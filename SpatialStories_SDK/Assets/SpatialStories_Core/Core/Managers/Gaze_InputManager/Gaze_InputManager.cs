@@ -25,7 +25,6 @@ public enum HapticForceMode
     FORCE_MAX
 }
 
-[SelectionBase]
 public class Gaze_InputManager : MonoBehaviour
 {
     #region members
@@ -399,7 +398,6 @@ public class Gaze_InputManager : MonoBehaviour
     {
         leftHandIO.transform.localPosition = InputTracking.GetLocalPosition(VRNode.LeftHand);
         rightHandIO.transform.localPosition = InputTracking.GetLocalPosition(VRNode.RightHand);
-        Debug.Log(InputTracking.GetLocalPosition(VRNode.RightHand));
     }
 
     private void SetOrientation()

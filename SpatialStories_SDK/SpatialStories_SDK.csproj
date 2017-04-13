@@ -126,6 +126,7 @@
     <Compile Include="Assets\OVR\Scripts\Util\OVRSceneSampleController.cs" />
     <Compile Include="Assets\OVR\Scripts\Util\OVRScreenFade.cs" />
     <Compile Include="Assets\OVR\Scripts\Util\OVRWaitCursor.cs" />
+    <Compile Include="Assets\ScreenShot.cs" />
     <Compile Include="Assets\SpatialStories_Core\Core\Abstracts\Gaze_AbstractBehaviour.cs" />
     <Compile Include="Assets\SpatialStories_Core\Core\Abstracts\Gaze_AbstractCollision.cs" />
     <Compile Include="Assets\SpatialStories_Core\Core\Abstracts\Gaze_AbstractConditions.cs" />
