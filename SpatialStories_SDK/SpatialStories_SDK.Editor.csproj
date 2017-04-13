@@ -197,6 +197,8 @@
     <None Include="Assets\Cardboard\Resources\RadialUndistortionEffect.shader" />
     <None Include="Assets\Cardboard\Resources\SolidColor.shader" />
     <None Include="Assets\OVR\Editor\AndroidManifest.OVRSubmission.xml" />
+    <None Include="Assets\OVR\Resources\Underlay Impostor.shader" />
+    <None Include="Assets\OVR\Resources\Underlay Transparent Occluder.shader" />
     <None Include="Assets\OVR\Resources\Unlit Transparent Color.shader" />
     <None Include="Assets\OVR\Shaders\OVRColorRampAlpha.shader" />
     <None Include="Assets\OVR\Shaders\Unlit Crosshair.shader" />

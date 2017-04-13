@@ -1,7 +1,27 @@
+/************************************************************************************
+
+Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
+
+Licensed under the Oculus VR Rift SDK License Version 3.3 (the "License");
+you may not use the Oculus VR Rift SDK except in compliance with the License,
+which is provided at the time of installation or download, or which
+otherwise accompanies this software in either electronic or hard copy form.
+
+You may obtain a copy of the License at
+
+http://www.oculus.com/licenses/LICENSE-3.3
+
+Unless required by applicable law or agreed to in writing, the Oculus VR SDK
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+************************************************************************************/
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using VR = UnityEngine.VR;
 
@@ -56,6 +76,7 @@ public class OVRCameraRig : MonoBehaviour
 	/// If true, separate cameras will be used for the left and right eyes.
 	/// </summary>
 	public bool usePerEyeCameras = false;
+	private bool _skipUpdate = false;
 
 	private readonly string trackingSpaceName = "TrackingSpace";
 	private readonly string trackerAnchorName = "TrackerAnchor";
@@ -66,57 +87,46 @@ public class OVRCameraRig : MonoBehaviour
 	private Camera _leftEyeCamera;
 	private Camera _rightEyeCamera;
 
-#if UNITY_ANDROID && !UNITY_EDITOR
-    bool correctedTrackingSpace = false;
-#endif
-
 #region Unity Messages
 	private void Awake()
 	{
+		_skipUpdate = true;
 		EnsureGameObjectIntegrity();
 	}
 
 	private void Start()
 	{
-		EnsureGameObjectIntegrity();
+		UpdateAnchors();
+	}
 
-		if (!Application.isPlaying)
-			return;
-
+	private void FixedUpdate()
+	{
 		UpdateAnchors();
 	}
 
 	private void Update()
 	{
-		EnsureGameObjectIntegrity();
-		
-		if (!Application.isPlaying)
-			return;
-
-		UpdateAnchors();
-
-#if UNITY_ANDROID && !UNITY_EDITOR
-
-        if (!correctedTrackingSpace)
-        {
-            //HACK: Unity 5.1.1p3 double-counts the head model on Android. Subtract it off in the reference frame.
-
-            var headModel = new Vector3(0f, OVRManager.profile.eyeHeight - OVRManager.profile.neckHeight, OVRManager.profile.eyeDepth);
-            var eyePos = -headModel + centerEyeAnchor.localRotation * headModel;
-
-            if ((eyePos - centerEyeAnchor.localPosition).magnitude > 0.01f)
-            {
-                trackingSpace.localPosition = trackingSpace.localPosition - 2f * (trackingSpace.localRotation * headModel);
-                correctedTrackingSpace = true;
-            }
-        }
-#endif
+		_skipUpdate = false;
 	}
 
 #endregion
 
 	private void UpdateAnchors()
 	{
+		EnsureGameObjectIntegrity();
+
+		if (!Application.isPlaying)
+			return;
+		
+		if (_skipUpdate)
+		{
+			centerEyeAnchor.FromOVRPose(OVRPose.identity, true);
+			leftEyeAnchor.FromOVRPose(OVRPose.identity, true);
+			rightEyeAnchor.FromOVRPose(OVRPose.identity, true);
+
+			return;
+		}
+
 		bool monoscopic = OVRManager.instance.monoscopic;
 
 		OVRPose tracker = OVRManager.tracker.GetPose();
@@ -205,6 +215,13 @@ public class OVRCameraRig : MonoBehaviour
 #endif
 		}
 
+		if (_centerEyeCamera.enabled == usePerEyeCameras ||
+		    _leftEyeCamera.enabled == !usePerEyeCameras ||
+		    _rightEyeCamera.enabled == !usePerEyeCameras)
+		{
+			_skipUpdate = true;
+		}
+		
 		_centerEyeCamera.enabled = !usePerEyeCameras;
 		_leftEyeCamera.enabled = usePerEyeCameras;
 		_rightEyeCamera.enabled = usePerEyeCameras;

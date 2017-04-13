@@ -1,3 +1,24 @@
+/************************************************************************************
+
+Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
+
+Licensed under the Oculus VR Rift SDK License Version 3.3 (the "License");
+you may not use the Oculus VR Rift SDK except in compliance with the License,
+which is provided at the time of installation or download, or which
+otherwise accompanies this software in either electronic or hard copy form.
+
+You may obtain a copy of the License at
+
+http://www.oculus.com/licenses/LICENSE-3.3
+
+Unless required by applicable law or agreed to in writing, the Oculus VR SDK
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+************************************************************************************/
+
 using System;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
@@ -94,23 +115,21 @@ public class OVRDisplay
 			if (!OVRManager.isHmdPresent)
 				return Vector3.zero;
 
-            OVRPose ret = OVRPlugin.GetEyeAcceleration(OVRPlugin.Eye.None).ToOVRPose();
-            return ret.position;
+			return OVRPlugin.GetNodeAcceleration(OVRPlugin.Node.None, OVRPlugin.Step.Render).FromFlippedZVector3f();
 		}
 	}
 
     /// <summary>
     /// Gets the current angular acceleration of the head.
     /// </summary>
-    public Quaternion angularAcceleration
+    public Vector3 angularAcceleration
     {
         get
         {
             if (!OVRManager.isHmdPresent)
-                return Quaternion.identity;
+				return Vector3.zero;
 
-            OVRPose ret = OVRPlugin.GetEyeAcceleration(OVRPlugin.Eye.None).ToOVRPose();
-            return ret.orientation;
+			return OVRPlugin.GetNodeAngularAcceleration(OVRPlugin.Node.None, OVRPlugin.Step.Render).FromFlippedZVector3f() * Mathf.Rad2Deg;
         }
     }
 
@@ -124,22 +143,20 @@ public class OVRDisplay
             if (!OVRManager.isHmdPresent)
                 return Vector3.zero;
 
-            OVRPose ret = OVRPlugin.GetEyeVelocity(OVRPlugin.Eye.None).ToOVRPose();
-            return ret.position;
+			return OVRPlugin.GetNodeVelocity(OVRPlugin.Node.None, OVRPlugin.Step.Render).FromFlippedZVector3f();
         }
     }
 	
 	/// <summary>
 	/// Gets the current angular velocity of the head.
 	/// </summary>
-	public Quaternion angularVelocity
+	public Vector3 angularVelocity
 	{
 		get {
 			if (!OVRManager.isHmdPresent)
-				return Quaternion.identity;
+				return Vector3.zero;
 
-			OVRPose ret = OVRPlugin.GetEyeVelocity(OVRPlugin.Eye.None).ToOVRPose();
-			return ret.orientation;
+			return OVRPlugin.GetNodeAngularVelocity(OVRPlugin.Node.None, OVRPlugin.Step.Render).FromFlippedZVector3f() * Mathf.Rad2Deg;
 		}
 	}
 
@@ -175,6 +192,20 @@ public class OVRDisplay
             }
 
             return ret;
+		}
+	}
+
+	/// <summary>
+	/// Gets application's frame rate reported by oculus plugin
+	/// </summary>
+	public float appFramerate
+	{
+		get
+		{
+			if (!OVRManager.isHmdPresent)
+				return 0;
+
+			return OVRPlugin.GetAppFramerate();
 		}
 	}
 

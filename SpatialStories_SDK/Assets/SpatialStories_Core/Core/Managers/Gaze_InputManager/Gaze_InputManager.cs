@@ -25,6 +25,7 @@ public enum HapticForceMode
     FORCE_MAX
 }
 
+[SelectionBase]
 public class Gaze_InputManager : MonoBehaviour
 {
     #region members

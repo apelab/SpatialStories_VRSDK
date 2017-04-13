@@ -141,6 +141,7 @@
     <Compile Include="Assets\SpatialStories_Core\Core\Classes\Gaze_Camera.cs" />
     <Compile Include="Assets\SpatialStories_Core\Core\Classes\Gaze_Catchable.cs" />
     <Compile Include="Assets\SpatialStories_Core\Core\Classes\Gaze_Conditions.cs" />
+    <Compile Include="Assets\SpatialStories_Core\Core\Classes\Gaze_ControllerDisconnectedMessage.cs" />
     <Compile Include="Assets\SpatialStories_Core\Core\Classes\Gaze_DistantGrabPointer.cs" />
     <Compile Include="Assets\SpatialStories_Core\Core\Classes\Gaze_DragAndDropCondition.cs" />
     <Compile Include="Assets\SpatialStories_Core\Core\Classes\Gaze_Gaze.cs" />
@@ -333,6 +334,8 @@
     <None Include="Assets\Cardboard\Resources\RadialUndistortionEffect.shader" />
     <None Include="Assets\Cardboard\Resources\SolidColor.shader" />
     <None Include="Assets\OVR\Editor\AndroidManifest.OVRSubmission.xml" />
+    <None Include="Assets\OVR\Resources\Underlay Impostor.shader" />
+    <None Include="Assets\OVR\Resources\Underlay Transparent Occluder.shader" />
     <None Include="Assets\OVR\Resources\Unlit Transparent Color.shader" />
     <None Include="Assets\OVR\Shaders\OVRColorRampAlpha.shader" />
     <None Include="Assets\OVR\Shaders\Unlit Crosshair.shader" />

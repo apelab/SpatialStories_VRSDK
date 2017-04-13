@@ -1,4 +1,25 @@
-﻿using System.Collections.Generic;
+﻿/************************************************************************************
+
+Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
+
+Licensed under the Oculus VR Rift SDK License Version 3.3 (the "License");
+you may not use the Oculus VR Rift SDK except in compliance with the License,
+which is provided at the time of installation or download, or which
+otherwise accompanies this software in either electronic or hard copy form.
+
+You may obtain a copy of the License at
+
+http://www.oculus.com/licenses/LICENSE-3.3
+
+Unless required by applicable law or agreed to in writing, the Oculus VR SDK
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+************************************************************************************/
+
+using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -298,16 +319,8 @@ public class OVRGrabber : MonoBehaviour
             localPose = localPose * offsetPose;
 
 			OVRPose trackingSpace = transform.ToOVRPose() * localPose.Inverse();
-			OVRPose localVelocity = new OVRPose() { position = OVRInput.GetLocalControllerVelocity(m_controller), orientation = OVRInput.GetLocalControllerAngularVelocity(m_controller) };
-			Vector3 linearVelocity = trackingSpace.orientation * localVelocity.position;
-			Vector3 angularVelocity = (trackingSpace.orientation * localVelocity.orientation).eulerAngles * Mathf.Deg2Rad;
-
-			if (angularVelocity.x > Mathf.PI)
-				angularVelocity.x -= 2f * Mathf.PI;
-			if (angularVelocity.y > Mathf.PI)
-				angularVelocity.y -= 2f * Mathf.PI;
-			if (angularVelocity.z > Mathf.PI)
-				angularVelocity.z -= 2f * Mathf.PI;
+			Vector3 linearVelocity = trackingSpace.orientation * OVRInput.GetLocalControllerVelocity(m_controller);
+			Vector3 angularVelocity = trackingSpace.orientation * OVRInput.GetLocalControllerAngularVelocity(m_controller);
 
             GrabbableRelease(linearVelocity, angularVelocity);
         }

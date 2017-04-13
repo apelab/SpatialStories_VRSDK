@@ -22,6 +22,7 @@ using UnityEngine;
 namespace Gaze
 {
     [Serializable]
+    [SelectionBase]
     public class Gaze_InteractiveObject : MonoBehaviour
     {
         /// <summary>
