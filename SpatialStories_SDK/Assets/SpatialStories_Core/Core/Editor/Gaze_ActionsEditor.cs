@@ -19,7 +19,6 @@ namespace Gaze
         private List<string> selectedAnimatorTriggers;
         private string[] grabModes;
 
-
         void OnEnable()
         {
             actionsScript = (Gaze_Actions)target;
@@ -301,6 +300,9 @@ namespace Gaze
 
         private void onEditorApplicationUpdate()
         {
+            if (target == null)
+                return;
+
             findAnimatorsInHierarchy();
             findAnimatorTriggers();
             findAudioSourcesInHierarchy();

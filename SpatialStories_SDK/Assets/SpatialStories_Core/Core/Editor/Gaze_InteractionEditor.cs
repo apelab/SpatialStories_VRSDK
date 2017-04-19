@@ -22,14 +22,12 @@ using UnityEngine;
 
 namespace Gaze
 {
-    [InitializeOnLoad]
+    // Custom Editor using SerializedProperties.
+    // Automatic handling of multi-object editing, undo, and prefab overrides.
     [CustomEditor(typeof(Gaze_Interaction))]
-    public class Gaze_InteractionEditor : Gaze_Editor
+    [CanEditMultipleObjects]
+    public class Gaze_InteractionEditor : Editor
     {
-        #region Members
-
-        private Gaze_Interaction targetConditions;
-
         // logo image
         Texture logo;
         Rect logoRect;
@@ -39,37 +37,23 @@ namespace Gaze
         // NEW list
         private List<Gaze_InteractiveObject> interactiveObjectsList;
 
-        #endregion
+        SerializedProperty HasConditions;
+        SerializedProperty HasActions;
 
         void OnEnable()
         {
+            // Setup the SerializedProperties.
+            HasConditions = serializedObject.FindProperty("HasActions");
+            HasActions = serializedObject.FindProperty("HasConditions");
+
             InitMembers();
         }
 
-        private void InitMembers()
+        public override void OnInspectorGUI()
         {
-            targetConditions = (Gaze_Interaction)target;
+            // Update the serializedProperty - always do this in the beginning of OnInspectorGUI.
+            serializedObject.Update();
 
-            interactiveObjectsList = new List<Gaze_InteractiveObject>();
-
-            #region Logo
-            logo = (Texture)Resources.Load("SpatialStorires_Logo_256", typeof(Texture));
-            logoRect = new Rect();
-            logoRect.x = 10;
-            logoRect.y = 10;
-            #endregion
-        }
-
-        public override void Gaze_OnInspectorGUI()
-        {
-            base.BeginChangeComparision();
-
-            #region Logo
-            GUILayout.BeginHorizontal();
-            GUI.Label(logoRect, logo);
-            GUILayout.Label(logo);
-            GUILayout.EndHorizontal();
-            #endregion
 
             if (!Application.isPlaying)
             {
@@ -77,72 +61,45 @@ namespace Gaze
                 UpdateInteractiveObjectsList();
                 #endregion
 
-                #region Actions
-                // button to add a Conditions component
-                EditorGUILayout.BeginHorizontal();
-                targetConditions.HasActions = EditorGUILayout.ToggleLeft("Actions", targetConditions.HasActions);
-                EditorGUILayout.EndHorizontal();
-                /*
-                if (targetConditions.HasActions)
-                {
-                    // display Activation component
-                    if (!targetConditions.gameObject.GetComponent<Gaze_Actions>())
-                    {
-                        // add the component
-                        targetConditions.gameObject.AddComponent<Gaze_Actions>();
-                    }
 
-                    // tell the script it's active
-                    targetConditions.gameObject.GetComponent<Gaze_Actions>().isActive = true;
-                }
-                else
-                {
-                    // remove Activation component
-                    if (targetConditions.gameObject.GetComponent<Gaze_Actions>())
-                    {
-                        // tell the script to deactive itself
-                        targetConditions.gameObject.GetComponent<Gaze_Actions>().isActive = false;
-                    }
-                }
-                */
+                #region Logo
+                GUILayout.BeginHorizontal();
+                GUI.Label(logoRect, logo);
+                GUILayout.Label(logo);
+                GUILayout.EndHorizontal();
                 #endregion
 
-                #region Conditions
-                // button to add a Conditions component
-                EditorGUILayout.BeginHorizontal();
-                targetConditions.HasConditions = EditorGUILayout.ToggleLeft("Conditions", targetConditions.HasConditions);
-                EditorGUILayout.EndHorizontal();
+                bool lastHasActions = HasActions.boolValue;
+                bool LastHasConditions = HasConditions.boolValue;
 
-                if (targetConditions.HasConditions)
-                {
-                    // display Conditions component
-                    //if (!targetConditions.gameObject.GetComponent<Gaze_Conditions>())
-                    //{
-                    //    targetConditions.gameObject.AddComponent<Gaze_Conditions>();
-                    conditionsScript = targetConditions.gameObject.GetComponent<Gaze_Conditions>();
-                    //}
+                HasActions.boolValue = EditorGUILayout.ToggleLeft("Actions", HasActions.boolValue);
+                HasConditions.boolValue = EditorGUILayout.ToggleLeft("Conditions", HasConditions.boolValue);
 
-                    // tell the script it's active
-                    //targetConditions.gameObject.GetComponent<Gaze_Conditions>().isActive = true;
-                }
-                /*
-                else
+                if (lastHasActions != HasActions.boolValue)
                 {
-                    // remove Conditions component
-                    if (targetConditions.gameObject.GetComponent<Gaze_Conditions>())
+                    if (HasActions.boolValue)
+                        ((Gaze_Interaction)target).AddActions();
+                    else
                     {
-                        // tell the script it's active
-                        targetConditions.gameObject.GetComponent<Gaze_Conditions>().isActive = false;
+                        ((Gaze_Interaction)target).RemoveActions();
                     }
                 }
-                */
-                #endregion
+
+                if (LastHasConditions != HasConditions.boolValue)
+                {
+                    if (HasConditions.boolValue)
+                        ((Gaze_Interaction)target).AddConditions();
+                    else
+                    {
+                        ((Gaze_Interaction)target).RemoveConditions();
+                    }
+                }
             }
             else
             {
                 #region State
                 // display Conditions component
-                conditionsScript = targetConditions.gameObject.GetComponent<Gaze_Conditions>();
+                conditionsScript = ((Gaze_Interaction)target).GetComponent<Gaze_Conditions>();
                 EditorGUILayout.Space();
                 EditorGUILayout.LabelField("Infos");
 
@@ -218,10 +175,22 @@ namespace Gaze
             }
             #endregion
 
-            // save changes
-            base.EndChangeComparision();
-            EditorUtility.SetDirty(targetConditions);
+            serializedObject.ApplyModifiedProperties();
         }
+
+        private void InitMembers()
+        {
+
+            interactiveObjectsList = new List<Gaze_InteractiveObject>();
+
+            #region Logo
+            logo = (Texture)Resources.Load("SpatialStorires_Logo_256", typeof(Texture));
+            logoRect = new Rect();
+            logoRect.x = 10;
+            logoRect.y = 10;
+            #endregion
+        }
+
 
         /// <summary>
         /// Get all InteractiveObjects in the scene !
@@ -231,5 +200,6 @@ namespace Gaze
         {
             interactiveObjectsList = (FindObjectsOfType(typeof(Gaze_InteractiveObject)) as Gaze_InteractiveObject[]).ToList();
         }
+
     }
 }
