@@ -28,7 +28,7 @@ namespace Gaze
         /// <summary>
         /// Can this object be grabbed.
         /// </summary>
-        public bool grab = false;
+        public bool grab = true;
 
         /// <summary>
         /// Temporary boolean to enable levitation
@@ -39,7 +39,7 @@ namespace Gaze
         /// Can this object be activated by :
         /// TOUCH, POINT or BOTH
         /// </summary>
-        public bool touch = false;
+        public bool touch = true;
         public int touchIndex;
 
         /// <summary>

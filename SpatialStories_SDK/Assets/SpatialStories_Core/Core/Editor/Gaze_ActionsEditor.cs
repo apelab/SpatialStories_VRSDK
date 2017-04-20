@@ -170,25 +170,49 @@ namespace Gaze
             // display conditions
             if (actionsScript.isActive)
             {
+                EditorGUILayout.Space();
+
                 if (actionsScript && !actionsScript.DestroyOnTrigger)
                 {
                     actionsScript.ActionVisuals = (Gaze_Actions.ACTIVABLE_OPTION)EditorGUILayout.EnumPopup("Visuals", actionsScript.ActionVisuals);
                     EditorGUILayout.Space();
 
                     actionsScript.ActionGrab = (Gaze_Actions.ACTIVABLE_OPTION)EditorGUILayout.EnumPopup("Grab Ability", actionsScript.ActionGrab);
-                    EditorGUILayout.BeginHorizontal();
-                    actionsScript.grabDistance = EditorGUILayout.FloatField("Grab Distance", actionsScript.grabDistance);
-                    EditorGUILayout.EndHorizontal();
-                    EditorGUILayout.BeginHorizontal();
-                    actionsScript.grabModeIndex = EditorGUILayout.Popup("Grab Mode", actionsScript.grabModeIndex, grabModes);
-                    EditorGUILayout.EndHorizontal();
+
+                    actionsScript.ModifyGrabDistance = (Gaze_Actions.ALTERABLE_OPTION)EditorGUILayout.EnumPopup("Grab Distance", actionsScript.ModifyGrabDistance);
+                    if (actionsScript.ModifyGrabDistance == Gaze_Actions.ALTERABLE_OPTION.MODIFY)
+                    {
+                        EditorGUILayout.BeginHorizontal();
+                        actionsScript.grabDistance = EditorGUILayout.FloatField("", actionsScript.grabDistance);
+                        EditorGUILayout.EndHorizontal();
+
+                    }
+
+                    EditorGUILayout.Space();
+
+
+                    actionsScript.ModifyGrabMode = (Gaze_Actions.ALTERABLE_OPTION)EditorGUILayout.EnumPopup("Grab Mode", actionsScript.ModifyGrabMode);
+                    if (actionsScript.ModifyGrabMode == Gaze_Actions.ALTERABLE_OPTION.MODIFY)
+                    {
+                        EditorGUILayout.BeginHorizontal();
+                        actionsScript.grabModeIndex = EditorGUILayout.Popup("", actionsScript.grabModeIndex, grabModes);
+                        EditorGUILayout.EndHorizontal();
+
+                    }
+
                     EditorGUILayout.Space();
 
 
                     actionsScript.ActionTouch = (Gaze_Actions.ACTIVABLE_OPTION)EditorGUILayout.EnumPopup("Touch Ability", actionsScript.ActionTouch);
-                    EditorGUILayout.BeginHorizontal();
-                    actionsScript.touchDistance = EditorGUILayout.FloatField("Touch Distance", actionsScript.touchDistance);
-                    EditorGUILayout.EndHorizontal();
+                    actionsScript.ModifyTouchDistance = (Gaze_Actions.ALTERABLE_OPTION)EditorGUILayout.EnumPopup("Touch Distance", actionsScript.ModifyTouchDistance);
+                    if (actionsScript.ModifyTouchDistance == Gaze_Actions.ALTERABLE_OPTION.MODIFY)
+                    {
+                        EditorGUILayout.BeginHorizontal();
+                        actionsScript.touchDistance = EditorGUILayout.FloatField("", actionsScript.touchDistance);
+                        EditorGUILayout.EndHorizontal();
+                    }
+
+
                     EditorGUILayout.Space();
 
 

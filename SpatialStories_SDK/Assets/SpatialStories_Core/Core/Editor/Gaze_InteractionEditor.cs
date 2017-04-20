@@ -50,6 +50,7 @@ namespace Gaze
 
         public override void OnInspectorGUI()
         {
+
             // Update the serializedProperty - always do this in the beginning of OnInspectorGUI.
             serializedObject.Update();
 

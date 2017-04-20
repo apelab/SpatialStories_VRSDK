@@ -15,10 +15,10 @@
 // <web>https://twitter.com/apelab_ch</web>
 // <web>http://www.apelab.ch</web>
 // <date>2014-06-01</date>
-using UnityEditor;
-using UnityEngine;
 using System;
 using System.Collections.Generic;
+using UnityEditor;
+using UnityEngine;
 
 namespace Gaze
 {
@@ -59,10 +59,6 @@ namespace Gaze
         public bool isManupulable;
 
         // Reflection members
-        private List<Collider> touchables;
-        private List<string> touchablesNames;
-
-        // Reflection members
         private List<Collider> grabables;
         private List<string> grabablesNames;
 
@@ -81,8 +77,6 @@ namespace Gaze
         private void InitMembers()
         {
             targetIO = (Gaze_InteractiveObject)target;
-            touchables = new List<Collider>();
-            touchablesNames = new List<String>();
             grabables = new List<Collider>();
             grabablesNames = new List<String>();
             targetIORoot = ((Gaze_InteractiveObject)target).gameObject;
