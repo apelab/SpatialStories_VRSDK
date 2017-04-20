@@ -62,9 +62,9 @@ namespace Gaze
             IO.transform.SetParent(null);
 
             // This object will not be able to be taken anymore
-            IO.grab = false;
-            IO.touch = false;
-            IO.levitate = false;
+            IO.DisableManipulationMode(Gaze_ManipulationModes.GRAB);
+            IO.DisableManipulationMode(Gaze_ManipulationModes.TOUCH);
+            IO.DisableManipulationMode(Gaze_ManipulationModes.LEVITATE);
 
             // hide current hand's model
             UpdateVisuals(false);

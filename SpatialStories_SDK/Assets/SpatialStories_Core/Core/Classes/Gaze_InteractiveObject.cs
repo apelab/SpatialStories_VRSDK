@@ -26,20 +26,21 @@ namespace Gaze
     public class Gaze_InteractiveObject : MonoBehaviour
     {
         /// <summary>
-        /// Can this object be grabbed.
+        /// Defines how the user can interact with the IO by using 
+        /// his controllers.
         /// </summary>
-        public bool grab = true;
+        public Gaze_ManipulationModes ManipulationMode { private set; get; }
 
         /// <summary>
-        /// Temporary boolean to enable levitation
+        /// Can this object be grabbed.
         /// </summary>
-        public bool levitate = true;
+        public bool grab { get { return ManipulationMode == Gaze_ManipulationModes.GRAB; } }
 
         /// <summary>
         /// Can this object be activated by :
         /// TOUCH, POINT or BOTH
         /// </summary>
-        public bool touch = true;
+        public bool touch { get { return ManipulationMode == Gaze_ManipulationModes.TOUCH; } }
         public int touchIndex;
 
         /// <summary>
@@ -160,6 +161,8 @@ namespace Gaze
 
         void Update()
         {
+            Debug.Log(grab);
+            Debug.Log(touch);
             if (rootMotion != null)
             {
                 FollowRoot();
@@ -461,6 +464,21 @@ namespace Gaze
         }
 
         #endregion GravityManagement
+
+        #region ManipulationManagement
+
+        public void EnableManipulationMode(Gaze_ManipulationModes _manipulationMode)
+        {
+            ManipulationMode = _manipulationMode;
+        }
+
+        public void DisableManipulationMode(Gaze_ManipulationModes manipulationMode)
+        {
+            if (ManipulationMode == manipulationMode)
+                ManipulationMode = Gaze_ManipulationModes.NONE;
+        }
+
+        #endregion ManipulationManagement
     }
 
 }

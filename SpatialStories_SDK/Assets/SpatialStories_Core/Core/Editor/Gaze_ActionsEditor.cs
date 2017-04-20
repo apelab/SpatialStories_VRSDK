@@ -38,7 +38,7 @@ namespace Gaze
             grabModes = Enum.GetNames(typeof(Gaze_GrabMode));
 
             findAnimatorsInHierarchy();
-            findAudioSourcesInHierarchy();
+            FindAudioSourcesInHierarchy();
         }
 
         void OnDisable()
@@ -274,7 +274,7 @@ namespace Gaze
 
         private void displayAnimBlock(int i)
         {
-            if (actionsScript.triggerAnimation && findAnimatorTriggers())
+            if (actionsScript.triggerAnimation && FindAnimatorTriggers())
             {
                 if (!selectedAnimatorTriggers.Contains(actionsScript.animatorTriggers[i]))
                 {
@@ -328,8 +328,8 @@ namespace Gaze
                 return;
 
             findAnimatorsInHierarchy();
-            findAnimatorTriggers();
-            findAudioSourcesInHierarchy();
+            FindAnimatorTriggers();
+            FindAudioSourcesInHierarchy();
         }
 
         private void findAnimatorsInHierarchy()
@@ -349,7 +349,7 @@ namespace Gaze
             }
         }
 
-        private void findAudioSourcesInHierarchy()
+        private void FindAudioSourcesInHierarchy()
         {
             AudioSource[] asrc = actionsScript.GetComponentInParent<Gaze_InteractiveObject>().GetComponentsInChildren<AudioSource>();
 
@@ -363,7 +363,7 @@ namespace Gaze
             }
         }
 
-        private bool findAnimatorTriggers()
+        private bool FindAnimatorTriggers()
         {
             selectedAnimatorTriggers.Clear();
 
