@@ -59,19 +59,6 @@ namespace Gaze
             }
         }
 
-        //void OnTriggerStay(Collider other)
-        //{
-        //if (!proximityFlag && other.gameObject.GetComponent<Gaze_Proximity>() != null)
-        //{
-        //    if (debug)
-        //        Debug.Log("Gaze_Proximity (" + transform.parent.name + ") OnTriggerStay with " + other.GetComponentInParent<Gaze_InteractiveObject>().name);
-
-        //    proximityFlag = true;
-        //    otherGameObject = other.gameObject;
-        //    Gaze_EventManager.FireProximityEvent(new Gaze_ProximityEventArgs(GetComponentInParent<Gaze_InteractiveObject>().gameObject, otherGameObject, true));
-        //}
-        //}
-
         void OnTriggerExit(Collider other)
         {
             if (other.gameObject.GetComponent<Gaze_Proximity>() != null)
