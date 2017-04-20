@@ -12,6 +12,7 @@ namespace Gaze
         public bool isActive = true;
 
         public enum ACTIVABLE_OPTION { NOTHING, ACTIVATE, DEACTIVATE }
+        public enum ALTERABLE_OPTION { NOTHING, MODIFY }
 
         public bool ActionReset;
         public ACTIVABLE_OPTION ActionVisuals;
@@ -24,6 +25,9 @@ namespace Gaze
         public bool DestroyOnTrigger;
 
         // grab and touch distances
+        public ALTERABLE_OPTION ModifyGrabDistance = ALTERABLE_OPTION.NOTHING;
+        public ALTERABLE_OPTION ModifyTouchDistance = ALTERABLE_OPTION.NOTHING;
+        public ALTERABLE_OPTION ModifyGrabMode = ALTERABLE_OPTION.NOTHING;
         public float grabDistance, touchDistance;
         public int grabModeIndex = 0;
 
@@ -43,6 +47,7 @@ namespace Gaze
         public float audioVolumeMax = 1f;
         public float fadeSpeed = .005f;
         public Gaze_InteractiveObject IO;
+
 
 
         // Notification
@@ -137,10 +142,12 @@ namespace Gaze
 
         private void HandleTouch()
         {
-            GetIO().touchDistance = touchDistance;
+            if (ModifyTouchDistance == ALTERABLE_OPTION.MODIFY)
+                GetIO().touchDistance = touchDistance;
 
             if (ActionTouch == ACTIVABLE_OPTION.NOTHING)
                 return;
+
             if (ActionTouch == ACTIVABLE_OPTION.ACTIVATE)
             {
                 GetIO().touch = true;
@@ -154,8 +161,11 @@ namespace Gaze
 
         private void HandleGrab()
         {
-            GetIO().grabDistance = grabDistance;
-            GetIO().grabModeIndex = grabModeIndex;
+            if (ModifyGrabDistance == ALTERABLE_OPTION.MODIFY)
+                GetIO().grabDistance = grabDistance;
+
+            if (ModifyGrabMode == ALTERABLE_OPTION.MODIFY)
+                GetIO().grabModeIndex = grabModeIndex;
 
             if (ActionGrab == ACTIVABLE_OPTION.NOTHING)
                 return;

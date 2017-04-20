@@ -406,7 +406,18 @@ namespace Gaze
                     EditorGUILayout.BeginHorizontal();
                     targetConditions.touchMap.touchDistanceModeLeftIndex = EditorGUILayout.Popup("Left", targetConditions.touchMap.touchDistanceModeLeftIndex, Enum.GetNames(typeof(Gaze_TouchDistanceMode)));
                     targetConditions.touchMap.touchActionLeftIndex = EditorGUILayout.Popup(targetConditions.touchMap.touchActionLeftIndex, Enum.GetNames(typeof(Gaze_TouchAction)));
-                    targetConditions.touchMap.touchEntryList[0].interactiveObject = hierarchyIOs[EditorGUILayout.Popup(hierarchyIOs.IndexOf((GameObject)targetConditions.touchMap.touchEntryList[0].interactiveObject), hierarchyIOsNames.ToArray())];
+
+                    var leftObject = EditorGUILayout.ObjectField(targetConditions.touchMap.touchEntryList[0].interactiveObject, typeof(Gaze_InteractiveObject), true);
+                    if (leftObject != null)
+                    {
+                        if (leftObject is GameObject)
+                            targetConditions.touchMap.touchEntryList[0].interactiveObject = (GameObject)leftObject;
+                        else
+                            targetConditions.touchMap.touchEntryList[0].interactiveObject = ((Gaze_InteractiveObject)leftObject).gameObject;
+                    }
+                    else
+                        targetConditions.touchMap.touchEntryList[0].interactiveObject = null;
+
                     targetConditions.touchMap.touchEntryList[0].hand = VRNode.LeftHand;
                     EditorGUILayout.EndHorizontal();
 
@@ -419,8 +430,22 @@ namespace Gaze
 
                     targetConditions.touchMap.touchDistanceModeRightIndex = EditorGUILayout.Popup("Right", targetConditions.touchMap.touchDistanceModeRightIndex, Enum.GetNames(typeof(Gaze_TouchDistanceMode)));
                     targetConditions.touchMap.touchActionRightIndex = EditorGUILayout.Popup(targetConditions.touchMap.touchActionRightIndex, Enum.GetNames(typeof(Gaze_TouchAction)));
-                    targetConditions.touchMap.touchEntryList[1].interactiveObject = hierarchyIOs[EditorGUILayout.Popup(hierarchyIOs.IndexOf((GameObject)targetConditions.touchMap.touchEntryList[1].interactiveObject), hierarchyIOsNames.ToArray())];
+
+                    var rightObject = EditorGUILayout.ObjectField(targetConditions.touchMap.touchEntryList[1].interactiveObject, typeof(Gaze_InteractiveObject), true);
+
+                    if (rightObject != null)
+                    {
+                        if (rightObject is GameObject)
+                            targetConditions.touchMap.touchEntryList[1].interactiveObject = (GameObject)rightObject;
+                        else
+                            targetConditions.touchMap.touchEntryList[1].interactiveObject = ((Gaze_InteractiveObject)rightObject).gameObject;
+                    }
+                    else
+                        targetConditions.touchMap.touchEntryList[1].interactiveObject = null;
+
+
                     targetConditions.touchMap.touchEntryList[1].hand = VRNode.RightHand;
+
                     EditorGUILayout.EndHorizontal();
                 }
                 else
@@ -442,7 +467,18 @@ namespace Gaze
                         targetConditions.touchMap.touchActionRightIndex = EditorGUILayout.Popup(targetConditions.touchMap.touchActionRightIndex, Enum.GetNames(typeof(Gaze_TouchAction)));
                     }
 
-                    targetConditions.touchMap.touchEntryList[0].interactiveObject = hierarchyIOs[EditorGUILayout.Popup(hierarchyIOs.IndexOf((GameObject)targetConditions.touchMap.touchEntryList[0].interactiveObject), hierarchyIOsNames.ToArray())];
+                    // Add the searchable objec dialog
+                    var objectToTouch = EditorGUILayout.ObjectField(targetConditions.touchMap.touchEntryList[0].interactiveObject, typeof(Gaze_InteractiveObject), true);
+                    if (objectToTouch != null)
+                    {
+                        if (objectToTouch is GameObject)
+                            targetConditions.touchMap.touchEntryList[0].interactiveObject = (GameObject)objectToTouch;
+                        else
+                            targetConditions.touchMap.touchEntryList[0].interactiveObject = ((Gaze_InteractiveObject)objectToTouch).gameObject;
+                    }
+                    else
+                        targetConditions.touchMap.touchEntryList[0].interactiveObject = null;
+
                     EditorGUILayout.EndHorizontal();
                 }
 

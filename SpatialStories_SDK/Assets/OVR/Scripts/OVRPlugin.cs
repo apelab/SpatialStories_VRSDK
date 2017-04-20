@@ -1,3 +1,24 @@
+/************************************************************************************
+
+Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
+
+Licensed under the Oculus VR Rift SDK License Version 3.3 (the "License");
+you may not use the Oculus VR Rift SDK except in compliance with the License,
+which is provided at the time of installation or download, or which
+otherwise accompanies this software in either electronic or hard copy form.
+
+You may obtain a copy of the License at
+
+http://www.oculus.com/licenses/LICENSE-3.3
+
+Unless required by applicable law or agreed to in writing, the Oculus VR SDK
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+************************************************************************************/
+
 using System;
 using System.Runtime.InteropServices;
 
@@ -5,7 +26,7 @@ using System.Runtime.InteropServices;
 
 internal static class OVRPlugin
 {
-	public static readonly System.Version wrapperVersion = OVRP_1_12_0.version;
+	public static readonly System.Version wrapperVersion = OVRP_1_13_0.version;
 
 	private static System.Version _version;
 	public static System.Version version
@@ -219,6 +240,12 @@ internal static class OVRPlugin
 		OffcenterCubemap = 4,
 	}
 
+	public enum Step
+	{
+		Render = -1,
+		Physics = 0,
+	}
+
 	private const int OverlayShapeFlagShift = 4;
 	private enum OverlayFlag
 	{
@@ -263,6 +290,17 @@ internal static class OVRPlugin
 	{
 		public Quatf Orientation;
 		public Vector3f Position;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public struct PoseStatef
+	{
+		public Posef Pose;
+		public Vector3f Velocity;
+		public Vector3f Acceleration;
+		public Vector3f AngularVelocity;
+		public Vector3f AngularAcceleration;
+		double Time;
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
@@ -667,11 +705,9 @@ internal static class OVRPlugin
 		get { return OVRP_1_1_0.ovrp_GetSystemBatteryStatus(); }
 	}
 
-	public static Posef GetEyeVelocity(Eye eyeId) { return GetNodeVelocity((Node)eyeId, false); }
-	public static Posef GetEyeAcceleration(Eye eyeId) { return GetNodeAcceleration((Node)eyeId, false); }
 	public static Frustumf GetEyeFrustum(Eye eyeId) { return OVRP_1_1_0.ovrp_GetNodeFrustum((Node)eyeId); }
 	public static Sizei GetEyeTextureSize(Eye eyeId) { return OVRP_0_1_0.ovrp_GetEyeTextureSize(eyeId); }
-	public static Posef GetTrackerPose(Tracker trackerId) { return GetNodePose((Node)((int)trackerId + (int)Node.TrackerZero), false); }
+	public static Posef GetTrackerPose(Tracker trackerId) { return GetNodePose((Node)((int)trackerId + (int)Node.TrackerZero), Step.Render); }
 	public static Frustumf GetTrackerFrustum(Tracker trackerId) { return OVRP_1_1_0.ovrp_GetNodeFrustum((Node)((int)trackerId + (int)Node.TrackerZero)); }
 	public static bool ShowUI(PlatformUI ui) { return OVRP_1_1_0.ovrp_ShowSystemUI(ui) == Bool.True; }
 	public static bool SetOverlayQuad(bool onTop, bool headLocked, IntPtr leftTexture, IntPtr rightTexture, IntPtr device, Posef pose, Vector3f scale, int layerIndex=0, OverlayShape shape=OverlayShape.Quad)
@@ -720,33 +756,58 @@ internal static class OVRPlugin
 	public static bool UpdateNodePhysicsPoses(int frameIndex, double predictionSeconds)
 	{
 		if (version >= OVRP_1_8_0.version)
-			return OVRP_1_8_0.ovrp_Update2(0, frameIndex, predictionSeconds) == Bool.True;
+			return OVRP_1_8_0.ovrp_Update2((int)Step.Physics, frameIndex, predictionSeconds) == Bool.True;
 
 		return false;
 	}
 
-	public static Posef GetNodePose(Node nodeId, bool usePhysicsPose)
+	public static Posef GetNodePose(Node nodeId, Step stepId)
 	{
-		if (version >= OVRP_1_8_0.version && usePhysicsPose)
+		if (version >= OVRP_1_12_0.version)
+			return OVRP_1_12_0.ovrp_GetNodePoseState (stepId, nodeId).Pose;
+		
+		if (version >= OVRP_1_8_0.version && stepId == Step.Physics)
 			return OVRP_1_8_0.ovrp_GetNodePose2(0, nodeId);
 		
 		return OVRP_0_1_2.ovrp_GetNodePose(nodeId);
 	}
 
-	public static Posef GetNodeVelocity(Node nodeId, bool usePhysicsPose)
+	public static Vector3f GetNodeVelocity(Node nodeId, Step stepId)
 	{
-		if (version >= OVRP_1_8_0.version && usePhysicsPose)
-			return OVRP_1_8_0.ovrp_GetNodeVelocity2(0, nodeId);
+		if (version >= OVRP_1_12_0.version)
+			return OVRP_1_12_0.ovrp_GetNodePoseState (stepId, nodeId).Velocity;
 		
-		return OVRP_0_1_3.ovrp_GetNodeVelocity(nodeId);
+		if (version >= OVRP_1_8_0.version && stepId == Step.Physics)
+			return OVRP_1_8_0.ovrp_GetNodeVelocity2(0, nodeId).Position;
+		
+		return OVRP_0_1_3.ovrp_GetNodeVelocity(nodeId).Position;
 	}
 
-	public static Posef GetNodeAcceleration(Node nodeId, bool usePhysicsPose)
+	public static Vector3f GetNodeAngularVelocity(Node nodeId, Step stepId)
 	{
-		if (version >= OVRP_1_8_0.version && usePhysicsPose)
-			return OVRP_1_8_0.ovrp_GetNodeAcceleration2(0, nodeId);
+		if (version >= OVRP_1_12_0.version)
+			return OVRP_1_12_0.ovrp_GetNodePoseState(stepId, nodeId).AngularVelocity;
+
+		return new Vector3f(); //TODO: Convert legacy quat to vec3?
+	}
+
+	public static Vector3f GetNodeAcceleration(Node nodeId, Step stepId)
+	{
+		if (version >= OVRP_1_12_0.version)
+			return OVRP_1_12_0.ovrp_GetNodePoseState (stepId, nodeId).Acceleration;
 		
-		return OVRP_0_1_3.ovrp_GetNodeAcceleration(nodeId);
+		if (version >= OVRP_1_8_0.version && stepId == Step.Physics)
+			return OVRP_1_8_0.ovrp_GetNodeAcceleration2(0, nodeId).Position;
+		
+		return OVRP_0_1_3.ovrp_GetNodeAcceleration(nodeId).Position;
+	}
+
+	public static Vector3f GetNodeAngularAcceleration(Node nodeId, Step stepId)
+	{
+		if (version >= OVRP_1_12_0.version)
+			return OVRP_1_12_0.ovrp_GetNodePoseState(stepId, nodeId).AngularAcceleration;
+
+		return new Vector3f(); //TODO: Convert legacy quat to vec3?
 	}
 
 	public static bool GetNodePresent(Node nodeId)
@@ -951,6 +1012,18 @@ internal static class OVRPlugin
 		else
 		{
 			return false;
+		}
+	}
+
+	public static float GetAppFramerate()
+	{
+		if (version >= OVRP_1_12_0.version)
+		{
+			return OVRP_1_12_0.ovrp_GetAppFramerate();
+		}
+		else
+		{
+			return 0.0f;
 		}
 	}
 
@@ -1442,6 +1515,17 @@ internal static class OVRPlugin
 		public static readonly System.Version version = new System.Version(1, 12, 0);
 
 		[DllImport(pluginName, CallingConvention = CallingConvention.Cdecl)]
+		public static extern float ovrp_GetAppFramerate();
+
+		[DllImport(pluginName, CallingConvention = CallingConvention.Cdecl)]
+		public static extern PoseStatef ovrp_GetNodePoseState(Step stepId, Node nodeId);
+
+		[DllImport(pluginName, CallingConvention = CallingConvention.Cdecl)]
 		public static extern ControllerState2 ovrp_GetControllerState2(uint controllerMask);
+	}
+
+	private static class OVRP_1_13_0
+	{
+		public static readonly System.Version version = new System.Version(1, 13, 0);
 	}
 }

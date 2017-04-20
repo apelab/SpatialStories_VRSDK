@@ -29,46 +29,13 @@ namespace Gaze
     public class Gaze_Interaction : MonoBehaviour
     {
         #region Members
-        private bool hasActions = false;
-        private bool hasConditions = false;
-
-        public bool HasConditions
-        {
-            get { return hasConditions; }
-            set
-            {
-                hasConditions = value;
-                if (value)
-                {
-                    AddConditions();
-                }
-                else
-                {
-                    RemoveConditions();
-                }
-            }
-        }
-
-        public bool HasActions
-        {
-            get { return hasActions; }
-            set
-            {
-                hasActions = value;
-                if (value)
-                {
-                    AddActions();
-                }
-                else
-                {
-                    RemoveActions();
-                }
-            }
-        }
+        public bool HasActions = false;
+        public bool HasConditions = false;
         #endregion
 
         public void AddActions()
         {
+            HasActions = true;
             // display Activation component
             if (!GetComponent<Gaze_Actions>())
             {
@@ -78,10 +45,27 @@ namespace Gaze
 
             // tell the script it's active
             gameObject.GetComponent<Gaze_Actions>().isActive = true;
+
+            AddDeactivatedConditionsIfNeeded();
+        }
+
+        /// <summary>
+        /// This method is used when the user adds actions but without addding conditions
+        /// right now gaze_sdk neeeds that the object has conditions in order to trigger
+        /// an action, thats why we add condtions and the we deactivate them is needed.
+        /// </summary>
+        public void AddDeactivatedConditionsIfNeeded()
+        {
+            if (GetComponent<Gaze_Conditions>() == null)
+            {
+                AddConditions();
+                RemoveConditions();
+            }
         }
 
         public void RemoveActions()
         {
+            HasActions = false;
             // remove Activation component
             if (gameObject.GetComponent<Gaze_Actions>())
             {
@@ -92,6 +76,7 @@ namespace Gaze
 
         public void AddConditions()
         {
+            HasConditions = true;
             // display Conditions component
             if (!gameObject.GetComponent<Gaze_Conditions>())
             {
@@ -104,6 +89,7 @@ namespace Gaze
 
         public void RemoveConditions()
         {
+            HasConditions = false;
             // remove Activation component
             if (gameObject.GetComponent<Gaze_Conditions>())
             {

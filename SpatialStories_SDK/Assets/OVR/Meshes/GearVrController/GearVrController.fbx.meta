@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 8bc887c2fa4559344a0060ce10dace30
-timeCreated: 1492002399
+guid: 84c37137326e7b943a87be7ae2a7ea19
+timeCreated: 1488144149
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -9,16 +9,16 @@ ModelImporter:
     100002: center_button_PLY
     100004: chassis_PLY
     100006: disc_button_PLY
-    100008: //RootNode
-    100010: home_button_PLY
+    100008: home_button_PLY
+    100010: //RootNode
     100012: text_PLY
     100014: trigger_PLY
     400000: back_button_PLY
     400002: center_button_PLY
     400004: chassis_PLY
     400006: disc_button_PLY
-    400008: //RootNode
-    400010: home_button_PLY
+    400008: home_button_PLY
+    400010: //RootNode
     400012: text_PLY
     400014: trigger_PLY
     2300000: back_button_PLY
@@ -52,8 +52,6 @@ ModelImporter:
     resampleCurves: 1
     optimizeGameObjects: 0
     motionNodeName: 
-    rigImportErrors: 
-    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
@@ -90,7 +88,6 @@ ModelImporter:
   importAnimation: 1
   copyAvatar: 0
   humanDescription:
-    serializedVersion: 2
     human: []
     skeleton: []
     armTwist: 0.5
@@ -101,10 +98,7 @@ ModelImporter:
     legStretch: 0.05
     feetSpacing: 0
     rootMotionBoneName: 
-    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
-    hasExtraRoot: 0
-    skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 0
   humanoidOversampling: 1
