@@ -16,7 +16,6 @@
 // <web>http://www.apelab.ch</web>
 // <date>2014-06-01</date>
 using System;
-using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
@@ -28,45 +27,12 @@ namespace Gaze
     {
         #region Members
         private Gaze_InteractiveObject targetIO;
-        private GameObject targetIORoot;
-
-        /// <summary>
-        /// Can this object be grabbed.
-        /// </summary>
-        public bool collidersFollowIO = false;
-
-        /// <summary>
-        /// It's the collider used to catch the object.
-        /// </summary>
-        //public GameObject catchableHandle;
-
-        private bool hasGrabPositionnerProperty;
-        private GameObject positionnerGameObject;
-
-        /// <summary>
-        /// If true, the object being catched will vibrate the controllers while grabbed.
-        /// </summary>
-        public bool vibratesOnGrab = false;
-
-        /// <summary>
-        /// Is this catchable object using gravity
-        /// </summary>
-        public bool hasGravity;
-
-        /// <summary>
-        /// Defines if an object can be grabbed from no matter where once is grabbed
-        /// </summary>
-        public bool isManupulable;
-
-        // Reflection members
-        private List<Collider> grabables;
-        private List<string> grabablesNames;
 
         // logo image
         private Texture logo;
         private Rect logoRect;
-
         private string[] grabModes;
+        private string[] manipulationModes;
         #endregion
 
         void OnEnable()
@@ -77,10 +43,10 @@ namespace Gaze
         private void InitMembers()
         {
             targetIO = (Gaze_InteractiveObject)target;
-            grabables = new List<Collider>();
-            grabablesNames = new List<String>();
-            targetIORoot = ((Gaze_InteractiveObject)target).gameObject;
+
             grabModes = Enum.GetNames(typeof(Gaze_GrabMode));
+            manipulationModes = Enum.GetNames(typeof(Gaze_ManipulationModes));
+
             logo = (Texture)Resources.Load("SpatialStorires_Logo_256", typeof(Texture));
             logoRect = new Rect();
             logoRect.x = 10;
@@ -90,6 +56,7 @@ namespace Gaze
         public override void OnInspectorGUI()
         {
             DisplayLogo();
+            DisplayManipulationMode();
             DisplayTouchDistance();
             DisplayGrabDistance();
             DisplayLevitationDistance();
@@ -102,6 +69,12 @@ namespace Gaze
             GUI.Label(logoRect, logo);
             GUILayout.Label(logo);
             GUILayout.EndHorizontal();
+        }
+
+
+        private void DisplayManipulationMode()
+        {
+            targetIO.ManipulationModeIndex = EditorGUILayout.Popup("Manipulation Modes", targetIO.ManipulationModeIndex, manipulationModes);
         }
 
         private void DisplayTouchDistance()

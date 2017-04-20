@@ -17,15 +17,14 @@
 // <date>2016-01-25</date>
 // </copyright>
 //-----------------------------------------------------------------------
+using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VR;
-using System;
 
 namespace Gaze
 {
-    public class Gaze_GearVr_DragAndDropManager: MonoBehaviour
+    public class Gaze_GearVr_DragAndDropManager : MonoBehaviour
     {
         public Gaze_InteractiveObject m_TargetObject;
         public Gaze_HandController[] grabbingControllers = new Gaze_HandController[2];
@@ -144,7 +143,7 @@ namespace Gaze
                 Gaze_DragAndDropCondition conditions = GetComponentInChildren<Gaze_DragAndDropCondition>();
                 if (conditions != null && conditions.attached)
                 {
-                    IO.grab = false;
+                    IO.DisableManipulationMode(Gaze_ManipulationModes.GRAB);
                     IO.isManupulable = false;
                     IO.SetManipulationMode(false, true);
                     if (IO.GrabbingManager != null)
@@ -351,7 +350,7 @@ namespace Gaze
                     Ungrab();
                 }
             }
-            
+
         }
         private void OnLevitationEvent(Gaze_LevitationEventArgs e)
         {

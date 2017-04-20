@@ -57,13 +57,13 @@ namespace Gaze
         {
             base.OnEnable();
             IO = GetIO();
-            Gaze_EventManager.OnGazeEvent += onGazeEvent;
+            Gaze_EventManager.OnGazeEvent += OnGazeEvent;
         }
 
         public override void OnDisable()
         {
             base.OnDisable();
-            Gaze_EventManager.OnGazeEvent -= onGazeEvent;
+            Gaze_EventManager.OnGazeEvent -= OnGazeEvent;
         }
 
         void Start()
@@ -145,17 +145,15 @@ namespace Gaze
             if (ModifyTouchDistance == ALTERABLE_OPTION.MODIFY)
                 GetIO().touchDistance = touchDistance;
 
-            if (ActionTouch == ACTIVABLE_OPTION.NOTHING)
-                return;
 
             if (ActionTouch == ACTIVABLE_OPTION.ACTIVATE)
             {
-                GetIO().touch = true;
+                GetIO().EnableManipulationMode(Gaze_ManipulationModes.TOUCH);
 
             }
-            else
+            else if (ActionTouch == ACTIVABLE_OPTION.DEACTIVATE)
             {
-                GetIO().touch = false;
+                GetIO().DisableManipulationMode(Gaze_ManipulationModes.TOUCH);
             }
         }
 
@@ -167,19 +165,18 @@ namespace Gaze
             if (ModifyGrabMode == ALTERABLE_OPTION.MODIFY)
                 GetIO().grabModeIndex = grabModeIndex;
 
-            if (ActionGrab == ACTIVABLE_OPTION.NOTHING)
-                return;
-
             Gaze_InteractiveObject IO = GetIO();
+
             if (ActionGrab == ACTIVABLE_OPTION.ACTIVATE)
             {
-                IO.grab = true;
+                IO.EnableManipulationMode(Gaze_ManipulationModes.GRAB);
             }
             else if (ActionGrab == ACTIVABLE_OPTION.DEACTIVATE)
             {
                 if (IO.GrabbingManager != null)
                     IO.GrabbingManager.TryDetach();
-                IO.grab = false;
+
+                IO.DisableManipulationMode(Gaze_ManipulationModes.GRAB);
             }
         }
 
@@ -190,8 +187,8 @@ namespace Gaze
         {
             if (!DestroyOnTrigger)
                 return;
-
-            GameObject.Destroy(GetIO().gameObject);
+            GetIO().enabled = false;
+            GameObject.Destroy(GetIO().gameObject, 0.1f);
         }
 
         private void HandleGravity()
@@ -357,7 +354,7 @@ namespace Gaze
         #endregion
 
 
-        private void onGazeEvent(Gaze_GazeEventArgs e)
+        private void OnGazeEvent(Gaze_GazeEventArgs e)
         {
             // if sender is the gazable collider GameObject
             if (e.Sender != null && gazable.gazeCollider != null && ((GameObject)e.Sender).Equals(gazable.gazeCollider.gameObject) && duckingEnabled && ActionAudio == Gaze_Actions.ACTIVABLE_OPTION.ACTIVATE)
