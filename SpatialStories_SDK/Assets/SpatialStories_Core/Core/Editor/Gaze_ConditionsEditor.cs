@@ -97,6 +97,7 @@ namespace Gaze
                     DisplayProximityList();
                     DisplayTouchCondition();
                     DisplayGrabCondition();
+                    DisplayTeleportCondition();
 
                     EditorGUILayout.Space();
                     #endregion
@@ -552,9 +553,21 @@ namespace Gaze
                     targetConditions.grabMap.grabEntryList[0].interactiveObject = hierarchyIOs[EditorGUILayout.Popup(hierarchyIOs.IndexOf((GameObject)targetConditions.grabMap.grabEntryList[0].interactiveObject), hierarchyIOsNames.ToArray())];
                     EditorGUILayout.EndHorizontal();
                 }
-
             }
+
             EditorGUILayout.Space();
+        }
+
+        private void DisplayTeleportCondition()
+        {
+            EditorGUILayout.BeginHorizontal();
+            targetConditions.teleportEnabled = EditorGUILayout.ToggleLeft("Teleport", targetConditions.teleportEnabled);
+
+            // chose teleport's action mode as a condition
+            if (targetConditions.teleportEnabled)
+                targetConditions.teleportIndex = EditorGUILayout.Popup(targetConditions.teleportIndex, Enum.GetNames(typeof(Gaze_TeleportMode)));
+
+            EditorGUILayout.EndHorizontal();
         }
 
         private void DisplayWarning()

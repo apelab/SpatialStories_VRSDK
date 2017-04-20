@@ -457,7 +457,17 @@ public class Gaze_Teleporter : MonoBehaviour
     virtual public bool IsGoodSpot(RaycastHit hit)
     {
         if (hit.transform == null)
+        {
+            // fire event
+            gaze_TeleportEventArgs.Mode = Gaze_TeleportMode.BAD_DESTINATION;
+            Gaze_EventManager.FireTeleportEvent(gaze_TeleportEventArgs);
+
             return false;
+        }
+
+        // fire event
+        gaze_TeleportEventArgs.Mode = Gaze_TeleportMode.GOOD_DESTINATION;
+        Gaze_EventManager.FireTeleportEvent(gaze_TeleportEventArgs);
 
         return true;
     }
@@ -475,6 +485,10 @@ public class Gaze_Teleporter : MonoBehaviour
         teleportActive = true;
         _lineRenderer.enabled = true;
         _lineRenderer2.enabled = true;
+
+        // fire event
+        gaze_TeleportEventArgs.Mode = Gaze_TeleportMode.ACTIVATED;
+        Gaze_EventManager.FireTeleportEvent(gaze_TeleportEventArgs);
     }
 
     virtual public void DisableTeleport()
@@ -487,6 +501,10 @@ public class Gaze_Teleporter : MonoBehaviour
         teleportActive = false;
         _lineRenderer.enabled = false;
         _lineRenderer2.enabled = false;
+
+        // fire event
+        gaze_TeleportEventArgs.Mode = Gaze_TeleportMode.DEACTIVATED;
+        Gaze_EventManager.FireTeleportEvent(gaze_TeleportEventArgs);
     }
 
     virtual public void Teleport()
@@ -535,6 +553,7 @@ public class Gaze_Teleporter : MonoBehaviour
             RecenterSpaceOnCameraPosition();
 
             // fire event
+            gaze_TeleportEventArgs.Mode = Gaze_TeleportMode.TELEPORT;
             Gaze_EventManager.FireTeleportEvent(gaze_TeleportEventArgs);
         }
     }
