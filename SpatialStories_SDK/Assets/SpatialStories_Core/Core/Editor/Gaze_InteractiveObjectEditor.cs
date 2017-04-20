@@ -32,6 +32,7 @@ namespace Gaze
         private Texture logo;
         private Rect logoRect;
         private string[] grabModes;
+        private string[] manipulationModes;
         #endregion
 
         void OnEnable()
@@ -42,7 +43,10 @@ namespace Gaze
         private void InitMembers()
         {
             targetIO = (Gaze_InteractiveObject)target;
+
             grabModes = Enum.GetNames(typeof(Gaze_GrabMode));
+            manipulationModes = Enum.GetNames(typeof(Gaze_ManipulationModes));
+
             logo = (Texture)Resources.Load("SpatialStorires_Logo_256", typeof(Texture));
             logoRect = new Rect();
             logoRect.x = 10;
@@ -52,6 +56,7 @@ namespace Gaze
         public override void OnInspectorGUI()
         {
             DisplayLogo();
+            DisplayManipulationMode();
             DisplayTouchDistance();
             DisplayGrabDistance();
             DisplayLevitationDistance();
@@ -66,6 +71,11 @@ namespace Gaze
             GUILayout.EndHorizontal();
         }
 
+
+        private void DisplayManipulationMode()
+        {
+            targetIO.ManipulationModeIndex = EditorGUILayout.Popup("Manipulation Modes", targetIO.ManipulationModeIndex, manipulationModes);
+        }
 
         private void DisplayTouchDistance()
         {

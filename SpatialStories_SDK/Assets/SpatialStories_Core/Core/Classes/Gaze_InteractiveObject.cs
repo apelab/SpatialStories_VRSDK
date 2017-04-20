@@ -29,7 +29,9 @@ namespace Gaze
         /// Defines how the user can interact with the IO by using 
         /// his controllers.
         /// </summary>
-        public Gaze_ManipulationModes ManipulationMode { private set; get; }
+        public Gaze_ManipulationModes ManipulationMode { get { return (Gaze_ManipulationModes)ManipulationModeIndex; } }
+        // This is done for the editor that does not work correctly with enums
+        public int ManipulationModeIndex = 0;
 
         /// <summary>
         /// Can this object be grabbed.
@@ -469,13 +471,13 @@ namespace Gaze
 
         public void EnableManipulationMode(Gaze_ManipulationModes _manipulationMode)
         {
-            ManipulationMode = _manipulationMode;
+            ManipulationModeIndex = (int)_manipulationMode;
         }
 
         public void DisableManipulationMode(Gaze_ManipulationModes manipulationMode)
         {
             if (ManipulationMode == manipulationMode)
-                ManipulationMode = Gaze_ManipulationModes.NONE;
+                ManipulationModeIndex = (int)Gaze_ManipulationModes.NONE;
         }
 
         #endregion ManipulationManagement
