@@ -135,6 +135,7 @@ public class Gaze_GrabManager : MonoBehaviour
         Gaze_InputManager.OnHandLeftDownEvent += OnHandLeftDownEvent;
         Gaze_InputManager.OnHandLeftUpEvent += OnHandLeftUpEvent;
         Gaze_HandsReplacer.OnHandsReplaced += OnHandsReplaced;
+        Gaze_EventManager.OnIODestroyed += OnIODestroyed;
 
         // get the snap location from the controller
         controllerSnapTransform = gameObject.GetComponentInChildren<Gaze_GrabPositionController>().transform;
@@ -143,6 +144,8 @@ public class Gaze_GrabManager : MonoBehaviour
         // Add this grab manager to the list
         GrabManagers.Add(this);
     }
+
+
 
     void OnDisable()
     {
@@ -154,6 +157,7 @@ public class Gaze_GrabManager : MonoBehaviour
         Gaze_InputManager.OnHandLeftDownEvent -= OnHandLeftDownEvent;
         Gaze_InputManager.OnHandLeftUpEvent -= OnHandLeftUpEvent;
         Gaze_HandsReplacer.OnHandsReplaced -= OnHandsReplaced;
+        Gaze_EventManager.OnIODestroyed -= OnIODestroyed;
 
         // Remove this grab manager from the list
         GrabManagers.Remove(this);
@@ -1242,5 +1246,24 @@ public class Gaze_GrabManager : MonoBehaviour
             }
         }
     }
+
+    /// <summary>
+    /// Clear all the lists where the destroyed IO was in order to 
+    /// prevent null reference exceptions.
+    /// </summary>
+    /// <param name="args"></param>
+    private void OnIODestroyed(Gaze_IODestroyEventArgs args)
+    {
+        raycastIOs.Remove(args.IO.gameObject);
+        hitsIOs.Remove(args.IO.gameObject);
+        objectsInProximity.Remove(args.IO.gameObject);
+
+        if (grabbedObject == args.IO.gameObject)
+            grabbedObject = null;
+
+        if (collidingObject == args.IO.gameObject)
+            collidingObject = null;
+    }
+
     #endregion EventHandlers
 }

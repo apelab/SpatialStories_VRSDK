@@ -317,6 +317,14 @@ namespace Gaze
             }
         }
 
+        /// <summary>
+        /// Notify to everyone that this IO has been destroyed 
+        /// </summary>
+        private void OnDestroy()
+        {
+            Gaze_EventManager.FireOnIODestroyed(new Gaze_IODestroyEventArgs(this, this));
+        }
+
         #region GravityManagement
         /// <summary>
         /// Checks the initial gravity state in order to return to it if required
