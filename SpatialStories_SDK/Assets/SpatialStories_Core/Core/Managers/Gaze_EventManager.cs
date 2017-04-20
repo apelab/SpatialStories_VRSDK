@@ -192,5 +192,15 @@ namespace Gaze
             if (OnTeleportEvent != null)
                 OnTeleportEvent(e);
         }
+
+        /// Fired when the controller is teleporting
+        /// </summary>
+        public delegate void IODestroyHandler(Gaze_IODestroyEventArgs e);
+        public static event IODestroyHandler OnIODestroyed;
+        public static void FireOnIODestroyed(Gaze_IODestroyEventArgs e)
+        {
+            if (OnIODestroyed != null)
+                OnIODestroyed(e);
+        }
     }
 }

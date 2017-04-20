@@ -1,9 +1,9 @@
 ﻿namespace Gaze
 {
-	public enum Gaze_TouchDistanceMode
+    public enum Gaze_TouchDistanceMode
     {
-		PROXIMITY,
-		DISTANT,
-		BOTH
-	}
+        PROXIMITY,
+        DISTANT,
+        BOTH
+    }
 }

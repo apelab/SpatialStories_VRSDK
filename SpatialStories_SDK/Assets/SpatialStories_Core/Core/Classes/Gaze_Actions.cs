@@ -175,12 +175,11 @@ namespace Gaze
             {
                 IO.grab = true;
             }
-            else
+            else if (ActionGrab == ACTIVABLE_OPTION.DEACTIVATE)
             {
                 if (IO.GrabbingManager != null)
                     IO.GrabbingManager.TryDetach();
                 IO.grab = false;
-
             }
         }
 
