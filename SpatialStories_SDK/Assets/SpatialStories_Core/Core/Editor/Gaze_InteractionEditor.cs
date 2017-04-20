@@ -132,6 +132,11 @@ namespace Gaze
                 EditorGUILayout.EndHorizontal();
 
                 EditorGUILayout.BeginHorizontal();
+                EditorGUILayout.LabelField("Teleport");
+                EditorGUILayout.LabelField(conditionsScript.teleportEditorState, EditorStyles.whiteLabel);
+                EditorGUILayout.EndHorizontal();
+
+                EditorGUILayout.BeginHorizontal();
                 EditorGUILayout.LabelField("State");
                 EditorGUILayout.LabelField(((Gaze_TriggerState)conditionsScript.triggerStateIndex).ToString(), EditorStyles.whiteLabel);
                 EditorGUILayout.EndHorizontal();

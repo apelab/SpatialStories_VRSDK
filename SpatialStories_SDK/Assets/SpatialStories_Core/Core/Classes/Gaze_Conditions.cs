@@ -16,6 +16,7 @@
 // <web>http://www.apelab.ch</web>
 // <date>2014-06-01</date>
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VR;
@@ -235,6 +236,8 @@ namespace Gaze
 
         private bool teleportValidated = false;
 
+        public string teleportEditorState;
+
         private bool grabValidated = false;
         private bool grabLeftValid = false, grabRightValid = false;
         private bool grabStateLeftValid = false, grabStateRightValid = false;
@@ -320,7 +323,7 @@ namespace Gaze
         private bool isTriggerPressed = false;
         private VRNode eventHand;
         private float lastUpdateTime;
-
+        private IEnumerator teleportStateCoroutine;
         #endregion
 
         void OnEnable()
@@ -1497,8 +1500,32 @@ namespace Gaze
 
         private void OnTeleportEvent(Gaze_TeleportEventArgs e)
         {
+            int _modeIndex = (int)e.Mode;
+
             // if the received telport mode is equal to the condition teleport mode
-            teleportValidated = (((int)e.Mode).Equals(teleportIndex));
+            if (!teleportValidated)
+                teleportValidated = _modeIndex.Equals(teleportIndex);
+
+            // stop the coroutine to display correct teleport state info in the inspector (at runtime) if any is running
+            if (teleportStateCoroutine != null)
+                StopCoroutine(teleportStateCoroutine);
+
+            // start the coroutine to display the teleport state info in the editor (at runtime)
+            teleportStateCoroutine = TeleportStateCoroutine(_modeIndex);
+            StartCoroutine(teleportStateCoroutine);
+        }
+
+        // TODO @apelab wait a few milliseconds to change state for ACTIVE and TELEPORT events so we have time to see it in the State infos
+        private IEnumerator TeleportStateCoroutine(int _modeIndex)
+        {
+            float waitTime = 0f;
+            if ((_modeIndex == (int)Gaze_TeleportMode.ACTIVATED) || (_modeIndex == (int)Gaze_TeleportMode.TELEPORT))
+            {
+                waitTime = .5f;
+            }
+
+            yield return new WaitForSeconds(waitTime);
+            teleportEditorState = ((Gaze_TeleportMode)_modeIndex).ToString();
         }
 
         private void OnDrawGizmos()

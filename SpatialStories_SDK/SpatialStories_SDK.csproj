@@ -199,6 +199,7 @@
     <Compile Include="Assets\SpatialStories_Core\Core\Events\Gaze_GazeEventArgs.cs" />
     <Compile Include="Assets\SpatialStories_Core\Core\Events\Gaze_GrabEventArgs.cs" />
     <Compile Include="Assets\SpatialStories_Core\Core\Events\Gaze_HandleEventArgs.cs" />
+    <Compile Include="Assets\SpatialStories_Core\Core\Events\Gaze_IODestroyEventArgs.cs" />
     <Compile Include="Assets\SpatialStories_Core\Core\Events\Gaze_InputEventArgs.cs" />
     <Compile Include="Assets\SpatialStories_Core\Core\Events\Gaze_LaserEventArgs.cs" />
     <Compile Include="Assets\SpatialStories_Core\Core\Events\Gaze_ProximityEventArgs.cs" />
