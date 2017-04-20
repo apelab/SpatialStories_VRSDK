@@ -15,6 +15,7 @@ public class TeleportCustomCondition : Gaze_AbstractConditions
 
     private void OnTeleportEvent(Gaze_TeleportEventArgs e)
     {
-        ValidateCustomCondition(true);
+        if (e.Mode.Equals(Gaze_TeleportMode.TELEPORT))
+            ValidateCustomCondition(true);
     }
 }

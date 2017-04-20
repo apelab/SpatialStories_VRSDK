@@ -169,28 +169,22 @@ namespace Gaze
         /// <summary>
         /// Is the Trigger being focused ?
         /// </summary>
-        private bool focusInProgress;
-
-        public bool FocusInProgress { get { return focusInProgress; } }
+        public bool FocusInProgress { get; private set; }
 
         /// <summary>
         /// True if focus time is reached, else FALSE
         /// </summary>
-        private bool focusComplete;
-
-        public bool FocusComplete { get { return focusComplete; } }
+        public bool FocusComplete { get; private set; }
 
         /// <summary>
         /// The amount of time the object has been focused.
         /// </summary>
-        private float focusTotalTime;
-
-        public float FocusTotalTime { get { return focusTotalTime; } }
+        public float FocusTotalTime { get; private set; }
 
         /// <summary>
         /// The focus completion amount normalized between 0 and 1
         /// </summary>
-        public float FocusCompletion { get { return Mathf.Clamp01(focusTotalTime / focusDuration); } }
+        public float FocusCompletion { get { return Mathf.Clamp01(FocusTotalTime / focusDuration); } }
 
         /// <summary>
         /// Frame starting time (works only if time driven is ON)
@@ -207,7 +201,7 @@ namespace Gaze
 
         /// <summary>
         /// Is Gaze condition enabled.
-        /// Corresponds to the editor checkbox as a trigger condition.
+        /// Corresponds to the editor's checkbox as a trigger condition.
         /// </summary>
         public bool gazeEnabled;
 
@@ -218,15 +212,29 @@ namespace Gaze
 
         /// <summary>
         /// Is Proximity condition enabled.
-        /// Corresponds to the editor checkbox as a trigger condition
+        /// Corresponds to the editor's checkbox as a trigger condition
         /// </summary>
         public bool proximityEnabled;
 
         /// <summary>
         /// Is Grab condition enabled.
-        /// Corresponds to the editor checkbox as a trigger condition
+        /// Corresponds to the editor's checkbox as a trigger condition
         /// </summary>
         public bool grabEnabled;
+
+        /// <summary>
+        /// Is teleport condition enabled.
+        /// Corresponds to the editor's checkbox as a trigger condition
+        /// </summary>
+        public bool teleportEnabled;
+
+        /// <summary>
+        /// Represents the teleport selected action's index in the Gaze_ConditionsEditor.
+        /// </summary>
+        public int teleportIndex;
+
+        private bool teleportValidated = false;
+
         private bool grabValidated = false;
         private bool grabLeftValid = false, grabRightValid = false;
         private bool grabStateLeftValid = false, grabStateRightValid = false;
@@ -332,6 +340,7 @@ namespace Gaze
                 Gaze_InputManager.OnControllerGrabEvent += OnControllerGrabEvent;
                 Gaze_InputManager.OnControllerTouchEvent += OnControllerTouchEvent;
                 Gaze_InputManager.OnControllerCollisionEvent += OnControllerCollisionEvent;
+                Gaze_EventManager.OnTeleportEvent += OnTeleportEvent;
 
                 if (customConditionsDico.Count != customConditions.Count)
                 {
@@ -361,13 +370,14 @@ namespace Gaze
                 Gaze_InputManager.OnControllerGrabEvent -= OnControllerGrabEvent;
                 Gaze_InputManager.OnControllerTouchEvent -= OnControllerTouchEvent;
                 Gaze_InputManager.OnControllerCollisionEvent -= OnControllerCollisionEvent;
+                Gaze_EventManager.OnTeleportEvent -= OnTeleportEvent;
             }
         }
 
         void Start()
         {
-            focusInProgress = false;
-            focusComplete = focusDuration <= 0 ? true : false;
+            FocusInProgress = false;
+            FocusComplete = focusDuration <= 0 ? true : false;
             withinTimeFrameFlag = false;
             afterTimeFrameFlag = false;
             DependenciesValidated = dependent ? false : true;
@@ -423,6 +433,10 @@ namespace Gaze
             if (touchEnabled && !touchValidated)
                 return;
 
+            // if teleport condition is not met
+            if (teleportEnabled && !teleportValidated)
+                return;
+
             // if all trigger conditions are met
             if (canBeTriggered && Time.time > nextReloadTime)
             {
@@ -460,19 +474,19 @@ namespace Gaze
         private void UpdateFocus()
         {
             // if focus is not complete
-            if (!focusComplete || focusDuration <= 0f)
+            if (!FocusComplete || focusDuration <= 0f)
             {
                 // set the flag
-                focusInProgress = true;
+                FocusInProgress = true;
 
                 // update focus time
-                focusTotalTime += Time.deltaTime;
+                FocusTotalTime += Time.deltaTime;
 
                 // set focused flag if focus time overpassed
-                if (focusTotalTime >= focusDuration)
+                if (FocusTotalTime >= focusDuration)
                 {
-                    focusComplete = true;
-                    focusInProgress = false;
+                    FocusComplete = true;
+                    FocusInProgress = false;
                     canBeTriggered = false;
                     TriggerCount++;
 
@@ -493,17 +507,17 @@ namespace Gaze
         private void ResetFocus()
         {
             // set the flag
-            focusInProgress = false;
+            FocusInProgress = false;
 
             if (GetFocusLossMode().Equals(Gaze_FocusLossMode.INSTANT))
             {
                 // reset if INSTANT loss mode
-                focusTotalTime = 0f;
+                FocusTotalTime = 0f;
             }
             else if (GetFocusLossMode().Equals(Gaze_FocusLossMode.FADE))
             {
                 // decrease if FADE loss mode
-                focusTotalTime = Mathf.Max(0, focusTotalTime - Time.deltaTime * FocusLossSpeed);
+                FocusTotalTime = Mathf.Max(0, FocusTotalTime - Time.deltaTime * FocusLossSpeed);
             }
         }
 
@@ -651,8 +665,8 @@ namespace Gaze
             // update focus values
             if (focusDuration > 0f)
             {
-                focusTotalTime = 0;
-                focusComplete = false;
+                FocusTotalTime = 0;
+                FocusComplete = false;
             }
 
             // update reload pending flag
@@ -1300,8 +1314,6 @@ namespace Gaze
             return valid;
         }
 
-        /// <summary>
-
         /// Get the pointed object in the dico argument
         /// </summary>
         /// <param name="e"></param>
@@ -1404,45 +1416,6 @@ namespace Gaze
             customConditionsDico[(int)e.Sender] = e.IsValid;
         }
 
-        private void OnDrawGizmos()
-        {
-            String gizmo;
-
-            if (gameObject.GetComponent<Gaze_SceneLoader>())
-            {
-                gizmo = "Gaze SDK/Gaze_SimpleSceneLoader.png";
-            }
-            else if (!dependent || ActivateOnDependencyMap.isEmpty())
-            {
-                gizmo = "Gaze SDK/Gaze_Gazable_starter.png";
-            }
-            else
-            {
-                gizmo = "Gaze SDK/Gaze_Gazable.png";
-            }
-
-            Gizmos.DrawIcon(transform.position, gizmo, true);
-
-            if (ShowDependencies && dependent)
-            {
-                Gizmos.color = new Color(0.5f, 0.5f, 0.5f, 0.5f);
-                DrawConnections(ActivateOnDependencyMap);
-                DrawConnections(DeactivateOnDependencyMap);
-            }
-        }
-
-        private void OnDrawGizmosSelected()
-        {
-            if (ShowDependencies && dependent)
-            {
-                Gizmos.color = Color.green;
-                DrawConnections(ActivateOnDependencyMap, 0.03f);
-
-                Gizmos.color = Color.red;
-                DrawConnections(DeactivateOnDependencyMap, 0.03f);
-            }
-        }
-
         private void OnControllerGrabEvent(Gaze_ControllerGrabEventArgs e)
         {
             if (grabEnabled)
@@ -1519,6 +1492,51 @@ namespace Gaze
                     // check if touch is valid
                     touchValidated = ValidateTouchConditions();
                 }
+            }
+        }
+
+        private void OnTeleportEvent(Gaze_TeleportEventArgs e)
+        {
+            // if the received telport mode is equal to the condition teleport mode
+            teleportValidated = (((int)e.Mode).Equals(teleportIndex));
+        }
+
+        private void OnDrawGizmos()
+        {
+            String gizmo;
+
+            if (gameObject.GetComponent<Gaze_SceneLoader>())
+            {
+                gizmo = "Gaze SDK/Gaze_SimpleSceneLoader.png";
+            }
+            else if (!dependent || ActivateOnDependencyMap.isEmpty())
+            {
+                gizmo = "Gaze SDK/Gaze_Gazable_starter.png";
+            }
+            else
+            {
+                gizmo = "Gaze SDK/Gaze_Gazable.png";
+            }
+
+            Gizmos.DrawIcon(transform.position, gizmo, true);
+
+            if (ShowDependencies && dependent)
+            {
+                Gizmos.color = new Color(0.5f, 0.5f, 0.5f, 0.5f);
+                DrawConnections(ActivateOnDependencyMap);
+                DrawConnections(DeactivateOnDependencyMap);
+            }
+        }
+
+        private void OnDrawGizmosSelected()
+        {
+            if (ShowDependencies && dependent)
+            {
+                Gizmos.color = Color.green;
+                DrawConnections(ActivateOnDependencyMap, 0.03f);
+
+                Gizmos.color = Color.red;
+                DrawConnections(DeactivateOnDependencyMap, 0.03f);
             }
         }
 
