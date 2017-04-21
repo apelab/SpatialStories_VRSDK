@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: d8f923b1c2e15cd46b755575258ba6cd
-timeCreated: 1492002399
+guid: cde54a68b95c7c64c8fdf8b42d0e4974
+timeCreated: 1485771840
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -92,8 +92,6 @@ ModelImporter:
     resampleCurves: 1
     optimizeGameObjects: 0
     motionNodeName: 
-    rigImportErrors: 
-    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
@@ -105,7 +103,7 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     clipAnimations: []
-    isReadable: 1
+    isReadable: 0
   meshes:
     lODScreenPercentages: []
     globalScale: 1
@@ -124,8 +122,8 @@ ModelImporter:
     secondaryUVPackMargin: 4
     useFileScale: 1
   tangentSpace:
-    normalSmoothAngle: 60
-    normalImportMode: 0
+    normalSmoothAngle: 151
+    normalImportMode: 1
     tangentImportMode: 3
   importAnimation: 1
   copyAvatar: 0

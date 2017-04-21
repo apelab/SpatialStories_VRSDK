@@ -1461,7 +1461,7 @@ namespace Gaze
             // if this object is me
             if (pointedObject && pointedObject.Equals(GetComponentInParent<Gaze_InteractiveObject>().gameObject))
             {
-                Debug.Log(this + " pointedObject  = " + pointedObject + " (" + e.IsPointed + ")");
+                // Debug.Log(this + " pointedObject  = " + pointedObject + " (" + e.IsPointed + ")");
                 // get the event's pointing hand
                 eventHand = e.Dico.ContainsKey(VRNode.LeftHand) ? VRNode.LeftHand : VRNode.RightHand;
 
