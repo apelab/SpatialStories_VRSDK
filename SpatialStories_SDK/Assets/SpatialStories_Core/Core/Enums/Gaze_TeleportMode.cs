@@ -25,10 +25,10 @@ namespace Gaze
     /// </summary>
     public enum Gaze_TeleportMode
     {
+        TELEPORT,
         ACTIVATED,
         DEACTIVATED,
         BAD_DESTINATION,
-        GOOD_DESTINATION,
-        TELEPORT
+        GOOD_DESTINATION
     }
 }

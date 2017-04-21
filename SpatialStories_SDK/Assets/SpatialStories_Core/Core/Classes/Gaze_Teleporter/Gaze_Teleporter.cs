@@ -503,8 +503,8 @@ public class Gaze_Teleporter : MonoBehaviour
         _lineRenderer2.enabled = false;
 
         // fire event
-        gaze_TeleportEventArgs.Mode = Gaze_TeleportMode.DEACTIVATED;
-        Gaze_EventManager.FireTeleportEvent(gaze_TeleportEventArgs);
+        //gaze_TeleportEventArgs.Mode = Gaze_TeleportMode.DEACTIVATED;
+        //Gaze_EventManager.FireTeleportEvent(gaze_TeleportEventArgs);
     }
 
     virtual public void Teleport()
