@@ -60,7 +60,6 @@ namespace Gaze
             DisplayTouchDistance();
             DisplayGrabDistance();
             DisplayLevitationDistance();
-            DisplayGrabMode();
         }
 
         private void DisplayLogo()
@@ -79,6 +78,9 @@ namespace Gaze
 
         private void DisplayTouchDistance()
         {
+            if (targetIO.ManipulationMode != Gaze_ManipulationModes.TOUCH)
+                return;
+
             GUILayout.BeginHorizontal();
             targetIO.touchDistance = EditorGUILayout.FloatField("Touch Distance", targetIO.touchDistance);
             GUILayout.EndHorizontal();
@@ -86,6 +88,9 @@ namespace Gaze
 
         private void DisplayGrabDistance()
         {
+            if (targetIO.ManipulationMode != Gaze_ManipulationModes.GRAB)
+                return;
+
             GUILayout.BeginHorizontal();
             targetIO.grabDistance = EditorGUILayout.FloatField("Grab Distance", targetIO.grabDistance);
             GUILayout.EndHorizontal();
@@ -93,17 +98,12 @@ namespace Gaze
 
         private void DisplayLevitationDistance()
         {
+            if (targetIO.ManipulationMode != Gaze_ManipulationModes.LEVITATE)
+                return;
+
             GUILayout.BeginHorizontal();
             targetIO.levitateDistance = EditorGUILayout.FloatField("Levitation Distance", targetIO.levitateDistance);
             GUILayout.EndHorizontal();
-        }
-
-        //TODO @apelab display grab mode (ATTRACT, LEVITATE)
-        private void DisplayGrabMode()
-        {
-            EditorGUILayout.BeginHorizontal();
-            targetIO.grabModeIndex = EditorGUILayout.Popup("Grab Mode", targetIO.grabModeIndex, grabModes);
-            EditorGUILayout.EndHorizontal();
         }
     }
 }

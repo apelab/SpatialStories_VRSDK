@@ -162,9 +162,6 @@ namespace Gaze
             if (ModifyGrabDistance == ALTERABLE_OPTION.MODIFY)
                 GetIO().grabDistance = grabDistance;
 
-            if (ModifyGrabMode == ALTERABLE_OPTION.MODIFY)
-                GetIO().grabModeIndex = grabModeIndex;
-
             Gaze_InteractiveObject IO = GetIO();
 
             if (ActionGrab == ACTIVABLE_OPTION.ACTIVATE)

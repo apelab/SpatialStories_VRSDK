@@ -46,9 +46,23 @@ namespace Gaze
         public int touchIndex;
 
         /// <summary>
-        /// The grab mode is either : AUTOMATIC or MANUAL
+        /// The grab mode is either : Attract or Levitate
+        /// TODO(4nc3str4l): This is here as a workarround of the new SDK but with the new
+        /// manipulation logic this should be removed and everything should be managed with\
+        /// the new manipulation mode attribute.
         /// </summary>
-        public int grabModeIndex;
+        public int grabModeIndex
+        {
+            get
+            {
+                if (ManipulationMode == Gaze_ManipulationModes.GRAB)
+                    return (int)Gaze_GrabMode.ATTRACT;
+                else if (ManipulationMode == Gaze_ManipulationModes.LEVITATE)
+                    return (int)Gaze_GrabMode.LEVITATE;
+                else
+                    return -1;
+            }
+        }
 
         /// <summary>
         /// It's the collider used to catch the object.
@@ -163,8 +177,6 @@ namespace Gaze
 
         void Update()
         {
-            Debug.Log(grab);
-            Debug.Log(touch);
             if (rootMotion != null)
             {
                 FollowRoot();
