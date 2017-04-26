@@ -36,7 +36,7 @@ namespace Gaze
         /// <summary>
         /// Can this object be grabbed.
         /// </summary>
-        public bool grab { get { return ManipulationMode == Gaze_ManipulationModes.GRAB; } }
+        public bool grab { get { return ManipulationMode == Gaze_ManipulationModes.GRAB || ManipulationMode == Gaze_ManipulationModes.LEVITATE; } }
 
         /// <summary>
         /// Can this object be activated by :

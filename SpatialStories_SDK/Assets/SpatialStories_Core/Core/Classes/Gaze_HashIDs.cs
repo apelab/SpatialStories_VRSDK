@@ -16,36 +16,35 @@
 // <web>http://www.apelab.ch</web>
 // <date>2014-06-01</date>
 using UnityEngine;
-using System.Collections;
 
 namespace Gaze
 {
-	public static class Gaze_HashIDs
-	{
-		public static float CONDITIONS_UPDATE_INTERVAL = .05f;
+    public static class Gaze_HashIDs
+    {
+        public static float CONDITIONS_UPDATE_INTERVAL = .05f;
 
-		public static string[] DependencyTriggerEventsAndStates = {
-			"Before",
-			"Active",
-			"After",
-			"Triggered"
-		};
+        public static string[] DependencyTriggerEventsAndStates = {
+            "Before",
+            "Active",
+            "After",
+            "Triggered"
+        };
 
-		public static string[] TriggerEventsAndStates = {
-			"OnTrigger",
-			"OnReload",
-			"OnBefore",
-			"OnActive",
-			"OnAfter"
-		};
+        public static string[] TriggerEventsAndStates = {
+            "OnTrigger",
+            "OnReload",
+            "OnBefore",
+            "OnActive",
+            "OnAfter"
+        };
 
-		public static string[] ProximityEventsAndStates = {
-			"OnEnter",
-			"OnExit"
-		};
+        public static string[] ProximityEventsAndStates = {
+            "OnEnter",
+            "OnExit"
+        };
 
-		public static int ANIMATOR_PARAMETER_HANDCLOSED = Animator.StringToHash ("handClosed");
-		public static float THROW_SPEED = 2f;
-		public static string LAYER_SOLID = "Custom Collision";
-	}
+        public static int ANIMATOR_PARAMETER_HANDCLOSED = Animator.StringToHash("handClosed");
+        public static float THROW_SPEED = 2f;
+        public static string LAYER_SOLID = "Custom Collision";
+    }
 }

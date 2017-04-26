@@ -542,10 +542,10 @@ namespace Gaze
         private void OnDragAndDropEvent(Gaze_DragAndDropEventArgs e)
         {
             Gaze_DragAndDropManager dndManager = Gaze_EventUtils.ConvertIntoGameObject(e.Sender).GetComponent<Gaze_DragAndDropManager>();
-            
+
             if (objectToLevitate != dndManager.gameObject)
                 return;
-            
+
             if (e.State.Equals(Gaze_DragAndDropStates.DROPREADY) && !dropReady)
             {
                 dropReady = !dropReady;
@@ -562,7 +562,7 @@ namespace Gaze
                 updateBeamColorRoutine = UpdateBeamFeedback(false);
                 StartCoroutine(updateBeamColorRoutine);
             }
-            else if(e.State.Equals(Gaze_DragAndDropStates.DROP))
+            else if (e.State.Equals(Gaze_DragAndDropStates.DROP))
             {
                 ResetBeamColor();
             }
