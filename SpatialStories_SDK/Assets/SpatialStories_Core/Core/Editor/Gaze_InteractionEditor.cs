@@ -30,6 +30,7 @@ namespace Gaze
         // logo image
         Texture logo;
         Rect logoRect;
+        private static bool showStateBlock = true;
 
         private Gaze_Conditions conditionsScript;
 
@@ -38,6 +39,11 @@ namespace Gaze
 
         SerializedProperty HasConditions;
         SerializedProperty HasActions;
+
+        private void Awake()
+        {
+            conditionsScript = ((Gaze_Interaction)target).GetComponent<Gaze_Conditions>();
+        }
 
         void OnEnable()
         {
@@ -54,19 +60,17 @@ namespace Gaze
             // Update the serializedProperty - always do this in the beginning of OnInspectorGUI.
             serializedObject.Update();
 
+            #region Logo
+            GUILayout.BeginHorizontal();
+            GUI.Label(logoRect, logo);
+            GUILayout.Label(logo);
+            GUILayout.EndHorizontal();
+            #endregion
 
             if (!Application.isPlaying)
             {
                 #region Update InteractiveObjects list
                 UpdateInteractiveObjectsList();
-                #endregion
-
-
-                #region Logo
-                GUILayout.BeginHorizontal();
-                GUI.Label(logoRect, logo);
-                GUILayout.Label(logo);
-                GUILayout.EndHorizontal();
                 #endregion
 
                 bool lastHasActions = HasActions.boolValue;
@@ -98,89 +102,115 @@ namespace Gaze
             else
             {
                 #region State
-                // display Conditions component
-                conditionsScript = ((Gaze_Interaction)target).GetComponent<Gaze_Conditions>();
+
                 EditorGUILayout.Space();
-                EditorGUILayout.LabelField("Infos");
+                showStateBlock = EditorGUILayout.Foldout(showStateBlock, "Infos");
 
                 // extra block that can be toggled on and off
-                EditorGUILayout.BeginHorizontal();
-                EditorGUILayout.LabelField("Gazed");
-                EditorGUILayout.LabelField(conditionsScript.IsGazed ? "Gazed" : "Ungazed", EditorStyles.whiteLabel);
-                EditorGUILayout.EndHorizontal();
-
-                EditorGUILayout.BeginHorizontal();
-                EditorGUILayout.LabelField("Proximity");
-                EditorGUILayout.LabelField(conditionsScript.isInProximity ? "In" : "Out", EditorStyles.whiteLabel);
-                EditorGUILayout.EndHorizontal();
-
-                EditorGUILayout.BeginHorizontal();
-                EditorGUILayout.LabelField("Touch Left");
-
-                if (Gaze_InputManager.instance.LeftHandActive)
-                    EditorGUILayout.LabelField(conditionsScript.isLeftPointing || conditionsScript.isLeftColliding ? "Touch" : "Untouch", EditorStyles.whiteLabel);
-                else
-                    EditorGUILayout.LabelField("N/A", EditorStyles.whiteLabel);
-                EditorGUILayout.EndHorizontal();
-
-                EditorGUILayout.BeginHorizontal();
-                EditorGUILayout.LabelField("Touch Right");
-                if (Gaze_InputManager.instance.RightHandActive)
-                    EditorGUILayout.LabelField(conditionsScript.isRightPointing || conditionsScript.isRightColliding ? "Touch" : "Untouch", EditorStyles.whiteLabel);
-                else
-                    EditorGUILayout.LabelField("N/A", EditorStyles.whiteLabel);
-                EditorGUILayout.EndHorizontal();
-
-                EditorGUILayout.BeginHorizontal();
-                EditorGUILayout.LabelField("Teleport");
-                EditorGUILayout.LabelField(conditionsScript.teleportEditorState, EditorStyles.whiteLabel);
-                EditorGUILayout.EndHorizontal();
-
-                EditorGUILayout.BeginHorizontal();
-                EditorGUILayout.LabelField("State");
-                EditorGUILayout.LabelField(((Gaze_TriggerState)conditionsScript.triggerStateIndex).ToString(), EditorStyles.whiteLabel);
-                EditorGUILayout.EndHorizontal();
-
-
-                if (conditionsScript.dependent)
+                if (showStateBlock)
                 {
                     EditorGUILayout.BeginHorizontal();
-                    EditorGUILayout.LabelField("Dependencies validated");
-                    EditorGUILayout.LabelField(conditionsScript.DependenciesValidated.ToString(), EditorStyles.whiteLabel);
+                    EditorGUILayout.LabelField("State");
+                    EditorGUILayout.LabelField(((Gaze_TriggerState)conditionsScript.triggerStateIndex).ToString(), EditorStyles.whiteLabel);
                     EditorGUILayout.EndHorizontal();
-                }
 
-                if (conditionsScript.focusDuration > 0)
-                {
+
+                    if (conditionsScript.focusDuration > 0)
+                    {
+                        EditorGUILayout.BeginHorizontal();
+                        EditorGUILayout.LabelField("Focus Completion");
+                        EditorGUILayout.LabelField(conditionsScript.FocusCompletion.ToString("P"), EditorStyles.whiteLabel);
+                        EditorGUILayout.EndHorizontal();
+                    }
+
                     EditorGUILayout.BeginHorizontal();
-                    EditorGUILayout.LabelField("Focus Completion");
-                    EditorGUILayout.LabelField(conditionsScript.FocusCompletion.ToString("P"), EditorStyles.whiteLabel);
+                    EditorGUILayout.LabelField("Trigger Count");
+                    EditorGUILayout.LabelField(conditionsScript.TriggerCount.ToString(), EditorStyles.whiteLabel);
                     EditorGUILayout.EndHorizontal();
-                }
 
-                EditorGUILayout.BeginHorizontal();
-                EditorGUILayout.LabelField("Trigger Count");
-                EditorGUILayout.LabelField(conditionsScript.TriggerCount.ToString(), EditorStyles.whiteLabel);
-                EditorGUILayout.EndHorizontal();
+                    if (conditionsScript.reload)
+                    {
+                        EditorGUILayout.BeginHorizontal();
+                        EditorGUILayout.LabelField("Reload Count");
+                        EditorGUILayout.LabelField(conditionsScript.reloadCount.ToString(), EditorStyles.whiteLabel);
+                        EditorGUILayout.EndHorizontal();
+                    }
 
-                if (conditionsScript.reload)
-                {
                     EditorGUILayout.BeginHorizontal();
-                    EditorGUILayout.LabelField("Reload Count");
-                    EditorGUILayout.LabelField(conditionsScript.reloadCount.ToString(), EditorStyles.whiteLabel);
+                    EditorGUILayout.LabelField("Can Be Triggered");
+                    EditorGUILayout.LabelField(conditionsScript.canBeTriggered.ToString(), EditorStyles.whiteLabel);
                     EditorGUILayout.EndHorizontal();
+
+                    EditorGUILayout.Space();
+
                 }
+                #endregion
 
-                EditorGUILayout.BeginHorizontal();
-                EditorGUILayout.LabelField("Can Be Triggered");
-                EditorGUILayout.LabelField(conditionsScript.canBeTriggered.ToString(), EditorStyles.whiteLabel);
-                EditorGUILayout.EndHorizontal();
-
-                EditorGUILayout.Space();
+                #region State
+                ShowConditionsState();
+                #endregion
             }
-            #endregion
 
             serializedObject.ApplyModifiedProperties();
+        }
+
+        /// <summary>
+        /// Displays the state of all the conditions, dependencies, and so on 
+        /// in runtime.
+        /// </summary>
+        private void ShowConditionsState()
+        {
+            EditorGUILayout.LabelField("Conditions: ", EditorStyles.boldLabel);
+
+            if (conditionsScript.activeConditions.Count() > 0)
+            {
+                foreach (Gaze_AbstractCondition condition in conditionsScript.activeConditions)
+                    condition.ToEditorGUI();
+            }
+            else
+            {
+                EditorGUILayout.LabelField("No condition is used");
+            }
+
+
+            EditorGUILayout.LabelField("Dependencies (Activate)", EditorStyles.boldLabel);
+            if (conditionsScript.ActivateOnDependencyMap.dependencies.Count() > 0)
+            {
+                foreach (Gaze_Dependency dep in conditionsScript.ActivateOnDependencyMap.dependencies)
+                {
+                    dep.ToEditorGUI();
+                }
+            }
+            else
+            {
+                EditorGUILayout.LabelField("Not used");
+            }
+
+            EditorGUILayout.LabelField("Dependencies (Deactivate)", EditorStyles.boldLabel);
+
+            if (conditionsScript.DeactivateOnDependencyMap.dependencies.Count() > 0)
+            {
+                foreach (Gaze_Dependency dep in conditionsScript.DeactivateOnDependencyMap.dependencies)
+                {
+                    dep.ToEditorGUI();
+                }
+            }
+            else
+            {
+                EditorGUILayout.LabelField("Not used");
+            }
+
+            if (conditionsScript.customConditions.Count > 0)
+            {
+                EditorGUILayout.LabelField("Custom Conditions:", EditorStyles.boldLabel);
+                foreach (Gaze_AbstractConditions conditon in conditionsScript.customConditions)
+                {
+                    conditon.ToGUI();
+                }
+            }
+
+            EditorGUILayout.Space();
+            EditorGUILayout.Space();
         }
 
         private void InitMembers()

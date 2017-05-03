@@ -354,7 +354,7 @@ namespace Gaze
         private void OnGazeEvent(Gaze_GazeEventArgs e)
         {
             // if sender is the gazable collider GameObject
-            if (e.Sender != null && gazable.gazeCollider != null && ((GameObject)e.Sender).Equals(gazable.gazeCollider.gameObject) && duckingEnabled && ActionAudio == Gaze_Actions.ACTIVABLE_OPTION.ACTIVATE)
+            if (e.Sender != null && gazable.gazeColliderIO != null && ((GameObject)e.Sender).Equals(gazable.gazeColliderIO.gameObject) && duckingEnabled && ActionAudio == Gaze_Actions.ACTIVABLE_OPTION.ACTIVATE)
             {
                 StopAllCoroutines();
                 if (e.IsGazed)

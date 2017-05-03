@@ -15,36 +15,35 @@
 // <web>https://twitter.com/apelab_ch</web>
 // <web>http://www.apelab.ch</web>
 // <date>2014-06-01</date>
-using UnityEngine;
 using System;
 
 namespace Gaze
 {
-	public class Gaze_ProximityEventArgs : EventArgs
-	{
-		private object sender;
+    public class Gaze_ProximityEventArgs : EventArgs
+    {
+        private object sender;
 
-		public object Sender { get { return sender; } }
+        public object Sender { get { return sender; } }
 
-		private GameObject other;
+        private Gaze_InteractiveObject other;
 
-		public GameObject Other { get { return other; } }
+        public Gaze_InteractiveObject Other { get { return other; } }
 
-		private bool isInProximity;
+        private bool isInProximity;
 
-		public bool IsInProximity { get { return isInProximity; } }
+        public bool IsInProximity { get { return isInProximity; } }
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="Gaze_ProximityEventArgs"/> class.
-		/// </summary>
-		/// <param name="_sender">The GameObject that fires the event. The Interactive Object (Root)</param>
-		/// <param name="_other">The colliding GameObject</param>
-		/// <param name="_isInProximity">true means the camera entered the proximity zone, false means exits the zone</param>
-		public Gaze_ProximityEventArgs (object _sender, GameObject _other, bool _isInProximity)
-		{
-			sender = _sender;
-			other = _other;
-			isInProximity = _isInProximity;
-		}
-	}
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Gaze_ProximityEventArgs"/> class.
+        /// </summary>
+        /// <param name="_sender">The GameObject that fires the event. The Interactive Object (Root)</param>
+        /// <param name="_other">The colliding GameObject</param>
+        /// <param name="_isInProximity">true means the camera entered the proximity zone, false means exits the zone</param>
+        public Gaze_ProximityEventArgs(object _sender, Gaze_InteractiveObject _other, bool _isInProximity)
+        {
+            sender = _sender;
+            other = _other;
+            isInProximity = _isInProximity;
+        }
+    }
 }

@@ -26,12 +26,12 @@ namespace Gaze
         private GameObject otherGameObject;
 
         [HideInInspector]
-        public GameObject IOGameObject;
+        public Gaze_InteractiveObject IOGameObject;
 
         private void Awake()
         {
             // otherwise the event is fired too early
-            IOGameObject = GetComponentInParent<Gaze_InteractiveObject>().gameObject;
+            IOGameObject = GetComponentInParent<Gaze_InteractiveObject>();
         }
 
         void Start()
@@ -43,7 +43,7 @@ namespace Gaze
         {
             yield return new WaitForEndOfFrame();
             if (proximityFlag)
-                Gaze_EventManager.FireProximityEvent(new Gaze_ProximityEventArgs(IOGameObject, otherGameObject, true));
+                Gaze_EventManager.FireProximityEvent(new Gaze_ProximityEventArgs(IOGameObject, otherGameObject.GetComponentInParent<Gaze_InteractiveObject>(), true));
         }
 
         void OnTriggerEnter(Collider other)
@@ -55,7 +55,7 @@ namespace Gaze
 
                 //				proximityFlag = true;
                 otherGameObject = other.gameObject;
-                Gaze_EventManager.FireProximityEvent(new Gaze_ProximityEventArgs(IOGameObject, otherGameObject, true));
+                Gaze_EventManager.FireProximityEvent(new Gaze_ProximityEventArgs(IOGameObject, otherGameObject.GetComponentInParent<Gaze_InteractiveObject>(), true));
             }
         }
 
@@ -67,7 +67,7 @@ namespace Gaze
                     Debug.Log("Gaze_Proximity (" + transform.parent.name + ") OnTriggerExit with " + other.GetComponentInParent<Gaze_InteractiveObject>().name);
                 proximityFlag = false;
                 otherGameObject = other.gameObject;
-                Gaze_EventManager.FireProximityEvent(new Gaze_ProximityEventArgs(IOGameObject, otherGameObject, false));
+                Gaze_EventManager.FireProximityEvent(new Gaze_ProximityEventArgs(IOGameObject, otherGameObject.GetComponentInParent<Gaze_InteractiveObject>(), false));
             }
         }
     }

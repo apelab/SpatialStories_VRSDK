@@ -41,7 +41,7 @@ namespace Gaze
         private List<GameObject> hierarchyIOs;
         private List<GameObject> hierarchyInteractions;
         private List<string> hierarchyInteractionsNames;
-        private List<GameObject> hierarchyProximities;
+        private List<Gaze_InteractiveObject> hierarchyProximities;
 
         // Reflection members
         private List<Collider> hierarchyGazeColliders;
@@ -70,7 +70,7 @@ namespace Gaze
             hierarchyInteractionsNames = new List<string>();
             hierarchyGazeColliders = new List<Collider>();
             hierarchyGazeCollidersNames = new List<string>();
-            hierarchyProximities = new List<GameObject>();
+            hierarchyProximities = new List<Gaze_InteractiveObject>();
 
             focusLossModes = Enum.GetNames(typeof(Gaze_FocusLossMode));
             reloadModes = Enum.GetNames(typeof(Gaze_ReloadMode));
@@ -249,7 +249,7 @@ namespace Gaze
 
         private void UpdateProximitiesList(GameObject g)
         {
-            hierarchyProximities.Add(g.GetComponentInChildren<Gaze_Proximity>().gameObject);
+            hierarchyProximities.Add(g.GetComponentInChildren<Gaze_Proximity>().GetComponentInParent<Gaze_InteractiveObject>());
         }
 
         private void UpdateCustomConditionsList()
@@ -318,7 +318,6 @@ namespace Gaze
                     {
 
                         // NOTE don't use foreach to avoid InvalidOperationException
-
                         for (int i = 0; i < targetConditions.proximityMap.proximityEntryList.Count; i++)
                         {
                             // delete from the list the gazables no more in the hierarchy
@@ -335,7 +334,18 @@ namespace Gaze
                     for (int i = 0; i < targetConditions.proximityMap.proximityEntryList.Count; i++)
                     {
                         EditorGUILayout.BeginHorizontal();
-                        targetConditions.proximityMap.proximityEntryList[i].dependentGameObject = hierarchyProximities[EditorGUILayout.Popup(hierarchyProximities.IndexOf((GameObject)targetConditions.proximityMap.proximityEntryList[i].dependentGameObject), hierarchyIOsNames.ToArray())];
+
+                        // Set the default collider for the gaze
+                        if (targetConditions.proximityMap.proximityEntryList[i].dependentGameObject == null)
+                        {
+                            targetConditions.proximityMap.proximityEntryList[i].dependentGameObject = targetConditions.GetComponentInParent<Gaze_InteractiveObject>();
+                        }
+
+                        var proximityObject = EditorGUILayout.ObjectField(targetConditions.proximityMap.proximityEntryList[i].dependentGameObject, typeof(Gaze_InteractiveObject), true);
+
+                        if (proximityObject != null)
+                            targetConditions.proximityMap.proximityEntryList[i].dependentGameObject = (Gaze_InteractiveObject)proximityObject;
+
 
                         if (GUILayout.Button("-"))
                         {
@@ -354,13 +364,22 @@ namespace Gaze
                     // display 'add' button
                     if (GUILayout.Button("+"))
                     {
-                        Gaze_ProximityEntry d = targetConditions.proximityMap.AddProximityEntry();
+                        Gaze_ProximityEntry d = targetConditions.proximityMap.AddProximityEntry(targetConditions);
                         EditorGUILayout.BeginHorizontal();
 
                         // assign the first interactive object in the hierarchy list by default (0)
                         if (hierarchyProximities != null && hierarchyProximities.Count > 0)
                         {
-                            d.dependentGameObject = hierarchyProximities[EditorGUILayout.Popup(0, hierarchyIOsNames.ToArray())];
+                            if (d.dependentGameObject == null)
+                            {
+                                d.dependentGameObject = targetConditions.GetComponentInParent<Gaze_InteractiveObject>();
+                            }
+
+                            var proximityObject = EditorGUILayout.ObjectField(d.dependentGameObject, typeof(Gaze_InteractiveObject), true);
+
+                            if (proximityObject != null)
+                                d.dependentGameObject = (Gaze_InteractiveObject)proximityObject;
+
                             if (GUILayout.Button("-"))
                             {
                                 targetConditions.proximityMap.DeleteProximityEntry(d);
@@ -560,14 +579,15 @@ namespace Gaze
 
         private void DisplayTeleportCondition()
         {
-            EditorGUILayout.BeginHorizontal();
-            targetConditions.teleportEnabled = EditorGUILayout.ToggleLeft("Teleport", targetConditions.teleportEnabled);
+            //TODO(4nc3str4l): Mike enable this when you will finnish the teleport condition
+            //EditorGUILayout.BeginHorizontal();
+            //targetConditions.teleportEnabled = EditorGUILayout.ToggleLeft("Teleport", targetConditions.teleportEnabled);
 
-            // chose teleport's action mode as a condition
-            if (targetConditions.teleportEnabled)
-                targetConditions.teleportIndex = EditorGUILayout.Popup(targetConditions.teleportIndex, Enum.GetNames(typeof(Gaze_TeleportMode)));
+            //// chose teleport's action mode as a condition
+            //if (targetConditions.teleportEnabled)
+            //    targetConditions.teleportIndex = EditorGUILayout.Popup(targetConditions.teleportIndex, Enum.GetNames(typeof(Gaze_TeleportMode)));
 
-            EditorGUILayout.EndHorizontal();
+            //EditorGUILayout.EndHorizontal();
         }
 
         private void DisplayWarning()
@@ -641,7 +661,7 @@ namespace Gaze
             // display 'add' button
             if (GUILayout.Button("+"))
             {
-                Gaze_Dependency d = targetConditions.ActivateOnDependencyMap.Add();
+                Gaze_Dependency d = targetConditions.ActivateOnDependencyMap.Add(targetConditions);
                 EditorGUILayout.BeginHorizontal();
                 d.dependentGameObject = hierarchyInteractions[EditorGUILayout.Popup(0, hierarchyInteractionsNames.ToArray())];
                 d.triggerStateIndex = EditorGUILayout.Popup(d.triggerStateIndex, Enum.GetNames(typeof(DependencyTriggerEventsAndStates)));
@@ -692,7 +712,7 @@ namespace Gaze
             // display 'add' button
             if (GUILayout.Button("+"))
             {
-                Gaze_Dependency d = targetConditions.DeactivateOnDependencyMap.Add();
+                Gaze_Dependency d = targetConditions.DeactivateOnDependencyMap.Add(targetConditions);
                 EditorGUILayout.BeginHorizontal();
                 d.dependentGameObject = hierarchyInteractions[EditorGUILayout.Popup(0, hierarchyInteractionsNames.ToArray())];
                 d.triggerStateIndex = EditorGUILayout.Popup(d.triggerStateIndex, Enum.GetNames(typeof(DependencyTriggerEventsAndStates)));
@@ -743,54 +763,32 @@ namespace Gaze
 
         private void DisplayConditionsBlock()
         {
-            GUILayout.BeginHorizontal();
-            targetConditions.focusDuration = EditorGUILayout.FloatField("Duration [s]", targetConditions.focusDuration);
-            GUILayout.EndHorizontal();
-            GUILayout.BeginHorizontal();
-            targetConditions.focusLossModeIndex = EditorGUILayout.Popup("Loss Mode", targetConditions.focusLossModeIndex, focusLossModes);
-            if (targetConditions.focusLossModeIndex.Equals((int)Gaze_FocusLossMode.FADE))
-            {
-                targetConditions.FocusLossSpeed = EditorGUILayout.FloatField("Speed Factor", targetConditions.FocusLossSpeed);
-            }
-            GUILayout.EndHorizontal();
-            EditorGUILayout.Space();
 
             GUILayout.BeginHorizontal();
             targetConditions.gazeEnabled = EditorGUILayout.ToggleLeft("Gaze", targetConditions.gazeEnabled);
-            GUILayout.EndHorizontal();
 
-            if (targetConditions.gazeEnabled && hierarchyGazeColliders.Count < 1)
+            if (targetConditions.gazeEnabled)
             {
-                GUILayout.BeginHorizontal();
-                EditorGUILayout.HelpBox("No colliders found.", MessageType.Warning);
-                GUILayout.EndHorizontal();
+                if (hierarchyGazeColliders.Count > 0)
+                {
+                    // Set the default collider for the gaze
+                    if (targetConditions.gazeColliderIO == null)
+                    {
+                        targetConditions.gazeColliderIO = targetConditions.GetComponentInParent<Gaze_InteractiveObject>();
+                    }
+
+                    var gazeObject = EditorGUILayout.ObjectField(targetConditions.gazeColliderIO, typeof(Gaze_InteractiveObject), true);
+
+                    if (gazeObject != null)
+                    {
+                        targetConditions.gazeColliderIO = (Gaze_InteractiveObject)gazeObject;
+                    }
+
+                }
+
             }
-
+            GUILayout.EndHorizontal();
             EditorGUILayout.Space();
-        }
-
-        [MenuItem("Gaze/Dependencies/Show Dependencies")]
-        public static void ShowDependencies()
-        {
-            Gaze_Conditions.ShowDependencies = true;
-        }
-
-        [MenuItem("Gaze/Dependencies/Hide Dependencies")]
-        public static void HideDependencies()
-        {
-            Gaze_Conditions.ShowDependencies = false;
-        }
-
-        [MenuItem("Gaze/Dependencies/Show Dependencies", true)]
-        public static bool CanShowDependencies()
-        {
-            return Gaze_Conditions.ShowDependencies == false;
-        }
-
-        [MenuItem("Gaze/Dependencies/Hide Dependencies", true)]
-        public static bool CanHideDependencies()
-        {
-            return Gaze_Conditions.ShowDependencies == true;
         }
     }
 }

@@ -113,7 +113,7 @@ namespace Gaze
 
             if (!Gaze_EventUtils.AreUnderSameGameObject(gameObject, e.Sender) ||
                 e.TriggerState != Gaze_TriggerState.ACTIVE ||
-                !GetComponent<Gaze_Conditions>().DependenciesValidated)
+                !GetComponent<Gaze_Conditions>().ActivateOnDependencyMap.AreDependenciesSatisfied)
                 return;
 
             DragAndDropManager.SetupDragAndDropProcess(this);

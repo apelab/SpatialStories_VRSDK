@@ -23,29 +23,38 @@ namespace Gaze
     [System.Serializable]
     public class Gaze_ProximityEntry
     {
-
         /// <summary>
         /// The associated proximity collider.
         /// </summary>
-        public GameObject dependentGameObject;
+        public Gaze_InteractiveObject dependentGameObject;
 
         // list of all colliding objects
-        private List<GameObject> collidingObjects;
+        private List<Gaze_InteractiveObject> collidingObjects;
 
-        public List<GameObject> CollidingObjects { get { return collidingObjects; } }
+        public List<Gaze_InteractiveObject> CollidingObjects
+        {
+            get
+            {
+                if (collidingObjects == null)
+                {
+                    collidingObjects = new List<Gaze_InteractiveObject>();
+                }
+                return collidingObjects;
+            }
+        }
 
         public Gaze_ProximityEntry()
         {
-            collidingObjects = new List<GameObject>();
+            collidingObjects = new List<Gaze_InteractiveObject>();
         }
 
-        public void AddCollidingObject(GameObject g)
+        public void AddCollidingObject(Gaze_InteractiveObject g)
         {
             if (!collidingObjects.Contains(g))
                 collidingObjects.Add(g);
         }
 
-        public void RemoveCollidingObject(GameObject g)
+        public void RemoveCollidingObject(Gaze_InteractiveObject g)
         {
             collidingObjects.Remove(g);
         }
@@ -57,6 +66,7 @@ namespace Gaze
 
         public bool IsValid(int _colliderStateIndex)
         {
+
             if (_colliderStateIndex.Equals((int)Gaze_ProximityStates.ENTER) && IsColliding())
                 return true;
             else if (_colliderStateIndex.Equals((int)Gaze_ProximityStates.EXIT) && !IsColliding())
@@ -67,16 +77,16 @@ namespace Gaze
 
         public void DisplayCollidingObjects()
         {
+            if (collidingObjects == null)
+                return;
             Debug.Log("Entry " + dependentGameObject.transform.parent.name + " is colliding with :");
-            foreach (GameObject item in collidingObjects)
+            foreach (Gaze_InteractiveObject item in collidingObjects)
             {
                 Debug.Log(item.name);
             }
         }
+
     }
-
-
-
 
     [System.Serializable]
     public class Gaze_ProximityMap
@@ -105,7 +115,7 @@ namespace Gaze
             proximityEntryList = new List<Gaze_ProximityEntry>();
         }
 
-        public Gaze_ProximityEntry AddProximityEntry()
+        public Gaze_ProximityEntry AddProximityEntry(Gaze_Conditions _conditions)
         {
             Gaze_ProximityEntry d = new Gaze_ProximityEntry();
             proximityEntryList.Add(d);
@@ -117,14 +127,14 @@ namespace Gaze
             return proximityEntryList.Remove(d);
         }
 
-        public void AddCollidingObjectToEntry(Gaze_ProximityEntry _entry, GameObject _collidingObject, bool displayCollidingObjects = false)
+        public void AddCollidingObjectToEntry(Gaze_ProximityEntry _entry, Gaze_InteractiveObject _collidingObject, bool displayCollidingObjects = false)
         {
             _entry.AddCollidingObject(_collidingObject);
             if (displayCollidingObjects)
                 _entry.DisplayCollidingObjects();
         }
 
-        public void RemoveCollidingObjectToEntry(Gaze_ProximityEntry _entry, GameObject _collidingObject, bool displayCollidingObjects = false)
+        public void RemoveCollidingObjectToEntry(Gaze_ProximityEntry _entry, Gaze_InteractiveObject _collidingObject, bool displayCollidingObjects = false)
         {
             _entry.RemoveCollidingObject(_collidingObject);
             if (displayCollidingObjects)
@@ -204,7 +214,7 @@ namespace Gaze
             }
         }
 
-        public bool ContainsEntry(GameObject _entryGameObject)
+        public bool ContainsEntry(Gaze_InteractiveObject _entryGameObject)
         {
             for (int i = 0; i < proximityEntryList.Count; i++)
             {

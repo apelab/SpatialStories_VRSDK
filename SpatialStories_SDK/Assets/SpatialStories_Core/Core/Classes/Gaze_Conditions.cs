@@ -16,10 +16,8 @@
 // <web>http://www.apelab.ch</web>
 // <date>2014-06-01</date>
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.VR;
 
 namespace Gaze
 {
@@ -31,10 +29,18 @@ namespace Gaze
     [ExecuteInEditMode]
     public class Gaze_Conditions : MonoBehaviour
     {
+        #region OwnEvents
+        public delegate void OnReloadHandler(bool _reloadDependencies);
+        public event OnReloadHandler OnReload;
+        public void FireOnReloadEvent(bool _reloadDependencies)
+        {
+            if (OnReload != null)
+                OnReload(_reloadDependencies);
+        }
+        #endregion OwnEvents
+
 
         #region members
-        // flag to know if this script is enabled in the Gaze_InteractiveObjectsEditor checkbox
-        public bool isActive = false;
 
         /// <summary>
         /// True means the trigger is only time dependant.
@@ -52,15 +58,11 @@ namespace Gaze
         /// <summary>
         /// If specified, these are the game objects this trigger is dependant upon.
         /// </summary>
-        public Gaze_DependencyMap ActivateOnDependencyMap = new Gaze_DependencyMap();
-        public Gaze_DependencyMap DeactivateOnDependencyMap = new Gaze_DependencyMap();
-        public static bool ShowDependencies;
-        public bool DependenciesValidated;
+        public static bool showDependencies;
         public static Mesh cubeMesh;
 
         public Gaze_ProximityMap proximityMap = new Gaze_ProximityMap();
         public Gaze_GrabMap grabMap = new Gaze_GrabMap();
-        public Gaze_TouchMap touchMap = new Gaze_TouchMap();
 
         // change Component to interface when ready
         public List<Gaze_AbstractConditions> customConditions = new List<Gaze_AbstractConditions>();
@@ -114,7 +116,7 @@ namespace Gaze
         /// <summary>
         /// The number of times the trigger has been triggered
         /// </summary>
-        public int TriggerCount = 0;
+        public int TriggerCount;
 
         /// <summary>
         /// The index of the reload mode.
@@ -170,22 +172,28 @@ namespace Gaze
         /// <summary>
         /// Is the Trigger being focused ?
         /// </summary>
-        public bool FocusInProgress { get; private set; }
+        private bool focusInProgress;
+
+        public bool FocusInProgress { get { return focusInProgress; } }
 
         /// <summary>
         /// True if focus time is reached, else FALSE
         /// </summary>
-        public bool FocusComplete { get; private set; }
+        private bool focusComplete;
+
+        public bool FocusComplete { get { return focusComplete; } }
 
         /// <summary>
         /// The amount of time the object has been focused.
         /// </summary>
-        public float FocusTotalTime { get; private set; }
+        private float focusTotalTime;
+
+        public float FocusTotalTime { get { return focusTotalTime; } }
 
         /// <summary>
         /// The focus completion amount normalized between 0 and 1
         /// </summary>
-        public float FocusCompletion { get { return Mathf.Clamp01(FocusTotalTime / focusDuration); } }
+        public float FocusCompletion { get { return Mathf.Clamp01(focusTotalTime / focusDuration); } }
 
         /// <summary>
         /// Frame starting time (works only if time driven is ON)
@@ -194,68 +202,22 @@ namespace Gaze
         private float startTime;
 
         /// <summary>
-        /// Is the Trigger being gazed at ?
-        /// </summary>
-        private bool isGazed;
-
-        public bool IsGazed { get { return isGazed; } }
-
-        /// <summary>
-        /// Is Gaze condition enabled.
-        /// Corresponds to the editor's checkbox as a trigger condition.
-        /// </summary>
-        public bool gazeEnabled;
-
-        /// <summary>
-        /// True if gaze is either disabled or enabled and being gazed.
-        /// </summary>
-        private bool gazeFlag;
-
-        /// <summary>
         /// Is Proximity condition enabled.
-        /// Corresponds to the editor's checkbox as a trigger condition
+        /// Corresponds to the editor checkbox as a trigger condition
         /// </summary>
         public bool proximityEnabled;
 
         /// <summary>
         /// Is Grab condition enabled.
-        /// Corresponds to the editor's checkbox as a trigger condition
+        /// Corresponds to the editor checkbox as a trigger condition
         /// </summary>
         public bool grabEnabled;
 
-        /// <summary>
-        /// Is teleport condition enabled.
-        /// Corresponds to the editor's checkbox as a trigger condition
-        /// </summary>
-        public bool teleportEnabled;
-
-        /// <summary>
-        /// Represents the teleport selected action's index in the Gaze_ConditionsEditor.
-        /// </summary>
-        public int teleportIndex;
-
-        private bool teleportValidated = false;
-
-        public string teleportEditorState;
-
-        private bool grabValidated = false;
-        private bool grabLeftValid = false, grabRightValid = false;
-        private bool grabStateLeftValid = false, grabStateRightValid = false;
 
         /// <summary>
         /// All the grabable Interactive Objects in the list are required in order to be validated.
         /// </summary>
         public bool requireAllGrabables;
-
-        public bool touchEnabled;
-        public bool touchValidated = false;
-        public bool touchLeftValid = false, touchRightValid = false;
-        public bool touchDistanceModeLeftValid = false, touchDistanceModeRightValid = false;
-
-        /// <summary>
-        /// All the grabable Interactive Objects in the list are required in order to be validated.
-        /// </summary>
-        public bool requireAllTouchables;
 
         /// <summary>
         /// Are Custom conditions enabled.
@@ -264,21 +226,9 @@ namespace Gaze
         public bool customConditionsEnabled;
 
         /// <summary>
-        /// Are all the specified proximities in the list validated ?
-        /// </summary>
-        private bool proximitiesValidated;
-
-        public bool ProximitiesValidated { get { return proximitiesValidated; } }
-
-        /// <summary>
         /// All the proximities in the list are required in order to be validated.
         /// </summary>
         public bool requireAllProximities;
-
-        /// <summary>
-        /// Whether this Interactive Object's Proximity is colliding.
-        /// </summary>
-        public bool isInProximity;
 
         private List<GameObject> collidingProximities;
 
@@ -292,70 +242,84 @@ namespace Gaze
 
         public Gaze_InteractiveObject RootIO { get { return rootIO; } }
 
-        public Collider gazeCollider;
+        public Gaze_TouchMap touchMap = new Gaze_TouchMap();
+        /// <summary>
+        /// Is Gaze condition enabled.
+        /// Corresponds to the editor checkbox as a trigger condition.
+        /// </summary>
+        public bool gazeEnabled;
+        public bool touchEnabled;
+
+        public Gaze_DependencyMap ActivateOnDependencyMap = new Gaze_DependencyMap();
+        public Gaze_DependencyMap DeactivateOnDependencyMap = new Gaze_DependencyMap();
 
         /// <summary>
-        /// Is the current time in the defined time frame ?
+        /// All the grabable Interactive Objects in the list are required in order to be validated.
         /// </summary>
-        private bool withinTimeFrameFlag;
+        public bool requireAllTouchables;
 
-        /// <summary>
-        /// Is the current time after the defined time frame ?
-        /// </summary>
-        private bool afterTimeFrameFlag;
+        public List<Gaze_AbstractCondition> activeConditions = new List<Gaze_AbstractCondition>();
 
-        private GameObject pointedObject;
+        // This list has all the AbstractConditions in order to setup & dipose them automatically
+        // it contains Dependencies, Conditions, Tiframe, everything don't remove anything from here.
+        public List<Gaze_AbstractCondition> allConditions = new List<Gaze_AbstractCondition>();
 
-        /// <summary>
-        /// TRUE if a distant touch ray is hitting this object, else FALSE (the controller grabbing from distance)
-        /// </summary>
-        public bool isLeftPointing = false, isRightPointing = false;
+        public Gaze_InteractiveObject gazeColliderIO;
 
+        public bool ReloadDependencies = false;
 
-        /// <summary>
-        /// TRUE if a controller directly touches this object, else FALSE
-        /// </summary>
-        public bool isLeftColliding = false, isRightColliding = false;
+        public bool isActive;
 
-        private bool isTouched = false;
-        public Gaze_TouchDistanceMode distanceMode;
-        public GameObject touchedObject = null;
-        private bool isTriggerPressed = false;
-        private VRNode eventHand;
-        private float lastUpdateTime;
-        private IEnumerator teleportStateCoroutine;
         #endregion
+
+        private void Awake()
+        {
+            if (Application.isPlaying)
+                SetupConditionsToCheck();
+        }
+
+        private void SetupConditionsToCheck()
+        {
+            activeConditions.Clear();
+
+            if (gazeEnabled)
+                activeConditions.Add(new Gaze_GazeCondition(this, gazeColliderIO.GetComponentInChildren<Gaze_Gaze>().GetComponent<Collider>()));
+
+            if (proximityEnabled)
+                activeConditions.Add(new Gaze_ProximityCondition(this));
+
+            if (touchEnabled)
+                activeConditions.Add(new Gaze_TouchCondition(this, gazeColliderIO.GetComponentInChildren<Gaze_Gaze>().GetComponent<Collider>()));
+
+            if (grabEnabled)
+                activeConditions.Add(new Gaze_GrabCondition(this));
+        }
 
         void OnEnable()
         {
+
             rootIO = GetComponentInParent<Gaze_InteractiveObject>();
             root = rootIO.gameObject;
 
             if (Application.isPlaying)
             {
-                Gaze_EventManager.OnGazeEvent += OnGazeEvent;
+                ActivateOnDependencyMap.OnEnable(this);
+                DeactivateOnDependencyMap.OnEnable(this);
+
+                foreach (Gaze_AbstractCondition conditions in allConditions)
+                    conditions.Enable();
+
                 Gaze_EventManager.OnTriggerStateEvent += OnTriggerStateEvent;
                 Gaze_EventManager.OnTriggerEvent += OnTriggerEvent;
-                Gaze_EventManager.OnProximityEvent += OnProximityEvent;
                 Gaze_EventManager.OnCustomConditionEvent += OnCustomConditionEvent;
-                Gaze_EventManager.OnControllerPointingEvent += OnControllerPointingEvent;
-
-                Gaze_InputManager.OnControllerGrabEvent += OnControllerGrabEvent;
-                Gaze_InputManager.OnControllerTouchEvent += OnControllerTouchEvent;
-                Gaze_InputManager.OnControllerCollisionEvent += OnControllerCollisionEvent;
-                Gaze_EventManager.OnTeleportEvent += OnTeleportEvent;
 
                 if (customConditionsDico.Count != customConditions.Count)
                 {
                     foreach (Gaze_AbstractConditions condition in customConditions)
                     {
-                        if (!customConditionsDico.ContainsKey(condition.GetInstanceID()))
-                            customConditionsDico.Add(condition.GetInstanceID(), false);
+                        customConditionsDico.Add(condition.GetInstanceID(), false);
                     }
                 }
-
-                // enable proximity detection accordingly
-                proximitiesValidated = proximityEnabled ? false : true;
             }
         }
 
@@ -363,27 +327,23 @@ namespace Gaze
         {
             if (Application.isPlaying)
             {
-                Gaze_EventManager.OnGazeEvent -= OnGazeEvent;
+                ActivateOnDependencyMap.OnDisable(this);
+                DeactivateOnDependencyMap.OnDisable(this);
+
+                foreach (Gaze_AbstractCondition conditions in allConditions)
+                    conditions.Disable();
+
                 Gaze_EventManager.OnTriggerStateEvent -= OnTriggerStateEvent;
                 Gaze_EventManager.OnTriggerEvent -= OnTriggerEvent;
-                Gaze_EventManager.OnProximityEvent -= OnProximityEvent;
                 Gaze_EventManager.OnCustomConditionEvent -= OnCustomConditionEvent;
-                Gaze_EventManager.OnControllerPointingEvent -= OnControllerPointingEvent;
-
-                Gaze_InputManager.OnControllerGrabEvent -= OnControllerGrabEvent;
-                Gaze_InputManager.OnControllerTouchEvent -= OnControllerTouchEvent;
-                Gaze_InputManager.OnControllerCollisionEvent -= OnControllerCollisionEvent;
-                Gaze_EventManager.OnTeleportEvent -= OnTeleportEvent;
             }
         }
 
         void Start()
         {
-            FocusInProgress = false;
-            FocusComplete = focusDuration <= 0 ? true : false;
-            withinTimeFrameFlag = false;
-            afterTimeFrameFlag = false;
-            DependenciesValidated = dependent ? false : true;
+            focusInProgress = false;
+            focusComplete = focusDuration <= 0 ? true : false;
+            ActivateOnDependencyMap.AreDependenciesSatisfied = dependent ? false : true;
             startTime = Time.time;
             reloadCount = 0;
 
@@ -398,52 +358,53 @@ namespace Gaze
             CheckReloadParams();
 
             collidingProximities = new List<GameObject>();
-            TriggerCount = 0;
-            lastUpdateTime = Time.time;
         }
 
         void Update()
         {
+            if (name == "HotspotPaquisSelected")
+                Debug.Log("Sdasd");
 
-            if (Time.time > lastUpdateTime + Gaze_HashIDs.CONDITIONS_UPDATE_INTERVAL)
+            UpdateTimeFrameStatus();
+
+            // if in the appropriate time frame (ACTIVE)
+            if (triggerStateIndex == (int)Gaze_TriggerState.ACTIVE)
             {
-                UpdateTimeFrameStatus();
 
-                // if in the appropriate time frame (ACTIVE)
-                if (withinTimeFrameFlag)
-                {
+                // check if we need to reload
+                HandleReload();
 
-                    // check if we need to reload
-                    HandleReload();
-
-                    // check if a trigger occurs
-                    HandleTrigger();
-                }
+                // check if a trigger occurs
+                HandleTrigger();
             }
         }
 
         private void HandleTrigger()
         {
+            if (!Application.isPlaying)
+                return;
+
+            // Thats the only line of code that should be here after the ref
+            foreach (Gaze_AbstractCondition condition in activeConditions)
+            {
+                if (!condition.IsValidated())
+                    return;
+            }
+
             // stop function if custom conditions are not fulfilled
-            if (customConditionsEnabled && !ValidateCustomConditions())
-                return;
-
-            // if grab condition is not met
-            if (grabEnabled && !grabValidated)
-                return;
-
-            // if touch condition is not met
-            if (touchEnabled && !touchValidated)
-                return;
-
-            // if teleport condition is not met
-            if (teleportEnabled && !teleportValidated)
-                return;
+            if (customConditionsEnabled)
+            {
+                if (!ValidateCustomConditions())
+                    return;
+            }
 
             // if all trigger conditions are met
             if (canBeTriggered && Time.time > nextReloadTime)
             {
-                gazeFlag = (gazeEnabled && isGazed) || !gazeEnabled;
+                var gazeFlag = (gazeEnabled && GetConditionOfType<Gaze_GazeCondition>().IsValidated()) || !gazeEnabled;
+
+                var proximitiesValidated = GetConditionOfType<Gaze_ProximityCondition>() == null ||
+                    GetConditionOfType<Gaze_ProximityCondition>().IsValidated();
 
                 if (gazeFlag && proximitiesValidated)
                     UpdateFocus();
@@ -467,41 +428,36 @@ namespace Gaze
             }
         }
 
-        private void ResetProximitiesCondition()
-        {
-            Debug.Log("ResetProximitiesCondition()");
-            proximitiesValidated = false;
-            proximityMap.ResetEveryoneColliding();
-        }
 
         private void UpdateFocus()
         {
             // if focus is not complete
-            if (!FocusComplete || focusDuration <= 0f)
+            if (!focusComplete || focusDuration <= 0f)
             {
                 // set the flag
-                FocusInProgress = true;
+                focusInProgress = true;
 
                 // update focus time
-                FocusTotalTime += Time.deltaTime;
+                focusTotalTime += Time.deltaTime;
 
                 // set focused flag if focus time overpassed
-                if (FocusTotalTime >= focusDuration)
+                if (focusTotalTime >= focusDuration)
                 {
-                    FocusComplete = true;
-                    FocusInProgress = false;
+                    focusComplete = true;
+                    focusInProgress = false;
                     canBeTriggered = false;
                     TriggerCount++;
 
                     // notify manager
                     Gaze_EventManager.FireTriggerEvent(new Gaze_TriggerEventArgs(gameObject, Time.time, true, false, TriggerCount, GetAutoTriggerMode(), GetReloadMode(), reloadMaxRepetitions));
+                    //Debug.Log(name + " Is triggered!!!");
+
 
                     // check if reload needed
                     if (reload)
                     {
                         ScheduleAutoReload();
                     }
-
                     return;
                 }
             }
@@ -510,30 +466,31 @@ namespace Gaze
         private void ResetFocus()
         {
             // set the flag
-            FocusInProgress = false;
+            focusInProgress = false;
 
             if (GetFocusLossMode().Equals(Gaze_FocusLossMode.INSTANT))
             {
                 // reset if INSTANT loss mode
-                FocusTotalTime = 0f;
+                focusTotalTime = 0f;
             }
             else if (GetFocusLossMode().Equals(Gaze_FocusLossMode.FADE))
             {
                 // decrease if FADE loss mode
-                FocusTotalTime = Mathf.Max(0, FocusTotalTime - Time.deltaTime * FocusLossSpeed);
+                focusTotalTime = Mathf.Max(0, focusTotalTime - Time.deltaTime * FocusLossSpeed);
             }
         }
 
         private void UpdateTimeFrameStatus()
         {
+
             // while we were not in the time frame
-            if (!withinTimeFrameFlag)
+            if (triggerStateIndex != (int)Gaze_TriggerState.ACTIVE)
             {
                 // check if we're now in the time frame
                 IsWithinTimeFrame();
             }
             // while we were in the time frame but not after
-            else if (!afterTimeFrameFlag)
+            else
             {
                 // check if we're now after the time frame
                 IsAfterTimeFrame();
@@ -546,17 +503,14 @@ namespace Gaze
         /// <returns><c>true</c>, if current time is within absolute defined time, <c>false</c> otherwise.</returns>
         private bool IsWithinTimeFrame()
         {
-            if (DependenciesValidated)
+            if (ActivateOnDependencyMap.AreDependenciesSatisfied)
             {
                 // if time is beyond the specified wait time
-                if (!delayed || delayed && Time.time >= startTime + delayDuration)
+                if (delayed && Time.time >= startTime + delayDuration || !delayed)
                 {
                     // if it never expires OR expires and below ending time frame
                     if (!expires || (expires && Time.time < startTime + delayDuration + activeDuration))
                     {
-                        // update flag
-                        withinTimeFrameFlag = true;
-
                         // notify manager
                         SetTriggerState(Gaze_TriggerState.ACTIVE);
                         canBeTriggered = true;
@@ -574,12 +528,10 @@ namespace Gaze
                                 ScheduleAutoReload();
                             }
                         }
-
                         return true;
                     }
                 }
             }
-
             return false;
         }
 
@@ -598,9 +550,6 @@ namespace Gaze
                 // check if we're over the time limit
                 if (Time.time >= startTime + delayDuration + activeDuration)
                 {
-                    // update flags
-                    withinTimeFrameFlag = false;
-                    afterTimeFrameFlag = true;
 
                     // trigger if auto-trigger is set to END
                     // FIX GAZE-193 GazeSDK_v0.5.6 : and if canBeTriggered
@@ -617,11 +566,10 @@ namespace Gaze
 
                     return true;
                 }
-
             }
 
             // if deactivated by dependencies
-            if (!DependenciesValidated)
+            if (!ActivateOnDependencyMap.AreDependenciesSatisfied)
             {
                 canBeTriggered = false;
 
@@ -630,7 +578,6 @@ namespace Gaze
 
                 return true;
             }
-
             return false;
         }
 
@@ -668,15 +615,27 @@ namespace Gaze
             // update focus values
             if (focusDuration > 0f)
             {
-                FocusTotalTime = 0;
-                FocusComplete = false;
+                focusTotalTime = 0;
+                focusComplete = false;
             }
 
-            // update reload pending flag
+            // Update reload pending flag
+            // All of these should go away
             reloadScheduled = false;
-            canBeTriggered = true;
-            grabValidated = false;
-            touchValidated = false;
+
+            FireOnReloadEvent(ReloadDependencies);
+
+            // If we have dependencies we need to set the trigger state to before.
+            if (ActivateOnDependencyMap.dependencies.Count > 0)
+            {
+
+                SetTriggerState(Gaze_TriggerState.BEFORE);
+                canBeTriggered = false;
+            }
+            else
+            {
+                canBeTriggered = true;
+            }
         }
 
         /// <summary>
@@ -733,7 +692,7 @@ namespace Gaze
 
         private void ValidateDependencies(GameObject sender, int triggerStateIndex)
         {
-            if (!DependenciesValidated && !ActivateOnDependencyMap.isEmpty())
+            if (!ActivateOnDependencyMap.AreDependenciesSatisfied && !ActivateOnDependencyMap.isEmpty())
             {
                 Gaze_Dependency activator = ActivateOnDependencyMap.Get(sender);
 
@@ -743,10 +702,9 @@ namespace Gaze
 
                     if (ValidateDependencyMap(ActivateOnDependencyMap, requireAllActivators))
                     {
-                        DependenciesValidated = true;
+                        ActivateOnDependencyMap.AreDependenciesSatisfied = true;
 
                         // reset start time reference for next delay computation
-                        Gaze_EventManager.FireOnDependenciesValidated(new Gaze_DependenciesValidatedEventArgs(this));
                         startTime = Time.time;
                     }
                 }
@@ -761,7 +719,7 @@ namespace Gaze
 
                     if (ValidateDependencyMap(DeactivateOnDependencyMap, requireAllDeactivators))
                     {
-                        DependenciesValidated = false;
+                        ActivateOnDependencyMap.AreDependenciesSatisfied = false;
                     }
                 }
             }
@@ -772,12 +730,12 @@ namespace Gaze
             if (triggerStateIndex == -1)
             {
                 // dependend on trigger
-                d.satisfied = d.onTrigger;
+                d.SetSatisfied(d.onTrigger);
             }
             else
             {
                 // dependent on state
-                d.satisfied = triggerStateIndex.Equals(d.triggerStateIndex);
+                d.SetSatisfied(triggerStateIndex.Equals(d.triggerStateIndex));
             }
         }
 
@@ -789,587 +747,33 @@ namespace Gaze
             {
                 if (requireAll)
                 {
-                    validated &= d.satisfied;
+                    validated &= d.IsValidated();
                 }
                 else
                 {
-                    validated |= d.satisfied;
+                    validated |= d.IsValidated();
                 }
             }
 
             return validated;
         }
 
-
-        private int collisionsOccuringCount = 0;
-
-        /// <summary>
-        /// Checks the proximities conditions validity.
-        /// </summary>
-        /// <returns><c>true</c>, if proximities was checked, <c>false</c> otherwise.</returns>
-        /// <param name="e">E.</param>
-        private bool ValidateProximity(Gaze_ProximityEventArgs e)
-        {
-
-
-            if (proximityEnabled)
-            {
-
-                // get colliding objects
-                GameObject sender = ((GameObject)e.Sender).GetComponentInChildren<Gaze_Proximity>().gameObject;
-                GameObject other = ((GameObject)e.Other).GetComponentInChildren<Gaze_Proximity>().gameObject;
-
-                // make sure the collision concerns two objects in the list of proximities (-1 if NOT)
-
-                int otherIndex = IsCollidingObjectsInList(other, sender);
-                //				Debug.Log ("otherIndex = " + otherIndex);
-                if (otherIndex != -1)
-                {
-
-                    // OnEnter
-                    if (e.IsInProximity)
-                    {
-
-                        // update number of collision in the list occuring
-                        collisionsOccuringCount++;
-                        proximityMap.AddCollidingObjectToEntry(proximityMap.proximityEntryList[otherIndex], sender.GetComponentInChildren<Gaze_Proximity>().IOGameObject);
-
-                        if (proximityMap.proximityStateIndex.Equals((int)Gaze_ProximityStates.ENTER))
-                        {
-                            // get number of valid entries
-                            int validatedEntriesCount = proximityMap.GetValidatedEntriesCount();
-
-                            // OnEnter + RequireAll
-                            if (requireAllProximities)
-                            {
-                                return validatedEntriesCount == proximityMap.proximityEntryList.Count;
-                            }
-
-                            // OnEnter + NOT RequireAll
-                            if (!requireAllProximities)
-                            {
-                                return validatedEntriesCount >= 2;
-                            }
-                        }
-
-                        // OnExit
-                    }
-                    else if (!e.IsInProximity)
-                    {
-
-                        // update everyoneIsColliding tag before removing an element
-                        proximityMap.UpdateEveryoneColliding();
-
-                        // remove colliding object
-                        proximityMap.RemoveCollidingObjectToEntry(proximityMap.proximityEntryList[otherIndex], sender.GetComponentInChildren<Gaze_Proximity>().IOGameObject);
-                        // if proximity condition is EXIT
-
-                        if (proximityMap.proximityStateIndex.Equals((int)Gaze_ProximityStates.EXIT))
-                        {
-
-                            if (requireAllProximities)
-                            {
-
-                                // every entry was colliding before the exit
-                                if (proximityMap.IsEveryoneColliding)
-                                {
-                                    //									proximityMap.ResetEveryoneColliding ();
-                                    return true;
-                                }
-
-                                // OnExit + NOT RequireAll
-                            }
-                            else
-                            {
-                                proximityMap.ResetEveryoneColliding();
-
-                                // if sender & other are in the list => true
-                                return (proximityMap.ContainsEntry(sender) && proximityMap.ContainsEntry(other));
-                            }
-                        }
-                    }
-                }
-            }
-
-            return false;
-        }
-
-
-        /// <summary>
-        /// Check if both colliding objects are in the list.
-        /// </summary>
-        /// <returns>The colliding's (_other) index within list.
-        /// If one of the object is not in the list, return -1</returns>
-        /// <param name="_other">Other.</param>
-        /// <param name="_sender">Sender.</param>
-        private int IsCollidingObjectsInList(GameObject _other, GameObject _sender)
-        {
-            //			Debug.Log ("other = " + _other.GetComponentInParent<Gaze_InteractiveObject> ().name + " and sender = " + _sender.GetComponentInParent<Gaze_InteractiveObject> ().name);
-            int found = 0;
-            int otherIndex = -1;
-            int tmpIndex = -1;
-            for (int i = 0; i < proximityMap.proximityEntryList.Count; i++)
-            {
-                //				Debug.Log ("proximityMap.proximityEntryList [i].dependentGameObject = " + proximityMap.proximityEntryList [i].dependentGameObject.GetComponentInParent<Gaze_InteractiveObject> ().name);
-                if (proximityMap.proximityEntryList[i].dependentGameObject.Equals(_other))
-                {
-                    tmpIndex = i;
-                    found++;
-                }
-                if (proximityMap.proximityEntryList[i].dependentGameObject.Equals(_sender))
-                {
-                    found++;
-                }
-                if (found == 2)
-                {
-                    otherIndex = tmpIndex;
-                    break;
-                }
-            }
-            //			Debug.Log (GetComponentInParent<Gaze_InteractiveObject> ().name + " found = " + found + " with otherIndex = " + otherIndex);
-            return otherIndex;
-        }
-        /// <summary>
-        /// Check if both colliding objects are in the list.
-        /// </summary>
-        /// <returns>The colliding's (_other) index within list.
-        /// If one of the object is not in the list, return -1</returns>
-        /// <param name="_other">Other.</param>
-        /// <param name="_sender">Sender.</param>
-        private int IsCollidingObjectsWithinList(GameObject _other, GameObject _sender)
-        {
-            int found = 0;
-            int otherIndex = -1;
-            int tmpIndex = -1;
-            for (int i = 0; i < proximityMap.proximityEntryList.Count; i++)
-            {
-                if (proximityMap.proximityEntryList[i].dependentGameObject.Equals(_other))
-                {
-                    tmpIndex = i;
-                    found++;
-                }
-                if (proximityMap.proximityEntryList[i].dependentGameObject.Equals(_sender))
-                {
-                    found++;
-                }
-                if (found == 2)
-                {
-                    otherIndex = tmpIndex;
-                    break;
-                }
-            }
-            return otherIndex;
-        }
-
         private bool ValidateCustomConditions()
         {
-            foreach (KeyValuePair<int, bool> condition in customConditionsDico)
+            foreach (Gaze_AbstractConditions cond in customConditions)
             {
-                if (condition.Value == false)
+                if (cond.IsValid == false)
                     return false;
             }
+
+            //foreach (KeyValuePair<int, bool> condition in customConditionsDico)
+            //{
+            //    if (condition.Value == false)
+            //        return false;
+            //}
             return true;
         }
 
-
-
-        private void ValidateGrab(Gaze_ControllerGrabEventArgs e)
-        {
-            // TODO(4nc3str4l): Validate if this lines need to be uncommented. 
-            //if (!DependenciesValidated)
-            //    grabValidated = false;
-            //else
-            grabValidated = ValidateGrabController(e);
-        }
-
-        private bool IsGrabbingControllerInMap(VRNode grabbingController)
-        {
-            for (int i = 0; i < grabMap.grabEntryList.Count; i++)
-            {
-                if (grabMap.grabEntryList[i].hand.Equals(grabbingController))
-                    return true;
-            }
-
-            return false;
-        }
-
-        private bool IsGrabbingControllerStateValid(bool _isGrabbing, Gaze_HandsEnum _mapHand, VRNode _dicoHand)
-        {
-            if (_mapHand.Equals(Gaze_HandsEnum.BOTH))
-            {
-                // check left hand state is ok
-                if (_dicoHand.Equals(VRNode.LeftHand))
-                    grabStateLeftValid = (_isGrabbing && grabMap.grabStateLeftIndex.Equals((int)Gaze_GrabStates.GRAB)) || (!_isGrabbing && grabMap.grabStateLeftIndex.Equals((int)Gaze_GrabStates.UNGRAB));
-
-                // check right hand state is ok
-                if (_dicoHand.Equals(VRNode.RightHand))
-                    grabStateRightValid = (_isGrabbing && grabMap.grabStateRightIndex.Equals((int)Gaze_GrabStates.GRAB)) || (!_isGrabbing && grabMap.grabStateRightIndex.Equals((int)Gaze_GrabStates.UNGRAB));
-
-                return grabStateLeftValid && grabStateRightValid;
-            }
-            else
-            {
-                int state = _mapHand.Equals(Gaze_HandsEnum.LEFT) ? grabMap.grabStateLeftIndex : grabMap.grabStateRightIndex;
-
-                if (_isGrabbing && state.Equals((int)Gaze_GrabStates.GRAB))
-                    return true;
-
-                if (!_isGrabbing && state.Equals((int)Gaze_GrabStates.UNGRAB))
-                    return true;
-            }
-
-            return false;
-        }
-
-        private bool IsGrabbingObjectValid(GameObject _grabbedObject, int _handIndex)
-        {
-            int index = _handIndex.Equals((int)Gaze_HandsEnum.BOTH) ? 1 : 0;
-            return _grabbedObject.Equals(grabMap.grabEntryList[index].interactiveObject);
-        }
-
-
-        private bool ValidateGrabController(Gaze_ControllerGrabEventArgs e)
-        {
-            VRNode dicoVRNode = e.ControllerObjectPair.Key;
-            GameObject grabbedObject = e.ControllerObjectPair.Value;
-
-            // return if there's no object in the Dico, otherwise, store it !
-            if (grabbedObject == null)
-                return false;
-
-            // get the hand VRNode from the event
-            bool isGrabbingControllerLeft = e.ControllerObjectPair.Key == VRNode.LeftHand;
-            VRNode eventVRNode = isGrabbingControllerLeft ? VRNode.LeftHand : VRNode.RightHand;
-
-            bool grabbedObjectValid = IsGrabbingObjectValid(grabbedObject, grabMap.grabHandsIndex);
-            touchLeftValid = IsGrabbingControllerInMap(dicoVRNode) && IsGrabbingControllerStateValid(e.IsGrabbing, Gaze_HandsEnum.LEFT, eventVRNode) && grabbedObjectValid;
-
-
-            // if we've configured
-            switch (grabMap.grabHandsIndex)
-            {
-                case (int)Gaze_HandsEnum.BOTH:
-                    bool isGrabbingControllerStateValid = IsGrabbingControllerStateValid(e.IsGrabbing, Gaze_HandsEnum.BOTH, eventVRNode);
-                    bool isGrabbingControllerInMap = IsGrabbingControllerInMap(dicoVRNode);
-
-                    return isGrabbingControllerInMap && isGrabbingControllerStateValid && grabbedObjectValid;
-                    break;
-
-                //  the LEFT hand
-                case (int)Gaze_HandsEnum.LEFT:
-                    touchLeftValid = IsGrabbingControllerInMap(dicoVRNode) && IsGrabbingControllerStateValid(e.IsGrabbing, Gaze_HandsEnum.LEFT, eventVRNode) && grabbedObjectValid;
-                    return touchLeftValid;
-                    break;
-
-                //  the RIGHT hand
-                case (int)Gaze_HandsEnum.RIGHT:
-                    grabRightValid = IsGrabbingControllerInMap(dicoVRNode) && IsGrabbingControllerStateValid(e.IsGrabbing, Gaze_HandsEnum.RIGHT, eventVRNode) && grabbedObjectValid;
-                    return grabRightValid;
-                    break;
-            }
-
-            return false;
-        }
-
-        private bool IsTouchObjectValid(GameObject _touchedObject, int _handIndex)
-        {
-            if (_touchedObject == null)
-                return false;
-
-            int index = _handIndex.Equals((int)Gaze_HandsEnum.BOTH) ? 1 : 0;
-            return _touchedObject.Equals(touchMap.touchEntryList[index].interactiveObject);
-        }
-
-        private bool IsTouchControllerValid(VRNode _touchingController)
-        {
-            for (int i = 0; i < touchMap.touchEntryList.Count; i++)
-            {
-                if (touchMap.touchEntryList[i].hand.Equals(_touchingController))
-                    return true;
-            }
-
-            return false;
-        }
-
-        private bool IsTouchDistanceValid(Gaze_TouchDistanceMode _eventDistance, VRNode _eventHand)
-        {
-            Gaze_HandsEnum mapHand = Gaze_HandsEnum.BOTH;
-
-            switch (touchMap.touchHandsIndex)
-            {
-                // LEFT hands
-                case (int)Gaze_HandsEnum.LEFT:
-                    mapHand = Gaze_HandsEnum.LEFT;
-                    break;
-
-                // RIGHT hands
-                case (int)Gaze_HandsEnum.RIGHT:
-                    mapHand = Gaze_HandsEnum.RIGHT;
-                    break;
-            }
-
-            if (mapHand.Equals(Gaze_HandsEnum.BOTH))
-            {
-                // check left hand mode 
-                if (_eventHand.Equals(VRNode.LeftHand))
-                {
-                    // if both modes are allowed, we're sure this is valid
-                    if (touchMap.touchDistanceModeLeftIndex.Equals((int)Gaze_TouchDistanceMode.BOTH))
-                    {
-                        touchDistanceModeLeftValid = true;
-                    }
-                    else
-                    {
-                        touchDistanceModeLeftValid = ((_eventDistance.Equals(Gaze_TouchDistanceMode.DISTANT) && touchMap.touchDistanceModeLeftIndex.Equals((int)Gaze_TouchDistanceMode.DISTANT))) || ((_eventDistance.Equals(Gaze_TouchDistanceMode.PROXIMITY) && touchMap.touchDistanceModeLeftIndex.Equals((int)Gaze_TouchDistanceMode.PROXIMITY))) ? true : false;
-                    }
-                }
-
-                // check right hand mode
-                if (_eventHand.Equals(VRNode.RightHand))
-                {
-                    // if both modes are allowed, we're sure this is valid
-                    if (touchMap.touchDistanceModeRightIndex.Equals((int)Gaze_TouchDistanceMode.BOTH))
-                    {
-                        touchDistanceModeRightValid = true;
-                    }
-                    else
-                    {
-                        touchDistanceModeRightValid = ((_eventDistance.Equals(Gaze_TouchDistanceMode.DISTANT) && touchMap.touchDistanceModeRightIndex.Equals((int)Gaze_TouchDistanceMode.DISTANT))) || ((_eventDistance.Equals(Gaze_TouchDistanceMode.PROXIMITY) && touchMap.touchDistanceModeRightIndex.Equals((int)Gaze_TouchDistanceMode.PROXIMITY))) ? true : false;
-                    }
-                }
-
-                if (requireAllTouchables)
-                    return touchDistanceModeLeftValid && touchDistanceModeRightValid;
-                else
-                    return touchDistanceModeLeftValid || touchDistanceModeRightValid ? true : false;
-            }
-            else
-            {
-                touchDistanceModeLeftValid = false;
-                touchDistanceModeRightValid = false;
-
-                // get the distance mode of the configured hand in the conditions
-                int mapDistanceModeIndex = mapHand.Equals(Gaze_HandsEnum.LEFT) ? touchMap.touchDistanceModeLeftIndex : touchMap.touchDistanceModeRightIndex;
-
-                if (_eventDistance.Equals(Gaze_TouchDistanceMode.PROXIMITY) && mapDistanceModeIndex.Equals((int)Gaze_TouchDistanceMode.PROXIMITY))
-                {
-                    if (mapHand.Equals(Gaze_HandsEnum.LEFT))
-                    {
-                        //Debug.Log("distanceModeIndex.Equals((int)Gaze_TouchDistanceMode.PROXIMITY) = " + distanceModeIndex.Equals((int)Gaze_TouchDistanceMode.PROXIMITY) + " and _eventDistanceMode =" + _eventDistanceMode);
-                        touchDistanceModeLeftValid = true;
-                        return true;
-                    }
-                    else if (mapHand.Equals(Gaze_HandsEnum.RIGHT))
-                    {
-                        touchDistanceModeRightValid = true;
-                        return true;
-                    }
-                }
-                else if (_eventDistance.Equals(Gaze_TouchDistanceMode.DISTANT) && mapDistanceModeIndex.Equals((int)Gaze_TouchDistanceMode.DISTANT))
-                {
-                    if (mapHand.Equals(Gaze_HandsEnum.LEFT))
-                    {
-                        touchDistanceModeLeftValid = true;
-                        return true;
-                    }
-                    else if (mapHand.Equals(Gaze_HandsEnum.RIGHT))
-                    {
-                        touchDistanceModeRightValid = true;
-                        return true;
-                    }
-                }
-                else if (mapDistanceModeIndex.Equals((int)Gaze_TouchDistanceMode.BOTH))
-                {
-                    if (mapHand.Equals(Gaze_HandsEnum.LEFT))
-                    {
-                        touchDistanceModeLeftValid = true;
-                        return true;
-                    }
-                    else if (mapHand.Equals(Gaze_HandsEnum.RIGHT))
-                    {
-                        touchDistanceModeRightValid = true;
-                        return true;
-                    }
-                }
-            }
-
-            return false;
-        }
-
-        /// <summary>
-        /// Return TRUE if the Action is valid.
-        /// Action is valid if action in the map equals action received.
-        /// Action can be TOUCH, UNTOUCH or BOTH.
-        /// </summary>
-        /// <param name="_dicoVRNode"></param>
-        /// <param name="_eventVRNode"></param>
-        /// <returns></returns>
-        private bool IsTouchActionValid(VRNode _touchingController, bool _isTouching)
-        {
-            int eventActionIndex = 0;
-            switch (touchMap.touchHandsIndex)
-            {
-                //TODO @apelab BOTH condition
-
-
-                // RIGHT hand
-                case (int)Gaze_HandsEnum.RIGHT:
-                    eventActionIndex = touchMap.touchActionRightIndex;
-                    break;
-
-                // LEFT hand
-                case (int)Gaze_HandsEnum.LEFT:
-                    eventActionIndex = touchMap.touchActionLeftIndex;
-                    break;
-            }
-
-            if ((_touchingController.Equals(VRNode.LeftHand) && touchMap.touchActionLeftIndex.Equals(eventActionIndex)) ||
-                (_touchingController.Equals(VRNode.RightHand) && touchMap.touchActionRightIndex.Equals(eventActionIndex)))
-            {
-                // if I'm touching AND the action is TOUCH AND the trigger is PRESSED
-                if (_isTouching && eventActionIndex.Equals((int)Gaze_TouchAction.TOUCH) && isTriggerPressed)
-                    return true;
-
-                // if I'm touching AND the action is UNTOUCH AND the trigger is RELEASED
-                if (_isTouching && eventActionIndex.Equals((int)Gaze_TouchAction.UNTOUCH) && !isTriggerPressed)
-                    return true;
-
-                // if I'm not touching AND action is UNTOUCH and trigger is PRESSED, that means we pointed OUT
-                if (!_isTouching && eventActionIndex.Equals((int)Gaze_TouchAction.UNTOUCH) && isTriggerPressed)
-                    return true;
-            }
-
-            //TODO @apelab BOTH hands condition
-
-            return false;
-        }
-
-        private bool IsTouchInputValid(bool _isTriggerPressed)
-        {
-            int eventActionIndex = 0;
-            switch (touchMap.touchHandsIndex)
-            {
-                // RIGHT hand
-                case (int)Gaze_HandsEnum.RIGHT:
-                    eventActionIndex = touchMap.touchActionRightIndex;
-                    break;
-
-                // LEFT hand
-                case (int)Gaze_HandsEnum.LEFT:
-                    eventActionIndex = touchMap.touchActionLeftIndex;
-                    break;
-            }
-
-            // if trigger is pressed and action is TOUCH return TRUE
-            if ((_isTriggerPressed && eventActionIndex.Equals((int)Gaze_TouchAction.TOUCH)) ||
-                (!_isTriggerPressed && eventActionIndex.Equals((int)Gaze_TouchAction.UNTOUCH)))
-            {
-                return true;
-            }
-
-            return false;
-        }
-
-        /// <summary>
-        /// To validate a touch, multiple conditions need to be met.
-        /// - Controller : must match the condition (LEFT, RIGHT, BOTH)
-        /// - Object : must match the condition (the one specified in the Touch conditions)
-        /// - Action : must match the condition (GRAB, UNGRAB, BOTH)
-        /// - Distance : must match the condition (PROXIMITY, DISTANT, BOTH)
-        /// </summary>
-        /// <param name="_eventHand"></param>
-        /// <param name="_touchedObject"></param>
-        /// <param name="_eventMode"></param>
-        /// <param name="_isTouching"></param>
-        /// <returns></returns>
-        private bool ValidateTouchConditions()
-        {
-            bool isTouchedObjectValid = IsTouchObjectValid(touchedObject, touchMap.touchHandsIndex);
-            bool isTouchControllerValid = IsTouchControllerValid(eventHand);
-            bool isTouchActionValid = IsTouchActionValid(eventHand, isTouched);
-            bool isTouchDistanceValid = IsTouchDistanceValid(distanceMode, eventHand);
-            bool valid = false;
-
-            // if we've configured
-            switch (touchMap.touchHandsIndex)
-            {
-                // BOTH hands
-                case (int)Gaze_HandsEnum.BOTH:
-
-                    valid = isTouchControllerValid && isTouchDistanceValid && isTouchedObjectValid;
-                    break;
-
-                //  the LEFT hand
-                case (int)Gaze_HandsEnum.LEFT:
-                    touchLeftValid = isTouchActionValid && isTouchControllerValid && isTouchDistanceValid && isTouchedObjectValid;
-
-                    valid = touchLeftValid;
-                    break;
-
-                //  the RIGHT hand
-                case (int)Gaze_HandsEnum.RIGHT:
-                    touchRightValid = isTouchActionValid && isTouchControllerValid && isTouchDistanceValid && isTouchedObjectValid;
-
-                    valid = touchRightValid;
-                    break;
-            }
-
-            return valid;
-        }
-
-        /// Get the pointed object in the dico argument
-        /// </summary>
-        /// <param name="e"></param>
-        /// <returns></returns>
-        private GameObject GetPointedObject(Gaze_ControllerPointingEventArgs e)
-        {
-            GameObject _object = null;
-            if (isActive)
-            {
-
-                switch (touchMap.touchHandsIndex)
-                {
-
-                    case (int)Gaze_HandsEnum.BOTH:
-                        if (e.Dico.ContainsKey(VRNode.LeftHand))
-                        {
-                            e.Dico.TryGetValue(VRNode.LeftHand, out _object);
-                        }
-                        else if (e.Dico.ContainsKey(VRNode.RightHand))
-                        {
-                            e.Dico.TryGetValue(VRNode.RightHand, out _object);
-                        }
-
-                        break;
-
-                    case (int)Gaze_HandsEnum.LEFT:
-                        e.Dico.TryGetValue(VRNode.LeftHand, out _object);
-                        break;
-
-                    case (int)Gaze_HandsEnum.RIGHT:
-                        e.Dico.TryGetValue(VRNode.RightHand, out _object);
-                        break;
-                }
-            }
-            else
-            {
-                if (e.Dico.ContainsKey(VRNode.LeftHand))
-                    e.Dico.TryGetValue(VRNode.LeftHand, out _object);
-                else
-                    e.Dico.TryGetValue(VRNode.RightHand, out _object);
-            }
-
-            return _object;
-        }
-
-        private void OnGazeEvent(Gaze_GazeEventArgs e)
-        {
-            // if sender is the gazable collider GameObject specified in the InteractiveObject Gaze field
-            if (e.Sender != null && ((GameObject)e.Sender).GetComponentInParent<Gaze_InteractiveObject>().gameObject.Equals(root))
-            {
-                isGazed = e.IsGazed;
-            }
-        }
 
         private void OnTriggerEvent(Gaze_TriggerEventArgs e)
         {
@@ -1403,234 +807,65 @@ namespace Gaze
             }
         }
 
-        private void OnProximityEvent(Gaze_ProximityEventArgs e)
-        {
-            if (e.Sender.Equals(root))
-                isInProximity = e.IsInProximity;
-
-            if (proximityEnabled)
-            {
-                proximitiesValidated = ValidateProximity(e);
-            }
-        }
-
         private void OnCustomConditionEvent(Gaze_CustomConditionEventArgs e)
         {
             customConditionsDico[(int)e.Sender] = e.IsValid;
         }
 
-        private void OnControllerGrabEvent(Gaze_ControllerGrabEventArgs e)
+        #region ConditionListManagement
+
+        public T GetConditionOfType<T>() where T : Gaze_AbstractCondition
         {
-            if (grabEnabled)
-                ValidateGrab(e);
+            if (activeConditions == null)
+                return null;
+
+            foreach (Gaze_AbstractCondition cond in activeConditions)
+                if (cond is T)
+                    return (T)cond;
+            return null;
+
         }
 
-        private void OnControllerCollisionEvent(Gaze_ControllerCollisionEventArgs e)
+        public bool IsConditionOfTypeValid<T>() where T : Gaze_AbstractCondition
         {
-            if (touchEnabled)
-            {
-                VRNode eventHand = ((GameObject)e.Sender).GetComponentInParent<Gaze_InteractiveObject>().gameObject.GetComponentInChildren<Gaze_GrabManager>().isLeftHand ? VRNode.LeftHand : VRNode.RightHand;
+            if (activeConditions == null)
+                return false;
 
-                // We can onli touch with handle!
-                if (e.Other.GetComponent<Gaze_Handle>() == null)
-                    return;
+            T cond = GetConditionOfType<T>();
 
-                // if I'm concerned
-                Gaze_InteractiveObject touchedObject = e.Other.GetComponentInParent<Gaze_InteractiveObject>();
-                if (touchedObject.Equals(rootIO))
-                {
-                    // update touch state
-                    bool isColliding = e.CollisionType.Equals(Gaze_CollisionTypes.COLLIDER_EXIT) ? false : true;
+            if (cond == null)
+                return false;
 
-                    if (eventHand.Equals(VRNode.LeftHand))
-                        isLeftColliding = isColliding;
-
-                    if (eventHand.Equals(VRNode.RightHand))
-                        isRightColliding = isColliding;
-
-                    //CheckUntouch(eventHand, isColliding, touchedObject.gameObject, Gaze_TouchDistanceMode.PROXIMITY, isTriggerPressed);
-                }
-            }
+            return cond.IsValidated();
         }
 
-        private void OnControllerPointingEvent(Gaze_ControllerPointingEventArgs e)
+        #endregion ConditionListManagement
+
+        #region VarsToDestroyAfterRefactoring
+        /// <summary>
+        /// This group of vars are here in order to allow us to create a fast
+        /// integration on the new SDK without modifying a lot of things
+        /// but should be removed as fast as we can in order to clean the project
+        /// </summary> 
+        [System.Obsolete("IsGazed is deprectaded use IsConditionOfTypeValid<Gaze_GazeCondition>()")]
+        public bool IsGazed
         {
-            // get the pointed object
-            pointedObject = GetPointedObject(e);
-
-            // if this object is me
-            if (pointedObject && pointedObject.Equals(GetComponentInParent<Gaze_InteractiveObject>().gameObject))
+            get
             {
-                // Debug.Log(this + " pointedObject  = " + pointedObject + " (" + e.IsPointed + ")");
-                // get the event's pointing hand
-                eventHand = e.Dico.ContainsKey(VRNode.LeftHand) ? VRNode.LeftHand : VRNode.RightHand;
-
-                // update touch state for inspector GUI
-                if (eventHand.Equals(VRNode.LeftHand))
-                    isLeftPointing = e.IsPointed;
-                else if (eventHand.Equals(VRNode.RightHand))
-                    isRightPointing = e.IsPointed;
-
-                // check if touch is valid
-                touchValidated = ValidateTouchConditions();
+                Gaze_GazeCondition gazeCondition = GetConditionOfType<Gaze_GazeCondition>();
+                return IsConditionOfTypeValid<Gaze_GazeCondition>();
             }
         }
 
-        private void OnControllerTouchEvent(Gaze_ControllerTouchEventArgs e)
+        [System.Obsolete("isInProximity is deprectaded use IsConditionOfTypeValid<Gaze_ProximityCondition>()")]
+        public bool isInProximity
         {
-            if (touchEnabled)
+            get
             {
-                // store the touched object
-                eventHand = e.Dico.ContainsKey(VRNode.LeftHand) ? VRNode.LeftHand : VRNode.RightHand;
-                e.Dico.TryGetValue(eventHand, out touchedObject);
-
-                // if I'm concerned
-                if (touchedObject.Equals(root))
-                {
-                    // update members
-                    isTriggerPressed = e.IsTriggerPressed;
-                    isTouched = e.IsTouching;
-                    distanceMode = e.Mode;
-
-                    // check if touch is valid
-                    touchValidated = ValidateTouchConditions();
-                }
+                return IsConditionOfTypeValid<Gaze_ProximityCondition>();
             }
         }
 
-        private void OnTeleportEvent(Gaze_TeleportEventArgs e)
-        {
-            int _modeIndex = (int)e.Mode;
-
-            // if the received telport mode is equal to the condition teleport mode
-            if (!teleportValidated)
-                teleportValidated = _modeIndex.Equals(teleportIndex);
-
-            // stop the coroutine to display correct teleport state info in the inspector (at runtime) if any is running
-            if (teleportStateCoroutine != null)
-                StopCoroutine(teleportStateCoroutine);
-
-            // start the coroutine to display the teleport state info in the editor (at runtime)
-            teleportStateCoroutine = TeleportStateCoroutine(_modeIndex);
-            StartCoroutine(teleportStateCoroutine);
-        }
-
-        // TODO @apelab wait a few milliseconds to change state for ACTIVE and TELEPORT events so we have time to see it in the State infos
-        private IEnumerator TeleportStateCoroutine(int _modeIndex)
-        {
-            float waitTime = 0f;
-            if ((_modeIndex == (int)Gaze_TeleportMode.ACTIVATED) || (_modeIndex == (int)Gaze_TeleportMode.TELEPORT))
-            {
-                waitTime = .5f;
-            }
-
-            yield return new WaitForSeconds(waitTime);
-            teleportEditorState = ((Gaze_TeleportMode)_modeIndex).ToString();
-        }
-
-        private void OnDrawGizmos()
-        {
-            String gizmo;
-
-            if (gameObject.GetComponent<Gaze_SceneLoader>())
-            {
-                gizmo = "Gaze SDK/Gaze_SimpleSceneLoader.png";
-            }
-            else if (!dependent || ActivateOnDependencyMap.isEmpty())
-            {
-                gizmo = "Gaze SDK/Gaze_Gazable_starter.png";
-            }
-            else
-            {
-                gizmo = "Gaze SDK/Gaze_Gazable.png";
-            }
-
-            Gizmos.DrawIcon(transform.position, gizmo, true);
-
-            if (ShowDependencies && dependent)
-            {
-                Gizmos.color = new Color(0.5f, 0.5f, 0.5f, 0.5f);
-                DrawConnections(ActivateOnDependencyMap);
-                DrawConnections(DeactivateOnDependencyMap);
-            }
-        }
-
-        private void OnDrawGizmosSelected()
-        {
-            if (ShowDependencies && dependent)
-            {
-                Gizmos.color = Color.green;
-                DrawConnections(ActivateOnDependencyMap, 0.03f);
-
-                Gizmos.color = Color.red;
-                DrawConnections(DeactivateOnDependencyMap, 0.03f);
-            }
-        }
-
-        private void DrawConnections(Gaze_DependencyMap map, float width = 0.01f)
-        {
-            if (!cubeMesh)
-            {
-                cubeMesh = MakeCube();
-            }
-
-            Vector3 p0, p1, mid, direction, normal;
-            Quaternion rotation;
-            float length;
-
-            foreach (Gaze_Dependency d in map.dependencies)
-            {
-                p0 = transform.position;
-                p1 = d.dependentGameObject.transform.position;
-                mid = (p0 + p1) * 0.5f;
-                direction = (p1 - p0).normalized;
-                normal = Vector3.Cross(direction, transform.forward).normalized;
-                length = (p1 - p0).magnitude * 0.5f;
-                rotation = Quaternion.identity;
-                if (normal.magnitude > 0)
-                {
-                    rotation.SetLookRotation(direction, normal);
-                }
-
-                Gizmos.DrawMesh(cubeMesh, mid, rotation, new Vector3(width, width, length));
-            }
-        }
-
-        private Mesh MakeCube()
-        {
-            Vector3[] vertexList = {
-                new Vector3 (-1, -1, -1),
-                new Vector3 (-1, 1, -1),
-                new Vector3 (1, 1, -1),
-                new Vector3 (1, -1, -1),
-                new Vector3 (1, -1, 1),
-                new Vector3 (1, 1, 1),
-                new Vector3 (-1, 1, 1),
-                new Vector3 (-1, -1, 1)
-            };
-
-            int[] faceList = {
-                0, 1, 3, // back
-                0, 2, 3,
-                3, 2, 5, // right
-                3, 5, 4,
-                5, 2, 1, // top
-                5, 1, 6,
-                3, 4, 7, // bottom
-                3, 7, 0,
-                0, 7, 6, // left
-                0, 6, 1,
-                4, 5, 6, // front
-                4, 6, 7
-            };
-
-            Mesh mesh = new Mesh();
-
-            mesh.vertices = vertexList;
-            mesh.triangles = faceList;
-            mesh.RecalculateNormals();
-
-            return mesh;
-        }
+        #endregion VarsToDestroyAfterRefactring
     }
 }
