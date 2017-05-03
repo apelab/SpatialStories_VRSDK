@@ -530,6 +530,17 @@ namespace Gaze
                 EditorGUILayout.BeginHorizontal();
                 targetConditions.grabMap.grabHandsIndex = EditorGUILayout.Popup(targetConditions.grabMap.grabHandsIndex, Enum.GetNames(typeof(Gaze_HandsEnum)));
 
+                //// Set the default collider for the gaze
+                //if (targetConditions.proximityMap.proximityEntryList[i].dependentGameObject == null)
+                //{
+                //    targetConditions.proximityMap.proximityEntryList[i].dependentGameObject = targetConditions.GetComponentInParent<Gaze_InteractiveObject>();
+                //}
+
+                //var proximityObject = EditorGUILayout.ObjectField(targetConditions.proximityMap.proximityEntryList[i].dependentGameObject, typeof(Gaze_InteractiveObject), true);
+
+                //if (proximityObject != null)
+                //    targetConditions.proximityMap.proximityEntryList[i].dependentGameObject = (Gaze_InteractiveObject)proximityObject;
+
                 // if both hands are used
                 if (targetConditions.grabMap.grabHandsIndex.Equals((int)Gaze_HandsEnum.BOTH))
                 {
@@ -540,7 +551,17 @@ namespace Gaze
                     // display first line of hand configuration
                     EditorGUILayout.BeginHorizontal();
                     targetConditions.grabMap.grabStateLeftIndex = EditorGUILayout.Popup("Left", targetConditions.grabMap.grabStateLeftIndex, Enum.GetNames(typeof(Gaze_GrabStates)));
-                    targetConditions.grabMap.grabEntryList[0].interactiveObject = hierarchyIOs[EditorGUILayout.Popup(hierarchyIOs.IndexOf((GameObject)targetConditions.grabMap.grabEntryList[0].interactiveObject), hierarchyIOsNames.ToArray())];
+
+                    var leftGrabObject = EditorGUILayout.ObjectField(targetConditions.grabMap.grabEntryList[0].interactiveObject, typeof(Gaze_InteractiveObject), true);
+
+                    if (leftGrabObject != null)
+                    {
+                        if (leftGrabObject is Gaze_InteractiveObject)
+                            targetConditions.grabMap.grabEntryList[0].interactiveObject = ((Gaze_InteractiveObject)leftGrabObject).gameObject;
+                        else
+                            targetConditions.grabMap.grabEntryList[0].interactiveObject = (GameObject)leftGrabObject;
+                    }
+
                     EditorGUILayout.EndHorizontal();
 
                     // TODO display 'link' option
@@ -551,7 +572,16 @@ namespace Gaze
                         targetConditions.grabMap.AddGrabableEntry(hierarchyIOs[0]);
 
                     targetConditions.grabMap.grabStateRightIndex = EditorGUILayout.Popup("Right", targetConditions.grabMap.grabStateRightIndex, Enum.GetNames(typeof(Gaze_GrabStates)));
-                    targetConditions.grabMap.grabEntryList[1].interactiveObject = hierarchyIOs[EditorGUILayout.Popup(hierarchyIOs.IndexOf((GameObject)targetConditions.grabMap.grabEntryList[1].interactiveObject), hierarchyIOsNames.ToArray())];
+
+                    var rightGrabObject = EditorGUILayout.ObjectField(targetConditions.grabMap.grabEntryList[1].interactiveObject, typeof(Gaze_InteractiveObject), true);
+
+                    if (rightGrabObject != null)
+                    {
+                        if (rightGrabObject is Gaze_InteractiveObject)
+                            targetConditions.grabMap.grabEntryList[1].interactiveObject = ((Gaze_InteractiveObject)rightGrabObject).gameObject;
+                        else
+                            targetConditions.grabMap.grabEntryList[1].interactiveObject = (GameObject)rightGrabObject;
+                    }
                     EditorGUILayout.EndHorizontal();
                 }
                 else
@@ -569,7 +599,14 @@ namespace Gaze
                         targetConditions.grabMap.grabEntryList[0].hand = VRNode.RightHand;
                     }
 
-                    targetConditions.grabMap.grabEntryList[0].interactiveObject = hierarchyIOs[EditorGUILayout.Popup(hierarchyIOs.IndexOf((GameObject)targetConditions.grabMap.grabEntryList[0].interactiveObject), hierarchyIOsNames.ToArray())];
+                    var grabObject = EditorGUILayout.ObjectField(targetConditions.grabMap.grabEntryList[0].interactiveObject, typeof(Gaze_InteractiveObject), true);
+                    if (grabObject != null)
+                    {
+                        if (grabObject is Gaze_InteractiveObject)
+                            targetConditions.grabMap.grabEntryList[0].interactiveObject = ((Gaze_InteractiveObject)grabObject).gameObject;
+                        else
+                            targetConditions.grabMap.grabEntryList[0].interactiveObject = (GameObject)grabObject;
+                    }
                     EditorGUILayout.EndHorizontal();
                 }
             }
@@ -645,11 +682,21 @@ namespace Gaze
             for (int i = 0; i < targetConditions.ActivateOnDependencyMap.dependencies.Count; i++)
             {
                 EditorGUILayout.BeginHorizontal();
-                targetConditions.ActivateOnDependencyMap.dependencies[i].dependentGameObject = hierarchyInteractions[EditorGUILayout.Popup(hierarchyInteractions.IndexOf((GameObject)targetConditions.ActivateOnDependencyMap.dependencies[i].dependentGameObject), hierarchyInteractionsNames.ToArray())];
+
+                var activateDependency = EditorGUILayout.ObjectField(targetConditions.ActivateOnDependencyMap.dependencies[i].dependentGameObject, typeof(Gaze_Conditions), true);
+
+                if (activateDependency != null)
+                {
+                    if (activateDependency is Gaze_Conditions)
+                        targetConditions.ActivateOnDependencyMap.dependencies[i].dependentGameObject = ((Gaze_Conditions)activateDependency).gameObject;
+                    else
+                        targetConditions.ActivateOnDependencyMap.dependencies[i].dependentGameObject = (GameObject)activateDependency;
+                }
+
                 targetConditions.ActivateOnDependencyMap.dependencies[i].triggerStateIndex = EditorGUILayout.Popup(targetConditions.ActivateOnDependencyMap.dependencies[i].triggerStateIndex, Enum.GetNames(typeof(DependencyTriggerEventsAndStates)));
 
                 // if dependent on Trigger event
-                targetConditions.ActivateOnDependencyMap.dependencies[i].onTrigger = targetConditions.ActivateOnDependencyMap.dependencies[i].triggerStateIndex == 3;
+                targetConditions.ActivateOnDependencyMap.dependencies[i].onTrigger = targetConditions.ActivateOnDependencyMap.dependencies[i].triggerStateIndex == (int)DependencyTriggerEventsAndStates.Triggered;
 
                 if (GUILayout.Button("-"))
                 {
@@ -664,6 +711,7 @@ namespace Gaze
                 Gaze_Dependency d = targetConditions.ActivateOnDependencyMap.Add(targetConditions);
                 EditorGUILayout.BeginHorizontal();
                 d.dependentGameObject = hierarchyInteractions[EditorGUILayout.Popup(0, hierarchyInteractionsNames.ToArray())];
+
                 d.triggerStateIndex = EditorGUILayout.Popup(d.triggerStateIndex, Enum.GetNames(typeof(DependencyTriggerEventsAndStates)));
                 if (GUILayout.Button("-"))
                 {
@@ -696,11 +744,21 @@ namespace Gaze
             for (int i = 0; i < targetConditions.DeactivateOnDependencyMap.dependencies.Count; i++)
             {
                 EditorGUILayout.BeginHorizontal();
-                targetConditions.DeactivateOnDependencyMap.dependencies[i].dependentGameObject = hierarchyInteractions[EditorGUILayout.Popup(hierarchyInteractions.IndexOf((GameObject)targetConditions.DeactivateOnDependencyMap.dependencies[i].dependentGameObject), hierarchyInteractionsNames.ToArray())];
+
+                var activateDependency = EditorGUILayout.ObjectField(targetConditions.DeactivateOnDependencyMap.dependencies[i].dependentGameObject, typeof(Gaze_Conditions), true);
+
+                if (activateDependency != null)
+                {
+                    if (activateDependency is Gaze_Conditions)
+                        targetConditions.DeactivateOnDependencyMap.dependencies[i].dependentGameObject = ((Gaze_Conditions)activateDependency).gameObject;
+                    else
+                        targetConditions.DeactivateOnDependencyMap.dependencies[i].dependentGameObject = (GameObject)activateDependency;
+                }
+
                 targetConditions.DeactivateOnDependencyMap.dependencies[i].triggerStateIndex = EditorGUILayout.Popup(targetConditions.DeactivateOnDependencyMap.dependencies[i].triggerStateIndex, Enum.GetNames(typeof(DependencyTriggerEventsAndStates)));
 
                 // if dependent on Trigger event
-                targetConditions.DeactivateOnDependencyMap.dependencies[i].onTrigger = targetConditions.DeactivateOnDependencyMap.dependencies[i].triggerStateIndex == 3;
+                targetConditions.DeactivateOnDependencyMap.dependencies[i].onTrigger = targetConditions.DeactivateOnDependencyMap.dependencies[i].triggerStateIndex == (int)DependencyTriggerEventsAndStates.Triggered;
 
                 if (GUILayout.Button("-"))
                 {
@@ -759,6 +817,9 @@ namespace Gaze
                     targetConditions.reloadMaxRepetitions = 1;
                 }
             }
+
+            // TODO(4nc3str4l): Put this on a better place
+            targetConditions.ReloadDependencies = EditorGUILayout.ToggleLeft("Reload Dependencies", targetConditions.ReloadDependencies);
         }
 
         private void DisplayConditionsBlock()
