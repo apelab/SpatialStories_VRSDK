@@ -82,8 +82,8 @@ namespace Gaze
                 return;
 
             GUILayout.BeginHorizontal();
-            targetIO.touchDistance = EditorGUILayout.FloatField("Touch Distance", targetIO.touchDistance);
-            Gaze_Utils.EnsureFieldIsPositiveOrZero(ref targetIO.touchDistance);
+            targetIO.TouchDistance = EditorGUILayout.FloatField("Touch Distance", targetIO.TouchDistance);
+            Gaze_Utils.EnsureFieldIsPositiveOrZero(ref targetIO.TouchDistance);
             GUILayout.EndHorizontal();
         }
 
@@ -93,9 +93,13 @@ namespace Gaze
                 return;
 
             GUILayout.BeginHorizontal();
-            targetIO.grabDistance = EditorGUILayout.FloatField("Grab Distance", targetIO.grabDistance);
-            Gaze_Utils.EnsureFieldIsPositiveOrZero(ref targetIO.grabDistance);
+            targetIO.GrabDistance = EditorGUILayout.FloatField("Grab Distance", targetIO.GrabDistance);
             GUILayout.EndHorizontal();
+            GUILayout.BeginHorizontal();
+            targetIO.AttractionSpeed = EditorGUILayout.FloatField("Attraction Speed", targetIO.AttractionSpeed);
+            GUILayout.EndHorizontal();
+            Gaze_Utils.EnsureFieldIsPositiveOrZero(ref targetIO.GrabDistance);
+            Gaze_Utils.EnsureFieldIsPositiveOrZero(ref targetIO.AttractionSpeed);
         }
 
         private void DisplayLevitationDistance()
@@ -104,8 +108,8 @@ namespace Gaze
                 return;
 
             GUILayout.BeginHorizontal();
-            targetIO.grabDistance = EditorGUILayout.FloatField("Levitation Distance", targetIO.grabDistance);
-            Gaze_Utils.EnsureFieldIsPositiveOrZero(ref targetIO.grabDistance);
+            targetIO.GrabDistance = EditorGUILayout.FloatField("Levitation Distance", targetIO.GrabDistance);
+            Gaze_Utils.EnsureFieldIsPositiveOrZero(ref targetIO.GrabDistance);
             GUILayout.EndHorizontal();
         }
     }

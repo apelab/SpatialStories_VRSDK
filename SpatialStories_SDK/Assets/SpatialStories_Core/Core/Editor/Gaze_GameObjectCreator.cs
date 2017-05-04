@@ -131,14 +131,14 @@ namespace Gaze
 
         #region Main Menu
 
-        [MenuItem("GameObject/Gaze/Convert into interactive object", false, 10)]
+        [MenuItem("GameObject/Spatial Stories/Convert into interactive object", false, 10)]
         public static void GameObjectConvertIntoObject(MenuCommand menuCommand)
         {
             if (Selection.activeGameObject != null)
                 ConvertInteractiveObject(Selection.activeGameObject);
         }
 
-        [MenuItem("GameObject/Gaze/Convert into interactive camera", false, 10)]
+        [MenuItem("GameObject/Spatial Stories/Convert into interactive camera", false, 10)]
         public static void GameObjectConvertIntoCamera(MenuCommand menuCommand)
         {
             if (Selection.activeGameObject != null && Selection.activeGameObject.GetComponent<Camera>() != null)
@@ -149,37 +149,37 @@ namespace Gaze
 
         #region Contextual Menu
 
-        [MenuItem("Gaze/Create/Interactive Object")]
+        [MenuItem("Spatial Stories/Create/Interactive Object")]
         public static void MenuCreateInteractiveObject()
         {
             ParentAndUndo(CreateInteractiveObject());
         }
 
-        [MenuItem("Gaze/Create/Interactive Camera")]
+        [MenuItem("Spatial Stories/Create/Interactive Camera")]
         public static void MenuCreateInteractiveCamera()
         {
             ParentAndUndo(CreateInteractiveCamera());
         }
 
-        [MenuItem("Gaze/Convert/Into interactive Object")]
+        [MenuItem("Spatial Stories/Convert/Into interactive Object")]
         public static void MenuConvertInteractiveObject()
         {
             Selection.activeGameObject = ConvertInteractiveObject(Selection.activeGameObject);
         }
 
-        [MenuItem("Gaze/Convert/Into interactive Object", true)]
+        [MenuItem("Spatial Stories/Convert/Into interactive Object", true)]
         public static bool ValidateGameobjectSelection()
         {
             return Selection.activeGameObject != null;
         }
 
-        [MenuItem("Gaze/Convert/Into interactive Camera")]
+        [MenuItem("Spatial Stories/Convert/Into interactive Camera")]
         public static void MenuConvertInteractiveCamera()
         {
             Selection.activeGameObject = ConvertInteractiveCamera(Selection.activeGameObject);
         }
 
-        [MenuItem("Gaze/Convert/Into interactive Camera", true)]
+        [MenuItem("Spatial Stories/Convert/Into interactive Camera", true)]
         public static bool ValidateCameraSelection()
         {
             return Selection.activeGameObject != null && Selection.activeGameObject.GetComponent<Camera>() != null;

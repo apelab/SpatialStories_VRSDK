@@ -6,28 +6,28 @@ namespace Gaze
 {
     public class Gaze_TouchCondition : Gaze_AbstractCondition
     {
-        public Gaze_TouchDistanceMode distanceMode;
-        public GameObject touchedObject = null;
+        public Gaze_TouchDistanceMode DistanceMode;
+        public GameObject TouchedObject = null;
 
-        private bool isTriggerPressed = false;
-        public bool touchLeftValid = false;
-        public bool touchRightValid = false;
-        public bool touchDistanceModeLeftValid = false;
-        public bool touchDistanceModeRightValid = false;
-        public Collider gazeCollider;
-        private GameObject pointedObject;
-        private VRNode eventHand;
+        public bool TouchLeftValid = false;
+        public bool TouchRightValid = false;
+        public bool TouchDistanceModeLeftValid = false;
+        public bool TouchDistanceModeRightValid = false;
+        public Collider GazeCollider;
 
         /// <summary>
         /// TRUE if a distant touch ray is hitting this object, else FALSE (the controller grabbing from distance)
         /// </summary>
-        public bool isLeftPointing = false;
-        public bool isRightPointing = false;
+        public bool IsLeftPointing = false;
+        public bool IsRightPointing = false;
 
+        private bool isTriggerPressed = false;
+        private GameObject pointedObject;
+        private VRNode eventHand;
 
         public Gaze_TouchCondition(Gaze_Conditions _gazeConditionsScript, Collider _gazeCollider) : base(_gazeConditionsScript)
         {
-            gazeCollider = _gazeCollider;
+            GazeCollider = _gazeCollider;
         }
 
         public override bool IsValidated()
@@ -79,10 +79,10 @@ namespace Gaze
         private bool ValidateTouchConditions()
         {
 
-            bool isTouchedObjectValid = IsTouchObjectValid(touchedObject, gazeConditionsScript.touchMap.touchHandsIndex);
+            bool isTouchedObjectValid = IsTouchObjectValid(TouchedObject, gazeConditionsScript.touchMap.touchHandsIndex);
             bool isTouchControllerValid = IsTouchControllerValid(eventHand);
             bool isTouchActionValid = IsTouchActionValid(eventHand, IsValid);
-            bool isTouchDistanceValid = IsTouchDistanceValid(distanceMode, eventHand);
+            bool isTouchDistanceValid = IsTouchDistanceValid(DistanceMode, eventHand);
             bool isTouchInputValid = IsTouchInputValid(isTriggerPressed);
 
             bool valid = false;
@@ -98,16 +98,16 @@ namespace Gaze
 
                 //  the LEFT hand
                 case (int)Gaze_HandsEnum.LEFT:
-                    touchLeftValid = isTouchActionValid && isTouchControllerValid && isTouchDistanceValid && isTouchedObjectValid;
+                    TouchLeftValid = isTouchActionValid && isTouchControllerValid && isTouchDistanceValid && isTouchedObjectValid;
 
-                    valid = touchLeftValid;
+                    valid = TouchLeftValid;
                     break;
 
                 //  the RIGHT hand
                 case (int)Gaze_HandsEnum.RIGHT:
-                    touchRightValid = isTouchActionValid && isTouchControllerValid && isTouchDistanceValid && isTouchedObjectValid;
+                    TouchRightValid = isTouchActionValid && isTouchControllerValid && isTouchDistanceValid && isTouchedObjectValid;
 
-                    valid = touchRightValid;
+                    valid = TouchRightValid;
                     break;
             }
 
@@ -167,11 +167,11 @@ namespace Gaze
                     // if both modes are allowed, we're sure this is valid
                     if (gazeConditionsScript.touchMap.touchDistanceModeLeftIndex.Equals((int)Gaze_TouchDistanceMode.BOTH))
                     {
-                        touchDistanceModeLeftValid = true;
+                        TouchDistanceModeLeftValid = true;
                     }
                     else
                     {
-                        touchDistanceModeLeftValid = ((_eventDistance.Equals(Gaze_TouchDistanceMode.DISTANT) && gazeConditionsScript.touchMap.touchDistanceModeLeftIndex.Equals((int)Gaze_TouchDistanceMode.DISTANT))) || ((_eventDistance.Equals(Gaze_TouchDistanceMode.PROXIMITY) && gazeConditionsScript.touchMap.touchDistanceModeLeftIndex.Equals((int)Gaze_TouchDistanceMode.PROXIMITY))) ? true : false;
+                        TouchDistanceModeLeftValid = ((_eventDistance.Equals(Gaze_TouchDistanceMode.DISTANT) && gazeConditionsScript.touchMap.touchDistanceModeLeftIndex.Equals((int)Gaze_TouchDistanceMode.DISTANT))) || ((_eventDistance.Equals(Gaze_TouchDistanceMode.PROXIMITY) && gazeConditionsScript.touchMap.touchDistanceModeLeftIndex.Equals((int)Gaze_TouchDistanceMode.PROXIMITY))) ? true : false;
                     }
                 }
 
@@ -181,23 +181,23 @@ namespace Gaze
                     // if both modes are allowed, we're sure this is valid
                     if (gazeConditionsScript.touchMap.touchDistanceModeRightIndex.Equals((int)Gaze_TouchDistanceMode.BOTH))
                     {
-                        touchDistanceModeRightValid = true;
+                        TouchDistanceModeRightValid = true;
                     }
                     else
                     {
-                        touchDistanceModeRightValid = ((_eventDistance.Equals(Gaze_TouchDistanceMode.DISTANT) && gazeConditionsScript.touchMap.touchDistanceModeRightIndex.Equals((int)Gaze_TouchDistanceMode.DISTANT))) || ((_eventDistance.Equals(Gaze_TouchDistanceMode.PROXIMITY) && gazeConditionsScript.touchMap.touchDistanceModeRightIndex.Equals((int)Gaze_TouchDistanceMode.PROXIMITY))) ? true : false;
+                        TouchDistanceModeRightValid = ((_eventDistance.Equals(Gaze_TouchDistanceMode.DISTANT) && gazeConditionsScript.touchMap.touchDistanceModeRightIndex.Equals((int)Gaze_TouchDistanceMode.DISTANT))) || ((_eventDistance.Equals(Gaze_TouchDistanceMode.PROXIMITY) && gazeConditionsScript.touchMap.touchDistanceModeRightIndex.Equals((int)Gaze_TouchDistanceMode.PROXIMITY))) ? true : false;
                     }
                 }
 
                 if (gazeConditionsScript.requireAllTouchables)
-                    return touchDistanceModeLeftValid && touchDistanceModeRightValid;
+                    return TouchDistanceModeLeftValid && TouchDistanceModeRightValid;
                 else
-                    return touchDistanceModeLeftValid || touchDistanceModeRightValid ? true : false;
+                    return TouchDistanceModeLeftValid || TouchDistanceModeRightValid ? true : false;
             }
             else
             {
-                touchDistanceModeLeftValid = false;
-                touchDistanceModeRightValid = false;
+                TouchDistanceModeLeftValid = false;
+                TouchDistanceModeRightValid = false;
 
                 // get the distance mode of the configured hand in the conditions
                 int mapDistanceModeIndex = mapHand.Equals(Gaze_HandsEnum.LEFT) ? gazeConditionsScript.touchMap.touchDistanceModeLeftIndex : gazeConditionsScript.touchMap.touchDistanceModeRightIndex;
@@ -207,12 +207,12 @@ namespace Gaze
                     if (mapHand.Equals(Gaze_HandsEnum.LEFT))
                     {
                         //Debug.Log("distanceModeIndex.Equals((int)Gaze_TouchDistanceMode.PROXIMITY) = " + distanceModeIndex.Equals((int)Gaze_TouchDistanceMode.PROXIMITY) + " and _eventDistanceMode =" + _eventDistanceMode);
-                        touchDistanceModeLeftValid = true;
+                        TouchDistanceModeLeftValid = true;
                         return true;
                     }
                     else if (mapHand.Equals(Gaze_HandsEnum.RIGHT))
                     {
-                        touchDistanceModeRightValid = true;
+                        TouchDistanceModeRightValid = true;
                         return true;
                     }
                 }
@@ -220,12 +220,12 @@ namespace Gaze
                 {
                     if (mapHand.Equals(Gaze_HandsEnum.LEFT))
                     {
-                        touchDistanceModeLeftValid = true;
+                        TouchDistanceModeLeftValid = true;
                         return true;
                     }
                     else if (mapHand.Equals(Gaze_HandsEnum.RIGHT))
                     {
-                        touchDistanceModeRightValid = true;
+                        TouchDistanceModeRightValid = true;
                         return true;
                     }
                 }
@@ -233,12 +233,12 @@ namespace Gaze
                 {
                     if (mapHand.Equals(Gaze_HandsEnum.LEFT))
                     {
-                        touchDistanceModeLeftValid = true;
+                        TouchDistanceModeLeftValid = true;
                         return true;
                     }
                     else if (mapHand.Equals(Gaze_HandsEnum.RIGHT))
                     {
-                        touchDistanceModeRightValid = true;
+                        TouchDistanceModeRightValid = true;
                         return true;
                     }
                 }
@@ -355,7 +355,7 @@ namespace Gaze
         private void OnControllerPointingEvent(Gaze_ControllerPointingEventArgs e)
         {
             // if touch OR grab is enabled
-            if (gazeConditionsScript.RootIO.touch)
+            if (gazeConditionsScript.RootIO.IsTouchEnabled)
             {
                 // get the pointed object
                 pointedObject = GetPointedObject(e);
@@ -368,10 +368,10 @@ namespace Gaze
 
                     // update touch state for inspector GUI
                     if (eventHand.Equals(VRNode.LeftHand))
-                        isLeftPointing = e.IsPointed;
+                        IsLeftPointing = e.IsPointed;
 
                     else if (eventHand.Equals(VRNode.RightHand))
-                        isRightPointing = e.IsPointed;
+                        IsRightPointing = e.IsPointed;
 
                     // check if touch is valid
                     IsValid = ValidateTouchConditions();
@@ -381,18 +381,17 @@ namespace Gaze
 
         private void OnControllerTouchEvent(Gaze_ControllerTouchEventArgs e)
         {
-
             // store the touched object
             VRNode eventHand = e.Dico.ContainsKey(VRNode.LeftHand) ? VRNode.LeftHand : VRNode.RightHand;
-            e.Dico.TryGetValue(eventHand, out touchedObject);
+            e.Dico.TryGetValue(eventHand, out TouchedObject);
 
             // if I'm concerned
-            if (touchedObject.Equals(gazeConditionsScript.RootIO.gameObject))
+            if (TouchedObject.Equals(gazeConditionsScript.RootIO.gameObject))
             {
                 // update members
                 isTriggerPressed = e.IsTriggerPressed;
                 IsValid = e.IsTouching;
-                distanceMode = e.Mode;
+                DistanceMode = e.Mode;
 
                 // check if touch is valid
                 IsValid = ValidateTouchConditions();

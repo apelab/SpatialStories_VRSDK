@@ -175,7 +175,7 @@ namespace Gaze
                 if (currentDragAndDropCondition != null && currentDragAndDropCondition.attached)
                 {
                     IO.DisableManipulationMode(Gaze_ManipulationModes.GRAB);
-                    IO.isManupulable = false;
+                    IO.IsManipulable = false;
                     IO.SetManipulationMode(false, true);
                 }
 

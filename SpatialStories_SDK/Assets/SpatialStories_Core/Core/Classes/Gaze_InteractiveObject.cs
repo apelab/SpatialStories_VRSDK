@@ -36,14 +36,14 @@ namespace Gaze
         /// <summary>
         /// Can this object be grabbed.
         /// </summary>
-        public bool grab { get { return ManipulationMode == Gaze_ManipulationModes.GRAB || ManipulationMode == Gaze_ManipulationModes.LEVITATE; } }
+        public bool IsGrabEnabled { get { return ManipulationMode == Gaze_ManipulationModes.GRAB || ManipulationMode == Gaze_ManipulationModes.LEVITATE; } }
 
         /// <summary>
         /// Can this object be activated by :
         /// TOUCH, POINT or BOTH
         /// </summary>
-        public bool touch { get { return ManipulationMode == Gaze_ManipulationModes.TOUCH; } }
-        public int touchIndex;
+        public bool IsTouchEnabled { get { return ManipulationMode == Gaze_ManipulationModes.TOUCH; } }
+        public int TouchModeIndex;
 
         /// <summary>
         /// The grab mode is either : Attract or Levitate
@@ -51,7 +51,7 @@ namespace Gaze
         /// manipulation logic this should be removed and everything should be managed with\
         /// the new manipulation mode attribute.
         /// </summary>
-        public int grabModeIndex
+        public int GrabModeIndex
         {
             get
             {
@@ -72,38 +72,38 @@ namespace Gaze
         /// <summary>
         /// It's the collider used to manipulate the object.
         /// </summary>
-        public Collider manipulabeHandle;
+        public Collider ManipulableHandle;
 
-        public bool hasGrabPositionner = false;
-        public Collider grabPositionnerCollider;
+        public bool HasGrabPositionner = false;
+        public Collider GrabPositionnerCollider;
 
-        public Transform GrabPositionnerTransform { get { return grabPositionnerCollider.gameObject.transform; } }
+        public Transform GrabPositionnerTransform { get { return GrabPositionnerCollider.gameObject.transform; } }
 
         /// <summary>
         /// If true, the object being catched will vibrate the controllers while grabbed.
         /// </summary>
-        public bool vibratesOnGrab = false;
+        public bool VibratesOnGrab = false;
 
         /// <summary>
         /// Defines the maximum distance that an object can be cached
         /// </summary>
-        public float grabDistance;
+        public float GrabDistance;
 
         /// <summary>
         /// Defines the maximum distance that an object can be distanced touched
         /// </summary>
-        public float touchDistance;
+        public float TouchDistance;
 
         /// <summary>
         /// Defines the speed that a certain object will be atracted to the hand
         /// </summary>
-        public float attractionSpeed = 1f;
+        public float AttractionSpeed = 1f;
 
 
         /// <summary>
         /// Defines if an object can be grabbed from no matter where once is grabbed
         /// </summary>
-        public bool isManupulable = false;
+        public bool IsManipulable = false;
 
 
         /// <summary>
@@ -112,7 +112,7 @@ namespace Gaze
         //		public bool hasGravity;
 
         // TODO test if this works with a FBX that already has a root motion
-        public Transform rootMotion;
+        public Transform RootMotion;
 
         private Gaze_Handle handle;
 
@@ -163,15 +163,15 @@ namespace Gaze
 
             initialTransform = new Gaze_Transform(transform);
 
-            if (rootMotion != null)
+            if (RootMotion != null)
             {
-                transform.SetParent(rootMotion);
+                transform.SetParent(RootMotion);
             }
         }
 
         void Update()
         {
-            if (rootMotion != null)
+            if (RootMotion != null)
             {
                 FollowRoot();
             }
@@ -215,8 +215,8 @@ namespace Gaze
             if (isBeingGrabbed)
             {
                 grabbingMananger = (Gaze_GrabManager)e.Sender;
-                rootMotion = grabbingMananger.grabPosition;
-                if (isManupulable && !IsBeingManipulated)
+                RootMotion = grabbingMananger.grabPosition;
+                if (IsManipulable && !IsBeingManipulated)
                     SetManipulationMode(true);
                 else if (IsBeingManipulated)
                     ContinueManipulation();
@@ -224,8 +224,8 @@ namespace Gaze
             else
             {
                 grabbingMananger = null;
-                rootMotion = null;
-                if (isManupulable)
+                RootMotion = null;
+                if (IsManipulable)
                     SetManipulationMode(false);
             }
         }

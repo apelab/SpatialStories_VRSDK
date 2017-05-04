@@ -530,7 +530,7 @@ namespace Gaze
             if ((e.ControllerObjectPair.Key.Equals(VRNode.LeftHand) && isLeftHand) || (e.ControllerObjectPair.Key.Equals(VRNode.RightHand) && !isLeftHand))
             {
                 // and this object is in LEVITATE mode
-                if (e.ControllerObjectPair.Value.GetComponent<Gaze_InteractiveObject>().grabModeIndex.Equals((int)Gaze_GrabMode.LEVITATE))
+                if (e.ControllerObjectPair.Value.GetComponent<Gaze_InteractiveObject>().GrabModeIndex.Equals((int)Gaze_GrabMode.LEVITATE))
                 {
                     isControllerTrigger = e.IsGrabbing;
                     objectToLevitate = e.ControllerObjectPair.Value.GetComponent<Gaze_InteractiveObject>().gameObject;

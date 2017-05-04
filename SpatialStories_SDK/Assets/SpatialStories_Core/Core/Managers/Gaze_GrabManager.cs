@@ -281,7 +281,7 @@ public class Gaze_GrabManager : MonoBehaviour
             }
 
             // if it's not an Interactive Object OR it's neither grabbable nor touchable, remove it !
-            if (io == null || (!io.grab && !io.touch))
+            if (io == null || (!io.IsGrabEnabled && !io.IsTouchEnabled))
                 objectsInProximity.RemoveAt(i);
         }
     }
@@ -327,7 +327,7 @@ public class Gaze_GrabManager : MonoBehaviour
 
     private void Touch(Gaze_InteractiveObject _interactableIO)
     {
-        if (_interactableIO.touch)
+        if (_interactableIO.IsTouchEnabled)
         {
             // set the dico members
             Dictionary<VRNode, GameObject> dico = new Dictionary<VRNode, GameObject>();
@@ -371,14 +371,14 @@ public class Gaze_GrabManager : MonoBehaviour
             {
                 interactableIO = closerIO;
 
-                if (interactableIO.grab)
+                if (interactableIO.IsGrabEnabled)
                 {
-                    if (interactableIO.grabModeIndex.Equals((int)Gaze_GrabMode.ATTRACT))
+                    if (interactableIO.GrabModeIndex.Equals((int)Gaze_GrabMode.ATTRACT))
                     {
                         Gaze_GravityManager.ChangeGravityState(interactableIO, Gaze_GravityRequestType.DEACTIVATE_AND_ATTACH);
                         grabState = GRAB_STATE.ATTRACTING;
                     }
-                    else if (interactableIO.grabModeIndex.Equals((int)Gaze_GrabMode.LEVITATE))
+                    else if (interactableIO.GrabModeIndex.Equals((int)Gaze_GrabMode.LEVITATE))
                     {
                         grabState = GRAB_STATE.GRABBED;
                         ClearLaserPointer();
@@ -394,7 +394,7 @@ public class Gaze_GrabManager : MonoBehaviour
                     }
                 }
 
-                if (interactableIO.touch)
+                if (interactableIO.IsTouchEnabled)
                 {
                     searchDistanceState = Gaze_TouchDistanceMode.DISTANT;
                     Touch(interactableIO);
@@ -430,18 +430,18 @@ public class Gaze_GrabManager : MonoBehaviour
             else
             {
                 // If the object is not being manipulated we just try to Find an object by the distance method
-                if (interactableIO.touch)
+                if (interactableIO.IsTouchEnabled)
                 {
                     searchDistanceState = Gaze_TouchDistanceMode.PROXIMITY;
                     Touch(interactableIO);
                 }
-                else if (interactableIO.grab)
+                else if (interactableIO.IsGrabEnabled)
                 {
-                    if (interactableIO.grabModeIndex.Equals((int)Gaze_GrabMode.ATTRACT))
+                    if (interactableIO.GrabModeIndex.Equals((int)Gaze_GrabMode.ATTRACT))
                     {
                         grabState = GRAB_STATE.GRABBING;
                     }
-                    else if (interactableIO.grabModeIndex.Equals((int)Gaze_GrabMode.LEVITATE))
+                    else if (interactableIO.GrabModeIndex.Equals((int)Gaze_GrabMode.LEVITATE))
                     {
                         grabState = GRAB_STATE.GRABBED;
                         KeyValuePair<VRNode, GameObject> dico = new KeyValuePair<VRNode, GameObject>(isLeftHand ? VRNode.LeftHand : VRNode.RightHand, interactableIO.gameObject);
@@ -514,7 +514,7 @@ public class Gaze_GrabManager : MonoBehaviour
             grabState = GRAB_STATE.SEARCHING;
             return;
         }
-        interactableIO.transform.position = Vector3.MoveTowards(interactableIO.transform.position, controllerSnapTransform.position - interactableIO.GetGrabPoint(), interactableIO.attractionSpeed * Time.deltaTime);
+        interactableIO.transform.position = Vector3.MoveTowards(interactableIO.transform.position, controllerSnapTransform.position - interactableIO.GetGrabPoint(), interactableIO.AttractionSpeed * Time.deltaTime);
     }
 
     /// <summary>
@@ -606,19 +606,19 @@ public class Gaze_GrabManager : MonoBehaviour
 
                     if (interactiveObject != null)
                     {
-                        if (!interactiveObject.IsBeingGrabbed && interactiveObject.grab && interactiveObject.grabModeIndex.Equals((int)Gaze_GrabMode.ATTRACT) && hits[i].distance < interactiveObject.grabDistance)
+                        if (!interactiveObject.IsBeingGrabbed && interactiveObject.IsGrabEnabled && interactiveObject.GrabModeIndex.Equals((int)Gaze_GrabMode.ATTRACT) && hits[i].distance < interactiveObject.GrabDistance)
                         {
                             closerIO = interactiveObject;
                             closerDistance = hits[i].distance;
                             break;
                         }
-                        if (interactiveObject.touch && hits[i].distance < interactiveObject.touchDistance)
+                        if (interactiveObject.IsTouchEnabled && hits[i].distance < interactiveObject.TouchDistance)
                         {
                             closerIO = interactiveObject;
                             closerDistance = hits[i].distance;
                             break;
                         }
-                        if (interactiveObject.grab && interactiveObject.grabModeIndex.Equals((int)Gaze_GrabMode.LEVITATE) && hits[i].distance < interactiveObject.grabDistance)
+                        if (interactiveObject.IsGrabEnabled && interactiveObject.GrabModeIndex.Equals((int)Gaze_GrabMode.LEVITATE) && hits[i].distance < interactiveObject.GrabDistance)
                         {
                             // update the hit position until we grab something
                             if (grabState != GRAB_STATE.GRABBED)
@@ -630,7 +630,7 @@ public class Gaze_GrabManager : MonoBehaviour
                         }
 
                         // Get the visual ray length
-                        visualRayLength = interactiveObject.grab && interactiveObject.grabModeIndex.Equals((int)Gaze_GrabMode.ATTRACT) && visualRayLength > hits[i].distance ? hits[i].distance : visualRayLength;
+                        visualRayLength = interactiveObject.IsGrabEnabled && interactiveObject.GrabModeIndex.Equals((int)Gaze_GrabMode.ATTRACT) && visualRayLength > hits[i].distance ? hits[i].distance : visualRayLength;
                     }
                 }
             }
@@ -738,7 +738,7 @@ public class Gaze_GrabManager : MonoBehaviour
             return;
 
         // snap in position if needed
-        if (interactableIO.hasGrabPositionner && interactableIO.grabPositionnerCollider)
+        if (interactableIO.HasGrabPositionner && interactableIO.GrabPositionnerCollider)
         {
             // get the snap location from the IO
             Transform grabbedObjectPositionnerTransform = interactableIO.GrabPositionnerTransform;
@@ -781,7 +781,7 @@ public class Gaze_GrabManager : MonoBehaviour
 
         grabbedObject = interactableIO.gameObject;
 
-        interactableIO.rootMotion = grabPosition;
+        interactableIO.RootMotion = grabPosition;
 
         // notify
         KeyValuePair<VRNode, GameObject> grabbedObjects = new KeyValuePair<VRNode, GameObject>(isLeftHand ? VRNode.LeftHand : VRNode.RightHand, grabbedObject);
@@ -817,7 +817,7 @@ public class Gaze_GrabManager : MonoBehaviour
             isGrabbing = false;
 
             if (grabbedObject.GetComponentInParent<Gaze_InteractiveObject>())
-                grabbedObject.GetComponentInParent<Gaze_InteractiveObject>().rootMotion = null;
+                grabbedObject.GetComponentInParent<Gaze_InteractiveObject>().RootMotion = null;
 
             Gaze_InputManager.FireControllerGrabEvent(new Gaze_ControllerGrabEventArgs(this, dico, isGrabbing));
         }
@@ -972,7 +972,7 @@ public class Gaze_GrabManager : MonoBehaviour
                     //Debug.Log("adding colliding object " + e.Other);
                 }
 
-                if (isTriggerPressed && interactableIO && interactableIO.grab && interactableIO.grabModeIndex.Equals((int)Gaze_GrabMode.ATTRACT))
+                if (isTriggerPressed && interactableIO && interactableIO.IsGrabEnabled && interactableIO.GrabModeIndex.Equals((int)Gaze_GrabMode.ATTRACT))
                 {
                     interactableIO = objectsInProximity.ElementAt(0).GetComponent<Gaze_InteractiveObject>();
                     grabState = GRAB_STATE.GRABBING;
@@ -1238,7 +1238,7 @@ public class Gaze_GrabManager : MonoBehaviour
         if (collidingIO != null)
         {
             // if it's catchable, touchable, levitable OR if it's manipulated and we're colliding with the manipulable collider
-            if (collidingIO.grab || collidingIO.touch || (collidingIO.IsBeingManipulated && collidingIO.manipulabeHandle.Equals(e.Other.GetComponent<Collider>())))
+            if (collidingIO.IsGrabEnabled || collidingIO.IsTouchEnabled || (collidingIO.IsBeingManipulated && collidingIO.ManipulableHandle.Equals(e.Other.GetComponent<Collider>())))
             {
                 UpdateProximityList(collidingIO, e);
             }

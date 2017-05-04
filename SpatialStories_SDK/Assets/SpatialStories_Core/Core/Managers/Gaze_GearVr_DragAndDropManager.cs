@@ -144,7 +144,7 @@ namespace Gaze
                 if (conditions != null && conditions.attached)
                 {
                     IO.DisableManipulationMode(Gaze_ManipulationModes.GRAB);
-                    IO.isManupulable = false;
+                    IO.IsManipulable = false;
                     IO.SetManipulationMode(false, true);
                     if (IO.GrabbingManager != null)
                         IO.GrabbingManager.TryDetach();

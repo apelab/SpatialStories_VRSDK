@@ -157,7 +157,7 @@ namespace Gaze
         private void HandleTouch()
         {
             if (ModifyTouchDistance == ALTERABLE_OPTION.MODIFY)
-                GetIO().touchDistance = touchDistance;
+                GetIO().TouchDistance = touchDistance;
 
 
             if (ActionTouch == ACTIVABLE_OPTION.ACTIVATE)
@@ -174,7 +174,7 @@ namespace Gaze
         private void HandleGrab()
         {
             if (ModifyGrabDistance == ALTERABLE_OPTION.MODIFY)
-                GetIO().grabDistance = grabDistance;
+                GetIO().GrabDistance = grabDistance;
 
             Gaze_InteractiveObject IO = GetIO();
 
