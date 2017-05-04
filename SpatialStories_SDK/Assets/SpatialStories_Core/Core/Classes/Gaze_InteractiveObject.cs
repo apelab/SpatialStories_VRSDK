@@ -95,12 +95,6 @@ namespace Gaze
         public float touchDistance;
 
         /// <summary>
-        /// Defines the maximum distance that an object can be levitated
-        /// </summary>
-        public float levitateDistance = 1f;
-
-
-        /// <summary>
         /// Defines the speed that a certain object will be atracted to the hand
         /// </summary>
         public float attractionSpeed = 1f;

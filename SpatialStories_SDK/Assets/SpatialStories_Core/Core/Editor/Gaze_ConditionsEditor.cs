@@ -702,6 +702,7 @@ namespace Gaze
                 {
                     targetConditions.ActivateOnDependencyMap.Delete(targetConditions.ActivateOnDependencyMap.dependencies[i]);
                 }
+
                 EditorGUILayout.EndHorizontal();
             }
 
@@ -712,7 +713,7 @@ namespace Gaze
                 EditorGUILayout.BeginHorizontal();
                 d.dependentGameObject = hierarchyInteractions[EditorGUILayout.Popup(0, hierarchyInteractionsNames.ToArray())];
 
-                d.triggerStateIndex = EditorGUILayout.Popup(d.triggerStateIndex, Enum.GetNames(typeof(DependencyTriggerEventsAndStates)));
+                d.triggerStateIndex = (int)DependencyTriggerEventsAndStates.Triggered;
                 if (GUILayout.Button("-"))
                 {
                     targetConditions.ActivateOnDependencyMap.Delete(d);
@@ -773,7 +774,7 @@ namespace Gaze
                 Gaze_Dependency d = targetConditions.DeactivateOnDependencyMap.Add(targetConditions);
                 EditorGUILayout.BeginHorizontal();
                 d.dependentGameObject = hierarchyInteractions[EditorGUILayout.Popup(0, hierarchyInteractionsNames.ToArray())];
-                d.triggerStateIndex = EditorGUILayout.Popup(d.triggerStateIndex, Enum.GetNames(typeof(DependencyTriggerEventsAndStates)));
+                d.triggerStateIndex = d.triggerStateIndex = (int)DependencyTriggerEventsAndStates.Triggered;
                 if (GUILayout.Button("-"))
                 {
                     targetConditions.DeactivateOnDependencyMap.Delete(d);

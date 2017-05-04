@@ -43,9 +43,12 @@ namespace Gaze
         // GC if the object gets destroyed.
         public void Dispose()
         {
-            gazeConditionsScript.OnReload -= Reset;
-            CustomDispose();
-            gazeConditionsScript.allConditions.Remove(this);
+            if (gazeConditionsScript != null)
+            {
+                gazeConditionsScript.OnReload -= Reset;
+                CustomDispose();
+                gazeConditionsScript.allConditions.Remove(this);
+            }
         }
 
         protected abstract void CustomSetup();

@@ -104,8 +104,8 @@ namespace Gaze
                 return;
 
             GUILayout.BeginHorizontal();
-            targetIO.levitateDistance = EditorGUILayout.FloatField("Levitation Distance", targetIO.levitateDistance);
-            Gaze_Utils.EnsureFieldIsPositiveOrZero(ref targetIO.levitateDistance);
+            targetIO.grabDistance = EditorGUILayout.FloatField("Levitation Distance", targetIO.grabDistance);
+            Gaze_Utils.EnsureFieldIsPositiveOrZero(ref targetIO.grabDistance);
             GUILayout.EndHorizontal();
         }
     }

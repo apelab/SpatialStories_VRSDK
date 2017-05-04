@@ -618,7 +618,7 @@ public class Gaze_GrabManager : MonoBehaviour
                             closerDistance = hits[i].distance;
                             break;
                         }
-                        if (interactiveObject.grab && interactiveObject.grabModeIndex.Equals((int)Gaze_GrabMode.LEVITATE))
+                        if (interactiveObject.grab && interactiveObject.grabModeIndex.Equals((int)Gaze_GrabMode.LEVITATE) && hits[i].distance < interactiveObject.grabDistance)
                         {
                             // update the hit position until we grab something
                             if (grabState != GRAB_STATE.GRABBED)
@@ -1237,8 +1237,6 @@ public class Gaze_GrabManager : MonoBehaviour
         Gaze_InteractiveObject collidingIO = ((GameObject)e.Other).GetComponentInParent<Gaze_InteractiveObject>();
         if (collidingIO != null)
         {
-
-
             // if it's catchable, touchable, levitable OR if it's manipulated and we're colliding with the manipulable collider
             if (collidingIO.grab || collidingIO.touch || (collidingIO.IsBeingManipulated && collidingIO.manipulabeHandle.Equals(e.Other.GetComponent<Collider>())))
             {

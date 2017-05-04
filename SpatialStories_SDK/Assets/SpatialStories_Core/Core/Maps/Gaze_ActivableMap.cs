@@ -15,30 +15,30 @@
 // <web>https://twitter.com/apelab_ch</web>
 // <web>http://www.apelab.ch</web>
 // <date>2014-06-01</date>
-using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.VR;
 
 namespace Gaze
 {
-	[System.Serializable]
-	public class Gaze_ActivableEntry
-	{
+    [System.Serializable]
+    public class Gaze_ActivableEntry
+    {
         // hand associated
         public VRNode hand;
 
-		/// <summary>
-		/// The associated proximity collider.
-		/// </summary>
-		public GameObject interactiveObject;
-	}
+        /// <summary>
+        /// The associated proximity collider.
+        /// </summary>
+        public GameObject interactiveObject;
+    }
 
-	[System.Serializable]
-	public class Gaze_TouchMap
+    [System.Serializable]
+    public class Gaze_TouchMap
     {
 
-		[SerializeField]
-		public List<Gaze_ActivableEntry> touchEntryList;
+        [SerializeField]
+        public List<Gaze_ActivableEntry> touchEntryList;
 
         /// <summary>
         /// The index of the hand's state. (LEFT, RIGHT or BOTH)
@@ -55,17 +55,17 @@ namespace Gaze
         /// </summary>
         public int touchActionLeftIndex, touchActionRightIndex;
 
-		public Gaze_TouchMap()
-		{
-			touchEntryList = new List<Gaze_ActivableEntry> ();
-		}
+        public Gaze_TouchMap()
+        {
+            touchEntryList = new List<Gaze_ActivableEntry>();
+        }
 
-		public Gaze_ActivableEntry AddActivableEntry ()
-		{
+        public Gaze_ActivableEntry AddActivableEntry()
+        {
             Gaze_ActivableEntry d = new Gaze_ActivableEntry();
-			touchEntryList.Add (d);
+            touchEntryList.Add(d);
             d.hand = VRNode.LeftHand;
-			return d;
+            return d;
         }
 
         public Gaze_ActivableEntry AddActivableEntry(GameObject _interactiveObject)
@@ -75,14 +75,14 @@ namespace Gaze
             return d;
         }
 
-        public bool DeleteActivableEntry (Gaze_ActivableEntry d)
-		{
-			return touchEntryList.Remove (d);
-		}
+        public bool DeleteActivableEntry(Gaze_ActivableEntry d)
+        {
+            return touchEntryList.Remove(d);
+        }
 
         public void ClearActivableEntries()
         {
-                touchEntryList.Clear();
+            touchEntryList.Clear();
         }
-	}
+    }
 }
