@@ -4,13 +4,13 @@ public class TriggerCounterAction : Gaze_AbstractBehaviour {
 
     public TriggerCounterAbstractTest Test;
 
-    protected override void onTrigger()
+    protected override void OnTrigger()
     {
         Test.UpdateTriggerCounter();
     }
 
-    protected override void onActive(){}
-    protected override void onAfter(){}
-    protected override void onBefore(){}
-    protected override void onReload(){}
+    protected override void OnActive(){}
+    protected override void OnAfter(){}
+    protected override void OnBefore(){}
+    protected override void OnReload(){}
 }

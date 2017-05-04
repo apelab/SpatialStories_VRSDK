@@ -48,10 +48,19 @@ namespace Gaze
         public float fadeSpeed = .005f;
         public Gaze_InteractiveObject IO;
 
-
+        private Gaze_Interaction gazeInteraction;
 
         // Notification
         public bool triggerNotification;
+
+        private void Awake()
+        {
+            gazeInteraction = GetComponent<Gaze_Interaction>();
+            if (gazeInteraction == null)
+            {
+                Debug.LogError("Spatial Stories SDK: Can't find a Gaze Interacton Script on the interaction: " + name);
+            }
+        }
 
         public override void OnEnable()
         {
@@ -72,10 +81,15 @@ namespace Gaze
             {
                 targetAudioSource.volume = duckingEnabled ? audioVolumeMin : audioVolumeMax;
             }
+
+            if (!gazeInteraction.HasConditions)
+            {
+                OnTrigger();
+            }
         }
 
 
-        private void playAnim(int i)
+        private void PlayAnim(int i)
         {
             if (triggerAnimation)
             {
@@ -83,7 +97,7 @@ namespace Gaze
             }
         }
 
-        private void playAudio(int i)
+        private void PlayAudio(int i)
         {
             if (ActionAudio == ACTIVABLE_OPTION.ACTIVATE)
             {
@@ -93,7 +107,7 @@ namespace Gaze
             }
         }
 
-        private IEnumerator lowerAudioVolume()
+        private IEnumerator LowerAudioVolume()
         {
             while (targetAudioSource.volume > audioVolumeMin)
             {
@@ -109,7 +123,7 @@ namespace Gaze
             }
         }
 
-        private IEnumerator raiseAudioVolume()
+        private IEnumerator RaiseAudioVolume()
         {
             if (targetAudioSource != null)
             {
@@ -251,7 +265,7 @@ namespace Gaze
             {
                 if (activeTriggerStatesAudio.Length > 0 && activeTriggerStatesAudio[0])
                 {
-                    playAudio(0);
+                    PlayAudio(0);
                 }
 
             }
@@ -271,7 +285,7 @@ namespace Gaze
         {
             if (activeTriggerStatesAnim.Length > 0 && activeTriggerStatesAnim[0])
             {
-                playAnim(0);
+                PlayAnim(0);
             }
         }
         /// <summary>
@@ -288,8 +302,12 @@ namespace Gaze
 
 
         #region implemented abstract members of Gaze_AbstractBehaviour
-        protected override void onTrigger()
+        protected override void OnTrigger()
         {
+            // Check if the trigger should be fired
+            if (!gazeInteraction.HasActions)
+                return;
+
             HandleReset();
             HandleAnimation();
             HandleAudio();
@@ -301,51 +319,51 @@ namespace Gaze
             HandleColliders();
         }
 
-        protected override void onReload()
+        protected override void OnReload()
         {
             if (activeTriggerStatesAnim.Length > 1 && activeTriggerStatesAnim[1])
             {
-                playAnim(1);
+                PlayAnim(1);
             }
             if (activeTriggerStatesAudio.Length > 1 && activeTriggerStatesAudio[1])
             {
-                playAudio(1);
+                PlayAudio(1);
             }
         }
 
-        protected override void onBefore()
+        protected override void OnBefore()
         {
             if (activeTriggerStatesAudio.Length > 2 && activeTriggerStatesAnim[2])
             {
-                playAnim(2);
+                PlayAnim(2);
             }
             if (activeTriggerStatesAudio.Length > 2 && activeTriggerStatesAudio[2])
             {
-                playAudio(2);
+                PlayAudio(2);
             }
         }
 
-        protected override void onActive()
+        protected override void OnActive()
         {
             if (activeTriggerStatesAnim.Length > 3 && activeTriggerStatesAnim[3])
             {
-                playAnim(3);
+                PlayAnim(3);
             }
             if (activeTriggerStatesAudio.Length > 3 && activeTriggerStatesAudio[3])
             {
-                playAudio(3);
+                PlayAudio(3);
             }
         }
 
-        protected override void onAfter()
+        protected override void OnAfter()
         {
             if (activeTriggerStatesAnim.Length > 4 && activeTriggerStatesAnim[4])
             {
-                playAnim(4);
+                PlayAnim(4);
             }
             if (activeTriggerStatesAudio.Length > 4 && activeTriggerStatesAudio[4])
             {
-                playAudio(4);
+                PlayAudio(4);
             }
         }
         #endregion
@@ -359,11 +377,11 @@ namespace Gaze
                 StopAllCoroutines();
                 if (e.IsGazed)
                 {
-                    StartCoroutine(raiseAudioVolume());
+                    StartCoroutine(RaiseAudioVolume());
                 }
                 else
                 {
-                    StartCoroutine(lowerAudioVolume());
+                    StartCoroutine(LowerAudioVolume());
                 }
             }
         }

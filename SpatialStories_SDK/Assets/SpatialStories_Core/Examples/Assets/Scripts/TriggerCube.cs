@@ -23,7 +23,7 @@ public class TriggerCube : Gaze_AbstractBehaviour
 
 	#region implemented abstract members of Gaze_AbstractTrigger
 
-	protected override void onTrigger ()
+	protected override void OnTrigger ()
 	{
 		material.color = triggeredColor;
 
@@ -32,12 +32,12 @@ public class TriggerCube : Gaze_AbstractBehaviour
 		}
 	}
 
-	protected override void onReload ()
+	protected override void OnReload ()
 	{
 		material.color = ungazedColor;
 	}
 
-	protected override void onBefore ()
+	protected override void OnBefore ()
 	{
 		if (!material) {
 			material = gazable.Root.GetComponentInChildren<Renderer> ().material;
@@ -46,12 +46,12 @@ public class TriggerCube : Gaze_AbstractBehaviour
 		material.color = delayedColor;
 	}
 
-	protected override void onActive ()
+	protected override void OnActive ()
 	{
 		material.color = ungazedColor;
 	}
 
-	protected override void onAfter ()
+	protected override void OnAfter ()
 	{
 		material.color = expiredColor;
 	}

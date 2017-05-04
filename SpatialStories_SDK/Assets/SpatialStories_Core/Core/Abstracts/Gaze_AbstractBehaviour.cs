@@ -71,13 +71,13 @@ namespace Gaze
 
 				switch (triggerState) {
 				case Gaze_TriggerState.BEFORE:
-					onBefore ();
+					OnBefore ();
 					break;
 				case Gaze_TriggerState.ACTIVE:
-					onActive ();
+					OnActive ();
 					break;
 				case Gaze_TriggerState.AFTER:
-					onAfter ();
+					OnAfter ();
 					break;
 				}
 			}
@@ -92,13 +92,13 @@ namespace Gaze
 					TriggerCount = e.Count;
 					TimeLastTriggered = e.Time;
 					
-					onTrigger ();
+					OnTrigger ();
 				} else if (e.IsReload) {
 					// execute reload
 					ReloadCount = e.Count;
 					TimeLastReloaded = e.Time;
 
-					onReload ();
+					OnReload ();
 				} else {
 					// initialize trigger
 					autoTriggerMode = e.AutoTriggerMode;
@@ -111,18 +111,18 @@ namespace Gaze
 		/// <summary>
 		/// This is the method to implement to describe the behaviour once triggered.
 		/// </summary>
-		protected abstract void onTrigger ();
+		protected abstract void OnTrigger ();
 
-		protected abstract void onReload ();
+		protected abstract void OnReload ();
 
 		/// <summary>
 		/// Implements here the actions to take on active, before and after states.
 		/// </summary>
-		protected abstract void onBefore ();
+		protected abstract void OnBefore ();
 
-		protected abstract void onActive ();
+		protected abstract void OnActive ();
 
-		protected abstract void onAfter ();
+		protected abstract void OnAfter ();
 
 	}
 }

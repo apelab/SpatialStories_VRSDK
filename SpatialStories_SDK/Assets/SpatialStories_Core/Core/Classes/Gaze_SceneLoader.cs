@@ -60,27 +60,27 @@ namespace Gaze
         }
 
         #region implemented abstract members of Gaze_AbstractBehaviour
-        protected override void onTrigger()
+        protected override void OnTrigger()
         {
             LoadSceneAsync(0);
         }
 
-        protected override void onReload()
+        protected override void OnReload()
         {
             LoadSceneAsync(1);
         }
 
-        protected override void onBefore()
+        protected override void OnBefore()
         {
             LoadSceneAsync(2);
         }
 
-        protected override void onActive()
+        protected override void OnActive()
         {
             LoadSceneAsync(3);
         }
 
-        protected override void onAfter()
+        protected override void OnAfter()
         {
             LoadSceneAsync(4);
         }

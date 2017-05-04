@@ -61,7 +61,7 @@ namespace Gaze
 
         #region implemented abstract members of Gaze_AbstractBehaviour
 
-        protected override void onTrigger()
+        protected override void OnTrigger()
         {
             if (isManager)
             {
@@ -72,19 +72,19 @@ namespace Gaze
                 levitable.enabled = levitationState.Equals(LevitationState.ACTIVATE) ? true : false;
         }
 
-        protected override void onReload()
+        protected override void OnReload()
         {
         }
 
-        protected override void onBefore()
+        protected override void OnBefore()
         {
         }
 
-        protected override void onActive()
+        protected override void OnActive()
         {
         }
 
-        protected override void onAfter()
+        protected override void OnAfter()
         {
         }
 

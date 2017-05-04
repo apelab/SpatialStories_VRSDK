@@ -19,7 +19,7 @@ namespace Gaze
 
 		#region implemented abstract members of Gaze_AbstractBehaviour
 
-		protected override void onTrigger ()
+		protected override void OnTrigger ()
 		{
 			if (activeTriggerStates [0])
 			{
@@ -27,7 +27,7 @@ namespace Gaze
 			}
 		}
 		
-		protected override void onReload ()
+		protected override void OnReload ()
 		{
 			if (activeTriggerStates [1])
 			{
@@ -35,7 +35,7 @@ namespace Gaze
 			}
 		}
 
-		protected override void onBefore ()
+		protected override void OnBefore ()
 		{
 			if (activeTriggerStates [2])
 			{
@@ -43,7 +43,7 @@ namespace Gaze
 			}
 		}
 
-		protected override void onActive ()
+		protected override void OnActive ()
 		{
 			if (activeTriggerStates [3])
 			{
@@ -51,7 +51,7 @@ namespace Gaze
 			}
 		}
 
-		protected override void onAfter ()
+		protected override void OnAfter ()
 		{
 			if (activeTriggerStates [4])
 			{

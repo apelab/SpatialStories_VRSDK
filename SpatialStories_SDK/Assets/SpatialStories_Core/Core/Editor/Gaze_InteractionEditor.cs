@@ -48,15 +48,14 @@ namespace Gaze
         void OnEnable()
         {
             // Setup the SerializedProperties.
-            HasConditions = serializedObject.FindProperty("HasActions");
-            HasActions = serializedObject.FindProperty("HasConditions");
+            HasConditions = serializedObject.FindProperty("HasConditions");
+            HasActions = serializedObject.FindProperty("HasActions");
 
             InitMembers();
         }
 
         public override void OnInspectorGUI()
         {
-
             // Update the serializedProperty - always do this in the beginning of OnInspectorGUI.
             serializedObject.Update();
 

@@ -92,24 +92,24 @@ namespace Gaze
             UpdateVisuals(true);
         }
 
-        protected override void onTrigger()
+        protected override void OnTrigger()
         {
             ReplaceHand();
         }
 
-        protected override void onReload()
+        protected override void OnReload()
         {
         }
 
-        protected override void onBefore()
+        protected override void OnBefore()
         {
         }
 
-        protected override void onActive()
+        protected override void OnActive()
         {
         }
 
-        protected override void onAfter()
+        protected override void OnAfter()
         {
         }
     }
