@@ -786,6 +786,7 @@ namespace Gaze
         {
             GUILayout.BeginHorizontal();
             targetConditions.delayDuration = EditorGUILayout.FloatField(targetConditions.delayDuration);
+            Gaze_Utils.EnsureFieldIsPositiveOrZero(ref targetConditions.delayDuration);
             EditorGUILayout.LabelField("[s]");
             GUILayout.EndHorizontal();
         }
@@ -794,6 +795,7 @@ namespace Gaze
         {
             GUILayout.BeginHorizontal();
             targetConditions.activeDuration = EditorGUILayout.FloatField(targetConditions.activeDuration);
+            Gaze_Utils.EnsureFieldIsPositiveOrZero(ref targetConditions.activeDuration);
             EditorGUILayout.LabelField("[s]");
             GUILayout.EndHorizontal();
         }
@@ -804,6 +806,7 @@ namespace Gaze
             if (targetConditions.reloadModeIndex.Equals((int)Gaze_ReloadMode.FINITE) || targetConditions.reloadModeIndex.Equals((int)Gaze_ReloadMode.INFINITE))
             {
                 targetConditions.reloadDelay = EditorGUILayout.FloatField("Delay", targetConditions.reloadDelay);
+                Gaze_Utils.EnsureFieldIsPositiveOrZero(ref targetConditions.reloadDelay);
                 if (targetConditions.reloadDelay < 0)
                 {
                     targetConditions.reloadDelay = 0;
@@ -824,7 +827,6 @@ namespace Gaze
 
         private void DisplayConditionsBlock()
         {
-
             GUILayout.BeginHorizontal();
             targetConditions.gazeEnabled = EditorGUILayout.ToggleLeft("Gaze", targetConditions.gazeEnabled);
 

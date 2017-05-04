@@ -184,6 +184,7 @@ namespace Gaze
                     {
                         EditorGUILayout.BeginHorizontal();
                         actionsScript.grabDistance = EditorGUILayout.FloatField("", actionsScript.grabDistance);
+                        Gaze_Utils.EnsureFieldIsPositiveOrZero(ref actionsScript.grabDistance);
                         EditorGUILayout.EndHorizontal();
 
                     }
@@ -209,6 +210,7 @@ namespace Gaze
                     {
                         EditorGUILayout.BeginHorizontal();
                         actionsScript.touchDistance = EditorGUILayout.FloatField("", actionsScript.touchDistance);
+                        Gaze_Utils.EnsureFieldIsPositiveOrZero(ref actionsScript.touchDistance);
                         EditorGUILayout.EndHorizontal();
                     }
 

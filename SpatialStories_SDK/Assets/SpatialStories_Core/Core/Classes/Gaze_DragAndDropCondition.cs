@@ -39,7 +39,7 @@ namespace Gaze
 
         private void Awake()
         {
-            DragAndDropManager = Gaze_EventUtils.GetIOFromObject(gameObject).GetComponent<Gaze_DragAndDropManager>();
+            DragAndDropManager = Gaze_Utils.GetIOFromObject(gameObject).GetComponent<Gaze_DragAndDropManager>();
         }
 
         void OnEnable()
@@ -111,7 +111,7 @@ namespace Gaze
             if (DragAndDropManager == null)
                 return;
 
-            if (!Gaze_EventUtils.AreUnderSameGameObject(gameObject, e.Sender) ||
+            if (!Gaze_Utils.AreUnderSameGameObject(gameObject, e.Sender) ||
                 e.TriggerState != Gaze_TriggerState.ACTIVE ||
                 !GetComponent<Gaze_Conditions>().ActivateOnDependencyMap.AreDependenciesSatisfied)
                 return;
@@ -124,7 +124,7 @@ namespace Gaze
             if (DragAndDropManager == null)
                 return;
 
-            if (!Gaze_EventUtils.AreUnderSameGameObject(e.Sender, this))
+            if (!Gaze_Utils.AreUnderSameGameObject(e.Sender, this))
                 return;
 
             DragAndDropManager.SetupDragAndDropProcess(this);

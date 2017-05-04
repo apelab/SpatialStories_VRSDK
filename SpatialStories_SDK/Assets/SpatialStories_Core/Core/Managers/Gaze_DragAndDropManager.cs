@@ -375,7 +375,7 @@ namespace Gaze
 
         private void OnLevitationEvent(Gaze_LevitationEventArgs e)
         {
-            if (Gaze_EventUtils.AreUnderSameIO(Gaze_EventUtils.ConvertIntoGameObject(e.Sender), this.gameObject))
+            if (Gaze_Utils.AreUnderSameIO(Gaze_Utils.ConvertIntoGameObject(e.Sender), this.gameObject))
             {
                 if (e.Type.Equals(Gaze_LevitationTypes.LEVITATE_START))
                 {

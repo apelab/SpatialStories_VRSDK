@@ -3,12 +3,12 @@ using UnityEngine;
 
 namespace Gaze
 {
-    public static class Gaze_EventUtils
+    public static class Gaze_Utils
     {
-        public static T[] SubArray<T>(this T[] data, int index, int length)
+        public static T[] SubArray<T>(this T[] _data, int _index, int _length)
         {
-            T[] result = new T[length];
-            Array.Copy(data, index, result, 0, length);
+            T[] result = new T[_length];
+            Array.Copy(_data, _index, result, 0, _length);
             return result;
         }
 
@@ -69,6 +69,12 @@ namespace Gaze
         public static Gaze_InteractiveObject GetIOFromGameObject(GameObject _go)
         {
             return _go.GetComponentInParent<Gaze_InteractiveObject>();
+        }
+
+        public static void EnsureFieldIsPositiveOrZero(ref float _val)
+        {
+            if (_val < 0)
+                _val = 0;
         }
     }
 }

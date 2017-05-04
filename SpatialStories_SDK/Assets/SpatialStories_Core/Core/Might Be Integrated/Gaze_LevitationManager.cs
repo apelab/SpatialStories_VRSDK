@@ -541,7 +541,7 @@ namespace Gaze
 
         private void OnDragAndDropEvent(Gaze_DragAndDropEventArgs e)
         {
-            Gaze_DragAndDropManager dndManager = Gaze_EventUtils.ConvertIntoGameObject(e.Sender).GetComponent<Gaze_DragAndDropManager>();
+            Gaze_DragAndDropManager dndManager = Gaze_Utils.ConvertIntoGameObject(e.Sender).GetComponent<Gaze_DragAndDropManager>();
 
             if (objectToLevitate != dndManager.gameObject)
                 return;

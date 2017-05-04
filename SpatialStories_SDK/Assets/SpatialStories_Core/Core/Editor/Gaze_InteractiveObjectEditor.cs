@@ -83,6 +83,7 @@ namespace Gaze
 
             GUILayout.BeginHorizontal();
             targetIO.touchDistance = EditorGUILayout.FloatField("Touch Distance", targetIO.touchDistance);
+            Gaze_Utils.EnsureFieldIsPositiveOrZero(ref targetIO.touchDistance);
             GUILayout.EndHorizontal();
         }
 
@@ -93,6 +94,7 @@ namespace Gaze
 
             GUILayout.BeginHorizontal();
             targetIO.grabDistance = EditorGUILayout.FloatField("Grab Distance", targetIO.grabDistance);
+            Gaze_Utils.EnsureFieldIsPositiveOrZero(ref targetIO.grabDistance);
             GUILayout.EndHorizontal();
         }
 
@@ -103,6 +105,7 @@ namespace Gaze
 
             GUILayout.BeginHorizontal();
             targetIO.levitateDistance = EditorGUILayout.FloatField("Levitation Distance", targetIO.levitateDistance);
+            Gaze_Utils.EnsureFieldIsPositiveOrZero(ref targetIO.levitateDistance);
             GUILayout.EndHorizontal();
         }
     }
