@@ -43,6 +43,7 @@ namespace Gaze
         public override void ToEditorGUI()
         {
             EditorGUILayout.BeginHorizontal();
+
             if (IsValid)
             {
                 RenderSatisfiedLabel(dependentGameObject.name + ": ");
@@ -53,6 +54,7 @@ namespace Gaze
                 RenderNonSatisfiedLabel(dependentGameObject.name + ": ");
                 RenderNonSatisfiedLabel("Not satisfied");
             }
+
             EditorGUILayout.EndHorizontal();
         }
 

@@ -184,7 +184,6 @@ namespace Gaze
         {
             return Selection.activeGameObject != null && Selection.activeGameObject.GetComponent<Camera>() != null;
         }
-
         #endregion
     }
 }
