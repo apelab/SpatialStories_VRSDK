@@ -362,9 +362,6 @@ namespace Gaze
 
         void Update()
         {
-            if (name == "HotspotPaquisSelected")
-                Debug.Log("Sdasd");
-
             UpdateTimeFrameStatus();
 
             // if in the appropriate time frame (ACTIVE)
@@ -709,7 +706,8 @@ namespace Gaze
                     }
                 }
             }
-            else if (!DeactivateOnDependencyMap.isEmpty())
+
+            if (!DeactivateOnDependencyMap.isEmpty())
             {
                 Gaze_Dependency deactivator = DeactivateOnDependencyMap.Get(sender);
 
