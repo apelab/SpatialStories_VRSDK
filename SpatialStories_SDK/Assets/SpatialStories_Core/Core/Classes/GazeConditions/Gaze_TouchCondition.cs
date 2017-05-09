@@ -192,7 +192,7 @@ namespace Gaze
                 if (gazeConditionsScript.requireAllTouchables)
                     return TouchDistanceModeLeftValid && TouchDistanceModeRightValid;
                 else
-                    return TouchDistanceModeLeftValid || TouchDistanceModeRightValid ? true : false;
+                    return TouchDistanceModeLeftValid || TouchDistanceModeRightValid;
             }
             else
             {

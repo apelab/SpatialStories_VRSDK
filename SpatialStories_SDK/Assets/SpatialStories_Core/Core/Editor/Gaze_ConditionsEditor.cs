@@ -544,8 +544,6 @@ namespace Gaze
                 // if both hands are used
                 if (targetConditions.grabMap.grabHandsIndex.Equals((int)Gaze_HandsEnum.BOTH))
                 {
-                    // display require all option
-                    targetConditions.requireAllGrabables = EditorGUILayout.ToggleLeft("Require all", targetConditions.requireAllGrabables);
                     EditorGUILayout.EndHorizontal();
 
                     // display first line of hand configuration

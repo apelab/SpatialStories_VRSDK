@@ -173,7 +173,8 @@ namespace Gaze
 
 
             EditorGUILayout.LabelField("Dependencies (Activate)", EditorStyles.boldLabel);
-            if (conditionsScript.ActivateOnDependencyMap.dependencies.Count() > 0)
+
+            if (conditionsScript.dependent && conditionsScript.ActivateOnDependencyMap.dependencies.Count() > 0)
             {
                 foreach (Gaze_Dependency dep in conditionsScript.ActivateOnDependencyMap.dependencies)
                 {
@@ -187,7 +188,7 @@ namespace Gaze
 
             EditorGUILayout.LabelField("Dependencies (Deactivate)", EditorStyles.boldLabel);
 
-            if (conditionsScript.DeactivateOnDependencyMap.dependencies.Count() > 0)
+            if (conditionsScript.dependent && conditionsScript.DeactivateOnDependencyMap.dependencies.Count() > 0)
             {
                 foreach (Gaze_Dependency dep in conditionsScript.DeactivateOnDependencyMap.dependencies)
                 {
@@ -199,7 +200,7 @@ namespace Gaze
                 EditorGUILayout.LabelField("Not used");
             }
 
-            if (conditionsScript.customConditions.Count > 0)
+            if (conditionsScript.customConditionsEnabled && conditionsScript.customConditions.Count > 0)
             {
                 EditorGUILayout.LabelField("Custom Conditions:", EditorStyles.boldLabel);
                 foreach (Gaze_AbstractConditions conditon in conditionsScript.customConditions)
