@@ -252,6 +252,22 @@ namespace Gaze
                 collider.enabled = isEnabled;
         }
 
+        private void HandleGrabMode()
+        {
+            if (ModifyGrabMode == ALTERABLE_OPTION.NOTHING)
+                return;
+
+            if (grabModeIndex == (int)Gaze_GrabMode.ATTRACT)
+            {
+                GetIO().ManipulationModeIndex = (int)Gaze_ManipulationModes.GRAB;
+            }
+            else if (grabModeIndex == (int)Gaze_GrabMode.LEVITATE)
+            {
+                GetIO().ManipulationModeIndex = (int)Gaze_ManipulationModes.LEVITATE;
+            }
+        }
+
+
         /// <summary>
         /// Enables or disables audio acording with the user preferences
         /// </summary>
@@ -317,6 +333,7 @@ namespace Gaze
             HandleGrab();
             HandleTouch();
             HandleColliders();
+            HandleGrabMode();
         }
 
         protected override void OnReload()
