@@ -542,72 +542,37 @@ namespace Gaze
                 //    targetConditions.proximityMap.proximityEntryList[i].dependentGameObject = (Gaze_InteractiveObject)proximityObject;
 
                 // if both hands are used
-                if (targetConditions.grabMap.grabHandsIndex.Equals((int)Gaze_HandsEnum.BOTH))
+
+
+                if (targetConditions.grabMap.grabHandsIndex.Equals((int)Gaze_HandsEnum.LEFT))
                 {
-                    EditorGUILayout.EndHorizontal();
-
-                    // display first line of hand configuration
-                    EditorGUILayout.BeginHorizontal();
-                    targetConditions.grabMap.grabStateLeftIndex = EditorGUILayout.Popup("Left", targetConditions.grabMap.grabStateLeftIndex, Enum.GetNames(typeof(Gaze_GrabStates)));
-
-                    var leftGrabObject = EditorGUILayout.ObjectField(targetConditions.grabMap.grabEntryList[0].interactiveObject, typeof(Gaze_InteractiveObject), true);
-
-                    if (leftGrabObject != null)
-                    {
-                        if (leftGrabObject is Gaze_InteractiveObject)
-                            targetConditions.grabMap.grabEntryList[0].interactiveObject = ((Gaze_InteractiveObject)leftGrabObject).gameObject;
-                        else
-                            targetConditions.grabMap.grabEntryList[0].interactiveObject = (GameObject)leftGrabObject;
-                    }
-
-                    EditorGUILayout.EndHorizontal();
-
-                    // TODO display 'link' option
-
-                    // display second line of hand configuration
-                    EditorGUILayout.BeginHorizontal();
-                    if (targetConditions.grabMap.grabEntryList.Count < 2)
-                        targetConditions.grabMap.AddGrabableEntry(hierarchyIOs[0]);
-
-                    targetConditions.grabMap.grabStateRightIndex = EditorGUILayout.Popup("Right", targetConditions.grabMap.grabStateRightIndex, Enum.GetNames(typeof(Gaze_GrabStates)));
-
-                    var rightGrabObject = EditorGUILayout.ObjectField(targetConditions.grabMap.grabEntryList[1].interactiveObject, typeof(Gaze_InteractiveObject), true);
-
-                    if (rightGrabObject != null)
-                    {
-                        if (rightGrabObject is Gaze_InteractiveObject)
-                            targetConditions.grabMap.grabEntryList[1].interactiveObject = ((Gaze_InteractiveObject)rightGrabObject).gameObject;
-                        else
-                            targetConditions.grabMap.grabEntryList[1].interactiveObject = (GameObject)rightGrabObject;
-                    }
-                    EditorGUILayout.EndHorizontal();
+                    targetConditions.grabMap.grabStateLeftIndex = EditorGUILayout.Popup(targetConditions.grabMap.grabStateLeftIndex, Enum.GetNames(typeof(Gaze_GrabStates)));
+                    //Debug.Log("targetConditions.grabMap.grabStateLeftIndex =" + targetConditions.grabMap.grabStateLeftIndex);
+                    targetConditions.grabMap.grabEntryList[0].hand = VRNode.LeftHand;
+                }
+                else if (targetConditions.grabMap.grabHandsIndex.Equals((int)Gaze_HandsEnum.RIGHT))
+                {
+                    targetConditions.grabMap.grabStateRightIndex = EditorGUILayout.Popup(targetConditions.grabMap.grabStateRightIndex, Enum.GetNames(typeof(Gaze_GrabStates)));
+                    targetConditions.grabMap.grabEntryList[0].hand = VRNode.RightHand;
                 }
                 else
                 {
-
-                    if (targetConditions.grabMap.grabHandsIndex.Equals((int)Gaze_HandsEnum.LEFT))
-                    {
-                        targetConditions.grabMap.grabStateLeftIndex = EditorGUILayout.Popup(targetConditions.grabMap.grabStateLeftIndex, Enum.GetNames(typeof(Gaze_GrabStates)));
-                        //Debug.Log("targetConditions.grabMap.grabStateLeftIndex =" + targetConditions.grabMap.grabStateLeftIndex);
-                        targetConditions.grabMap.grabEntryList[0].hand = VRNode.LeftHand;
-                    }
-                    else if (targetConditions.grabMap.grabHandsIndex.Equals((int)Gaze_HandsEnum.RIGHT))
-                    {
-                        targetConditions.grabMap.grabStateRightIndex = EditorGUILayout.Popup(targetConditions.grabMap.grabStateRightIndex, Enum.GetNames(typeof(Gaze_GrabStates)));
-                        targetConditions.grabMap.grabEntryList[0].hand = VRNode.RightHand;
-                    }
-
-                    var grabObject = EditorGUILayout.ObjectField(targetConditions.grabMap.grabEntryList[0].interactiveObject, typeof(Gaze_InteractiveObject), true);
-                    if (grabObject != null)
-                    {
-                        if (grabObject is Gaze_InteractiveObject)
-                            targetConditions.grabMap.grabEntryList[0].interactiveObject = ((Gaze_InteractiveObject)grabObject).gameObject;
-                        else
-                            targetConditions.grabMap.grabEntryList[0].interactiveObject = (GameObject)grabObject;
-                    }
-                    EditorGUILayout.EndHorizontal();
+                    targetConditions.grabMap.grabStateLeftIndex = EditorGUILayout.Popup(targetConditions.grabMap.grabStateLeftIndex, Enum.GetNames(typeof(Gaze_GrabStates)));
+                    //Debug.Log("targetConditions.grabMap.grabStateLeftIndex =" + targetConditions.grabMap.grabStateLeftIndex);
+                    targetConditions.grabMap.grabEntryList[0].hand = VRNode.LeftHand;
                 }
+
+                var grabObject = EditorGUILayout.ObjectField(targetConditions.grabMap.grabEntryList[0].interactiveObject, typeof(Gaze_InteractiveObject), true);
+                if (grabObject != null)
+                {
+                    if (grabObject is Gaze_InteractiveObject)
+                        targetConditions.grabMap.grabEntryList[0].interactiveObject = ((Gaze_InteractiveObject)grabObject).gameObject;
+                    else
+                        targetConditions.grabMap.grabEntryList[0].interactiveObject = (GameObject)grabObject;
+                }
+                EditorGUILayout.EndHorizontal();
             }
+
 
             EditorGUILayout.Space();
         }

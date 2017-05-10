@@ -31,9 +31,7 @@ namespace Gaze
         private bool grabStateLeftValid = false;
         private bool grabStateRightValid = false;
 
-        public Gaze_GrabCondition(Gaze_Conditions _gazeConditionsScript) : base(_gazeConditionsScript)
-        {
-        }
+        public Gaze_GrabCondition(Gaze_Conditions _gazeConditionsScript) : base(_gazeConditionsScript) { }
 
         public override bool IsValidated()
         {
@@ -78,7 +76,7 @@ namespace Gaze
                 if (_dicoHand.Equals(VRNode.RightHand))
                     grabStateRightValid = (_isGrabbing && gazeConditionsScript.grabMap.grabStateRightIndex.Equals((int)Gaze_GrabStates.GRAB)) || (!_isGrabbing && gazeConditionsScript.grabMap.grabStateRightIndex.Equals((int)Gaze_GrabStates.UNGRAB));
 
-                return grabStateLeftValid && grabStateRightValid;
+                return grabStateLeftValid || grabStateRightValid;
             }
             else
             {
@@ -96,8 +94,7 @@ namespace Gaze
 
         private bool IsGrabbingObjectValid(GameObject _grabbedObject, int _handIndex)
         {
-            int index = _handIndex.Equals((int)Gaze_HandsEnum.BOTH) ? 1 : 0;
-            return _grabbedObject.Equals(gazeConditionsScript.grabMap.grabEntryList[index].interactiveObject);
+            return _grabbedObject.Equals(gazeConditionsScript.grabMap.grabEntryList[0].interactiveObject);
         }
 
         private void ValidateGrab(Gaze_ControllerGrabEventArgs e)
@@ -153,7 +150,14 @@ namespace Gaze
         {
             for (int i = 0; i < gazeConditionsScript.grabMap.grabEntryList.Count; i++)
             {
-                if (gazeConditionsScript.grabMap.grabEntryList[i].hand.Equals(grabbingController))
+                if (gazeConditionsScript.grabMap.grabHandsIndex == (int)Gaze_HandsEnum.BOTH)
+                {
+                    if (gazeConditionsScript.grabMap.grabEntryList[i].hand.Equals(VRNode.RightHand) ||
+                        gazeConditionsScript.grabMap.grabEntryList[i].hand.Equals(VRNode.LeftHand))
+                        return true;
+                }
+                else
+                    if (gazeConditionsScript.grabMap.grabEntryList[i].hand.Equals(grabbingController))
                     return true;
             }
 

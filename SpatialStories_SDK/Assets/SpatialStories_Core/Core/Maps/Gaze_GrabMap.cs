@@ -15,30 +15,30 @@
 // <web>https://twitter.com/apelab_ch</web>
 // <web>http://www.apelab.ch</web>
 // <date>2014-06-01</date>
-using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.VR;
 
 namespace Gaze
 {
-	[System.Serializable]
-	public class Gaze_GrabEntry
-	{
+    [System.Serializable]
+    public class Gaze_GrabEntry
+    {
         // hand associated
         public VRNode hand;
 
-		/// <summary>
-		/// The associated proximity collider.
-		/// </summary>
-		public GameObject interactiveObject;
-	}
+        /// <summary>
+        /// The associated proximity collider.
+        /// </summary>
+        public GameObject interactiveObject;
+    }
 
-	[System.Serializable]
-	public class Gaze_GrabMap
+    [System.Serializable]
+    public class Gaze_GrabMap
     {
 
-		[SerializeField]
-		public List<Gaze_GrabEntry> grabEntryList;
+        [SerializeField]
+        public List<Gaze_GrabEntry> grabEntryList;
 
         /// <summary>
         /// The index of the hand's state. (LEFT, RIGHT or BOTH)
@@ -50,17 +50,17 @@ namespace Gaze
         /// </summary>
         public int grabStateLeftIndex, grabStateRightIndex;
 
-		public Gaze_GrabMap()
-		{
-			grabEntryList = new List<Gaze_GrabEntry> ();
-		}
+        public Gaze_GrabMap()
+        {
+            grabEntryList = new List<Gaze_GrabEntry>();
+        }
 
-		public Gaze_GrabEntry AddGrabableEntry ()
-		{
+        public Gaze_GrabEntry AddGrabableEntry()
+        {
             Gaze_GrabEntry d = new Gaze_GrabEntry();
-			grabEntryList.Add (d);
+            grabEntryList.Add(d);
             d.hand = VRNode.LeftHand;
-			return d;
+            return d;
         }
 
         public Gaze_GrabEntry AddGrabableEntry(GameObject _interactiveObject)
@@ -70,14 +70,14 @@ namespace Gaze
             return d;
         }
 
-        public bool DeleteGrabableEntry (Gaze_GrabEntry d)
-		{
-			return grabEntryList.Remove (d);
-		}
+        public bool DeleteGrabableEntry(Gaze_GrabEntry d)
+        {
+            return grabEntryList.Remove(d);
+        }
 
         public void ClearGrabEntries()
         {
-                grabEntryList.Clear();
+            grabEntryList.Clear();
         }
-	}
+    }
 }
