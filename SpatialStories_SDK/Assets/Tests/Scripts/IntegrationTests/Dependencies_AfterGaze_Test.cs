@@ -1,5 +1,4 @@
-﻿using Gaze;
-using UnityEngine;
+﻿using UnityEngine;
 
 /// <summary>
 /// Description:
@@ -19,7 +18,6 @@ public class Dependencies_AfterGaze_Test : Gaze_SucceedOnTriggerTest
 
     public GameObject DependentGameObject, DependencyGameObject;
     public TestCustomCondition CustomCondtitionToTrigger;
-
 
     public override void Gaze_Update()
     {

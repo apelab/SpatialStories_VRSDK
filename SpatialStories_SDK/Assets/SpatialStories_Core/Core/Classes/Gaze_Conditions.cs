@@ -213,12 +213,6 @@ namespace Gaze
         /// </summary>
         public bool grabEnabled;
 
-
-        /// <summary>
-        /// All the grabable Interactive Objects in the list are required in order to be validated.
-        /// </summary>
-        public bool requireAllGrabables;
-
         /// <summary>
         /// Are Custom conditions enabled.
         /// Corresponds to the editor checkbox as a trigger condition
@@ -448,7 +442,6 @@ namespace Gaze
                     // notify manager
                     Gaze_EventManager.FireTriggerEvent(new Gaze_TriggerEventArgs(gameObject, Time.time, true, false, TriggerCount, GetAutoTriggerMode(), GetReloadMode(), reloadMaxRepetitions));
                     //Debug.Log(name + " Is triggered!!!");
-
 
                     // check if reload needed
                     if (reload)
@@ -763,12 +756,6 @@ namespace Gaze
                 if (cond.IsValid == false)
                     return false;
             }
-
-            //foreach (KeyValuePair<int, bool> condition in customConditionsDico)
-            //{
-            //    if (condition.Value == false)
-            //        return false;
-            //}
             return true;
         }
 
