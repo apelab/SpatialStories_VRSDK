@@ -783,7 +783,6 @@ MonoBehaviour:
   FocusLossSpeed: 1
   proximityEnabled: 0
   grabEnabled: 0
-  requireAllGrabables: 0
   customConditionsEnabled: 0
   requireAllProximities: 0
   touchMap:
@@ -1786,7 +1785,6 @@ MonoBehaviour:
   FocusLossSpeed: 1
   proximityEnabled: 0
   grabEnabled: 0
-  requireAllGrabables: 0
   customConditionsEnabled: 0
   requireAllProximities: 0
   touchMap:
@@ -2763,7 +2761,6 @@ MonoBehaviour:
   FocusLossSpeed: 1
   proximityEnabled: 0
   grabEnabled: 0
-  requireAllGrabables: 0
   customConditionsEnabled: 0
   requireAllProximities: 0
   touchMap:
@@ -3243,7 +3240,6 @@ MonoBehaviour:
   FocusLossSpeed: 1
   proximityEnabled: 0
   grabEnabled: 0
-  requireAllGrabables: 0
   customConditionsEnabled: 0
   requireAllProximities: 0
   touchMap:
@@ -3838,7 +3834,6 @@ MonoBehaviour:
   FocusLossSpeed: 1
   proximityEnabled: 0
   grabEnabled: 0
-  requireAllGrabables: 0
   customConditionsEnabled: 0
   requireAllProximities: 0
   touchMap:
@@ -3999,7 +3994,9 @@ MonoBehaviour:
     proximityEntryList: []
     proximityStateIndex: 0
   grabMap:
-    grabEntryList: []
+    grabEntryList:
+    - hand: 4
+      interactiveObject: {fileID: 58958299}
     grabHandsIndex: 0
     grabStateLeftIndex: 0
     grabStateRightIndex: 0
@@ -4021,8 +4018,7 @@ MonoBehaviour:
   focusLossModeIndex: 0
   FocusLossSpeed: 1
   proximityEnabled: 0
-  grabEnabled: 0
-  requireAllGrabables: 0
+  grabEnabled: 1
   customConditionsEnabled: 0
   requireAllProximities: 0
   touchMap:
@@ -4067,7 +4063,7 @@ MonoBehaviour:
   DestroyOnTrigger: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
-  ModifyGrabMode: 0
+  ModifyGrabMode: 1
   grabDistance: 0
   touchDistance: 0
   grabModeIndex: 0
@@ -6498,7 +6494,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ac765816c049ac42908efc08e7f359c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ManipulationModeIndex: 0
+  ManipulationModeIndex: 2
   TouchModeIndex: 0
   ManipulableHandle: {fileID: 0}
   HasGrabPositionner: 0
@@ -6825,7 +6821,6 @@ MonoBehaviour:
   FocusLossSpeed: 1
   proximityEnabled: 0
   grabEnabled: 0
-  requireAllGrabables: 0
   customConditionsEnabled: 0
   requireAllProximities: 0
   touchMap:
