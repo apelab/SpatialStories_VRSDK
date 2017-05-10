@@ -19,6 +19,7 @@ using System.Collections;
 using UnityEngine;
 namespace Gaze
 {
+    [ExecuteInEditMode]
     public class Gaze_Proximity : MonoBehaviour
     {
         public bool debug = false;
