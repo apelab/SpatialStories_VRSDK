@@ -856,7 +856,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debug: 0
-  IOGameObject: {fileID: 0}
+  IOGameObject: {fileID: 1886917124}
 --- !u!54 &216863069
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1071,7 +1071,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debug: 0
-  IOGameObject: {fileID: 0}
+  IOGameObject: {fileID: 823055622}
 --- !u!54 &314867220
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2315,7 +2315,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debug: 0
-  IOGameObject: {fileID: 0}
+  IOGameObject: {fileID: 675330652}
 --- !u!54 &740255124
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2386,7 +2386,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debug: 0
-  IOGameObject: {fileID: 0}
+  IOGameObject: {fileID: 58958300}
 --- !u!54 &745229782
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3811,7 +3811,9 @@ MonoBehaviour:
     proximityEntryList: []
     proximityStateIndex: 0
   grabMap:
-    grabEntryList: []
+    grabEntryList:
+    - hand: 4
+      interactiveObject: {fileID: 58958299}
     grabHandsIndex: 0
     grabStateLeftIndex: 0
     grabStateRightIndex: 0
@@ -4162,7 +4164,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debug: 0
-  IOGameObject: {fileID: 0}
+  IOGameObject: {fileID: 1858058323}
 --- !u!54 &1115726403
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5032,7 +5034,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debug: 0
-  IOGameObject: {fileID: 0}
+  IOGameObject: {fileID: 162321395}
 --- !u!54 &1364946929
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6277,7 +6279,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debug: 0
-  IOGameObject: {fileID: 0}
+  IOGameObject: {fileID: 495159971}
 --- !u!54 &1743555281
 Rigidbody:
   m_ObjectHideFlags: 0
