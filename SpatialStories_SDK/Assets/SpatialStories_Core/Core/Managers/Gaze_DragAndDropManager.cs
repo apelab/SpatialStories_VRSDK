@@ -25,14 +25,8 @@ namespace Gaze
 {
     public class Gaze_DragAndDropManager : MonoBehaviour
     {
-        [Gaze_ShowOnly]
-        private bool m_Grabbed, isLevitating;
-        [Gaze_ShowOnly]
-        private bool m_InProximity;
-        [Gaze_ShowOnly]
-        private bool m_InPlace;
-        [Gaze_ShowOnly]
-        private bool m_Snapped;
+        #region public Members
+        public Gaze_DragAndDropCondition CurrentDragAndDropCondition { get { return currentDragAndDropCondition; } set { currentDragAndDropCondition = value; } }
 
         public float m_MinDistance = 0.1f;
         // in unity units
@@ -46,39 +40,89 @@ namespace Gaze
         public bool respectZAxisMirrored = false;
         public bool m_SnapBeforeDrop = false;
 
+        // snaps only if attached on drop
+        public float m_TimeToSnap = 0.5f;
+        #endregion
+
+        #region private Members
+        [Gaze_ShowOnly]
+        private bool m_Grabbed, isLevitating;
+        [Gaze_ShowOnly]
+        private bool m_InProximity;
+        [Gaze_ShowOnly]
+        private bool wasAligned;
+        [Gaze_ShowOnly]
+        private bool m_Snapped;
+
         private Gaze_HandController[] grabbingControllers = new Gaze_HandController[2];
         private bool m_attachOnDrop = true;
         private bool m_SnapOnDrop = true;
 
-        // snaps only if attached on drop
-        public float m_TimeToSnap = 0.5f;
         private Vector3 m_StartGrabLocalPosition;
         private Quaternion m_StartGrabLocalRotation;
 
-        public Gaze_DragAndDropCondition CurrentDragAndDropCondition { get { return currentDragAndDropCondition; } set { currentDragAndDropCondition = value; } }
-
         [SerializeField]
         private Gaze_DragAndDropCondition currentDragAndDropCondition;
-
-        Gaze_InteractiveObject IO;
+        private bool isCurrentlyAligned = false;
+        private Gaze_InteractiveObject IO;
+        private Coroutine m_SnapCoroutine;
+        #endregion
 
         void OnEnable()
         {
-            Gaze_InputManager.OnControllerGrabEvent += OnControllerGrabEvent;
+            // to know if the object has entered its DnD target or not
             Gaze_EventManager.OnProximityEvent += OnProximityEvent;
+
+            // to snap/unsnap by grabbing the object
+            Gaze_InputManager.OnControllerGrabEvent += OnControllerGrabEvent;
+
+            // to snap/unsnap by levitating the object
             Gaze_EventManager.OnLevitationEvent += OnLevitationEvent;
         }
 
         void OnDisable()
         {
-            Gaze_InputManager.OnControllerGrabEvent -= OnControllerGrabEvent;
             Gaze_EventManager.OnProximityEvent -= OnProximityEvent;
+            Gaze_InputManager.OnControllerGrabEvent -= OnControllerGrabEvent;
             Gaze_EventManager.OnLevitationEvent -= OnLevitationEvent;
         }
 
         void Start()
         {
+            IO = GetComponent<Gaze_InteractiveObject>();
             grabbingControllers = new Gaze_HandController[2];
+        }
+
+        void Update()
+        {
+            if (currentDragAndDropCondition == null)
+                return;
+
+            if (!m_Grabbed && !isLevitating)
+                return;
+
+            isCurrentlyAligned = IsObjectAlignedWithItsTarget();
+
+            // if the value has changed
+            if (isCurrentlyAligned != wasAligned)
+            {
+                // if the user aligned the object with its DnD target
+                if (isCurrentlyAligned)
+                {
+                    Debug.Log("aligned !");
+                    DropReady();
+                }
+                // if the user removed the object from its DnD target
+                else
+                {
+                    Debug.Log("NOT aligned !");
+                    Remove();
+                    Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(gameObject, currentDragAndDropCondition.TargetObject.gameObject, Gaze_DragAndDropStates.DROPREADYCANCELED));
+                }
+
+                // update flags
+                wasAligned = isCurrentlyAligned;
+            }
         }
 
         public void SetupDragAndDropProcess(Gaze_DragAndDropCondition _dndCondition)
@@ -92,45 +136,17 @@ namespace Gaze
 
         }
 
-
         private void ResetVariables()
         {
-            IO = GetComponent<Gaze_InteractiveObject>();
 
             // Unlock the gravity in case it has been locked for another game object
             Gaze_GravityManager.ChangeGravityState(IO, Gaze_GravityRequestType.UNLOCK);
 
-            m_InPlace = false;
+            wasAligned = false;
             m_Snapped = false;
         }
 
-        void Update()
-        {
-            if (currentDragAndDropCondition == null)
-                return;
-
-            if (!m_Grabbed && !isLevitating)
-                return;
-
-            bool _inPlace = IsInPlace();
-
-            // if the value changed
-            if (_inPlace != m_InPlace)
-            {
-                m_InPlace = _inPlace;
-                if (m_InPlace)
-                {
-                    DropReady();
-                }
-                else
-                {
-                    Remove();
-                    Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(gameObject, currentDragAndDropCondition.TargetObject.gameObject, Gaze_DragAndDropStates.DROPREADYCANCELED));
-                }
-            }
-        }
-
-        void DropReady()
+        private void DropReady()
         {
             if (m_attachOnDrop)
             {
@@ -147,7 +163,7 @@ namespace Gaze
             Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(gameObject, currentDragAndDropCondition.TargetObject.gameObject, Gaze_DragAndDropStates.DROPREADY));
         }
 
-        void Remove()
+        private void Remove()
         {
             if (m_SnapBeforeDrop)
             {
@@ -164,7 +180,7 @@ namespace Gaze
             }
         }
 
-        void Drop()
+        private void Drop()
         {
             if (m_attachOnDrop)
             {
@@ -199,17 +215,21 @@ namespace Gaze
             Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(gameObject, currentDragAndDropCondition.TargetObject.gameObject, Gaze_DragAndDropStates.PICKUP));
         }
 
-        private bool IsInPlace()
+        private bool IsObjectAlignedWithItsTarget()
         {
-            // check position
+            // if already snapped, unsnap it
             if (m_Snapped)
-            {
-                // replace the object temporarily at its original local position
                 UnSnap();
-            }
-            if (Vector3.Distance(transform.position, currentDragAndDropCondition.TargetObject.transform.position) > m_MinDistance)
+
+            // return if object is too far from its DnD target
+            if (Vector3.Distance(transform.position, currentDragAndDropCondition.TargetObject.transform.position) >= m_MinDistance)
                 return false;
-            // check rotation bz checking axis
+
+            // NOTE hack to always return true (no rotation check)
+            return true;
+
+            /*
+            // check rotation by checking axis
             float xAxisSimilarity = respectXAxis ? Vector3.Dot(transform.right, currentDragAndDropCondition.TargetObject.transform.right) : 1;
             if (respectXAxisMirrored)
                 xAxisSimilarity = Mathf.Abs(xAxisSimilarity);
@@ -220,7 +240,8 @@ namespace Gaze
             if (respectZAxisMirrored)
                 zAxisSimilarity = Mathf.Abs(zAxisSimilarity);
             bool validRotation = xAxisSimilarity > angleThreshold && yAxisSimilarity > angleThreshold && zAxisSimilarity > angleThreshold;
-            if (true)
+
+            if (validRotation)
             {
                 if (m_Snapped)
                 {
@@ -231,10 +252,10 @@ namespace Gaze
             }
             else
                 return false;
+            */
         }
 
-        Coroutine m_SnapCoroutine;
-        void Snap(float timeToSnap = 0f)
+        private void Snap(float timeToSnap = 0f)
         {
             if (timeToSnap == 0)
             {
@@ -247,7 +268,7 @@ namespace Gaze
             }
         }
 
-        IEnumerator SnapCoroutine(float timeToSnap)
+        private IEnumerator SnapCoroutine(float timeToSnap)
         {
             float time = 0f;
             Vector3 startPos = transform.position;
@@ -262,13 +283,13 @@ namespace Gaze
             }
         }
 
-        float QuadEaseOut(float time, float startVal, float changeInVal, float duration)
+        private float QuadEaseOut(float time, float startVal, float changeInVal, float duration)
         {
             float elapsedTime = (time > duration) ? 1.0f : time / duration;
             return -changeInVal * elapsedTime * (elapsedTime - 2) + startVal;
         }
 
-        void UnSnap()
+        private void UnSnap()
         {
             if (m_SnapCoroutine != null)
             {
@@ -279,7 +300,7 @@ namespace Gaze
             transform.localRotation = m_StartGrabLocalRotation;
         }
 
-        void Grab(GameObject _controller)
+        private void Grab(GameObject _controller)
         {
             m_Grabbed = true;
 
@@ -291,16 +312,16 @@ namespace Gaze
                 StopCoroutine(m_SnapCoroutine);
                 m_SnapCoroutine = null;
             }
-            if (m_InPlace)
+            if (wasAligned)
             {
                 PickUp();
             }
         }
 
-        void Ungrab()
+        private void Ungrab()
         {
             m_Grabbed = false;
-            if (m_InPlace)
+            if (wasAligned)
             {
                 Drop();
             }
@@ -312,16 +333,16 @@ namespace Gaze
         private void Levitate()
         {
             isLevitating = true;
-            if (m_InPlace)
+            if (wasAligned)
             {
                 PickUp();
             }
         }
 
-        void Unlevitate()
+        private void Unlevitate()
         {
             isLevitating = false;
-            if (m_InPlace)
+            if (wasAligned)
             {
                 Drop();
             }
@@ -333,21 +354,23 @@ namespace Gaze
             }
         }
 
-        void OnProximityEvent(Gaze_ProximityEventArgs e)
+        private void OnProximityEvent(Gaze_ProximityEventArgs e)
         {
             if (currentDragAndDropCondition == null)
                 return;
 
-            if ((GameObject)e.Sender == gameObject)
-            {   // we collided with something
+            // if I'm the sender
+            if (((Gaze_InteractiveObject)e.Sender).gameObject == gameObject)
+            {
+                // we collided with something
                 if (e.Other.GetComponentInParent<Gaze_InteractiveObject>() == currentDragAndDropCondition.TargetObject)
                 {
                     m_InProximity = e.IsInProximity;
                     if (!m_InProximity)
                     {
-                        if (m_InPlace)
+                        if (wasAligned)
                         {
-                            m_InPlace = false;
+                            wasAligned = false;
                             Remove();
                         }
                     }
@@ -355,7 +378,7 @@ namespace Gaze
             }
         }
 
-        void OnControllerGrabEvent(Gaze_ControllerGrabEventArgs e)
+        private void OnControllerGrabEvent(Gaze_ControllerGrabEventArgs e)
         {
             if (e.ControllerObjectPair.Value == gameObject)
             {

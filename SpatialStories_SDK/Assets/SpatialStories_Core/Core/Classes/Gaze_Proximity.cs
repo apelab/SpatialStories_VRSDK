@@ -27,12 +27,12 @@ namespace Gaze
         private GameObject otherGameObject;
 
         [HideInInspector]
-        public Gaze_InteractiveObject IOGameObject;
+        public Gaze_InteractiveObject IOScript;
 
         private void Awake()
         {
             // otherwise the event is fired too early
-            IOGameObject = GetComponentInParent<Gaze_InteractiveObject>();
+            IOScript = GetComponentInParent<Gaze_InteractiveObject>();
         }
 
         void Start()
@@ -44,7 +44,7 @@ namespace Gaze
         {
             yield return new WaitForEndOfFrame();
             if (proximityFlag)
-                Gaze_EventManager.FireProximityEvent(new Gaze_ProximityEventArgs(IOGameObject, otherGameObject.GetComponentInParent<Gaze_InteractiveObject>(), true));
+                Gaze_EventManager.FireProximityEvent(new Gaze_ProximityEventArgs(IOScript, otherGameObject.GetComponentInParent<Gaze_InteractiveObject>(), true));
         }
 
         void OnTriggerEnter(Collider other)
@@ -56,7 +56,7 @@ namespace Gaze
 
                 //				proximityFlag = true;
                 otherGameObject = other.gameObject;
-                Gaze_EventManager.FireProximityEvent(new Gaze_ProximityEventArgs(IOGameObject, otherGameObject.GetComponentInParent<Gaze_InteractiveObject>(), true));
+                Gaze_EventManager.FireProximityEvent(new Gaze_ProximityEventArgs(IOScript, otherGameObject.GetComponentInParent<Gaze_InteractiveObject>(), true));
             }
         }
 
@@ -68,7 +68,7 @@ namespace Gaze
                     Debug.Log("Gaze_Proximity (" + transform.parent.name + ") OnTriggerExit with " + other.GetComponentInParent<Gaze_InteractiveObject>().name);
                 proximityFlag = false;
                 otherGameObject = other.gameObject;
-                Gaze_EventManager.FireProximityEvent(new Gaze_ProximityEventArgs(IOGameObject, otherGameObject.GetComponentInParent<Gaze_InteractiveObject>(), false));
+                Gaze_EventManager.FireProximityEvent(new Gaze_ProximityEventArgs(IOScript, otherGameObject.GetComponentInParent<Gaze_InteractiveObject>(), false));
             }
         }
     }
