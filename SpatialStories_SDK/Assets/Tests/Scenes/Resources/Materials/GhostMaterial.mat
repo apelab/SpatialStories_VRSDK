@@ -10,316 +10,140 @@ Material:
   m_Shader: {fileID: 4800000, guid: 8402266bd4efdee489772cbbdfba3d60, type: 3}
   m_ShaderKeywords: _EMISSION
   m_LightmapFlags: 1
+  m_EnableInstancingVariants: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
+  disabledShaderPasses: []
   m_SavedProperties:
-    serializedVersion: 2
+    serializedVersion: 3
     m_TexEnvs:
-    - first:
-        name: _BumpMap
-      second:
+    - _BumpMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - first:
-        name: _DetailAlbedoMap
-      second:
+    - _DetailAlbedoMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - first:
-        name: _DetailMask
-      second:
+    - _DetailMask:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - first:
-        name: _DetailNormalMap
-      second:
+    - _DetailNormalMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - first:
-        name: _DisTex
-      second:
+    - _DisTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - first:
-        name: _DslTex
-      second:
+    - _DslTex:
         m_Texture: {fileID: 2800000, guid: 56b44960de2034f4f910344df7a4d639, type: 3}
         m_Scale: {x: 10, y: 10}
         m_Offset: {x: 0, y: 0}
-    - first:
-        name: _EmissionMap
-      second:
+    - _EmissionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - first:
-        name: _MainTex
-      second:
+    - _MainTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - first:
-        name: _MainTex2
-      second:
+    - _MainTex2:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - first:
-        name: _MainTex3
-      second:
+    - _MainTex3:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - first:
-        name: _MetallicGlossMap
-      second:
+    - _MetallicGlossMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - first:
-        name: _OcclusionMap
-      second:
+    - _OcclusionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - first:
-        name: _ParallaxMap
-      second:
+    - _ParallaxMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - first:
-        name: _Alpha1
-      second: 0
-    - first:
-        name: _Alpha2
-      second: 0
-    - first:
-        name: _Alpha3
-      second: 0
-    - first:
-        name: _BiasDs
-      second: 0
-    - first:
-        name: _BiasDsl
-      second: 1
-    - first:
-        name: _BiasMT
-      second: 1
-    - first:
-        name: _BiasMT2
-      second: 1
-    - first:
-        name: _BiasMT3
-      second: 1
-    - first:
-        name: _Bri
-      second: 0
-    - first:
-        name: _BumpScale
-      second: 1
-    - first:
-        name: _Con
-      second: 0.5
-    - first:
-        name: _Cutoff
-      second: 0.5
-    - first:
-        name: _DetailNormalMapScale
-      second: 1
-    - first:
-        name: _DisTexType
-      second: 0
-    - first:
-        name: _DslEA
-      second: 0
-    - first:
-        name: _DslEI
-      second: 1
-    - first:
-        name: _DslER
-      second: 0.08
-    - first:
-        name: _DslGl
-      second: 0
-    - first:
-        name: _DstBlend
-      second: 0
-    - first:
-        name: _GlossMapScale
-      second: 1
-    - first:
-        name: _Glossiness
-      second: 0.5
-    - first:
-        name: _GlossyReflections
-      second: 1
-    - first:
-        name: _InvFade
-      second: 5
-    - first:
-        name: _Metallic
-      second: 0
-    - first:
-        name: _Mode
-      second: 0
-    - first:
-        name: _OcclusionStrength
-      second: 1
-    - first:
-        name: _Parallax
-      second: 0.02
-    - first:
-        name: _Queue
-      second: 3000
-    - first:
-        name: _SmoothnessTextureChannel
-      second: 0
-    - first:
-        name: _SpecularHighlights
-      second: 1
-    - first:
-        name: _SrcBlend
-      second: 1
-    - first:
-        name: _UVSec
-      second: 0
-    - first:
-        name: _ZWrite
-      second: 1
-    - first:
-        name: _ac
-      second: 0
-    - first:
-        name: _dT
-      second: 1
-    - first:
-        name: _dTA
-      second: 0
-    - first:
-        name: _dTAE
-      second: 0
-    - first:
-        name: _dslT
-      second: 1
-    - first:
-        name: _dslTA
-      second: 0
-    - first:
-        name: _dslTAE
-      second: 0
-    - first:
-        name: _fT
-      second: 1
-    - first:
-        name: _fTA
-      second: 0
-    - first:
-        name: _fTAE
-      second: 0
-    - first:
-        name: _inv1
-      second: 0
-    - first:
-        name: _inv2
-      second: 0
-    - first:
-        name: _inv3
-      second: 0
-    - first:
-        name: _invAlpha1
-      second: 0
-    - first:
-        name: _invAlpha2
-      second: 0
-    - first:
-        name: _invAlpha3
-      second: 0
-    - first:
-        name: _numberTex
-      second: 0
-    - first:
-        name: _rgbc
-      second: 0
-    - first:
-        name: _sT
-      second: 1
-    - first:
-        name: _sTA
-      second: 0
-    - first:
-        name: _sTAE
-      second: 0
-    - first:
-        name: _tT
-      second: 1
-    - first:
-        name: _tTA
-      second: 0
-    - first:
-        name: _tTAE
-      second: 0
+    - _Alpha1: 0
+    - _Alpha2: 0
+    - _Alpha3: 0
+    - _BiasDs: 0
+    - _BiasDsl: 1
+    - _BiasMT: 1
+    - _BiasMT2: 1
+    - _BiasMT3: 1
+    - _Bri: 0.18
+    - _BumpScale: 1
+    - _Con: 0.5
+    - _Cutoff: 0.5
+    - _DetailNormalMapScale: 1
+    - _DisTexType: 0
+    - _DslEA: 0.21
+    - _DslEI: 1
+    - _DslER: 0.074
+    - _DslGl: 0
+    - _DstBlend: 0
+    - _GlossMapScale: 1
+    - _Glossiness: 0.5
+    - _GlossyReflections: 1
+    - _InvFade: 5
+    - _Metallic: 0
+    - _Mode: 0
+    - _OcclusionStrength: 1
+    - _Parallax: 0.02
+    - _Queue: 3000
+    - _SmoothnessTextureChannel: 0
+    - _SpecularHighlights: 1
+    - _SrcBlend: 1
+    - _UVSec: 0
+    - _ZWrite: 1
+    - _ac: 1
+    - _dT: 1
+    - _dTA: 0
+    - _dTAE: 0
+    - _dslT: 1
+    - _dslTA: 0
+    - _dslTAE: 0
+    - _fT: 1
+    - _fTA: 0
+    - _fTAE: 0
+    - _inv1: 0
+    - _inv2: 0
+    - _inv3: 0
+    - _invAlpha1: 0
+    - _invAlpha2: 0
+    - _invAlpha3: 0
+    - _numberTex: 0
+    - _rgbc: 0
+    - _sT: 1
+    - _sTA: 0
+    - _sTAE: 0
+    - _tT: 1
+    - _tTA: 0
+    - _tTAE: 0
     m_Colors:
-    - first:
-        name: _Color
-      second: {r: 1, g: 1, b: 1, a: 1}
-    - first:
-        name: _DslEC
-      second: {r: 1, g: 1, b: 1, a: 1}
-    - first:
-        name: _EmissionColor
-      second: {r: 0, g: 0, b: 0, a: 1}
-    - first:
-        name: _Pan1
-      second: {r: 0, g: 0, b: 0, a: 0}
-    - first:
-        name: _Pan2
-      second: {r: 0, g: 0, b: 0, a: 0}
-    - first:
-        name: _Pan3
-      second: {r: 0, g: 0, b: 0, a: 0}
-    - first:
-        name: _PanDs
-      second: {r: 0, g: 0, b: 0, a: 0}
-    - first:
-        name: _PanDsl
-      second: {r: 0, g: 0, b: 0, a: 0}
-    - first:
-        name: _Rot1
-      second: {r: 0.5, g: 0.5, b: 0, a: 0}
-    - first:
-        name: _Rot2
-      second: {r: 0.5, g: 0.5, b: 0, a: 0}
-    - first:
-        name: _Rot3
-      second: {r: 0.5, g: 0.5, b: 0, a: 0}
-    - first:
-        name: _RotDs
-      second: {r: 0.5, g: 0.5, b: 0, a: 0}
-    - first:
-        name: _RotDsl
-      second: {r: 0.5, g: 0.5, b: 0, a: 0}
-    - first:
-        name: _Tile1
-      second: {r: 1, g: 1, b: 0, a: 0}
-    - first:
-        name: _Tile2
-      second: {r: 1, g: 1, b: 0, a: 0}
-    - first:
-        name: _Tile3
-      second: {r: 1, g: 1, b: 0, a: 0}
-    - first:
-        name: _TileDs
-      second: {r: 1, g: 1, b: 0, a: 0}
-    - first:
-        name: _TileDsl
-      second: {r: 1, g: 1, b: 0, a: 0}
-    - first:
-        name: _TintColor
-      second: {r: 0, g: 0.8758622, b: 1, a: 0.116}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _DslEC: {r: 1, g: 1, b: 1, a: 1}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _Pan1: {r: 0, g: 0, b: 0, a: 0}
+    - _Pan2: {r: 0, g: 0, b: 0, a: 0}
+    - _Pan3: {r: 0, g: 0, b: 0, a: 0}
+    - _PanDs: {r: 0, g: 0, b: 0, a: 0}
+    - _PanDsl: {r: 0, g: 0, b: 0, a: 0}
+    - _Rot1: {r: 0.5, g: 0.5, b: 0, a: 0}
+    - _Rot2: {r: 0.5, g: 0.5, b: 0, a: 0}
+    - _Rot3: {r: 0.5, g: 0.5, b: 0, a: 0}
+    - _RotDs: {r: 0.5, g: 0.5, b: 0, a: 0}
+    - _RotDsl: {r: 0.5, g: 0.5, b: 0, a: 0}
+    - _Tile1: {r: 1, g: 1, b: 0, a: 0}
+    - _Tile2: {r: 1, g: 1, b: 0, a: 0}
+    - _Tile3: {r: 1, g: 1, b: 0, a: 0}
+    - _TileDs: {r: 1, g: 1, b: 0, a: 0}
+    - _TileDsl: {r: 1, g: 1, b: 0, a: 0}
+    - _TintColor: {r: 0, g: 0.8758622, b: 1, a: 0.078}
