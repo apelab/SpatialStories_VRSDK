@@ -2461,7 +2461,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debug: 0
-  IOGameObject: {fileID: 202171839}
+  IOScript: {fileID: 202171839}
 --- !u!54 &607995281
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5517,7 +5517,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1546726829}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -31.25}
+  m_LocalPosition: {x: 0, y: 0, z: -31.5}
   m_LocalScale: {x: 10, y: 1, z: 5}
   m_Children: []
   m_Father: {fileID: 0}
@@ -5650,7 +5650,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debug: 0
-  IOGameObject: {fileID: 1466844566}
+  IOScript: {fileID: 1466844566}
 --- !u!54 &1570764928
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6264,7 +6264,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debug: 0
-  IOGameObject: {fileID: 1477511855}
+  IOScript: {fileID: 1477511855}
 --- !u!54 &1747674653
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6393,7 +6393,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debug: 0
-  IOGameObject: {fileID: 1605048750}
+  IOScript: {fileID: 1605048750}
 --- !u!54 &1767149873
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6464,7 +6464,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debug: 0
-  IOGameObject: {fileID: 490019600}
+  IOScript: {fileID: 490019600}
 --- !u!54 &1781126281
 Rigidbody:
   m_ObjectHideFlags: 0
