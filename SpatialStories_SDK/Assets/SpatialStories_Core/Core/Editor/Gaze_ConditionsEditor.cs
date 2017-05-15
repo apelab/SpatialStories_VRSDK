@@ -415,7 +415,9 @@ namespace Gaze
                 }
 
                 // if there are no entry yet, create a default one
-                if (targetConditions.touchMap.TouchEnitry == null)
+                if (targetConditions.touchMap.TouchEnitry == null ||
+                    (targetConditions.touchMap.TouchEnitry != null &&
+                    targetConditions.touchMap.TouchEnitry.interactiveObject == null))
                     targetConditions.touchMap.AddActivableEntry(hierarchyIOs[0]);
 
                 // chose which hand to use
