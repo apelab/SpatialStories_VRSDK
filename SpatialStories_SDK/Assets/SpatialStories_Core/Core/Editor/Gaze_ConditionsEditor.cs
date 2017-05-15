@@ -417,18 +417,16 @@ namespace Gaze
                 if (targetConditions.touchMap.touchHandsIndex.Equals((int)Gaze_HandsEnum.LEFT))
                 {
                     targetConditions.touchMap.TouchEnitry.hand = VRNode.LeftHand;
-                    targetConditions.touchMap.touchActionLeftIndex = EditorGUILayout.Popup(targetConditions.touchMap.touchActionLeftIndex, Enum.GetNames(typeof(Gaze_TouchAction)));
                 }
                 else if (targetConditions.touchMap.touchHandsIndex.Equals((int)Gaze_HandsEnum.RIGHT))
                 {
                     targetConditions.touchMap.TouchEnitry.hand = VRNode.RightHand;
-                    targetConditions.touchMap.touchActionRightIndex = EditorGUILayout.Popup(targetConditions.touchMap.touchActionRightIndex, Enum.GetNames(typeof(Gaze_TouchAction)));
                 }
                 else // We store both in left
                 {
                     targetConditions.touchMap.TouchEnitry.hand = VRNode.LeftHand;
-                    targetConditions.touchMap.touchActionLeftIndex = EditorGUILayout.Popup(targetConditions.touchMap.touchActionLeftIndex, Enum.GetNames(typeof(Gaze_TouchAction)));
                 }
+                targetConditions.touchMap.touchActionIndex = EditorGUILayout.Popup(targetConditions.touchMap.touchActionIndex, Enum.GetNames(typeof(Gaze_TouchAction)));
 
                 // Add the searchable objec dialog
                 var objectToTouch = EditorGUILayout.ObjectField(targetConditions.touchMap.TouchEnitry.interactiveObject, typeof(Gaze_InteractiveObject), true);

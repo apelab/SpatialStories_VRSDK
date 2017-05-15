@@ -50,6 +50,7 @@ namespace Gaze
         public override void ToEditorGUI()
         {
             EditorGUILayout.BeginHorizontal();
+            // TODO(4nc3str4l): Show more detailed information depending on the configuration.
             if (IsValid)
             {
                 RenderSatisfiedLabel("Touch:");
@@ -91,6 +92,8 @@ namespace Gaze
                 // BOTH hands
                 case (int)Gaze_HandsEnum.BOTH:
                     TouchLeftValid = isTouchActionValid && isTouchControllerValid && isTouchDistanceValid && isTouchedObjectValid;
+                    TouchRightValid = isTouchActionValid && isTouchControllerValid && isTouchDistanceValid && isTouchedObjectValid;
+                    valid = TouchLeftValid;
                     break;
 
                 //  the LEFT hand
@@ -102,7 +105,6 @@ namespace Gaze
                 //  the RIGHT hand
                 case (int)Gaze_HandsEnum.RIGHT:
                     TouchRightValid = isTouchActionValid && isTouchControllerValid && isTouchDistanceValid && isTouchedObjectValid;
-
                     valid = TouchRightValid;
                     break;
             }
@@ -113,19 +115,7 @@ namespace Gaze
         private bool IsTouchInputValid(bool _isTriggerPressed)
         {
             int eventActionIndex = 0;
-            switch (gazeConditionsScript.touchMap.touchHandsIndex)
-            {
-                // RIGHT hand
-                case (int)Gaze_HandsEnum.RIGHT:
-                    eventActionIndex = gazeConditionsScript.touchMap.touchActionRightIndex;
-                    break;
-
-                // LEFT hand
-                case (int)Gaze_HandsEnum.LEFT:
-                    eventActionIndex = gazeConditionsScript.touchMap.touchActionLeftIndex;
-                    break;
-            }
-
+            eventActionIndex = gazeConditionsScript.touchMap.touchActionIndex;
             // if trigger is pressed and action is TOUCH return TRUE
             if ((_isTriggerPressed && eventActionIndex.Equals((int)Gaze_TouchAction.TOUCH)) ||
                 (!_isTriggerPressed && eventActionIndex.Equals((int)Gaze_TouchAction.UNTOUCH)))
@@ -256,23 +246,22 @@ namespace Gaze
         private bool IsTouchActionValid(VRNode _touchingController, bool _isTouching)
         {
             int eventActionIndex = 0;
-            eventActionIndex = gazeConditionsScript.touchMap.touchActionLeftIndex;
 
-            if ((_touchingController.Equals(VRNode.LeftHand) && gazeConditionsScript.touchMap.touchActionLeftIndex.Equals(eventActionIndex)) ||
-                (_touchingController.Equals(VRNode.RightHand) && gazeConditionsScript.touchMap.touchActionRightIndex.Equals(eventActionIndex)))
-            {
-                // if I'm touching AND the action is TOUCH AND the trigger is PRESSED
-                if (_isTouching && eventActionIndex.Equals((int)Gaze_TouchAction.TOUCH) && isTriggerPressed)
-                    return true;
+            eventActionIndex = gazeConditionsScript.touchMap.touchActionIndex;
 
-                // if I'm touching AND the action is UNTOUCH AND the trigger is RELEASED
-                if (_isTouching && eventActionIndex.Equals((int)Gaze_TouchAction.UNTOUCH) && !isTriggerPressed)
-                    return true;
 
-                // if I'm not touching AND action is UNTOUCH and trigger is PRESSED, that means we pointed OUT
-                if (!_isTouching && eventActionIndex.Equals((int)Gaze_TouchAction.UNTOUCH) && isTriggerPressed)
-                    return true;
-            }
+            // if I'm touching AND the action is TOUCH AND the trigger is PRESSED
+            if (_isTouching && eventActionIndex.Equals((int)Gaze_TouchAction.TOUCH) && isTriggerPressed)
+                return true;
+
+            // if I'm touching AND the action is UNTOUCH AND the trigger is RELEASED
+            if (_isTouching && eventActionIndex.Equals((int)Gaze_TouchAction.UNTOUCH) && !isTriggerPressed)
+                return true;
+
+            // if I'm not touching AND action is UNTOUCH and trigger is PRESSED, that means we pointed OUT
+            if (!_isTouching && eventActionIndex.Equals((int)Gaze_TouchAction.UNTOUCH) && isTriggerPressed)
+                return true;
+
             return false;
         }
 

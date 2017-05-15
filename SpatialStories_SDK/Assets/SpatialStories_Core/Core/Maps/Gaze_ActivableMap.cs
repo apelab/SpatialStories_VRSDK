@@ -47,7 +47,7 @@ namespace Gaze
         /// <summary>
         /// The index of action (TOUCH, UNTOUCH, BOTH)
         /// </summary>
-        public int touchActionLeftIndex, touchActionRightIndex;
+        public int touchActionIndex;
 
         public Gaze_TouchMap()
         {
