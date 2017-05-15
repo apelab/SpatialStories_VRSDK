@@ -93,8 +93,8 @@ namespace Gaze
         private bool HandleProximity(Gaze_ProximityEventArgs e)
         {
             // get colliding objects
-            Gaze_InteractiveObject sender = ((Gaze_InteractiveObject)e.Sender).GetComponentInChildren<Gaze_Proximity>().IOGameObject;
-            Gaze_InteractiveObject other = ((Gaze_InteractiveObject)e.Other).GetComponentInChildren<Gaze_Proximity>().IOGameObject;
+            Gaze_InteractiveObject sender = ((Gaze_InteractiveObject)e.Sender).GetComponentInChildren<Gaze_Proximity>().IOScript;
+            Gaze_InteractiveObject other = ((Gaze_InteractiveObject)e.Other).GetComponentInChildren<Gaze_Proximity>().IOScript;
             // make sure the collision concerns two objects in the list of proximities (-1 if NOT)
 
             int otherIndex = IsCollidingObjectsInList(other, sender);
@@ -107,7 +107,7 @@ namespace Gaze
                 {
                     // update number of collision in the list occuring
                     collisionsOccuringCount++;
-                    gazeConditionsScript.proximityMap.AddCollidingObjectToEntry(gazeConditionsScript.proximityMap.proximityEntryList[otherIndex], sender.GetComponentInChildren<Gaze_Proximity>().IOGameObject);
+                    gazeConditionsScript.proximityMap.AddCollidingObjectToEntry(gazeConditionsScript.proximityMap.proximityEntryList[otherIndex], sender.GetComponentInChildren<Gaze_Proximity>().IOScript);
 
                     if (gazeConditionsScript.proximityMap.proximityStateIndex.Equals((int)Gaze_ProximityStates.ENTER))
                     {
@@ -133,7 +133,7 @@ namespace Gaze
                     // update everyoneIsColliding tag before removing an element
                     gazeConditionsScript.proximityMap.UpdateEveryoneColliding();
                     // remove colliding object
-                    gazeConditionsScript.proximityMap.RemoveCollidingObjectToEntry(gazeConditionsScript.proximityMap.proximityEntryList[otherIndex], sender.GetComponentInChildren<Gaze_Proximity>().IOGameObject);
+                    gazeConditionsScript.proximityMap.RemoveCollidingObjectToEntry(gazeConditionsScript.proximityMap.proximityEntryList[otherIndex], sender.GetComponentInChildren<Gaze_Proximity>().IOScript);
                     // if proximity condition is EXIT
                     if (gazeConditionsScript.proximityMap.proximityStateIndex.Equals((int)Gaze_ProximityStates.EXIT))
                     {
