@@ -15,12 +15,6 @@ namespace Gaze
         public bool TouchDistanceModeRightValid = false;
         public Collider GazeCollider;
 
-        /// <summary>
-        /// TRUE if a distant touch ray is hitting this object, else FALSE (the controller grabbing from distance)
-        /// </summary>
-        public bool IsLeftPointing = false;
-        public bool IsRightPointing = false;
-
         private bool isTriggerPressed = false;
         private GameObject pointedObject;
         private VRNode eventHand;
@@ -268,35 +262,24 @@ namespace Gaze
 
         private void OnControllerPointingEvent(Gaze_ControllerPointingEventArgs e)
         {
-            // if touch OR grab is enabled
-            if (gazeConditionsScript.RootIO.IsTouchEnabled)
+            // get the pointed object
+            pointedObject = e.Dico.Value;
+
+            // if this object is me
+            if (pointedObject && pointedObject.Equals(gazeConditionsScript.RootIO.gameObject))
             {
-                // get the pointed object
-                pointedObject = e.Dico.Value;
+                // get the event's pointing hand
+                eventHand = e.Dico.Key;
 
-                // if this object is me
-                if (pointedObject && pointedObject.Equals(gazeConditionsScript.RootIO.gameObject))
-                {
-                    // get the event's pointing hand
-                    eventHand = e.Dico.Key;
-
-                    // update touch state for inspector GUI
-                    if (eventHand.Equals(VRNode.LeftHand))
-                        IsLeftPointing = e.IsPointed;
-
-                    else if (eventHand.Equals(VRNode.RightHand))
-                        IsRightPointing = e.IsPointed;
-
-                    // check if touch is valid
-                    IsValid = ValidateTouchConditions();
-                }
+                // check if touch is valid
+                IsValid = ValidateTouchConditions();
             }
         }
 
         private void OnControllerTouchEvent(Gaze_ControllerTouchEventArgs e)
         {
             // store the touched object
-            VRNode eventHand = e.Dico.Key;
+            eventHand = e.Dico.Key;
             TouchedObject = e.Dico.Value;
 
             // if I'm concerned

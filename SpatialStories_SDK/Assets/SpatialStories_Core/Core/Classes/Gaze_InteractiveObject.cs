@@ -180,11 +180,13 @@ namespace Gaze
         private void OnEnable()
         {
             Gaze_InputManager.OnControllerGrabEvent += OnControllerGrabEvent;
+            Gaze_EventManager.OnControllerPointingEvent += OnControllerPointingEvent;
         }
 
         private void OnDisable()
         {
             Gaze_InputManager.OnControllerGrabEvent -= OnControllerGrabEvent;
+            Gaze_EventManager.OnControllerPointingEvent -= OnControllerPointingEvent;
         }
 
         /// <summary>
@@ -487,6 +489,26 @@ namespace Gaze
         }
 
         #endregion ManipulationManagement
-    }
 
+        #region PointingManagement
+
+        public bool IsPointedWithLeftHand;
+        public bool IsPointedWithRightHand;
+
+        private void OnControllerPointingEvent(Gaze_ControllerPointingEventArgs e)
+        {
+            if (e.Dico.Value.Equals(gameObject))
+            {
+                if (e.KeyValue.Key == UnityEngine.VR.VRNode.LeftHand)
+                {
+                    IsPointedWithLeftHand = e.IsPointed;
+                }
+                else
+                {
+                    IsPointedWithRightHand = e.IsPointed;
+                }
+            }
+        }
+        #endregion PointingManagement
+    }
 }
