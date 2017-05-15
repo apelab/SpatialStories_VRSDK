@@ -1,0 +1,655 @@
+fileFormatVersion: 2
+guid: e6befe24b896bb843ba97bfc3583eb91
+timeCreated: 1479465392
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Bone.002
+    100002: Bone.002_end
+    100004: Hand.control.L
+    100006: Hand.control.L_end
+    100008: hand1
+    100010: hand_left
+    100012: //RootNode
+    100014: index_distal.L
+    100016: index_distal.L_end
+    100018: index_metacarp.L
+    100020: index_proximal.L
+    100022: index_root.L
+    100024: little_distal.L
+    100026: little_distal.L_end
+    100028: little_metacarp.L
+    100030: little_proximal.L
+    100032: little_root.L
+    100034: middle_distal.L
+    100036: middle_distal.L_end
+    100038: middle_metacarp.L
+    100040: middle_proximal.L
+    100042: middle_root.L
+    100044: palm_hand.L
+    100046: Point.control.L
+    100048: Point.control.L_end
+    100050: ring_distal.L
+    100052: ring_distal.L_end
+    100054: ring_metacarp.L
+    100056: ring_proximal.L
+    100058: ring_root.L
+    100060: root_hand.L
+    100062: thumb_distal.L
+    100064: thumb_distal.L_end
+    100066: thumb_metacarp.L
+    100068: thumb_proximal.L
+    100070: thumb_root.L
+    400000: Bone.002
+    400002: Bone.002_end
+    400004: Hand.control.L
+    400006: Hand.control.L_end
+    400008: hand1
+    400010: hand_left
+    400012: //RootNode
+    400014: index_distal.L
+    400016: index_distal.L_end
+    400018: index_metacarp.L
+    400020: index_proximal.L
+    400022: index_root.L
+    400024: little_distal.L
+    400026: little_distal.L_end
+    400028: little_metacarp.L
+    400030: little_proximal.L
+    400032: little_root.L
+    400034: middle_distal.L
+    400036: middle_distal.L_end
+    400038: middle_metacarp.L
+    400040: middle_proximal.L
+    400042: middle_root.L
+    400044: palm_hand.L
+    400046: Point.control.L
+    400048: Point.control.L_end
+    400050: ring_distal.L
+    400052: ring_distal.L_end
+    400054: ring_metacarp.L
+    400056: ring_proximal.L
+    400058: ring_root.L
+    400060: root_hand.L
+    400062: thumb_distal.L
+    400064: thumb_distal.L_end
+    400066: thumb_metacarp.L
+    400068: thumb_proximal.L
+    400070: thumb_root.L
+    4300000: hand1
+    7400000: hand_left|left_neutral
+    7400002: hand_left|left_neutral->grab
+    7400004: hand_left|right_neutral
+    7400006: hand_left|right_neutral->grab
+    7400008: hand1|left_neutral->grab
+    9500000: //RootNode
+    13700000: hand1
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: hand_left|left_neutral
+      takeName: hand_left|left_neutral
+      firstFrame: 0
+      lastFrame: 1
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: hand1
+        weight: 1
+      - path: hand_left
+        weight: 1
+      - path: hand_left/Hand.control.L
+        weight: 1
+      - path: hand_left/Hand.control.L/Hand.control.L_end
+        weight: 1
+      - path: hand_left/Point.control.L
+        weight: 1
+      - path: hand_left/Point.control.L/Point.control.L_end
+        weight: 1
+      - path: hand_left/root_hand.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/index_root.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/index_root.L/index_metacarp.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/index_root.L/index_metacarp.L/index_proximal.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/index_root.L/index_metacarp.L/index_proximal.L/index_distal.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/index_root.L/index_metacarp.L/index_proximal.L/index_distal.L/index_distal.L_end
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/little_root.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/little_root.L/little_metacarp.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/little_root.L/little_metacarp.L/little_proximal.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/little_root.L/little_metacarp.L/little_proximal.L/little_distal.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/little_root.L/little_metacarp.L/little_proximal.L/little_distal.L/little_distal.L_end
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/middle_root.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/middle_root.L/middle_metacarp.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/middle_root.L/middle_metacarp.L/middle_proximal.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/middle_root.L/middle_metacarp.L/middle_proximal.L/middle_distal.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/middle_root.L/middle_metacarp.L/middle_proximal.L/middle_distal.L/middle_distal.L_end
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/ring_root.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/ring_root.L/ring_metacarp.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/ring_root.L/ring_metacarp.L/ring_proximal.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/ring_root.L/ring_metacarp.L/ring_proximal.L/ring_distal.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/ring_root.L/ring_metacarp.L/ring_proximal.L/ring_distal.L/ring_distal.L_end
+        weight: 1
+      - path: hand_left/root_hand.L/thumb_root.L
+        weight: 1
+      - path: hand_left/root_hand.L/thumb_root.L/Bone.002
+        weight: 1
+      - path: hand_left/root_hand.L/thumb_root.L/Bone.002/Bone.002_end
+        weight: 1
+      - path: hand_left/root_hand.L/thumb_root.L/thumb_metacarp.L
+        weight: 1
+      - path: hand_left/root_hand.L/thumb_root.L/thumb_metacarp.L/thumb_proximal.L
+        weight: 1
+      - path: hand_left/root_hand.L/thumb_root.L/thumb_metacarp.L/thumb_proximal.L/thumb_distal.L
+        weight: 1
+      - path: hand_left/root_hand.L/thumb_root.L/thumb_metacarp.L/thumb_proximal.L/thumb_distal.L/thumb_distal.L_end
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: hand_left|left_neutral->grab
+      takeName: hand_left|left_neutral->grab
+      firstFrame: 0
+      lastFrame: 9.1
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: hand1
+        weight: 1
+      - path: hand_left
+        weight: 1
+      - path: hand_left/Hand.control.L
+        weight: 1
+      - path: hand_left/Hand.control.L/Hand.control.L_end
+        weight: 1
+      - path: hand_left/Point.control.L
+        weight: 1
+      - path: hand_left/Point.control.L/Point.control.L_end
+        weight: 1
+      - path: hand_left/root_hand.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/index_root.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/index_root.L/index_metacarp.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/index_root.L/index_metacarp.L/index_proximal.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/index_root.L/index_metacarp.L/index_proximal.L/index_distal.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/index_root.L/index_metacarp.L/index_proximal.L/index_distal.L/index_distal.L_end
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/little_root.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/little_root.L/little_metacarp.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/little_root.L/little_metacarp.L/little_proximal.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/little_root.L/little_metacarp.L/little_proximal.L/little_distal.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/little_root.L/little_metacarp.L/little_proximal.L/little_distal.L/little_distal.L_end
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/middle_root.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/middle_root.L/middle_metacarp.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/middle_root.L/middle_metacarp.L/middle_proximal.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/middle_root.L/middle_metacarp.L/middle_proximal.L/middle_distal.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/middle_root.L/middle_metacarp.L/middle_proximal.L/middle_distal.L/middle_distal.L_end
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/ring_root.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/ring_root.L/ring_metacarp.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/ring_root.L/ring_metacarp.L/ring_proximal.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/ring_root.L/ring_metacarp.L/ring_proximal.L/ring_distal.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/ring_root.L/ring_metacarp.L/ring_proximal.L/ring_distal.L/ring_distal.L_end
+        weight: 1
+      - path: hand_left/root_hand.L/thumb_root.L
+        weight: 1
+      - path: hand_left/root_hand.L/thumb_root.L/Bone.002
+        weight: 1
+      - path: hand_left/root_hand.L/thumb_root.L/Bone.002/Bone.002_end
+        weight: 1
+      - path: hand_left/root_hand.L/thumb_root.L/thumb_metacarp.L
+        weight: 1
+      - path: hand_left/root_hand.L/thumb_root.L/thumb_metacarp.L/thumb_proximal.L
+        weight: 1
+      - path: hand_left/root_hand.L/thumb_root.L/thumb_metacarp.L/thumb_proximal.L/thumb_distal.L
+        weight: 1
+      - path: hand_left/root_hand.L/thumb_root.L/thumb_metacarp.L/thumb_proximal.L/thumb_distal.L/thumb_distal.L_end
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: hand_left|right_neutral
+      takeName: hand_left|right_neutral
+      firstFrame: 0
+      lastFrame: 1
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: hand1
+        weight: 1
+      - path: hand_left
+        weight: 1
+      - path: hand_left/Hand.control.L
+        weight: 1
+      - path: hand_left/Hand.control.L/Hand.control.L_end
+        weight: 1
+      - path: hand_left/Point.control.L
+        weight: 1
+      - path: hand_left/Point.control.L/Point.control.L_end
+        weight: 1
+      - path: hand_left/root_hand.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/index_root.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/index_root.L/index_metacarp.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/index_root.L/index_metacarp.L/index_proximal.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/index_root.L/index_metacarp.L/index_proximal.L/index_distal.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/index_root.L/index_metacarp.L/index_proximal.L/index_distal.L/index_distal.L_end
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/little_root.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/little_root.L/little_metacarp.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/little_root.L/little_metacarp.L/little_proximal.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/little_root.L/little_metacarp.L/little_proximal.L/little_distal.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/little_root.L/little_metacarp.L/little_proximal.L/little_distal.L/little_distal.L_end
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/middle_root.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/middle_root.L/middle_metacarp.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/middle_root.L/middle_metacarp.L/middle_proximal.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/middle_root.L/middle_metacarp.L/middle_proximal.L/middle_distal.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/middle_root.L/middle_metacarp.L/middle_proximal.L/middle_distal.L/middle_distal.L_end
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/ring_root.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/ring_root.L/ring_metacarp.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/ring_root.L/ring_metacarp.L/ring_proximal.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/ring_root.L/ring_metacarp.L/ring_proximal.L/ring_distal.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/ring_root.L/ring_metacarp.L/ring_proximal.L/ring_distal.L/ring_distal.L_end
+        weight: 1
+      - path: hand_left/root_hand.L/thumb_root.L
+        weight: 1
+      - path: hand_left/root_hand.L/thumb_root.L/Bone.002
+        weight: 1
+      - path: hand_left/root_hand.L/thumb_root.L/Bone.002/Bone.002_end
+        weight: 1
+      - path: hand_left/root_hand.L/thumb_root.L/thumb_metacarp.L
+        weight: 1
+      - path: hand_left/root_hand.L/thumb_root.L/thumb_metacarp.L/thumb_proximal.L
+        weight: 1
+      - path: hand_left/root_hand.L/thumb_root.L/thumb_metacarp.L/thumb_proximal.L/thumb_distal.L
+        weight: 1
+      - path: hand_left/root_hand.L/thumb_root.L/thumb_metacarp.L/thumb_proximal.L/thumb_distal.L/thumb_distal.L_end
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: hand_left|right_neutral->grab
+      takeName: hand_left|right_neutral->grab
+      firstFrame: 0
+      lastFrame: 21
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: hand1
+        weight: 1
+      - path: hand_left
+        weight: 1
+      - path: hand_left/Hand.control.L
+        weight: 1
+      - path: hand_left/Hand.control.L/Hand.control.L_end
+        weight: 1
+      - path: hand_left/Point.control.L
+        weight: 1
+      - path: hand_left/Point.control.L/Point.control.L_end
+        weight: 1
+      - path: hand_left/root_hand.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/index_root.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/index_root.L/index_metacarp.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/index_root.L/index_metacarp.L/index_proximal.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/index_root.L/index_metacarp.L/index_proximal.L/index_distal.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/index_root.L/index_metacarp.L/index_proximal.L/index_distal.L/index_distal.L_end
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/little_root.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/little_root.L/little_metacarp.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/little_root.L/little_metacarp.L/little_proximal.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/little_root.L/little_metacarp.L/little_proximal.L/little_distal.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/little_root.L/little_metacarp.L/little_proximal.L/little_distal.L/little_distal.L_end
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/middle_root.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/middle_root.L/middle_metacarp.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/middle_root.L/middle_metacarp.L/middle_proximal.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/middle_root.L/middle_metacarp.L/middle_proximal.L/middle_distal.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/middle_root.L/middle_metacarp.L/middle_proximal.L/middle_distal.L/middle_distal.L_end
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/ring_root.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/ring_root.L/ring_metacarp.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/ring_root.L/ring_metacarp.L/ring_proximal.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/ring_root.L/ring_metacarp.L/ring_proximal.L/ring_distal.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/ring_root.L/ring_metacarp.L/ring_proximal.L/ring_distal.L/ring_distal.L_end
+        weight: 1
+      - path: hand_left/root_hand.L/thumb_root.L
+        weight: 1
+      - path: hand_left/root_hand.L/thumb_root.L/Bone.002
+        weight: 1
+      - path: hand_left/root_hand.L/thumb_root.L/Bone.002/Bone.002_end
+        weight: 1
+      - path: hand_left/root_hand.L/thumb_root.L/thumb_metacarp.L
+        weight: 1
+      - path: hand_left/root_hand.L/thumb_root.L/thumb_metacarp.L/thumb_proximal.L
+        weight: 1
+      - path: hand_left/root_hand.L/thumb_root.L/thumb_metacarp.L/thumb_proximal.L/thumb_distal.L
+        weight: 1
+      - path: hand_left/root_hand.L/thumb_root.L/thumb_metacarp.L/thumb_proximal.L/thumb_distal.L/thumb_distal.L_end
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: hand1|left_neutral->grab
+      takeName: hand1|left_neutral->grab
+      firstFrame: 0
+      lastFrame: 20
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: hand1
+        weight: 1
+      - path: hand_left
+        weight: 1
+      - path: hand_left/Hand.control.L
+        weight: 1
+      - path: hand_left/Hand.control.L/Hand.control.L_end
+        weight: 1
+      - path: hand_left/Point.control.L
+        weight: 1
+      - path: hand_left/Point.control.L/Point.control.L_end
+        weight: 1
+      - path: hand_left/root_hand.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/index_root.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/index_root.L/index_metacarp.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/index_root.L/index_metacarp.L/index_proximal.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/index_root.L/index_metacarp.L/index_proximal.L/index_distal.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/index_root.L/index_metacarp.L/index_proximal.L/index_distal.L/index_distal.L_end
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/little_root.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/little_root.L/little_metacarp.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/little_root.L/little_metacarp.L/little_proximal.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/little_root.L/little_metacarp.L/little_proximal.L/little_distal.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/little_root.L/little_metacarp.L/little_proximal.L/little_distal.L/little_distal.L_end
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/middle_root.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/middle_root.L/middle_metacarp.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/middle_root.L/middle_metacarp.L/middle_proximal.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/middle_root.L/middle_metacarp.L/middle_proximal.L/middle_distal.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/middle_root.L/middle_metacarp.L/middle_proximal.L/middle_distal.L/middle_distal.L_end
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/ring_root.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/ring_root.L/ring_metacarp.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/ring_root.L/ring_metacarp.L/ring_proximal.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/ring_root.L/ring_metacarp.L/ring_proximal.L/ring_distal.L
+        weight: 1
+      - path: hand_left/root_hand.L/palm_hand.L/ring_root.L/ring_metacarp.L/ring_proximal.L/ring_distal.L/ring_distal.L_end
+        weight: 1
+      - path: hand_left/root_hand.L/thumb_root.L
+        weight: 1
+      - path: hand_left/root_hand.L/thumb_root.L/Bone.002
+        weight: 1
+      - path: hand_left/root_hand.L/thumb_root.L/Bone.002/Bone.002_end
+        weight: 1
+      - path: hand_left/root_hand.L/thumb_root.L/thumb_metacarp.L
+        weight: 1
+      - path: hand_left/root_hand.L/thumb_root.L/thumb_metacarp.L/thumb_proximal.L
+        weight: 1
+      - path: hand_left/root_hand.L/thumb_root.L/thumb_metacarp.L/thumb_proximal.L/thumb_distal.L
+        weight: 1
+      - path: hand_left/root_hand.L/thumb_root.L/thumb_metacarp.L/thumb_proximal.L/thumb_distal.L/thumb_distal.L_end
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 180
+    normalImportMode: 1
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

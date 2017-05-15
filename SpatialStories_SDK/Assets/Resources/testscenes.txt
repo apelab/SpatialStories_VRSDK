@@ -1,0 +1,4 @@
+E:\Projects\SpatialStories_Unity\git\SpatialStories_Unity\Assets\SpatialStories_Core\Examples\Gaze.unity
+E:\Projects\SpatialStories_Unity\git\SpatialStories_Unity\Assets\SpatialStories_Core\Examples\Inputs.unity
+E:\Projects\SpatialStories_Unity\git\SpatialStories_Unity\Assets\SpatialStories_Core\Examples\Proximity_Camera.unity
+E:\Projects\SpatialStories_Unity\git\SpatialStories_Unity\Assets\SpatialStories_Core\Examples\Proximity_CustomConditions.unity
