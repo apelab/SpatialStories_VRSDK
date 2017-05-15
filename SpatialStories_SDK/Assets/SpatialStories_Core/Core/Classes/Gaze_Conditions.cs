@@ -283,7 +283,7 @@ namespace Gaze
                 activeConditions.Add(new Gaze_ProximityCondition(this));
 
             if (touchEnabled)
-                activeConditions.Add(new Gaze_TouchCondition(this, gazeColliderIO.GetComponentInChildren<Gaze_Gaze>().GetComponent<Collider>()));
+                activeConditions.Add(new Gaze_TouchCondition(this, touchMap.TouchEnitry.interactiveObject.GetComponentInChildren<Gaze_Gaze>().GetComponent<Collider>()));
 
             if (grabEnabled)
                 activeConditions.Add(new Gaze_GrabCondition(this));
@@ -361,7 +361,6 @@ namespace Gaze
             // if in the appropriate time frame (ACTIVE)
             if (triggerStateIndex == (int)Gaze_TriggerState.ACTIVE)
             {
-
                 // check if we need to reload
                 HandleReload();
 

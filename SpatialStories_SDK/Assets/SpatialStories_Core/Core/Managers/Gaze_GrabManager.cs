@@ -78,8 +78,8 @@ public class Gaze_GrabManager : MonoBehaviour
     private Vector3 hitPosition;
     private bool intersectsWithInteractiveIO;
     private Dictionary<string, object> analyticsDico;
-    private Gaze_ControllerPointingEventArgs gaze_ControllerPointingEventArgs;
-    private Gaze_LaserEventArgs gaze_LaserEventArgs;
+    private Gaze_ControllerPointingEventArgs gaze_ControllerPointingEventArgs = new Gaze_ControllerPointingEventArgs();
+    private Gaze_LaserEventArgs gaze_LaserEventArgs = new Gaze_LaserEventArgs();
     private Gaze_ControllerTouchEventArgs gaze_ControllerTouchEventArgs;
 
     /// <summary>
@@ -195,12 +195,15 @@ public class Gaze_GrabManager : MonoBehaviour
         SetupDinstanceGrabFeedbacks();
         analyticsDico = new Dictionary<string, object>();
 
-        gaze_ControllerPointingEventArgs = new Gaze_ControllerPointingEventArgs();
         gaze_ControllerPointingEventArgs.Sender = this.gameObject;
-        gaze_LaserEventArgs = new Gaze_LaserEventArgs();
-        gaze_LaserEventArgs.Sender = this;
-        gaze_ControllerTouchEventArgs = new Gaze_ControllerTouchEventArgs(this.gameObject);
+        gaze_LaserEventArgs = new Gaze_LaserEventArgs()
+        {
+            Sender = this
+        };
+
         keyValue = new KeyValuePair<VRNode, GameObject>();
+        gaze_ControllerTouchEventArgs = new Gaze_ControllerTouchEventArgs(this.gameObject);
+        gaze_ControllerPointingEventArgs = new Gaze_ControllerPointingEventArgs(this.gameObject, keyValue, true);
         laserPointer.enabled = true;
     }
 
@@ -330,17 +333,14 @@ public class Gaze_GrabManager : MonoBehaviour
         if (_interactableIO.IsTouchEnabled)
         {
             // set the dico members
-            Dictionary<VRNode, GameObject> dico = new Dictionary<VRNode, GameObject>();
             VRNode vrNode = isLeftHand ? VRNode.LeftHand : VRNode.RightHand;
-            dico.Add(vrNode, _interactableIO.gameObject);
 
             // fire the touch event
-            gaze_ControllerTouchEventArgs.Dico = dico;
+            gaze_ControllerTouchEventArgs.Dico = new KeyValuePair<VRNode, GameObject>(vrNode, _interactableIO.gameObject);
             gaze_ControllerTouchEventArgs.Mode = searchDistanceState;
             gaze_ControllerTouchEventArgs.IsTouching = true;
             gaze_ControllerTouchEventArgs.IsTriggerPressed = isTriggerPressed;
             Gaze_InputManager.FireControllerTouchEvent(gaze_ControllerTouchEventArgs);
-            //Gaze_InputManager.FireControllerTouchEvent(new Gaze_ControllerTouchEventArgs(this, dico, searchDistanceState, true, isTriggerPressed));
 
             // analytics
             analyticsDico.Clear();
@@ -539,7 +539,6 @@ public class Gaze_GrabManager : MonoBehaviour
     /// <summary>
     /// Trows a raycast forward in order to find an object to grab
     /// </summary>
-    //TODO in the future version, raycast on Manipulate collider (former name of Gaze and Handle colliders merged)
     private void FindValidDistantObject()
     {
         if (distantGrabOrigin == null)
@@ -557,10 +556,6 @@ public class Gaze_GrabManager : MonoBehaviour
             // notify every previously pointed object they are no longer pointed
             for (int i = 0; i < raycastIOs.Count; i++)
             {
-                //Dictionary<VRNode, GameObject> dico = new Dictionary<VRNode, GameObject>();
-                //dico.Add(isLeftHand ? VRNode.LeftHand : VRNode.RightHand, raycastIOs[i]);
-                //gaze_ControllerPointingEventArgs.Dico = dico;
-                gaze_ControllerPointingEventArgs.KeyValue = new KeyValuePair<VRNode, GameObject>(isLeftHand ? VRNode.LeftHand : VRNode.RightHand, raycastIOs[i]);
                 gaze_ControllerPointingEventArgs.IsPointed = false;
                 Gaze_EventManager.FireControllerPointingEvent(gaze_ControllerPointingEventArgs);
 
@@ -591,10 +586,7 @@ public class Gaze_GrabManager : MonoBehaviour
                     {
                         // notify the new pointed object
                         raycastIOs.Add(interactiveObject.gameObject);
-                        Dictionary<VRNode, GameObject> dicoPointed = new Dictionary<VRNode, GameObject>();
-                        dicoPointed.Add(isLeftHand ? VRNode.LeftHand : VRNode.RightHand, interactiveObject.gameObject);
-                        gaze_ControllerPointingEventArgs.Dico = dicoPointed;
-                        //gaze_ControllerPointingEventArgs.KeyValue = new KeyValuePair<VRNode, GameObject>(isLeftHand ? VRNode.LeftHand : VRNode.RightHand, interactiveObject.gameObject);
+                        gaze_ControllerPointingEventArgs.Dico = new KeyValuePair<VRNode, GameObject>(isLeftHand ? VRNode.LeftHand : VRNode.RightHand, interactiveObject.gameObject);
                         gaze_ControllerPointingEventArgs.IsPointed = true;
                         Gaze_EventManager.FireControllerPointingEvent(gaze_ControllerPointingEventArgs);
 
@@ -641,9 +633,7 @@ public class Gaze_GrabManager : MonoBehaviour
                 if (!hitsIOs.Contains(raycastIOs[i]))
                 {
                     // notify
-                    Dictionary<VRNode, GameObject> dicoUnpointed = new Dictionary<VRNode, GameObject>();
-                    dicoUnpointed.Add(isLeftHand ? VRNode.LeftHand : VRNode.RightHand, raycastIOs[i]);
-                    gaze_ControllerPointingEventArgs.Dico = dicoUnpointed;
+                    gaze_ControllerPointingEventArgs.Dico = new KeyValuePair<VRNode, GameObject>(isLeftHand ? VRNode.LeftHand : VRNode.RightHand, raycastIOs[i]);
                     gaze_ControllerPointingEventArgs.IsPointed = false;
                     Gaze_EventManager.FireControllerPointingEvent(gaze_ControllerPointingEventArgs);
 
@@ -1120,9 +1110,7 @@ public class Gaze_GrabManager : MonoBehaviour
             {
                 if (interactableIO)
                 {
-                    Dictionary<VRNode, GameObject> dico = new Dictionary<VRNode, GameObject>();
-                    dico.Add(isLeftHand ? VRNode.LeftHand : VRNode.RightHand, interactableIO.gameObject);
-                    Gaze_EventManager.FireControllerPointingEvent(new Gaze_ControllerPointingEventArgs(this.gameObject, dico, false));
+                    Gaze_EventManager.FireControllerPointingEvent(new Gaze_ControllerPointingEventArgs(this.gameObject, new KeyValuePair<VRNode, GameObject>(isLeftHand ? VRNode.LeftHand : VRNode.RightHand, interactableIO.gameObject), false));
                     TriggerReleased(interactableIO.gameObject);
                     ResetGrabStateAfterHandUp();
                 }
@@ -1153,7 +1141,7 @@ public class Gaze_GrabManager : MonoBehaviour
                 {
                     Dictionary<VRNode, GameObject> dico = new Dictionary<VRNode, GameObject>();
                     dico.Add(isLeftHand ? VRNode.LeftHand : VRNode.RightHand, interactableIO.gameObject);
-                    Gaze_EventManager.FireControllerPointingEvent(new Gaze_ControllerPointingEventArgs(this.gameObject, dico, false));
+                    Gaze_EventManager.FireControllerPointingEvent(new Gaze_ControllerPointingEventArgs(this.gameObject, new KeyValuePair<VRNode, GameObject>(isLeftHand ? VRNode.LeftHand : VRNode.RightHand, interactableIO.gameObject), false));
                     TriggerReleased(interactableIO.gameObject);
                     ResetGrabStateAfterHandUp();
                 }
