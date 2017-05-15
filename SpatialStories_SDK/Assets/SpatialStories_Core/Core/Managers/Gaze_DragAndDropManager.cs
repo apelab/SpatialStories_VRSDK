@@ -95,7 +95,7 @@ namespace Gaze
 
         void Update()
         {
-            Debug.Log(currentDragAndDropCondition.TargetObject.transform.rotation.eulerAngles.x);
+            //Debug.Log(currentDragAndDropCondition.TargetObject.transform.rotation.eulerAngles.x);
             //Debug.Log(currentDragAndDropCondition.TargetObject.transform.rotation.eulerAngles.x);
             //Debug.Log(Mathf.Abs(currentDragAndDropCondition.TargetObject.transform.rotation.eulerAngles.y - transform.rotation.eulerAngles.y));
             //Debug.Log(Mathf.DeltaAngle(currentDragAndDropCondition.TargetObject.transform.rotation.eulerAngles.z, transform.rotation.eulerAngles.z));
@@ -246,7 +246,10 @@ namespace Gaze
             bool validRotation = xAxisSimilarity > angleThreshold && yAxisSimilarity > angleThreshold && zAxisSimilarity > angleThreshold;
             */
 
-            float xAxisSimilarity = respectXAxis ? Vector3.Dot(transform.right, currentDragAndDropCondition.TargetObject.transform.right) : 1;
+            float[] validArray = {1, 1};
+            float[] xDotProducts = { Vector3.Dot(transform.up, currentDragAndDropCondition.TargetObject.transform.up), Vector3.Dot(transform.forward, currentDragAndDropCondition.TargetObject.transform.forward) };
+            
+            float xAxisSimilarity = respectXAxis ? Vector3.Dot(transform.right, currentDragAndDropCondition.TargetObject.transform.right)  : 1;
             if (respectXAxisMirrored)
                 xAxisSimilarity = Mathf.Abs(xAxisSimilarity);
             float yAxisSimilarity = respectYAxis ? Vector3.Dot(transform.up, currentDragAndDropCondition.TargetObject.transform.up) : 1;
