@@ -159,7 +159,7 @@ namespace Gaze
 
         private void Awake()
         {
-            DetermineInitialGravityState();
+            SetActualGravityStateAsDefault();
 
             initialTransform = new Gaze_Transform(transform);
 
@@ -180,11 +180,13 @@ namespace Gaze
         private void OnEnable()
         {
             Gaze_InputManager.OnControllerGrabEvent += OnControllerGrabEvent;
+            Gaze_EventManager.OnControllerPointingEvent += OnControllerPointingEvent;
         }
 
         private void OnDisable()
         {
             Gaze_InputManager.OnControllerGrabEvent -= OnControllerGrabEvent;
+            Gaze_EventManager.OnControllerPointingEvent -= OnControllerPointingEvent;
         }
 
         /// <summary>
@@ -338,9 +340,9 @@ namespace Gaze
 
         #region GravityManagement
         /// <summary>
-        /// Checks the initial gravity state in order to return to it if required
+        /// Checks the actual gravity state and store it as default
         /// </summary>
-        private void DetermineInitialGravityState()
+        public void SetActualGravityStateAsDefault()
         {
             Rigidbody rigidBody = GetRigitBodyOrError();
             if (rigidBody == null)
@@ -357,6 +359,37 @@ namespace Gaze
             }
 
             actualGravityState = initialGravityState;
+        }
+
+        /// <summary>
+        /// If the gravity of the IO is not locked it will return to its default state.
+        /// </summary>
+        public void ReturnToInitialGravityState()
+        {
+            Rigidbody rigidBody = GetRigitBodyOrError();
+
+            if (rigidBody == null)
+                return;
+
+            switch (initialGravityState)
+            {
+                case Gaze_GravityState.ACTIVE_KINEMATIC:
+                    rigidBody.useGravity = true;
+                    rigidBody.isKinematic = true;
+                    break;
+                case Gaze_GravityState.ACTIVE_NOT_KINEMATIC:
+                    rigidBody.useGravity = true;
+                    rigidBody.isKinematic = false;
+                    break;
+                case Gaze_GravityState.UNACTIVE_KINEMATIC:
+                    rigidBody.useGravity = false;
+                    rigidBody.isKinematic = true;
+                    break;
+                case Gaze_GravityState.UNACTIVE_NOT_KINEMATIC:
+                    rigidBody.useGravity = false;
+                    rigidBody.isKinematic = false;
+                    break;
+            }
         }
 
         // Make the IO not listen gravity requests
@@ -487,6 +520,26 @@ namespace Gaze
         }
 
         #endregion ManipulationManagement
-    }
 
+        #region PointingManagement
+
+        public bool IsPointedWithLeftHand;
+        public bool IsPointedWithRightHand;
+
+        private void OnControllerPointingEvent(Gaze_ControllerPointingEventArgs e)
+        {
+            if (e.Dico.Value.Equals(gameObject))
+            {
+                if (e.KeyValue.Key == UnityEngine.VR.VRNode.LeftHand)
+                {
+                    IsPointedWithLeftHand = e.IsPointed;
+                }
+                else
+                {
+                    IsPointedWithRightHand = e.IsPointed;
+                }
+            }
+        }
+        #endregion PointingManagement
+    }
 }

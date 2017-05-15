@@ -247,11 +247,6 @@ namespace Gaze
         public Gaze_DependencyMap ActivateOnDependencyMap = new Gaze_DependencyMap();
         public Gaze_DependencyMap DeactivateOnDependencyMap = new Gaze_DependencyMap();
 
-        /// <summary>
-        /// All the grabable Interactive Objects in the list are required in order to be validated.
-        /// </summary>
-        public bool requireAllTouchables;
-
         public List<Gaze_AbstractCondition> activeConditions = new List<Gaze_AbstractCondition>();
 
         // This list has all the AbstractConditions in order to setup & dipose them automatically
@@ -283,7 +278,7 @@ namespace Gaze
                 activeConditions.Add(new Gaze_ProximityCondition(this));
 
             if (touchEnabled)
-                activeConditions.Add(new Gaze_TouchCondition(this, gazeColliderIO.GetComponentInChildren<Gaze_Gaze>().GetComponent<Collider>()));
+                activeConditions.Add(new Gaze_TouchCondition(this, touchMap.TouchEnitry.interactiveObject.GetComponentInChildren<Gaze_Gaze>().GetComponent<Collider>()));
 
             if (grabEnabled)
                 activeConditions.Add(new Gaze_GrabCondition(this));
@@ -361,7 +356,6 @@ namespace Gaze
             // if in the appropriate time frame (ACTIVE)
             if (triggerStateIndex == (int)Gaze_TriggerState.ACTIVE)
             {
-
                 // check if we need to reload
                 HandleReload();
 

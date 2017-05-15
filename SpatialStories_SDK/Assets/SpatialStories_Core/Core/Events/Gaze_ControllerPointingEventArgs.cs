@@ -32,41 +32,24 @@ namespace Gaze
 
         public KeyValuePair<VRNode, GameObject> KeyValue { get { return keyValue; } set { keyValue = value; } }
 
-        private Dictionary<VRNode, GameObject> dico;
+        private KeyValuePair<VRNode, GameObject> dico;
 
-        public Dictionary<VRNode, GameObject> Dico { get { return dico; } set { dico = value; } }
+        public KeyValuePair<VRNode, GameObject> Dico { get { return dico; } set { dico = value; } }
 
         private bool isPointed;
 
         public bool IsPointed { get { return isPointed; } set { isPointed = value; } }
 
-        /// <summary>
-        /// Arguments for animation events related.     
-        /// </summary>
-        /// <param name="_sender">Is the sender's object.</param>
-        public Gaze_ControllerPointingEventArgs()
-        {
-        }
+        public Gaze_ControllerPointingEventArgs() { }
 
         /// <summary>
         /// Arguments for animation events related.     
         /// </summary>
         /// <param name="_sender">Is the sender's object.</param>
-        public Gaze_ControllerPointingEventArgs(object _sender, Dictionary<VRNode, GameObject> _dico, bool _isPointed)
+        public Gaze_ControllerPointingEventArgs(object _sender, KeyValuePair<VRNode, GameObject> _dico, bool _isPointed)
         {
             sender = _sender;
             dico = _dico;
-            isPointed = _isPointed;
-        }
-
-        /// <summary>
-        /// Arguments for animation events related.     
-        /// </summary>
-        /// <param name="_sender">Is the sender's object.</param>
-        public Gaze_ControllerPointingEventArgs(object _sender, KeyValuePair<VRNode, GameObject> _keyValue, bool _isPointed)
-        {
-            sender = _sender;
-            keyValue = _keyValue;
             isPointed = _isPointed;
         }
     }
