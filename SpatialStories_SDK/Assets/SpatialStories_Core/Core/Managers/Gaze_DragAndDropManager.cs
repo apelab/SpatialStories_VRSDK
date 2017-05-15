@@ -109,13 +109,11 @@ namespace Gaze
                 // if the user aligned the object with its DnD target
                 if (isCurrentlyAligned)
                 {
-                    Debug.Log("aligned !");
                     DropReady();
                 }
                 // if the user removed the object from its DnD target
                 else
                 {
-                    Debug.Log("NOT aligned !");
                     Remove();
                     Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(gameObject, currentDragAndDropCondition.TargetObject.gameObject, Gaze_DragAndDropStates.DROPREADYCANCELED));
                 }

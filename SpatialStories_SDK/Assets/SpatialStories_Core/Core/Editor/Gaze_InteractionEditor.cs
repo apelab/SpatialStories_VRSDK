@@ -145,7 +145,7 @@ namespace Gaze
                 }
                 #endregion
 
-                #region State
+                #region Conditions
                 ShowConditionsState();
                 #endregion
             }
