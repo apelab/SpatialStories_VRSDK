@@ -95,6 +95,12 @@ namespace Gaze
 
         void Update()
         {
+            Debug.Log(currentDragAndDropCondition.TargetObject.transform.rotation.eulerAngles.x);
+            //Debug.Log(currentDragAndDropCondition.TargetObject.transform.rotation.eulerAngles.x);
+            //Debug.Log(Mathf.Abs(currentDragAndDropCondition.TargetObject.transform.rotation.eulerAngles.y - transform.rotation.eulerAngles.y));
+            //Debug.Log(Mathf.DeltaAngle(currentDragAndDropCondition.TargetObject.transform.rotation.eulerAngles.z, transform.rotation.eulerAngles.z));
+
+
             if (currentDragAndDropCondition == null)
                 return;
 
@@ -226,7 +232,7 @@ namespace Gaze
                 return false;
 
             // NOTE hack to always return true (no rotation check)
-            return true;
+            //return true;
 
             /*
             // check rotation by checking axis
@@ -240,6 +246,28 @@ namespace Gaze
             if (respectZAxisMirrored)
                 zAxisSimilarity = Mathf.Abs(zAxisSimilarity);
             bool validRotation = xAxisSimilarity > angleThreshold && yAxisSimilarity > angleThreshold && zAxisSimilarity > angleThreshold;
+            */
+
+            float xAxisSimilarity = respectXAxis ? Vector3.Dot(transform.right, currentDragAndDropCondition.TargetObject.transform.right) : 1;
+            if (respectXAxisMirrored)
+                xAxisSimilarity = Mathf.Abs(xAxisSimilarity);
+            float yAxisSimilarity = respectYAxis ? Vector3.Dot(transform.up, currentDragAndDropCondition.TargetObject.transform.up) : 1;
+            if (respectYAxisMirrored)
+                yAxisSimilarity = Mathf.Abs(yAxisSimilarity);
+            float zAxisSimilarity = respectZAxis ? Vector3.Dot(transform.forward, currentDragAndDropCondition.TargetObject.transform.forward) : 1;
+            if (respectZAxisMirrored)
+                zAxisSimilarity = Mathf.Abs(zAxisSimilarity);
+            bool validRotation = xAxisSimilarity > angleThreshold && yAxisSimilarity > angleThreshold && zAxisSimilarity > angleThreshold;
+
+            
+
+
+            //Debug.Log(Mathf.Abs(xAngleGhost - xAngle));
+            //Debug.Log(isSimilar);
+
+            //Debug.Log("x " + xAxisSimilarity);
+            //Debug.Log("y " + yAxisSimilarity);
+            //Debug.Log("z " + zAxisSimilarity);
 
             if (validRotation)
             {
@@ -252,7 +280,7 @@ namespace Gaze
             }
             else
                 return false;
-            */
+            
         }
 
         private void Snap(float timeToSnap = 0f)
