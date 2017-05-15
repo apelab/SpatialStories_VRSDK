@@ -857,15 +857,19 @@ MonoBehaviour:
   FocusLossSpeed: 1
   proximityEnabled: 0
   grabEnabled: 0
+  inputsEnabled: 0
+  InputsMap:
+    InputsEntries: []
+    AreDependenciesSatisfied: 1
+  requireAllInputs: 0
   customConditionsEnabled: 1
   requireAllProximities: 0
   touchMap:
-    touchEntryList: []
+    TouchEnitry:
+      hand: 0
+      interactiveObject: {fileID: 0}
     touchHandsIndex: 0
-    touchDistanceModeLeftIndex: 0
-    touchDistanceModeRightIndex: 0
-    touchActionLeftIndex: 0
-    touchActionRightIndex: 0
+    touchActionIndex: 0
   gazeEnabled: 0
   touchEnabled: 0
   ActivateOnDependencyMap:
@@ -874,7 +878,6 @@ MonoBehaviour:
   DeactivateOnDependencyMap:
     dependencies: []
     AreDependenciesSatisfied: 0
-  requireAllTouchables: 0
   gazeColliderIO: {fileID: 0}
   ReloadDependencies: 0
   isActive: 1
@@ -907,60 +910,6 @@ Transform:
   m_Father: {fileID: 46026025}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &171255322
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 171255323}
-  - component: {fileID: 171255325}
-  - component: {fileID: 171255324}
-  m_Layer: 0
-  m_Name: Handle
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &171255323
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 171255322}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1189755141}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &171255324
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 171255322}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ea4af8136cc3c446acc160bf8904707, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  debug: 0
---- !u!65 &171255325
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 171255322}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &184322375
 GameObject:
   m_ObjectHideFlags: 0
@@ -1284,15 +1233,19 @@ MonoBehaviour:
   FocusLossSpeed: 1
   proximityEnabled: 0
   grabEnabled: 0
+  inputsEnabled: 0
+  InputsMap:
+    InputsEntries: []
+    AreDependenciesSatisfied: 1
+  requireAllInputs: 0
   customConditionsEnabled: 0
   requireAllProximities: 0
   touchMap:
-    touchEntryList: []
+    TouchEnitry:
+      hand: 0
+      interactiveObject: {fileID: 0}
     touchHandsIndex: 0
-    touchDistanceModeLeftIndex: 0
-    touchDistanceModeRightIndex: 0
-    touchActionLeftIndex: 0
-    touchActionRightIndex: 0
+    touchActionIndex: 0
   gazeEnabled: 0
   touchEnabled: 0
   ActivateOnDependencyMap:
@@ -1304,7 +1257,6 @@ MonoBehaviour:
   DeactivateOnDependencyMap:
     dependencies: []
     AreDependenciesSatisfied: 0
-  requireAllTouchables: 0
   gazeColliderIO: {fileID: 0}
   ReloadDependencies: 0
   isActive: 1
@@ -1414,183 +1366,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 211634444}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &256979621
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 256979626}
-  - component: {fileID: 256979625}
-  - component: {fileID: 256979624}
-  - component: {fileID: 256979623}
-  - component: {fileID: 256979622}
-  m_Layer: 0
-  m_Name: Interaction
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &256979622
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 256979621}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 028afd6ab11f86e4ca542964abe9dfb4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  IsValid: 0
-  onDropReady: 0
-  onDrop: 1
-  onPickup: 0
-  onRemove: 0
-  TargetObject: {fileID: 710290729}
-  attached: 0
---- !u!114 &256979623
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 256979621}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a11d97df356699943aab990d9fcca9f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dependent: 0
-  requireAllActivators: 0
-  requireAllDeactivators: 0
-  proximityMap:
-    proximityEntryList: []
-    proximityStateIndex: 0
-  grabMap:
-    grabEntryList: []
-    grabHandsIndex: 0
-    grabStateLeftIndex: 0
-    grabStateRightIndex: 0
-  customConditions:
-  - {fileID: 256979622}
-  triggerStateIndex: 1
-  delayDuration: 0
-  delayed: 0
-  activeDuration: 0
-  expires: 0
-  autoTriggerModeIndex: 0
-  reload: 0
-  canBeTriggered: 1
-  TriggerCount: 0
-  reloadModeIndex: 0
-  reloadMaxRepetitions: 0
-  reloadCount: 0
-  reloadDelay: 0
-  focusDuration: 0
-  focusLossModeIndex: 0
-  FocusLossSpeed: 1
-  proximityEnabled: 0
-  grabEnabled: 0
-  customConditionsEnabled: 1
-  requireAllProximities: 0
-  touchMap:
-    touchEntryList: []
-    touchHandsIndex: 0
-    touchDistanceModeLeftIndex: 0
-    touchDistanceModeRightIndex: 0
-    touchActionLeftIndex: 0
-    touchActionRightIndex: 0
-  gazeEnabled: 0
-  touchEnabled: 0
-  ActivateOnDependencyMap:
-    dependencies: []
-    AreDependenciesSatisfied: 1
-  DeactivateOnDependencyMap:
-    dependencies: []
-    AreDependenciesSatisfied: 0
-  requireAllTouchables: 0
-  gazeColliderIO: {fileID: 0}
-  ReloadDependencies: 0
-  isActive: 1
---- !u!114 &256979624
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 256979621}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9fe86aa1e2e51304b81a3f6820a3abdb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rootIO: {fileID: 0}
-  isActive: 0
-  ActionReset: 0
-  ActionVisuals: 0
-  ActionGrab: 0
-  ActionTouch: 0
-  ActionGravity: 0
-  ActionAudio: 0
-  ActionColliders: 0
-  DestroyOnTrigger: 0
-  ModifyGrabDistance: 0
-  ModifyTouchDistance: 0
-  ModifyGrabMode: 0
-  grabDistance: 0
-  touchDistance: 0
-  grabModeIndex: 0
-  triggerAnimation: 0
-  targetAnimator: {fileID: 0}
-  activeTriggerStatesAnim: 0000000000
-  animatorTriggers:
-  - 
-  - 
-  - 
-  - 
-  - 
-  targetAudioSource: {fileID: 0}
-  activeTriggerStatesAudio: 0000000000
-  audioClips:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  loopAudio: 0000000000
-  duckingEnabled: 1
-  audioVolumeMin: 0.2
-  audioVolumeMax: 1
-  fadeSpeed: 0.005
-  IO: {fileID: 0}
-  triggerNotification: 0
---- !u!114 &256979625
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 256979621}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c5e5d36d57be5841bfb50b6dbe7c062, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HasActions: 0
-  HasConditions: 1
---- !u!4 &256979626
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 256979621}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 2031365311}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &258864135
@@ -1845,6 +1620,8 @@ MonoBehaviour:
   AttractionSpeed: 1
   IsManipulable: 0
   RootMotion: {fileID: 0}
+  IsPointedWithLeftHand: 0
+  IsPointedWithRightHand: 0
 --- !u!95 &283241737
 Animator:
   serializedVersion: 3
@@ -1868,7 +1645,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 283241733}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 6.536, y: 0.16, z: -8.17}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1877,8 +1654,8 @@ Transform:
   - {fileID: 1375974747}
   - {fileID: 2098827381}
   - {fileID: 270648861}
-  m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_Father: {fileID: 735740480}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!114 &283241739
 MonoBehaviour:
@@ -2190,15 +1967,19 @@ MonoBehaviour:
   FocusLossSpeed: 1
   proximityEnabled: 0
   grabEnabled: 0
+  inputsEnabled: 0
+  InputsMap:
+    InputsEntries: []
+    AreDependenciesSatisfied: 1
+  requireAllInputs: 0
   customConditionsEnabled: 0
   requireAllProximities: 0
   touchMap:
-    touchEntryList: []
+    TouchEnitry:
+      hand: 0
+      interactiveObject: {fileID: 0}
     touchHandsIndex: 0
-    touchDistanceModeLeftIndex: 0
-    touchDistanceModeRightIndex: 0
-    touchActionLeftIndex: 0
-    touchActionRightIndex: 0
+    touchActionIndex: 0
   gazeEnabled: 0
   touchEnabled: 0
   ActivateOnDependencyMap:
@@ -2210,7 +1991,6 @@ MonoBehaviour:
   DeactivateOnDependencyMap:
     dependencies: []
     AreDependenciesSatisfied: 0
-  requireAllTouchables: 0
   gazeColliderIO: {fileID: 0}
   ReloadDependencies: 0
   isActive: 1
@@ -2891,6 +2671,8 @@ MonoBehaviour:
   AttractionSpeed: 1
   IsManipulable: 0
   RootMotion: {fileID: 0}
+  IsPointedWithLeftHand: 0
+  IsPointedWithRightHand: 0
 --- !u!82 &429312879
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3080,77 +2862,6 @@ BoxCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 452525765}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!1 &458037117
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 458037118}
-  - component: {fileID: 458037121}
-  - component: {fileID: 458037120}
-  - component: {fileID: 458037119}
-  m_Layer: 0
-  m_Name: Proximity
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &458037118
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 458037117}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1189755141}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &458037119
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 458037117}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0af6883239c3794b9e9f723082ebfdd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  debug: 0
-  IOScript: {fileID: 1189755139}
---- !u!54 &458037120
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 458037117}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!65 &458037121
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 458037117}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
@@ -3367,59 +3078,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!1 &487574115
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 487574116}
-  - component: {fileID: 487574118}
-  - component: {fileID: 487574117}
-  m_Layer: 0
-  m_Name: Gaze
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &487574116
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 487574115}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1189755141}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &487574117
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 487574115}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: effc050a645b03e4794e0b3d97e0c660, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!65 &487574118
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 487574115}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &488040978
 GameObject:
   m_ObjectHideFlags: 0
@@ -3605,15 +3263,19 @@ MonoBehaviour:
   FocusLossSpeed: 1
   proximityEnabled: 0
   grabEnabled: 0
+  inputsEnabled: 0
+  InputsMap:
+    InputsEntries: []
+    AreDependenciesSatisfied: 1
+  requireAllInputs: 0
   customConditionsEnabled: 0
   requireAllProximities: 0
   touchMap:
-    touchEntryList: []
+    TouchEnitry:
+      hand: 0
+      interactiveObject: {fileID: 0}
     touchHandsIndex: 0
-    touchDistanceModeLeftIndex: 0
-    touchDistanceModeRightIndex: 0
-    touchActionLeftIndex: 0
-    touchActionRightIndex: 0
+    touchActionIndex: 0
   gazeEnabled: 0
   touchEnabled: 0
   ActivateOnDependencyMap:
@@ -3622,7 +3284,6 @@ MonoBehaviour:
   DeactivateOnDependencyMap:
     dependencies: []
     AreDependenciesSatisfied: 0
-  requireAllTouchables: 0
   gazeColliderIO: {fileID: 1297070890}
   ReloadDependencies: 0
   isActive: 0
@@ -3823,60 +3484,6 @@ Transform:
   m_Father: {fileID: 1830319125}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &565292017
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 565292018}
-  - component: {fileID: 565292020}
-  - component: {fileID: 565292019}
-  m_Layer: 0
-  m_Name: Handle
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &565292018
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 565292017}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 710290731}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &565292019
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 565292017}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ea4af8136cc3c446acc160bf8904707, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  debug: 0
---- !u!65 &565292020
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 565292017}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &603501134
 GameObject:
   m_ObjectHideFlags: 0
@@ -4008,6 +3615,8 @@ MonoBehaviour:
   AttractionSpeed: 1
   IsManipulable: 0
   RootMotion: {fileID: 0}
+  IsPointedWithLeftHand: 0
+  IsPointedWithRightHand: 0
 --- !u!114 &614516347
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4368,177 +3977,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 701109827}
   m_Mesh: {fileID: 4300000, guid: ae3b812a65f8cf94bac262280742cd08, type: 3}
---- !u!1 &710290726
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 710290731}
-  - component: {fileID: 710290730}
-  - component: {fileID: 710290729}
-  - component: {fileID: 710290728}
-  - component: {fileID: 710290727}
-  m_Layer: 0
-  m_Name: CubeGhost (IO)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!82 &710290727
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 710290726}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
---- !u!54 &710290728
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 710290726}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!114 &710290729
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 710290726}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ac765816c049ac42908efc08e7f359c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ManipulationModeIndex: 3
-  TouchModeIndex: 0
-  ManipulableHandle: {fileID: 0}
-  HasGrabPositionner: 0
-  GrabPositionnerCollider: {fileID: 0}
-  VibratesOnGrab: 0
-  GrabDistance: 0
-  TouchDistance: 0
-  AttractionSpeed: 1
-  IsManipulable: 0
-  RootMotion: {fileID: 0}
---- !u!95 &710290730
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 710290726}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
---- !u!4 &710290731
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 710290726}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.75, y: 1.16, z: -6.98}
-  m_LocalScale: {x: 1, y: 3, z: 0.5}
-  m_Children:
-  - {fileID: 900255554}
-  - {fileID: 1135691896}
-  - {fileID: 1960289531}
-  - {fileID: 906048472}
-  - {fileID: 565292018}
-  m_Father: {fileID: 0}
-  m_RootOrder: 10
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &721919751
 GameObject:
   m_ObjectHideFlags: 0
@@ -4669,6 +4107,38 @@ Transform:
   m_Father: {fileID: 1683916535}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &735740479
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 735740480}
+  m_Layer: 0
+  m_Name: Accessories
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &735740480
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 735740479}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 894770034}
+  - {fileID: 2040613626}
+  - {fileID: 769113361}
+  - {fileID: 283241738}
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &739198056
 GameObject:
   m_ObjectHideFlags: 0
@@ -4754,15 +4224,19 @@ MonoBehaviour:
   FocusLossSpeed: 1
   proximityEnabled: 0
   grabEnabled: 0
+  inputsEnabled: 0
+  InputsMap:
+    InputsEntries: []
+    AreDependenciesSatisfied: 1
+  requireAllInputs: 0
   customConditionsEnabled: 0
   requireAllProximities: 0
   touchMap:
-    touchEntryList: []
+    TouchEnitry:
+      hand: 0
+      interactiveObject: {fileID: 0}
     touchHandsIndex: 0
-    touchDistanceModeLeftIndex: 0
-    touchDistanceModeRightIndex: 0
-    touchActionLeftIndex: 0
-    touchActionRightIndex: 0
+    touchActionIndex: 0
   gazeEnabled: 0
   touchEnabled: 0
   ActivateOnDependencyMap:
@@ -4774,7 +4248,6 @@ MonoBehaviour:
   DeactivateOnDependencyMap:
     dependencies: []
     AreDependenciesSatisfied: 0
-  requireAllTouchables: 0
   gazeColliderIO: {fileID: 0}
   ReloadDependencies: 0
   isActive: 1
@@ -5025,6 +4498,8 @@ MonoBehaviour:
   AttractionSpeed: 1
   IsManipulable: 0
   RootMotion: {fileID: 0}
+  IsPointedWithLeftHand: 0
+  IsPointedWithRightHand: 0
 --- !u!95 &769113360
 Animator:
   serializedVersion: 3
@@ -5057,8 +4532,8 @@ Transform:
   - {fileID: 603501135}
   - {fileID: 1246471224}
   - {fileID: 1329500256}
-  m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_Father: {fileID: 735740480}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &769113362
 MonoBehaviour:
@@ -5953,6 +5428,8 @@ MonoBehaviour:
   AttractionSpeed: 1
   IsManipulable: 0
   RootMotion: {fileID: 0}
+  IsPointedWithLeftHand: 0
+  IsPointedWithRightHand: 0
 --- !u!95 &894770033
 Animator:
   serializedVersion: 3
@@ -5985,8 +5462,8 @@ Transform:
   - {fileID: 722859048}
   - {fileID: 103570945}
   - {fileID: 1611676637}
-  m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_Father: {fileID: 735740480}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &894770035
 MonoBehaviour:
@@ -6024,88 +5501,6 @@ MeshCollider:
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: be85e3465d68749458e3b4463565b308, type: 3}
---- !u!1 &900255553
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 900255554}
-  m_Layer: 0
-  m_Name: Interactions
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &900255554
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 900255553}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 2089895006}
-  m_Father: {fileID: 710290731}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &906048471
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 906048472}
-  - component: {fileID: 906048474}
-  - component: {fileID: 906048473}
-  m_Layer: 0
-  m_Name: Gaze
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &906048472
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 906048471}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 710290731}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &906048473
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 906048471}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: effc050a645b03e4794e0b3d97e0c660, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!65 &906048474
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 906048471}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &908730838
 GameObject:
   m_ObjectHideFlags: 0
@@ -6491,15 +5886,19 @@ MonoBehaviour:
   FocusLossSpeed: 1
   proximityEnabled: 0
   grabEnabled: 0
+  inputsEnabled: 0
+  InputsMap:
+    InputsEntries: []
+    AreDependenciesSatisfied: 1
+  requireAllInputs: 0
   customConditionsEnabled: 0
   requireAllProximities: 0
   touchMap:
-    touchEntryList: []
+    TouchEnitry:
+      hand: 0
+      interactiveObject: {fileID: 0}
     touchHandsIndex: 0
-    touchDistanceModeLeftIndex: 0
-    touchDistanceModeRightIndex: 0
-    touchActionLeftIndex: 0
-    touchActionRightIndex: 0
+    touchActionIndex: 0
   gazeEnabled: 0
   touchEnabled: 0
   ActivateOnDependencyMap:
@@ -6508,7 +5907,6 @@ MonoBehaviour:
   DeactivateOnDependencyMap:
     dependencies: []
     AreDependenciesSatisfied: 0
-  requireAllTouchables: 0
   gazeColliderIO: {fileID: 0}
   ReloadDependencies: 0
   isActive: 0
@@ -7161,104 +6559,6 @@ Transform:
   m_Father: {fileID: 1184647757}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1130670454
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1130670455}
-  - component: {fileID: 1130670458}
-  - component: {fileID: 1130670456}
-  m_Layer: 0
-  m_Name: Cube
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1130670455
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1130670454}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1623343863}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &1130670456
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1130670454}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 1
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
---- !u!33 &1130670458
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1130670454}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &1135691895
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1135691896}
-  m_Layer: 0
-  m_Name: Visuals
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1135691896
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1135691895}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1878231132}
-  m_Father: {fileID: 710290731}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1140921629
 GameObject:
   m_ObjectHideFlags: 0
@@ -7575,6 +6875,8 @@ MonoBehaviour:
   AttractionSpeed: 1
   IsManipulable: 0
   RootMotion: {fileID: 0}
+  IsPointedWithLeftHand: 0
+  IsPointedWithRightHand: 0
 --- !u!82 &1166538129
 AudioSource:
   m_ObjectHideFlags: 0
@@ -7918,200 +7220,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 561849564}
   m_RootOrder: 11
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1189755135
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1189755141}
-  - component: {fileID: 1189755140}
-  - component: {fileID: 1189755139}
-  - component: {fileID: 1189755138}
-  - component: {fileID: 1189755137}
-  - component: {fileID: 1189755136}
-  m_Layer: 0
-  m_Name: CubeToDrag (IO)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &1189755136
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1189755135}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6ec005bb801f6b42b79902e425cae65, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_MinDistance: 1
-  angleThreshold: 0.9
-  respectXAxis: 1
-  respectXAxisMirrored: 0
-  respectYAxis: 1
-  respectYAxisMirrored: 0
-  respectZAxis: 1
-  respectZAxisMirrored: 0
-  m_SnapBeforeDrop: 0
-  m_TimeToSnap: 0.5
-  currentDragAndDropCondition: {fileID: 256979622}
---- !u!82 &1189755137
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1189755135}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
---- !u!54 &1189755138
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1189755135}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!114 &1189755139
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1189755135}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ac765816c049ac42908efc08e7f359c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ManipulationModeIndex: 2
-  TouchModeIndex: 0
-  ManipulableHandle: {fileID: 0}
-  HasGrabPositionner: 0
-  GrabPositionnerCollider: {fileID: 0}
-  VibratesOnGrab: 0
-  GrabDistance: 15
-  TouchDistance: 0
-  AttractionSpeed: 1
-  IsManipulable: 0
-  RootMotion: {fileID: 0}
---- !u!95 &1189755140
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1189755135}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
---- !u!4 &1189755141
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1189755135}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.75, y: 1.16, z: -6.98}
-  m_LocalScale: {x: 1, y: 3, z: 0.5}
-  m_Children:
-  - {fileID: 2031365311}
-  - {fileID: 1623343863}
-  - {fileID: 458037118}
-  - {fileID: 487574116}
-  - {fileID: 171255323}
-  m_Father: {fileID: 0}
-  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1199595657
 GameObject:
@@ -8542,6 +7650,8 @@ MonoBehaviour:
   AttractionSpeed: 1
   IsManipulable: 0
   RootMotion: {fileID: 0}
+  IsPointedWithLeftHand: 0
+  IsPointedWithRightHand: 0
 --- !u!95 &1240469967
 Animator:
   serializedVersion: 3
@@ -9114,15 +8224,19 @@ MonoBehaviour:
   FocusLossSpeed: 1
   proximityEnabled: 0
   grabEnabled: 0
+  inputsEnabled: 0
+  InputsMap:
+    InputsEntries: []
+    AreDependenciesSatisfied: 1
+  requireAllInputs: 0
   customConditionsEnabled: 1
   requireAllProximities: 0
   touchMap:
-    touchEntryList: []
+    TouchEnitry:
+      hand: 0
+      interactiveObject: {fileID: 0}
     touchHandsIndex: 0
-    touchDistanceModeLeftIndex: 0
-    touchDistanceModeRightIndex: 0
-    touchActionLeftIndex: 0
-    touchActionRightIndex: 0
+    touchActionIndex: 0
   gazeEnabled: 0
   touchEnabled: 0
   ActivateOnDependencyMap:
@@ -9131,7 +8245,6 @@ MonoBehaviour:
   DeactivateOnDependencyMap:
     dependencies: []
     AreDependenciesSatisfied: 0
-  requireAllTouchables: 0
   gazeColliderIO: {fileID: 0}
   ReloadDependencies: 0
   isActive: 1
@@ -9284,6 +8397,8 @@ MonoBehaviour:
   AttractionSpeed: 1
   IsManipulable: 0
   RootMotion: {fileID: 0}
+  IsPointedWithLeftHand: 0
+  IsPointedWithRightHand: 0
 --- !u!95 &1297070891
 Animator:
   serializedVersion: 3
@@ -10045,15 +9160,19 @@ MonoBehaviour:
   FocusLossSpeed: 1
   proximityEnabled: 0
   grabEnabled: 0
+  inputsEnabled: 0
+  InputsMap:
+    InputsEntries: []
+    AreDependenciesSatisfied: 1
+  requireAllInputs: 0
   customConditionsEnabled: 1
   requireAllProximities: 0
   touchMap:
-    touchEntryList: []
+    TouchEnitry:
+      hand: 0
+      interactiveObject: {fileID: 0}
     touchHandsIndex: 0
-    touchDistanceModeLeftIndex: 0
-    touchDistanceModeRightIndex: 0
-    touchActionLeftIndex: 0
-    touchActionRightIndex: 0
+    touchActionIndex: 0
   gazeEnabled: 0
   touchEnabled: 0
   ActivateOnDependencyMap:
@@ -10062,7 +9181,6 @@ MonoBehaviour:
   DeactivateOnDependencyMap:
     dependencies: []
     AreDependenciesSatisfied: 0
-  requireAllTouchables: 0
   gazeColliderIO: {fileID: 0}
   ReloadDependencies: 0
   isActive: 1
@@ -10400,15 +9518,19 @@ MonoBehaviour:
   FocusLossSpeed: 1
   proximityEnabled: 0
   grabEnabled: 0
+  inputsEnabled: 0
+  InputsMap:
+    InputsEntries: []
+    AreDependenciesSatisfied: 1
+  requireAllInputs: 0
   customConditionsEnabled: 1
   requireAllProximities: 0
   touchMap:
-    touchEntryList: []
+    TouchEnitry:
+      hand: 0
+      interactiveObject: {fileID: 0}
     touchHandsIndex: 0
-    touchDistanceModeLeftIndex: 0
-    touchDistanceModeRightIndex: 0
-    touchActionLeftIndex: 0
-    touchActionRightIndex: 0
+    touchActionIndex: 0
   gazeEnabled: 0
   touchEnabled: 0
   ActivateOnDependencyMap:
@@ -10417,7 +9539,6 @@ MonoBehaviour:
   DeactivateOnDependencyMap:
     dependencies: []
     AreDependenciesSatisfied: 0
-  requireAllTouchables: 0
   gazeColliderIO: {fileID: 0}
   ReloadDependencies: 0
   isActive: 1
@@ -11030,35 +10151,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!1 &1623343862
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1623343863}
-  m_Layer: 0
-  m_Name: Visuals
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1623343863
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1623343862}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1130670455}
-  m_Father: {fileID: 1189755141}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1627136414
 GameObject:
   m_ObjectHideFlags: 0
@@ -11211,15 +10303,19 @@ MonoBehaviour:
   FocusLossSpeed: 1
   proximityEnabled: 0
   grabEnabled: 0
+  inputsEnabled: 0
+  InputsMap:
+    InputsEntries: []
+    AreDependenciesSatisfied: 1
+  requireAllInputs: 0
   customConditionsEnabled: 0
   requireAllProximities: 0
   touchMap:
-    touchEntryList: []
+    TouchEnitry:
+      hand: 0
+      interactiveObject: {fileID: 0}
     touchHandsIndex: 0
-    touchDistanceModeLeftIndex: 0
-    touchDistanceModeRightIndex: 0
-    touchActionLeftIndex: 0
-    touchActionRightIndex: 0
+    touchActionIndex: 0
   gazeEnabled: 0
   touchEnabled: 0
   ActivateOnDependencyMap:
@@ -11228,7 +10324,6 @@ MonoBehaviour:
   DeactivateOnDependencyMap:
     dependencies: []
     AreDependenciesSatisfied: 0
-  requireAllTouchables: 0
   gazeColliderIO: {fileID: 0}
   ReloadDependencies: 0
   isActive: 0
@@ -11397,6 +10492,8 @@ MonoBehaviour:
   AttractionSpeed: 1
   IsManipulable: 0
   RootMotion: {fileID: 0}
+  IsPointedWithLeftHand: 0
+  IsPointedWithRightHand: 0
 --- !u!82 &1683916537
 AudioSource:
   m_ObjectHideFlags: 0
@@ -11717,15 +10814,19 @@ MonoBehaviour:
   FocusLossSpeed: 1
   proximityEnabled: 0
   grabEnabled: 0
+  inputsEnabled: 0
+  InputsMap:
+    InputsEntries: []
+    AreDependenciesSatisfied: 1
+  requireAllInputs: 0
   customConditionsEnabled: 0
   requireAllProximities: 0
   touchMap:
-    touchEntryList: []
+    TouchEnitry:
+      hand: 0
+      interactiveObject: {fileID: 0}
     touchHandsIndex: 0
-    touchDistanceModeLeftIndex: 0
-    touchDistanceModeRightIndex: 0
-    touchActionLeftIndex: 0
-    touchActionRightIndex: 0
+    touchActionIndex: 0
   gazeEnabled: 0
   touchEnabled: 0
   ActivateOnDependencyMap:
@@ -11737,7 +10838,6 @@ MonoBehaviour:
   DeactivateOnDependencyMap:
     dependencies: []
     AreDependenciesSatisfied: 0
-  requireAllTouchables: 0
   gazeColliderIO: {fileID: 0}
   ReloadDependencies: 0
   isActive: 1
@@ -12147,75 +11247,6 @@ Transform:
   m_Father: {fileID: 561849564}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1878231131
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1878231132}
-  - component: {fileID: 1878231135}
-  - component: {fileID: 1878231133}
-  m_Layer: 0
-  m_Name: Cube
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1878231132
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1878231131}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1135691896}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &1878231133
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1878231131}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 1
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
---- !u!33 &1878231135
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1878231131}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &1879117716
 GameObject:
   m_ObjectHideFlags: 0
@@ -12732,77 +11763,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!1 &1960289530
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1960289531}
-  - component: {fileID: 1960289534}
-  - component: {fileID: 1960289533}
-  - component: {fileID: 1960289532}
-  m_Layer: 0
-  m_Name: Proximity
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1960289531
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1960289530}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 710290731}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1960289532
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1960289530}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0af6883239c3794b9e9f723082ebfdd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  debug: 0
-  IOScript: {fileID: 710290729}
---- !u!54 &1960289533
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1960289530}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!65 &1960289534
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1960289530}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1968026446
 GameObject:
   m_ObjectHideFlags: 0
@@ -13002,35 +11962,6 @@ Transform:
   m_Father: {fileID: 467233212}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2031365310
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 2031365311}
-  m_Layer: 0
-  m_Name: Interactions
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2031365311
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2031365310}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 256979626}
-  m_Father: {fileID: 1189755141}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2038594115
 GameObject:
   m_ObjectHideFlags: 0
@@ -13229,6 +12160,8 @@ MonoBehaviour:
   AttractionSpeed: 1
   IsManipulable: 0
   RootMotion: {fileID: 0}
+  IsPointedWithLeftHand: 0
+  IsPointedWithRightHand: 0
 --- !u!95 &2040613625
 Animator:
   serializedVersion: 3
@@ -13261,8 +12194,8 @@ Transform:
   - {fileID: 216030007}
   - {fileID: 2092004414}
   - {fileID: 1884844406}
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_Father: {fileID: 735740480}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2040613627
 MonoBehaviour:
@@ -13528,48 +12461,6 @@ Transform:
   m_Father: {fileID: 1285156257}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2089895005
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 2089895006}
-  - component: {fileID: 2089895007}
-  m_Layer: 0
-  m_Name: Interaction
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2089895006
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2089895005}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 900255554}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2089895007
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2089895005}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c5e5d36d57be5841bfb50b6dbe7c062, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HasActions: 0
-  HasConditions: 0
 --- !u!1 &2092004413
 GameObject:
   m_ObjectHideFlags: 0
@@ -13686,6 +12577,8 @@ MonoBehaviour:
   AttractionSpeed: 1
   IsManipulable: 0
   RootMotion: {fileID: 0}
+  IsPointedWithLeftHand: 0
+  IsPointedWithRightHand: 0
 --- !u!82 &2095049878
 AudioSource:
   m_ObjectHideFlags: 0

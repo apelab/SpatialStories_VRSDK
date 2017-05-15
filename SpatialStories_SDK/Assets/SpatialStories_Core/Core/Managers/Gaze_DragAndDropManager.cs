@@ -95,11 +95,6 @@ namespace Gaze
 
         void Update()
         {
-            //Debug.Log(currentDragAndDropCondition.TargetObject.transform.rotation.eulerAngles.x);
-            //Debug.Log(currentDragAndDropCondition.TargetObject.transform.rotation.eulerAngles.x);
-            //Debug.Log(Mathf.Abs(currentDragAndDropCondition.TargetObject.transform.rotation.eulerAngles.y - transform.rotation.eulerAngles.y));
-            //Debug.Log(Mathf.DeltaAngle(currentDragAndDropCondition.TargetObject.transform.rotation.eulerAngles.z, transform.rotation.eulerAngles.z));
-
 
             if (currentDragAndDropCondition == null)
                 return;
@@ -246,29 +241,39 @@ namespace Gaze
             bool validRotation = xAxisSimilarity > angleThreshold && yAxisSimilarity > angleThreshold && zAxisSimilarity > angleThreshold;
             */
 
-            float[] validArray = {1, 1};
+            // calculation of dot products 
+            float[] validArray = { 1, 1 };
             float[] xDotProducts = { Vector3.Dot(transform.up, currentDragAndDropCondition.TargetObject.transform.up), Vector3.Dot(transform.forward, currentDragAndDropCondition.TargetObject.transform.forward) };
-            
-            float xAxisSimilarity = respectXAxis ? Vector3.Dot(transform.right, currentDragAndDropCondition.TargetObject.transform.right)  : 1;
+            float[] yDotProducts = { Vector3.Dot(transform.right, currentDragAndDropCondition.TargetObject.transform.right), Vector3.Dot(transform.forward, currentDragAndDropCondition.TargetObject.transform.forward) };
+            float[] zDotProducts = { Vector3.Dot(transform.right, currentDragAndDropCondition.TargetObject.transform.right), Vector3.Dot(transform.up, currentDragAndDropCondition.TargetObject.transform.up) };
+
+            // check if rotations are valid
+            float[] xAxisSimilarity = respectXAxis ? xDotProducts : validArray;
             if (respectXAxisMirrored)
-                xAxisSimilarity = Mathf.Abs(xAxisSimilarity);
-            float yAxisSimilarity = respectYAxis ? Vector3.Dot(transform.up, currentDragAndDropCondition.TargetObject.transform.up) : 1;
+            {
+                xAxisSimilarity[0] = Mathf.Abs(xAxisSimilarity[0]);
+                xAxisSimilarity[1] = Mathf.Abs(xAxisSimilarity[1]);
+            }
+
+            float[] yAxisSimilarity = respectYAxis ? yDotProducts : validArray;
             if (respectYAxisMirrored)
-                yAxisSimilarity = Mathf.Abs(yAxisSimilarity);
-            float zAxisSimilarity = respectZAxis ? Vector3.Dot(transform.forward, currentDragAndDropCondition.TargetObject.transform.forward) : 1;
+            {
+                yAxisSimilarity[0] = Mathf.Abs(yAxisSimilarity[0]);
+                yAxisSimilarity[1] = Mathf.Abs(yAxisSimilarity[1]);
+            }
+
+            float[] zAxisSimilarity = respectZAxis ? zDotProducts : validArray;
             if (respectZAxisMirrored)
-                zAxisSimilarity = Mathf.Abs(zAxisSimilarity);
-            bool validRotation = xAxisSimilarity > angleThreshold && yAxisSimilarity > angleThreshold && zAxisSimilarity > angleThreshold;
+            {
+                zAxisSimilarity[0] = Mathf.Abs(zAxisSimilarity[0]);
+                zAxisSimilarity[1] = Mathf.Abs(zAxisSimilarity[1]);
+            }
 
-            
+            bool xValidRotation = xAxisSimilarity[0] > angleThreshold || xAxisSimilarity[1] > angleThreshold;
+            bool yValidRotation = yAxisSimilarity[0] > angleThreshold || yAxisSimilarity[1] > angleThreshold;
+            bool zValidRotation = zAxisSimilarity[0] > angleThreshold || zAxisSimilarity[1] > angleThreshold;
+            bool validRotation = xValidRotation && yValidRotation && zValidRotation;
 
-
-            //Debug.Log(Mathf.Abs(xAngleGhost - xAngle));
-            //Debug.Log(isSimilar);
-
-            //Debug.Log("x " + xAxisSimilarity);
-            //Debug.Log("y " + yAxisSimilarity);
-            //Debug.Log("z " + zAxisSimilarity);
 
             if (validRotation)
             {
@@ -281,7 +286,7 @@ namespace Gaze
             }
             else
                 return false;
-            
+
         }
 
         private void Snap(float timeToSnap = 0f)
