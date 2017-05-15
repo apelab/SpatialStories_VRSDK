@@ -214,6 +214,18 @@ namespace Gaze
         public bool grabEnabled;
 
         /// <summary>
+        /// Is Grab condition enabled.
+        /// Corresponds to the editor checkbox as a trigger condition
+        /// </summary>
+        public bool inputsEnabled;
+        public Gaze_InputsMap InputsMap = new Gaze_InputsMap();
+
+        /// <summary>
+        /// if FALSE, require only one input to be validated among the specified list
+        /// </summary>
+        public bool requireAllInputs;
+
+        /// <summary>
         /// Are Custom conditions enabled.
         /// Corresponds to the editor checkbox as a trigger condition
         /// </summary>
@@ -282,6 +294,9 @@ namespace Gaze
 
             if (grabEnabled)
                 activeConditions.Add(new Gaze_GrabCondition(this));
+
+            if (inputsEnabled)
+                activeConditions.Add(new Gaze_InputsCondition(this));
         }
 
         void OnEnable()
@@ -333,6 +348,7 @@ namespace Gaze
             focusInProgress = false;
             focusComplete = focusDuration <= 0 ? true : false;
             ActivateOnDependencyMap.AreDependenciesSatisfied = dependent ? false : true;
+            InputsMap.AreDependenciesSatisfied = inputsEnabled ? false : true;
             startTime = Time.time;
             reloadCount = 0;
 

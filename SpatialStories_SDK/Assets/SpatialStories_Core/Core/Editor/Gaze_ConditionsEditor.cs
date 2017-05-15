@@ -41,6 +41,7 @@ namespace Gaze
         private List<GameObject> hierarchyIOs;
         private List<GameObject> hierarchyInteractions;
         private List<string> hierarchyInteractionsNames;
+        private string[] inputsNames;
         private List<Gaze_InteractiveObject> hierarchyProximities;
 
         // Reflection members
@@ -78,6 +79,13 @@ namespace Gaze
 
             hierarchyCustomConditions = new List<Gaze_AbstractConditions>();
             hierarchyCustomConditionsNames = new List<string>();
+
+            FetchInputsList();
+        }
+
+        private void FetchInputsList()
+        {
+            inputsNames = Enum.GetNames(typeof(Gaze_InputTypes));
         }
 
         public override void Gaze_OnInspectorGUI()
@@ -97,6 +105,7 @@ namespace Gaze
                     DisplayProximityList();
                     DisplayTouchCondition();
                     DisplayGrabCondition();
+                    DisplayInputsCondition();
                     DisplayTeleportCondition();
 
                     EditorGUILayout.Space();
@@ -199,7 +208,6 @@ namespace Gaze
             hierarchyIOsNames.Clear();
             hierarchyIOs.Clear();
             hierarchyInteractions.Clear();
-            hierarchyInteractionsNames.Clear();
             hierarchyGazeCollidersNames.Clear();
             hierarchyGazeColliders.Clear();
             hierarchyGazeCollidersNames.Clear();
@@ -514,6 +522,61 @@ namespace Gaze
 
 
             EditorGUILayout.Space();
+        }
+
+        private void DisplayInputsCondition()
+        {
+            EditorGUILayout.BeginHorizontal();
+            targetConditions.inputsEnabled = EditorGUILayout.ToggleLeft("Inputs", targetConditions.inputsEnabled);
+
+            if (targetConditions.inputsEnabled)
+            {
+                // help message if no input is specified
+                if (targetConditions.InputsMap.InputsEntries.Count < 1)
+                {
+                    EditorGUILayout.EndHorizontal();
+                    EditorGUILayout.BeginHorizontal();
+                    EditorGUILayout.HelpBox("Add at least one input or deactivate this condition if not needed.", MessageType.Warning);
+                    EditorGUILayout.EndHorizontal();
+                }
+                else
+                {
+                    // display require all option
+                    targetConditions.requireAllInputs = EditorGUILayout.ToggleLeft("Require all", targetConditions.requireAllInputs);
+                    EditorGUILayout.EndHorizontal();
+
+                    // update inputs list in Gaze_Interactions (Gaze_Interactions may have been removed in the hierarchy)
+                    for (int i = 0; i < targetConditions.InputsMap.InputsEntries.Count; i++)
+                    {
+                        // display the entry
+                        EditorGUILayout.BeginHorizontal();
+                        targetConditions.InputsMap.InputsEntries[i].inputType = (Gaze_InputTypes)EditorGUILayout.Popup((int)targetConditions.InputsMap.InputsEntries[i].inputType, inputsNames);
+
+                        // and a '-' button to remove it if needed
+                        if (GUILayout.Button("-"))
+                            targetConditions.InputsMap.Delete(targetConditions.InputsMap.InputsEntries[i]);
+
+                        EditorGUILayout.EndHorizontal();
+                    }
+                }
+
+                // display 'add' button
+                if (GUILayout.Button("+"))
+                {
+                    Gaze_InputsMapEntry d = targetConditions.InputsMap.Add();
+                    EditorGUILayout.BeginHorizontal();
+                    //d.dependentGameObject = hierarchyInteractions[EditorGUILayout.Popup(0, hierarchyInteractionsNames.ToArray())];
+
+                    if (GUILayout.Button("-"))
+                    {
+                        targetConditions.InputsMap.Delete(d);
+                    }
+                    EditorGUILayout.EndHorizontal();
+                }
+            }
+            else
+                EditorGUILayout.EndHorizontal();
+
         }
 
         private void DisplayTeleportCondition()
