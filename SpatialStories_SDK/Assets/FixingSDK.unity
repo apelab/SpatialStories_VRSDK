@@ -1027,14 +1027,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ac765816c049ac42908efc08e7f359c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ManipulationModeIndex: 0
+  ManipulationModeIndex: 1
   TouchModeIndex: 0
   ManipulableHandle: {fileID: 0}
   HasGrabPositionner: 0
   GrabPositionnerCollider: {fileID: 0}
   VibratesOnGrab: 0
   GrabDistance: 0
-  TouchDistance: 0
+  TouchDistance: 100
   AttractionSpeed: 1
   IsManipulable: 0
   RootMotion: {fileID: 0}
@@ -4839,9 +4839,9 @@ MonoBehaviour:
   requireAllProximities: 0
   touchMap:
     TouchEnitry:
-      hand: 4
-      interactiveObject: {fileID: 448618651}
-    touchHandsIndex: 2
+      hand: 5
+      interactiveObject: {fileID: 932926031}
+    touchHandsIndex: 1
     touchActionIndex: 0
   gazeEnabled: 0
   touchEnabled: 1

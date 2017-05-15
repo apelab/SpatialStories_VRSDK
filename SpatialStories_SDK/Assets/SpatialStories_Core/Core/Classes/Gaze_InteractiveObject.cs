@@ -361,6 +361,37 @@ namespace Gaze
             actualGravityState = initialGravityState;
         }
 
+        /// <summary>
+        /// If the gravity of the IO is not locked it will return to its default state.
+        /// </summary>
+        public void ReturnToInitialGravityState()
+        {
+            Rigidbody rigidBody = GetRigitBodyOrError();
+
+            if (rigidBody == null)
+                return;
+
+            switch (initialGravityState)
+            {
+                case Gaze_GravityState.ACTIVE_KINEMATIC:
+                    rigidBody.useGravity = true;
+                    rigidBody.isKinematic = true;
+                    break;
+                case Gaze_GravityState.ACTIVE_NOT_KINEMATIC:
+                    rigidBody.useGravity = true;
+                    rigidBody.isKinematic = false;
+                    break;
+                case Gaze_GravityState.UNACTIVE_KINEMATIC:
+                    rigidBody.useGravity = false;
+                    rigidBody.isKinematic = true;
+                    break;
+                case Gaze_GravityState.UNACTIVE_NOT_KINEMATIC:
+                    rigidBody.useGravity = false;
+                    rigidBody.isKinematic = false;
+                    break;
+            }
+        }
+
         // Make the IO not listen gravity requests
         public void LockGravity()
         {
