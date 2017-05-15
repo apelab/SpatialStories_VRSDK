@@ -159,7 +159,7 @@ namespace Gaze
 
         private void Awake()
         {
-            DetermineInitialGravityState();
+            SetActualGravityStateAsDefault();
 
             initialTransform = new Gaze_Transform(transform);
 
@@ -340,9 +340,9 @@ namespace Gaze
 
         #region GravityManagement
         /// <summary>
-        /// Checks the initial gravity state in order to return to it if required
+        /// Checks the actual gravity state and store it as default
         /// </summary>
-        private void DetermineInitialGravityState()
+        public void SetActualGravityStateAsDefault()
         {
             Rigidbody rigidBody = GetRigitBodyOrError();
             if (rigidBody == null)

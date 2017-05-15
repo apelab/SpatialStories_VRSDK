@@ -798,7 +798,7 @@ public class Gaze_GrabManager : MonoBehaviour
             if (grabState != GRAB_STATE.ATTRACTING)
                 ThrowObject(grabbedObj);
 
-            Gaze_GravityManager.ChangeGravityState(interactableIO, Gaze_GravityRequestType.SET_DEFAULT);
+            Gaze_GravityManager.ChangeGravityState(interactableIO, Gaze_GravityRequestType.RETURN_TO_DEFAULT);
 
             if (grabbedObj.GetComponent<Gaze_Catchable>() != null && grabbedObj.GetComponent<Gaze_Catchable>().vibrates)
                 Gaze_InputManager.instance.HapticFeedback(false);
@@ -1170,7 +1170,7 @@ public class Gaze_GrabManager : MonoBehaviour
         }
 
         Gaze_InputManager.FireControllerGrabEvent(new Gaze_ControllerGrabEventArgs(this, dico, false));
-        Gaze_GravityManager.ChangeGravityState(interactableIO, Gaze_GravityRequestType.SET_DEFAULT);
+        Gaze_GravityManager.ChangeGravityState(interactableIO, Gaze_GravityRequestType.RETURN_TO_DEFAULT);
 
         // If the IO was on our hands we need to trydeatch
         TryDetach();
