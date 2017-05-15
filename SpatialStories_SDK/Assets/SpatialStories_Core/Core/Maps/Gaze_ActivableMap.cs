@@ -15,7 +15,6 @@
 // <web>https://twitter.com/apelab_ch</web>
 // <web>http://www.apelab.ch</web>
 // <date>2014-06-01</date>
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VR;
 
@@ -38,7 +37,7 @@ namespace Gaze
     {
 
         [SerializeField]
-        public List<Gaze_ActivableEntry> touchEntryList;
+        public Gaze_ActivableEntry TouchEnitry;
 
         /// <summary>
         /// The index of the hand's state. (LEFT, RIGHT or BOTH)
@@ -46,26 +45,19 @@ namespace Gaze
         public int touchHandsIndex;
 
         /// <summary>
-        /// The index of touch state (PROXIMITY, DISTANT, BOTH)
-        /// </summary>
-        public int touchDistanceModeLeftIndex, touchDistanceModeRightIndex;
-
-        /// <summary>
         /// The index of action (TOUCH, UNTOUCH, BOTH)
         /// </summary>
-        public int touchActionLeftIndex, touchActionRightIndex;
+        public int touchActionIndex;
 
         public Gaze_TouchMap()
         {
-            touchEntryList = new List<Gaze_ActivableEntry>();
         }
 
         public Gaze_ActivableEntry AddActivableEntry()
         {
-            Gaze_ActivableEntry d = new Gaze_ActivableEntry();
-            touchEntryList.Add(d);
-            d.hand = VRNode.LeftHand;
-            return d;
+            TouchEnitry = new Gaze_ActivableEntry();
+            TouchEnitry.hand = VRNode.LeftHand;
+            return TouchEnitry;
         }
 
         public Gaze_ActivableEntry AddActivableEntry(GameObject _interactiveObject)
@@ -77,12 +69,18 @@ namespace Gaze
 
         public bool DeleteActivableEntry(Gaze_ActivableEntry d)
         {
-            return touchEntryList.Remove(d);
+            if (TouchEnitry == null)
+                return false;
+            else
+            {
+                TouchEnitry = null;
+            }
+            return true;
         }
 
         public void ClearActivableEntries()
         {
-            touchEntryList.Clear();
+            TouchEnitry = null;
         }
     }
 }

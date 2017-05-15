@@ -35,6 +35,45 @@ namespace Gaze
                 case Gaze_GravityRequestType.UNLOCK:
                     _IO.UnlockGravity();
                     break;
+                case Gaze_GravityRequestType.RETURN_TO_DEFAULT:
+                    ReturnToDefaultState(_IO);
+                    break;
+                case Gaze_GravityRequestType.SET_AS_DEFAULT:
+                    SetActualGravityStateAsDefault(_IO);
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Sets the actual gravity state of an object as the default state to return to when
+        /// the object is released.
+        /// </summary>
+        /// <param name="_IO"></param>
+        private static void SetActualGravityStateAsDefault(Gaze_InteractiveObject _IO)
+        {
+            if (_IO.IsGravityLocked())
+            {
+                if (SHOW_GRAVITY_WARNINGS)
+                    Debug.LogWarning(string.Format("GravityManager -> Interactive object: {0} has ben requested to change its gravity but the object is LOCKED", _IO.name));
+                return;
+            }
+            else
+            {
+                _IO.SetActualGravityStateAsDefault();
+            }
+        }
+
+        private static void ReturnToDefaultState(Gaze_InteractiveObject _IO)
+        {
+            if (_IO.IsGravityLocked())
+            {
+                if (SHOW_GRAVITY_WARNINGS)
+                    Debug.LogWarning(string.Format("GravityManager -> Interactive object: {0} has ben requested to change its gravity but the object is LOCKED", _IO.name));
+                return;
+            }
+            else
+            {
+                _IO.ReturnToInitialGravityState();
             }
         }
 
@@ -79,7 +118,7 @@ namespace Gaze
 
         public static void AddRigidBodyToIO(Gaze_InteractiveObject _IO)
         {
-            if(_IO.GetComponent<Rigidbody>() == null)
+            if (_IO.GetComponent<Rigidbody>() == null)
             {
                 _IO.gameObject.AddComponent<Rigidbody>();
                 SetGravity(_IO, true);

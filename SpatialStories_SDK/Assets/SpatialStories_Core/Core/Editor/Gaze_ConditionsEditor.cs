@@ -282,7 +282,6 @@ namespace Gaze
                     EditorGUILayout.BeginHorizontal();
                     EditorGUILayout.HelpBox("No valid custom condition found on this component !\nInherit your custom script from Gaze_AbstractConditions.", MessageType.Warning);
                     EditorGUILayout.EndHorizontal();
-
                 }
                 else
                 {
@@ -416,100 +415,40 @@ namespace Gaze
                 }
 
                 // if there are no entry yet, create a default one
-                if (targetConditions.touchMap.touchEntryList.Count < 1)
+                if (targetConditions.touchMap.TouchEnitry == null)
                     targetConditions.touchMap.AddActivableEntry(hierarchyIOs[0]);
 
                 // chose which hand to use
                 EditorGUILayout.BeginHorizontal();
                 targetConditions.touchMap.touchHandsIndex = EditorGUILayout.Popup(targetConditions.touchMap.touchHandsIndex, Enum.GetNames(typeof(Gaze_HandsEnum)));
 
-                // if both hands are used
-                if (targetConditions.touchMap.touchHandsIndex.Equals((int)Gaze_HandsEnum.BOTH))
+                if (targetConditions.touchMap.touchHandsIndex.Equals((int)Gaze_HandsEnum.LEFT))
                 {
-                    // display require all option
-                    targetConditions.requireAllTouchables = EditorGUILayout.ToggleLeft("Require all", targetConditions.requireAllTouchables);
-                    EditorGUILayout.EndHorizontal();
+                    targetConditions.touchMap.TouchEnitry.hand = VRNode.LeftHand;
+                }
+                else if (targetConditions.touchMap.touchHandsIndex.Equals((int)Gaze_HandsEnum.RIGHT))
+                {
+                    targetConditions.touchMap.TouchEnitry.hand = VRNode.RightHand;
+                }
+                else // We store both in left
+                {
+                    targetConditions.touchMap.TouchEnitry.hand = VRNode.LeftHand;
+                }
+                targetConditions.touchMap.touchActionIndex = EditorGUILayout.Popup(targetConditions.touchMap.touchActionIndex, Enum.GetNames(typeof(Gaze_TouchAction)));
 
-                    // display first line of hand configuration
-                    EditorGUILayout.BeginHorizontal();
-                    targetConditions.touchMap.touchDistanceModeLeftIndex = EditorGUILayout.Popup("Left", targetConditions.touchMap.touchDistanceModeLeftIndex, Enum.GetNames(typeof(Gaze_TouchDistanceMode)));
-                    targetConditions.touchMap.touchActionLeftIndex = EditorGUILayout.Popup(targetConditions.touchMap.touchActionLeftIndex, Enum.GetNames(typeof(Gaze_TouchAction)));
-
-                    var leftObject = EditorGUILayout.ObjectField(targetConditions.touchMap.touchEntryList[0].interactiveObject, typeof(Gaze_InteractiveObject), true);
-                    if (leftObject != null)
-                    {
-                        if (leftObject is GameObject)
-                            targetConditions.touchMap.touchEntryList[0].interactiveObject = (GameObject)leftObject;
-                        else
-                            targetConditions.touchMap.touchEntryList[0].interactiveObject = ((Gaze_InteractiveObject)leftObject).gameObject;
-                    }
+                // Add the searchable objec dialog
+                var objectToTouch = EditorGUILayout.ObjectField(targetConditions.touchMap.TouchEnitry.interactiveObject, typeof(Gaze_InteractiveObject), true);
+                if (objectToTouch != null)
+                {
+                    if (objectToTouch is GameObject)
+                        targetConditions.touchMap.TouchEnitry.interactiveObject = (GameObject)objectToTouch;
                     else
-                        targetConditions.touchMap.touchEntryList[0].interactiveObject = null;
-
-                    targetConditions.touchMap.touchEntryList[0].hand = VRNode.LeftHand;
-                    EditorGUILayout.EndHorizontal();
-
-                    // TODO @apelab display 'linked conditions' option
-
-                    // display second line of hand configuration
-                    EditorGUILayout.BeginHorizontal();
-                    if (targetConditions.touchMap.touchEntryList.Count < 2)
-                        targetConditions.touchMap.AddActivableEntry(hierarchyIOs[0]);
-
-                    targetConditions.touchMap.touchDistanceModeRightIndex = EditorGUILayout.Popup("Right", targetConditions.touchMap.touchDistanceModeRightIndex, Enum.GetNames(typeof(Gaze_TouchDistanceMode)));
-                    targetConditions.touchMap.touchActionRightIndex = EditorGUILayout.Popup(targetConditions.touchMap.touchActionRightIndex, Enum.GetNames(typeof(Gaze_TouchAction)));
-
-                    var rightObject = EditorGUILayout.ObjectField(targetConditions.touchMap.touchEntryList[1].interactiveObject, typeof(Gaze_InteractiveObject), true);
-
-                    if (rightObject != null)
-                    {
-                        if (rightObject is GameObject)
-                            targetConditions.touchMap.touchEntryList[1].interactiveObject = (GameObject)rightObject;
-                        else
-                            targetConditions.touchMap.touchEntryList[1].interactiveObject = ((Gaze_InteractiveObject)rightObject).gameObject;
-                    }
-                    else
-                        targetConditions.touchMap.touchEntryList[1].interactiveObject = null;
-
-
-                    targetConditions.touchMap.touchEntryList[1].hand = VRNode.RightHand;
-
-                    EditorGUILayout.EndHorizontal();
+                        targetConditions.touchMap.TouchEnitry.interactiveObject = ((Gaze_InteractiveObject)objectToTouch).gameObject;
                 }
                 else
-                {
-                    // remove second entry if BOTH was selected before
-                    if (targetConditions.touchMap.touchEntryList.Count > 1)
-                        targetConditions.touchMap.touchEntryList.RemoveAt(0);
+                    targetConditions.touchMap.TouchEnitry.interactiveObject = null;
 
-                    if (targetConditions.touchMap.touchHandsIndex.Equals((int)Gaze_HandsEnum.LEFT))
-                    {
-                        targetConditions.touchMap.touchDistanceModeLeftIndex = EditorGUILayout.Popup(targetConditions.touchMap.touchDistanceModeLeftIndex, Enum.GetNames(typeof(Gaze_TouchDistanceMode)));
-                        targetConditions.touchMap.touchEntryList[0].hand = VRNode.LeftHand;
-                        targetConditions.touchMap.touchActionLeftIndex = EditorGUILayout.Popup(targetConditions.touchMap.touchActionLeftIndex, Enum.GetNames(typeof(Gaze_TouchAction)));
-                    }
-                    else if (targetConditions.touchMap.touchHandsIndex.Equals((int)Gaze_HandsEnum.RIGHT))
-                    {
-                        targetConditions.touchMap.touchDistanceModeRightIndex = EditorGUILayout.Popup(targetConditions.touchMap.touchDistanceModeRightIndex, Enum.GetNames(typeof(Gaze_TouchDistanceMode)));
-                        targetConditions.touchMap.touchEntryList[0].hand = VRNode.RightHand;
-                        targetConditions.touchMap.touchActionRightIndex = EditorGUILayout.Popup(targetConditions.touchMap.touchActionRightIndex, Enum.GetNames(typeof(Gaze_TouchAction)));
-                    }
-
-                    // Add the searchable objec dialog
-                    var objectToTouch = EditorGUILayout.ObjectField(targetConditions.touchMap.touchEntryList[0].interactiveObject, typeof(Gaze_InteractiveObject), true);
-                    if (objectToTouch != null)
-                    {
-                        if (objectToTouch is GameObject)
-                            targetConditions.touchMap.touchEntryList[0].interactiveObject = (GameObject)objectToTouch;
-                        else
-                            targetConditions.touchMap.touchEntryList[0].interactiveObject = ((Gaze_InteractiveObject)objectToTouch).gameObject;
-                    }
-                    else
-                        targetConditions.touchMap.touchEntryList[0].interactiveObject = null;
-
-                    EditorGUILayout.EndHorizontal();
-                }
-
+                EditorGUILayout.EndHorizontal();
             }
 
             EditorGUILayout.Space();
