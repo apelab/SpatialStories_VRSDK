@@ -247,11 +247,6 @@ namespace Gaze
         public Gaze_DependencyMap ActivateOnDependencyMap = new Gaze_DependencyMap();
         public Gaze_DependencyMap DeactivateOnDependencyMap = new Gaze_DependencyMap();
 
-        /// <summary>
-        /// All the grabable Interactive Objects in the list are required in order to be validated.
-        /// </summary>
-        public bool requireAllTouchables;
-
         public List<Gaze_AbstractCondition> activeConditions = new List<Gaze_AbstractCondition>();
 
         // This list has all the AbstractConditions in order to setup & dipose them automatically

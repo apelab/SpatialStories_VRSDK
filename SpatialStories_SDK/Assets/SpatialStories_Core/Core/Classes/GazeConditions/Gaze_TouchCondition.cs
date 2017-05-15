@@ -142,20 +142,20 @@ namespace Gaze
 
             switch (gazeConditionsScript.touchMap.touchHandsIndex)
             {
-                // LEFT hands
                 case (int)Gaze_HandsEnum.LEFT:
                     mapHand = Gaze_HandsEnum.LEFT;
                     break;
 
-                // RIGHT hands
                 case (int)Gaze_HandsEnum.RIGHT:
                     mapHand = Gaze_HandsEnum.RIGHT;
+                    break;
+                default:
+                    mapHand = Gaze_HandsEnum.BOTH;
                     break;
             }
 
             if (mapHand.Equals(Gaze_HandsEnum.BOTH))
             {
-                // check left hand mode 
                 if (_eventHand.Equals(VRNode.LeftHand))
                 {
                     // if both modes are allowed, we're sure this is valid      
@@ -169,10 +169,7 @@ namespace Gaze
                     TouchDistanceModeRightValid = true;
                 }
 
-                if (gazeConditionsScript.requireAllTouchables)
-                    return TouchDistanceModeLeftValid && TouchDistanceModeRightValid;
-                else
-                    return TouchDistanceModeLeftValid || TouchDistanceModeRightValid;
+                return TouchDistanceModeLeftValid || TouchDistanceModeRightValid;
             }
             else
             {
@@ -261,7 +258,6 @@ namespace Gaze
             int eventActionIndex = 0;
             eventActionIndex = gazeConditionsScript.touchMap.touchActionLeftIndex;
 
-            
             if ((_touchingController.Equals(VRNode.LeftHand) && gazeConditionsScript.touchMap.touchActionLeftIndex.Equals(eventActionIndex)) ||
                 (_touchingController.Equals(VRNode.RightHand) && gazeConditionsScript.touchMap.touchActionRightIndex.Equals(eventActionIndex)))
             {
