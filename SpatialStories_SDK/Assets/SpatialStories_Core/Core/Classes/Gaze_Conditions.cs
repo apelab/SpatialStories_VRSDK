@@ -214,6 +214,17 @@ namespace Gaze
         public bool grabEnabled;
 
         /// <summary>
+        /// The index corresponding to the chosen teleport enum in the editor
+        /// </summary>
+        public int teleportIndex;
+
+        /// <summary>
+        /// Is teleport condition enabled.
+        /// Corresponds to the editor checkbox as a trigger condition
+        /// </summary>
+        public bool teleportEnabled;
+
+        /// <summary>
         /// Is Grab condition enabled.
         /// Corresponds to the editor checkbox as a trigger condition
         /// </summary>
@@ -297,6 +308,9 @@ namespace Gaze
 
             if (inputsEnabled)
                 activeConditions.Add(new Gaze_InputsCondition(this));
+
+            if (teleportEnabled)
+                activeConditions.Add(new Gaze_TeleportCondition(this));
         }
 
         void OnEnable()
