@@ -103,7 +103,7 @@ namespace Gaze
         /// <summary>
         /// Defines if an object can be grabbed from no matter where once is grabbed
         /// </summary>
-        public bool IsManipulable = false;
+        public bool IsManipulable = true;
 
 
         /// <summary>
@@ -216,6 +216,9 @@ namespace Gaze
             // Handle all the manipulation states
             if (isBeingGrabbed)
             {
+                if (grabbingMananger != null)
+                    grabbingMananger.TryDetach();
+
                 grabbingMananger = (Gaze_GrabManager)e.Sender;
                 RootMotion = grabbingMananger.grabPosition;
                 if (IsManipulable && !IsBeingManipulated)

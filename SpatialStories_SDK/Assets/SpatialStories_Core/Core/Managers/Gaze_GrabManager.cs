@@ -373,6 +373,14 @@ public class Gaze_GrabManager : MonoBehaviour
 
                 if (interactableIO.IsGrabEnabled)
                 {
+                    if (interactableIO.IsBeingGrabbed)
+                    {
+                        foreach (Gaze_GrabManager gm in GrabManagers)
+                            gm.TryDetach();
+
+                        interactableIO.SetManipulationMode(true);
+                    }
+
                     if (interactableIO.GrabModeIndex.Equals((int)Gaze_GrabMode.ATTRACT))
                     {
                         Gaze_GravityManager.ChangeGravityState(interactableIO, Gaze_GravityRequestType.DEACTIVATE_AND_ATTACH);
@@ -407,6 +415,11 @@ public class Gaze_GrabManager : MonoBehaviour
         {
             // get the IO being collided with
             interactableIO = objectsInProximity.ElementAt(0).GetComponent<Gaze_InteractiveObject>();
+
+            if (interactableIO.IsManipulable && !interactableIO.IsBeingManipulated)
+            {
+                interactableIO.SetManipulationMode(true);
+            }
 
             // if the grabbed object is being manipulated
             if (interactableIO.IsBeingManipulated)
@@ -1213,7 +1226,14 @@ public class Gaze_GrabManager : MonoBehaviour
         if (collidingObject.GetComponent<Gaze_Handle>() == null)
             return;
 
-        if (collidingObject.GetComponentInParent<Gaze_InputManager>() != null)
+        Gaze_InteractiveObject IO = collidingObject.GetComponentInParent<Gaze_InteractiveObject>();
+
+        // Discart hands
+        if (IO.GetComponentInChildren<Gaze_HandController>())
+            return;
+
+        // Discard Head
+        if (IO.GetComponentInChildren<Camera>())
             return;
 
         // Check if the colliding object has a gaze handle in order to avoid noise.
