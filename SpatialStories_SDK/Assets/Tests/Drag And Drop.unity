@@ -2611,16 +2611,12 @@ MonoBehaviour:
   FocusLossSpeed: 1
   proximityEnabled: 0
   grabEnabled: 0
-  teleportIndex: 0
+  teleportIndex: 1
   teleportEnabled: 1
   inputsEnabled: 0
   InputsMap:
     InputsEntries:
     - inputType: 5
-      valid: 0
-    - inputType: 2
-      valid: 0
-    - inputType: 17
       valid: 0
     AreDependenciesSatisfied: 1
   requireAllInputs: 1
