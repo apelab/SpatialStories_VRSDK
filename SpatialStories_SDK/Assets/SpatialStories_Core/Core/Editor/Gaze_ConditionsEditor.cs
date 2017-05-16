@@ -131,7 +131,7 @@ namespace Gaze
                     #endregion
 
                     #region Warning
-                    DisplayWarning();
+                    //DisplayWarning();
                     #endregion
 
                     #region Delayed ActiveWindow
@@ -554,6 +554,9 @@ namespace Gaze
                         EditorGUILayout.BeginHorizontal();
                         targetConditions.InputsMap.InputsEntries[i].inputType = (Gaze_InputTypes)EditorGUILayout.Popup((int)targetConditions.InputsMap.InputsEntries[i].inputType, inputsNames);
 
+
+                        // TODO @apelab add/remove event subscription with the new popup value
+
                         // and a '-' button to remove it if needed
                         if (GUILayout.Button("-"))
                             targetConditions.InputsMap.Delete(targetConditions.InputsMap.InputsEntries[i]);
@@ -566,12 +569,19 @@ namespace Gaze
                 if (GUILayout.Button("+"))
                 {
                     Gaze_InputsMapEntry d = targetConditions.InputsMap.Add();
+
+                    // TODO @apelab add event subscription with a default value
+                    //Gaze_InputsCondition inputscondition = targetConditions.activeConditions.GetType(typeof(Gaze_InputsCondition));
+
                     EditorGUILayout.BeginHorizontal();
-                    //d.dependentGameObject = hierarchyInteractions[EditorGUILayout.Popup(0, hierarchyInteractionsNames.ToArray())];
 
                     if (GUILayout.Button("-"))
                     {
                         targetConditions.InputsMap.Delete(d);
+
+                        // TODO @apelab remove event subscription
+
+
                     }
                     EditorGUILayout.EndHorizontal();
                 }

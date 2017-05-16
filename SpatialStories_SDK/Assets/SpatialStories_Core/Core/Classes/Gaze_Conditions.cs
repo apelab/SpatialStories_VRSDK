@@ -399,7 +399,7 @@ namespace Gaze
                     return;
             }
 
-            // if all trigger conditions are met
+            // if all interaction's conditions are met
             if (canBeTriggered && Time.time > nextReloadTime)
             {
                 var gazeFlag = (gazeEnabled && GetConditionOfType<Gaze_GazeCondition>().IsValidated()) || !gazeEnabled;

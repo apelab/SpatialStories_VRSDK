@@ -1,9 +1,4 @@
-﻿using UnityEngine;
-using UnityTest;
-using Gaze;
-using System;
-
-/// <summary>
+﻿/// <summary>
 /// Description:
 /// In this test we are going to put an object near to the left hand and then 
 /// trigger the OnIndexLeftDownEvent and then listen if the grab event has been

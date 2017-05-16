@@ -689,6 +689,8 @@ MonoBehaviour:
   AttractionSpeed: 10
   IsManipulable: 0
   RootMotion: {fileID: 0}
+  IsPointedWithLeftHand: 0
+  IsPointedWithRightHand: 0
 --- !u!95 &239913274
 Animator:
   serializedVersion: 3
@@ -754,6 +756,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 284769104}
+  - component: {fileID: 284769105}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -774,6 +777,18 @@ Transform:
   m_Father: {fileID: 2018369728}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &284769105
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 284769103}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &301876245
 GameObject:
   m_ObjectHideFlags: 0
@@ -1607,24 +1622,23 @@ MonoBehaviour:
   customConditionsEnabled: 1
   requireAllProximities: 0
   touchMap:
-    touchEntryList: []
+    TouchEnitry:
+      hand: 0
+      interactiveObject: {fileID: 0}
     touchHandsIndex: 0
-    touchDistanceModeLeftIndex: 0
-    touchDistanceModeRightIndex: 0
-    touchActionLeftIndex: 0
-    touchActionRightIndex: 0
+    touchActionIndex: 0
   gazeEnabled: 0
   touchEnabled: 0
   ActivateOnDependencyMap:
     dependencies:
-    - dependentGameObject: {fileID: 1537340387}
+    - IsValid: 0
+      dependentGameObject: {fileID: 1537340387}
       triggerStateIndex: 3
       onTrigger: 1
     AreDependenciesSatisfied: 1
   DeactivateOnDependencyMap:
     dependencies: []
     AreDependenciesSatisfied: 0
-  requireAllTouchables: 0
   gazeColliderIO: {fileID: 0}
   ReloadDependencies: 0
   isActive: 1
@@ -1918,12 +1932,11 @@ MonoBehaviour:
   customConditionsEnabled: 0
   requireAllProximities: 0
   touchMap:
-    touchEntryList: []
+    TouchEnitry:
+      hand: 0
+      interactiveObject: {fileID: 0}
     touchHandsIndex: 0
-    touchDistanceModeLeftIndex: 0
-    touchDistanceModeRightIndex: 0
-    touchActionLeftIndex: 0
-    touchActionRightIndex: 0
+    touchActionIndex: 0
   gazeEnabled: 0
   touchEnabled: 0
   ActivateOnDependencyMap:
@@ -1932,7 +1945,6 @@ MonoBehaviour:
   DeactivateOnDependencyMap:
     dependencies: []
     AreDependenciesSatisfied: 0
-  requireAllTouchables: 0
   gazeColliderIO: {fileID: 951239753}
   ReloadDependencies: 0
   isActive: 1
@@ -2116,12 +2128,11 @@ MonoBehaviour:
   customConditionsEnabled: 0
   requireAllProximities: 0
   touchMap:
-    touchEntryList: []
+    TouchEnitry:
+      hand: 0
+      interactiveObject: {fileID: 0}
     touchHandsIndex: 0
-    touchDistanceModeLeftIndex: 0
-    touchDistanceModeRightIndex: 0
-    touchActionLeftIndex: 0
-    touchActionRightIndex: 0
+    touchActionIndex: 0
   gazeEnabled: 0
   touchEnabled: 0
   ActivateOnDependencyMap:
@@ -2130,7 +2141,6 @@ MonoBehaviour:
   DeactivateOnDependencyMap:
     dependencies: []
     AreDependenciesSatisfied: 0
-  requireAllTouchables: 0
   gazeColliderIO: {fileID: 0}
   ReloadDependencies: 0
   isActive: 0
@@ -2518,17 +2528,18 @@ MonoBehaviour:
       valid: 0
     - inputType: 2
       valid: 0
+    - inputType: 17
+      valid: 0
     AreDependenciesSatisfied: 0
   requireAllInputs: 1
   customConditionsEnabled: 0
   requireAllProximities: 0
   touchMap:
-    touchEntryList: []
+    TouchEnitry:
+      hand: 0
+      interactiveObject: {fileID: 0}
     touchHandsIndex: 0
-    touchDistanceModeLeftIndex: 0
-    touchDistanceModeRightIndex: 0
-    touchActionLeftIndex: 0
-    touchActionRightIndex: 0
+    touchActionIndex: 0
   gazeEnabled: 0
   touchEnabled: 0
   ActivateOnDependencyMap:
@@ -2537,7 +2548,6 @@ MonoBehaviour:
   DeactivateOnDependencyMap:
     dependencies: []
     AreDependenciesSatisfied: 0
-  requireAllTouchables: 0
   gazeColliderIO: {fileID: 0}
   ReloadDependencies: 0
   isActive: 1
@@ -2768,12 +2778,11 @@ MonoBehaviour:
   customConditionsEnabled: 0
   requireAllProximities: 0
   touchMap:
-    touchEntryList: []
+    TouchEnitry:
+      hand: 0
+      interactiveObject: {fileID: 0}
     touchHandsIndex: 0
-    touchDistanceModeLeftIndex: 0
-    touchDistanceModeRightIndex: 0
-    touchActionLeftIndex: 0
-    touchActionRightIndex: 0
+    touchActionIndex: 0
   gazeEnabled: 0
   touchEnabled: 0
   ActivateOnDependencyMap:
@@ -2782,7 +2791,6 @@ MonoBehaviour:
   DeactivateOnDependencyMap:
     dependencies: []
     AreDependenciesSatisfied: 0
-  requireAllTouchables: 0
   gazeColliderIO: {fileID: 0}
   ReloadDependencies: 0
   isActive: 0
@@ -2914,6 +2922,8 @@ MonoBehaviour:
   AttractionSpeed: 1
   IsManipulable: 0
   RootMotion: {fileID: 0}
+  IsPointedWithLeftHand: 0
+  IsPointedWithRightHand: 0
 --- !u!95 &951239754
 Animator:
   serializedVersion: 3
@@ -3292,6 +3302,8 @@ MonoBehaviour:
   AttractionSpeed: 1
   IsManipulable: 0
   RootMotion: {fileID: 0}
+  IsPointedWithLeftHand: 0
+  IsPointedWithRightHand: 0
 --- !u!95 &1110953092
 Animator:
   serializedVersion: 3
@@ -3737,6 +3749,8 @@ MonoBehaviour:
   AttractionSpeed: 10
   IsManipulable: 0
   RootMotion: {fileID: 0}
+  IsPointedWithLeftHand: 0
+  IsPointedWithRightHand: 0
 --- !u!95 &1189798472
 Animator:
   serializedVersion: 3
@@ -5253,6 +5267,8 @@ MonoBehaviour:
   AttractionSpeed: 1
   IsManipulable: 0
   RootMotion: {fileID: 0}
+  IsPointedWithLeftHand: 0
+  IsPointedWithRightHand: 0
 --- !u!95 &1567460778
 Animator:
   serializedVersion: 3
@@ -5850,6 +5866,8 @@ MonoBehaviour:
   AttractionSpeed: 1
   IsManipulable: 0
   RootMotion: {fileID: 0}
+  IsPointedWithLeftHand: 0
+  IsPointedWithRightHand: 0
 --- !u!95 &1769862486
 Animator:
   serializedVersion: 3

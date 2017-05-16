@@ -17,6 +17,7 @@
 // <date>2014-06-01</date>
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Gaze
@@ -103,7 +104,7 @@ namespace Gaze
         /// <summary>
         /// Defines if an object can be grabbed from no matter where once is grabbed
         /// </summary>
-        public bool IsManipulable = false;
+        public bool IsManipulable = true;
 
 
         /// <summary>
@@ -217,7 +218,22 @@ namespace Gaze
             if (isBeingGrabbed)
             {
                 grabbingMananger = (Gaze_GrabManager)e.Sender;
-                RootMotion = grabbingMananger.grabPosition;
+
+
+                List<Gaze_GrabManager> GrabManagers = Gaze_GrabManager.GetGrabbingHands(this);
+
+                if (GrabManagers.Count > 1)
+                {
+                    foreach (Gaze_GrabManager gm in GrabManagers)
+                    {
+                        if (gm != grabbingMananger)
+                            gm.TryDetach();
+                    }
+                }
+
+                if (grabbingMananger != null)
+                    RootMotion = grabbingMananger.grabPosition;
+
                 if (IsManipulable && !IsBeingManipulated)
                     SetManipulationMode(true);
                 else if (IsBeingManipulated)
@@ -230,6 +246,7 @@ namespace Gaze
                 if (IsManipulable)
                     SetManipulationMode(false);
             }
+
         }
 
         private void FollowRoot()

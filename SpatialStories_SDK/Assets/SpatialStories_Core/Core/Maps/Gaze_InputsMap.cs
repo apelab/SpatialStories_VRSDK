@@ -36,10 +36,9 @@ namespace Gaze
         public bool Delete(Gaze_InputsMapEntry d)
         {
             if (InputsEntries.Contains(d))
-            {
                 // Destroy the dependency from the list
                 return InputsEntries.Remove(d);
-            }
+
             return false;
         }
 
@@ -47,6 +46,7 @@ namespace Gaze
         {
             Gaze_InputsMapEntry d = new Gaze_InputsMapEntry();
             InputsEntries.Add(d);
+
             return d;
         }
 
