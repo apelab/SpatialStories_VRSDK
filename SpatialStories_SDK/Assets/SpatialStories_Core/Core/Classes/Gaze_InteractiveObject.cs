@@ -17,6 +17,7 @@
 // <date>2014-06-01</date>
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Gaze
@@ -216,10 +217,20 @@ namespace Gaze
             // Handle all the manipulation states
             if (isBeingGrabbed)
             {
-                if (grabbingMananger != null)
-                    grabbingMananger.TryDetach();
-
                 grabbingMananger = (Gaze_GrabManager)e.Sender;
+
+
+                List<Gaze_GrabManager> GrabManagers = Gaze_GrabManager.GetGrabbingHands(this);
+
+                if (GrabManagers.Count > 1)
+                {
+                    foreach (Gaze_GrabManager gm in GrabManagers)
+                    {
+                        if (gm != grabbingMananger)
+                            gm.TryDetach();
+                    }
+                }
+
                 RootMotion = grabbingMananger.grabPosition;
                 if (IsManipulable && !IsBeingManipulated)
                     SetManipulationMode(true);
@@ -233,6 +244,7 @@ namespace Gaze
                 if (IsManipulable)
                     SetManipulationMode(false);
             }
+
         }
 
         private void FollowRoot()

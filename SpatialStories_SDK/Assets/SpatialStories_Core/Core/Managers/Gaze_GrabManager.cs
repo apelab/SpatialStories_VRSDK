@@ -1072,6 +1072,11 @@ public class Gaze_GrabManager : MonoBehaviour
         return GrabManagers.FirstOrDefault(gm => gm.isGrabbing && gm.interactableIO != null);
     }
 
+    public static List<Gaze_GrabManager> GetGrabbingHands(Gaze_InteractiveObject io)
+    {
+        return GrabManagers.Where(gm => gm.interactableIO == io).ToList();
+    }
+
     /// <summary>
     /// Used to disable all the grab for a certain ammount of time
     /// </summary>
