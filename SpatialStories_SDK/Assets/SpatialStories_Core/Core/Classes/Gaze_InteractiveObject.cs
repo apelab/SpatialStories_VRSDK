@@ -231,7 +231,9 @@ namespace Gaze
                     }
                 }
 
-                RootMotion = grabbingMananger.grabPosition;
+                if (grabbingMananger != null)
+                    RootMotion = grabbingMananger.grabPosition;
+
                 if (IsManipulable && !IsBeingManipulated)
                     SetManipulationMode(true);
                 else if (IsBeingManipulated)
