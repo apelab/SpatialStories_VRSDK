@@ -8,7 +8,7 @@ namespace Gaze
     {
         private bool hasBeenSetup = false;
         protected Gaze_Conditions gazeConditionsScript;
-        protected bool IsValid;
+        public bool IsValid;
 
         public Gaze_AbstractCondition(Gaze_Conditions _gazeConditionsScript)
         {

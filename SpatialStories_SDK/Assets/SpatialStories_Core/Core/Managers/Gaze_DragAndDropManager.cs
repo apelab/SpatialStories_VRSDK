@@ -257,7 +257,7 @@ namespace Gaze
                 zAxisSimilarity = Mathf.Abs(zAxisSimilarity);
             bool validRotation = xAxisSimilarity > angleThreshold && yAxisSimilarity > angleThreshold && zAxisSimilarity > angleThreshold;
 
-            
+
 
 
             //Debug.Log(Mathf.Abs(xAngleGhost - xAngle));
@@ -278,7 +278,7 @@ namespace Gaze
             }
             else
                 return false;
-            
+
         }
 
         private void Snap(float timeToSnap = 0f)

@@ -75,8 +75,39 @@ namespace Gaze
             }
         }
 
-        private void ValidateInputsCondition(Gaze_InputEventArgs e)
+        private void ValidateInputs(Gaze_InputEventArgs e)
         {
+            bool allValid = false;
+
+            // for all input conditions specified (in the map)
+            for (int i = 0; i < entriesCount; i++)
+            {
+                // if the current input is valid
+                if (gazeConditionsScript.InputsMap.InputsEntries[i].valid)
+                {
+                    // if NOT require all
+                    if (!gazeConditionsScript.requireAllInputs)
+                    {
+                        IsValid = true;
+                        break;
+                    }
+                }
+                else
+                {
+                    // if require all
+                    if (gazeConditionsScript.requireAllInputs)
+                    {
+                        IsValid = false;
+                        break;
+                    }
+                }
+                IsValid = true;
+            }
+        }
+
+        private void CheckReceivedInputValidity(Gaze_InputEventArgs e)
+        {
+            // for all input conditions specified (in the map)
             for (int i = 0; i < entriesCount; i++)
             {
                 // if the pressed input is in the map
@@ -85,36 +116,21 @@ namespace Gaze
                     // update its valid flag
                     gazeConditionsScript.InputsMap.InputsEntries[i].valid = true;
 
-                    // if require all
-                    if (!gazeConditionsScript.requireAllInputs)
-                    {
-                        IsValid = true;
-                    }
+                    // check if all conditions are now met
+                    ValidateInputs(e);
+                    break;
                 }
-
-                // if require all
-                if (gazeConditionsScript.requireAllInputs)
-                {
-                    // and one is not valid
-                    if (!gazeConditionsScript.InputsMap.InputsEntries[i].valid)
-                    {
-                        IsValid = false;
-                        break;
-                    }
-                }
-                else
-                    IsValid = true;
             }
         }
 
         private void OnButtonADownEvent(Gaze_InputEventArgs e)
         {
-            ValidateInputsCondition(e);
+            CheckReceivedInputValidity(e);
         }
 
         private void OnButtonBDownEvent(Gaze_InputEventArgs e)
         {
-            ValidateInputsCondition(e);
+            CheckReceivedInputValidity(e);
         }
     }
 }
