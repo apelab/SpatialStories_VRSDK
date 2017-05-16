@@ -1669,7 +1669,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_MinDistance: 1
-  angleThreshold: 0.9
+  angleThreshold: 1
   respectXAxis: 0
   respectXAxisMirrored: 0
   respectYAxis: 0
@@ -4547,7 +4547,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_MinDistance: 1
-  angleThreshold: 0.9
+  angleThreshold: 1
   respectXAxis: 0
   respectXAxisMirrored: 0
   respectYAxis: 0
@@ -5477,7 +5477,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_MinDistance: 1
-  angleThreshold: 0.9
+  angleThreshold: 1
   respectXAxis: 0
   respectXAxisMirrored: 0
   respectYAxis: 0
@@ -12209,7 +12209,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_MinDistance: 1
-  angleThreshold: 0.9
+  angleThreshold: 1
   respectXAxis: 0
   respectXAxisMirrored: 0
   respectYAxis: 0

@@ -28,17 +28,17 @@ namespace Gaze
         #region public Members
         public Gaze_DragAndDropCondition CurrentDragAndDropCondition { get { return currentDragAndDropCondition; } set { currentDragAndDropCondition = value; } }
 
-        public float m_MinDistance = 0.1f;
+        public float m_MinDistance = 1f;
         // in unity units
-        public float angleThreshold = 0.9f;
+        public float angleThreshold = 1f;
         // 0 is perpendicular, 1 is same direction
-        public bool respectXAxis = true;
+        public bool respectXAxis = false;
         public bool respectXAxisMirrored = false;
-        public bool respectYAxis = true;
+        public bool respectYAxis = false;
         public bool respectYAxisMirrored = false;
-        public bool respectZAxis = true;
+        public bool respectZAxis = false;
         public bool respectZAxisMirrored = false;
-        public bool m_SnapBeforeDrop = false;
+        public bool m_SnapBeforeDrop = true;
 
         // snaps only if attached on drop
         public float m_TimeToSnap = 0.5f;
@@ -224,22 +224,6 @@ namespace Gaze
             if (Vector3.Distance(transform.position, currentDragAndDropCondition.TargetObject.transform.position) >= m_MinDistance)
                 return false;
 
-            // NOTE hack to always return true (no rotation check)
-            //return true;
-
-            /*
-            // check rotation by checking axis
-            float xAxisSimilarity = respectXAxis ? Vector3.Dot(transform.right, currentDragAndDropCondition.TargetObject.transform.right) : 1;
-            if (respectXAxisMirrored)
-                xAxisSimilarity = Mathf.Abs(xAxisSimilarity);
-            float yAxisSimilarity = respectYAxis ? Vector3.Dot(transform.up, currentDragAndDropCondition.TargetObject.transform.up) : 1;
-            if (respectYAxisMirrored)
-                yAxisSimilarity = Mathf.Abs(yAxisSimilarity);
-            float zAxisSimilarity = respectZAxis ? Vector3.Dot(transform.forward, currentDragAndDropCondition.TargetObject.transform.forward) : 1;
-            if (respectZAxisMirrored)
-                zAxisSimilarity = Mathf.Abs(zAxisSimilarity);
-            bool validRotation = xAxisSimilarity > angleThreshold && yAxisSimilarity > angleThreshold && zAxisSimilarity > angleThreshold;
-            */
 
             // calculation of dot products 
             float[] validArray = { 1, 1 };
@@ -247,7 +231,7 @@ namespace Gaze
             float[] yDotProducts = { Vector3.Dot(transform.right, currentDragAndDropCondition.TargetObject.transform.right), Vector3.Dot(transform.forward, currentDragAndDropCondition.TargetObject.transform.forward) };
             float[] zDotProducts = { Vector3.Dot(transform.right, currentDragAndDropCondition.TargetObject.transform.right), Vector3.Dot(transform.up, currentDragAndDropCondition.TargetObject.transform.up) };
 
-            // check if rotations are valid
+            // is respectAxis checked?
             float[] xAxisSimilarity = respectXAxis ? xDotProducts : validArray;
             if (respectXAxisMirrored)
             {
@@ -269,9 +253,10 @@ namespace Gaze
                 zAxisSimilarity[1] = Mathf.Abs(zAxisSimilarity[1]);
             }
 
-            bool xValidRotation = xAxisSimilarity[0] > angleThreshold || xAxisSimilarity[1] > angleThreshold;
-            bool yValidRotation = yAxisSimilarity[0] > angleThreshold || yAxisSimilarity[1] > angleThreshold;
-            bool zValidRotation = zAxisSimilarity[0] > angleThreshold || zAxisSimilarity[1] > angleThreshold;
+            // check if rotations are valid
+            bool xValidRotation = xAxisSimilarity[0] > (angleThreshold/100) || xAxisSimilarity[1] > (angleThreshold / 100);
+            bool yValidRotation = yAxisSimilarity[0] > (angleThreshold / 100) || yAxisSimilarity[1] > (angleThreshold / 100);
+            bool zValidRotation = zAxisSimilarity[0] > (angleThreshold / 100) || zAxisSimilarity[1] > (angleThreshold / 100);
             bool validRotation = xValidRotation && yValidRotation && zValidRotation;
 
 
