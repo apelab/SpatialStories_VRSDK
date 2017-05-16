@@ -908,6 +908,7 @@ public class Gaze_GrabManager : MonoBehaviour
     private void ThrowObject(GameObject _object)
     {
         Rigidbody rb = _object.GetComponent<Rigidbody>();
+
         if (rb != null)
         {
             Gaze_GravityManager.ChangeGravityState(interactableIO, Gaze_GravityRequestType.ACTIVATE_AND_DETACH);
@@ -922,7 +923,7 @@ public class Gaze_GrabManager : MonoBehaviour
             float v = GetMeanAcceleration();
 
             // This works fine with GearVr controllers
-            Vector3 direction = direction = transform.forward;
+            Vector3 direction = transform.forward;
 
             // Calc the direction if needed
             if (Gaze_InputManager.instance.trackPosition)
@@ -931,19 +932,18 @@ public class Gaze_GrabManager : MonoBehaviour
             {
                 direction = transform.forward;
                 v *= MIKES_MAGIC_NUMBER_FOR_GEARVR;
+
+                // Limit the velocity of the trow
+                if (v > MAX_THROW_VELOCITY)
+                    v = MAX_THROW_VELOCITY;
             }
 
-
-
-            // Limit the velocity of the trow
-            if (v > MAX_THROW_VELOCITY)
-                v = MAX_THROW_VELOCITY;
 
             // Add a velocity to the object in the current directio
             Vector3 Vv = direction * v;
 
             // Add an inpulse based on velocity
-            rb.AddForce(Vv.x, Vv.y, Vv.z, ForceMode.Impulse);
+            rb.AddForce(Vv.x, Vv.y, Vv.z, ForceMode.Acceleration);
 
             ClearPositionsArray();
         }
@@ -959,7 +959,6 @@ public class Gaze_GrabManager : MonoBehaviour
                 if (!IsObjectInProximityList(collidingIO.gameObject))
                 {
                     AddNewObjectInProximity(collidingIO.gameObject);
-                    //Debug.Log("adding colliding object " + e.Other);
                 }
 
                 if (isTriggerPressed && interactableIO && interactableIO.IsGrabEnabled && interactableIO.GrabModeIndex.Equals((int)Gaze_GrabMode.ATTRACT))
@@ -1209,17 +1208,21 @@ public class Gaze_GrabManager : MonoBehaviour
     /// <param name="e">E.</param>
     private void OnControllerCollisionEvent(Gaze_ControllerCollisionEventArgs e)
     {
-        // Check if the colliding object has a gaze handle in order to avoid noise.
-        collidingObject = (GameObject)e.Other;
+        GameObject collidingObject = Gaze_Utils.ConvertIntoGameObject(e.Other);
+
         if (collidingObject.GetComponent<Gaze_Handle>() == null)
             return;
+
+        if (collidingObject.GetComponentInParent<Gaze_InputManager>() != null)
+            return;
+
+        // Check if the colliding object has a gaze handle in order to avoid noise.
+        collidingObject = (GameObject)e.Other;
 
         // exit if the sender is not this Controller
         GameObject senderController = ((GameObject)e.Sender).GetComponentInParent<Gaze_InteractiveObject>().GetComponentInChildren<Gaze_HandController>().gameObject;
         if (senderController != this.gameObject)
             return;
-
-        // TODO check if the colliding object has a rigidbody
 
         // if colliding object is a Gaze_InteractiveObject
         Gaze_InteractiveObject collidingIO = ((GameObject)e.Other).GetComponentInParent<Gaze_InteractiveObject>();
