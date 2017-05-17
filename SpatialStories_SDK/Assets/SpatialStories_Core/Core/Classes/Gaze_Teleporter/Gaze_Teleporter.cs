@@ -210,7 +210,6 @@ public class Gaze_Teleporter : MonoBehaviour
     private void Gyro(RaycastHit _hit)
     {
         gyroInstance.transform.position = _hit.point;
-        //		gyroInstance.transform.up = hit.normal;
         gyroInstance.transform.localEulerAngles = new Vector3(_hit.normal.x, angle, _hit.normal.z);
     }
 
@@ -231,7 +230,7 @@ public class Gaze_Teleporter : MonoBehaviour
     /// <summary>
     /// This is a hack that allows us to detect that a GO has been teleported
     /// </summary>
-    /// <param name="enable"></param>
+    /// <param name="enable"></param>\
     public void AlterColliders(bool enable)
     {
         for (int i = 0; i < CameraColliders.Length; i++)
