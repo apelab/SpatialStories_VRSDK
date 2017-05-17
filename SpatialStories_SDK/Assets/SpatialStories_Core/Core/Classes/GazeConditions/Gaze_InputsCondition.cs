@@ -24,14 +24,6 @@ namespace Gaze
 {
     public class Gaze_InputsCondition : Gaze_AbstractCondition
     {
-
-        public bool IsButtonA_Down { get; set; }
-
-        private bool grabLeftValid = false;
-        private bool grabRightValid = false;
-        private bool grabStateLeftValid = false;
-        private bool grabStateRightValid = false;
-
         private int entriesCount;
         private bool requireAllValidated = false;
 
