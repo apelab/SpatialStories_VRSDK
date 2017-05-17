@@ -100,6 +100,17 @@ namespace Gaze
             GUILayout.EndHorizontal();
             Gaze_Utils.EnsureFieldIsPositiveOrZero(ref targetIO.GrabDistance);
             Gaze_Utils.EnsureFieldIsPositiveOrZero(ref targetIO.AttractionSpeed);
+            GUILayout.BeginHorizontal();
+            targetIO.SnapOnGrab = EditorGUILayout.Toggle("Snap On Grab", targetIO.SnapOnGrab);
+            if (targetIO.SnapOnGrab)
+            {
+                targetIO.IsManipulable = EditorGUILayout.Toggle("Is Manipulable", targetIO.IsManipulable);
+            }
+            else
+            {
+                targetIO.IsManipulable = true;
+            }
+            GUILayout.EndHorizontal();
         }
 
         private void DisplayLevitationDistance()

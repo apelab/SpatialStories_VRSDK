@@ -106,6 +106,7 @@ namespace Gaze
         /// </summary>
         public bool IsManipulable = true;
 
+        public bool SnapOnGrab = false;
 
         /// <summary>
         /// Is this catchable object using gravity
@@ -115,7 +116,7 @@ namespace Gaze
         // TODO test if this works with a FBX that already has a root motion
         public Transform RootMotion;
 
-        private Gaze_Handle handle;
+        private Gaze_Manipulation handle;
 
         private float DISABLE_MANIPULATION_TIME = 1f;
         private static Vector3 NULL_VECTOR_3 = new Vector3(float.MinValue, float.MinValue, float.MinValue);
@@ -163,6 +164,7 @@ namespace Gaze
             SetActualGravityStateAsDefault();
 
             initialTransform = new Gaze_Transform(transform);
+            GrabPositionnerCollider = GetComponentInChildren<Gaze_Manipulation>().GetComponent<Collider>();
 
             if (RootMotion != null)
             {
@@ -261,10 +263,10 @@ namespace Gaze
         /// <returns></returns>
         public Vector3 GetGrabPoint()
         {
-            Gaze_Handle handle = GetComponentInChildren<Gaze_Handle>();
-            if (handle == null)
+            Gaze_Manipulation grabPoint = GetComponentInChildren<Gaze_Manipulation>();
+            if (grabPoint == null)
                 Debug.LogAssertion("An interactive object should have a Gaze_Handle child.");
-            Vector3 point = actualGrabPoint != null ? actualGrabPoint.transform.position : GetComponentInChildren<Gaze_Handle>().transform.position;
+            Vector3 point = actualGrabPoint != null ? actualGrabPoint.transform.position : GetComponentInChildren<Gaze_Manipulation>().transform.position;
             return point - transform.position;
         }
 
@@ -277,9 +279,7 @@ namespace Gaze
         {
             if (actualGrabPoint != null)
                 Destroy(actualGrabPoint);
-            //actualGrabPoint = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-            //actualGrabPoint.GetComponent<Collider>().enabled = false;
-            //actualGrabPoint.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+
             actualGrabPoint = new GameObject();
             actualGrabPoint.transform.position = point;
             actualGrabPoint.transform.parent = transform;
@@ -299,9 +299,12 @@ namespace Gaze
         /// <param name="isOn"></param>
         public void SetManipulationMode(bool isOn, bool inmeditelly = false)
         {
+            // Don't allow to change the manipulation mode if the object is not manipulable
+            if (!IsManipulable)
+                return;
+
             if (isOn)
             {
-                // TODO:
                 isBeingManipulated = true;
             }
             else

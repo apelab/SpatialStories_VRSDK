@@ -28,7 +28,7 @@ namespace Gaze
         private void Start()
         {
             IO = GetComponentInParent<Gaze_InteractiveObject>();
-            handlePosition = IO.GetComponentInChildren<Gaze_Handle>().transform;
+            handlePosition = IO.GetComponentInChildren<Gaze_Manipulation>().transform;
 
             bool searchingForLeftHand = handToReplace == HANDS.LEFT;
 

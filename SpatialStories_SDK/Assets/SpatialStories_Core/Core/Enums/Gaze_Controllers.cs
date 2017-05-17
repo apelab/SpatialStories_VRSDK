@@ -3,7 +3,8 @@
     public enum Gaze_Controllers
     {
         NOT_DETERMINED,
-        GENERIC,
+        OCULUS_RIFT,
+        HTC_VIVE,
         GEARVR_CONTROLLER
     }
 }

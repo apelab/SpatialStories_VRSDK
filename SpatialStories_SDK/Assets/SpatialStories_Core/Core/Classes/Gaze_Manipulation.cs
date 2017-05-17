@@ -20,7 +20,7 @@ using System.Collections;
 
 namespace Gaze
 {
-	public class Gaze_Handle : MonoBehaviour
+	public class Gaze_Manipulation : MonoBehaviour
     {
 		public bool debug = false;
 

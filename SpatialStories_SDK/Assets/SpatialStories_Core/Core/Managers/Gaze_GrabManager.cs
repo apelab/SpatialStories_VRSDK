@@ -502,7 +502,17 @@ public class Gaze_GrabManager : MonoBehaviour
     {
         ClearLaserPointer();
         TryAttach();
+        HandleSnap();
         grabState = GRAB_STATE.GRABBED;
+    }
+
+    private void HandleSnap()
+    {
+        if (interactableIO.SnapOnGrab && !interactableIO.IsBeingManipulated)
+        {
+            interactableIO.transform.position = controllerSnapTransform.position - interactableIO.GetGrabPoint();
+            interactableIO.transform.localRotation = interactableIO.GrabPositionnerTransform.localRotation;
+        }
     }
 
     private void ClearLaserPointer()
@@ -586,7 +596,7 @@ public class Gaze_GrabManager : MonoBehaviour
             // 1° notify new raycasted objects in hits
             for (int i = 0; i < hits.Length; i++)
             {
-                if (hits[i].collider.GetComponent<Gaze_Handle>() != null)
+                if (hits[i].collider.GetComponent<Gaze_Manipulation>() != null)
                 {
                     // get the pointed object
                     Gaze_InteractiveObject interactiveObject = hits[i].collider.transform.GetComponentInParent<Gaze_InteractiveObject>();
@@ -1239,7 +1249,7 @@ public class Gaze_GrabManager : MonoBehaviour
     {
         GameObject collidingObject = Gaze_Utils.ConvertIntoGameObject(e.Other);
 
-        if (collidingObject.GetComponent<Gaze_Handle>() == null)
+        if (collidingObject.GetComponent<Gaze_Manipulation>() == null)
             return;
 
         Gaze_InteractiveObject IO = collidingObject.GetComponentInParent<Gaze_InteractiveObject>();

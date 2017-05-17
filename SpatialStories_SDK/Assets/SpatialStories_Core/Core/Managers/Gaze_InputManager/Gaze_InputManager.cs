@@ -16,8 +16,10 @@
 // <web>http://www.apelab.ch</web>
 // <date>2014-06-01</date>
 using Gaze;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.VR;
+
 
 public enum HapticForceMode
 {
@@ -28,6 +30,12 @@ public enum HapticForceMode
 public class Gaze_InputManager : MonoBehaviour
 {
     #region members
+
+    public static Gaze_Controllers pluggedControllerType = Gaze_Controllers.NOT_DETERMINED;
+
+    [ReadOnly]
+    public Gaze_Controllers CurrentController = Gaze_Controllers.NOT_DETERMINED;
+
     /// <summary>
     /// Fired when the player has found two items that creates a Totem.
     /// </summary>
@@ -227,7 +235,10 @@ public class Gaze_InputManager : MonoBehaviour
     // Input type determination setup
     public delegate void OnSetupController(Gaze_Controllers controllerType);
     private static event OnSetupController setupEvent;
-    public static Gaze_Controllers pluggedControllerType = Gaze_Controllers.NOT_DETERMINED;
+
+
+
+
     public Gaze_InputLogic SpecialInputLogic;
 
     public GameObject UnpluggedControllerMessage;
@@ -300,10 +311,22 @@ public class Gaze_InputManager : MonoBehaviour
         else
         {
             SpecialInputLogic = null;
-            pluggedControllerType = Gaze_Controllers.GENERIC;
+
+            if (Input.GetJoystickNames().Where(name => name.Contains("Oculus")).Count() > 0)
+            {
+                pluggedControllerType = Gaze_Controllers.OCULUS_RIFT;
+            }
+            else if (Input.GetJoystickNames().Where(name => name.Contains("OpenVR")).Count() > 0)
+            {
+                pluggedControllerType = Gaze_Controllers.HTC_VIVE;
+            }
         }
+
         if (setupEvent != null)
+        {
             setupEvent(pluggedControllerType);
+            CurrentController = pluggedControllerType;
+        }
     }
 
     private void OnDestroy()

@@ -104,10 +104,13 @@ public class Gaze_Teleporter : MonoBehaviour
     {
         if (actualTeleportLogic != null)
             return;
+
         switch (actualController)
         {
-            case Gaze_Controllers.GENERIC:
-                //Hack
+            case Gaze_Controllers.HTC_VIVE:
+                actualTeleportLogic = new Gaze_GenericTeleport(this);
+                break;
+            case Gaze_Controllers.OCULUS_RIFT:
                 actualTeleportLogic = new Gaze_GenericTeleport(this);
                 break;
             case Gaze_Controllers.GEARVR_CONTROLLER:
