@@ -900,9 +900,20 @@ public class Gaze_GrabManager : MonoBehaviour
 
         //Debug.Log(velocitiesArray);
 
-        float meanAcceleration = velocities.Average();
+        try
+        {
+            if (velocities.Count > 0)
+            {
+                return velocities.Average();
+            }
 
-        return meanAcceleration;
+            return 0;
+        }
+        catch (Exception ex)
+        {
+            Debug.Log("WTF is going on!!");
+            return 0;
+        }
     }
 
     /// <summary>
@@ -1238,7 +1249,7 @@ public class Gaze_GrabManager : MonoBehaviour
             return;
 
         // Discard Head
-        if (IO.GetComponentInChildren<Camera>())
+        if (IO.GetComponent<Gaze_Head>() != null)
             return;
 
         // Check if the colliding object has a gaze handle in order to avoid noise.
