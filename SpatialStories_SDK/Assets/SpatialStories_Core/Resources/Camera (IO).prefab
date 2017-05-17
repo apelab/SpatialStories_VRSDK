@@ -203,6 +203,7 @@ GameObject:
   - component: {fileID: 4388356553964870}
   - component: {fileID: 95949219564952494}
   - component: {fileID: 114485687126287418}
+  - component: {fileID: 114188414025829052}
   m_Layer: 0
   m_Name: Head (IO)
   m_TagString: Untagged
@@ -3198,7 +3199,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0.01
   far clip plane: 1000
   field of view: 60
   orthographic: 0
@@ -3667,6 +3668,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a8ad9374c4038a4479b70da3ea56166f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114188414025829052
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1101354194073666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 907f26d34541f4046afe51bebbfe98c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &114199945311775306
