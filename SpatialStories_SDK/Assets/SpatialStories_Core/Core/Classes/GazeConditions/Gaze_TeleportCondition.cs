@@ -19,20 +19,21 @@
 //-----------------------------------------------------------------------
 
 using UnityEditor;
-using UnityEngine;
-using UnityEngine.VR;
 
 namespace Gaze
 {
     public class Gaze_TeleportCondition : Gaze_AbstractCondition
     {
-        private bool grabLeftValid = false;
-        private bool grabRightValid = false;
-        private bool grabStateLeftValid = false;
-        private bool grabStateRightValid = false;
+        public Gaze_TeleportCondition(Gaze_Conditions _gazeConditionsScript) : base(_gazeConditionsScript) { }
 
-        public Gaze_TeleportCondition(Gaze_Conditions _gazeConditionsScript) : base(_gazeConditionsScript)
+        protected override void CustomSetup()
         {
+            Gaze_EventManager.OnTeleportEvent += OnTeleportEvent;
+        }
+
+        protected override void CustomDispose()
+        {
+            Gaze_EventManager.OnTeleportEvent -= OnTeleportEvent;
         }
 
         public override bool IsValidated()
@@ -45,121 +46,26 @@ namespace Gaze
             EditorGUILayout.BeginHorizontal();
             if (IsValid)
             {
-                RenderSatisfiedLabel("Grab:");
+                RenderSatisfiedLabel("Teleport:");
                 RenderSatisfiedLabel("True");
             }
             else
             {
-                RenderNonSatisfiedLabel("Grab:");
+                RenderNonSatisfiedLabel("Teleport:");
                 RenderNonSatisfiedLabel("False");
             }
             EditorGUILayout.EndHorizontal();
         }
 
-        protected override void CustomDispose()
+        private void ValidateGrab(Gaze_TeleportEventArgs e)
         {
-            Gaze_InputManager.OnControllerGrabEvent -= OnControllerGrabEvent;
+            if (((int)e.Mode).Equals(gazeConditionsScript.teleportIndex))
+                IsValid = true;
         }
 
-        protected override void CustomSetup()
-        {
-            Gaze_InputManager.OnControllerGrabEvent += OnControllerGrabEvent;
-        }
-
-        private bool IsGrabbingControllerStateValid(bool _isGrabbing, Gaze_HandsEnum _mapHand, VRNode _dicoHand)
-        {
-            if (_mapHand.Equals(Gaze_HandsEnum.BOTH))
-            {
-                // check left hand state is ok
-                if (_dicoHand.Equals(VRNode.LeftHand))
-                    grabStateLeftValid = (_isGrabbing && gazeConditionsScript.grabMap.grabStateLeftIndex.Equals((int)Gaze_GrabStates.GRAB)) || (!_isGrabbing && gazeConditionsScript.grabMap.grabStateLeftIndex.Equals((int)Gaze_GrabStates.UNGRAB));
-
-                // check right hand state is ok
-                if (_dicoHand.Equals(VRNode.RightHand))
-                    grabStateRightValid = (_isGrabbing && gazeConditionsScript.grabMap.grabStateRightIndex.Equals((int)Gaze_GrabStates.GRAB)) || (!_isGrabbing && gazeConditionsScript.grabMap.grabStateRightIndex.Equals((int)Gaze_GrabStates.UNGRAB));
-
-                return grabStateLeftValid && grabStateRightValid;
-            }
-            else
-            {
-                int state = _mapHand.Equals(Gaze_HandsEnum.LEFT) ? gazeConditionsScript.grabMap.grabStateLeftIndex : gazeConditionsScript.grabMap.grabStateRightIndex;
-
-                if (_isGrabbing && state.Equals((int)Gaze_GrabStates.GRAB))
-                    return true;
-
-                if (!_isGrabbing && state.Equals((int)Gaze_GrabStates.UNGRAB))
-                    return true;
-            }
-
-            return false;
-        }
-
-        private bool IsGrabbingObjectValid(GameObject _grabbedObject, int _handIndex)
-        {
-            int index = _handIndex.Equals((int)Gaze_HandsEnum.BOTH) ? 1 : 0;
-            return _grabbedObject.Equals(gazeConditionsScript.grabMap.grabEntryList[index].interactiveObject);
-        }
-
-        private void ValidateGrab(Gaze_ControllerGrabEventArgs e)
-        {
-            // by default, invalidate grab
-            IsValid = ValidateGrabController(e);
-        }
-
-        private bool ValidateGrabController(Gaze_ControllerGrabEventArgs e)
-        {
-            VRNode dicoVRNode = e.ControllerObjectPair.Key;
-            GameObject grabbedObject = e.ControllerObjectPair.Value;
-
-            // get the hand VRNode from the event
-            bool isGrabbingControllerLeft = e.ControllerObjectPair.Key == VRNode.LeftHand;
-            VRNode eventVRNode = isGrabbingControllerLeft ? VRNode.LeftHand : VRNode.RightHand;
-
-            bool grabbedObjectValid = IsGrabbingObjectValid(grabbedObject, gazeConditionsScript.grabMap.grabHandsIndex);
-
-            // if we've configured
-            switch (gazeConditionsScript.grabMap.grabHandsIndex)
-            {
-                case (int)Gaze_HandsEnum.BOTH:
-                    bool isGrabbingControllerStateValid = IsGrabbingControllerStateValid(e.IsGrabbing, Gaze_HandsEnum.BOTH, eventVRNode);
-                    bool isGrabbingControllerInMap = IsGrabbingControllerInMap(dicoVRNode);
-
-                    return isGrabbingControllerInMap && isGrabbingControllerStateValid && grabbedObjectValid;
-                    break;
-
-                //  the LEFT hand
-                case (int)Gaze_HandsEnum.LEFT:
-                    grabLeftValid = IsGrabbingControllerInMap(dicoVRNode) && IsGrabbingControllerStateValid(e.IsGrabbing, Gaze_HandsEnum.LEFT, eventVRNode) && grabbedObjectValid;
-                    return grabLeftValid;
-                    break;
-
-                //  the RIGHT hand
-                case (int)Gaze_HandsEnum.RIGHT:
-                    grabRightValid = IsGrabbingControllerInMap(dicoVRNode) && IsGrabbingControllerStateValid(e.IsGrabbing, Gaze_HandsEnum.RIGHT, eventVRNode) && grabbedObjectValid;
-                    return grabRightValid;
-                    break;
-            }
-
-            return false;
-        }
-
-        private void OnControllerGrabEvent(Gaze_ControllerGrabEventArgs e)
+        private void OnTeleportEvent(Gaze_TeleportEventArgs e)
         {
             ValidateGrab(e);
         }
-
-
-        private bool IsGrabbingControllerInMap(VRNode grabbingController)
-        {
-            for (int i = 0; i < gazeConditionsScript.grabMap.grabEntryList.Count; i++)
-            {
-                if (gazeConditionsScript.grabMap.grabEntryList[i].hand.Equals(grabbingController))
-                    return true;
-            }
-
-            return false;
-        }
-
-
     }
 }

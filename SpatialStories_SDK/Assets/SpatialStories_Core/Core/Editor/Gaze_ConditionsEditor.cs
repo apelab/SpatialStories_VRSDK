@@ -589,19 +589,20 @@ namespace Gaze
             else
                 EditorGUILayout.EndHorizontal();
 
+
+            EditorGUILayout.Space();
         }
 
         private void DisplayTeleportCondition()
         {
-            //TODO(4nc3str4l): Mike enable this when you will finnish the teleport condition
-            //EditorGUILayout.BeginHorizontal();
-            //targetConditions.teleportEnabled = EditorGUILayout.ToggleLeft("Teleport", targetConditions.teleportEnabled);
+            EditorGUILayout.BeginHorizontal();
+            targetConditions.teleportEnabled = EditorGUILayout.ToggleLeft("Teleport", targetConditions.teleportEnabled);
 
-            //// chose teleport's action mode as a condition
-            //if (targetConditions.teleportEnabled)
-            //    targetConditions.teleportIndex = EditorGUILayout.Popup(targetConditions.teleportIndex, Enum.GetNames(typeof(Gaze_TeleportMode)));
+            // chose teleport's action mode as a condition
+            if (targetConditions.teleportEnabled)
+                targetConditions.teleportIndex = EditorGUILayout.Popup(targetConditions.teleportIndex, Enum.GetNames(typeof(Gaze_TeleportMode)));
 
-            //EditorGUILayout.EndHorizontal();
+            EditorGUILayout.EndHorizontal();
         }
 
         private void DisplayWarning()

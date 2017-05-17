@@ -219,9 +219,15 @@ namespace Gaze
             {
                 grabbingMananger = (Gaze_GrabManager)e.Sender;
 
+                if (grabbingMananger != null)
+                    RootMotion = grabbingMananger.grabPosition;
+
+                if (IsManipulable && !IsBeingManipulated)
+                    SetManipulationMode(true);
+                else if (IsBeingManipulated)
+                    ContinueManipulation();
 
                 List<Gaze_GrabManager> GrabManagers = Gaze_GrabManager.GetGrabbingHands(this);
-
                 if (GrabManagers.Count > 1)
                 {
                     foreach (Gaze_GrabManager gm in GrabManagers)
@@ -230,14 +236,6 @@ namespace Gaze
                             gm.TryDetach();
                     }
                 }
-
-                if (grabbingMananger != null)
-                    RootMotion = grabbingMananger.grabPosition;
-
-                if (IsManipulable && !IsBeingManipulated)
-                    SetManipulationMode(true);
-                else if (IsBeingManipulated)
-                    ContinueManipulation();
             }
             else
             {
