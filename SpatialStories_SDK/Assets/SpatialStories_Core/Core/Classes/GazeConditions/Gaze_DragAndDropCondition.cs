@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="LevitationEventArgs.cs" company="apelab sàrl">
+// <copyright file="Gaze_DragAndDropCondition.cs" company="apelab sàrl">
 // © apelab. All Rights Reserved.
 //
 // This source is subject to the apelab license.
