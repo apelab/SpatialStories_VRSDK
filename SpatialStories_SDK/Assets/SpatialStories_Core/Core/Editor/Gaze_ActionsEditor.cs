@@ -174,56 +174,15 @@ namespace Gaze
 
                 if (actionsScript && !actionsScript.DestroyOnTrigger)
                 {
-                    actionsScript.ActionVisuals = (Gaze_Actions.ACTIVABLE_OPTION)EditorGUILayout.EnumPopup("Visuals", actionsScript.ActionVisuals);
-                    EditorGUILayout.Space();
-
-                    actionsScript.ActionGrab = (Gaze_Actions.ACTIVABLE_OPTION)EditorGUILayout.EnumPopup("Grab Ability", actionsScript.ActionGrab);
-
-                    actionsScript.ModifyGrabDistance = (Gaze_Actions.ALTERABLE_OPTION)EditorGUILayout.EnumPopup("Grab Distance", actionsScript.ModifyGrabDistance);
-                    if (actionsScript.ModifyGrabDistance == Gaze_Actions.ALTERABLE_OPTION.MODIFY)
-                    {
-                        EditorGUILayout.BeginHorizontal();
-                        actionsScript.grabDistance = EditorGUILayout.FloatField("", actionsScript.grabDistance);
-                        Gaze_Utils.EnsureFieldIsPositiveOrZero(ref actionsScript.grabDistance);
-                        EditorGUILayout.EndHorizontal();
-
-                    }
-
-                    EditorGUILayout.Space();
-
-
-                    actionsScript.ModifyGrabMode = (Gaze_Actions.ALTERABLE_OPTION)EditorGUILayout.EnumPopup("Grab Mode", actionsScript.ModifyGrabMode);
-                    if (actionsScript.ModifyGrabMode == Gaze_Actions.ALTERABLE_OPTION.MODIFY)
-                    {
-                        EditorGUILayout.BeginHorizontal();
-                        actionsScript.grabModeIndex = EditorGUILayout.Popup("", actionsScript.grabModeIndex, grabModes);
-                        EditorGUILayout.EndHorizontal();
-
-                    }
-
-                    EditorGUILayout.Space();
-
-
-                    actionsScript.ActionTouch = (Gaze_Actions.ACTIVABLE_OPTION)EditorGUILayout.EnumPopup("Touch Ability", actionsScript.ActionTouch);
-                    actionsScript.ModifyTouchDistance = (Gaze_Actions.ALTERABLE_OPTION)EditorGUILayout.EnumPopup("Touch Distance", actionsScript.ModifyTouchDistance);
-                    if (actionsScript.ModifyTouchDistance == Gaze_Actions.ALTERABLE_OPTION.MODIFY)
-                    {
-                        EditorGUILayout.BeginHorizontal();
-                        actionsScript.touchDistance = EditorGUILayout.FloatField("", actionsScript.touchDistance);
-                        Gaze_Utils.EnsureFieldIsPositiveOrZero(ref actionsScript.touchDistance);
-                        EditorGUILayout.EndHorizontal();
-                    }
-
-
-                    EditorGUILayout.Space();
-
-
+                    ShowVisualsOption();
+                    ShowCollidersOption();
+                    ShowGrabOption();
+                    ShowGrabDistanceOption();
+                    ShowGrabModeOption();
+                    ShowTouchAbilityOption();
+                    ShowTouchDistanceOption();
                     actionsScript.ActionGravity = (Gaze_Actions.ACTIVABLE_OPTION)EditorGUILayout.EnumPopup("Gravity", actionsScript.ActionGravity);
-                    EditorGUILayout.Space();
-
-
                     ShowAudioOptions();
-
                     ShowAnimationOptions();
                 }
 
@@ -235,10 +194,61 @@ namespace Gaze
             EditorUtility.SetDirty(actionsScript);
         }
 
+        private void ShowTouchDistanceOption()
+        {
+            actionsScript.ModifyTouchDistance = (Gaze_Actions.ALTERABLE_OPTION)EditorGUILayout.EnumPopup("Touch Distance", actionsScript.ModifyTouchDistance);
+            if (actionsScript.ModifyTouchDistance == Gaze_Actions.ALTERABLE_OPTION.MODIFY)
+            {
+                EditorGUILayout.BeginHorizontal();
+                actionsScript.touchDistance = EditorGUILayout.FloatField("", actionsScript.touchDistance);
+                Gaze_Utils.EnsureFieldIsPositiveOrZero(ref actionsScript.touchDistance);
+                EditorGUILayout.EndHorizontal();
+            }
+        }
+
+        private void ShowTouchAbilityOption()
+        {
+            actionsScript.ActionTouch = (Gaze_Actions.ACTIVABLE_OPTION)EditorGUILayout.EnumPopup("Touch Ability", actionsScript.ActionTouch);
+        }
+
+        private void ShowGrabModeOption()
+        {
+            actionsScript.ModifyGrabMode = (Gaze_Actions.ALTERABLE_OPTION)EditorGUILayout.EnumPopup("Grab Mode", actionsScript.ModifyGrabMode);
+            if (actionsScript.ModifyGrabMode == Gaze_Actions.ALTERABLE_OPTION.MODIFY)
+            {
+                EditorGUILayout.BeginHorizontal();
+                actionsScript.grabModeIndex = EditorGUILayout.Popup("", actionsScript.grabModeIndex, grabModes);
+                EditorGUILayout.EndHorizontal();
+
+            }
+        }
+
+        private void ShowGrabDistanceOption()
+        {
+            actionsScript.ModifyGrabDistance = (Gaze_Actions.ALTERABLE_OPTION)EditorGUILayout.EnumPopup("Grab Distance", actionsScript.ModifyGrabDistance);
+            if (actionsScript.ModifyGrabDistance == Gaze_Actions.ALTERABLE_OPTION.MODIFY)
+            {
+                EditorGUILayout.BeginHorizontal();
+                actionsScript.grabDistance = EditorGUILayout.FloatField("", actionsScript.grabDistance);
+                Gaze_Utils.EnsureFieldIsPositiveOrZero(ref actionsScript.grabDistance);
+                EditorGUILayout.EndHorizontal();
+
+            }
+        }
+
+        private void ShowGrabOption()
+        {
+            actionsScript.ActionGrab = (Gaze_Actions.ACTIVABLE_OPTION)EditorGUILayout.EnumPopup("Grab Ability", actionsScript.ActionGrab);
+        }
+
+        private void ShowVisualsOption()
+        {
+            actionsScript.ActionVisuals = (Gaze_Actions.ACTIVABLE_OPTION)EditorGUILayout.EnumPopup("Visuals", actionsScript.ActionVisuals);
+        }
 
         private void ShowCollidersOption()
         {
-            actionsScript.ActionColliders = (Gaze_Actions.ACTIVABLE_OPTION)EditorGUILayout.EnumPopup("Colliders:", actionsScript.ActionColliders);
+            actionsScript.ActionColliders = (Gaze_Actions.ACTIVABLE_OPTION)EditorGUILayout.EnumPopup("Colliders", actionsScript.ActionColliders);
             if (actionsScript.ActionColliders == Gaze_Actions.ACTIVABLE_OPTION.DEACTIVATE)
             {
                 if (actionsScript.GetIO().IsAffectedByGravity() && actionsScript.ActionGravity != Gaze_Actions.ACTIVABLE_OPTION.DEACTIVATE)

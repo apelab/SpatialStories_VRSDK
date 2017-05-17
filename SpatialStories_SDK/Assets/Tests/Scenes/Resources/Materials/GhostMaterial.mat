@@ -74,20 +74,20 @@ Material:
     - _Alpha2: 0
     - _Alpha3: 0
     - _BiasDs: 0
-    - _BiasDsl: 1
+    - _BiasDsl: 1.34
     - _BiasMT: 1
     - _BiasMT2: 1
     - _BiasMT3: 1
-    - _Bri: 0.18
+    - _Bri: 0.12
     - _BumpScale: 1
-    - _Con: 0.5
+    - _Con: 0.58
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
-    - _DisTexType: 0
-    - _DslEA: 0.21
+    - _DisTexType: 1
+    - _DslEA: 0.42
     - _DslEI: 1
-    - _DslER: 0.074
-    - _DslGl: 0
+    - _DslER: 0.2
+    - _DslGl: -1.96
     - _DstBlend: 0
     - _GlossMapScale: 1
     - _Glossiness: 0.5
@@ -103,7 +103,7 @@ Material:
     - _SrcBlend: 1
     - _UVSec: 0
     - _ZWrite: 1
-    - _ac: 1
+    - _ac: 0
     - _dT: 1
     - _dTA: 0
     - _dTAE: 0
@@ -129,7 +129,7 @@ Material:
     - _tTAE: 0
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _DslEC: {r: 1, g: 1, b: 1, a: 1}
+    - _DslEC: {r: 0.7794118, g: 0.16619812, b: 0.16619812, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Pan1: {r: 0, g: 0, b: 0, a: 0}
     - _Pan2: {r: 0, g: 0, b: 0, a: 0}
