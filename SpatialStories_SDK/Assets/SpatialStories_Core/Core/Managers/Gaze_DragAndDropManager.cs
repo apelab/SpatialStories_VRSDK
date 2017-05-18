@@ -190,6 +190,7 @@ namespace Gaze
                 if (currentDragAndDropCondition != null && currentDragAndDropCondition.attached)
                 {
                     IO.DisableManipulationMode(Gaze_ManipulationModes.GRAB);
+                    IO.DisableManipulationMode(Gaze_ManipulationModes.LEVITATE);
                     IO.IsManipulable = false;
                     IO.SetManipulationMode(false, true);
                 }
@@ -254,7 +255,7 @@ namespace Gaze
             }
 
             // check if rotations are valid
-            bool xValidRotation = xAxisSimilarity[0] > (angleThreshold/100) || xAxisSimilarity[1] > (angleThreshold / 100);
+            bool xValidRotation = xAxisSimilarity[0] > (angleThreshold / 100) || xAxisSimilarity[1] > (angleThreshold / 100);
             bool yValidRotation = yAxisSimilarity[0] > (angleThreshold / 100) || yAxisSimilarity[1] > (angleThreshold / 100);
             bool zValidRotation = zAxisSimilarity[0] > (angleThreshold / 100) || zAxisSimilarity[1] > (angleThreshold / 100);
             bool validRotation = xValidRotation && yValidRotation && zValidRotation;
