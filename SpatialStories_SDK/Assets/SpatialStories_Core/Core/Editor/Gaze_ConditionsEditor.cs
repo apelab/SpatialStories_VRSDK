@@ -52,6 +52,7 @@ namespace Gaze
 
         private List<Gaze_AbstractConditions> hierarchyCustomConditions;
         private List<string> hierarchyCustomConditionsNames;
+        private string[] customConditionActionEnum;
 
         #endregion
 
@@ -79,6 +80,7 @@ namespace Gaze
 
             hierarchyCustomConditions = new List<Gaze_AbstractConditions>();
             hierarchyCustomConditionsNames = new List<string>();
+            customConditionActionEnum = Enum.GetNames(typeof(Gaze_CustomConditionActionEnum));
 
             FetchInputsList();
         }
@@ -107,6 +109,7 @@ namespace Gaze
                     DisplayGrabCondition();
                     DisplayInputsCondition();
                     DisplayTeleportCondition();
+                    DisplayDragAndDropCondition();
 
                     EditorGUILayout.Space();
                     #endregion
@@ -603,6 +606,8 @@ namespace Gaze
                 targetConditions.teleportIndex = EditorGUILayout.Popup(targetConditions.teleportIndex, Enum.GetNames(typeof(Gaze_TeleportMode)));
 
             EditorGUILayout.EndHorizontal();
+
+            EditorGUILayout.Space();
         }
 
         private void DisplayWarning()
@@ -831,6 +836,32 @@ namespace Gaze
             }
             GUILayout.EndHorizontal();
             EditorGUILayout.Space();
+        }
+
+        private void DisplayDragAndDropCondition()
+        {
+            EditorGUILayout.BeginHorizontal();
+            targetConditions.dragAndDropEnabled = EditorGUILayout.ToggleLeft("Drag And Drop", targetConditions.dragAndDropEnabled);
+            EditorGUILayout.EndHorizontal();
+
+            if (targetConditions.dragAndDropEnabled)
+            {
+                EditorGUILayout.BeginHorizontal();
+                targetConditions.DnDTargetObject = (Gaze_InteractiveObject)EditorGUILayout.ObjectField("Target", targetConditions.DnDTargetObject, typeof(Gaze_InteractiveObject), true);
+                EditorGUILayout.EndHorizontal();
+                EditorGUILayout.BeginHorizontal();
+                targetConditions.dndOnDropReadyIndex = EditorGUILayout.Popup("On Drop Ready", targetConditions.dndOnDropReadyIndex, customConditionActionEnum);
+                EditorGUILayout.EndHorizontal();
+                EditorGUILayout.BeginHorizontal();
+                targetConditions.dndOnDropIndex = EditorGUILayout.Popup("On Drop", targetConditions.dndOnDropIndex, customConditionActionEnum);
+                EditorGUILayout.EndHorizontal();
+                EditorGUILayout.BeginHorizontal();
+                targetConditions.dndOnPickupIndex = EditorGUILayout.Popup("On Pickup", targetConditions.dndOnPickupIndex, customConditionActionEnum);
+                EditorGUILayout.EndHorizontal();
+                EditorGUILayout.BeginHorizontal();
+                targetConditions.dndOnRemoveIndex = EditorGUILayout.Popup("On Remove", targetConditions.dndOnRemoveIndex, customConditionActionEnum);
+                EditorGUILayout.EndHorizontal();
+            }
         }
     }
 }

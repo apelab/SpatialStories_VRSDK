@@ -243,6 +243,17 @@ namespace Gaze
         public bool customConditionsEnabled;
 
         /// <summary>
+        /// Is Drag And Drop enabled.
+        /// </summary>
+        public bool dragAndDropEnabled;
+        public int dndOnDropReadyIndex;
+        public int dndOnDropIndex;
+        public int dndOnPickupIndex;
+        public int dndOnRemoveIndex;
+        public Gaze_InteractiveObject DnDTargetObject;
+        public bool DnDAttached;
+
+        /// <summary>
         /// All the proximities in the list are required in order to be validated.
         /// </summary>
         public bool requireAllProximities;
