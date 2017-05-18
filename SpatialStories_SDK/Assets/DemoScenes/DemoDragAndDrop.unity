@@ -422,8 +422,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.4470857, y: 0.42491296, z: 0.45346034}
+  m_Center: {x: -0.00074594474, y: -0.0061170016, z: 0.20393264}
 --- !u!1 &112896432
 GameObject:
   m_ObjectHideFlags: 0
@@ -814,7 +814,7 @@ MonoBehaviour:
   onPickup: 0
   onRemove: 0
   TargetObject: {fileID: 1166538128}
-  attached: 0
+  attached: 1
 --- !u!114 &147883697
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -857,6 +857,8 @@ MonoBehaviour:
   FocusLossSpeed: 1
   proximityEnabled: 0
   grabEnabled: 0
+  teleportIndex: 0
+  teleportEnabled: 0
   inputsEnabled: 0
   InputsMap:
     InputsEntries: []
@@ -1067,8 +1069,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.20031856, y: 0.45538878, z: 0.31062058}
+  m_Center: {x: 0.0034469813, y: -0.017234236, z: -0.027575262}
 --- !u!1 &220583945
 GameObject:
   m_ObjectHideFlags: 0
@@ -1233,6 +1235,8 @@ MonoBehaviour:
   FocusLossSpeed: 1
   proximityEnabled: 0
   grabEnabled: 0
+  teleportIndex: 0
+  teleportEnabled: 0
   inputsEnabled: 0
   InputsMap:
     InputsEntries: []
@@ -1250,7 +1254,8 @@ MonoBehaviour:
   touchEnabled: 0
   ActivateOnDependencyMap:
     dependencies:
-    - dependentGameObject: {fileID: 147883693}
+    - IsValid: 0
+      dependentGameObject: {fileID: 147883693}
       triggerStateIndex: 3
       onTrigger: 1
     AreDependenciesSatisfied: 0
@@ -1480,8 +1485,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1.464456}
-  m_Center: {x: 0, y: -2.525543e-16, z: 0.23222801}
+  m_Size: {x: 0.43279552, y: 0.31125253, z: 1.3753239}
+  m_Center: {x: -0.0040516853, y: 0.0040510595, z: 0.27679408}
 --- !u!1 &283241733
 GameObject:
   m_ObjectHideFlags: 0
@@ -1619,6 +1624,7 @@ MonoBehaviour:
   TouchDistance: 0
   AttractionSpeed: 1
   IsManipulable: 0
+  SnapOnGrab: 0
   RootMotion: {fileID: 0}
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
@@ -1676,7 +1682,7 @@ MonoBehaviour:
   respectYAxisMirrored: 0
   respectZAxis: 0
   respectZAxisMirrored: 0
-  m_SnapBeforeDrop: 1
+  m_SnapBeforeDrop: 0
   m_TimeToSnap: 0.5
   currentDragAndDropCondition: {fileID: 1394269509}
 --- !u!64 &283241740
@@ -1967,6 +1973,8 @@ MonoBehaviour:
   FocusLossSpeed: 1
   proximityEnabled: 0
   grabEnabled: 0
+  teleportIndex: 0
+  teleportEnabled: 0
   inputsEnabled: 0
   InputsMap:
     InputsEntries: []
@@ -1984,7 +1992,8 @@ MonoBehaviour:
   touchEnabled: 0
   ActivateOnDependencyMap:
     dependencies:
-    - dependentGameObject: {fileID: 1470701452}
+    - IsValid: 0
+      dependentGameObject: {fileID: 1470701452}
       triggerStateIndex: 3
       onTrigger: 1
     AreDependenciesSatisfied: 0
@@ -2670,6 +2679,7 @@ MonoBehaviour:
   TouchDistance: 0
   AttractionSpeed: 1
   IsManipulable: 0
+  SnapOnGrab: 0
   RootMotion: {fileID: 0}
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
@@ -3263,6 +3273,8 @@ MonoBehaviour:
   FocusLossSpeed: 1
   proximityEnabled: 0
   grabEnabled: 0
+  teleportIndex: 0
+  teleportEnabled: 0
   inputsEnabled: 0
   InputsMap:
     InputsEntries: []
@@ -3383,6 +3395,24 @@ Transform:
   m_Father: {fileID: 314735335}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &520545790 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100000, guid: 512fbb4109613fa489452d6110751fcf, type: 3}
+  m_PrefabInternal: {fileID: 1246577226}
+--- !u!64 &520545794
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 520545790}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 1
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: 512fbb4109613fa489452d6110751fcf, type: 3}
 --- !u!1 &523100572
 GameObject:
   m_ObjectHideFlags: 0
@@ -3553,8 +3583,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.46573067, y: 0.5415622, z: 0.4622836}
+  m_Center: {x: 0.015511036, y: 0.09823662, z: -0.00000023841858}
 --- !u!1 &614516344
 GameObject:
   m_ObjectHideFlags: 0
@@ -3613,7 +3643,8 @@ MonoBehaviour:
   GrabDistance: 0
   TouchDistance: 0
   AttractionSpeed: 1
-  IsManipulable: 0
+  IsManipulable: 1
+  SnapOnGrab: 0
   RootMotion: {fileID: 0}
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
@@ -3684,7 +3715,7 @@ MonoBehaviour:
   gyroColor: {r: 0, g: 0.6, b: 1, a: 0.2}
   gyroUI: {fileID: 1903499341379776, guid: 934a3c1822b00914ebc0ca1e4fa1a92b, type: 2}
   arcLineWidth: 0.05
-  arcMaterial: {fileID: 0}
+  arcMaterial: {fileID: 2100000, guid: 74b35de85a4816e4d8533b9b2c8a5f47, type: 2}
 --- !u!95 &614516349
 Animator:
   serializedVersion: 3
@@ -4076,8 +4107,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.4470857, y: 0.42491296, z: 0.45346034}
+  m_Center: {x: -0.00074594474, y: -0.0061170016, z: 0.20393264}
 --- !u!1 &730240363
 GameObject:
   m_ObjectHideFlags: 0
@@ -4224,6 +4255,8 @@ MonoBehaviour:
   FocusLossSpeed: 1
   proximityEnabled: 0
   grabEnabled: 0
+  teleportIndex: 0
+  teleportEnabled: 0
   inputsEnabled: 0
   InputsMap:
     InputsEntries: []
@@ -4241,7 +4274,8 @@ MonoBehaviour:
   touchEnabled: 0
   ActivateOnDependencyMap:
     dependencies:
-    - dependentGameObject: {fileID: 1394269506}
+    - IsValid: 0
+      dependentGameObject: {fileID: 1394269506}
       triggerStateIndex: 3
       onTrigger: 1
     AreDependenciesSatisfied: 0
@@ -4497,6 +4531,7 @@ MonoBehaviour:
   TouchDistance: 0
   AttractionSpeed: 1
   IsManipulable: 0
+  SnapOnGrab: 0
   RootMotion: {fileID: 0}
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
@@ -4554,7 +4589,7 @@ MonoBehaviour:
   respectYAxisMirrored: 0
   respectZAxis: 0
   respectZAxisMirrored: 0
-  m_SnapBeforeDrop: 1
+  m_SnapBeforeDrop: 0
   m_TimeToSnap: 0.5
   currentDragAndDropCondition: {fileID: 147883696}
 --- !u!136 &769113363
@@ -5114,6 +5149,24 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &827630579 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100000, guid: 512fbb4109613fa489452d6110751fcf, type: 3}
+  m_PrefabInternal: {fileID: 1230681624}
+--- !u!64 &827630583
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 827630579}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 1
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: 512fbb4109613fa489452d6110751fcf, type: 3}
 --- !u!1 &841861582
 GameObject:
   m_ObjectHideFlags: 0
@@ -5366,7 +5419,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   spreadCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -5390,7 +5443,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
 --- !u!54 &894770031
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5426,7 +5479,8 @@ MonoBehaviour:
   GrabDistance: 50
   TouchDistance: 0
   AttractionSpeed: 1
-  IsManipulable: 0
+  IsManipulable: 1
+  SnapOnGrab: 1
   RootMotion: {fileID: 0}
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
@@ -5484,7 +5538,7 @@ MonoBehaviour:
   respectYAxisMirrored: 0
   respectZAxis: 0
   respectZAxisMirrored: 0
-  m_SnapBeforeDrop: 1
+  m_SnapBeforeDrop: 0
   m_TimeToSnap: 0.5
   currentDragAndDropCondition: {fileID: 1470701455}
 --- !u!64 &894770036
@@ -5886,6 +5940,8 @@ MonoBehaviour:
   FocusLossSpeed: 1
   proximityEnabled: 0
   grabEnabled: 0
+  teleportIndex: 0
+  teleportEnabled: 0
   inputsEnabled: 0
   InputsMap:
     InputsEntries: []
@@ -6874,6 +6930,7 @@ MonoBehaviour:
   TouchDistance: 0
   AttractionSpeed: 1
   IsManipulable: 0
+  SnapOnGrab: 0
   RootMotion: {fileID: 0}
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
@@ -7610,7 +7667,7 @@ MonoBehaviour:
   inputThreshold: 0.5
   teleportLayer:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 0
   transition: 0
   fadeMat: {fileID: 0}
   fadeDuration: 0.5
@@ -7648,7 +7705,8 @@ MonoBehaviour:
   GrabDistance: 0
   TouchDistance: 0
   AttractionSpeed: 1
-  IsManipulable: 0
+  IsManipulable: 1
+  SnapOnGrab: 0
   RootMotion: {fileID: 0}
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
@@ -7768,8 +7826,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.46573067, y: 0.5415622, z: 0.4622836}
+  m_Center: {x: 0.015511036, y: 0.09823662, z: -0.00000023841858}
 --- !u!1001 &1246577226
 Prefab:
   m_ObjectHideFlags: 0
@@ -8181,7 +8239,7 @@ MonoBehaviour:
   onPickup: 0
   onRemove: 0
   TargetObject: {fileID: 2095049877}
-  attached: 0
+  attached: 1
 --- !u!114 &1283808241
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8224,6 +8282,8 @@ MonoBehaviour:
   FocusLossSpeed: 1
   proximityEnabled: 0
   grabEnabled: 0
+  teleportIndex: 0
+  teleportEnabled: 0
   inputsEnabled: 0
   InputsMap:
     InputsEntries: []
@@ -8395,7 +8455,8 @@ MonoBehaviour:
   GrabDistance: 0
   TouchDistance: 0
   AttractionSpeed: 1
-  IsManipulable: 0
+  IsManipulable: 1
+  SnapOnGrab: 0
   RootMotion: {fileID: 0}
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
@@ -8719,8 +8780,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.46573067, y: 0.5415622, z: 0.4622836}
+  m_Center: {x: 0.015511036, y: 0.09823662, z: -0.00000023841858}
 --- !u!1 &1334681317
 GameObject:
   m_ObjectHideFlags: 0
@@ -8932,8 +8993,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1.464456}
-  m_Center: {x: 0, y: -2.525543e-16, z: 0.23222801}
+  m_Size: {x: 0.43279552, y: 0.31125253, z: 1.3753239}
+  m_Center: {x: -0.0040516853, y: 0.0040510595, z: 0.27679408}
 --- !u!1 &1383346913
 GameObject:
   m_ObjectHideFlags: 0
@@ -9117,7 +9178,7 @@ MonoBehaviour:
   onPickup: 0
   onRemove: 0
   TargetObject: {fileID: 429312878}
-  attached: 0
+  attached: 1
 --- !u!114 &1394269510
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9160,6 +9221,8 @@ MonoBehaviour:
   FocusLossSpeed: 1
   proximityEnabled: 0
   grabEnabled: 0
+  teleportIndex: 0
+  teleportEnabled: 0
   inputsEnabled: 0
   InputsMap:
     InputsEntries: []
@@ -9312,6 +9375,24 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &1455412768 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100000, guid: 512fbb4109613fa489452d6110751fcf, type: 3}
+  m_PrefabInternal: {fileID: 472932562}
+--- !u!64 &1455412772
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1455412768}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 1
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: 512fbb4109613fa489452d6110751fcf, type: 3}
 --- !u!1 &1458590147
 GameObject:
   m_ObjectHideFlags: 0
@@ -9475,7 +9556,7 @@ MonoBehaviour:
   onPickup: 0
   onRemove: 0
   TargetObject: {fileID: 1683916536}
-  attached: 0
+  attached: 1
 --- !u!114 &1470701456
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9518,6 +9599,8 @@ MonoBehaviour:
   FocusLossSpeed: 1
   proximityEnabled: 0
   grabEnabled: 0
+  teleportIndex: 0
+  teleportEnabled: 0
   inputsEnabled: 0
   InputsMap:
     InputsEntries: []
@@ -10149,8 +10232,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.4470857, y: 0.42491296, z: 0.45346034}
+  m_Center: {x: -0.00074594474, y: -0.0061170016, z: 0.20393264}
 --- !u!1 &1627136414
 GameObject:
   m_ObjectHideFlags: 0
@@ -10303,6 +10386,8 @@ MonoBehaviour:
   FocusLossSpeed: 1
   proximityEnabled: 0
   grabEnabled: 0
+  teleportIndex: 0
+  teleportEnabled: 0
   inputsEnabled: 0
   InputsMap:
     InputsEntries: []
@@ -10491,6 +10576,7 @@ MonoBehaviour:
   TouchDistance: 0
   AttractionSpeed: 1
   IsManipulable: 0
+  SnapOnGrab: 0
   RootMotion: {fileID: 0}
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
@@ -10814,6 +10900,8 @@ MonoBehaviour:
   FocusLossSpeed: 1
   proximityEnabled: 0
   grabEnabled: 0
+  teleportIndex: 0
+  teleportEnabled: 0
   inputsEnabled: 0
   InputsMap:
     InputsEntries: []
@@ -10831,7 +10919,8 @@ MonoBehaviour:
   touchEnabled: 0
   ActivateOnDependencyMap:
     dependencies:
-    - dependentGameObject: {fileID: 1283808237}
+    - IsValid: 0
+      dependentGameObject: {fileID: 1283808237}
       triggerStateIndex: 3
       onTrigger: 1
     AreDependenciesSatisfied: 0
@@ -11328,8 +11417,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.20031856, y: 0.45538878, z: 0.31062058}
+  m_Center: {x: 0.0034469813, y: -0.017234236, z: -0.027575262}
 --- !u!1 &1887232479
 GameObject:
   m_ObjectHideFlags: 0
@@ -11358,6 +11447,24 @@ Transform:
   m_Father: {fileID: 2042674255}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1888982826 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100000, guid: 512fbb4109613fa489452d6110751fcf, type: 3}
+  m_PrefabInternal: {fileID: 1546756269}
+--- !u!64 &1888982827
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1888982826}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 1
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: 512fbb4109613fa489452d6110751fcf, type: 3}
 --- !u!1 &1906957174
 GameObject:
   m_ObjectHideFlags: 0
@@ -11633,6 +11740,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d732d8224a352643a546576ae2a2e5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CurrentController: 0
   LeftHandActive: 1
   RightHandActive: 1
   trackPosition: 1
@@ -12098,7 +12206,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   spreadCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -12122,7 +12230,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
 --- !u!54 &2040613623
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -12159,6 +12267,7 @@ MonoBehaviour:
   TouchDistance: 0
   AttractionSpeed: 1
   IsManipulable: 0
+  SnapOnGrab: 0
   RootMotion: {fileID: 0}
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
@@ -12216,7 +12325,7 @@ MonoBehaviour:
   respectYAxisMirrored: 0
   respectZAxis: 0
   respectZAxisMirrored: 0
-  m_SnapBeforeDrop: 1
+  m_SnapBeforeDrop: 0
   m_TimeToSnap: 0.5
   currentDragAndDropCondition: {fileID: 1283808240}
 --- !u!65 &2040613628
@@ -12512,8 +12621,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.20031856, y: 0.45538878, z: 0.31062058}
+  m_Center: {x: 0.0034469813, y: -0.017234236, z: -0.027575262}
 --- !u!4 &2093938295 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 512fbb4109613fa489452d6110751fcf, type: 3}
@@ -12576,6 +12685,7 @@ MonoBehaviour:
   TouchDistance: 0
   AttractionSpeed: 1
   IsManipulable: 0
+  SnapOnGrab: 0
   RootMotion: {fileID: 0}
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
@@ -12742,8 +12852,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1.464456}
-  m_Center: {x: 0, y: -2.525543e-16, z: 0.23222801}
+  m_Size: {x: 0.43279552, y: 0.31125253, z: 1.3753239}
+  m_Center: {x: -0.0040516853, y: 0.0040510595, z: 0.27679408}
 --- !u!1 &2121736242
 GameObject:
   m_ObjectHideFlags: 0

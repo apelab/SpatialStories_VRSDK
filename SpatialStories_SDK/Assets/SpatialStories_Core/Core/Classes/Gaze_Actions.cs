@@ -233,10 +233,19 @@ namespace Gaze
             Gaze_InteractiveObject io = GetIO();
             // HACK: this is done as a hotfix for BALMOB in a future we need to create an scripts visuals add it into each IO and then track it.
             Renderer[] AllRenderers = io.transform.FindChild("Visuals").GetComponentsInChildren<Renderer>();
+            ParticleSystem[] AllParticles = io.transform.FindChild("Visuals").GetComponentsInChildren<ParticleSystem>();
             bool isEnabled = ActionVisuals == ACTIVABLE_OPTION.ACTIVATE;
 
             foreach (Renderer renderer in AllRenderers)
                 renderer.enabled = isEnabled;
+
+            foreach (ParticleSystem particle in AllParticles)
+            {
+                if (isEnabled)
+                    particle.Play();
+                else
+                    particle.Stop();
+            }
         }
 
         /// <summary>

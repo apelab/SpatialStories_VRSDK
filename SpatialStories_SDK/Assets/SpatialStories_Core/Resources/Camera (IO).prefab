@@ -4305,7 +4305,8 @@ MonoBehaviour:
   GrabDistance: 0
   TouchDistance: 0
   AttractionSpeed: 1
-  IsManipulable: 0
+  IsManipulable: 1
+  SnapOnGrab: 0
   RootMotion: {fileID: 0}
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
@@ -4320,6 +4321,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d732d8224a352643a546576ae2a2e5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CurrentController: 0
   LeftHandActive: 1
   RightHandActive: 1
   trackPosition: 1
@@ -4404,7 +4406,8 @@ MonoBehaviour:
   GrabDistance: 0
   TouchDistance: 0
   AttractionSpeed: 1
-  IsManipulable: 0
+  IsManipulable: 1
+  SnapOnGrab: 0
   RootMotion: {fileID: 0}
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
@@ -4627,7 +4630,8 @@ MonoBehaviour:
   GrabDistance: 0
   TouchDistance: 0
   AttractionSpeed: 1
-  IsManipulable: 0
+  IsManipulable: 1
+  SnapOnGrab: 0
   RootMotion: {fileID: 0}
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
@@ -4745,7 +4749,7 @@ MonoBehaviour:
   gyroColor: {r: 0, g: 0.6, b: 1, a: 0.2}
   gyroUI: {fileID: 1903499341379776, guid: 934a3c1822b00914ebc0ca1e4fa1a92b, type: 2}
   arcLineWidth: 0.05
-  arcMaterial: {fileID: 0}
+  arcMaterial: {fileID: 2100000, guid: 74b35de85a4816e4d8533b9b2c8a5f47, type: 2}
 --- !u!114 &114905319991704646
 MonoBehaviour:
   m_ObjectHideFlags: 1
