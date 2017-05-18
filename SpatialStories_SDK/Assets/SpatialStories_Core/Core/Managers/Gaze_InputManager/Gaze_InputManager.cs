@@ -31,7 +31,7 @@ public class Gaze_InputManager : MonoBehaviour
 {
     #region members
 
-    public static Gaze_Controllers pluggedControllerType = Gaze_Controllers.NOT_DETERMINED;
+    public static Gaze_Controllers PluggedControllerType = Gaze_Controllers.NOT_DETERMINED;
 
     [ReadOnly]
     public Gaze_Controllers CurrentController = Gaze_Controllers.NOT_DETERMINED;
@@ -250,8 +250,8 @@ public class Gaze_InputManager : MonoBehaviour
         add
         {
             setupEvent += value;
-            if (pluggedControllerType != Gaze_Controllers.NOT_DETERMINED)
-                setupEvent(pluggedControllerType);
+            if (PluggedControllerType != Gaze_Controllers.NOT_DETERMINED)
+                setupEvent(PluggedControllerType);
         }
         remove { setupEvent -= value; }
     }
@@ -283,7 +283,8 @@ public class Gaze_InputManager : MonoBehaviour
         // if position tracking is disabled, parent the controllers to the camera
         if (!trackPosition)
             ParentControllersToCamera();
-        //CPU / GPU Throttling
+
+        // CPU / GPU Throttling
         OVRPlugin.cpuLevel = 3;
         OVRPlugin.gpuLevel = 3;
 
@@ -306,7 +307,7 @@ public class Gaze_InputManager : MonoBehaviour
         if (OVRInput.IsControllerConnected(OVRInput.Controller.RTrackedRemote))
         {
             SpecialInputLogic = new Gaze_GearVR_InputLogic();
-            pluggedControllerType = Gaze_Controllers.GEARVR_CONTROLLER;
+            PluggedControllerType = Gaze_Controllers.GEARVR_CONTROLLER;
         }
         else
         {
@@ -314,18 +315,18 @@ public class Gaze_InputManager : MonoBehaviour
 
             if (Input.GetJoystickNames().Where(name => name.Contains("Oculus")).Count() > 0)
             {
-                pluggedControllerType = Gaze_Controllers.OCULUS_RIFT;
+                PluggedControllerType = Gaze_Controllers.OCULUS_RIFT;
             }
             else if (Input.GetJoystickNames().Where(name => name.Contains("OpenVR")).Count() > 0)
             {
-                pluggedControllerType = Gaze_Controllers.HTC_VIVE;
+                PluggedControllerType = Gaze_Controllers.HTC_VIVE;
             }
         }
 
         if (setupEvent != null)
         {
-            setupEvent(pluggedControllerType);
-            CurrentController = pluggedControllerType;
+            setupEvent(PluggedControllerType);
+            CurrentController = PluggedControllerType;
         }
     }
 

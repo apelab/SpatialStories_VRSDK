@@ -34,6 +34,9 @@ namespace Gaze
         // This is done for the editor that does not work correctly with enums
         public int ManipulationModeIndex = 0;
 
+        public Transform LeftHandSnapPoint;
+        public Transform RightHandSnapPoint;
+
         /// <summary>
         /// Can this object be grabbed.
         /// </summary>
@@ -116,7 +119,7 @@ namespace Gaze
         // TODO test if this works with a FBX that already has a root motion
         public Transform RootMotion;
 
-        private Gaze_Manipulation handle;
+        private Gaze_Manipulation manipulationCollider;
 
         private float DISABLE_MANIPULATION_TIME = 1f;
         private static Vector3 NULL_VECTOR_3 = new Vector3(float.MinValue, float.MinValue, float.MinValue);
@@ -166,6 +169,19 @@ namespace Gaze
             initialTransform = new Gaze_Transform(transform);
             GrabPositionnerCollider = GetComponentInChildren<Gaze_Manipulation>().GetComponent<Collider>();
 
+            Gaze_SnapPosition[] snapPositions = GetComponentsInChildren<Gaze_SnapPosition>();
+            foreach (Gaze_SnapPosition pos in snapPositions)
+            {
+                if (pos.ActualHand == Gaze_SnapPosition.HAND.LEFT)
+                {
+                    LeftHandSnapPoint = pos.transform;
+                }
+                else
+                {
+                    RightHandSnapPoint = pos.transform;
+                }
+            }
+
             if (RootMotion != null)
             {
                 transform.SetParent(RootMotion);
@@ -211,10 +227,11 @@ namespace Gaze
         public void OnControllerGrabEvent(Gaze_ControllerGrabEventArgs e)
         {
             // Mark the object as grabbed or ungrabbed
-            if (e.ControllerObjectPair.Value == gameObject)
-            {
-                isBeingGrabbed = e.IsGrabbing;
-            }
+
+            if (e.ControllerObjectPair.Value != gameObject)
+                return;
+
+            isBeingGrabbed = e.IsGrabbing;
 
             // Handle all the manipulation states
             if (isBeingGrabbed)
@@ -226,6 +243,7 @@ namespace Gaze
 
                 if (IsManipulable && !IsBeingManipulated)
                     SetManipulationMode(true);
+
                 else if (IsBeingManipulated)
                     ContinueManipulation();
 
@@ -235,7 +253,7 @@ namespace Gaze
                     foreach (Gaze_GrabManager gm in GrabManagers)
                     {
                         if (gm != grabbingMananger)
-                            gm.TryDetach();
+                            gm.TryDetach(false);
                     }
                 }
             }
@@ -251,9 +269,9 @@ namespace Gaze
 
         private void FollowRoot()
         {
-            if (handle != null)
+            if (manipulationCollider != null)
             {
-                transform.localPosition = Vector3.zero + handle.transform.position;
+                transform.localPosition = Vector3.zero + manipulationCollider.transform.position;
             }
         }
 
@@ -263,12 +281,13 @@ namespace Gaze
         /// <returns></returns>
         public Vector3 GetGrabPoint()
         {
-            Gaze_Manipulation grabPoint = GetComponentInChildren<Gaze_Manipulation>();
-            if (grabPoint == null)
+            Gaze_Manipulation handle = GetComponentInChildren<Gaze_Manipulation>();
+            if (handle == null)
                 Debug.LogAssertion("An interactive object should have a Gaze_Handle child.");
             Vector3 point = actualGrabPoint != null ? actualGrabPoint.transform.position : GetComponentInChildren<Gaze_Manipulation>().transform.position;
             return point - transform.position;
         }
+
 
         /// <summary>
         /// This method will be called when we need to change the grab point of the
