@@ -338,20 +338,7 @@ public class Gaze_InputManager : MonoBehaviour
         OnControllerGrabEvent = null;
     }
 
-    /*
-    void Update()
-    {
-        //Debug.Log("@apelab "+OVRInput.GetLocalControllerPosition(OVRInput.Controller.RTrackedRemote));
-        //rightHandIO.transform.position = OVRInput.GetLocalControllerPosition(OVRInput.Controller.RTrackedRemote);
 
-        //ovrInputStateTrackedRemote remoteState;
-        //remoteState.Header.Type = ovrControllerType_TrackedRemote;
-        //if (vrapi_GetCurrentInputState(ovr, controllerDeviceID, &remoteState.Header) >= 0)
-        //{
-        //    // act on device state returned in remoteState
-        //}
-    }
-    */
     private void Update()
     {
         // Hack: Right now we are not able to know what is the current input type until update method 

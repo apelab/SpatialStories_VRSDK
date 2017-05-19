@@ -91,13 +91,26 @@ namespace Gaze
 
         void OnEnable()
         {
+            isLeftHand = GetComponentInChildren<Gaze_GrabManager>().isLeftHand; isLeftHand = GetComponentInChildren<Gaze_GrabManager>().isLeftHand;
+
             Gaze_EventManager.OnLevitationEvent += OnLevitationEvent;
             Gaze_EventManager.OnDragAndDropEvent += OnDragAndDropEvent;
 
+            // TODO: Discriminate the hand that we are using
             Gaze_InputManager.OnControllerGrabEvent += OnControllerGrabEvent;
-            Gaze_InputManager.OnPadRightTouchDownEvent += OnPadRightTouchDownEvent;
-            Gaze_InputManager.OnPadRightTouchUpEvent += OnPadRightTouchUpEvent;
-            Gaze_InputManager.OnRightTouchpadEvent += OnRightTouchpadEvent;
+            if (isLeftHand)
+            {
+                Gaze_InputManager.OnPadLeftTouchDownEvent += OnPadRightTouchDownEvent;
+                Gaze_InputManager.OnPadLeftTouchUpEvent += OnPadRightTouchUpEvent;
+                Gaze_InputManager.OnLeftTouchpadEvent += OnRightTouchpadEvent;
+            }
+            else
+            {
+                Gaze_InputManager.OnPadRightTouchDownEvent += OnPadRightTouchDownEvent;
+                Gaze_InputManager.OnPadRightTouchUpEvent += OnPadRightTouchUpEvent;
+                Gaze_InputManager.OnRightTouchpadEvent += OnRightTouchpadEvent;
+
+            }
 
             transform.gameObject.AddComponent<AudioSource>();
             GetComponent<AudioSource>().playOnAwake = false;
@@ -111,9 +124,21 @@ namespace Gaze
             Gaze_EventManager.OnDragAndDropEvent -= OnDragAndDropEvent;
 
             Gaze_InputManager.OnControllerGrabEvent -= OnControllerGrabEvent;
-            Gaze_InputManager.OnPadRightTouchDownEvent -= OnPadRightTouchDownEvent;
-            Gaze_InputManager.OnPadRightTouchUpEvent -= OnPadRightTouchUpEvent;
-            Gaze_InputManager.OnRightTouchpadEvent -= OnRightTouchpadEvent;
+
+            if (isLeftHand)
+            {
+                Gaze_InputManager.OnPadLeftTouchDownEvent -= OnPadRightTouchDownEvent;
+                Gaze_InputManager.OnPadLeftTouchUpEvent -= OnPadRightTouchUpEvent;
+                Gaze_InputManager.OnLeftTouchpadEvent -= OnRightTouchpadEvent;
+            }
+            else
+            {
+                Gaze_InputManager.OnPadRightTouchDownEvent -= OnPadRightTouchDownEvent;
+                Gaze_InputManager.OnPadRightTouchUpEvent -= OnPadRightTouchUpEvent;
+                Gaze_InputManager.OnRightTouchpadEvent -= OnRightTouchpadEvent;
+
+            }
+
         }
 
         void Start()
