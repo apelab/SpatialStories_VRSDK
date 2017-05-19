@@ -137,7 +137,6 @@ namespace Gaze
                 Gaze_InputManager.OnPadRightTouchDownEvent -= OnPadRightTouchDownEvent;
                 Gaze_InputManager.OnPadRightTouchUpEvent -= OnPadRightTouchUpEvent;
                 Gaze_InputManager.OnRightTouchpadEvent -= OnRightTouchpadEvent;
-
             }
 
         }
@@ -536,6 +535,9 @@ namespace Gaze
 
         private void OnLevitationEvent(Gaze_LevitationEventArgs e)
         {
+            if (e.Hand != actualHand && e.Hand != Gaze_HandsEnum.BOTH)
+                return;
+
             if (e.Type.Equals(Gaze_LevitationTypes.LEVITATE_START))
             {
                 objectToLevitate = e.ObjectToLevitate;
