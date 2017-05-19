@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Gaze
@@ -49,6 +50,9 @@ namespace Gaze
         public Gaze_InteractiveObject IO;
 
         private Gaze_Interaction gazeInteraction;
+
+        public List<Renderer> VisualsToAlter = new List<Renderer>();
+        public bool AlterAllVisuals = true;
 
         // Notification
         public bool triggerNotification;
@@ -236,16 +240,27 @@ namespace Gaze
             ParticleSystem[] AllParticles = io.transform.FindChild("Visuals").GetComponentsInChildren<ParticleSystem>();
             bool isEnabled = ActionVisuals == ACTIVABLE_OPTION.ACTIVATE;
 
-            foreach (Renderer renderer in AllRenderers)
-                renderer.enabled = isEnabled;
-
-            foreach (ParticleSystem particle in AllParticles)
+            if (AlterAllVisuals)
             {
-                if (isEnabled)
-                    particle.Play();
-                else
-                    particle.Stop();
+                foreach (Renderer renderer in AllRenderers)
+                    renderer.enabled = isEnabled;
+
+                foreach (ParticleSystem particle in AllParticles)
+                {
+                    if (isEnabled)
+                        particle.Play();
+                    else
+                        particle.Stop();
+                }
             }
+            else
+            {
+                foreach (Renderer renderer in VisualsToAlter)
+                {
+                    renderer.enabled = isEnabled;
+                }
+            }
+
         }
 
         /// <summary>

@@ -244,6 +244,17 @@ namespace Gaze
         private void ShowVisualsOption()
         {
             actionsScript.ActionVisuals = (Gaze_Actions.ACTIVABLE_OPTION)EditorGUILayout.EnumPopup("Visuals", actionsScript.ActionVisuals);
+
+            if (actionsScript.ActionVisuals == Gaze_Actions.ACTIVABLE_OPTION.NOTHING)
+                return;
+
+            actionsScript.AlterAllVisuals = EditorGUILayout.Toggle("Alter All Visuals", actionsScript.AlterAllVisuals);
+
+            if (!actionsScript.AlterAllVisuals)
+            {
+                EditorGUILayout.PropertyField(serializedObject.FindProperty("VisualsToAlter"), true);
+            }
+
         }
 
         private void ShowCollidersOption()
