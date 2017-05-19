@@ -548,6 +548,7 @@ namespace Gaze
             {
                 beam.enabled = true;
                 objectToLevitate = e.ObjectToLevitate;
+                Gaze_Teleporter.IsTeleportAllowed = false;
             }
             else if (e.Type.Equals(Gaze_LevitationTypes.LEVITATE_STOP))
             {
@@ -557,6 +558,7 @@ namespace Gaze
                 objectToLevitate = null;
                 Gaze_GrabManager.EnableAllGrabManagers();
                 ClearAttachPoint();
+                Gaze_Teleporter.IsTeleportAllowed = true;
 
             }
         }

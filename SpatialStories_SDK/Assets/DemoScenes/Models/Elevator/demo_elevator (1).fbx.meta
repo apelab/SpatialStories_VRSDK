@@ -1,48 +1,76 @@
 fileFormatVersion: 2
-guid: 41cf73e5f6ba12c44b0fb8c8012926cb
-timeCreated: 1495097702
+guid: 1c5f63738bef925428875e3fefb5067e
+timeCreated: 1495182515
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: //RootNode
-    100002: chairFeet1
-    100004: chairFeet2
-    100006: chairFeet3
-    100008: chairFeet4
-    100010: ChairPart1
-    100012: ChairPart2
-    100014: ChairPart3
-    400000: //RootNode
-    400002: chairFeet1
-    400004: chairFeet2
-    400006: chairFeet3
-    400008: chairFeet4
-    400010: ChairPart1
-    400012: ChairPart2
-    400014: ChairPart3
-    2300000: chairFeet1
-    2300002: chairFeet2
-    2300004: chairFeet3
-    2300006: chairFeet4
-    2300008: ChairPart1
-    2300010: ChairPart2
-    2300012: ChairPart3
-    3300000: chairFeet1
-    3300002: chairFeet2
-    3300004: chairFeet3
-    3300006: chairFeet4
-    3300008: ChairPart1
-    3300010: ChairPart2
-    3300012: ChairPart3
-    4300000: ChairPart1
-    4300002: ChairPart3
-    4300004: ChairPart2
-    4300006: chairFeet4
-    4300008: chairFeet3
-    4300010: chairFeet2
-    4300012: chairFeet1
-    9500000: //RootNode
+    100000: barriere
+    100002: board
+    100004: bouton_1
+    100006: bouton_2
+    100008: bouton_3
+    100010: bouton_4
+    100012: bouton_5
+    100014: bouton_6
+    100016: bouton_7
+    100018: bouton_8
+    100020: boutons
+    100022: //RootNode
+    100024: elevator
+    100026: pltaforme
+    100028: tube
+    400000: barriere
+    400002: board
+    400004: bouton_1
+    400006: bouton_2
+    400008: bouton_3
+    400010: bouton_4
+    400012: bouton_5
+    400014: bouton_6
+    400016: bouton_7
+    400018: bouton_8
+    400020: boutons
+    400022: //RootNode
+    400024: elevator
+    400026: pltaforme
+    400028: tube
+    2300000: barriere
+    2300002: board
+    2300004: bouton_1
+    2300006: bouton_2
+    2300008: bouton_3
+    2300010: bouton_4
+    2300012: bouton_5
+    2300014: bouton_6
+    2300016: bouton_7
+    2300018: bouton_8
+    2300020: pltaforme
+    2300022: tube
+    3300000: barriere
+    3300002: board
+    3300004: bouton_1
+    3300006: bouton_2
+    3300008: bouton_3
+    3300010: bouton_4
+    3300012: bouton_5
+    3300014: bouton_6
+    3300016: bouton_7
+    3300018: bouton_8
+    3300020: pltaforme
+    3300022: tube
+    4300000: board
+    4300002: bouton_1
+    4300004: bouton_2
+    4300006: bouton_3
+    4300008: bouton_5
+    4300010: bouton_4
+    4300012: bouton_6
+    4300014: bouton_7
+    4300016: bouton_8
+    4300018: tube
+    4300020: barriere
+    4300022: pltaforme
   materials:
     importMaterials: 1
     materialName: 0
@@ -107,7 +135,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 0
   humanoidOversampling: 1
   additionalBone: 0
   userData: 

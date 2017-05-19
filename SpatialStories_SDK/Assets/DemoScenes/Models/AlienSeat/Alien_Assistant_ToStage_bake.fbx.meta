@@ -1,0 +1,235 @@
+fileFormatVersion: 2
+guid: b3fdc192fa5ed494ebef0cdfcc8994bf
+timeCreated: 1495189628
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: Alien_Costume_Assistant_rig_001_alien_assitant_mobile_head
+    100004: Alien_Costume_Assistant_rig_001_alien_hat_stage
+    100006: Alien_Costume_Assistant_rig_001_alien_teeth_below
+    100008: Alien_Costume_Assistant_rig_001_alien_teeth_up
+    100010: Alien_Costume_Assistant_rig_001_ball_l
+    100012: Alien_Costume_Assistant_rig_001_ball_r
+    100014: Alien_Costume_Assistant_rig_001_calf_l
+    100016: Alien_Costume_Assistant_rig_001_calf_r
+    100018: Alien_Costume_Assistant_rig_001_calf_twist_01_l
+    100020: Alien_Costume_Assistant_rig_001_calf_twist_01_r
+    100022: Alien_Costume_Assistant_rig_001_clavicle_l
+    100024: Alien_Costume_Assistant_rig_001_clavicle_r
+    100026: Alien_Costume_Assistant_rig_001_eyeball_L
+    100028: Alien_Costume_Assistant_rig_001_eyeball_R
+    100030: Alien_Costume_Assistant_rig_001_eyebrow_L
+    100032: Alien_Costume_Assistant_rig_001_eyebrow_M
+    100034: Alien_Costume_Assistant_rig_001_eyebrow_R
+    100036: Alien_Costume_Assistant_rig_001_eyelowerlid_L
+    100038: Alien_Costume_Assistant_rig_001_eyelowerlid_R
+    100040: Alien_Costume_Assistant_rig_001_eyeUplid_L
+    100042: Alien_Costume_Assistant_rig_001_eyeUplid_R
+    100044: Alien_Costume_Assistant_rig_001_foot_l
+    100046: Alien_Costume_Assistant_rig_001_foot_r
+    100048: Alien_Costume_Assistant_rig_001_hand_l
+    100050: Alien_Costume_Assistant_rig_001_hand_r
+    100052: Alien_Costume_Assistant_rig_001_head
+    100054: Alien_Costume_Assistant_rig_001_ik_foot_l
+    100056: Alien_Costume_Assistant_rig_001_ik_foot_r
+    100058: Alien_Costume_Assistant_rig_001_ik_foot_root
+    100060: Alien_Costume_Assistant_rig_001_ik_hand_gun
+    100062: Alien_Costume_Assistant_rig_001_ik_hand_l
+    100064: Alien_Costume_Assistant_rig_001_ik_hand_r
+    100066: Alien_Costume_Assistant_rig_001_ik_hand_root
+    100068: Alien_Costume_Assistant_rig_001_index_01_l
+    100070: Alien_Costume_Assistant_rig_001_index_01_r
+    100072: Alien_Costume_Assistant_rig_001_index_02_l
+    100074: Alien_Costume_Assistant_rig_001_index_02_r
+    100076: Alien_Costume_Assistant_rig_001_index_03_l
+    100078: Alien_Costume_Assistant_rig_001_index_03_r
+    100080: Alien_Costume_Assistant_rig_001_lipCorner_L
+    100082: Alien_Costume_Assistant_rig_001_lipCorner_R
+    100084: Alien_Costume_Assistant_rig_001_lipLower
+    100086: Alien_Costume_Assistant_rig_001_lipUp
+    100088: Alien_Costume_Assistant_rig_001_lowerarm_l
+    100090: Alien_Costume_Assistant_rig_001_lowerarm_r
+    100092: Alien_Costume_Assistant_rig_001_lowerarm_twist_01_l
+    100094: Alien_Costume_Assistant_rig_001_lowerarm_twist_01_r
+    100096: Alien_Costume_Assistant_rig_001_neck_01
+    100098: Alien_Costume_Assistant_rig_001_pelvis
+    100100: Alien_Costume_Assistant_rig_001_pinky_01_l
+    100102: Alien_Costume_Assistant_rig_001_pinky_01_r
+    100104: Alien_Costume_Assistant_rig_001_pinky_02_l
+    100106: Alien_Costume_Assistant_rig_001_pinky_02_r
+    100108: Alien_Costume_Assistant_rig_001_pinky_03_l
+    100110: Alien_Costume_Assistant_rig_001_pinky_03_r
+    100112: Alien_Costume_Assistant_rig_001_root
+    100114: Alien_Costume_Assistant_rig_001_spine_01
+    100116: Alien_Costume_Assistant_rig_001_spine_02
+    100118: Alien_Costume_Assistant_rig_001_spine_03
+    100120: Alien_Costume_Assistant_rig_001_thigh_l
+    100122: Alien_Costume_Assistant_rig_001_thigh_r
+    100124: Alien_Costume_Assistant_rig_001_thigh_twist_01_l
+    100126: Alien_Costume_Assistant_rig_001_thigh_twist_01_r
+    100128: Alien_Costume_Assistant_rig_001_thumb_01_l
+    100130: Alien_Costume_Assistant_rig_001_thumb_01_r
+    100132: Alien_Costume_Assistant_rig_001_thumb_02_l
+    100134: Alien_Costume_Assistant_rig_001_thumb_02_r
+    100136: Alien_Costume_Assistant_rig_001_thumb_03_l
+    100138: Alien_Costume_Assistant_rig_001_thumb_03_r
+    100140: Alien_Costume_Assistant_rig_001_upperarm_l
+    100142: Alien_Costume_Assistant_rig_001_upperarm_r
+    100144: Alien_Costume_Assistant_rig_001_upperarm_twist_01_l
+    100146: Alien_Costume_Assistant_rig_001_upperarm_twist_01_r
+    400000: //RootNode
+    400002: Alien_Costume_Assistant_rig_001_alien_assitant_mobile_head
+    400004: Alien_Costume_Assistant_rig_001_alien_hat_stage
+    400006: Alien_Costume_Assistant_rig_001_alien_teeth_below
+    400008: Alien_Costume_Assistant_rig_001_alien_teeth_up
+    400010: Alien_Costume_Assistant_rig_001_ball_l
+    400012: Alien_Costume_Assistant_rig_001_ball_r
+    400014: Alien_Costume_Assistant_rig_001_calf_l
+    400016: Alien_Costume_Assistant_rig_001_calf_r
+    400018: Alien_Costume_Assistant_rig_001_calf_twist_01_l
+    400020: Alien_Costume_Assistant_rig_001_calf_twist_01_r
+    400022: Alien_Costume_Assistant_rig_001_clavicle_l
+    400024: Alien_Costume_Assistant_rig_001_clavicle_r
+    400026: Alien_Costume_Assistant_rig_001_eyeball_L
+    400028: Alien_Costume_Assistant_rig_001_eyeball_R
+    400030: Alien_Costume_Assistant_rig_001_eyebrow_L
+    400032: Alien_Costume_Assistant_rig_001_eyebrow_M
+    400034: Alien_Costume_Assistant_rig_001_eyebrow_R
+    400036: Alien_Costume_Assistant_rig_001_eyelowerlid_L
+    400038: Alien_Costume_Assistant_rig_001_eyelowerlid_R
+    400040: Alien_Costume_Assistant_rig_001_eyeUplid_L
+    400042: Alien_Costume_Assistant_rig_001_eyeUplid_R
+    400044: Alien_Costume_Assistant_rig_001_foot_l
+    400046: Alien_Costume_Assistant_rig_001_foot_r
+    400048: Alien_Costume_Assistant_rig_001_hand_l
+    400050: Alien_Costume_Assistant_rig_001_hand_r
+    400052: Alien_Costume_Assistant_rig_001_head
+    400054: Alien_Costume_Assistant_rig_001_ik_foot_l
+    400056: Alien_Costume_Assistant_rig_001_ik_foot_r
+    400058: Alien_Costume_Assistant_rig_001_ik_foot_root
+    400060: Alien_Costume_Assistant_rig_001_ik_hand_gun
+    400062: Alien_Costume_Assistant_rig_001_ik_hand_l
+    400064: Alien_Costume_Assistant_rig_001_ik_hand_r
+    400066: Alien_Costume_Assistant_rig_001_ik_hand_root
+    400068: Alien_Costume_Assistant_rig_001_index_01_l
+    400070: Alien_Costume_Assistant_rig_001_index_01_r
+    400072: Alien_Costume_Assistant_rig_001_index_02_l
+    400074: Alien_Costume_Assistant_rig_001_index_02_r
+    400076: Alien_Costume_Assistant_rig_001_index_03_l
+    400078: Alien_Costume_Assistant_rig_001_index_03_r
+    400080: Alien_Costume_Assistant_rig_001_lipCorner_L
+    400082: Alien_Costume_Assistant_rig_001_lipCorner_R
+    400084: Alien_Costume_Assistant_rig_001_lipLower
+    400086: Alien_Costume_Assistant_rig_001_lipUp
+    400088: Alien_Costume_Assistant_rig_001_lowerarm_l
+    400090: Alien_Costume_Assistant_rig_001_lowerarm_r
+    400092: Alien_Costume_Assistant_rig_001_lowerarm_twist_01_l
+    400094: Alien_Costume_Assistant_rig_001_lowerarm_twist_01_r
+    400096: Alien_Costume_Assistant_rig_001_neck_01
+    400098: Alien_Costume_Assistant_rig_001_pelvis
+    400100: Alien_Costume_Assistant_rig_001_pinky_01_l
+    400102: Alien_Costume_Assistant_rig_001_pinky_01_r
+    400104: Alien_Costume_Assistant_rig_001_pinky_02_l
+    400106: Alien_Costume_Assistant_rig_001_pinky_02_r
+    400108: Alien_Costume_Assistant_rig_001_pinky_03_l
+    400110: Alien_Costume_Assistant_rig_001_pinky_03_r
+    400112: Alien_Costume_Assistant_rig_001_root
+    400114: Alien_Costume_Assistant_rig_001_spine_01
+    400116: Alien_Costume_Assistant_rig_001_spine_02
+    400118: Alien_Costume_Assistant_rig_001_spine_03
+    400120: Alien_Costume_Assistant_rig_001_thigh_l
+    400122: Alien_Costume_Assistant_rig_001_thigh_r
+    400124: Alien_Costume_Assistant_rig_001_thigh_twist_01_l
+    400126: Alien_Costume_Assistant_rig_001_thigh_twist_01_r
+    400128: Alien_Costume_Assistant_rig_001_thumb_01_l
+    400130: Alien_Costume_Assistant_rig_001_thumb_01_r
+    400132: Alien_Costume_Assistant_rig_001_thumb_02_l
+    400134: Alien_Costume_Assistant_rig_001_thumb_02_r
+    400136: Alien_Costume_Assistant_rig_001_thumb_03_l
+    400138: Alien_Costume_Assistant_rig_001_thumb_03_r
+    400140: Alien_Costume_Assistant_rig_001_upperarm_l
+    400142: Alien_Costume_Assistant_rig_001_upperarm_r
+    400144: Alien_Costume_Assistant_rig_001_upperarm_twist_01_l
+    400146: Alien_Costume_Assistant_rig_001_upperarm_twist_01_r
+    4300000: Alien_Costume_Assistant_rig_001_alien_hat_stage
+    4300002: Alien_Costume_Assistant_rig_001_alien_teeth_up
+    4300004: Alien_Costume_Assistant_rig_001_alien_teeth_below
+    4300006: Alien_Costume_Assistant_rig_001_alien_assitant_mobile_head
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: Alien_Costume_Assistant_rig_001_alien_assitant_mobile_head
+    13700002: Alien_Costume_Assistant_rig_001_alien_hat_stage
+    13700004: Alien_Costume_Assistant_rig_001_alien_teeth_below
+    13700006: Alien_Costume_Assistant_rig_001_alien_teeth_up
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
