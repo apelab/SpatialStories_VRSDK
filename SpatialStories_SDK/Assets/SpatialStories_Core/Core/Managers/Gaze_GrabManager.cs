@@ -920,7 +920,7 @@ public class Gaze_GrabManager : MonoBehaviour
 
         if (rb != null)
         {
-            Gaze_GravityManager.ChangeGravityState(interactableIO, Gaze_GravityRequestType.ACTIVATE_AND_DETACH);
+            Gaze_GravityManager.ChangeGravityState(interactableIO, Gaze_GravityRequestType.RETURN_TO_DEFAULT);
 
             // get the current index (beware it's been incremented in the updated)
             short currentIndex = (short)(positionsIndex == 0 ? samples - 1 : (positionsIndex - 1) % samples);
