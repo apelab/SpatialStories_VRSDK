@@ -17,8 +17,8 @@
 // <date>2016-01-25</date>
 // </copyright>
 //-----------------------------------------------------------------------
-using UnityEngine;
 using System;
+using UnityEngine;
 
 namespace Gaze
 {
@@ -36,11 +36,14 @@ namespace Gaze
 
         public Gaze_LevitationTypes Type { get { return type; } }
 
-        public Gaze_LevitationEventArgs(object _sender, GameObject _objectToLevitate, Gaze_LevitationTypes _type)
+        public Gaze_HandsEnum Hand { get; private set; }
+
+        public Gaze_LevitationEventArgs(object _sender, GameObject _objectToLevitate, Gaze_LevitationTypes _type, Gaze_HandsEnum actualHand)
         {
             sender = _sender;
             objectToLevitate = _objectToLevitate;
             type = _type;
+            Hand = actualHand;
         }
     }
 }

@@ -52,7 +52,7 @@ namespace Gaze
         public bool debug = false;
 
         private GameObject controllerLeft, controllerRight;
-        private bool isLeftHand;
+        private Gaze_HandsEnum actualHand;
         private GameObject targetLocation;
         private GameObject objectToLevitate;
         private float chargeStartTime;
@@ -91,14 +91,15 @@ namespace Gaze
 
         void OnEnable()
         {
-            isLeftHand = GetComponentInChildren<Gaze_GrabManager>().isLeftHand; isLeftHand = GetComponentInChildren<Gaze_GrabManager>().isLeftHand;
+            actualHand = GetComponentInChildren<Gaze_GrabManager>().isLeftHand ? Gaze_HandsEnum.LEFT : Gaze_HandsEnum.RIGHT;
 
             Gaze_EventManager.OnLevitationEvent += OnLevitationEvent;
             Gaze_EventManager.OnDragAndDropEvent += OnDragAndDropEvent;
 
             // TODO: Discriminate the hand that we are using
             Gaze_InputManager.OnControllerGrabEvent += OnControllerGrabEvent;
-            if (isLeftHand)
+
+            if (actualHand == Gaze_HandsEnum.LEFT)
             {
                 Gaze_InputManager.OnPadLeftTouchDownEvent += OnPadRightTouchDownEvent;
                 Gaze_InputManager.OnPadLeftTouchUpEvent += OnPadRightTouchUpEvent;
@@ -125,7 +126,7 @@ namespace Gaze
 
             Gaze_InputManager.OnControllerGrabEvent -= OnControllerGrabEvent;
 
-            if (isLeftHand)
+            if (actualHand == Gaze_HandsEnum.LEFT)
             {
                 Gaze_InputManager.OnPadLeftTouchDownEvent -= OnPadRightTouchDownEvent;
                 Gaze_InputManager.OnPadLeftTouchUpEvent -= OnPadRightTouchUpEvent;
@@ -143,7 +144,7 @@ namespace Gaze
 
         void Start()
         {
-            isLeftHand = GetComponentInChildren<Gaze_GrabManager>().isLeftHand;
+            actualHand = GetComponentInChildren<Gaze_GrabManager>().isLeftHand ? Gaze_HandsEnum.LEFT : Gaze_HandsEnum.RIGHT;
             isControllerTrigger = false;
             targetLocation = transform.FindChild("Levitation Target").gameObject;
 
@@ -325,7 +326,7 @@ namespace Gaze
             TrySwitchGravity(objectToLevitate, false);
 
             // notify the levitation is occuring
-            Gaze_EventManager.FireLevitationEvent(new Gaze_LevitationEventArgs(this, objectToLevitate, Gaze_LevitationTypes.LEVITATE_START));
+            Gaze_EventManager.FireLevitationEvent(new Gaze_LevitationEventArgs(this, objectToLevitate, Gaze_LevitationTypes.LEVITATE_START, actualHand));
 
             // get distance between headset and handsMidPoint
             startCameraHandsDistance = Vector3.Distance(Camera.main.transform.position, transform.position);
@@ -515,7 +516,7 @@ namespace Gaze
             TrySwitchGravity(objectToLevitate, true);
 
             // notify the levitation has stopped
-            Gaze_EventManager.FireLevitationEvent(new Gaze_LevitationEventArgs(this, objectToLevitate, Gaze_LevitationTypes.LEVITATE_STOP));
+            Gaze_EventManager.FireLevitationEvent(new Gaze_LevitationEventArgs(this, objectToLevitate, Gaze_LevitationTypes.LEVITATE_STOP, actualHand));
             Gaze_GrabManager.EnableAllGrabManagers();
         }
 
@@ -552,7 +553,7 @@ namespace Gaze
         private void OnControllerGrabEvent(Gaze_ControllerGrabEventArgs e)
         {
             // else, if the I'm the concerned controller
-            if ((e.ControllerObjectPair.Key.Equals(VRNode.LeftHand) && isLeftHand) || (e.ControllerObjectPair.Key.Equals(VRNode.RightHand) && !isLeftHand))
+            if ((e.ControllerObjectPair.Key.Equals(VRNode.LeftHand) && actualHand == Gaze_HandsEnum.LEFT) || (e.ControllerObjectPair.Key.Equals(VRNode.RightHand) && actualHand == Gaze_HandsEnum.RIGHT))
             {
                 // and this object is in LEVITATE mode
                 if (e.ControllerObjectPair.Value.GetComponent<Gaze_InteractiveObject>().GrabModeIndex.Equals((int)Gaze_GrabMode.LEVITATE))

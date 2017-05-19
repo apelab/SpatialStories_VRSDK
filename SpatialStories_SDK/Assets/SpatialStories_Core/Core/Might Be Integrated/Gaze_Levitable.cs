@@ -18,7 +18,6 @@
 // </copyright>
 //-----------------------------------------------------------------------
 using UnityEngine;
-using Gaze;
 
 namespace Gaze
 {
@@ -64,11 +63,11 @@ namespace Gaze
             {
                 if (e.IsGazed)
                 {
-                    Gaze_EventManager.FireLevitationEvent(new Gaze_LevitationEventArgs(this, visuals, Gaze_LevitationTypes.GAZED));
+                    Gaze_EventManager.FireLevitationEvent(new Gaze_LevitationEventArgs(this, visuals, Gaze_LevitationTypes.GAZED, Gaze_HandsEnum.BOTH));
                 }
                 else
                 {
-                    Gaze_EventManager.FireLevitationEvent(new Gaze_LevitationEventArgs(this, visuals, Gaze_LevitationTypes.UNGAZED));
+                    Gaze_EventManager.FireLevitationEvent(new Gaze_LevitationEventArgs(this, visuals, Gaze_LevitationTypes.UNGAZED, Gaze_HandsEnum.BOTH));
                 }
             }
         }
@@ -76,12 +75,12 @@ namespace Gaze
         {
             if (visuals.GetComponentInParent<Gaze_InteractiveObject>().GetComponentInChildren<Gaze_Conditions>().IsGazed)
             {
-                Gaze_EventManager.FireLevitationEvent(new Gaze_LevitationEventArgs(this, visuals, Gaze_LevitationTypes.GAZED));
+                Gaze_EventManager.FireLevitationEvent(new Gaze_LevitationEventArgs(this, visuals, Gaze_LevitationTypes.GAZED, Gaze_HandsEnum.BOTH));
                 checkEnabled = false;
             }
             else
             {
-                Gaze_EventManager.FireLevitationEvent(new Gaze_LevitationEventArgs(this, visuals, Gaze_LevitationTypes.UNGAZED));
+                Gaze_EventManager.FireLevitationEvent(new Gaze_LevitationEventArgs(this, visuals, Gaze_LevitationTypes.UNGAZED, Gaze_HandsEnum.BOTH));
             }
 
         }

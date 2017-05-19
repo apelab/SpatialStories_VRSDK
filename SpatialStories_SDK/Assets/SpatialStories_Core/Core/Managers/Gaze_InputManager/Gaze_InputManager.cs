@@ -294,11 +294,13 @@ public class Gaze_InputManager : MonoBehaviour
     void OnEnable()
     {
         OnStickRightAxisEvent += StickRightAxisEvent;
+        OnStickLeftAxisEvent += StickLeftAxisEvent;
     }
 
     void OnDisable()
     {
         OnStickRightAxisEvent -= StickRightAxisEvent;
+        OnStickLeftAxisEvent -= StickLeftAxisEvent;
     }
 
     private void IdentifyInputType()
