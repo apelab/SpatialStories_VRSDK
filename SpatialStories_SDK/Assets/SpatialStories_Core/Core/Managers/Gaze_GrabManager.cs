@@ -589,6 +589,12 @@ public class Gaze_GrabManager : MonoBehaviour
                     // get the pointed object
                     Gaze_InteractiveObject interactiveObject = hits[i].collider.transform.GetComponentInParent<Gaze_InteractiveObject>();
 
+                    // If the other hand is levitating the object dont consider this as a valid target.
+                    if (Gaze_LevitationManager.IsIOBeingLevitatedByHand(interactiveObject, !isLeftHand))
+                    {
+                        continue;
+                    }
+
                     // populate the list of IOs hit
                     hitsIOs.Add(interactiveObject.gameObject);
 

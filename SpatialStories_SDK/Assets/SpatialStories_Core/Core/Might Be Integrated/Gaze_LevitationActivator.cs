@@ -18,7 +18,6 @@
 // </copyright>
 //-----------------------------------------------------------------------
 using UnityEngine;
-using Gaze;
 
 namespace Gaze
 {
@@ -26,6 +25,7 @@ namespace Gaze
     {
         public bool isManager = false;
         public LevitationState levitationState;
+
 
         public enum LevitationState
         {

@@ -18,6 +18,7 @@
 // </copyright>
 //-----------------------------------------------------------------------
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VR;
 
@@ -87,6 +88,9 @@ namespace Gaze
         private Transform handLocation;
         private bool dropReady;
         private IEnumerator updateBeamColorRoutine;
+
+
+        public static List<Gaze_LevitationManager> LevitationManagers = new List<Gaze_LevitationManager>();
         #endregion
 
         void OnEnable()
@@ -117,6 +121,7 @@ namespace Gaze
             GetComponent<AudioSource>().playOnAwake = false;
             GetComponent<AudioSource>().loop = true;
             GetComponent<AudioSource>().clip = beamSoundClip;
+            LevitationManagers.Add(this);
         }
 
         void OnDisable()
@@ -139,6 +144,7 @@ namespace Gaze
                 Gaze_InputManager.OnRightTouchpadEvent -= OnRightTouchpadEvent;
             }
 
+            LevitationManagers.Remove(this);
         }
 
         void Start()
@@ -460,12 +466,12 @@ namespace Gaze
             // if pushing
             switch (levitationState)
             {
-                case Gaze_LevitationStates.PULL:
+                case Gaze_LevitationStates.PUSH:
                     if (Vector3.Distance(targetLocation.transform.position, handLocation.transform.position) > closestDistance)
                         targetLocation.transform.localPosition = new Vector3(targetLocation.transform.localPosition.x, targetLocation.transform.localPosition.y, targetLocation.transform.localPosition.z + (-levitatingObjectAttractingSpeed * attractionForce * Time.deltaTime));
                     break;
 
-                case Gaze_LevitationStates.PUSH:
+                case Gaze_LevitationStates.PULL:
                     targetLocation.transform.localPosition = new Vector3(targetLocation.transform.localPosition.x, targetLocation.transform.localPosition.y, targetLocation.transform.localPosition.z + (levitatingObjectAttractingSpeed * attractionForce * Time.deltaTime));
                     break;
 
@@ -540,15 +546,18 @@ namespace Gaze
 
             if (e.Type.Equals(Gaze_LevitationTypes.LEVITATE_START))
             {
+                beam.enabled = true;
                 objectToLevitate = e.ObjectToLevitate;
             }
             else if (e.Type.Equals(Gaze_LevitationTypes.LEVITATE_STOP))
             {
                 if (objectToLevitate)
                     objectToLevitate.transform.parent = null;
+
                 objectToLevitate = null;
                 Gaze_GrabManager.EnableAllGrabManagers();
                 ClearAttachPoint();
+
             }
         }
 
@@ -593,6 +602,10 @@ namespace Gaze
             else if (e.State.Equals(Gaze_DragAndDropStates.DROP))
             {
                 ResetBeamColor();
+
+                // Trying to hide everything 
+                beam.enabled = false;
+                attachPoint.GetComponent<Renderer>().enabled = false;
             }
         }
 
@@ -618,6 +631,19 @@ namespace Gaze
         {
             if (e.AxisValue.Equals(Vector2.zero))
                 levitationState = Gaze_LevitationStates.NEUTRAL;
+        }
+
+        public static bool IsIOBeingLevitatedByHand(Gaze_InteractiveObject io, bool isLefHand)
+        {
+            foreach (Gaze_LevitationManager manager in LevitationManagers)
+            {
+                if (manager.objectToLevitate == io.gameObject
+                    && manager.actualHand == (isLefHand ? Gaze_HandsEnum.LEFT : Gaze_HandsEnum.RIGHT))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
         #endregion
     }
