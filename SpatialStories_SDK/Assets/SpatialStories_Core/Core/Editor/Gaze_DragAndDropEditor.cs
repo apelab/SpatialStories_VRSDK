@@ -1,13 +1,10 @@
-using System;
-using System.Collections.Generic;
 using UnityEditor;
-using UnityEngine;
 
 namespace Gaze
 {
     [InitializeOnLoad]
     [CustomEditor(typeof(Gaze_DragAndDropManager))]
-    public class Gaze_DragAndDropEditor  : Gaze_Editor
+    public class Gaze_DragAndDropEditor : Gaze_Editor
     {
         private Gaze_InteractiveObject rootIO;
 
@@ -27,17 +24,11 @@ namespace Gaze
         {
             // GUI components here...
 
-            EditorGUILayout.BeginHorizontal();
-            targetConditions.CurrentDragAndDropCondition = (Gaze_DragAndDropCondition)EditorGUILayout.ObjectField("Current Drag And Drop Condition", targetConditions.CurrentDragAndDropCondition, typeof(Gaze_DragAndDropCondition), true);
-            EditorGUILayout.EndHorizontal();
 
             EditorGUILayout.BeginHorizontal();
             targetConditions.m_MinDistance = EditorGUILayout.FloatField("Minimum Distance", targetConditions.m_MinDistance);
             EditorGUILayout.EndHorizontal();
 
-            EditorGUILayout.BeginHorizontal();
-            targetConditions.angleThreshold = EditorGUILayout.Slider("Angle Threshold", targetConditions.angleThreshold, 1, 100);
-            EditorGUILayout.EndHorizontal();
 
             EditorGUILayout.BeginHorizontal();
             targetConditions.respectXAxis = EditorGUILayout.ToggleLeft("Respect X Axis", targetConditions.respectXAxis);
@@ -47,6 +38,7 @@ namespace Gaze
             }
             EditorGUILayout.EndHorizontal();
 
+
             EditorGUILayout.BeginHorizontal();
             targetConditions.respectYAxis = EditorGUILayout.ToggleLeft("Respect Y Axis", targetConditions.respectYAxis);
             if (targetConditions.respectYAxis)
@@ -54,6 +46,7 @@ namespace Gaze
                 targetConditions.respectYAxisMirrored = EditorGUILayout.ToggleLeft("Respect Y Axis Mirrored", targetConditions.respectYAxisMirrored);
             }
             EditorGUILayout.EndHorizontal();
+
 
             EditorGUILayout.BeginHorizontal();
             targetConditions.respectZAxis = EditorGUILayout.ToggleLeft("Respect Z Axis", targetConditions.respectZAxis);
@@ -63,13 +56,29 @@ namespace Gaze
             }
             EditorGUILayout.EndHorizontal();
 
+
+            if (targetConditions.respectXAxis || targetConditions.respectYAxis || targetConditions.respectZAxis)
+            {
+                EditorGUILayout.BeginHorizontal();
+                targetConditions.angleThreshold = EditorGUILayout.Slider("Angle Threshold", targetConditions.angleThreshold, 1, 100);
+                EditorGUILayout.EndHorizontal();
+            }
+
+
             EditorGUILayout.BeginHorizontal();
             targetConditions.m_SnapBeforeDrop = EditorGUILayout.ToggleLeft("Snap Before Drop", targetConditions.m_SnapBeforeDrop);
             EditorGUILayout.EndHorizontal();
 
+
             EditorGUILayout.BeginHorizontal();
             targetConditions.m_TimeToSnap = EditorGUILayout.FloatField("Time To Snap", targetConditions.m_TimeToSnap);
             EditorGUILayout.EndHorizontal();
+
+
+            EditorGUILayout.BeginHorizontal();
+            targetConditions.CurrentDragAndDropCondition = (Gaze_DragAndDropCondition)EditorGUILayout.ObjectField("Current Drag And Drop Condition", targetConditions.CurrentDragAndDropCondition, typeof(Gaze_DragAndDropCondition), true);
+            EditorGUILayout.EndHorizontal();
+
 
             // save changes
             EditorUtility.SetDirty(targetConditions);
