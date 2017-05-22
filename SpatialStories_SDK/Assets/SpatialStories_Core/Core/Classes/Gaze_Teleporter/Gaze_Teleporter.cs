@@ -197,7 +197,8 @@ public class Gaze_Teleporter : MonoBehaviour
         _lineRenderer.enabled = false;
         _lineRenderer2.enabled = false;
 
-        playerHeightBeforeTeleport = GetPlayerHeight();
+        if (playerHeightBeforeTeleport == 0)
+            playerHeightBeforeTeleport = GetPlayerHeight();
 
         CameraColliders = cameraRigIO.GetComponentsInChildren<Collider>();
         gaze_TeleportEventArgs = new Gaze_TeleportEventArgs(this);

@@ -688,6 +688,10 @@ public class Gaze_GrabManager : MonoBehaviour
 
     private void ShowDistantGrabLaser(Vector3 targetPosition, Vector3 endPosition, Vector3 direction, float length, bool intersectsWithIO, bool iOInRange)
     {
+        if (!displayGrabPointer)
+            return;
+
+
         //laserPointer.enabled = true;
         laserPointer.SetPosition(0, targetPosition);
         laserPointer.SetPosition(1, endPosition);
