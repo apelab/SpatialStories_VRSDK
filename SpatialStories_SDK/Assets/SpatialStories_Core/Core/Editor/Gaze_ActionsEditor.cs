@@ -254,7 +254,6 @@ namespace Gaze
             {
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("VisualsToAlter"), true);
             }
-
         }
 
         private void ShowCollidersOption()

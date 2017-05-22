@@ -189,8 +189,14 @@ namespace Gaze
 
                 if (currentDragAndDropCondition != null && currentDragAndDropCondition.attached)
                 {
-                    IO.GetComponentInChildren<Gaze_Manipulation>().gameObject.SetActive(false);
-                    IO.GetComponentInChildren<Gaze_HandHover>().gameObject.SetActive(false);
+                    Gaze_Manipulation manipulation = IO.GetComponent<Gaze_Manipulation>();
+                    Gaze_HandHover handHover = IO.GetComponentInChildren<Gaze_HandHover>();
+
+                    if (manipulation != null)
+                        IO.GetComponentInChildren<Gaze_Manipulation>().gameObject.SetActive(false);
+                    if (handHover != null)
+                        IO.GetComponentInChildren<Gaze_HandHover>().gameObject.SetActive(false);
+
                     IO.IsManipulable = false;
                     IO.SetManipulationMode(false, true);
                 }
