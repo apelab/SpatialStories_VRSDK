@@ -16,8 +16,6 @@ public class Gaze_SnapPosition : MonoBehaviour
     {
         Rotation = transform.localRotation;
         Position = transform.localPosition;
-        Debug.Log(Rotation);
-        Debug.Log(Position);
     }
 
     // Update is called once per frame
