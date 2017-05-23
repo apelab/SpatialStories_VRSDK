@@ -111,6 +111,8 @@ namespace Gaze
             message.gameObject.SetActive(false);
             message.transform.localPosition = new Vector3(0, 0, 0.75f);
 
+            go.GetComponent<Camera>().near = 0.01f;
+
             // Return the game object
             return go;
         }

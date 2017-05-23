@@ -418,7 +418,7 @@ namespace Gaze
                 if (targetConditions.touchMap.TouchEnitry == null ||
                     (targetConditions.touchMap.TouchEnitry != null &&
                     targetConditions.touchMap.TouchEnitry.interactiveObject == null))
-                    targetConditions.touchMap.AddActivableEntry(hierarchyIOs[0]);
+                    targetConditions.touchMap.AddActivableEntry(targetConditions.RootIO.gameObject);
 
                 // chose which hand to use
                 EditorGUILayout.BeginHorizontal();
@@ -473,7 +473,7 @@ namespace Gaze
 
                 // if there are no entry yet, create a default one
                 if (targetConditions.grabMap.grabEntryList.Count < 1)
-                    targetConditions.grabMap.AddGrabableEntry(hierarchyIOs[0]);
+                    targetConditions.grabMap.AddGrabableEntry(targetConditions.RootIO.gameObject);
 
                 // chose which hand to use
                 EditorGUILayout.BeginHorizontal();

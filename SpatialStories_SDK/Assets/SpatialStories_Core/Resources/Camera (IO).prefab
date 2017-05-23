@@ -4273,6 +4273,8 @@ MonoBehaviour:
   audioVolumeMax: 1
   fadeSpeed: 0.005
   IO: {fileID: 0}
+  VisualsToAlter: []
+  AlterAllVisuals: 1
   triggerNotification: 0
 --- !u!114 &114333447657965670
 MonoBehaviour:
@@ -4297,6 +4299,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ManipulationModeIndex: 0
+  LeftHandSnapPoint: {fileID: 0}
+  RightHandSnapPoint: {fileID: 0}
   TouchModeIndex: 0
   ManipulableHandle: {fileID: 0}
   HasGrabPositionner: 0
@@ -4398,6 +4402,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ManipulationModeIndex: 0
+  LeftHandSnapPoint: {fileID: 0}
+  RightHandSnapPoint: {fileID: 0}
   TouchModeIndex: 0
   ManipulableHandle: {fileID: 0}
   HasGrabPositionner: 0
@@ -4528,6 +4534,8 @@ MonoBehaviour:
   audioVolumeMax: 1
   fadeSpeed: 0.005
   IO: {fileID: 0}
+  VisualsToAlter: []
+  AlterAllVisuals: 1
   triggerNotification: 0
 --- !u!114 &114669035429232872
 MonoBehaviour:
@@ -4622,6 +4630,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ManipulationModeIndex: 0
+  LeftHandSnapPoint: {fileID: 0}
+  RightHandSnapPoint: {fileID: 0}
   TouchModeIndex: 0
   ManipulableHandle: {fileID: 0}
   HasGrabPositionner: 0
@@ -4698,7 +4708,7 @@ MonoBehaviour:
   inputThreshold: 0.5
   teleportLayer:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 4294967295
   transition: 0
   fadeMat: {fileID: 0}
   fadeDuration: 0.5
@@ -4732,7 +4742,7 @@ MonoBehaviour:
   inputThreshold: 0.5
   teleportLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4294967295
   transition: 0
   fadeMat: {fileID: 0}
   fadeDuration: 0.5
@@ -4864,6 +4874,8 @@ MonoBehaviour:
   audioVolumeMax: 1
   fadeSpeed: 0.005
   IO: {fileID: 0}
+  VisualsToAlter: []
+  AlterAllVisuals: 1
   triggerNotification: 0
 --- !u!114 &114978793445472990
 MonoBehaviour:
