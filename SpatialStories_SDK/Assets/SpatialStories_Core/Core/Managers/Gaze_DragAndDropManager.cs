@@ -28,7 +28,7 @@ namespace Gaze
         #region public Members
         public Gaze_DragAndDropCondition CurrentDragAndDropCondition { get { return currentDragAndDropCondition; } set { currentDragAndDropCondition = value; } }
 
-        public float m_MinDistance = 1f;
+        public float m_MinDistance = .5f;
         // in unity units
         public float angleThreshold = 1f;
         // 0 is perpendicular, 1 is same direction
@@ -223,6 +223,9 @@ namespace Gaze
 
         private bool IsObjectAlignedWithItsTarget()
         {
+            if (currentDragAndDropCondition.TargetObject == null)
+                return false;
+
             // if already snapped, unsnap it
             if (m_Snapped)
                 UnSnap();
