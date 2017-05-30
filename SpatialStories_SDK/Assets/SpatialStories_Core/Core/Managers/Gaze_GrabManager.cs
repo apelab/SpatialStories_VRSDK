@@ -1247,6 +1247,9 @@ public class Gaze_GrabManager : MonoBehaviour
         if (IO.GetComponent<Gaze_Head>() != null)
             return;
 
+        if (IO.ManipulationMode != Gaze_ManipulationModes.GRAB)
+            return;
+
         // Check if the colliding object has a gaze handle in order to avoid noise.
         collidingObject = (GameObject)e.Other;
 

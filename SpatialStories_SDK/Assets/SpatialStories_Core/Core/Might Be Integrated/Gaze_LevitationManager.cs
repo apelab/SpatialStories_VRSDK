@@ -383,7 +383,7 @@ namespace Gaze
             Gaze_InteractiveObject IO = _object.GetComponentInParent<Gaze_InteractiveObject>();
 
             if (_activateGravity)
-                Gaze_GravityManager.ChangeGravityState(IO, Gaze_GravityRequestType.ACTIVATE_AND_DETACH);
+                Gaze_GravityManager.ChangeGravityState(IO, Gaze_GravityRequestType.RETURN_TO_DEFAULT);
             else
                 Gaze_GravityManager.ChangeGravityState(IO, Gaze_GravityRequestType.DEACTIVATE_AND_ATTACH);
         }
@@ -531,7 +531,7 @@ namespace Gaze
             if (objectToLevitate != null && objectToLevitate.GetComponent<Rigidbody>() != null)
             {
                 if (_enableGravity)
-                    Gaze_GravityManager.ChangeGravityState(objectToLevitate.GetComponent<Gaze_InteractiveObject>(), Gaze_GravityRequestType.ACTIVATE_AND_DETACH);
+                    Gaze_GravityManager.ChangeGravityState(objectToLevitate.GetComponent<Gaze_InteractiveObject>(), Gaze_GravityRequestType.RETURN_TO_DEFAULT);
                 else
                     Gaze_GravityManager.ChangeGravityState(objectToLevitate.GetComponent<Gaze_InteractiveObject>(), Gaze_GravityRequestType.DEACTIVATE_AND_ATTACH);
 
