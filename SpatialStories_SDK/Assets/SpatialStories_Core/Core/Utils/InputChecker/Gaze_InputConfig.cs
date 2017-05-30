@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 using UnityEditor;
 
 namespace Gaze
@@ -91,7 +92,8 @@ namespace Gaze
         /// <returns></returns>
         public bool GetParamInLine(ref string _attribute, string _param, string _line)
         {
-            if (_line.Contains(_param))
+            Match match = Regex.Match(_line, @"(\s" + _param + ")", RegexOptions.ExplicitCapture);
+            if (match.Success)
             {
                 _attribute = _line.Split(':')[1].Trim();
                 return true;

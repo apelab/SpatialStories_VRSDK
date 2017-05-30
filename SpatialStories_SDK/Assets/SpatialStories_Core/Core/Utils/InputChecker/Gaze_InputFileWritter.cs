@@ -53,7 +53,7 @@ namespace Gaze
         /// <returns>Formated text</returns>
         public static string PropToString(string _propName, string _propValue)
         {
-            return String.Format("    {0}: {1}{2}", _propName, _propValue, Environment.NewLine);
+            return String.Format("    {0}: {1}{2}", _propName, _propValue.Trim(), Environment.NewLine);
         }
 
         /// <summary>
@@ -70,7 +70,7 @@ namespace Gaze
             toYAML += PropToString(Gaze_InputConfigConstants.NAME_NEGATIVE_BUTTON, _config.negativeButton);
             toYAML += PropToString(Gaze_InputConfigConstants.NAME_POSITIVE_BUTTON, _config.positiveButton);
             toYAML += PropToString(Gaze_InputConfigConstants.NAME_ALT_NEGATIVE_BUTTON, _config.altNegativeButton);
-            toYAML += PropToString(Gaze_InputConfigConstants.NAME_ALT_POSITIVE_BUTTON, _config.positiveButton);
+            toYAML += PropToString(Gaze_InputConfigConstants.NAME_ALT_POSITIVE_BUTTON, _config.altPositiveButton);
             toYAML += PropToString(Gaze_InputConfigConstants.NAME_GRAVITY, _config.gravity);
             toYAML += PropToString(Gaze_InputConfigConstants.NAME_DEAD, _config.dead);
             toYAML += PropToString(Gaze_InputConfigConstants.NAME_SENSITIVITY, _config.sensitivity);
