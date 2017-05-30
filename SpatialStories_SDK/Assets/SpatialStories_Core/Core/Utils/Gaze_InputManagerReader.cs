@@ -15,48 +15,22 @@
 // <web>https://twitter.com/apelab_ch</web>
 // <web>http://www.apelab.ch</web>
 // <date>2014-06-01</date>
+using Gaze;
 using UnityEditor;
-using UnityEngine;
 
 public class Gaze_InputManagerReader
 {
-    public static void ReadAxes()
+    [MenuItem("Assets/Repair Input Manager")]
+    public static void RepairInputsIfNeeded()
     {
-        var inputManager = AssetDatabase.LoadAllAssetsAtPath("ProjectSettings/InputManager.asset")[0];
-
-        SerializedObject obj = new SerializedObject(inputManager);
-
-        SerializedProperty axisArray = obj.FindProperty("Oculus");
-
-        Debug.Log("axisArray.arraySize = " + axisArray.arraySize);
-        if (axisArray.arraySize == 0)
-            Debug.Log("No Axes");
-
-        for (int i = 0; i < axisArray.arraySize; ++i)
+        if (!Gaze_InputManagerChecker.IsInputManagerAssetIsInstaled())
         {
-            var axis = axisArray.GetArrayElementAtIndex(i);
-
-            var name = axis.FindPropertyRelative("m_Name").stringValue;
-            var axisVal = axis.FindPropertyRelative("axis").intValue;
-            var inputType = (InputType)axis.FindPropertyRelative("type").intValue;
-
-            Debug.Log(name);
-            Debug.Log(axisVal);
-            Debug.Log(inputType);
+            Gaze_InputManagerChecker.AddMissingInputsToPoject();
         }
-    }
-
-    public enum InputType
-    {
-        KeyOrMouseButton,
-        MouseMovement,
-        JoystickAxis,
-    };
-
-    [MenuItem("Assets/ReadInputManager")]
-    public static void DoRead()
-    {
-        ReadAxes();
+        else
+        {
+            EditorUtility.DisplayDialog("Spatial Stories SDK", "InputManager.asset is OK, nothing to change.", "Ok");
+        }
     }
 
 }

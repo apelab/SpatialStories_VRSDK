@@ -270,6 +270,9 @@ public class Gaze_InputManager : MonoBehaviour
         axisValueRight = Vector2.zero;
 
         UnpluggedControllerMessage.SetActive(false);
+
+        if (Application.isEditor)
+            RepairInputManagerIfNeeded();
     }
 
     void Start()
@@ -988,6 +991,17 @@ public class Gaze_InputManager : MonoBehaviour
 
             if (OnLeftTouchpadEvent != null)
                 OnLeftTouchpadEvent(new Gaze_InputEventArgs(this.gameObject, VRNode.RightHand, Gaze_InputTypes.PAD_LEFT_TOUCH_UP, e.AxisValue));
+        }
+    }
+
+    /// <summary>
+    /// Checks if the user has the InputManger.asset installed correctly with all our custom inputs
+    /// </summary>
+    void RepairInputManagerIfNeeded()
+    {
+        if (!Gaze_InputManagerChecker.IsInputManagerAssetIsInstaled())
+        {
+            Gaze_InputManagerChecker.ShowInputNotCorrectlyConfiguredDialog();
         }
     }
 }
