@@ -29,8 +29,8 @@ namespace Gaze
     public class Gaze_Interaction : MonoBehaviour
     {
         #region Members
-        public bool HasActions = false;
-        public bool HasConditions = false;
+        public bool HasActions = true;
+        public bool HasConditions = true;
         #endregion
 
         public void AddActions()
