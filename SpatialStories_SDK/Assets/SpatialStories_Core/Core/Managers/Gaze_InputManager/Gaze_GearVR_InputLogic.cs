@@ -44,7 +44,7 @@ namespace Gaze
 
             // Queries the touchpad position of the GearVR Controller explicitly
             if (triggerPressedThisFrame)
-                Gaze_InputManager.FireOnHandRightDownEvent(new Gaze_InputEventArgs(this, VRNode.RightHand, Gaze_InputTypes.HAND_RIGHT_DOWN, Input.GetAxis("Oculus Hand Right")));
+                Gaze_InputManager.FireOnHandRightDownEvent(new Gaze_InputEventArgs(this, VRNode.RightHand, Gaze_InputTypes.HAND_RIGHT_DOWN, Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_HAND_RIGHT)));
 
             if (triggerReleasedThisFrame)
                 Gaze_InputManager.FireOnHandRightUpEvent(new Gaze_InputEventArgs(this, VRNode.RightHand, Gaze_InputTypes.HAND_RIGHT_UP));

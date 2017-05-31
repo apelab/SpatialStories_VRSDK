@@ -47,7 +47,7 @@ namespace Gaze
         {
             try
             {
-                Input.GetButtonDown("Oculus Stick Left");
+                Input.GetButtonDown(Gaze_InputConstants.APELAB_INPUT_STICK_LEFT);
             }
             catch (ArgumentException)
             {
