@@ -88,6 +88,13 @@ namespace Gaze
         public bool delayed;
 
         /// <summary>
+        /// If true, 'delayDuration' will be set to a random value between randomRange[0] and randomRange[1]
+        /// </summary>
+        public bool isDelayRandom;
+
+        public float[] randomRange = { 0.0f, 0.0f };
+
+        /// <summary>
         /// Window of time during which the object is active (gazable).
         /// </summary>
         /// <value>The duration in seconds</value>
@@ -359,6 +366,7 @@ namespace Gaze
 
         void Start()
         {
+            SetRandomDelay();
             focusInProgress = false;
             focusComplete = focusDuration <= 0 ? true : false;
             ActivateOnDependencyMap.AreDependenciesSatisfied = dependent ? false : true;
@@ -820,6 +828,14 @@ namespace Gaze
         {
             customConditionsDico[(int)e.Sender] = e.IsValid;
         }
+
+
+        private void SetRandomDelay()
+        {
+            if (isDelayRandom)
+                delayDuration = UnityEngine.Random.Range(randomRange[0], randomRange[1]);
+        }
+
 
         #region ConditionListManagement
 

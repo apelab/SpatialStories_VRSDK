@@ -763,11 +763,42 @@ namespace Gaze
 
         private void DisplayDelayBlock()
         {
+            GUILayout.BeginVertical();
+
+            if (!targetConditions.isDelayRandom)
+            {
+                GUILayout.BeginHorizontal();
+                targetConditions.delayDuration = EditorGUILayout.FloatField(targetConditions.delayDuration);
+                Gaze_Utils.EnsureFieldIsPositiveOrZero(ref targetConditions.delayDuration);
+                EditorGUILayout.LabelField("[s]");
+                GUILayout.EndHorizontal();
+            }
+
+            else
+            {
+                GUILayout.BeginHorizontal();
+                EditorGUILayout.LabelField("Min", GUILayout.MaxWidth(50));
+                targetConditions.randomRange[0] = EditorGUILayout.FloatField(targetConditions.randomRange[0]);
+                Gaze_Utils.EnsureFieldIsPositiveOrZero(ref targetConditions.delayDuration);
+                EditorGUILayout.LabelField("[s]");
+                GUILayout.EndHorizontal();
+
+                GUILayout.BeginHorizontal();
+                EditorGUILayout.LabelField("Max", GUILayout.MaxWidth(50));
+                targetConditions.randomRange[1] = EditorGUILayout.FloatField(targetConditions.randomRange[1]);
+                Gaze_Utils.EnsureFieldIsPositiveOrZero(ref targetConditions.delayDuration);
+                EditorGUILayout.LabelField("[s]");
+                GUILayout.EndHorizontal();
+
+                if (targetConditions.randomRange[1] < targetConditions.randomRange[0])
+                    targetConditions.randomRange[1] = targetConditions.randomRange[0] + 1.0f;
+            }
+
             GUILayout.BeginHorizontal();
-            targetConditions.delayDuration = EditorGUILayout.FloatField(targetConditions.delayDuration);
-            Gaze_Utils.EnsureFieldIsPositiveOrZero(ref targetConditions.delayDuration);
-            EditorGUILayout.LabelField("[s]");
+            targetConditions.isDelayRandom = EditorGUILayout.ToggleLeft("Random", targetConditions.isDelayRandom);
             GUILayout.EndHorizontal();
+
+            GUILayout.EndVertical();
         }
 
         private void DisplayExpiresBlock()
