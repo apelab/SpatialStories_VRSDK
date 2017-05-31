@@ -1991,7 +1991,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1930913337941218}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_Children:
@@ -2587,7 +2587,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1081491569568804}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalRotation: {x: -0.46174863, y: 0.8870109, z: -0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2595,7 +2595,7 @@ Transform:
   - {fileID: 4630946836050282}
   m_Father: {fileID: 4089726369610446}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: -55}
 --- !u!4 &4480770257380462
 Transform:
   m_ObjectHideFlags: 1
@@ -2931,7 +2931,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1167547611887526}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalRotation: {x: 0.46174863, y: 0.8870109, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children:
@@ -2939,7 +2939,7 @@ Transform:
   - {fileID: 4025743471047310}
   m_Father: {fileID: 4169992983356192}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 55}
 --- !u!4 &4687416792168004
 Transform:
   m_ObjectHideFlags: 1
@@ -4018,6 +4018,10 @@ MonoBehaviour:
   triggerStateIndex: 1
   delayDuration: 0
   delayed: 0
+  isDelayRandom: 0
+  randomRange:
+  - 0
+  - 0
   activeDuration: 0
   expires: 0
   autoTriggerModeIndex: 0
@@ -4443,6 +4447,10 @@ MonoBehaviour:
   triggerStateIndex: 1
   delayDuration: 0
   delayed: 0
+  isDelayRandom: 0
+  randomRange:
+  - 0
+  - 0
   activeDuration: 0
   expires: 0
   autoTriggerModeIndex: 0
@@ -4916,6 +4924,10 @@ MonoBehaviour:
   triggerStateIndex: 1
   delayDuration: 0
   delayed: 0
+  isDelayRandom: 0
+  randomRange:
+  - 0
+  - 0
   activeDuration: 0
   expires: 0
   autoTriggerModeIndex: 0
