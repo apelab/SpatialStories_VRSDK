@@ -735,10 +735,10 @@ MonoBehaviour:
     grabStateRightIndex: 0
   customConditions: []
   triggerStateIndex: 0
-  delayDuration: 0
-  delayed: 0
-  isDelayRandom: 0
-  randomRange:
+  TFdelayDuration: 0
+  TFDelayed: 0
+  isTFDelayRandom: 0
+  TFDelayRange:
   - 0
   - 0
   activeDuration: 0
@@ -1979,10 +1979,10 @@ MonoBehaviour:
   customConditions:
   - {fileID: 243393213}
   triggerStateIndex: 1
-  delayDuration: 0
-  delayed: 0
-  isDelayRandom: 0
-  randomRange:
+  TFdelayDuration: 0
+  TFDelayed: 0
+  isTFDelayRandom: 0
+  TFDelayRange:
   - 0
   - 0
   activeDuration: 0
@@ -2094,10 +2094,10 @@ MonoBehaviour:
     grabStateRightIndex: 0
   customConditions: []
   triggerStateIndex: 0
-  delayDuration: 0
-  delayed: 0
-  isDelayRandom: 0
-  randomRange:
+  TFdelayDuration: 0
+  TFDelayed: 0
+  isTFDelayRandom: 0
+  TFDelayRange:
   - 0
   - 0
   activeDuration: 0
@@ -2453,7 +2453,7 @@ GameObject:
   - component: {fileID: 264405587}
   - component: {fileID: 264405586}
   m_Layer: 0
-  m_Name: Destroy
+  m_Name: DestroyAfterFade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2496,10 +2496,10 @@ MonoBehaviour:
     grabStateRightIndex: 0
   customConditions: []
   triggerStateIndex: 0
-  delayDuration: 2
-  delayed: 1
-  isDelayRandom: 0
-  randomRange:
+  TFdelayDuration: 2
+  TFDelayed: 1
+  isTFDelayRandom: 0
+  TFDelayRange:
   - 0
   - 0
   activeDuration: 0
@@ -2905,10 +2905,10 @@ MonoBehaviour:
     grabStateRightIndex: 0
   customConditions: []
   triggerStateIndex: 0
-  delayDuration: 0
-  delayed: 0
-  isDelayRandom: 0
-  randomRange:
+  TFdelayDuration: 0
+  TFDelayed: 0
+  isTFDelayRandom: 0
+  TFDelayRange:
   - 0
   - 0
   activeDuration: 0
@@ -3479,10 +3479,10 @@ MonoBehaviour:
   customConditions:
   - {fileID: 387642573}
   triggerStateIndex: 1
-  delayDuration: 0
-  delayed: 0
-  isDelayRandom: 0
-  randomRange:
+  TFdelayDuration: 0
+  TFDelayed: 0
+  isTFDelayRandom: 0
+  TFDelayRange:
   - 0
   - 0
   activeDuration: 0
@@ -4305,10 +4305,10 @@ MonoBehaviour:
     grabStateRightIndex: 0
   customConditions: []
   triggerStateIndex: 0
-  delayDuration: 0
-  delayed: 0
-  isDelayRandom: 0
-  randomRange:
+  TFdelayDuration: 0
+  TFDelayed: 0
+  isTFDelayRandom: 0
+  TFDelayRange:
   - 0
   - 0
   activeDuration: 0
@@ -4711,10 +4711,10 @@ MonoBehaviour:
     grabStateRightIndex: 0
   customConditions: []
   triggerStateIndex: 0
-  delayDuration: 0
-  delayed: 0
-  isDelayRandom: 0
-  randomRange:
+  TFdelayDuration: 0
+  TFDelayed: 0
+  isTFDelayRandom: 0
+  TFDelayRange:
   - 0
   - 0
   activeDuration: 0
@@ -7113,10 +7113,10 @@ MonoBehaviour:
     grabStateRightIndex: 0
   customConditions: []
   triggerStateIndex: 1
-  delayDuration: 0
-  delayed: 0
-  isDelayRandom: 0
-  randomRange:
+  TFdelayDuration: 0
+  TFDelayed: 0
+  isTFDelayRandom: 0
+  TFDelayRange:
   - 0
   - 0
   activeDuration: 0
@@ -7312,10 +7312,10 @@ MonoBehaviour:
     grabStateRightIndex: 0
   customConditions: []
   triggerStateIndex: 0
-  delayDuration: 0
-  delayed: 0
-  isDelayRandom: 0
-  randomRange:
+  TFdelayDuration: 0
+  TFDelayed: 0
+  isTFDelayRandom: 0
+  TFDelayRange:
   - 0
   - 0
   activeDuration: 0
@@ -7503,10 +7503,10 @@ MonoBehaviour:
   customConditions:
   - {fileID: 1061908694}
   triggerStateIndex: 1
-  delayDuration: 0
-  delayed: 0
-  isDelayRandom: 0
-  randomRange:
+  TFdelayDuration: 0
+  TFDelayed: 0
+  isTFDelayRandom: 0
+  TFDelayRange:
   - 0
   - 0
   activeDuration: 0
@@ -9783,10 +9783,10 @@ MonoBehaviour:
     grabStateRightIndex: 0
   customConditions: []
   triggerStateIndex: 1
-  delayDuration: 0
-  delayed: 0
-  isDelayRandom: 0
-  randomRange:
+  TFdelayDuration: 0
+  TFDelayed: 0
+  isTFDelayRandom: 0
+  TFDelayRange:
   - 0
   - 0
   activeDuration: 0
@@ -10332,10 +10332,10 @@ MonoBehaviour:
     grabStateRightIndex: 0
   customConditions: []
   triggerStateIndex: 1
-  delayDuration: 0
-  delayed: 0
-  isDelayRandom: 0
-  randomRange:
+  TFdelayDuration: 0
+  TFDelayed: 0
+  isTFDelayRandom: 0
+  TFDelayRange:
   - 0
   - 0
   activeDuration: 0
@@ -10909,10 +10909,10 @@ MonoBehaviour:
   customConditions:
   - {fileID: 1503495522}
   triggerStateIndex: 1
-  delayDuration: 0
-  delayed: 0
-  isDelayRandom: 0
-  randomRange:
+  TFdelayDuration: 0
+  TFDelayed: 0
+  isTFDelayRandom: 0
+  TFDelayRange:
   - 0
   - 0
   activeDuration: 0
@@ -11140,10 +11140,10 @@ MonoBehaviour:
     grabStateRightIndex: 0
   customConditions: []
   triggerStateIndex: 0
-  delayDuration: 0
-  delayed: 0
-  isDelayRandom: 0
-  randomRange:
+  TFdelayDuration: 0
+  TFDelayed: 0
+  isTFDelayRandom: 0
+  TFDelayRange:
   - 0
   - 0
   activeDuration: 0
@@ -13480,10 +13480,10 @@ MonoBehaviour:
     grabStateRightIndex: 0
   customConditions: []
   triggerStateIndex: 0
-  delayDuration: 0
-  delayed: 0
-  isDelayRandom: 0
-  randomRange:
+  TFdelayDuration: 0
+  TFDelayed: 0
+  isTFDelayRandom: 0
+  TFDelayRange:
   - 0
   - 0
   activeDuration: 0
@@ -13611,10 +13611,10 @@ MonoBehaviour:
     grabStateRightIndex: 0
   customConditions: []
   triggerStateIndex: 1
-  delayDuration: 0
-  delayed: 0
-  isDelayRandom: 0
-  randomRange:
+  TFdelayDuration: 0
+  TFDelayed: 0
+  isTFDelayRandom: 0
+  TFDelayRange:
   - 0
   - 0
   activeDuration: 0
@@ -14474,10 +14474,10 @@ MonoBehaviour:
     grabStateRightIndex: 0
   customConditions: []
   triggerStateIndex: 0
-  delayDuration: 0
-  delayed: 0
-  isDelayRandom: 0
-  randomRange:
+  TFdelayDuration: 0
+  TFDelayed: 0
+  isTFDelayRandom: 0
+  TFDelayRange:
   - 0
   - 0
   activeDuration: 0
@@ -15029,10 +15029,10 @@ MonoBehaviour:
     grabStateRightIndex: 0
   customConditions: []
   triggerStateIndex: 0
-  delayDuration: 0
-  delayed: 0
-  isDelayRandom: 0
-  randomRange:
+  TFdelayDuration: 0
+  TFDelayed: 0
+  isTFDelayRandom: 0
+  TFDelayRange:
   - 0
   - 0
   activeDuration: 0

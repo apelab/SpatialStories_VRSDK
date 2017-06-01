@@ -74,31 +74,32 @@ namespace Gaze
         public int triggerStateIndex;
 
         /// <summary>
-        /// This trigger must wait 'waitTime' before being in active mode.
+        /// This trigger must wait 'waitTime' before being in acisdelayedRandomtive mode.
         /// This wait time is dependant on triggerObject start if any otherwise
         /// its dependant on the load level scene time.
         /// </summary>
         /// <value>The duration in seconds</value>
-        public float delayDuration;
+        public float TFdelayDuration;
 
         /// <summary>
         /// The toggle to display delay duration in the Editor
         /// Used in Gaze_TriggerSettingsEditor.cs
         /// </summary>
-        public bool delayed;
+        public bool TFDelayed;
 
         /// <summary>
-        /// If true, 'delayDuration' will be set to a random value between randomRange[0] and randomRange[1]
+        /// If true, 'TFdelayDuration' will be set to a random value between TFDelayRange[0] and TFDelayRange[1]
         /// </summary>
-        public bool isDelayRandom;
+        public bool isTFDelayRandom;
 
-        public float[] randomRange = { 0.0f, 0.0f };
+        public float[] TFDelayRange = { 0.0f, 0.0f };
 
         /// <summary>
         /// Window of time during which the object is active (gazable).
         /// </summary>
         /// <value>The duration in seconds</value>
         public float activeDuration;
+
 
         /// <summary>
         /// True if the active window has no end. (active forever, always gazable)
@@ -366,7 +367,8 @@ namespace Gaze
 
         void Start()
         {
-            SetRandomDelay();
+            SetRandomTFDelay();
+            Debug.Log(TFdelayDuration);
             focusInProgress = false;
             focusComplete = focusDuration <= 0 ? true : false;
             ActivateOnDependencyMap.AreDependenciesSatisfied = dependent ? false : true;
@@ -528,10 +530,10 @@ namespace Gaze
             if (ActivateOnDependencyMap.AreDependenciesSatisfied)
             {
                 // if time is beyond the specified wait time
-                if (delayed && Time.time >= startTime + delayDuration || !delayed)
+                if (TFDelayed && Time.time >= startTime + TFdelayDuration || !TFDelayed)
                 {
                     // if it never expires OR expires and below ending time frame
-                    if (!expires || (expires && Time.time < startTime + delayDuration + activeDuration))
+                    if (!expires || (expires && Time.time < startTime + TFdelayDuration + activeDuration))
                     {
                         // notify manager
                         SetTriggerState(Gaze_TriggerState.ACTIVE);
@@ -567,10 +569,10 @@ namespace Gaze
             if (expires)
             {
                 // set delay duration
-                delayDuration = delayed ? delayDuration : 0;
+                TFdelayDuration = TFDelayed ? TFdelayDuration : 0;
 
                 // check if we're over the time limit
-                if (Time.time >= startTime + delayDuration + activeDuration)
+                if (Time.time >= startTime + TFdelayDuration + activeDuration)
                 {
 
                     // trigger if auto-trigger is set to END
@@ -830,10 +832,10 @@ namespace Gaze
         }
 
 
-        private void SetRandomDelay()
+        private void SetRandomTFDelay()
         {
-            if (isDelayRandom)
-                delayDuration = UnityEngine.Random.Range(randomRange[0], randomRange[1]);
+            if (isTFDelayRandom)
+                TFdelayDuration = UnityEngine.Random.Range(TFDelayRange[0], TFDelayRange[1]);
         }
 
 

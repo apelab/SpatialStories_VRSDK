@@ -141,8 +141,8 @@ namespace Gaze
                     // extra block that can be toggled on and off
                     GUILayout.BeginHorizontal();
                     // set boolean value accordingly in Trigger settings
-                    targetConditions.delayed = EditorGUILayout.ToggleLeft("Delayed", targetConditions.delayed);
-                    if (targetConditions.delayed)
+                    targetConditions.TFDelayed = EditorGUILayout.ToggleLeft("Delayed", targetConditions.TFDelayed);
+                    if (targetConditions.TFDelayed)
                     {
                         DisplayDelayBlock();
                     }
@@ -765,11 +765,11 @@ namespace Gaze
         {
             GUILayout.BeginVertical();
 
-            if (!targetConditions.isDelayRandom)
+            if (!targetConditions.isTFDelayRandom)
             {
                 GUILayout.BeginHorizontal();
-                targetConditions.delayDuration = EditorGUILayout.FloatField(targetConditions.delayDuration);
-                Gaze_Utils.EnsureFieldIsPositiveOrZero(ref targetConditions.delayDuration);
+                targetConditions.TFdelayDuration = EditorGUILayout.FloatField(targetConditions.TFdelayDuration);
+                Gaze_Utils.EnsureFieldIsPositiveOrZero(ref targetConditions.TFdelayDuration);
                 EditorGUILayout.LabelField("[s]");
                 GUILayout.EndHorizontal();
             }
@@ -778,24 +778,24 @@ namespace Gaze
             {
                 GUILayout.BeginHorizontal();
                 EditorGUILayout.LabelField("Min", GUILayout.MaxWidth(50));
-                targetConditions.randomRange[0] = EditorGUILayout.FloatField(targetConditions.randomRange[0]);
-                Gaze_Utils.EnsureFieldIsPositiveOrZero(ref targetConditions.delayDuration);
+                targetConditions.TFDelayRange[0] = EditorGUILayout.FloatField(targetConditions.TFDelayRange[0]);
+                Gaze_Utils.EnsureFieldIsPositiveOrZero(ref targetConditions.TFdelayDuration);
                 EditorGUILayout.LabelField("[s]");
                 GUILayout.EndHorizontal();
 
                 GUILayout.BeginHorizontal();
                 EditorGUILayout.LabelField("Max", GUILayout.MaxWidth(50));
-                targetConditions.randomRange[1] = EditorGUILayout.FloatField(targetConditions.randomRange[1]);
-                Gaze_Utils.EnsureFieldIsPositiveOrZero(ref targetConditions.delayDuration);
+                targetConditions.TFDelayRange[1] = EditorGUILayout.FloatField(targetConditions.TFDelayRange[1]);
+                Gaze_Utils.EnsureFieldIsPositiveOrZero(ref targetConditions.TFdelayDuration);
                 EditorGUILayout.LabelField("[s]");
                 GUILayout.EndHorizontal();
 
-                if (targetConditions.randomRange[1] < targetConditions.randomRange[0])
-                    targetConditions.randomRange[1] = targetConditions.randomRange[0] + 1.0f;
+                if (targetConditions.TFDelayRange[1] < targetConditions.TFDelayRange[0])
+                    targetConditions.TFDelayRange[1] = targetConditions.TFDelayRange[0] + 1.0f;
             }
 
             GUILayout.BeginHorizontal();
-            targetConditions.isDelayRandom = EditorGUILayout.ToggleLeft("Random", targetConditions.isDelayRandom);
+            targetConditions.isTFDelayRandom = EditorGUILayout.ToggleLeft("Random", targetConditions.isTFDelayRandom);
             GUILayout.EndHorizontal();
 
             GUILayout.EndVertical();
