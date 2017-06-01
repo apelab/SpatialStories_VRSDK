@@ -299,14 +299,44 @@ namespace Gaze
             EditorGUILayout.BeginHorizontal();
             actionsScript.isDelayed = EditorGUILayout.ToggleLeft("Delayed", actionsScript.isDelayed);
 
-
             if (actionsScript.isDelayed)
             {
-                //GUILayout.BeginHorizontal();
-                actionsScript.delayTime = EditorGUILayout.FloatField(actionsScript.delayTime);
-                Gaze_Utils.EnsureFieldIsPositiveOrZero(ref actionsScript.delayTime);
-                EditorGUILayout.LabelField("[s]");
-                //GUILayout.EndHorizontal();
+                GUILayout.BeginVertical();
+
+                if (!actionsScript.isDelayRandom)
+                {
+                    GUILayout.BeginHorizontal();
+                    actionsScript.delayTime = EditorGUILayout.FloatField(actionsScript.delayTime);
+                    Gaze_Utils.EnsureFieldIsPositiveOrZero(ref actionsScript.delayTime);
+                    EditorGUILayout.LabelField("[s]");
+                    GUILayout.EndHorizontal();
+                }
+
+                else
+                {
+                    GUILayout.BeginHorizontal();
+                    EditorGUILayout.LabelField("Min", GUILayout.MaxWidth(50));
+                    actionsScript.delayRange[0] = EditorGUILayout.FloatField(actionsScript.delayRange[0]);
+                    Gaze_Utils.EnsureFieldIsPositiveOrZero(ref actionsScript.delayRange[0]);
+                    EditorGUILayout.LabelField("[s]");
+                    GUILayout.EndHorizontal();
+
+                    GUILayout.BeginHorizontal();
+                    EditorGUILayout.LabelField("Max", GUILayout.MaxWidth(50));
+                    actionsScript.delayRange[1] = EditorGUILayout.FloatField(actionsScript.delayRange[1]);
+                    Gaze_Utils.EnsureFieldIsPositiveOrZero(ref actionsScript.delayRange[1]);
+                    EditorGUILayout.LabelField("[s]");
+                    GUILayout.EndHorizontal();
+
+                    if (actionsScript.delayRange[1] < actionsScript.delayRange[0])
+                        actionsScript.delayRange[1] = actionsScript.delayRange[0] + 1.0f;
+                }
+
+                GUILayout.BeginHorizontal();
+                actionsScript.isDelayRandom = EditorGUILayout.ToggleLeft("Random", actionsScript.isDelayRandom);
+                GUILayout.EndHorizontal();
+
+                GUILayout.EndVertical();
             }
             EditorGUILayout.EndHorizontal();
         }

@@ -376,7 +376,6 @@ namespace Gaze
         {
             SetDelayRandom();
             SetExpireRandom();
-            Debug.Log(activeDuration);
             focusInProgress = false;
             focusComplete = focusDuration <= 0 ? true : false;
             ActivateOnDependencyMap.AreDependenciesSatisfied = dependent ? false : true;

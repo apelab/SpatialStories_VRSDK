@@ -28,8 +28,8 @@ namespace Gaze
         // delay actions
         public bool isDelayed;
         public float delayTime;
-        //public bool isDelayRandom;
-        //public float[] delayRange = { 0.0f, 0.0f };
+        public bool isDelayRandom;
+        public float[] delayRange = { 0.0f, 0.0f };
         private Coroutine delayActions;
 
         // grab and touch distances
@@ -88,6 +88,7 @@ namespace Gaze
 
         void Start()
         {
+            SetDelayRandom();
             if (ActionAudio == ACTIVABLE_OPTION.ACTIVATE && targetAudioSource != null)
             {
                 targetAudioSource.volume = duckingEnabled ? audioVolumeMin : audioVolumeMax;
@@ -99,6 +100,13 @@ namespace Gaze
             }
         }
 
+        private void SetDelayRandom()
+        {
+            if (isDelayRandom)
+            {
+                delayTime = UnityEngine.Random.Range(delayRange[0], delayRange[1]);
+            }
+        }
 
         private void PlayAnim(int i)
         {
