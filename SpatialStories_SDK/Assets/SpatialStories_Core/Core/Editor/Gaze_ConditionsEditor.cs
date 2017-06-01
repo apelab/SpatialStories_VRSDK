@@ -167,9 +167,12 @@ namespace Gaze
                     }
                     else if (targetConditions.autoTriggerModeIndex.Equals((int)Gaze_AutoTriggerMode.NONE) && targetConditions.expires && targetConditions.activeDuration == 0)
                     {
-                        EditorGUILayout.BeginHorizontal();
-                        EditorGUILayout.HelpBox("Will never trigger !\n(Expires immediately AND has no Auto-Trigger).", MessageType.Warning);
-                        EditorGUILayout.EndHorizontal();
+                        if (!(targetConditions.isExpireRandom && targetConditions.expireRange[1] > 0))
+                        {
+                            EditorGUILayout.BeginHorizontal();
+                            EditorGUILayout.HelpBox("Will never trigger !\n(Expires immediately AND has no Auto-Trigger).", MessageType.Warning);
+                            EditorGUILayout.EndHorizontal();
+                        }
                     }
 
                     EditorGUILayout.Space();
