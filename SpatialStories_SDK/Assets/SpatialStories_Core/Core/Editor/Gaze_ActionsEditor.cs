@@ -185,10 +185,11 @@ namespace Gaze
                     ShowAudioOptions();
                     ShowAnimationOptions();
                 }
-
-
                 actionsScript.DestroyOnTrigger = EditorGUILayout.ToggleLeft("Destroy", actionsScript.DestroyOnTrigger);
 
+                EditorGUILayout.Space();
+                EditorGUILayout.LabelField("Delay", EditorStyles.boldLabel);
+                ShowDelayBlock();
             }
             // save changes
             EditorUtility.SetDirty(actionsScript);
@@ -293,6 +294,22 @@ namespace Gaze
             }
         }
 
+        private void ShowDelayBlock()
+        {
+            EditorGUILayout.BeginHorizontal();
+            actionsScript.isDelayed = EditorGUILayout.ToggleLeft("Delayed", actionsScript.isDelayed);
+
+
+            if (actionsScript.isDelayed)
+            {
+                //GUILayout.BeginHorizontal();
+                actionsScript.delayTime = EditorGUILayout.FloatField(actionsScript.delayTime);
+                Gaze_Utils.EnsureFieldIsPositiveOrZero(ref actionsScript.delayTime);
+                EditorGUILayout.LabelField("[s]");
+                //GUILayout.EndHorizontal();
+            }
+            EditorGUILayout.EndHorizontal();
+        }
 
         private void displayAnimBlock(int i)
         {

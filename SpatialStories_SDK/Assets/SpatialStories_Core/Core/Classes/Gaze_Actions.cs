@@ -25,6 +25,13 @@ namespace Gaze
 
         public bool DestroyOnTrigger;
 
+        // delay actions
+        public bool isDelayed;
+        public float delayTime;
+        //public bool isDelayRandom;
+        //public float[] delayRange = { 0.0f, 0.0f };
+        private Coroutine delayActions;
+
         // grab and touch distances
         public ALTERABLE_OPTION ModifyGrabDistance = ALTERABLE_OPTION.NOTHING;
         public ALTERABLE_OPTION ModifyTouchDistance = ALTERABLE_OPTION.NOTHING;
@@ -331,6 +338,22 @@ namespace Gaze
                 PlayAnim(0);
             }
         }
+
+        private IEnumerator HandleActionsInTime()
+        {
+            yield return new WaitForSeconds(delayTime);
+            HandleReset();
+            HandleAnimation();
+            HandleAudio();
+            HandleVisuals();
+            HandleGravity();
+            HandleDestroy();
+            HandleGrab();
+            HandleTouch();
+            HandleColliders();
+            HandleGrabMode();
+        }
+
         /// <summary>
         /// Gets the root IO of GazeActions
         /// </summary>
@@ -351,16 +374,25 @@ namespace Gaze
             if (!gazeInteraction.HasActions)
                 return;
 
-            HandleReset();
-            HandleAnimation();
-            HandleAudio();
-            HandleVisuals();
-            HandleGravity();
-            HandleDestroy();
-            HandleGrab();
-            HandleTouch();
-            HandleColliders();
-            HandleGrabMode();
+            if (isDelayed)
+            {
+                delayActions = StartCoroutine(HandleActionsInTime());
+            }
+
+            else
+            {
+                HandleReset();
+                HandleAnimation();
+                HandleAudio();
+                HandleVisuals();
+                HandleGravity();
+                HandleDestroy();
+                HandleGrab();
+                HandleTouch();
+                HandleColliders();
+                HandleGrabMode();
+            }
+
         }
 
         protected override void OnReload()
