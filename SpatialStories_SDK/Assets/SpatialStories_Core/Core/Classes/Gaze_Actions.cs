@@ -55,6 +55,9 @@ namespace Gaze
         public float audioVolumeMin = .2f;
         public float audioVolumeMax = 1f;
         public float fadeSpeed = .005f;
+        private Coroutine raiseAudioVolume;
+        private Coroutine lowerAudioVolume;
+
         public Gaze_InteractiveObject IO;
 
         private Gaze_Interaction gazeInteraction;
@@ -79,13 +82,13 @@ namespace Gaze
         {
             base.OnEnable();
             IO = GetIO();
-            Gaze_EventManager.OnGazeEvent += OnGazeEvent;
+            //Gaze_EventManager.OnGazeEvent += OnGazeEvent;
         }
 
         public override void OnDisable()
         {
             base.OnDisable();
-            Gaze_EventManager.OnGazeEvent -= OnGazeEvent;
+            //Gaze_EventManager.OnGazeEvent -= OnGazeEvent;
         }
 
         void Start()
@@ -404,7 +407,6 @@ namespace Gaze
             // Check if the trigger should be fired
             if (!gazeInteraction.HasActions)
                 return;
-
             //check if the action should be delayed
             if (isDelayed)
                 delayActions = StartCoroutine(HandleActionsInTime(() => ActionLogic()));
@@ -417,7 +419,7 @@ namespace Gaze
         protected override void OnReload()
         {
             if (isDelayed)
-                delayActions = StartCoroutine(HandleActionsInTime(() => { TimeFrameLogic(1); }));
+                delayActions = StartCoroutine(HandleActionsInTime(() => TimeFrameLogic(1)));
 
             else
                 TimeFrameLogic(1);
@@ -428,7 +430,7 @@ namespace Gaze
         protected override void OnBefore()
         {
             if (isDelayed)
-                delayActions = StartCoroutine(HandleActionsInTime(() => { TimeFrameLogic(2); }));
+                delayActions = StartCoroutine(HandleActionsInTime(() => TimeFrameLogic(2)));
 
             else
                 TimeFrameLogic(2);
@@ -437,7 +439,7 @@ namespace Gaze
         protected override void OnActive()
         {
             if (isDelayed)
-                delayActions = StartCoroutine(HandleActionsInTime(() => { TimeFrameLogic(3); }));
+                delayActions = StartCoroutine(HandleActionsInTime(() => TimeFrameLogic(3)));
 
             else
                 TimeFrameLogic(3);
@@ -446,14 +448,14 @@ namespace Gaze
         protected override void OnAfter()
         {
             if (isDelayed)
-                delayActions = StartCoroutine(HandleActionsInTime(() => { TimeFrameLogic(4); }));
+                delayActions = StartCoroutine(HandleActionsInTime(() => TimeFrameLogic(4)));
 
             else
                 TimeFrameLogic(4);
         }
         #endregion
 
-
+        /*
         private void OnGazeEvent(Gaze_GazeEventArgs e)
         {
             // if sender is the gazable collider GameObject
@@ -462,14 +464,14 @@ namespace Gaze
                 StopAllCoroutines();
                 if (e.IsGazed)
                 {
-                    StartCoroutine(RaiseAudioVolume());
+                    raiseAudioVolume = StartCoroutine(RaiseAudioVolume());
                 }
                 else
                 {
-                    StartCoroutine(LowerAudioVolume());
+                    lowerAudioVolume = StartCoroutine(LowerAudioVolume());
                 }
             }
         }
-
+        */
     }
 }

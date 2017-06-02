@@ -97,6 +97,9 @@ public class Gaze_Teleporter : MonoBehaviour
 
     private Gaze_TeleportEventArgs gaze_TeleportEventArgs;
 
+    // stores the current TeleportMode while teleport is enables
+    private Gaze_TeleportMode lastTeleportMode;
+
     #endregion
 
 
@@ -464,22 +467,30 @@ public class Gaze_Teleporter : MonoBehaviour
         }
     }
 
+    private void CheckSpotChange()
+    {
+        if (lastTeleportMode.Equals(gaze_TeleportEventArgs.Mode))
+            return;
+        lastTeleportMode = gaze_TeleportEventArgs.Mode;
+        Gaze_EventManager.FireTeleportEvent(gaze_TeleportEventArgs);
+    }
+
     //	Overide and change to expand on what is a good landing spot
     virtual public bool IsGoodSpot(RaycastHit hit)
     {
         if (hit.transform == null)
         {
-            // fire event
+            // check if the status of destination has changed
+            // fire event if so
             gaze_TeleportEventArgs.Mode = Gaze_TeleportMode.BAD_DESTINATION;
-            Gaze_EventManager.FireTeleportEvent(gaze_TeleportEventArgs);
-
+            CheckSpotChange();
             return false;
         }
 
-        // fire event
+        // check if the status of destination has changed
+        // fire event if so
         gaze_TeleportEventArgs.Mode = Gaze_TeleportMode.GOOD_DESTINATION;
-        Gaze_EventManager.FireTeleportEvent(gaze_TeleportEventArgs);
-
+        CheckSpotChange();
         return true;
     }
 
