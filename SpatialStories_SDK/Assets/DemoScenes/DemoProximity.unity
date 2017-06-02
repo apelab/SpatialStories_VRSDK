@@ -223,14 +223,18 @@ MonoBehaviour:
     grabStateRightIndex: 0
   customConditions: []
   triggerStateIndex: 1
-  TFdelayDuration: 0
-  TFDelayed: 0
-  isTFDelayRandom: 0
-  TFDelayRange:
+  delayDuration: 0
+  delayed: 0
+  isDelayRandom: 0
+  delayRange:
   - 0
   - 0
   activeDuration: 0
   expires: 0
+  isExpireRandom: 0
+  expireRange:
+  - 0
+  - 0
   autoTriggerModeIndex: 0
   reload: 0
   canBeTriggered: 1
@@ -291,6 +295,12 @@ MonoBehaviour:
   ActionAudio: 0
   ActionColliders: 0
   DestroyOnTrigger: 0
+  isDelayed: 0
+  delayTime: 0
+  isDelayRandom: 0
+  delayRange:
+  - 0
+  - 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
   ModifyGrabMode: 0
@@ -477,14 +487,18 @@ MonoBehaviour:
     grabStateRightIndex: 0
   customConditions: []
   triggerStateIndex: 1
-  TFdelayDuration: 0
-  TFDelayed: 0
-  isTFDelayRandom: 0
-  TFDelayRange:
+  delayDuration: 0
+  delayed: 0
+  isDelayRandom: 0
+  delayRange:
   - 0
   - 0
   activeDuration: 0
   expires: 0
+  isExpireRandom: 0
+  expireRange:
+  - 0
+  - 0
   autoTriggerModeIndex: 0
   reload: 0
   canBeTriggered: 1
@@ -545,6 +559,12 @@ MonoBehaviour:
   ActionAudio: 0
   ActionColliders: 0
   DestroyOnTrigger: 0
+  isDelayed: 0
+  delayTime: 0
+  isDelayRandom: 0
+  delayRange:
+  - 0
+  - 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
   ModifyGrabMode: 0
@@ -2032,6 +2052,12 @@ MonoBehaviour:
   ActionAudio: 0
   ActionColliders: 0
   DestroyOnTrigger: 0
+  isDelayed: 0
+  delayTime: 0
+  isDelayRandom: 0
+  delayRange:
+  - 0
+  - 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
   ModifyGrabMode: 0
@@ -2090,14 +2116,18 @@ MonoBehaviour:
     grabStateRightIndex: 0
   customConditions: []
   triggerStateIndex: 1
-  TFdelayDuration: 0
-  TFDelayed: 0
-  isTFDelayRandom: 0
-  TFDelayRange:
+  delayDuration: 0
+  delayed: 0
+  isDelayRandom: 0
+  delayRange:
   - 0
   - 0
   activeDuration: 0
   expires: 0
+  isExpireRandom: 0
+  expireRange:
+  - 0
+  - 0
   autoTriggerModeIndex: 0
   reload: 0
   canBeTriggered: 1
@@ -2792,14 +2822,18 @@ MonoBehaviour:
     grabStateRightIndex: 0
   customConditions: []
   triggerStateIndex: 1
-  TFdelayDuration: 0
-  TFDelayed: 0
-  isTFDelayRandom: 0
-  TFDelayRange:
+  delayDuration: 0
+  delayed: 0
+  isDelayRandom: 0
+  delayRange:
   - 0
   - 0
   activeDuration: 0
   expires: 0
+  isExpireRandom: 0
+  expireRange:
+  - 0
+  - 0
   autoTriggerModeIndex: 0
   reload: 0
   canBeTriggered: 1
@@ -2860,6 +2894,12 @@ MonoBehaviour:
   ActionAudio: 0
   ActionColliders: 0
   DestroyOnTrigger: 0
+  isDelayed: 0
+  delayTime: 0
+  isDelayRandom: 0
+  delayRange:
+  - 0
+  - 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
   ModifyGrabMode: 0
@@ -3760,14 +3800,18 @@ MonoBehaviour:
     grabStateRightIndex: 0
   customConditions: []
   triggerStateIndex: 1
-  TFdelayDuration: 0
-  TFDelayed: 0
-  isTFDelayRandom: 0
-  TFDelayRange:
+  delayDuration: 0
+  delayed: 0
+  isDelayRandom: 0
+  delayRange:
   - 0
   - 0
   activeDuration: 0
   expires: 0
+  isExpireRandom: 0
+  expireRange:
+  - 0
+  - 0
   autoTriggerModeIndex: 0
   reload: 0
   canBeTriggered: 1
@@ -3828,6 +3872,12 @@ MonoBehaviour:
   ActionAudio: 0
   ActionColliders: 0
   DestroyOnTrigger: 0
+  isDelayed: 0
+  delayTime: 0
+  isDelayRandom: 0
+  delayRange:
+  - 0
+  - 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
   ModifyGrabMode: 0
@@ -4300,14 +4350,18 @@ MonoBehaviour:
     grabStateRightIndex: 0
   customConditions: []
   triggerStateIndex: 0
-  TFdelayDuration: 1
-  TFDelayed: 1
-  isTFDelayRandom: 0
-  TFDelayRange:
+  delayDuration: 0
+  delayed: 0
+  isDelayRandom: 0
+  delayRange:
   - 0
   - 0
   activeDuration: 0
   expires: 0
+  isExpireRandom: 0
+  expireRange:
+  - 0
+  - 0
   autoTriggerModeIndex: 0
   reload: 0
   canBeTriggered: 1
@@ -4392,6 +4446,12 @@ MonoBehaviour:
   ActionAudio: 1
   ActionColliders: 0
   DestroyOnTrigger: 0
+  isDelayed: 1
+  delayTime: 1
+  isDelayRandom: 0
+  delayRange:
+  - 0
+  - 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
   ModifyGrabMode: 0
@@ -5146,14 +5206,18 @@ MonoBehaviour:
     grabStateRightIndex: 0
   customConditions: []
   triggerStateIndex: 1
-  TFdelayDuration: 0
-  TFDelayed: 0
-  isTFDelayRandom: 0
-  TFDelayRange:
+  delayDuration: 0
+  delayed: 0
+  isDelayRandom: 0
+  delayRange:
   - 0
   - 0
   activeDuration: 0
   expires: 0
+  isExpireRandom: 0
+  expireRange:
+  - 0
+  - 0
   autoTriggerModeIndex: 0
   reload: 0
   canBeTriggered: 1
@@ -5214,6 +5278,12 @@ MonoBehaviour:
   ActionAudio: 0
   ActionColliders: 0
   DestroyOnTrigger: 0
+  isDelayed: 0
+  delayTime: 0
+  isDelayRandom: 0
+  delayRange:
+  - 0
+  - 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
   ModifyGrabMode: 0
@@ -5368,6 +5438,12 @@ MonoBehaviour:
   ActionAudio: 0
   ActionColliders: 0
   DestroyOnTrigger: 0
+  isDelayed: 0
+  delayTime: 0
+  isDelayRandom: 0
+  delayRange:
+  - 0
+  - 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
   ModifyGrabMode: 0
@@ -5424,14 +5500,18 @@ MonoBehaviour:
     grabStateRightIndex: 0
   customConditions: []
   triggerStateIndex: 1
-  TFdelayDuration: 0
-  TFDelayed: 0
-  isTFDelayRandom: 0
-  TFDelayRange:
+  delayDuration: 0
+  delayed: 0
+  isDelayRandom: 0
+  delayRange:
   - 0
   - 0
   activeDuration: 0
   expires: 0
+  isExpireRandom: 0
+  expireRange:
+  - 0
+  - 0
   autoTriggerModeIndex: 0
   reload: 0
   canBeTriggered: 1
@@ -5834,14 +5914,18 @@ MonoBehaviour:
     grabStateRightIndex: 0
   customConditions: []
   triggerStateIndex: 1
-  TFdelayDuration: 0
-  TFDelayed: 0
-  isTFDelayRandom: 0
-  TFDelayRange:
+  delayDuration: 0
+  delayed: 0
+  isDelayRandom: 0
+  delayRange:
   - 0
   - 0
   activeDuration: 0
   expires: 0
+  isExpireRandom: 0
+  expireRange:
+  - 0
+  - 0
   autoTriggerModeIndex: 0
   reload: 0
   canBeTriggered: 1
@@ -5902,6 +5986,12 @@ MonoBehaviour:
   ActionAudio: 0
   ActionColliders: 0
   DestroyOnTrigger: 0
+  isDelayed: 0
+  delayTime: 0
+  isDelayRandom: 0
+  delayRange:
+  - 0
+  - 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
   ModifyGrabMode: 0
@@ -7027,14 +7117,18 @@ MonoBehaviour:
     grabStateRightIndex: 0
   customConditions: []
   triggerStateIndex: 0
-  TFdelayDuration: 0
-  TFDelayed: 0
-  isTFDelayRandom: 0
-  TFDelayRange:
+  delayDuration: 0
+  delayed: 0
+  isDelayRandom: 0
+  delayRange:
   - 0
   - 0
   activeDuration: 0
   expires: 0
+  isExpireRandom: 0
+  expireRange:
+  - 0
+  - 0
   autoTriggerModeIndex: 0
   reload: 0
   canBeTriggered: 1
@@ -7119,6 +7213,12 @@ MonoBehaviour:
   ActionAudio: 0
   ActionColliders: 0
   DestroyOnTrigger: 0
+  isDelayed: 0
+  delayTime: 0
+  isDelayRandom: 0
+  delayRange:
+  - 0
+  - 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
   ModifyGrabMode: 0
@@ -7649,14 +7749,18 @@ MonoBehaviour:
     grabStateRightIndex: 0
   customConditions: []
   triggerStateIndex: 0
-  TFdelayDuration: 0.44620898
-  TFDelayed: 1
-  isTFDelayRandom: 1
-  TFDelayRange:
-  - 0.4
-  - 0.6
+  delayDuration: 0
+  delayed: 0
+  isDelayRandom: 0
+  delayRange:
+  - 0
+  - 0
   activeDuration: 0
   expires: 0
+  isExpireRandom: 0
+  expireRange:
+  - 0
+  - 0
   autoTriggerModeIndex: 0
   reload: 0
   canBeTriggered: 1
@@ -7729,6 +7833,12 @@ MonoBehaviour:
   ActionAudio: 1
   ActionColliders: 0
   DestroyOnTrigger: 0
+  isDelayed: 1
+  delayTime: 0
+  isDelayRandom: 1
+  delayRange:
+  - 0.4
+  - 0.6
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
   ModifyGrabMode: 0
@@ -8512,7 +8622,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a11d97df356699943aab990d9fcca9f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dependent: 1
+  dependent: 0
   requireAllActivators: 0
   requireAllDeactivators: 0
   proximityMap:
@@ -8525,14 +8635,18 @@ MonoBehaviour:
     grabStateRightIndex: 0
   customConditions: []
   triggerStateIndex: 0
-  TFdelayDuration: 2
-  TFDelayed: 1
-  isTFDelayRandom: 0
-  TFDelayRange:
+  delayDuration: 0
+  delayed: 0
+  isDelayRandom: 0
+  delayRange:
   - 0
   - 0
   activeDuration: 0
   expires: 0
+  isExpireRandom: 0
+  expireRange:
+  - 0
+  - 0
   autoTriggerModeIndex: 0
   reload: 0
   canBeTriggered: 1
@@ -8561,7 +8675,7 @@ MonoBehaviour:
       interactiveObject: {fileID: 0}
     touchHandsIndex: 0
     touchActionIndex: 0
-  gazeEnabled: 0
+  gazeEnabled: 1
   touchEnabled: 0
   ActivateOnDependencyMap:
     dependencies:
@@ -8573,7 +8687,7 @@ MonoBehaviour:
   DeactivateOnDependencyMap:
     dependencies: []
     AreDependenciesSatisfied: 0
-  gazeColliderIO: {fileID: 0}
+  gazeColliderIO: {fileID: 1843363408}
   ReloadDependencies: 0
   isActive: 1
 --- !u!114 &1626211788
@@ -8597,6 +8711,12 @@ MonoBehaviour:
   ActionAudio: 0
   ActionColliders: 0
   DestroyOnTrigger: 1
+  isDelayed: 1
+  delayTime: 2
+  isDelayRandom: 0
+  delayRange:
+  - 0
+  - 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
   ModifyGrabMode: 0
@@ -10018,14 +10138,18 @@ MonoBehaviour:
     grabStateRightIndex: 0
   customConditions: []
   triggerStateIndex: 0
-  TFdelayDuration: 0.40341297
-  TFDelayed: 1
-  isTFDelayRandom: 1
-  TFDelayRange:
-  - 0.4
-  - 0.6
+  delayDuration: 0
+  delayed: 0
+  isDelayRandom: 0
+  delayRange:
+  - 0
+  - 0
   activeDuration: 0
   expires: 0
+  isExpireRandom: 0
+  expireRange:
+  - 0
+  - 0
   autoTriggerModeIndex: 0
   reload: 0
   canBeTriggered: 1
@@ -10098,6 +10222,12 @@ MonoBehaviour:
   ActionAudio: 1
   ActionColliders: 0
   DestroyOnTrigger: 0
+  isDelayed: 1
+  delayTime: 0
+  isDelayRandom: 1
+  delayRange:
+  - 0.3
+  - 0.7
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
   ModifyGrabMode: 0
@@ -10444,14 +10574,18 @@ MonoBehaviour:
     grabStateRightIndex: 0
   customConditions: []
   triggerStateIndex: 1
-  TFdelayDuration: 0
-  TFDelayed: 0
-  isTFDelayRandom: 0
-  TFDelayRange:
+  delayDuration: 0
+  delayed: 0
+  isDelayRandom: 0
+  delayRange:
   - 0
   - 0
   activeDuration: 0
   expires: 0
+  isExpireRandom: 0
+  expireRange:
+  - 0
+  - 0
   autoTriggerModeIndex: 0
   reload: 0
   canBeTriggered: 1
@@ -10512,6 +10646,12 @@ MonoBehaviour:
   ActionAudio: 0
   ActionColliders: 0
   DestroyOnTrigger: 0
+  isDelayed: 0
+  delayTime: 0
+  isDelayRandom: 0
+  delayRange:
+  - 0
+  - 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
   ModifyGrabMode: 0
@@ -10672,14 +10812,18 @@ MonoBehaviour:
     grabStateRightIndex: 0
   customConditions: []
   triggerStateIndex: 1
-  TFdelayDuration: 0
-  TFDelayed: 0
-  isTFDelayRandom: 0
-  TFDelayRange:
+  delayDuration: 0
+  delayed: 0
+  isDelayRandom: 0
+  delayRange:
   - 0
   - 0
   activeDuration: 0
   expires: 0
+  isExpireRandom: 0
+  expireRange:
+  - 0
+  - 0
   autoTriggerModeIndex: 0
   reload: 0
   canBeTriggered: 1
@@ -10740,6 +10884,12 @@ MonoBehaviour:
   ActionAudio: 0
   ActionColliders: 0
   DestroyOnTrigger: 0
+  isDelayed: 0
+  delayTime: 0
+  isDelayRandom: 0
+  delayRange:
+  - 0
+  - 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
   ModifyGrabMode: 0
