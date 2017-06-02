@@ -31,6 +31,7 @@ namespace Gaze
         public bool isDelayRandom;
         public float[] delayRange = { 0.0f, 0.0f };
         private Coroutine delayActions;
+        public delegate void ActionHandler();
 
         // grab and touch distances
         public ALTERABLE_OPTION ModifyGrabDistance = ALTERABLE_OPTION.NOTHING;
@@ -60,6 +61,7 @@ namespace Gaze
 
         public List<Renderer> VisualsToAlter = new List<Renderer>();
         public bool AlterAllVisuals = true;
+
 
         // Notification
         public bool triggerNotification;
@@ -347,19 +349,11 @@ namespace Gaze
             }
         }
 
-        private IEnumerator HandleActionsInTime()
+        private IEnumerator HandleActionsInTime(ActionHandler _handler)
         {
             yield return new WaitForSeconds(delayTime);
-            HandleReset();
-            HandleAnimation();
-            HandleAudio();
-            HandleVisuals();
-            HandleGravity();
-            HandleDestroy();
-            HandleGrab();
-            HandleTouch();
-            HandleColliders();
-            HandleGrabMode();
+            _handler();
+
         }
 
         /// <summary>
@@ -374,6 +368,35 @@ namespace Gaze
             return io;
         }
 
+        // Actions executed when OnTrigger
+        protected void ActionLogic()
+        {
+            HandleReset();
+            HandleAnimation();
+            HandleAudio();
+            HandleVisuals();
+            HandleGravity();
+            HandleDestroy();
+            HandleGrab();
+            HandleTouch();
+            HandleColliders();
+            HandleGrabMode();
+        }
+
+        // Actions executed when OnReload, OnBefore, OnActive or OnAfter
+        protected void TimeFrameLogic(int _animIndex)
+        {
+            if (activeTriggerStatesAnim.Length > _animIndex && activeTriggerStatesAnim[_animIndex])
+            {
+                PlayAnim(1);
+            }
+
+            if (activeTriggerStatesAudio.Length > _animIndex && activeTriggerStatesAudio[_animIndex])
+            {
+                PlayAudio(_animIndex);
+            }
+        }
+
 
         #region implemented abstract members of Gaze_AbstractBehaviour
         protected override void OnTrigger()
@@ -382,73 +405,51 @@ namespace Gaze
             if (!gazeInteraction.HasActions)
                 return;
 
+            //check if the action should be delayed
             if (isDelayed)
-            {
-                delayActions = StartCoroutine(HandleActionsInTime());
-            }
+                delayActions = StartCoroutine(HandleActionsInTime(() => ActionLogic()));
 
             else
-            {
-                HandleReset();
-                HandleAnimation();
-                HandleAudio();
-                HandleVisuals();
-                HandleGravity();
-                HandleDestroy();
-                HandleGrab();
-                HandleTouch();
-                HandleColliders();
-                HandleGrabMode();
-            }
-
+                ActionLogic();
         }
+
 
         protected override void OnReload()
         {
-            if (activeTriggerStatesAnim.Length > 1 && activeTriggerStatesAnim[1])
-            {
-                PlayAnim(1);
-            }
-            if (activeTriggerStatesAudio.Length > 1 && activeTriggerStatesAudio[1])
-            {
-                PlayAudio(1);
-            }
+            if (isDelayed)
+                delayActions = StartCoroutine(HandleActionsInTime(() => { TimeFrameLogic(1); }));
+
+            else
+                TimeFrameLogic(1);
         }
+
+
 
         protected override void OnBefore()
         {
-            if (activeTriggerStatesAudio.Length > 2 && activeTriggerStatesAnim[2])
-            {
-                PlayAnim(2);
-            }
-            if (activeTriggerStatesAudio.Length > 2 && activeTriggerStatesAudio[2])
-            {
-                PlayAudio(2);
-            }
+            if (isDelayed)
+                delayActions = StartCoroutine(HandleActionsInTime(() => { TimeFrameLogic(2); }));
+
+            else
+                TimeFrameLogic(2);
         }
 
         protected override void OnActive()
         {
-            if (activeTriggerStatesAnim.Length > 3 && activeTriggerStatesAnim[3])
-            {
-                PlayAnim(3);
-            }
-            if (activeTriggerStatesAudio.Length > 3 && activeTriggerStatesAudio[3])
-            {
-                PlayAudio(3);
-            }
+            if (isDelayed)
+                delayActions = StartCoroutine(HandleActionsInTime(() => { TimeFrameLogic(3); }));
+
+            else
+                TimeFrameLogic(3);
         }
 
         protected override void OnAfter()
         {
-            if (activeTriggerStatesAnim.Length > 4 && activeTriggerStatesAnim[4])
-            {
-                PlayAnim(4);
-            }
-            if (activeTriggerStatesAudio.Length > 4 && activeTriggerStatesAudio[4])
-            {
-                PlayAudio(4);
-            }
+            if (isDelayed)
+                delayActions = StartCoroutine(HandleActionsInTime(() => { TimeFrameLogic(4); }));
+
+            else
+                TimeFrameLogic(4);
         }
         #endregion
 
