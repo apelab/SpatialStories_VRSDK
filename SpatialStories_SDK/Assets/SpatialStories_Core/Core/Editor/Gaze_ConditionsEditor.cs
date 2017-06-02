@@ -847,15 +847,6 @@ namespace Gaze
         private void DisplayReloadBlock()
         {
             targetConditions.reloadModeIndex = EditorGUILayout.Popup("Mode", targetConditions.reloadModeIndex, reloadModes);
-            if (targetConditions.reloadModeIndex.Equals((int)Gaze_ReloadMode.FINITE) || targetConditions.reloadModeIndex.Equals((int)Gaze_ReloadMode.INFINITE))
-            {
-                targetConditions.reloadDelay = EditorGUILayout.FloatField("Delay", targetConditions.reloadDelay);
-                Gaze_Utils.EnsureFieldIsPositiveOrZero(ref targetConditions.reloadDelay);
-                if (targetConditions.reloadDelay < 0)
-                {
-                    targetConditions.reloadDelay = 0;
-                }
-            }
             if (targetConditions.reloadModeIndex.Equals((int)Gaze_ReloadMode.FINITE))
             {
                 targetConditions.reloadMaxRepetitions = EditorGUILayout.IntField("Repetitions", targetConditions.reloadMaxRepetitions);
@@ -865,9 +856,61 @@ namespace Gaze
                 }
             }
 
+            if (targetConditions.reloadModeIndex.Equals((int)Gaze_ReloadMode.FINITE) || targetConditions.reloadModeIndex.Equals((int)Gaze_ReloadMode.INFINITE))
+            {
+                GUILayout.BeginHorizontal();
+                DisplayReloadDelayBlock();
+                GUILayout.EndHorizontal();
+            }
+
             // TODO(4nc3str4l): Put this on a better place
+            EditorGUILayout.Space();
             targetConditions.ReloadDependencies = EditorGUILayout.ToggleLeft("Reload Dependencies", targetConditions.ReloadDependencies);
         }
+
+
+        private void DisplayReloadDelayBlock()
+        {
+            EditorGUILayout.LabelField("Delay");
+
+            GUILayout.BeginVertical();
+
+            if (!targetConditions.isReloadRandom)
+            {
+                GUILayout.BeginHorizontal();
+                targetConditions.reloadDelay = EditorGUILayout.FloatField(targetConditions.reloadDelay);
+                Gaze_Utils.EnsureFieldIsPositiveOrZero(ref targetConditions.reloadDelay);
+                EditorGUILayout.LabelField("[s]");
+                GUILayout.EndHorizontal();
+            }
+
+            else
+            {
+                GUILayout.BeginHorizontal();
+                EditorGUILayout.LabelField("Min", GUILayout.MaxWidth(50));
+                targetConditions.reloadRange[0] = EditorGUILayout.FloatField(targetConditions.reloadRange[0]);
+                Gaze_Utils.EnsureFieldIsPositiveOrZero(ref targetConditions.reloadRange[0]);
+                EditorGUILayout.LabelField("[s]");
+                GUILayout.EndHorizontal();
+
+                GUILayout.BeginHorizontal();
+                EditorGUILayout.LabelField("Max", GUILayout.MaxWidth(50));
+                targetConditions.reloadRange[1] = EditorGUILayout.FloatField(targetConditions.reloadRange[1]);
+                Gaze_Utils.EnsureFieldIsPositiveOrZero(ref targetConditions.reloadRange[1]);
+                EditorGUILayout.LabelField("[s]");
+                GUILayout.EndHorizontal();
+
+                if (targetConditions.reloadRange[1] < targetConditions.reloadRange[0])
+                    targetConditions.reloadRange[1] = targetConditions.reloadRange[0] + 1.0f;
+            }
+
+            GUILayout.BeginHorizontal();
+            targetConditions.isReloadRandom = EditorGUILayout.ToggleLeft("Random", targetConditions.isReloadRandom);
+            GUILayout.EndHorizontal();
+
+            GUILayout.EndVertical();
+        }
+
 
         private void DisplayConditionsBlock()
         {

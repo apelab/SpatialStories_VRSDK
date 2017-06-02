@@ -156,6 +156,13 @@ namespace Gaze
         public float reloadDelay;
 
         /// <summary>
+        /// If true, 'reloadDelay' will be set to a random value 
+        /// between reloadRange[0] and reloadRange[1]. (new value at each reload)
+        /// </summary>
+        public bool isReloadRandom;
+        public float[] reloadRange = { 0.0f, 0.0f };
+
+        /// <summary>
         /// Time at which to reload the trigger
         /// </summary>
         private float nextReloadTime;
@@ -633,6 +640,8 @@ namespace Gaze
 
         private void ScheduleReload()
         {
+            // set reloadDelay randomly if necessary
+            SetReloadRandom();
             // update next reload time
             nextReloadTime = Time.time + reloadDelay;
             reloadScheduled = true;
@@ -851,6 +860,11 @@ namespace Gaze
                 activeDuration = UnityEngine.Random.Range(expireRange[0], expireRange[1]);
         }
 
+        private void SetReloadRandom()
+        {
+            if (isReloadRandom)
+                reloadDelay = UnityEngine.Random.Range(reloadRange[0], reloadRange[1]);
+        }
 
         #region ConditionListManagement
 
