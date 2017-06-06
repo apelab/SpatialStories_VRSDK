@@ -356,7 +356,6 @@ namespace Gaze
         {
             yield return new WaitForSeconds(delayTime);
             _handler();
-
         }
 
         /// <summary>

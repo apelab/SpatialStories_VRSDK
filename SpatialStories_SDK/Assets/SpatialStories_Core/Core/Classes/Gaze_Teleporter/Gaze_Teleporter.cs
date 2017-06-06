@@ -238,8 +238,6 @@ public class Gaze_Teleporter : MonoBehaviour
         cameraRigIO.transform.position = new Vector3(_position.x - offset.x, _position.y + playerHeightBeforeTeleport, _position.z - offset.z);
 
         //AlterColliders(true);
-
-
     }
 
     /// <summary>
@@ -324,6 +322,7 @@ public class Gaze_Teleporter : MonoBehaviour
         // Set the rotation of the camera rig correctly
         cameraRigIO.transform.forward = gyroInstance.transform.forward;
         cameraRigIO.transform.rotation = Quaternion.Euler(cameraRigIO.transform.rotation.eulerAngles - new Vector3(0, cam.transform.localRotation.eulerAngles.y, 0));
+
     }
 
     internal void CalculateArc()
@@ -379,7 +378,6 @@ public class Gaze_Teleporter : MonoBehaviour
             // @ Apelab don't allow to teleport to negative normals
             if (hitSomething && hit.normal.y > 0)
             {
-
                 //	Depending on whether we had switched to the first or second line renderer
                 //	add the point and finish calculating the total distance
                 if (useFirstArray)
@@ -571,8 +569,9 @@ public class Gaze_Teleporter : MonoBehaviour
                     break;
             }
 
-            // Recenter space on the camera position
-            RecenterSpaceOnCameraPosition();
+            /// TODO (Arthur) check if commenting this method gives problems in production
+            // Recenter space on the camera position (commented because creates an offset)
+            //RecenterSpaceOnCameraPosition();
 
             // fire event
             gaze_TeleportEventArgs.Mode = Gaze_TeleportMode.TELEPORT;
@@ -580,6 +579,7 @@ public class Gaze_Teleporter : MonoBehaviour
         }
     }
 
+    /*
     private void RecenterSpaceOnCameraPosition()
     {
         Transform[] cameraRigIOChilds = cameraRigIO.transform.GetComponentsInChildren<Transform>();
@@ -592,12 +592,12 @@ public class Gaze_Teleporter : MonoBehaviour
                 objectsToReparent.Add(trans);
             }
         }
-
         cameraRigIO.transform.position = new Vector3(cam.transform.position.x, cameraRigIO.transform.position.y, cam.transform.position.z);
 
         foreach (Transform trans in objectsToReparent)
             trans.parent = cameraRigIO.transform;
     }
+    */
 
     internal bool IsInputValid()
     {

@@ -602,8 +602,16 @@ MonoBehaviour:
   triggerStateIndex: 1
   delayDuration: 0
   delayed: 0
+  isDelayRandom: 0
+  delayRange:
+  - 0
+  - 0
   activeDuration: 0
   expires: 0
+  isExpireRandom: 0
+  expireRange:
+  - 0
+  - 0
   autoTriggerModeIndex: 0
   reload: 0
   canBeTriggered: 1
@@ -612,6 +620,10 @@ MonoBehaviour:
   reloadMaxRepetitions: 0
   reloadCount: 0
   reloadDelay: 0
+  isReloadRandom: 0
+  reloadRange:
+  - 0
+  - 0
   focusDuration: 0
   focusLossModeIndex: 0
   FocusLossSpeed: 1
@@ -691,6 +703,12 @@ MonoBehaviour:
   ActionAudio: 0
   ActionColliders: 0
   DestroyOnTrigger: 0
+  isDelayed: 0
+  delayTime: 0
+  isDelayRandom: 0
+  delayRange:
+  - 0
+  - 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
   ModifyGrabMode: 0

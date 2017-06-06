@@ -44,10 +44,18 @@ namespace Gaze
             if (teleporter._goodSpot)
             {
                 teleporter.gyroInstance.SetActive(true);
-                teleporter.angle = Mathf.Atan2(Gaze_GearVR_InputLogic.SamsungGearVR_TouchpadPos.x, Gaze_GearVR_InputLogic.SamsungGearVR_TouchpadPos.y) * Mathf.Rad2Deg;
 
-                // angle take hand's rotation into account
-                teleporter.angle += teleporter.transform.eulerAngles.y;
+                if (teleporter.OrientOnTeleport)
+                {
+                    teleporter.angle = Mathf.Atan2(Gaze_GearVR_InputLogic.SamsungGearVR_TouchpadPos.x, Gaze_GearVR_InputLogic.SamsungGearVR_TouchpadPos.y) * Mathf.Rad2Deg;
+
+                    // angle take hand's rotation into account
+                    teleporter.angle += teleporter.transform.eulerAngles.y;
+                }
+                else
+                    teleporter.angle = teleporter.cam.transform.eulerAngles.y;
+
+
             }
             else
                 teleporter.gyroInstance.SetActive(false);
