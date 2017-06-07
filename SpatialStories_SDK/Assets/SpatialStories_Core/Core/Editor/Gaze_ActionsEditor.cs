@@ -335,7 +335,7 @@ namespace Gaze
                 GUILayout.EndHorizontal();
 
                 GUILayout.BeginHorizontal();
-                actionsScript.multipleActionsInTime = EditorGUILayout.ToggleLeft("Multiple Actions In Delay", actionsScript.multipleActionsInTime);
+                actionsScript.multipleActionsInTime = EditorGUILayout.ToggleLeft("Fire All Recorded Interactions After Delay", actionsScript.multipleActionsInTime);
                 GUILayout.EndHorizontal();
             }
         }

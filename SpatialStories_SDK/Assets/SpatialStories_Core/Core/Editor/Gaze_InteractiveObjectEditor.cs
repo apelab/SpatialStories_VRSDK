@@ -22,6 +22,7 @@ using UnityEngine;
 namespace Gaze
 {
     [InitializeOnLoad]
+    [CanEditMultipleObjects]
     [CustomEditor(typeof(Gaze_InteractiveObject))]
     public class Gaze_InteractiveObjectEditor : Editor
     {

@@ -24,6 +24,7 @@ using UnityEngine.VR;
 
 namespace Gaze
 {
+    [CanEditMultipleObjects]
     [InitializeOnLoad]
     [CustomEditor(typeof(Gaze_Conditions))]
     public class Gaze_ConditionsEditor : Gaze_Editor

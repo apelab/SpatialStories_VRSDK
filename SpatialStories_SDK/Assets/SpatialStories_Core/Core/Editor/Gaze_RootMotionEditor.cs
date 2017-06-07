@@ -15,23 +15,23 @@
 // <web>https://twitter.com/apelab_ch</web>
 // <web>http://www.apelab.ch</web>
 // <date>2014-06-01</date>
-using System;
 using UnityEditor;
 using UnityEngine;
 
 namespace Gaze
 {
-	[CustomEditor(typeof(Gaze_RootMotion))]
-	public class Gaze_RootMotionEditor : Gaze_Editor
+    [CanEditMultipleObjects]
+    [CustomEditor(typeof(Gaze_RootMotion))]
+    public class Gaze_RootMotionEditor : Gaze_Editor
     {
-		public GameObject rootMotionTarget;
-		private Gaze_RootMotion rootMotionScript;
-		
+        public GameObject rootMotionTarget;
+        private Gaze_RootMotion rootMotionScript;
 
-		void OnEnable ()
-		{
-			rootMotionScript = (Gaze_RootMotion)target;
-		}
+
+        void OnEnable()
+        {
+            rootMotionScript = (Gaze_RootMotion)target;
+        }
 
         public override void Gaze_OnInspectorGUI()
         {

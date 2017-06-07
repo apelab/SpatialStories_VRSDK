@@ -2,6 +2,7 @@ using UnityEditor;
 
 namespace Gaze
 {
+    [CanEditMultipleObjects]
     [InitializeOnLoad]
     [CustomEditor(typeof(Gaze_DragAndDropManager))]
     public class Gaze_DragAndDropEditor : Gaze_Editor

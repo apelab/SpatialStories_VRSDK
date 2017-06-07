@@ -24,6 +24,7 @@ namespace Gaze
 {
     // Custom Editor using SerializedProperties.
     // Automatic handling of multi-object editing, undo, and prefab overrides.
+    [CanEditMultipleObjects]
     [CustomEditor(typeof(Gaze_Interaction))]
     public class Gaze_InteractionEditor : Editor
     {

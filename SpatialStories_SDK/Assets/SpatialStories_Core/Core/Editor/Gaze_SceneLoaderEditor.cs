@@ -1,23 +1,23 @@
-﻿using UnityEngine;
+﻿using System;
 using UnityEditor;
-using System;
-using System.Collections;
+using UnityEngine;
 
 namespace Gaze
 {
-	[InitializeOnLoad]
-	[CustomEditor(typeof(Gaze_SceneLoader))]
-	public class Gaze_SceneLoaderEditor : Gaze_Editor
+    [CanEditMultipleObjects]
+    [InitializeOnLoad]
+    [CustomEditor(typeof(Gaze_SceneLoader))]
+    public class Gaze_SceneLoaderEditor : Gaze_Editor
     {
-		private Gaze_SceneLoader sceneLoader;
+        private Gaze_SceneLoader sceneLoader;
 
-		void OnEnable ()
-		{
+        void OnEnable()
+        {
             sceneLoader = (Gaze_SceneLoader)target;
-		}
+        }
 
-		public override void Gaze_OnInspectorGUI ()
-		{
+        public override void Gaze_OnInspectorGUI()
+        {
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.LabelField("Target Scene");
             sceneLoader.targetSceneName = EditorGUILayout.TextField(sceneLoader.targetSceneName);
@@ -55,5 +55,5 @@ namespace Gaze
                 UnityEditor.SceneManagement.EditorSceneManager.MarkAllScenesDirty();
             }
         }
-	}
+    }
 }
