@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace Gaze
 {
+    [CanEditMultipleObjects]
     [InitializeOnLoad]
     [CustomEditor(typeof(Gaze_Actions))]
     public class Gaze_ActionsEditor : Gaze_Editor
@@ -296,13 +297,10 @@ namespace Gaze
 
         private void ShowDelayBlock()
         {
-            EditorGUILayout.BeginHorizontal();
             actionsScript.isDelayed = EditorGUILayout.ToggleLeft("Delayed", actionsScript.isDelayed);
 
             if (actionsScript.isDelayed)
             {
-                GUILayout.BeginVertical();
-
                 if (!actionsScript.isDelayRandom)
                 {
                     GUILayout.BeginHorizontal();
@@ -336,9 +334,10 @@ namespace Gaze
                 actionsScript.isDelayRandom = EditorGUILayout.ToggleLeft("Random", actionsScript.isDelayRandom);
                 GUILayout.EndHorizontal();
 
-                GUILayout.EndVertical();
+                GUILayout.BeginHorizontal();
+                actionsScript.multipleActionsInTime = EditorGUILayout.ToggleLeft("Multiple Actions In Delay", actionsScript.multipleActionsInTime);
+                GUILayout.EndHorizontal();
             }
-            EditorGUILayout.EndHorizontal();
         }
 
         private void displayAnimBlock(int i)

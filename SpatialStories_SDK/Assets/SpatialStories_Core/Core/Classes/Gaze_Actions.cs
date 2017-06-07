@@ -32,6 +32,8 @@ namespace Gaze
         public float[] delayRange = { 0.0f, 0.0f };
         private Coroutine delayActions;
         public delegate void ActionHandler();
+        public bool multipleActionsInTime;
+        private bool delayRunning;
 
         // grab and touch distances
         public ALTERABLE_OPTION ModifyGrabDistance = ALTERABLE_OPTION.NOTHING;
@@ -354,8 +356,25 @@ namespace Gaze
 
         private IEnumerator HandleActionsInTime(ActionHandler _handler)
         {
-            yield return new WaitForSeconds(delayTime);
-            _handler();
+            if (multipleActionsInTime)
+            {
+                yield return new WaitForSeconds(delayTime);
+                _handler();
+            }
+
+            else
+            {
+                if (delayRunning)
+                    yield return null;
+                else
+                {
+                    delayRunning = true;
+                    yield return new WaitForSeconds(delayTime);
+                    _handler();
+                    delayRunning = false;
+                }
+            }
+
         }
 
         /// <summary>
@@ -454,6 +473,9 @@ namespace Gaze
         }
         #endregion
 
+
+        // TODO (Arthur): see if commenting this method causes any problem in production.
+        // Commented because eventual source of bugs with the delay routine.
         /*
         private void OnGazeEvent(Gaze_GazeEventArgs e)
         {
