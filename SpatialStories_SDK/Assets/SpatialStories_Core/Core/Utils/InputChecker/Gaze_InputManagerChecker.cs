@@ -47,7 +47,7 @@ namespace Gaze
         {
             try
             {
-                Input.GetButtonDown("Oculus Stick Left");
+                Input.GetButtonDown(Gaze_InputConstants.APELAB_INPUT_STICK_LEFT);
             }
             catch (ArgumentException)
             {
@@ -97,8 +97,7 @@ namespace Gaze
             // Create the new input file
             string backupFile = Gaze_InputFileWritter.WriteFile(newInputConfig, ActualInputManagerPath, true);
 
-            EditorUtility.DisplayDialog("Spatial Stories SDK", "Inputs Fixed," + Environment.NewLine + Environment.NewLine + "(As we have modified your input settings contents," +
-                " after clicking \"Ok\" we are going to reveal the location of the old input file contents in case you want to keep them)", "Ok");
+            EditorUtility.DisplayDialog("Spatial Stories SDK", "Inputs Fixed," + Environment.NewLine + Environment.NewLine + "(A new input manager file has been added to the project. After clicking “OK” the location of the old input manager will appear in case you want to recover it)", "Ok");
             ShowExplorer(backupFile);
         }
 

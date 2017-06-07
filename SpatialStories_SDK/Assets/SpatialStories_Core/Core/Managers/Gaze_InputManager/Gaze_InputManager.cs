@@ -273,6 +273,7 @@ public class Gaze_InputManager : MonoBehaviour
 
         if (Application.isEditor)
             RepairInputManagerIfNeeded();
+
     }
 
     void Start()
@@ -583,10 +584,10 @@ public class Gaze_InputManager : MonoBehaviour
     {
 
         #region buttons input
-        if (Input.GetButton("Oculus Start"))
+        if (Input.GetButton(Gaze_InputConstants.APELAB_INPUT_START))
         {
             if (debug)
-                Debug.Log("Start Button");
+                Debug.Log(Gaze_InputConstants.APELAB_INPUT_START);
 
             if (OnStartEvent != null)
             {
@@ -595,95 +596,95 @@ public class Gaze_InputManager : MonoBehaviour
             }
         }
 
-        if (Input.GetButton("Oculus A"))
+        if (Input.GetButton(Gaze_InputConstants.APELAB_INPUT_A))
         {
             if (debug)
-                Debug.Log("A Button");
+                Debug.Log(Gaze_InputConstants.APELAB_INPUT_A);
             FireOnButtonAEvent(new Gaze_InputEventArgs(this.gameObject, Gaze_InputTypes.A_BUTTON));
         }
-        if (Input.GetButtonDown("Oculus A"))
+        if (Input.GetButtonDown(Gaze_InputConstants.APELAB_INPUT_A))
         {
             if (debug)
-                Debug.Log("A Button Down");
+                Debug.Log(Gaze_InputConstants.APELAB_INPUT_A + " Down");
             FireOnButtonADownEvent(new Gaze_InputEventArgs(this.gameObject, Gaze_InputTypes.A_BUTTON_DOWN));
         }
-        if (Input.GetButtonUp("Oculus A"))
+        if (Input.GetButtonUp(Gaze_InputConstants.APELAB_INPUT_A))
         {
             if (debug)
-                Debug.Log("A Button Up");
+                Debug.Log(Gaze_InputConstants.APELAB_INPUT_A + " Up");
             FireOnOnButtonAUpEvent(new Gaze_InputEventArgs(this.gameObject, Gaze_InputTypes.A_BUTTON_UP));
         }
 
-        if (Input.GetButton("Oculus B"))
+        if (Input.GetButton(Gaze_InputConstants.APELAB_INPUT_B))
         {
             if (debug)
-                Debug.Log("B Button");
+                Debug.Log(Gaze_InputConstants.APELAB_INPUT_B);
 
             if (OnButtonBEvent != null)
                 OnButtonBEvent(new Gaze_InputEventArgs(this.gameObject, Gaze_InputTypes.B_BUTTON));
         }
-        if (Input.GetButtonDown("Oculus B"))
+        if (Input.GetButtonDown(Gaze_InputConstants.APELAB_INPUT_B))
         {
             if (debug)
-                Debug.Log("B Button Down");
+                Debug.Log(Gaze_InputConstants.APELAB_INPUT_B + " Down");
 
             if (OnButtonBDownEvent != null)
                 OnButtonBDownEvent(new Gaze_InputEventArgs(this.gameObject, Gaze_InputTypes.B_BUTTON_DOWN));
         }
-        if (Input.GetButtonUp("Oculus B"))
+        if (Input.GetButtonUp(Gaze_InputConstants.APELAB_INPUT_B))
         {
             if (debug)
-                Debug.Log("B Button Up");
+                Debug.Log(Gaze_InputConstants.APELAB_INPUT_B + " Up");
 
             if (OnButtonBUpEvent != null)
                 OnButtonBUpEvent(new Gaze_InputEventArgs(this.gameObject, Gaze_InputTypes.B_BUTTON_UP));
         }
 
-        if (Input.GetButton("Oculus X"))
+        if (Input.GetButton(Gaze_InputConstants.APELAB_INPUT_X))
         {
             if (debug)
-                Debug.Log("X Button");
+                Debug.Log(Gaze_InputConstants.APELAB_INPUT_X);
 
             if (OnButtonXEvent != null)
                 OnButtonXEvent(new Gaze_InputEventArgs(this.gameObject, Gaze_InputTypes.X_BUTTON));
         }
-        if (Input.GetButtonDown("Oculus X"))
+        if (Input.GetButtonDown(Gaze_InputConstants.APELAB_INPUT_X))
         {
             if (debug)
-                Debug.Log("X Button Down");
+                Debug.Log(Gaze_InputConstants.APELAB_INPUT_X + " Down");
 
             if (OnButtonXDownEvent != null)
                 OnButtonXDownEvent(new Gaze_InputEventArgs(this.gameObject, Gaze_InputTypes.X_BUTTON_DOWN));
         }
-        if (Input.GetButtonUp("Oculus X"))
+        if (Input.GetButtonUp(Gaze_InputConstants.APELAB_INPUT_X))
         {
             if (debug)
-                Debug.Log("X Button Up");
+                Debug.Log(Gaze_InputConstants.APELAB_INPUT_X + " Up");
 
             if (OnButtonXUpEvent != null)
                 OnButtonXUpEvent(new Gaze_InputEventArgs(this.gameObject, Gaze_InputTypes.X_BUTTON_UP));
         }
 
-        if (Input.GetButton("Oculus Y"))
+        if (Input.GetButton(Gaze_InputConstants.APELAB_INPUT_Y))
         {
             if (debug)
-                Debug.Log("Y Button");
+                Debug.Log(Gaze_InputConstants.APELAB_INPUT_Y);
 
             if (OnButtonYEvent != null)
                 OnButtonYEvent(new Gaze_InputEventArgs(this.gameObject, Gaze_InputTypes.Y_BUTTON));
         }
-        if (Input.GetButtonDown("Oculus Y"))
+        if (Input.GetButtonDown(Gaze_InputConstants.APELAB_INPUT_Y))
         {
             if (debug)
-                Debug.Log("Y Button Down");
+                Debug.Log(Gaze_InputConstants.APELAB_INPUT_Y + " Down");
 
             if (OnButtonYDownEvent != null)
                 OnButtonYDownEvent(new Gaze_InputEventArgs(this.gameObject, Gaze_InputTypes.Y_BUTTON_DOWN));
         }
-        if (Input.GetButtonUp("Oculus Y"))
+        if (Input.GetButtonUp(Gaze_InputConstants.APELAB_INPUT_Y))
         {
             if (debug)
-                Debug.Log("Y Button Up");
+                Debug.Log(Gaze_InputConstants.APELAB_INPUT_Y + " Up");
 
             if (OnButtonYUpEvent != null)
                 OnButtonYUpEvent(new Gaze_InputEventArgs(this.gameObject, Gaze_InputTypes.Y_BUTTON_UP));
@@ -691,41 +692,41 @@ public class Gaze_InputManager : MonoBehaviour
         #endregion
 
         #region sticks/pads input
-        if (Input.GetButtonDown("Oculus Stick Left"))
+        if (Input.GetButtonDown(Gaze_InputConstants.APELAB_INPUT_STICK_LEFT))
         {
             if (debug)
-                Debug.Log("Oculus Stick Left Down");
+                Debug.Log(Gaze_InputConstants.APELAB_INPUT_STICK_LEFT + " Down");
 
             if (OnStickLeftDownEvent != null)
                 OnStickLeftDownEvent(new Gaze_InputEventArgs(this.gameObject, VRNode.LeftHand, Gaze_InputTypes.STICK_LEFT_DOWN));
         }
-        if (Input.GetButtonUp("Oculus Stick Left"))
+        if (Input.GetButtonUp(Gaze_InputConstants.APELAB_INPUT_STICK_LEFT))
         {
             if (debug)
-                Debug.Log("Oculus Stick Left Up");
+                Debug.Log(Gaze_InputConstants.APELAB_INPUT_STICK_LEFT + " Up");
 
             if (OnStickLeftUpEvent != null)
                 OnStickLeftUpEvent(new Gaze_InputEventArgs(this.gameObject, VRNode.LeftHand, Gaze_InputTypes.STICK_LEFT_DOWN));
         }
 
-        if (Input.GetAxis("Oculus Stick Left Vertical") != 0 || Input.GetAxis("Oculus Stick Left Horizontal") != 0)
+        if (Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_STICK_LEFT_VERTICAL) != 0 || Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_STICK_LEFT_HORIZONTAL) != 0)
         {
             if (debug)
-                Debug.Log("Oculus Stick Left " + Input.GetAxis("Oculus Stick Left Vertical") + ":" + Input.GetAxis("Oculus Stick Left Horizontal"));
+                Debug.Log(Gaze_InputConstants.APELAB_INPUT_STICK_LEFT + Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_STICK_LEFT_VERTICAL) + ":" + Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_STICK_LEFT_HORIZONTAL));
 
             leftStickActive = true;
 
             if (OnStickLeftAxisEvent != null)
             {
-                axisValueLeft.x = Input.GetAxis("Oculus Stick Left Horizontal");
-                axisValueLeft.y = Input.GetAxis("Oculus Stick Left Vertical");
+                axisValueLeft.x = Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_STICK_LEFT_HORIZONTAL);
+                axisValueLeft.y = Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_STICK_LEFT_VERTICAL);
                 OnStickLeftAxisEvent(new Gaze_InputEventArgs(this.gameObject, VRNode.LeftHand, Gaze_InputTypes.STICK_LEFT, axisValueLeft));
             }
         }
-        if (leftStickActive && (Input.GetAxis("Oculus Stick Left Vertical") == 0) && (Input.GetAxis("Oculus Stick Left Horizontal") == 0))
+        if (leftStickActive && (Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_STICK_LEFT_VERTICAL) == 0) && (Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_STICK_LEFT_HORIZONTAL) == 0))
         {
             if (debug)
-                Debug.Log("Oculus Stick Left released");
+                Debug.Log(Gaze_InputConstants.APELAB_INPUT_STICK_LEFT + " released");
 
             leftStickActive = false;
 
@@ -733,40 +734,40 @@ public class Gaze_InputManager : MonoBehaviour
                 OnStickLeftAxisEvent(new Gaze_InputEventArgs(this.gameObject, VRNode.LeftHand, Gaze_InputTypes.STICK_LEFT, Vector2.zero));
         }
 
-        if (Input.GetButtonDown("Oculus Stick Right"))
+        if (Input.GetButtonDown(Gaze_InputConstants.APELAB_INPUT_STICK_RIGHT))
         {
             if (debug)
-                Debug.Log("Oculus Stick Right Down");
+                Debug.Log(Gaze_InputConstants.APELAB_INPUT_STICK_RIGHT + " Down");
 
             if (OnStickRightDownEvent != null)
                 OnStickRightDownEvent(new Gaze_InputEventArgs(this.gameObject, VRNode.RightHand, Gaze_InputTypes.STICK_RIGHT_DOWN));
         }
-        if (Input.GetButtonUp("Oculus Stick Right"))
+        if (Input.GetButtonUp(Gaze_InputConstants.APELAB_INPUT_STICK_RIGHT))
         {
             if (debug)
-                Debug.Log("Oculus Stick Right Up");
+                Debug.Log(Gaze_InputConstants.APELAB_INPUT_STICK_RIGHT + " Up");
 
             if (OnStickRightUpEvent != null)
                 OnStickRightUpEvent(new Gaze_InputEventArgs(this.gameObject, VRNode.RightHand, Gaze_InputTypes.STICK_RIGHT_UP));
         }
-        if (Input.GetAxis("Oculus Stick Right Horizontal") != 0 || Input.GetAxis("Oculus Stick Right Vertical") != 0)
+        if (Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_STICK_RIGHT_HORIZONTAL) != 0 || Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_STICK_RIGHT_VERTICAL) != 0)
         {
             if (debug)
-                Debug.Log("Oculus Stick Right " + Input.GetAxis("Oculus Stick Right Vertical") + ":" + Input.GetAxis("Oculus Stick Right Horizontal"));
+                Debug.Log(Gaze_InputConstants.APELAB_INPUT_STICK_RIGHT + Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_STICK_RIGHT_VERTICAL) + ":" + Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_STICK_RIGHT_HORIZONTAL));
 
             rightStickActive = true;
 
             if (OnStickRightAxisEvent != null)
             {
-                axisValueLeft.x = Input.GetAxis("Oculus Stick Right Horizontal");
-                axisValueLeft.y = Input.GetAxis("Oculus Stick Right Vertical");
+                axisValueLeft.x = Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_STICK_RIGHT_HORIZONTAL);
+                axisValueLeft.y = Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_STICK_RIGHT_VERTICAL);
                 OnStickRightAxisEvent(new Gaze_InputEventArgs(this.gameObject, VRNode.RightHand, Gaze_InputTypes.STICK_RIGHT, axisValueLeft));
             }
         }
-        if (rightStickActive && (Input.GetAxis("Oculus Stick Right Vertical") == 0) && (Input.GetAxis("Oculus Stick Right Horizontal") == 0))
+        if (rightStickActive && (Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_STICK_RIGHT_VERTICAL) == 0) && (Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_STICK_RIGHT_HORIZONTAL) == 0))
         {
             if (debug)
-                Debug.Log("Oculus Stick Right released");
+                Debug.Log(Gaze_InputConstants.APELAB_INPUT_STICK_RIGHT + " released");
 
             rightStickActive = false;
 
@@ -776,107 +777,107 @@ public class Gaze_InputManager : MonoBehaviour
         #endregion
 
         #region indexes/trigger input
-        if (Input.GetAxis("Oculus Index Right") != 0)
+        if (Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_INDEX_RIGHT) != 0)
         {
             if (debug)
-                Debug.Log("Oculus Index Right" + Input.GetAxis("Oculus Index Right"));
+                Debug.Log(Gaze_InputConstants.APELAB_INPUT_INDEX_RIGHT + Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_INDEX_RIGHT));
 
             if (OnIndexRightEvent != null)
-                OnIndexRightEvent(new Gaze_InputEventArgs(this.gameObject, VRNode.RightHand, Gaze_InputTypes.INDEX_RIGHT, Input.GetAxis("Oculus Index Right")));
+                OnIndexRightEvent(new Gaze_InputEventArgs(this.gameObject, VRNode.RightHand, Gaze_InputTypes.INDEX_RIGHT, Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_INDEX_RIGHT)));
         }
-        if (!isIndexRightDown && Input.GetAxis("Oculus Index Right") > .8f)
+        if (!isIndexRightDown && Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_INDEX_RIGHT) > .8f)
         {
             if (debug)
-                Debug.Log("Oculus Index Right Down" + Input.GetAxis("Oculus Index Right"));
+                Debug.Log(Gaze_InputConstants.APELAB_INPUT_INDEX_RIGHT + " Down" + Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_INDEX_RIGHT));
             isIndexRightDown = true;
             if (OnIndexRightDownEvent != null)
-                OnIndexRightDownEvent(new Gaze_InputEventArgs(this.gameObject, VRNode.LeftHand, Gaze_InputTypes.INDEX_RIGHT_DOWN, Input.GetAxis("Oculus Index Right")));
+                OnIndexRightDownEvent(new Gaze_InputEventArgs(this.gameObject, VRNode.LeftHand, Gaze_InputTypes.INDEX_RIGHT_DOWN, Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_INDEX_RIGHT)));
 
             //HACK: This is done for the Samsung VR controller
             if (OVRInput.IsControllerConnected(OVRInput.Controller.RTrackedRemote))
-                OnHandRightDownEvent(new Gaze_InputEventArgs(this.gameObject, VRNode.RightHand, Gaze_InputTypes.HAND_RIGHT_DOWN, Input.GetAxis("Oculus Index Right")));
+                OnHandRightDownEvent(new Gaze_InputEventArgs(this.gameObject, VRNode.RightHand, Gaze_InputTypes.HAND_RIGHT_DOWN, Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_INDEX_RIGHT)));
 
         }
-        if (isIndexRightDown && Input.GetAxis("Oculus Index Right") <= .8f)
+        if (isIndexRightDown && Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_INDEX_RIGHT) <= .8f)
         {
             if (debug)
-                Debug.Log("Oculus Index Right Up" + Input.GetAxis("Oculus Index Right"));
+                Debug.Log(Gaze_InputConstants.APELAB_INPUT_INDEX_RIGHT + " Up" + Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_INDEX_RIGHT));
             isIndexRightDown = false;
             if (OnIndexRightUpEvent != null)
-                OnIndexRightUpEvent(new Gaze_InputEventArgs(this.gameObject, VRNode.LeftHand, Gaze_InputTypes.INDEX_RIGHT_UP, Input.GetAxis("Oculus Index Right")));
+                OnIndexRightUpEvent(new Gaze_InputEventArgs(this.gameObject, VRNode.LeftHand, Gaze_InputTypes.INDEX_RIGHT_UP, Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_INDEX_RIGHT)));
 
             //HACK: This is done for the Samsung VR controller
             if (OVRInput.IsControllerConnected(OVRInput.Controller.RTrackedRemote))
-                OnHandRightDownEvent(new Gaze_InputEventArgs(this.gameObject, VRNode.RightHand, Gaze_InputTypes.HAND_RIGHT_UP, Input.GetAxis("Oculus Index Right")));
+                OnHandRightDownEvent(new Gaze_InputEventArgs(this.gameObject, VRNode.RightHand, Gaze_InputTypes.HAND_RIGHT_UP, Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_INDEX_RIGHT)));
         }
 
-        if (Input.GetAxis("Oculus Index Left") != 0)
+        if (Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_INDEX_LEFT) != 0)
         {
             if (debug)
-                Debug.Log("Oculus Index Left" + Input.GetAxis("Oculus Index Left"));
+                Debug.Log(Gaze_InputConstants.APELAB_INPUT_INDEX_LEFT + Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_INDEX_LEFT));
 
             if (OnIndexLeftEvent != null)
-                OnIndexLeftEvent(new Gaze_InputEventArgs(this.gameObject, VRNode.LeftHand, Gaze_InputTypes.INDEX_RIGHT, Input.GetAxis("Oculus Index Left")));
+                OnIndexLeftEvent(new Gaze_InputEventArgs(this.gameObject, VRNode.LeftHand, Gaze_InputTypes.INDEX_RIGHT, Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_INDEX_LEFT)));
         }
-        if (!isIndexLeftDown && Input.GetAxis("Oculus Index Left") > .8f)
+        if (!isIndexLeftDown && Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_INDEX_LEFT) > .8f)
         {
             if (debug)
-                Debug.Log("Oculus Index Left Down" + Input.GetAxis("Oculus Index Left"));
+                Debug.Log(Gaze_InputConstants.APELAB_INPUT_INDEX_LEFT + " Down" + Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_INDEX_LEFT));
             isIndexLeftDown = true;
             if (OnIndexLeftDownEvent != null)
-                OnIndexLeftDownEvent(new Gaze_InputEventArgs(this.gameObject, VRNode.LeftHand, Gaze_InputTypes.INDEX_LEFT_DOWN, Input.GetAxis("Oculus Index Left")));
+                OnIndexLeftDownEvent(new Gaze_InputEventArgs(this.gameObject, VRNode.LeftHand, Gaze_InputTypes.INDEX_LEFT_DOWN, Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_INDEX_LEFT)));
         }
-        if (isIndexLeftDown && Input.GetAxis("Oculus Index Left") <= .8f)
+        if (isIndexLeftDown && Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_INDEX_LEFT) <= .8f)
         {
             if (debug)
-                Debug.Log("Oculus Index Left Up" + Input.GetAxis("Oculus Index Left"));
+                Debug.Log(Gaze_InputConstants.APELAB_INPUT_INDEX_LEFT + " Up" + Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_INDEX_LEFT));
             isIndexLeftDown = false;
             if (OnIndexLeftUpEvent != null)
-                OnIndexLeftUpEvent(new Gaze_InputEventArgs(this.gameObject, VRNode.LeftHand, Gaze_InputTypes.INDEX_LEFT_UP, Input.GetAxis("Oculus Index Left")));
+                OnIndexLeftUpEvent(new Gaze_InputEventArgs(this.gameObject, VRNode.LeftHand, Gaze_InputTypes.INDEX_LEFT_UP, Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_INDEX_LEFT)));
         }
         #endregion
 
         #region hands/grip input
-        if (Input.GetAxis("Oculus Hand Right") != 0)
+        if (Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_HAND_RIGHT) != 0)
         {
             if (debug)
-                Debug.Log("Oculus Hand Right" + Input.GetAxis("Oculus Hand Right"));
-            FireOnHandRightEvent(new Gaze_InputEventArgs(this.gameObject, VRNode.RightHand, Gaze_InputTypes.HAND_RIGHT, Input.GetAxis("Oculus Hand Right")));
+                Debug.Log(Gaze_InputConstants.APELAB_INPUT_HAND_RIGHT + Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_HAND_RIGHT));
+            FireOnHandRightEvent(new Gaze_InputEventArgs(this.gameObject, VRNode.RightHand, Gaze_InputTypes.HAND_RIGHT, Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_HAND_RIGHT)));
         }
-        if (!isHandRightDown && Input.GetAxis("Oculus Hand Right") > TRIGGER_SENSIBILITY)
+        if (!isHandRightDown && Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_HAND_RIGHT) > TRIGGER_SENSIBILITY)
         {
             if (debug)
-                Debug.Log("Oculus Hand Right DOWN");
+                Debug.Log(Gaze_InputConstants.APELAB_INPUT_HAND_RIGHT + " DOWN");
             isHandRightDown = true;
             FireOnHandRightDownEvent(new Gaze_InputEventArgs(this.gameObject, VRNode.RightHand, Gaze_InputTypes.HAND_RIGHT_DOWN));
         }
-        if (isHandRightDown && Input.GetAxis("Oculus Hand Right") <= TRIGGER_SENSIBILITY)
+        if (isHandRightDown && Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_HAND_RIGHT) <= TRIGGER_SENSIBILITY)
         {
             if (debug)
-                Debug.Log("Oculus Hand Right UP");
+                Debug.Log(Gaze_InputConstants.APELAB_INPUT_HAND_RIGHT + " UP");
             isHandRightDown = false;
             FireOnHandRightUpEvent(new Gaze_InputEventArgs(this.gameObject, VRNode.RightHand, Gaze_InputTypes.HAND_RIGHT_UP));
         }
 
-        if (Input.GetAxis("Oculus Hand Left") != 0)
+        if (Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_HAND_LEFT) != 0)
         {
             if (debug)
-                Debug.Log("Oculus Hand Left" + Input.GetAxis("Oculus Hand Left"));
+                Debug.Log(Gaze_InputConstants.APELAB_INPUT_HAND_LEFT + Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_HAND_LEFT));
             if (OnHandLeftEvent != null)
-                OnHandLeftEvent(new Gaze_InputEventArgs(this.gameObject, VRNode.LeftHand, Gaze_InputTypes.HAND_LEFT, Input.GetAxis("Oculus Hand Left")));
+                OnHandLeftEvent(new Gaze_InputEventArgs(this.gameObject, VRNode.LeftHand, Gaze_InputTypes.HAND_LEFT, Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_HAND_LEFT)));
         }
-        if (!isHandLeftDown && Input.GetAxis("Oculus Hand Left") > TRIGGER_SENSIBILITY)
+        if (!isHandLeftDown && Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_HAND_LEFT) > TRIGGER_SENSIBILITY)
         {
             if (debug)
-                Debug.Log("Oculus Hand Left DOWN");
+                Debug.Log(Gaze_InputConstants.APELAB_INPUT_HAND_LEFT + " DOWN");
             isHandLeftDown = true;
             if (OnHandLeftDownEvent != null)
                 OnHandLeftDownEvent(new Gaze_InputEventArgs(this.gameObject, VRNode.LeftHand, Gaze_InputTypes.HAND_LEFT_DOWN));
         }
-        if (isHandLeftDown && Input.GetAxis("Oculus Hand Left") <= TRIGGER_SENSIBILITY)
+        if (isHandLeftDown && Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_HAND_LEFT) <= TRIGGER_SENSIBILITY)
         {
             if (debug)
-                Debug.Log("Oculus Hand Left UP");
+                Debug.Log(Gaze_InputConstants.APELAB_INPUT_HAND_LEFT + " UP");
             isHandLeftDown = false;
             if (OnHandLeftUpEvent != null)
                 OnHandLeftUpEvent(new Gaze_InputEventArgs(this.gameObject, VRNode.LeftHand, Gaze_InputTypes.HAND_LEFT_UP));

@@ -535,8 +535,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c5e5d36d57be5841bfb50b6dbe7c062, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HasActions: 0
-  HasConditions: 0
+  HasActions: 1
+  HasConditions: 1
 --- !u!114 &114154902076240054
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -642,7 +642,7 @@ MonoBehaviour:
     AreDependenciesSatisfied: 0
   gazeColliderIO: {fileID: 0}
   ReloadDependencies: 0
-  isActive: 0
+  isActive: 1
 --- !u!114 &114443437197172438
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -682,7 +682,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rootIO: {fileID: 0}
-  isActive: 0
+  isActive: 1
   ActionReset: 0
   ActionVisuals: 0
   ActionGrab: 0
