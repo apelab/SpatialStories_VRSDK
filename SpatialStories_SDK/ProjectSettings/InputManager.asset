@@ -294,7 +294,7 @@ InputManager:
     axis: 0
     joyNum: 0
   - serializedVersion: 3
-    m_Name: Oculus Index Right
+    m_Name: apelab Index Right
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: left
@@ -310,7 +310,7 @@ InputManager:
     axis: 9
     joyNum: 0
   - serializedVersion: 3
-    m_Name: Oculus Index Left
+    m_Name: apelab Index Left
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: down
@@ -326,7 +326,7 @@ InputManager:
     axis: 8
     joyNum: 0
   - serializedVersion: 3
-    m_Name: Oculus Stick Right Horizontal
+    m_Name: apelab Stick Right Horizontal
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: left
@@ -342,7 +342,7 @@ InputManager:
     axis: 3
     joyNum: 0
   - serializedVersion: 3
-    m_Name: Oculus Stick Right Vertical
+    m_Name: apelab Stick Right Vertical
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: up
@@ -358,7 +358,7 @@ InputManager:
     axis: 4
     joyNum: 0
   - serializedVersion: 3
-    m_Name: Oculus Hand Right
+    m_Name: apelab Hand Right
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: down
@@ -374,7 +374,7 @@ InputManager:
     axis: 11
     joyNum: 0
   - serializedVersion: 3
-    m_Name: Oculus Hand Left
+    m_Name: apelab Hand Left
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: down
@@ -406,7 +406,7 @@ InputManager:
     axis: 0
     joyNum: 0
   - serializedVersion: 3
-    m_Name: Oculus A
+    m_Name: apelab A
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
@@ -422,7 +422,7 @@ InputManager:
     axis: 0
     joyNum: 0
   - serializedVersion: 3
-    m_Name: Oculus B
+    m_Name: apelab B
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
@@ -438,7 +438,7 @@ InputManager:
     axis: 0
     joyNum: 0
   - serializedVersion: 3
-    m_Name: Oculus X
+    m_Name: apelab X
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
@@ -454,7 +454,7 @@ InputManager:
     axis: 0
     joyNum: 0
   - serializedVersion: 3
-    m_Name: Oculus Y
+    m_Name: apelab Y
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
@@ -470,7 +470,7 @@ InputManager:
     axis: 0
     joyNum: 0
   - serializedVersion: 3
-    m_Name: Oculus Stick Left Horizontal
+    m_Name: apelab Stick Left Horizontal
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: down
@@ -486,7 +486,7 @@ InputManager:
     axis: 0
     joyNum: 0
   - serializedVersion: 3
-    m_Name: Oculus Stick Left Vertical
+    m_Name: apelab Stick Left Vertical
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: down
@@ -502,7 +502,7 @@ InputManager:
     axis: 1
     joyNum: 0
   - serializedVersion: 3
-    m_Name: Oculus Start
+    m_Name: apelab Start
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
@@ -646,7 +646,7 @@ InputManager:
     axis: 11
     joyNum: 0
   - serializedVersion: 3
-    m_Name: Oculus Stick Left
+    m_Name: apelab Stick Left
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
@@ -662,7 +662,7 @@ InputManager:
     axis: 11
     joyNum: 0
   - serializedVersion: 3
-    m_Name: Oculus Stick Right
+    m_Name: apelab Stick Right
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 

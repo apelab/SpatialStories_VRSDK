@@ -25,6 +25,14 @@ namespace Gaze
 
         public bool DestroyOnTrigger;
 
+        // delay actions
+        public bool isDelayed;
+        public float delayTime;
+        public bool isDelayRandom;
+        public float[] delayRange = { 0.0f, 0.0f };
+        private Coroutine delayActions;
+        public delegate void ActionHandler();
+
         // grab and touch distances
         public ALTERABLE_OPTION ModifyGrabDistance = ALTERABLE_OPTION.NOTHING;
         public ALTERABLE_OPTION ModifyTouchDistance = ALTERABLE_OPTION.NOTHING;
@@ -47,12 +55,16 @@ namespace Gaze
         public float audioVolumeMin = .2f;
         public float audioVolumeMax = 1f;
         public float fadeSpeed = .005f;
+        private Coroutine raiseAudioVolume;
+        private Coroutine lowerAudioVolume;
+
         public Gaze_InteractiveObject IO;
 
         private Gaze_Interaction gazeInteraction;
 
         public List<Renderer> VisualsToAlter = new List<Renderer>();
         public bool AlterAllVisuals = true;
+
 
         // Notification
         public bool triggerNotification;
@@ -70,17 +82,18 @@ namespace Gaze
         {
             base.OnEnable();
             IO = GetIO();
-            Gaze_EventManager.OnGazeEvent += OnGazeEvent;
+            //Gaze_EventManager.OnGazeEvent += OnGazeEvent;
         }
 
         public override void OnDisable()
         {
             base.OnDisable();
-            Gaze_EventManager.OnGazeEvent -= OnGazeEvent;
+            //Gaze_EventManager.OnGazeEvent -= OnGazeEvent;
         }
 
         void Start()
         {
+            SetDelayRandom();
             if (ActionAudio == ACTIVABLE_OPTION.ACTIVATE && targetAudioSource != null)
             {
                 targetAudioSource.volume = duckingEnabled ? audioVolumeMin : audioVolumeMax;
@@ -92,6 +105,13 @@ namespace Gaze
             }
         }
 
+        private void SetDelayRandom()
+        {
+            if (isDelayRandom)
+            {
+                delayTime = UnityEngine.Random.Range(delayRange[0], delayRange[1]);
+            }
+        }
 
         private void PlayAnim(int i)
         {
@@ -331,6 +351,13 @@ namespace Gaze
                 PlayAnim(0);
             }
         }
+
+        private IEnumerator HandleActionsInTime(ActionHandler _handler)
+        {
+            yield return new WaitForSeconds(delayTime);
+            _handler();
+        }
+
         /// <summary>
         /// Gets the root IO of GazeActions
         /// </summary>
@@ -343,14 +370,9 @@ namespace Gaze
             return io;
         }
 
-
-        #region implemented abstract members of Gaze_AbstractBehaviour
-        protected override void OnTrigger()
+        // Actions executed when OnTrigger
+        protected void ActionLogic()
         {
-            // Check if the trigger should be fired
-            if (!gazeInteraction.HasActions)
-                return;
-
             HandleReset();
             HandleAnimation();
             HandleAudio();
@@ -363,56 +385,76 @@ namespace Gaze
             HandleGrabMode();
         }
 
-        protected override void OnReload()
+        // Actions executed when OnReload, OnBefore, OnActive or OnAfter
+        protected void TimeFrameLogic(int _animIndex)
         {
-            if (activeTriggerStatesAnim.Length > 1 && activeTriggerStatesAnim[1])
+            if (activeTriggerStatesAnim.Length > _animIndex && activeTriggerStatesAnim[_animIndex])
             {
                 PlayAnim(1);
             }
-            if (activeTriggerStatesAudio.Length > 1 && activeTriggerStatesAudio[1])
+
+            if (activeTriggerStatesAudio.Length > _animIndex && activeTriggerStatesAudio[_animIndex])
             {
-                PlayAudio(1);
+                PlayAudio(_animIndex);
             }
         }
 
+
+        #region implemented abstract members of Gaze_AbstractBehaviour
+        protected override void OnTrigger()
+        {
+            // Check if the trigger should be fired
+            if (!gazeInteraction.HasActions)
+                return;
+            //check if the action should be delayed
+            if (isDelayed)
+                delayActions = StartCoroutine(HandleActionsInTime(() => ActionLogic()));
+
+            else
+                ActionLogic();
+        }
+
+
+        protected override void OnReload()
+        {
+            if (isDelayed)
+                delayActions = StartCoroutine(HandleActionsInTime(() => TimeFrameLogic(1)));
+
+            else
+                TimeFrameLogic(1);
+        }
+
+
+
         protected override void OnBefore()
         {
-            if (activeTriggerStatesAudio.Length > 2 && activeTriggerStatesAnim[2])
-            {
-                PlayAnim(2);
-            }
-            if (activeTriggerStatesAudio.Length > 2 && activeTriggerStatesAudio[2])
-            {
-                PlayAudio(2);
-            }
+            if (isDelayed)
+                delayActions = StartCoroutine(HandleActionsInTime(() => TimeFrameLogic(2)));
+
+            else
+                TimeFrameLogic(2);
         }
 
         protected override void OnActive()
         {
-            if (activeTriggerStatesAnim.Length > 3 && activeTriggerStatesAnim[3])
-            {
-                PlayAnim(3);
-            }
-            if (activeTriggerStatesAudio.Length > 3 && activeTriggerStatesAudio[3])
-            {
-                PlayAudio(3);
-            }
+            if (isDelayed)
+                delayActions = StartCoroutine(HandleActionsInTime(() => TimeFrameLogic(3)));
+
+            else
+                TimeFrameLogic(3);
         }
 
         protected override void OnAfter()
         {
-            if (activeTriggerStatesAnim.Length > 4 && activeTriggerStatesAnim[4])
-            {
-                PlayAnim(4);
-            }
-            if (activeTriggerStatesAudio.Length > 4 && activeTriggerStatesAudio[4])
-            {
-                PlayAudio(4);
-            }
+            if (isDelayed)
+                delayActions = StartCoroutine(HandleActionsInTime(() => TimeFrameLogic(4)));
+
+            else
+                TimeFrameLogic(4);
         }
         #endregion
 
-
+        /*
         private void OnGazeEvent(Gaze_GazeEventArgs e)
         {
             // if sender is the gazable collider GameObject
@@ -421,14 +463,14 @@ namespace Gaze
                 StopAllCoroutines();
                 if (e.IsGazed)
                 {
-                    StartCoroutine(RaiseAudioVolume());
+                    raiseAudioVolume = StartCoroutine(RaiseAudioVolume());
                 }
                 else
                 {
-                    StartCoroutine(LowerAudioVolume());
+                    lowerAudioVolume = StartCoroutine(LowerAudioVolume());
                 }
             }
         }
-
+        */
     }
 }

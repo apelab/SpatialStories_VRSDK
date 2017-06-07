@@ -61,10 +61,16 @@ namespace Gaze
             if (teleporter._goodSpot)
             {
                 teleporter.gyroInstance.SetActive(true);
-                teleporter.angle = Mathf.Atan2(e.AxisValue.x, -e.AxisValue.y) * Mathf.Rad2Deg;
 
-                // angle take hand's rotation into account
-                teleporter.angle += teleporter.transform.eulerAngles.y;
+                if (teleporter.OrientOnTeleport)
+                {
+                    teleporter.angle = Mathf.Atan2(e.AxisValue.x, -e.AxisValue.y) * Mathf.Rad2Deg;
+
+                    // angle take hand's rotation into account
+                    teleporter.angle += teleporter.transform.eulerAngles.y;
+                }
+                else
+                    teleporter.angle = teleporter.cam.transform.eulerAngles.y;
 
             }
             else

@@ -74,25 +74,25 @@ namespace Gaze
         public int triggerStateIndex;
 
         /// <summary>
-        /// This trigger must wait 'waitTime' before being in acisdelayedRandomtive mode.
+        /// This trigger must wait 'waitTime' before being in active mode.
         /// This wait time is dependant on triggerObject start if any otherwise
         /// its dependant on the load level scene time.
         /// </summary>
         /// <value>The duration in seconds</value>
-        public float TFdelayDuration;
+        public float delayDuration;
 
         /// <summary>
         /// The toggle to display delay duration in the Editor
         /// Used in Gaze_TriggerSettingsEditor.cs
         /// </summary>
-        public bool TFDelayed;
+        public bool delayed;
 
         /// <summary>
-        /// If true, 'TFdelayDuration' will be set to a random value between TFDelayRange[0] and TFDelayRange[1]
+        /// If true, 'delayDuration' will be set to a random value 
+        /// between delayRange[0] and delayRange[1].
         /// </summary>
-        public bool isTFDelayRandom;
-
-        public float[] TFDelayRange = { 0.0f, 0.0f };
+        public bool isDelayRandom;
+        public float[] delayRange = { 0.0f, 0.0f };
 
         /// <summary>
         /// Window of time during which the object is active (gazable).
@@ -105,6 +105,13 @@ namespace Gaze
         /// True if the active window has no end. (active forever, always gazable)
         /// </summary>
         public bool expires;
+
+        /// <summary>
+        /// If true, 'activeDuration' will be set to a random value 
+        /// between expireRange[0] and expireRange[1].
+        /// </summary>
+        public bool isExpireRandom;
+        public float[] expireRange = { 0.0f, 0.0f };
 
         /// <summary>
         /// The index of the auto trigger mode as defined in Gaze_AutoTriggerMode.
@@ -147,6 +154,13 @@ namespace Gaze
         /// </summary>
         /// <value>The duration in seconds</value>
         public float reloadDelay;
+
+        /// <summary>
+        /// If true, 'reloadDelay' will be set to a random value 
+        /// between reloadRange[0] and reloadRange[1]. (new value at each reload)
+        /// </summary>
+        public bool isReloadRandom;
+        public float[] reloadRange = { 0.0f, 0.0f };
 
         /// <summary>
         /// Time at which to reload the trigger
@@ -367,7 +381,8 @@ namespace Gaze
 
         void Start()
         {
-            SetRandomTFDelay();
+            SetDelayRandom();
+            SetExpireRandom();
             focusInProgress = false;
             focusComplete = focusDuration <= 0 ? true : false;
             ActivateOnDependencyMap.AreDependenciesSatisfied = dependent ? false : true;
@@ -529,10 +544,10 @@ namespace Gaze
             if (ActivateOnDependencyMap.AreDependenciesSatisfied)
             {
                 // if time is beyond the specified wait time
-                if (TFDelayed && Time.time >= startTime + TFdelayDuration || !TFDelayed)
+                if (delayed && Time.time >= startTime + delayDuration || !delayed)
                 {
                     // if it never expires OR expires and below ending time frame
-                    if (!expires || (expires && Time.time < startTime + TFdelayDuration + activeDuration))
+                    if (!expires || (expires && Time.time < startTime + delayDuration + activeDuration))
                     {
                         // notify manager
                         SetTriggerState(Gaze_TriggerState.ACTIVE);
@@ -568,10 +583,10 @@ namespace Gaze
             if (expires)
             {
                 // set delay duration
-                TFdelayDuration = TFDelayed ? TFdelayDuration : 0;
+                delayDuration = delayed ? delayDuration : 0;
 
                 // check if we're over the time limit
-                if (Time.time >= startTime + TFdelayDuration + activeDuration)
+                if (Time.time >= startTime + delayDuration + activeDuration)
                 {
 
                     // trigger if auto-trigger is set to END
@@ -625,6 +640,8 @@ namespace Gaze
 
         private void ScheduleReload()
         {
+            // set reloadDelay randomly if necessary
+            SetReloadRandom();
             // update next reload time
             nextReloadTime = Time.time + reloadDelay;
             reloadScheduled = true;
@@ -831,12 +848,23 @@ namespace Gaze
         }
 
 
-        private void SetRandomTFDelay()
+        private void SetDelayRandom()
         {
-            if (isTFDelayRandom)
-                TFdelayDuration = UnityEngine.Random.Range(TFDelayRange[0], TFDelayRange[1]);
+            if (isDelayRandom)
+                delayDuration = UnityEngine.Random.Range(delayRange[0], delayRange[1]);
         }
 
+        private void SetExpireRandom()
+        {
+            if (isExpireRandom)
+                activeDuration = UnityEngine.Random.Range(expireRange[0], expireRange[1]);
+        }
+
+        private void SetReloadRandom()
+        {
+            if (isReloadRandom)
+                reloadDelay = UnityEngine.Random.Range(reloadRange[0], reloadRange[1]);
+        }
 
         #region ConditionListManagement
 

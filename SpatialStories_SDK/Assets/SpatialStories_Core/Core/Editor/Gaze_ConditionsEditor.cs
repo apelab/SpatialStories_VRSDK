@@ -141,8 +141,8 @@ namespace Gaze
                     // extra block that can be toggled on and off
                     GUILayout.BeginHorizontal();
                     // set boolean value accordingly in Trigger settings
-                    targetConditions.TFDelayed = EditorGUILayout.ToggleLeft("Delayed", targetConditions.TFDelayed);
-                    if (targetConditions.TFDelayed)
+                    targetConditions.delayed = EditorGUILayout.ToggleLeft("Delayed", targetConditions.delayed);
+                    if (targetConditions.delayed)
                     {
                         DisplayDelayBlock();
                     }
@@ -167,9 +167,12 @@ namespace Gaze
                     }
                     else if (targetConditions.autoTriggerModeIndex.Equals((int)Gaze_AutoTriggerMode.NONE) && targetConditions.expires && targetConditions.activeDuration == 0)
                     {
-                        EditorGUILayout.BeginHorizontal();
-                        EditorGUILayout.HelpBox("Will never trigger !\n(Expires immediately AND has no Auto-Trigger).", MessageType.Warning);
-                        EditorGUILayout.EndHorizontal();
+                        if (!(targetConditions.isExpireRandom && targetConditions.expireRange[1] > 0))
+                        {
+                            EditorGUILayout.BeginHorizontal();
+                            EditorGUILayout.HelpBox("Will never trigger !\n(Expires immediately AND has no Auto-Trigger).", MessageType.Warning);
+                            EditorGUILayout.EndHorizontal();
+                        }
                     }
 
                     EditorGUILayout.Space();
@@ -765,11 +768,11 @@ namespace Gaze
         {
             GUILayout.BeginVertical();
 
-            if (!targetConditions.isTFDelayRandom)
+            if (!targetConditions.isDelayRandom)
             {
                 GUILayout.BeginHorizontal();
-                targetConditions.TFdelayDuration = EditorGUILayout.FloatField(targetConditions.TFdelayDuration);
-                Gaze_Utils.EnsureFieldIsPositiveOrZero(ref targetConditions.TFdelayDuration);
+                targetConditions.delayDuration = EditorGUILayout.FloatField(targetConditions.delayDuration);
+                Gaze_Utils.EnsureFieldIsPositiveOrZero(ref targetConditions.delayDuration);
                 EditorGUILayout.LabelField("[s]");
                 GUILayout.EndHorizontal();
             }
@@ -778,24 +781,24 @@ namespace Gaze
             {
                 GUILayout.BeginHorizontal();
                 EditorGUILayout.LabelField("Min", GUILayout.MaxWidth(50));
-                targetConditions.TFDelayRange[0] = EditorGUILayout.FloatField(targetConditions.TFDelayRange[0]);
-                Gaze_Utils.EnsureFieldIsPositiveOrZero(ref targetConditions.TFdelayDuration);
+                targetConditions.delayRange[0] = EditorGUILayout.FloatField(targetConditions.delayRange[0]);
+                Gaze_Utils.EnsureFieldIsPositiveOrZero(ref targetConditions.delayRange[0]);
                 EditorGUILayout.LabelField("[s]");
                 GUILayout.EndHorizontal();
 
                 GUILayout.BeginHorizontal();
                 EditorGUILayout.LabelField("Max", GUILayout.MaxWidth(50));
-                targetConditions.TFDelayRange[1] = EditorGUILayout.FloatField(targetConditions.TFDelayRange[1]);
-                Gaze_Utils.EnsureFieldIsPositiveOrZero(ref targetConditions.TFdelayDuration);
+                targetConditions.delayRange[1] = EditorGUILayout.FloatField(targetConditions.delayRange[1]);
+                Gaze_Utils.EnsureFieldIsPositiveOrZero(ref targetConditions.delayRange[1]);
                 EditorGUILayout.LabelField("[s]");
                 GUILayout.EndHorizontal();
 
-                if (targetConditions.TFDelayRange[1] < targetConditions.TFDelayRange[0])
-                    targetConditions.TFDelayRange[1] = targetConditions.TFDelayRange[0] + 1.0f;
+                if (targetConditions.delayRange[1] < targetConditions.delayRange[0])
+                    targetConditions.delayRange[1] = targetConditions.delayRange[0] + 1.0f;
             }
 
             GUILayout.BeginHorizontal();
-            targetConditions.isTFDelayRandom = EditorGUILayout.ToggleLeft("Random", targetConditions.isTFDelayRandom);
+            targetConditions.isDelayRandom = EditorGUILayout.ToggleLeft("Random", targetConditions.isDelayRandom);
             GUILayout.EndHorizontal();
 
             GUILayout.EndVertical();
@@ -803,25 +806,47 @@ namespace Gaze
 
         private void DisplayExpiresBlock()
         {
+            GUILayout.BeginVertical();
+
+            if (!targetConditions.isExpireRandom)
+            {
+                GUILayout.BeginHorizontal();
+                targetConditions.activeDuration = EditorGUILayout.FloatField(targetConditions.activeDuration);
+                Gaze_Utils.EnsureFieldIsPositiveOrZero(ref targetConditions.activeDuration);
+                EditorGUILayout.LabelField("[s]");
+                GUILayout.EndHorizontal();
+            }
+
+            else
+            {
+                GUILayout.BeginHorizontal();
+                EditorGUILayout.LabelField("Min", GUILayout.MaxWidth(50));
+                targetConditions.expireRange[0] = EditorGUILayout.FloatField(targetConditions.expireRange[0]);
+                Gaze_Utils.EnsureFieldIsPositiveOrZero(ref targetConditions.expireRange[0]);
+                EditorGUILayout.LabelField("[s]");
+                GUILayout.EndHorizontal();
+
+                GUILayout.BeginHorizontal();
+                EditorGUILayout.LabelField("Max", GUILayout.MaxWidth(50));
+                targetConditions.expireRange[1] = EditorGUILayout.FloatField(targetConditions.expireRange[1]);
+                Gaze_Utils.EnsureFieldIsPositiveOrZero(ref targetConditions.expireRange[1]);
+                EditorGUILayout.LabelField("[s]");
+                GUILayout.EndHorizontal();
+
+                if (targetConditions.expireRange[1] < targetConditions.expireRange[0])
+                    targetConditions.expireRange[1] = targetConditions.expireRange[0] + 1.0f;
+            }
+
             GUILayout.BeginHorizontal();
-            targetConditions.activeDuration = EditorGUILayout.FloatField(targetConditions.activeDuration);
-            Gaze_Utils.EnsureFieldIsPositiveOrZero(ref targetConditions.activeDuration);
-            EditorGUILayout.LabelField("[s]");
+            targetConditions.isExpireRandom = EditorGUILayout.ToggleLeft("Random", targetConditions.isExpireRandom);
             GUILayout.EndHorizontal();
+
+            GUILayout.EndVertical();
         }
 
         private void DisplayReloadBlock()
         {
             targetConditions.reloadModeIndex = EditorGUILayout.Popup("Mode", targetConditions.reloadModeIndex, reloadModes);
-            if (targetConditions.reloadModeIndex.Equals((int)Gaze_ReloadMode.FINITE) || targetConditions.reloadModeIndex.Equals((int)Gaze_ReloadMode.INFINITE))
-            {
-                targetConditions.reloadDelay = EditorGUILayout.FloatField("Delay", targetConditions.reloadDelay);
-                Gaze_Utils.EnsureFieldIsPositiveOrZero(ref targetConditions.reloadDelay);
-                if (targetConditions.reloadDelay < 0)
-                {
-                    targetConditions.reloadDelay = 0;
-                }
-            }
             if (targetConditions.reloadModeIndex.Equals((int)Gaze_ReloadMode.FINITE))
             {
                 targetConditions.reloadMaxRepetitions = EditorGUILayout.IntField("Repetitions", targetConditions.reloadMaxRepetitions);
@@ -831,9 +856,61 @@ namespace Gaze
                 }
             }
 
+            if (targetConditions.reloadModeIndex.Equals((int)Gaze_ReloadMode.FINITE) || targetConditions.reloadModeIndex.Equals((int)Gaze_ReloadMode.INFINITE))
+            {
+                GUILayout.BeginHorizontal();
+                DisplayReloadDelayBlock();
+                GUILayout.EndHorizontal();
+            }
+
             // TODO(4nc3str4l): Put this on a better place
+            EditorGUILayout.Space();
             targetConditions.ReloadDependencies = EditorGUILayout.ToggleLeft("Reload Dependencies", targetConditions.ReloadDependencies);
         }
+
+
+        private void DisplayReloadDelayBlock()
+        {
+            EditorGUILayout.LabelField("Delay");
+
+            GUILayout.BeginVertical();
+
+            if (!targetConditions.isReloadRandom)
+            {
+                GUILayout.BeginHorizontal();
+                targetConditions.reloadDelay = EditorGUILayout.FloatField(targetConditions.reloadDelay);
+                Gaze_Utils.EnsureFieldIsPositiveOrZero(ref targetConditions.reloadDelay);
+                EditorGUILayout.LabelField("[s]");
+                GUILayout.EndHorizontal();
+            }
+
+            else
+            {
+                GUILayout.BeginHorizontal();
+                EditorGUILayout.LabelField("Min", GUILayout.MaxWidth(50));
+                targetConditions.reloadRange[0] = EditorGUILayout.FloatField(targetConditions.reloadRange[0]);
+                Gaze_Utils.EnsureFieldIsPositiveOrZero(ref targetConditions.reloadRange[0]);
+                EditorGUILayout.LabelField("[s]");
+                GUILayout.EndHorizontal();
+
+                GUILayout.BeginHorizontal();
+                EditorGUILayout.LabelField("Max", GUILayout.MaxWidth(50));
+                targetConditions.reloadRange[1] = EditorGUILayout.FloatField(targetConditions.reloadRange[1]);
+                Gaze_Utils.EnsureFieldIsPositiveOrZero(ref targetConditions.reloadRange[1]);
+                EditorGUILayout.LabelField("[s]");
+                GUILayout.EndHorizontal();
+
+                if (targetConditions.reloadRange[1] < targetConditions.reloadRange[0])
+                    targetConditions.reloadRange[1] = targetConditions.reloadRange[0] + 1.0f;
+            }
+
+            GUILayout.BeginHorizontal();
+            targetConditions.isReloadRandom = EditorGUILayout.ToggleLeft("Random", targetConditions.isReloadRandom);
+            GUILayout.EndHorizontal();
+
+            GUILayout.EndVertical();
+        }
+
 
         private void DisplayConditionsBlock()
         {
