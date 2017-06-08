@@ -158,6 +158,20 @@ namespace Gaze
         public Gaze_Transform InitialTransform { get { return initialTransform; } }
         private Gaze_Transform initialTransform;
 
+        public bool IsDragAndDropEnabled = false;
+        public float DnD_minDistance = 1f;
+        // in unity units
+        public float DnD_angleThreshold = 1f;
+        // 0 is perpendicular, 1 is same direction
+        public bool DnD_respectXAxis = false;
+        public bool DnD_respectXAxisMirrored = false;
+        public bool DnD_respectYAxis = false;
+        public bool DnD_respectYAxisMirrored = false;
+        public bool DnD_respectZAxis = false;
+        public bool DnD_respectZAxisMirrored = false;
+        public bool DnD_snapBeforeDrop = true;
+        public float DnD_TimeToSnap = 0.5f;
+
         private void Awake()
         {
             SetActualGravityStateAsDefault();

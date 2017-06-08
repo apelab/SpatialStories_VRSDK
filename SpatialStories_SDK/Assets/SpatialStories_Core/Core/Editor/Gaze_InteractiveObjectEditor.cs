@@ -60,6 +60,7 @@ namespace Gaze
             DisplayTouchDistance();
             DisplayGrabDistance();
             DisplayLevitationDistance();
+            DisplayDragAndDrop();
         }
 
         private void DisplayLogo()
@@ -111,6 +112,133 @@ namespace Gaze
             targetIO.GrabDistance = EditorGUILayout.FloatField("Levitation Distance", targetIO.GrabDistance);
             Gaze_Utils.EnsureFieldIsPositiveOrZero(ref targetIO.GrabDistance);
             GUILayout.EndHorizontal();
+        }
+
+        private void DisplayDragAndDrop()
+        {
+            GUILayout.Space(10);
+            GUILayout.BeginHorizontal();
+            targetIO.IsDragAndDropEnabled = EditorGUILayout.ToggleLeft("Enable Drag And Drop", targetIO.IsDragAndDropEnabled);
+
+            if (targetIO.IsDragAndDropEnabled)
+            {
+                #region Targets
+                DisplayTargets();
+                #endregion
+
+                #region Axis contraints
+                GUILayout.EndHorizontal();
+                GUILayout.BeginHorizontal();
+                targetIO.DnD_minDistance = EditorGUILayout.FloatField("Min Distance To Validate", targetIO.DnD_minDistance);
+                GUILayout.EndHorizontal();
+
+                GUILayout.BeginHorizontal();
+                targetIO.DnD_respectXAxis = EditorGUILayout.ToggleLeft("Respect X Axis", targetIO.DnD_respectXAxis);
+                if (targetIO.DnD_respectXAxis)
+                {
+                    targetIO.DnD_respectXAxisMirrored = EditorGUILayout.ToggleLeft("Mirrored", targetIO.DnD_respectXAxisMirrored);
+                }
+                GUILayout.EndHorizontal();
+
+                GUILayout.BeginHorizontal();
+                targetIO.DnD_respectYAxis = EditorGUILayout.ToggleLeft("Respect Y Axis", targetIO.DnD_respectYAxis);
+                if (targetIO.DnD_respectYAxis)
+                {
+                    targetIO.DnD_respectYAxisMirrored = EditorGUILayout.ToggleLeft("Mirrored", targetIO.DnD_respectYAxisMirrored);
+                }
+                GUILayout.EndHorizontal();
+
+                GUILayout.BeginHorizontal();
+                targetIO.DnD_respectZAxis = EditorGUILayout.ToggleLeft("Respect Z Axis", targetIO.DnD_respectZAxis);
+                if (targetIO.DnD_respectZAxis)
+                {
+                    targetIO.DnD_respectZAxisMirrored = EditorGUILayout.ToggleLeft("Mirrored", targetIO.DnD_respectZAxisMirrored);
+                }
+                GUILayout.EndHorizontal();
+                #endregion
+
+                #region Threshold angle
+                if (targetIO.DnD_respectXAxis || targetIO.DnD_respectYAxis || targetIO.DnD_respectZAxis)
+                {
+                    targetIO.DnD_angleThreshold = EditorGUILayout.Slider("Angle Threshold", targetIO.DnD_angleThreshold, 1, 100);
+                }
+                #endregion
+
+                #region Snap
+                EditorGUILayout.BeginHorizontal();
+                targetIO.DnD_snapBeforeDrop = EditorGUILayout.ToggleLeft("Snap Before Drop", targetIO.DnD_snapBeforeDrop);
+                EditorGUILayout.EndHorizontal();
+                #endregion
+
+                #region Time to snap
+                EditorGUILayout.BeginHorizontal();
+                targetIO.DnD_TimeToSnap = EditorGUILayout.FloatField("Time To Snap", targetIO.DnD_TimeToSnap);
+                EditorGUILayout.EndHorizontal();
+                #endregion
+            }
+            else
+            {
+                GUILayout.EndHorizontal();
+            }
+        }
+
+        // TODO @apelab add targets list with plus button
+        private void DisplayTargets()
+        {
+            EditorGUILayout.BeginHorizontal();
+            // help message if no input is specified
+            if (targetConditions.InputsMap.InputsEntries.Count < 1)
+            {
+                EditorGUILayout.EndHorizontal();
+                EditorGUILayout.BeginHorizontal();
+                EditorGUILayout.HelpBox("Add at least one input or deactivate this condition if not needed.", MessageType.Warning);
+                EditorGUILayout.EndHorizontal();
+            }
+            else
+            {
+                // display require all option
+                targetConditions.requireAllInputs = EditorGUILayout.ToggleLeft("Require all", targetConditions.requireAllInputs);
+                EditorGUILayout.EndHorizontal();
+
+                // update inputs list in Gaze_Interactions (Gaze_Interactions may have been removed in the hierarchy)
+                for (int i = 0; i < targetConditions.InputsMap.InputsEntries.Count; i++)
+                {
+                    // display the entry
+                    EditorGUILayout.BeginHorizontal();
+                    targetConditions.InputsMap.InputsEntries[i].inputType = (Gaze_InputTypes)EditorGUILayout.Popup((int)targetConditions.InputsMap.InputsEntries[i].inputType, inputsNames);
+
+
+                    // TODO @apelab add/remove event subscription with the new popup value
+
+                    // and a '-' button to remove it if needed
+                    if (GUILayout.Button("-"))
+                        targetConditions.InputsMap.Delete(targetConditions.InputsMap.InputsEntries[i]);
+
+                    EditorGUILayout.EndHorizontal();
+                }
+            }
+
+            // display 'add' button
+            if (GUILayout.Button("+"))
+            {
+                Gaze_InputsMapEntry d = targetConditions.InputsMap.Add();
+
+                // TODO @apelab add event subscription with a default value
+                //Gaze_InputsCondition inputscondition = targetConditions.activeConditions.GetType(typeof(Gaze_InputsCondition));
+
+                EditorGUILayout.BeginHorizontal();
+
+                if (GUILayout.Button("-"))
+                {
+                    targetConditions.InputsMap.Delete(d);
+
+                    // TODO @apelab remove event subscription
+
+
+                }
+                EditorGUILayout.EndHorizontal();
+            }
+            EditorGUILayout.Space();
         }
     }
 }

@@ -100,8 +100,10 @@ namespace Gaze
 
         private void OnDragAndDropEvent(Gaze_DragAndDropEventArgs e)
         {
+            // get the DragAndDrop 
             receivedDnDManager = ((GameObject)e.Sender).GetComponent<Gaze_DragAndDropManager>();
 
+            // TODO @apelab ?
             if (((GameObject)e.Sender).GetComponent<Gaze_DragAndDropManager>().CurrentDragAndDropCondition != gazeConditionsScript)
                 return;
 

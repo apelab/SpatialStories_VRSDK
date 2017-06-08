@@ -1347,7 +1347,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 582045758}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b6ec005bb801f6b42b79902e425cae65, type: 3}
   m_Name: 
@@ -1417,6 +1417,17 @@ MonoBehaviour:
   AttractionSpeed: 1
   IsManipulable: 0
   RootMotion: {fileID: 0}
+  IsDragAndDropEnabled: 0
+  DnD_minDistance: 1
+  DnD_angleThreshold: 1
+  DnD_respectXAxis: 0
+  DnD_respectXAxisMirrored: 0
+  DnD_respectYAxis: 0
+  DnD_respectYAxisMirrored: 0
+  DnD_respectZAxis: 0
+  DnD_respectZAxisMirrored: 0
+  DnD_snapBeforeDrop: 1
+  DnD_TimeToSnap: 0.5
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
 --- !u!4 &582045763
@@ -2078,7 +2089,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_MinDistance: 1
-  angleThreshold: 1
+  angleThreshold: 49.5
   respectXAxis: 0
   respectXAxisMirrored: 0
   respectYAxis: 0
@@ -2142,6 +2153,17 @@ MonoBehaviour:
   AttractionSpeed: 1
   IsManipulable: 0
   RootMotion: {fileID: 0}
+  IsDragAndDropEnabled: 1
+  DnD_minDistance: 1
+  DnD_angleThreshold: 1
+  DnD_respectXAxis: 0
+  DnD_respectXAxisMirrored: 0
+  DnD_respectYAxis: 0
+  DnD_respectYAxisMirrored: 1
+  DnD_respectZAxis: 0
+  DnD_respectZAxisMirrored: 0
+  DnD_snapBeforeDrop: 1
+  DnD_TimeToSnap: 0.5
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
 --- !u!4 &774839302
@@ -2836,6 +2858,17 @@ MonoBehaviour:
   AttractionSpeed: 1
   IsManipulable: 0
   RootMotion: {fileID: 0}
+  IsDragAndDropEnabled: 0
+  DnD_minDistance: 1
+  DnD_angleThreshold: 1
+  DnD_respectXAxis: 0
+  DnD_respectXAxisMirrored: 0
+  DnD_respectYAxis: 0
+  DnD_respectYAxisMirrored: 0
+  DnD_respectZAxis: 0
+  DnD_respectZAxisMirrored: 0
+  DnD_snapBeforeDrop: 1
+  DnD_TimeToSnap: 0.5
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
 --- !u!95 &951239754
@@ -3166,7 +3199,7 @@ MonoBehaviour:
   customConditionsEnabled: 0
   dragAndDropEnabled: 1
   dndOnDropReadyIndex: 0
-  dndOnDropIndex: 0
+  dndOnDropIndex: 1
   dndOnPickupIndex: 0
   dndOnRemoveIndex: 0
   DnDTargetObject: {fileID: 582045762}
@@ -5010,6 +5043,17 @@ MonoBehaviour:
   AttractionSpeed: 1
   IsManipulable: 0
   RootMotion: {fileID: 0}
+  IsDragAndDropEnabled: 0
+  DnD_minDistance: 1
+  DnD_angleThreshold: 1
+  DnD_respectXAxis: 0
+  DnD_respectXAxisMirrored: 0
+  DnD_respectYAxis: 0
+  DnD_respectYAxisMirrored: 0
+  DnD_respectZAxis: 0
+  DnD_respectZAxisMirrored: 0
+  DnD_snapBeforeDrop: 1
+  DnD_TimeToSnap: 0.5
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
 --- !u!95 &1567460778
@@ -5443,7 +5487,7 @@ MonoBehaviour:
     AreDependenciesSatisfied: 1
   requireAllInputs: 0
   customConditionsEnabled: 0
-  dragAndDropEnabled: 0
+  dragAndDropEnabled: 1
   dndOnDropReadyIndex: 0
   dndOnDropIndex: 0
   dndOnPickupIndex: 0
@@ -5598,7 +5642,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1769862482}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6d1bf5f274029124898ba5975f1ca219, type: 3}
   m_Name: 
@@ -5648,6 +5692,17 @@ MonoBehaviour:
   AttractionSpeed: 1
   IsManipulable: 0
   RootMotion: {fileID: 0}
+  IsDragAndDropEnabled: 0
+  DnD_minDistance: 1
+  DnD_angleThreshold: 1
+  DnD_respectXAxis: 0
+  DnD_respectXAxisMirrored: 0
+  DnD_respectYAxis: 0
+  DnD_respectYAxisMirrored: 0
+  DnD_respectZAxis: 0
+  DnD_respectZAxisMirrored: 0
+  DnD_snapBeforeDrop: 1
+  DnD_TimeToSnap: 0.5
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
 --- !u!95 &1769862486

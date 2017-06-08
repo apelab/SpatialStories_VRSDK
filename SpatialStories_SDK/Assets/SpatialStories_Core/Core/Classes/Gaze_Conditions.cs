@@ -322,6 +322,9 @@ namespace Gaze
 
             if (teleportEnabled)
                 activeConditions.Add(new Gaze_TeleportCondition(this));
+
+            if (dragAndDropEnabled)
+                activeConditions.Add(new Gaze_DragAndDropCondition(this));
         }
 
         void OnEnable()
