@@ -57,6 +57,7 @@ namespace Gaze
             logoRect.x = 10;
             logoRect.y = 10;
             hierarchyIOs = new List<GameObject>();
+            hierarchyIOsScripts = new List<Gaze_InteractiveObject>();
             dnd_dropTargetsNames = new List<string>();
         }
 
@@ -145,6 +146,9 @@ namespace Gaze
             if (gaze_InteractiveObjectScript.IsDragAndDropEnabled)
             {
                 #region Targets
+                GUILayout.BeginHorizontal();
+                EditorGUILayout.LabelField("Drop Targets");
+                GUILayout.EndHorizontal();
                 DisplayTargets();
                 #endregion
 
@@ -197,17 +201,13 @@ namespace Gaze
                 EditorGUILayout.EndHorizontal();
                 #endregion
             }
-            else
-            {
-                GUILayout.EndHorizontal();
-            }
         }
 
         // TODO @apelab add targets list with plus button
         private void DisplayTargets()
         {
             // help message if no input is specified
-            if (gaze_InteractiveObjectScript.DnD_Targets.Count < 1)
+            if (gaze_InteractiveObjectScript.DnD_TargetsIndexes.Count < 1)
             {
                 EditorGUILayout.BeginHorizontal();
                 EditorGUILayout.HelpBox("Add at least one drop target or deactivate this condition if not needed.", MessageType.Warning);
@@ -216,16 +216,16 @@ namespace Gaze
             else
             {
                 // for each DnD target
-                for (int i = 0; i < gaze_InteractiveObjectScript.DnD_Targets.Count; i++)
+                for (int i = 0; i < gaze_InteractiveObjectScript.DnD_TargetsIndexes.Count; i++)
                 {
                     // display it in a popup
                     EditorGUILayout.BeginHorizontal();
-                    gaze_InteractiveObjectScript.DnD_Targets[i] = EditorGUILayout.Popup(hierarchyIOs.IndexOf(gaze_InteractiveObjectScript.DnD_Targets[i]), dnd_dropTargetsNames.ToArray());
+                    gaze_InteractiveObjectScript.DnD_TargetsIndexes[i] = EditorGUILayout.Popup(gaze_InteractiveObjectScript.DnD_TargetsIndexes[i], dnd_dropTargetsNames.ToArray());
 
 
                     // and a '-' button to remove it if needed
                     if (GUILayout.Button("-"))
-                        gaze_InteractiveObjectScript.DnD_Targets.Remove(gaze_InteractiveObjectScript.DnD_Targets[i]);
+                        gaze_InteractiveObjectScript.DnD_TargetsIndexes.Remove(gaze_InteractiveObjectScript.DnD_TargetsIndexes[i]);
 
                     EditorGUILayout.EndHorizontal();
                 }
@@ -235,13 +235,13 @@ namespace Gaze
             {
                 // TODO @apelab mike : add a new target in the list with a default value from a list of all IOs
                 Debug.Log("target to add : " + hierarchyIOs[0]);
-                gaze_InteractiveObjectScript.DnD_Targets.Add(hierarchyIOs[0]);
+                gaze_InteractiveObjectScript.DnD_TargetsIndexes.Add(0);
 
                 EditorGUILayout.BeginHorizontal();
                 if (GUILayout.Button("-"))
                 {
                     //targetConditions.InputsMap.Delete(d);
-                    gaze_InteractiveObjectScript.DnD_Targets.Remove(gaze_InteractiveObjectScript.DnD_Targets[0]);
+                    gaze_InteractiveObjectScript.DnD_TargetsIndexes.Remove(gaze_InteractiveObjectScript.DnD_TargetsIndexes[0]);
                 }
                 EditorGUILayout.EndHorizontal();
             }
