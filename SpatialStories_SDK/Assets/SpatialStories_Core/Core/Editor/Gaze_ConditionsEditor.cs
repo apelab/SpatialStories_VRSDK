@@ -38,7 +38,7 @@ namespace Gaze
         // hierarchy lists
         private List<Gaze_InteractiveObject> hierarchyIOsScripts;
         private List<string> hierarchyIOsNames;
-        private List<GameObject> hierarchyIOs;
+        public List<GameObject> hierarchyIOs;
         private List<GameObject> hierarchyInteractions;
         private List<string> hierarchyInteractionsNames;
         private string[] inputsNames;
@@ -46,7 +46,6 @@ namespace Gaze
 
         // Reflection members
         private List<Collider> hierarchyGazeColliders;
-        private List<string> hierarchyGazeCollidersNames;
 
         private Dictionary<Collider, string> interactiveObjectsDico;
 
@@ -71,7 +70,6 @@ namespace Gaze
             hierarchyInteractions = new List<GameObject>();
             hierarchyInteractionsNames = new List<string>();
             hierarchyGazeColliders = new List<Collider>();
-            hierarchyGazeCollidersNames = new List<string>();
             hierarchyProximities = new List<Gaze_InteractiveObject>();
 
             focusLossModes = Enum.GetNames(typeof(Gaze_FocusLossMode));
@@ -211,9 +209,7 @@ namespace Gaze
             hierarchyIOsNames.Clear();
             hierarchyIOs.Clear();
             hierarchyInteractions.Clear();
-            hierarchyGazeCollidersNames.Clear();
             hierarchyGazeColliders.Clear();
-            hierarchyGazeCollidersNames.Clear();
             hierarchyProximities.Clear();
             hierarchyCustomConditions.Clear();
             hierarchyCustomConditionsNames.Clear();

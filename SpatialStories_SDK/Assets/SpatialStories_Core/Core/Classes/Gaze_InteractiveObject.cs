@@ -171,6 +171,7 @@ namespace Gaze
         public bool DnD_respectZAxisMirrored = false;
         public bool DnD_snapBeforeDrop = true;
         public float DnD_TimeToSnap = 0.5f;
+        public List<GameObject> DnD_Targets = new List<GameObject>();
 
         private void Awake()
         {
@@ -182,6 +183,7 @@ namespace Gaze
             {
                 transform.SetParent(RootMotion);
             }
+            DnD_Targets = new List<GameObject>();
         }
 
         void Update()
