@@ -717,6 +717,8 @@ MonoBehaviour:
   grabDistance: 0
   touchDistance: 0
   grabModeIndex: 0
+  visualsScript: {fileID: 0}
+  AlterAllVisuals: 1
   triggerAnimation: 0
   targetAnimator: {fileID: 0}
   activeTriggerStatesAnim: 0000000000
@@ -740,8 +742,6 @@ MonoBehaviour:
   audioVolumeMax: 1
   fadeSpeed: 0.005
   IO: {fileID: 0}
-  VisualsToAlter: []
-  AlterAllVisuals: 1
   triggerNotification: 0
 --- !u!114 &114628989291598488
 MonoBehaviour:
@@ -787,6 +787,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3978acaf2eedc8f4889c42ba095690a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectedRenderers: 
 --- !u!114 &114746154667141864
 MonoBehaviour:
   m_ObjectHideFlags: 1

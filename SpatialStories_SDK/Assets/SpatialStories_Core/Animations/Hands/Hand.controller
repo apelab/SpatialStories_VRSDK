@@ -82,7 +82,7 @@ AnimatorState:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: hand_left|left_neutral->grab
-  m_Speed: 2.5
+  m_Speed: 10
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 1101732033221813718}
