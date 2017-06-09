@@ -173,6 +173,9 @@ namespace Gaze
         public float DnD_TimeToSnap = 0.5f;
         public List<int> DnD_TargetsIndexes = new List<int>();
 
+        private Gaze_DragAndDropManager dragAndDropManager;
+        private Gaze_SceneInventory sceneInventory;
+
         private void Awake()
         {
             SetActualGravityStateAsDefault();
@@ -198,6 +201,11 @@ namespace Gaze
         {
             Gaze_InputManager.OnControllerGrabEvent += OnControllerGrabEvent;
             Gaze_EventManager.OnControllerPointingEvent += OnControllerPointingEvent;
+            dragAndDropManager = gameObject.AddComponent<Gaze_DragAndDropManager>();
+            dragAndDropManager.hideFlags = HideFlags.HideInInspector;
+            sceneInventory = gameObject.AddComponent<Gaze_SceneInventory>();
+            // Uncomment the line below to hide the inventory in the editor
+            //sceneInventory.hideFlags = HideFlags.HideInInspector;
         }
 
         private void OnDisable()

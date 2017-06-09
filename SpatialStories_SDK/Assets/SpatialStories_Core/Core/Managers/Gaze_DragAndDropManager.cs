@@ -42,9 +42,7 @@ namespace Gaze
 
         // snaps only if attached on drop
         public float m_TimeToSnap = 0.5f;
-        #endregion
 
-        #region private Members
         [Gaze_ShowOnly]
         private bool m_Grabbed, isLevitating;
         [Gaze_ShowOnly]
@@ -66,6 +64,7 @@ namespace Gaze
         private bool isCurrentlyAligned = false;
         private Gaze_InteractiveObject IO;
         private Coroutine m_SnapCoroutine;
+        private Gaze_InteractiveObject interactiveObject;
         #endregion
 
         void OnEnable()
@@ -78,6 +77,8 @@ namespace Gaze
 
             // to snap/unsnap by levitating the object
             Gaze_EventManager.OnLevitationEvent += OnLevitationEvent;
+
+            interactiveObject = GetComponent<Gaze_InteractiveObject>();
         }
 
         void OnDisable()
@@ -95,9 +96,8 @@ namespace Gaze
 
         void Update()
         {
-
-            if (currentDragAndDropCondition == null)
-                return;
+            //if (currentDragAndDropCondition == null)
+            //    return;
 
             if (!m_Grabbed && !isLevitating)
                 return;
@@ -375,13 +375,18 @@ namespace Gaze
 
         private void OnProximityEvent(Gaze_ProximityEventArgs e)
         {
-            if (currentDragAndDropCondition == null)
-                return;
-
+            //if (currentDragAndDropCondition == null)
+            //    return;
+            Debug.Log("3");
             // if I'm the sender
             if (((Gaze_InteractiveObject)e.Sender).gameObject == gameObject)
             {
-                // we collided with something
+                // TODO @apelab:mike check if the target is in the list
+                for (int i = 0; i < interactiveObject.DnD_TargetsIndexes.Count; i++)
+                {
+
+
+                }
                 if (e.Other.GetComponentInParent<Gaze_InteractiveObject>() == currentDragAndDropCondition.DnDTargetObject)
                 {
                     m_InProximity = e.IsInProximity;

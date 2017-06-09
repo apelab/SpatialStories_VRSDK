@@ -3,7 +3,7 @@ using UnityEditor;
 namespace Gaze
 {
     [InitializeOnLoad]
-    [CustomEditor(typeof(Gaze_DragAndDropManager))]
+    //[CustomEditor(typeof(Gaze_DragAndDropManager))]
     public class Gaze_DragAndDropEditor : Gaze_Editor
     {
         private Gaze_InteractiveObject rootIO;
