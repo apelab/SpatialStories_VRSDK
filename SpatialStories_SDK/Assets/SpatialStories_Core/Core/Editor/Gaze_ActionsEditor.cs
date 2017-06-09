@@ -168,32 +168,37 @@ namespace Gaze
 
         public override void Gaze_OnInspectorGUI()
         {
+            base.BeginChangeComparision();
 
             // display conditions
             if (actionsScript.isActive)
             {
-                EditorGUILayout.Space();
-
-                if (actionsScript && !actionsScript.DestroyOnTrigger)
+                if (!Application.isPlaying)
                 {
-                    ShowVisualsOption();
-                    ShowCollidersOption();
-                    ShowGrabOption();
-                    ShowGrabDistanceOption();
-                    ShowGrabModeOption();
-                    ShowTouchAbilityOption();
-                    ShowTouchDistanceOption();
-                    actionsScript.ActionGravity = (Gaze_Actions.ACTIVABLE_OPTION)EditorGUILayout.EnumPopup("Gravity", actionsScript.ActionGravity);
-                    ShowAudioOptions();
-                    ShowAnimationOptions();
-                }
-                actionsScript.DestroyOnTrigger = EditorGUILayout.ToggleLeft("Destroy", actionsScript.DestroyOnTrigger);
+                    EditorGUILayout.Space();
+                    if (actionsScript && !actionsScript.DestroyOnTrigger)
+                    {
+                        ShowVisualsOption();
+                        ShowCollidersOption();
+                        ShowGrabOption();
+                        ShowGrabDistanceOption();
+                        ShowGrabModeOption();
+                        ShowTouchAbilityOption();
+                        ShowTouchDistanceOption();
+                        actionsScript.ActionGravity = (Gaze_Actions.ACTIVABLE_OPTION)EditorGUILayout.EnumPopup("Gravity", actionsScript.ActionGravity);
+                        ShowAudioOptions();
+                        ShowAnimationOptions();
+                    }
+                    actionsScript.DestroyOnTrigger = EditorGUILayout.ToggleLeft("Destroy", actionsScript.DestroyOnTrigger);
 
-                EditorGUILayout.Space();
-                EditorGUILayout.LabelField("Delay", EditorStyles.boldLabel);
-                ShowDelayBlock();
+                    EditorGUILayout.Space();
+                    EditorGUILayout.LabelField("Delay", EditorStyles.boldLabel);
+                    ShowDelayBlock();
+                }
             }
+
             // save changes
+            base.EndChangeComparision();
             EditorUtility.SetDirty(actionsScript);
         }
 

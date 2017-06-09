@@ -238,6 +238,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 36183213}
+  - component: {fileID: 36183214}
   m_Layer: 0
   m_Name: Visuals
   m_TagString: Untagged
@@ -259,6 +260,18 @@ Transform:
   m_Father: {fileID: 842713445}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &36183214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 36183212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3978acaf2eedc8f4889c42ba095690a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedRenderers: 
 --- !u!1 &38339492
 GameObject:
   m_ObjectHideFlags: 0
@@ -755,6 +768,10 @@ MonoBehaviour:
   reloadMaxRepetitions: 0
   reloadCount: 0
   reloadDelay: 0
+  isReloadRandom: 0
+  reloadRange:
+  - 0
+  - 0
   focusDuration: 0
   focusLossModeIndex: 0
   FocusLossSpeed: 1
@@ -817,12 +834,15 @@ MonoBehaviour:
   delayRange:
   - 0
   - 0
+  multipleActionsInTime: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
   ModifyGrabMode: 0
   grabDistance: 0
   touchDistance: 0
   grabModeIndex: 0
+  visualsScript: {fileID: 0}
+  AlterAllVisuals: 1
   triggerAnimation: 0
   targetAnimator: {fileID: 0}
   activeTriggerStatesAnim: 0000000000
@@ -845,9 +865,7 @@ MonoBehaviour:
   audioVolumeMin: 0.2
   audioVolumeMax: 1
   fadeSpeed: 0.005
-  IO: {fileID: 0}
-  VisualsToAlter: []
-  AlterAllVisuals: 1
+  IO: {fileID: 1766648723}
   triggerNotification: 0
 --- !u!1 &119329870
 GameObject:
@@ -1315,7 +1333,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1525,6 +1543,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 210647869}
+  - component: {fileID: 210647870}
   m_Layer: 0
   m_Name: Visuals
   m_TagString: Untagged
@@ -1546,6 +1565,18 @@ Transform:
   m_Father: {fileID: 1214818742}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &210647870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 210647868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3978acaf2eedc8f4889c42ba095690a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedRenderers: 
 --- !u!1 &213419061
 GameObject:
   m_ObjectHideFlags: 0
@@ -1696,7 +1727,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1833,7 +1864,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -2009,6 +2040,10 @@ MonoBehaviour:
   reloadMaxRepetitions: 0
   reloadCount: 0
   reloadDelay: 0
+  isReloadRandom: 0
+  reloadRange:
+  - 0
+  - 0
   focusDuration: 0
   focusLossModeIndex: 0
   FocusLossSpeed: 1
@@ -2128,6 +2163,10 @@ MonoBehaviour:
   reloadMaxRepetitions: 0
   reloadCount: 0
   reloadDelay: 0
+  isReloadRandom: 0
+  reloadRange:
+  - 0
+  - 0
   focusDuration: 0
   focusLossModeIndex: 0
   FocusLossSpeed: 1
@@ -2190,12 +2229,15 @@ MonoBehaviour:
   delayRange:
   - 0
   - 0
+  multipleActionsInTime: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
   ModifyGrabMode: 0
   grabDistance: 0
   touchDistance: 0
   grabModeIndex: 0
+  visualsScript: {fileID: 0}
+  AlterAllVisuals: 1
   triggerAnimation: 0
   targetAnimator: {fileID: 0}
   activeTriggerStatesAnim: 0000000000
@@ -2218,9 +2260,7 @@ MonoBehaviour:
   audioVolumeMin: 0.2
   audioVolumeMax: 1
   fadeSpeed: 0.005
-  IO: {fileID: 0}
-  VisualsToAlter: []
-  AlterAllVisuals: 1
+  IO: {fileID: 323865886}
   triggerNotification: 0
 --- !u!1 &252865446
 GameObject:
@@ -2540,6 +2580,10 @@ MonoBehaviour:
   reloadMaxRepetitions: 0
   reloadCount: 0
   reloadDelay: 0
+  isReloadRandom: 0
+  reloadRange:
+  - 0
+  - 0
   focusDuration: 0
   focusLossModeIndex: 0
   FocusLossSpeed: 1
@@ -2602,12 +2646,15 @@ MonoBehaviour:
   delayRange:
   - 0
   - 0
+  multipleActionsInTime: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
   ModifyGrabMode: 0
   grabDistance: 0
   touchDistance: 0
   grabModeIndex: 0
+  visualsScript: {fileID: 0}
+  AlterAllVisuals: 1
   triggerAnimation: 1
   targetAnimator: {fileID: 1288450690}
   activeTriggerStatesAnim: 0100000000
@@ -2630,9 +2677,7 @@ MonoBehaviour:
   audioVolumeMin: 0.2
   audioVolumeMax: 1
   fadeSpeed: 0.005
-  IO: {fileID: 0}
-  VisualsToAlter: []
-  AlterAllVisuals: 1
+  IO: {fileID: 2076184233}
   triggerNotification: 0
 --- !u!114 &264405588
 MonoBehaviour:
@@ -2889,12 +2934,15 @@ MonoBehaviour:
   delayRange:
   - 0
   - 0
+  multipleActionsInTime: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
   ModifyGrabMode: 0
   grabDistance: 0
   touchDistance: 0
   grabModeIndex: 0
+  visualsScript: {fileID: 0}
+  AlterAllVisuals: 1
   triggerAnimation: 0
   targetAnimator: {fileID: 0}
   activeTriggerStatesAnim: 0000000000
@@ -2917,9 +2965,7 @@ MonoBehaviour:
   audioVolumeMin: 0.2
   audioVolumeMax: 1
   fadeSpeed: 0.005
-  IO: {fileID: 0}
-  VisualsToAlter: []
-  AlterAllVisuals: 1
+  IO: {fileID: 842713444}
   triggerNotification: 0
 --- !u!114 &316538409
 MonoBehaviour:
@@ -2965,6 +3011,10 @@ MonoBehaviour:
   reloadMaxRepetitions: 0
   reloadCount: 0
   reloadDelay: 0
+  isReloadRandom: 0
+  reloadRange:
+  - 0
+  - 0
   focusDuration: 0
   focusLossModeIndex: 0
   FocusLossSpeed: 1
@@ -3543,6 +3593,10 @@ MonoBehaviour:
   reloadMaxRepetitions: 0
   reloadCount: 0
   reloadDelay: 0
+  isReloadRandom: 0
+  reloadRange:
+  - 0
+  - 0
   focusDuration: 0
   focusLossModeIndex: 0
   FocusLossSpeed: 1
@@ -3664,6 +3718,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 406322947}
+  - component: {fileID: 406322948}
   m_Layer: 0
   m_Name: Visuals
   m_TagString: Untagged
@@ -3685,6 +3740,18 @@ Transform:
   m_Father: {fileID: 66050293}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &406322948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 406322946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3978acaf2eedc8f4889c42ba095690a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedRenderers: 
 --- !u!1 &411937191
 GameObject:
   m_ObjectHideFlags: 0
@@ -4373,6 +4440,10 @@ MonoBehaviour:
   reloadMaxRepetitions: 0
   reloadCount: 0
   reloadDelay: 0
+  isReloadRandom: 0
+  reloadRange:
+  - 0
+  - 0
   focusDuration: 0
   focusLossModeIndex: 0
   FocusLossSpeed: 1
@@ -4435,12 +4506,15 @@ MonoBehaviour:
   delayRange:
   - 0
   - 0
+  multipleActionsInTime: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
   ModifyGrabMode: 0
   grabDistance: 0
   touchDistance: 0
   grabModeIndex: 0
+  visualsScript: {fileID: 0}
+  AlterAllVisuals: 1
   triggerAnimation: 0
   targetAnimator: {fileID: 0}
   activeTriggerStatesAnim: 0000000000
@@ -4463,9 +4537,7 @@ MonoBehaviour:
   audioVolumeMin: 0.2
   audioVolumeMax: 1
   fadeSpeed: 0.005
-  IO: {fileID: 0}
-  VisualsToAlter: []
-  AlterAllVisuals: 1
+  IO: {fileID: 1214818743}
   triggerNotification: 0
 --- !u!114 &511780138
 MonoBehaviour:
@@ -4789,6 +4861,10 @@ MonoBehaviour:
   reloadMaxRepetitions: 0
   reloadCount: 0
   reloadDelay: 0
+  isReloadRandom: 0
+  reloadRange:
+  - 0
+  - 0
   focusDuration: 0
   focusLossModeIndex: 0
   FocusLossSpeed: 1
@@ -4851,12 +4927,15 @@ MonoBehaviour:
   delayRange:
   - 0
   - 0
+  multipleActionsInTime: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
   ModifyGrabMode: 0
   grabDistance: 0
   touchDistance: 0
   grabModeIndex: 0
+  visualsScript: {fileID: 0}
+  AlterAllVisuals: 1
   triggerAnimation: 0
   targetAnimator: {fileID: 0}
   activeTriggerStatesAnim: 0000000000
@@ -4879,9 +4958,7 @@ MonoBehaviour:
   audioVolumeMin: 0.2
   audioVolumeMax: 1
   fadeSpeed: 0.005
-  IO: {fileID: 0}
-  VisualsToAlter: []
-  AlterAllVisuals: 1
+  IO: {fileID: 323865886}
   triggerNotification: 0
 --- !u!114 &593311673
 MonoBehaviour:
@@ -6651,6 +6728,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 971757450}
+  - component: {fileID: 971757451}
   m_Layer: 0
   m_Name: Visuals
   m_TagString: Untagged
@@ -6673,6 +6751,18 @@ Transform:
   m_Father: {fileID: 148061610}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &971757451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 971757449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3978acaf2eedc8f4889c42ba095690a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedRenderers: 
 --- !u!1 &972269967
 GameObject:
   m_ObjectHideFlags: 0
@@ -7131,12 +7221,15 @@ MonoBehaviour:
   delayRange:
   - 0
   - 0
+  multipleActionsInTime: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
   ModifyGrabMode: 0
   grabDistance: 0
   touchDistance: 0
   grabModeIndex: 0
+  visualsScript: {fileID: 0}
+  AlterAllVisuals: 1
   triggerAnimation: 0
   targetAnimator: {fileID: 0}
   activeTriggerStatesAnim: 0000000000
@@ -7159,9 +7252,7 @@ MonoBehaviour:
   audioVolumeMin: 0.2
   audioVolumeMax: 1
   fadeSpeed: 0.005
-  IO: {fileID: 0}
-  VisualsToAlter: []
-  AlterAllVisuals: 1
+  IO: {fileID: 66050291}
   triggerNotification: 0
 --- !u!114 &1009554013
 MonoBehaviour:
@@ -7207,6 +7298,10 @@ MonoBehaviour:
   reloadMaxRepetitions: 0
   reloadCount: 0
   reloadDelay: 0
+  isReloadRandom: 0
+  reloadRange:
+  - 0
+  - 0
   focusDuration: 0
   focusLossModeIndex: 0
   FocusLossSpeed: 1
@@ -7410,6 +7505,10 @@ MonoBehaviour:
   reloadMaxRepetitions: 0
   reloadCount: 0
   reloadDelay: 0
+  isReloadRandom: 0
+  reloadRange:
+  - 0
+  - 0
   focusDuration: 0
   focusLossModeIndex: 0
   FocusLossSpeed: 1
@@ -7472,12 +7571,15 @@ MonoBehaviour:
   delayRange:
   - 0
   - 0
+  multipleActionsInTime: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
   ModifyGrabMode: 0
   grabDistance: 0
   touchDistance: 0
   grabModeIndex: 0
+  visualsScript: {fileID: 0}
+  AlterAllVisuals: 1
   triggerAnimation: 0
   targetAnimator: {fileID: 0}
   activeTriggerStatesAnim: 0000000000
@@ -7500,9 +7602,7 @@ MonoBehaviour:
   audioVolumeMin: 0.2
   audioVolumeMax: 1
   fadeSpeed: 0.005
-  IO: {fileID: 0}
-  VisualsToAlter: []
-  AlterAllVisuals: 1
+  IO: {fileID: 1838630714}
   triggerNotification: 0
 --- !u!1 &1061908691
 GameObject:
@@ -7611,6 +7711,10 @@ MonoBehaviour:
   reloadMaxRepetitions: 0
   reloadCount: 0
   reloadDelay: 0
+  isReloadRandom: 0
+  reloadRange:
+  - 0
+  - 0
   focusDuration: 0
   focusLossModeIndex: 0
   FocusLossSpeed: 1
@@ -7890,6 +7994,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1097368695}
+  - component: {fileID: 1097368696}
   m_Layer: 0
   m_Name: Visuals
   m_TagString: Untagged
@@ -7911,6 +8016,18 @@ Transform:
   m_Father: {fileID: 1766648722}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1097368696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1097368694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3978acaf2eedc8f4889c42ba095690a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedRenderers: 
 --- !u!1 &1104085835
 GameObject:
   m_ObjectHideFlags: 0
@@ -9299,6 +9416,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1302917888}
+  - component: {fileID: 1302917889}
   m_Layer: 0
   m_Name: Visuals
   m_TagString: Untagged
@@ -9320,6 +9438,18 @@ Transform:
   m_Father: {fileID: 2076184234}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1302917889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1302917887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3978acaf2eedc8f4889c42ba095690a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedRenderers: 
 --- !u!1 &1306728284
 GameObject:
   m_ObjectHideFlags: 0
@@ -9895,6 +10025,10 @@ MonoBehaviour:
   reloadMaxRepetitions: 0
   reloadCount: 0
   reloadDelay: 0
+  isReloadRandom: 0
+  reloadRange:
+  - 0
+  - 0
   focusDuration: 0
   focusLossModeIndex: 0
   FocusLossSpeed: 1
@@ -9953,12 +10087,15 @@ MonoBehaviour:
   delayRange:
   - 0
   - 0
+  multipleActionsInTime: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
   ModifyGrabMode: 0
   grabDistance: 0
   touchDistance: 0
   grabModeIndex: 0
+  visualsScript: {fileID: 0}
+  AlterAllVisuals: 1
   triggerAnimation: 1
   targetAnimator: {fileID: 1288450690}
   activeTriggerStatesAnim: 0100000000
@@ -9981,9 +10118,7 @@ MonoBehaviour:
   audioVolumeMin: 0.2
   audioVolumeMax: 1
   fadeSpeed: 0.005
-  IO: {fileID: 0}
-  VisualsToAlter: []
-  AlterAllVisuals: 1
+  IO: {fileID: 2076184233}
   triggerNotification: 0
 --- !u!114 &1355049418
 MonoBehaviour:
@@ -10006,6 +10141,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1363558096}
+  - component: {fileID: 1363558097}
   m_Layer: 0
   m_Name: Visuals
   m_TagString: Untagged
@@ -10027,6 +10163,18 @@ Transform:
   m_Father: {fileID: 1838630713}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1363558097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1363558095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3978acaf2eedc8f4889c42ba095690a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedRenderers: 
 --- !u!1 &1381878228
 GameObject:
   m_ObjectHideFlags: 0
@@ -10035,6 +10183,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1381878229}
+  - component: {fileID: 1381878230}
   m_Layer: 0
   m_Name: Visuals
   m_TagString: Untagged
@@ -10056,6 +10205,18 @@ Transform:
   m_Father: {fileID: 1855426844}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1381878230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1381878228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3978acaf2eedc8f4889c42ba095690a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedRenderers: 
 --- !u!1 &1387923787
 GameObject:
   m_ObjectHideFlags: 0
@@ -10123,6 +10284,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1404650884}
+  - component: {fileID: 1404650885}
   m_Layer: 0
   m_Name: Visuals
   m_TagString: Untagged
@@ -10144,6 +10306,18 @@ Transform:
   m_Father: {fileID: 323865885}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1404650885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1404650883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3978acaf2eedc8f4889c42ba095690a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedRenderers: 
 --- !u!1 &1409721844
 GameObject:
   m_ObjectHideFlags: 0
@@ -10382,12 +10556,15 @@ MonoBehaviour:
   delayRange:
   - 0
   - 0
+  multipleActionsInTime: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
   ModifyGrabMode: 0
   grabDistance: 0
   touchDistance: 0
   grabModeIndex: 0
+  visualsScript: {fileID: 0}
+  AlterAllVisuals: 1
   triggerAnimation: 0
   targetAnimator: {fileID: 0}
   activeTriggerStatesAnim: 0000000000
@@ -10410,9 +10587,7 @@ MonoBehaviour:
   audioVolumeMin: 0.2
   audioVolumeMax: 1
   fadeSpeed: 0.005
-  IO: {fileID: 0}
-  VisualsToAlter: []
-  AlterAllVisuals: 1
+  IO: {fileID: 148061611}
   triggerNotification: 0
 --- !u!114 &1432006574
 MonoBehaviour:
@@ -10460,6 +10635,10 @@ MonoBehaviour:
   reloadMaxRepetitions: 0
   reloadCount: 0
   reloadDelay: 0
+  isReloadRandom: 0
+  reloadRange:
+  - 0
+  - 0
   focusDuration: 0
   focusLossModeIndex: 0
   FocusLossSpeed: 1
@@ -10670,6 +10849,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1444910838}
+  - component: {fileID: 1444910839}
   m_Layer: 0
   m_Name: Visuals
   m_TagString: Untagged
@@ -10691,6 +10871,18 @@ Transform:
   m_Father: {fileID: 645056933}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1444910839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1444910837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3978acaf2eedc8f4889c42ba095690a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedRenderers: 
 --- !u!1 &1445405629
 GameObject:
   m_ObjectHideFlags: 0
@@ -11041,6 +11233,10 @@ MonoBehaviour:
   reloadMaxRepetitions: 0
   reloadCount: 0
   reloadDelay: 0
+  isReloadRandom: 0
+  reloadRange:
+  - 0
+  - 0
   focusDuration: 0
   focusLossModeIndex: 0
   FocusLossSpeed: 1
@@ -11276,6 +11472,10 @@ MonoBehaviour:
   reloadMaxRepetitions: 0
   reloadCount: 0
   reloadDelay: 0
+  isReloadRandom: 0
+  reloadRange:
+  - 0
+  - 0
   focusDuration: 0
   focusLossModeIndex: 0
   FocusLossSpeed: 1
@@ -11338,12 +11538,15 @@ MonoBehaviour:
   delayRange:
   - 0
   - 0
+  multipleActionsInTime: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
   ModifyGrabMode: 0
   grabDistance: 0
   touchDistance: 0
   grabModeIndex: 0
+  visualsScript: {fileID: 0}
+  AlterAllVisuals: 1
   triggerAnimation: 0
   targetAnimator: {fileID: 0}
   activeTriggerStatesAnim: 0000000000
@@ -11366,9 +11569,7 @@ MonoBehaviour:
   audioVolumeMin: 0.2
   audioVolumeMax: 1
   fadeSpeed: 0.005
-  IO: {fileID: 0}
-  VisualsToAlter: []
-  AlterAllVisuals: 1
+  IO: {fileID: 1214818743}
   triggerNotification: 0
 --- !u!1 &1551770389
 GameObject:
@@ -12661,6 +12862,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1773826605}
+  - component: {fileID: 1773826606}
   m_Layer: 0
   m_Name: Visuals
   m_TagString: Untagged
@@ -12682,6 +12884,18 @@ Transform:
   m_Father: {fileID: 1074505780}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1773826606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1773826604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3978acaf2eedc8f4889c42ba095690a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedRenderers: 
 --- !u!1 &1784731982
 GameObject:
   m_ObjectHideFlags: 0
@@ -12858,7 +13072,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -13095,7 +13309,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -13204,7 +13418,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -13556,12 +13770,15 @@ MonoBehaviour:
   delayRange:
   - 0
   - 0
+  multipleActionsInTime: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
   ModifyGrabMode: 0
   grabDistance: 0
   touchDistance: 0
   grabModeIndex: 0
+  visualsScript: {fileID: 0}
+  AlterAllVisuals: 1
   triggerAnimation: 0
   targetAnimator: {fileID: 0}
   activeTriggerStatesAnim: 0000000000
@@ -13584,9 +13801,7 @@ MonoBehaviour:
   audioVolumeMin: 0.2
   audioVolumeMax: 1
   fadeSpeed: 0.005
-  IO: {fileID: 0}
-  VisualsToAlter: []
-  AlterAllVisuals: 1
+  IO: {fileID: 842713444}
   triggerNotification: 0
 --- !u!114 &1861627540
 MonoBehaviour:
@@ -13632,6 +13847,10 @@ MonoBehaviour:
   reloadMaxRepetitions: 0
   reloadCount: 0
   reloadDelay: 0
+  isReloadRandom: 0
+  reloadRange:
+  - 0
+  - 0
   focusDuration: 0
   focusLossModeIndex: 0
   FocusLossSpeed: 1
@@ -13767,6 +13986,10 @@ MonoBehaviour:
   reloadMaxRepetitions: 0
   reloadCount: 0
   reloadDelay: 0
+  isReloadRandom: 0
+  reloadRange:
+  - 0
+  - 0
   focusDuration: 0
   focusLossModeIndex: 0
   FocusLossSpeed: 1
@@ -13825,12 +14048,15 @@ MonoBehaviour:
   delayRange:
   - 0
   - 0
+  multipleActionsInTime: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
   ModifyGrabMode: 0
   grabDistance: 0
   touchDistance: 0
   grabModeIndex: 0
+  visualsScript: {fileID: 0}
+  AlterAllVisuals: 1
   triggerAnimation: 0
   targetAnimator: {fileID: 0}
   activeTriggerStatesAnim: 0000000000
@@ -13853,9 +14079,7 @@ MonoBehaviour:
   audioVolumeMin: 0.2
   audioVolumeMax: 1
   fadeSpeed: 0.005
-  IO: {fileID: 0}
-  VisualsToAlter: []
-  AlterAllVisuals: 1
+  IO: {fileID: 1661833562}
   triggerNotification: 0
 --- !u!114 &1877110863
 MonoBehaviour:
@@ -14640,6 +14864,10 @@ MonoBehaviour:
   reloadMaxRepetitions: 0
   reloadCount: 0
   reloadDelay: 0
+  isReloadRandom: 0
+  reloadRange:
+  - 0
+  - 0
   focusDuration: 0
   focusLossModeIndex: 0
   FocusLossSpeed: 1
@@ -14702,12 +14930,15 @@ MonoBehaviour:
   delayRange:
   - 0
   - 0
+  multipleActionsInTime: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
   ModifyGrabMode: 0
   grabDistance: 0
   touchDistance: 0
   grabModeIndex: 0
+  visualsScript: {fileID: 0}
+  AlterAllVisuals: 1
   triggerAnimation: 0
   targetAnimator: {fileID: 0}
   activeTriggerStatesAnim: 0000000000
@@ -14730,9 +14961,7 @@ MonoBehaviour:
   audioVolumeMin: 0.2
   audioVolumeMax: 1
   fadeSpeed: 0.005
-  IO: {fileID: 0}
-  VisualsToAlter: []
-  AlterAllVisuals: 1
+  IO: {fileID: 1766648723}
   triggerNotification: 0
 --- !u!114 &1971476042
 MonoBehaviour:
@@ -14853,6 +15082,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 2002179546}
+  - component: {fileID: 2002179547}
   m_Layer: 0
   m_Name: Visuals
   m_TagString: Untagged
@@ -14874,6 +15104,18 @@ Transform:
   m_Father: {fileID: 7792258}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2002179547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2002179545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3978acaf2eedc8f4889c42ba095690a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedRenderers: 
 --- !u!1 &2025886435
 GameObject:
   m_ObjectHideFlags: 0
@@ -15205,6 +15447,10 @@ MonoBehaviour:
   reloadMaxRepetitions: 0
   reloadCount: 0
   reloadDelay: 0
+  isReloadRandom: 0
+  reloadRange:
+  - 0
+  - 0
   focusDuration: 0
   focusLossModeIndex: 0
   FocusLossSpeed: 1
@@ -15267,12 +15513,15 @@ MonoBehaviour:
   delayRange:
   - 0
   - 0
+  multipleActionsInTime: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
   ModifyGrabMode: 0
   grabDistance: 0
   touchDistance: 0
   grabModeIndex: 0
+  visualsScript: {fileID: 0}
+  AlterAllVisuals: 1
   triggerAnimation: 0
   targetAnimator: {fileID: 0}
   activeTriggerStatesAnim: 0000000000
@@ -15295,9 +15544,7 @@ MonoBehaviour:
   audioVolumeMin: 0.2
   audioVolumeMax: 1
   fadeSpeed: 0.005
-  IO: {fileID: 0}
-  VisualsToAlter: []
-  AlterAllVisuals: 1
+  IO: {fileID: 1838630714}
   triggerNotification: 0
 --- !u!114 &2061436763
 MonoBehaviour:
@@ -15699,6 +15946,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 2127905822}
+  - component: {fileID: 2127905823}
   m_Layer: 0
   m_Name: Visuals
   m_TagString: Untagged
@@ -15720,6 +15968,18 @@ Transform:
   m_Father: {fileID: 1661833561}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2127905823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2127905821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3978acaf2eedc8f4889c42ba095690a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedRenderers: 
 --- !u!1 &2140942543
 GameObject:
   m_ObjectHideFlags: 0
