@@ -1,11 +1,11 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Gaze
 {
     [Serializable]
+    [ExecuteInEditMode]
     public class Gaze_Actions : Gaze_AbstractBehaviour
     {
         public Gaze_InteractiveObject rootIO;
@@ -42,6 +42,10 @@ namespace Gaze
         public float grabDistance, touchDistance;
         public int grabModeIndex = 0;
 
+        // Visuals
+        public Gaze_Visuals visualsScript;
+        public bool AlterAllVisuals = true;
+
         // Animation
         public bool triggerAnimation;
         public Animator targetAnimator;
@@ -64,12 +68,9 @@ namespace Gaze
 
         private Gaze_Interaction gazeInteraction;
 
-        public List<Renderer> VisualsToAlter = new List<Renderer>();
-        public bool AlterAllVisuals = true;
-
-
         // Notification
         public bool triggerNotification;
+
 
         private void Awake()
         {
@@ -84,6 +85,7 @@ namespace Gaze
         {
             base.OnEnable();
             IO = GetIO();
+            visualsScript = IO.GetComponentInChildren<Gaze_Visuals>();
             //Gaze_EventManager.OnGazeEvent += OnGazeEvent;
         }
 
@@ -256,33 +258,13 @@ namespace Gaze
             if (ActionVisuals == ACTIVABLE_OPTION.NOTHING)
                 return;
 
-            Gaze_InteractiveObject io = GetIO();
-            // HACK: this is done as a hotfix for BALMOB in a future we need to create an scripts visuals add it into each IO and then track it.
-            Renderer[] AllRenderers = io.transform.FindChild("Visuals").GetComponentsInChildren<Renderer>();
-            ParticleSystem[] AllParticles = io.transform.FindChild("Visuals").GetComponentsInChildren<ParticleSystem>();
             bool isEnabled = ActionVisuals == ACTIVABLE_OPTION.ACTIVATE;
 
             if (AlterAllVisuals)
-            {
-                foreach (Renderer renderer in AllRenderers)
-                    renderer.enabled = isEnabled;
+                visualsScript.AlterAllVisuals(isEnabled);
 
-                foreach (ParticleSystem particle in AllParticles)
-                {
-                    if (isEnabled)
-                        particle.Play();
-                    else
-                        particle.Stop();
-                }
-            }
             else
-            {
-                foreach (Renderer renderer in VisualsToAlter)
-                {
-                    renderer.enabled = isEnabled;
-                }
-            }
-
+                visualsScript.AlterSelectedVisuals(isEnabled);
         }
 
         /// <summary>
@@ -365,7 +347,10 @@ namespace Gaze
             else
             {
                 if (delayRunning)
+                {
                     yield return null;
+                }
+
                 else
                 {
                     delayRunning = true;
@@ -373,6 +358,7 @@ namespace Gaze
                     _handler();
                     delayRunning = false;
                 }
+
             }
 
         }

@@ -19,11 +19,12 @@ namespace Gaze
         private List<string> hierarchyAudioSourceNames;
         private List<string> selectedAnimatorTriggers;
         private string[] grabModes;
+        private string[] allVisuals;
+        private Renderer[] allRenderers;
 
         void OnEnable()
         {
             actionsScript = (Gaze_Actions)target;
-
             rootIO = actionsScript.GetComponentInParent<Gaze_InteractiveObject>();
 
             //actionsScript.isActive = true;
@@ -252,9 +253,59 @@ namespace Gaze
 
             actionsScript.AlterAllVisuals = EditorGUILayout.Toggle("Alter All Visuals", actionsScript.AlterAllVisuals);
 
+
             if (!actionsScript.AlterAllVisuals)
             {
-                EditorGUILayout.PropertyField(serializedObject.FindProperty("VisualsToAlter"), true);
+                // Get All the renderers on this IO
+                allRenderers = actionsScript.visualsScript.GetAllRenderers().ToArray();
+                if (allRenderers.Length < 1)
+                {
+                    // If no visuals on this object, dont show anything else than warning
+                    EditorGUILayout.BeginHorizontal();
+                    EditorGUILayout.HelpBox("No visual found.", MessageType.Warning);
+                    EditorGUILayout.EndHorizontal();
+                }
+
+                else
+                {
+                    // storing all this object visuals name
+                    allVisuals = new string[allRenderers.Length];
+                    for (int i = 0; i < allVisuals.Length; i++)
+                        allVisuals[i] = allRenderers[i].gameObject.name;
+
+                    if (actionsScript.visualsScript.selectedRenderers.Count < 1)
+                    {
+                        EditorGUILayout.BeginHorizontal();
+                        EditorGUILayout.HelpBox("Add at least one visual or deactivate this condition if not needed.", MessageType.Warning);
+                        EditorGUILayout.EndHorizontal();
+                    }
+
+                    // for all selected renderers
+                    for (int i = 0; i < actionsScript.visualsScript.selectedRenderers.Count; i++)
+                    {
+                        // get the corresponding Renderer from the AllRenderers List
+                        int selectedEntryIndex = actionsScript.visualsScript.selectedRenderers[i];
+
+                        //display it
+                        EditorGUILayout.BeginHorizontal();
+                        actionsScript.visualsScript.selectedRenderers[i] = EditorGUILayout.Popup(selectedEntryIndex, allVisuals);
+
+                        // add a remove button
+                        if (GUILayout.Button("-"))
+                        {
+                            actionsScript.visualsScript.Remove(actionsScript.visualsScript.selectedRenderers[i]);
+                        }
+                        EditorGUILayout.EndHorizontal();
+                    }
+
+                    // display 'add' button
+                    if (GUILayout.Button("+"))
+                    {
+                        actionsScript.visualsScript.Add();
+                    }
+
+                    EditorGUILayout.Space();
+                }
             }
         }
 
@@ -335,7 +386,7 @@ namespace Gaze
                 GUILayout.EndHorizontal();
 
                 GUILayout.BeginHorizontal();
-                actionsScript.multipleActionsInTime = EditorGUILayout.ToggleLeft("Fire All Recorded Interactions After Delay", actionsScript.multipleActionsInTime);
+                actionsScript.multipleActionsInTime = EditorGUILayout.ToggleLeft("Fire All Interactions Recorded During Delay", actionsScript.multipleActionsInTime);
                 GUILayout.EndHorizontal();
             }
         }
