@@ -260,6 +260,7 @@ namespace Gaze
 
         /// <summary>
         /// Are Custom conditions enabled.
+        /// 
         /// Corresponds to the editor checkbox as a trigger condition
         /// </summary>
         public bool customConditionsEnabled;

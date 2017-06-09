@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Gaze
 {
     [ExecuteInEditMode]
-    public class Gaze_Visuals : MonoBehaviour
+    public class Gaze_InteractiveObjectVisuals : MonoBehaviour
     {
         [HideInInspector]
         public List<int> selectedRenderers = new List<int>();
@@ -31,7 +31,6 @@ namespace Gaze
         /// </summary>
         public void UpdateAllRenderers()
         {
-            Debug.Log("Updating");
             allRenderers.Clear();
             Renderer[] renderers = GetComponentsInChildren<Renderer>(true);
 

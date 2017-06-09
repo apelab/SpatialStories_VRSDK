@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Gaze
@@ -30,10 +31,9 @@ namespace Gaze
         public float delayTime;
         public bool isDelayRandom;
         public float[] delayRange = { 0.0f, 0.0f };
-        private Coroutine delayActions;
-        public delegate void ActionHandler();
+        private List<Request> requests = new List<Request>();
+        private delegate void ActionHandler();
         public bool multipleActionsInTime;
-        private bool delayRunning;
 
         // grab and touch distances
         public ALTERABLE_OPTION ModifyGrabDistance = ALTERABLE_OPTION.NOTHING;
@@ -43,7 +43,7 @@ namespace Gaze
         public int grabModeIndex = 0;
 
         // Visuals
-        public Gaze_Visuals visualsScript;
+        public Gaze_InteractiveObjectVisuals visualsScript;
         public bool AlterAllVisuals = true;
 
         // Animation
@@ -85,7 +85,7 @@ namespace Gaze
         {
             base.OnEnable();
             IO = GetIO();
-            visualsScript = IO.GetComponentInChildren<Gaze_Visuals>();
+            visualsScript = IO.GetComponentInChildren<Gaze_InteractiveObjectVisuals>();
             //Gaze_EventManager.OnGazeEvent += OnGazeEvent;
         }
 
@@ -106,6 +106,18 @@ namespace Gaze
             if (!gazeInteraction.HasConditions)
             {
                 OnTrigger();
+            }
+        }
+
+        void Update()
+        {
+            for (int i = requests.Count - 1; i >= 0; i--)
+            {
+                if (Time.time > requests[i].GetTime())
+                {
+                    requests[i].CallHandler();
+                    requests.RemoveAt(i);
+                }
             }
         }
 
@@ -336,33 +348,6 @@ namespace Gaze
             }
         }
 
-        private IEnumerator HandleActionsInTime(ActionHandler _handler)
-        {
-            if (multipleActionsInTime)
-            {
-                yield return new WaitForSeconds(delayTime);
-                _handler();
-            }
-
-            else
-            {
-                if (delayRunning)
-                {
-                    yield return null;
-                }
-
-                else
-                {
-                    delayRunning = true;
-                    yield return new WaitForSeconds(delayTime);
-                    _handler();
-                    delayRunning = false;
-                }
-
-            }
-
-        }
-
         /// <summary>
         /// Gets the root IO of GazeActions
         /// </summary>
@@ -413,7 +398,19 @@ namespace Gaze
                 return;
             //check if the action should be delayed
             if (isDelayed)
-                delayActions = StartCoroutine(HandleActionsInTime(() => ActionLogic()));
+            {
+                if (multipleActionsInTime)
+                    requests.Add(new Request(Time.time + delayTime, () => ActionLogic(), TriggerEventsAndStates.OnTrigger));
+                else
+                {
+                    for (int i = 0; i < requests.Count; i++)
+                    {
+                        if (requests[i].GetRequestType() == (TriggerEventsAndStates.OnTrigger))
+                            return;
+                    }
+                    requests.Add(new Request(Time.time + delayTime, () => ActionLogic(), TriggerEventsAndStates.OnTrigger));
+                }
+            }
 
             else
                 ActionLogic();
@@ -423,7 +420,19 @@ namespace Gaze
         protected override void OnReload()
         {
             if (isDelayed)
-                delayActions = StartCoroutine(HandleActionsInTime(() => TimeFrameLogic(1)));
+            {
+                if (multipleActionsInTime)
+                    requests.Add(new Request(Time.time + delayTime, () => TimeFrameLogic(1), TriggerEventsAndStates.OnReload));
+                else
+                {
+                    for (int i = 0; i < requests.Count; i++)
+                    {
+                        if (requests[i].GetRequestType() == (TriggerEventsAndStates.OnReload))
+                            return;
+                    }
+                    requests.Add(new Request(Time.time + delayTime, () => TimeFrameLogic(1), TriggerEventsAndStates.OnReload));
+                }
+            }
 
             else
                 TimeFrameLogic(1);
@@ -434,7 +443,19 @@ namespace Gaze
         protected override void OnBefore()
         {
             if (isDelayed)
-                delayActions = StartCoroutine(HandleActionsInTime(() => TimeFrameLogic(2)));
+            {
+                if (multipleActionsInTime)
+                    requests.Add(new Request(Time.time + delayTime, () => TimeFrameLogic(2), TriggerEventsAndStates.OnBefore));
+                else
+                {
+                    for (int i = 0; i < requests.Count; i++)
+                    {
+                        if (requests[i].GetRequestType() == (TriggerEventsAndStates.OnBefore))
+                            return;
+                    }
+                    requests.Add(new Request(Time.time + delayTime, () => TimeFrameLogic(2), TriggerEventsAndStates.OnBefore));
+                }
+            }
 
             else
                 TimeFrameLogic(2);
@@ -443,7 +464,19 @@ namespace Gaze
         protected override void OnActive()
         {
             if (isDelayed)
-                delayActions = StartCoroutine(HandleActionsInTime(() => TimeFrameLogic(3)));
+            {
+                if (multipleActionsInTime)
+                    requests.Add(new Request(Time.time + delayTime, () => TimeFrameLogic(3), TriggerEventsAndStates.OnActive));
+                else
+                {
+                    for (int i = 0; i < requests.Count; i++)
+                    {
+                        if (requests[i].GetRequestType() == (TriggerEventsAndStates.OnActive))
+                            return;
+                    }
+                    requests.Add(new Request(Time.time + delayTime, () => TimeFrameLogic(3), TriggerEventsAndStates.OnActive));
+                }
+            }
 
             else
                 TimeFrameLogic(3);
@@ -452,7 +485,19 @@ namespace Gaze
         protected override void OnAfter()
         {
             if (isDelayed)
-                delayActions = StartCoroutine(HandleActionsInTime(() => TimeFrameLogic(4)));
+            {
+                if (multipleActionsInTime)
+                    requests.Add(new Request(Time.time + delayTime, () => TimeFrameLogic(4), TriggerEventsAndStates.OnAfter));
+                else
+                {
+                    for (int i = 0; i < requests.Count; i++)
+                    {
+                        if (requests[i].GetRequestType() == (TriggerEventsAndStates.OnAfter))
+                            return;
+                    }
+                    requests.Add(new Request(Time.time + delayTime, () => TimeFrameLogic(4), TriggerEventsAndStates.OnAfter));
+                }
+            }
 
             else
                 TimeFrameLogic(4);
@@ -480,5 +525,24 @@ namespace Gaze
             }
         }
         */
+
+        private struct Request
+        {
+            private float time;
+            public float GetTime() { return time; }
+
+            private ActionHandler handler;
+            public void CallHandler() { handler(); }
+
+            private TriggerEventsAndStates requestType;
+            public TriggerEventsAndStates GetRequestType() { return requestType; }
+
+            public Request(float tm, ActionHandler h, TriggerEventsAndStates tp)
+            {
+                time = tm;
+                handler = h;
+                requestType = tp;
+            }
+        }
     }
 }

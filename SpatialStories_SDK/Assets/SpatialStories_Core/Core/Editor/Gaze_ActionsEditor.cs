@@ -20,7 +20,7 @@ namespace Gaze
         private List<string> selectedAnimatorTriggers;
         private string[] grabModes;
         private string[] allVisuals;
-        private Renderer[] allRenderers;
+        private List<Renderer> allRenderers;
 
         void OnEnable()
         {
@@ -257,8 +257,8 @@ namespace Gaze
             if (!actionsScript.AlterAllVisuals)
             {
                 // Get All the renderers on this IO
-                allRenderers = actionsScript.visualsScript.GetAllRenderers().ToArray();
-                if (allRenderers.Length < 1)
+                allRenderers = actionsScript.visualsScript.GetAllRenderers();
+                if (allRenderers.Count < 1)
                 {
                     // If no visuals on this object, dont show anything else than warning
                     EditorGUILayout.BeginHorizontal();
@@ -269,7 +269,7 @@ namespace Gaze
                 else
                 {
                     // storing all this object visuals name
-                    allVisuals = new string[allRenderers.Length];
+                    allVisuals = new string[allRenderers.Count];
                     for (int i = 0; i < allVisuals.Length; i++)
                         allVisuals[i] = allRenderers[i].gameObject.name;
 
