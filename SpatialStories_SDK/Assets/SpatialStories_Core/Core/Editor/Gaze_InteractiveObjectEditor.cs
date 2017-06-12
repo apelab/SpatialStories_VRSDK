@@ -17,7 +17,6 @@
 // <date>2014-06-01</date>
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
@@ -63,7 +62,8 @@ namespace Gaze
 
         public override void OnInspectorGUI()
         {
-            UpdateListsFromHierarchy();
+            //UpdateListsFromHierarchy();
+            UpdateDropTargetsNames();
             DisplayLogo();
             DisplayManipulationMode();
             DisplayTouchDistance();
@@ -72,10 +72,25 @@ namespace Gaze
             DisplayDragAndDrop();
         }
 
+        private void UpdateDropTargetsNames()
+        {
+            dnd_dropTargetsNames.Clear();
+
+            // rebuild them
+            if (Gaze_SceneInventory.Instance != null)
+            {
+                for (int i = 0; i < Gaze_SceneInventory.Instance.InteractiveObjectsCount; i++)
+                {
+                    dnd_dropTargetsNames.Add(Gaze_SceneInventory.Instance.InteractiveObjects[i].gameObject.name);
+                }
+            }
+        }
+
         private void UpdateListsFromHierarchy()
         {
-            //hierarchyIOsScripts.Clear();
-            //hierarchyIOs.Clear();
+            /*
+            hierarchyiosscripts.clear();
+            hierarchyIOs.Clear();
             dnd_dropTargetsNames.Clear();
 
             // rebuild them
@@ -85,6 +100,7 @@ namespace Gaze
                 hierarchyIOs.Add(hierarchyIOsScripts[i].gameObject);
                 dnd_dropTargetsNames.Add(hierarchyIOsScripts[i].gameObject.name);
             }
+            */
         }
 
         private void DisplayLogo()
@@ -235,7 +251,16 @@ namespace Gaze
             if (GUILayout.Button("+"))
             {
                 // TODO @apelab mike : add a new target in the list with a default value from a list of all IOs
-                Debug.Log("target to add : " + Gaze_SceneInventory.InteractiveObjects[0]);
+                //Debug.Log("Gaze_SceneInventory.Instance =" + Gaze_SceneInventory.Instance);
+                //Debug.Log("target to add : " + Gaze_SceneInventory.Instance.InteractiveObjects[0]);
+
+                // exit if there are no Interactive Object in the scene
+                if (Gaze_SceneInventory.Instance.InteractiveObjectsCount < 1)
+                    return;
+
+                // add the first Interactive Object by default
+                Debug.Log(Gaze_SceneInventory.Instance.InteractiveObjects[0]);
+                // TODO @mike add only if doesn't exist already !
                 gaze_InteractiveObjectScript.DnD_TargetsIndexes.Add(0);
 
                 EditorGUILayout.BeginHorizontal();
