@@ -239,7 +239,6 @@ namespace Gaze
                     EditorGUILayout.BeginHorizontal();
                     gaze_InteractiveObjectScript.DnD_TargetsIndexes[i] = EditorGUILayout.Popup(gaze_InteractiveObjectScript.DnD_TargetsIndexes[i], dnd_dropTargetsNames.ToArray());
 
-
                     // and a '-' button to remove it if needed
                     if (GUILayout.Button("-"))
                         gaze_InteractiveObjectScript.DnD_TargetsIndexes.Remove(gaze_InteractiveObjectScript.DnD_TargetsIndexes[i]);
@@ -259,7 +258,6 @@ namespace Gaze
                     return;
 
                 // add the first Interactive Object by default
-                Debug.Log(Gaze_SceneInventory.Instance.InteractiveObjects[0]);
                 // TODO @mike add only if doesn't exist already !
                 gaze_InteractiveObjectScript.DnD_TargetsIndexes.Add(0);
 

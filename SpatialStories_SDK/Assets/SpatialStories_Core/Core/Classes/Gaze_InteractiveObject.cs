@@ -186,7 +186,6 @@ namespace Gaze
             {
                 transform.SetParent(RootMotion);
             }
-            DnD_TargetsIndexes = new List<int>();
         }
 
         void Update()

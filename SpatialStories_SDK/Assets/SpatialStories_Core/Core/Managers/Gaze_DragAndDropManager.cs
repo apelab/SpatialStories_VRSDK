@@ -65,6 +65,8 @@ namespace Gaze
         private Gaze_InteractiveObject IO;
         private Coroutine m_SnapCoroutine;
         private Gaze_InteractiveObject interactiveObject;
+
+        private Transform targetTransform;
         #endregion
 
         void OnEnable()
@@ -116,7 +118,7 @@ namespace Gaze
                 else
                 {
                     Remove();
-                    Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(gameObject, currentDragAndDropCondition.DnDTargetObject.gameObject, Gaze_DragAndDropStates.DROPREADYCANCELED));
+                    Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(gameObject, targetTransform.gameObject, Gaze_DragAndDropStates.DROPREADYCANCELED));
                 }
 
                 // update flags
@@ -124,6 +126,7 @@ namespace Gaze
             }
         }
 
+        //TODO @mike see if currentDragAndDropCondition is still useful
         public void SetupDragAndDropProcess(Gaze_Conditions _dndCondition)
         {
             if (_dndCondition == currentDragAndDropCondition)
@@ -159,7 +162,7 @@ namespace Gaze
                 m_Snapped = true;
             }
 
-            Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(gameObject, currentDragAndDropCondition.DnDTargetObject.gameObject, Gaze_DragAndDropStates.DROPREADY));
+            Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(gameObject, targetTransform.gameObject, Gaze_DragAndDropStates.DROPREADY));
         }
 
         private void Remove()
@@ -169,7 +172,7 @@ namespace Gaze
                 UnSnap();
                 m_Snapped = false;
             }
-            Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(gameObject, currentDragAndDropCondition.DnDTargetObject.gameObject, Gaze_DragAndDropStates.REMOVE));
+            Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(gameObject, targetTransform.gameObject, Gaze_DragAndDropStates.REMOVE));
 
             if (IO.ActualGravityState == Gaze_GravityState.LOCKED)
             {
@@ -184,7 +187,7 @@ namespace Gaze
             if (m_attachOnDrop)
             {
                 // parent to target object
-                transform.SetParent(currentDragAndDropCondition.DnDTargetObject.transform);
+                transform.SetParent(targetTransform.transform);
                 Gaze_InteractiveObject IO = GetComponent<Gaze_InteractiveObject>();
 
                 if (currentDragAndDropCondition != null && currentDragAndDropCondition.DnDAttached)
@@ -200,7 +203,7 @@ namespace Gaze
                 }
             }
 
-            Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(gameObject, currentDragAndDropCondition.DnDTargetObject.gameObject, Gaze_DragAndDropStates.DROP));
+            Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(gameObject, targetTransform.gameObject, Gaze_DragAndDropStates.DROP));
         }
 
         private void PickUp()
@@ -211,7 +214,7 @@ namespace Gaze
                 m_Snapped = true;
             }
 
-            Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(gameObject, currentDragAndDropCondition.DnDTargetObject.gameObject, Gaze_DragAndDropStates.PICKUP));
+            Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(gameObject, targetTransform.gameObject, Gaze_DragAndDropStates.PICKUP));
         }
 
         private bool IsObjectAlignedWithItsTarget()
@@ -229,11 +232,14 @@ namespace Gaze
 
             // for each drop target in the list
             bool isWithinDistance = false;
+
             for (int i = 0; i < targetCount; i++)
             {
                 // compare distance between me (the drop object) and the drop target
-                if (Vector3.Distance(transform.position, Gaze_SceneInventory.Instance.InteractiveObjects[interactiveObject.DnD_TargetsIndexes[i]].transform.position) >= m_MinDistance)
+                if (Vector3.Distance(transform.position, Gaze_SceneInventory.Instance.InteractiveObjects[interactiveObject.DnD_TargetsIndexes[i]].transform.position) <= m_MinDistance)
                 {
+                    // store the target in proximity's transform
+                    targetTransform = Gaze_SceneInventory.Instance.InteractiveObjects[interactiveObject.DnD_TargetsIndexes[i]].transform;
                     isWithinDistance = true;
                     break;
                 }
@@ -243,12 +249,11 @@ namespace Gaze
             if (!isWithinDistance)
                 return false;
 
-
             // calculation of dot products 
             float[] validArray = { 1, 1 };
-            float[] xDotProducts = { Vector3.Dot(transform.up, currentDragAndDropCondition.DnDTargetObject.transform.up), Vector3.Dot(transform.forward, currentDragAndDropCondition.DnDTargetObject.transform.forward) };
-            float[] yDotProducts = { Vector3.Dot(transform.right, currentDragAndDropCondition.DnDTargetObject.transform.right), Vector3.Dot(transform.forward, currentDragAndDropCondition.DnDTargetObject.transform.forward) };
-            float[] zDotProducts = { Vector3.Dot(transform.right, currentDragAndDropCondition.DnDTargetObject.transform.right), Vector3.Dot(transform.up, currentDragAndDropCondition.DnDTargetObject.transform.up) };
+            float[] xDotProducts = { Vector3.Dot(transform.up, targetTransform.up), Vector3.Dot(transform.forward, targetTransform.forward) };
+            float[] yDotProducts = { Vector3.Dot(transform.right, targetTransform.right), Vector3.Dot(transform.forward, targetTransform.forward) };
+            float[] zDotProducts = { Vector3.Dot(transform.right, targetTransform.right), Vector3.Dot(transform.up, targetTransform.up) };
 
             // is respectAxis checked?
             float[] xAxisSimilarity = respectXAxis ? xDotProducts : validArray;
@@ -297,8 +302,8 @@ namespace Gaze
         {
             if (timeToSnap == 0)
             {
-                transform.position = currentDragAndDropCondition.DnDTargetObject.transform.position;
-                transform.rotation = currentDragAndDropCondition.DnDTargetObject.transform.rotation;
+                transform.position = targetTransform.position;
+                transform.rotation = targetTransform.transform.rotation;
             }
             else
             {
@@ -314,8 +319,8 @@ namespace Gaze
             while (time < timeToSnap)
             {
                 float eased = QuadEaseOut(time, 0f, 1f, timeToSnap);
-                transform.position = Vector3.Lerp(startPos, currentDragAndDropCondition.DnDTargetObject.transform.position, eased);
-                transform.rotation = Quaternion.Lerp(startRot, currentDragAndDropCondition.DnDTargetObject.transform.rotation, eased);
+                transform.position = Vector3.Lerp(startPos, targetTransform.position, eased);
+                transform.rotation = Quaternion.Lerp(startRot, targetTransform.rotation, eased);
                 time += Time.deltaTime;
                 yield return null;
             }
@@ -394,30 +399,35 @@ namespace Gaze
 
         private void OnProximityEvent(Gaze_ProximityEventArgs e)
         {
+
+            interactiveObject = GetComponent<Gaze_InteractiveObject>();
+
             // if the sender is me (the DropObject)
             if (((Gaze_InteractiveObject)e.Sender).gameObject.Equals(gameObject))
             {
                 // get the drop target from the received event
                 GameObject dropTarget = e.Other.GetComponentInParent<Gaze_InteractiveObject>().gameObject;
-                Debug.Log("drop object [" + gameObject + "] colliding with dropTarget [" + dropTarget + "]");
 
                 // get the list size of drop targets for this manager
                 int targetCount = interactiveObject.DnD_TargetsIndexes.Count;
-                Debug.Log("targetCount )" + targetCount);
 
                 // for each drop target in the list
                 for (int i = 0; i < targetCount; i++)
                 {
-                    Debug.Log("Gaze_SceneInventory.InteractiveObjects[interactiveObject.DnD_TargetsIndexes[i]] = " + Gaze_SceneInventory.Instance.InteractiveObjects[interactiveObject.DnD_TargetsIndexes[i]]);
-                    // TODO @apelab:mike check if the target is in the list
+                    // check if the target is in the list
                     if (dropTarget.Equals(Gaze_SceneInventory.Instance.InteractiveObjects[interactiveObject.DnD_TargetsIndexes[i]]))
                     {
                         m_InProximity = e.IsInProximity;
+
+                        // if it's not in proximity
                         if (!m_InProximity)
                         {
+                            // but was previously aligned
                             if (wasAligned)
                             {
                                 wasAligned = false;
+
+                                // that means the user removed the drop object from its target
                                 Remove();
                             }
                         }
