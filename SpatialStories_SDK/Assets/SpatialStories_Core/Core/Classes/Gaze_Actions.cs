@@ -1,4 +1,3 @@
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -27,14 +26,8 @@ namespace Gaze
 
         public bool DestroyOnTrigger;
 
-        // delay actions
-        public bool isDelayed;
-        public float delayTime;
-        public bool isDelayRandom;
-        public float[] delayRange = { 0.0f, 0.0f };
-        private List<Request> requests = new List<Request>();
-        private delegate void ActionHandler();
-        public bool multipleActionsInTime;
+
+
 
         // grab and touch distances
         public ALTERABLE_OPTION ModifyGrabDistance = ALTERABLE_OPTION.NOTHING;
@@ -98,7 +91,12 @@ namespace Gaze
 
         void Start()
         {
-            SetDelayRandom();
+            // Set the delay if it is random
+            if (isDelayRandom)
+                delayTime = UnityEngine.Random.Range(delayRange[0], delayRange[1]);
+
+            SetCustomActionsDelay();
+
             if (ActionAudio == ACTIVABLE_OPTION.ACTIVATE && targetAudioSource != null)
             {
                 targetAudioSource.volume = duckingEnabled ? audioVolumeMin : audioVolumeMax;
@@ -110,23 +108,18 @@ namespace Gaze
             }
         }
 
-        void Update()
+        private void SetCustomActionsDelay()
         {
-            for (int i = requests.Count - 1; i >= 0; i--)
+            Gaze_AbstractBehaviour[] behaviors = GetComponents<Gaze_AbstractBehaviour>();
+            for (int i = 0; i < behaviors.Length; i++)
             {
-                if (Time.time > requests[i].GetTime())
+                if (behaviors[i] == this) continue;
+                else
                 {
-                    requests[i].CallHandler();
-                    requests.RemoveAt(i);
+                    behaviors[i].isDelayed = this.isDelayed;
+                    behaviors[i].delayTime = this.delayTime;
+                    behaviors[i].multipleActionsInTime = this.multipleActionsInTime;
                 }
-            }
-        }
-
-        private void SetDelayRandom()
-        {
-            if (isDelayRandom)
-            {
-                delayTime = UnityEngine.Random.Range(delayRange[0], delayRange[1]);
             }
         }
 
@@ -429,111 +422,30 @@ namespace Gaze
             // Check if the trigger should be fired
             if (!gazeInteraction.HasActions)
                 return;
-            //check if the action should be delayed
-            if (isDelayed)
-            {
-                if (multipleActionsInTime)
-                    requests.Add(new Request(Time.time + delayTime, () => ActionLogic(), TriggerEventsAndStates.OnTrigger));
-                else
-                {
-                    for (int i = 0; i < requests.Count; i++)
-                    {
-                        if (requests[i].GetRequestType() == (TriggerEventsAndStates.OnTrigger))
-                            return;
-                    }
-                    requests.Add(new Request(Time.time + delayTime, () => ActionLogic(), TriggerEventsAndStates.OnTrigger));
-                }
-            }
-
-            else
-                ActionLogic();
+            ActionLogic();
         }
 
 
         protected override void OnReload()
         {
-            if (isDelayed)
-            {
-                if (multipleActionsInTime)
-                    requests.Add(new Request(Time.time + delayTime, () => TimeFrameLogic(1), TriggerEventsAndStates.OnReload));
-                else
-                {
-                    for (int i = 0; i < requests.Count; i++)
-                    {
-                        if (requests[i].GetRequestType() == (TriggerEventsAndStates.OnReload))
-                            return;
-                    }
-                    requests.Add(new Request(Time.time + delayTime, () => TimeFrameLogic(1), TriggerEventsAndStates.OnReload));
-                }
-            }
-
-            else
-                TimeFrameLogic(1);
+            TimeFrameLogic(1);
         }
 
 
 
         protected override void OnBefore()
         {
-            if (isDelayed)
-            {
-                if (multipleActionsInTime)
-                    requests.Add(new Request(Time.time + delayTime, () => TimeFrameLogic(2), TriggerEventsAndStates.OnBefore));
-                else
-                {
-                    for (int i = 0; i < requests.Count; i++)
-                    {
-                        if (requests[i].GetRequestType() == (TriggerEventsAndStates.OnBefore))
-                            return;
-                    }
-                    requests.Add(new Request(Time.time + delayTime, () => TimeFrameLogic(2), TriggerEventsAndStates.OnBefore));
-                }
-            }
-
-            else
-                TimeFrameLogic(2);
+            TimeFrameLogic(2);
         }
 
         protected override void OnActive()
         {
-            if (isDelayed)
-            {
-                if (multipleActionsInTime)
-                    requests.Add(new Request(Time.time + delayTime, () => TimeFrameLogic(3), TriggerEventsAndStates.OnActive));
-                else
-                {
-                    for (int i = 0; i < requests.Count; i++)
-                    {
-                        if (requests[i].GetRequestType() == (TriggerEventsAndStates.OnActive))
-                            return;
-                    }
-                    requests.Add(new Request(Time.time + delayTime, () => TimeFrameLogic(3), TriggerEventsAndStates.OnActive));
-                }
-            }
-
-            else
-                TimeFrameLogic(3);
+            TimeFrameLogic(3);
         }
 
         protected override void OnAfter()
         {
-            if (isDelayed)
-            {
-                if (multipleActionsInTime)
-                    requests.Add(new Request(Time.time + delayTime, () => TimeFrameLogic(4), TriggerEventsAndStates.OnAfter));
-                else
-                {
-                    for (int i = 0; i < requests.Count; i++)
-                    {
-                        if (requests[i].GetRequestType() == (TriggerEventsAndStates.OnAfter))
-                            return;
-                    }
-                    requests.Add(new Request(Time.time + delayTime, () => TimeFrameLogic(4), TriggerEventsAndStates.OnAfter));
-                }
-            }
-
-            else
-                TimeFrameLogic(4);
+            TimeFrameLogic(4);
         }
         #endregion
 
@@ -559,23 +471,5 @@ namespace Gaze
         }
         */
 
-        private struct Request
-        {
-            private float time;
-            public float GetTime() { return time; }
-
-            private ActionHandler handler;
-            public void CallHandler() { handler(); }
-
-            private TriggerEventsAndStates requestType;
-            public TriggerEventsAndStates GetRequestType() { return requestType; }
-
-            public Request(float tm, ActionHandler h, TriggerEventsAndStates tp)
-            {
-                time = tm;
-                handler = h;
-                requestType = tp;
-            }
-        }
     }
 }

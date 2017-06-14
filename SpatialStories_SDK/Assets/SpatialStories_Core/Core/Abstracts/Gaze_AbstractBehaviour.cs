@@ -15,12 +15,28 @@
 // <web>https://twitter.com/apelab_ch</web>
 // <web>http://www.apelab.ch</web>
 // <date>2014-06-01</date>
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Gaze
 {
     public abstract class Gaze_AbstractBehaviour : MonoBehaviour
     {
+        // delay actions
+        [HideInInspector]
+        public bool isDelayed;
+        [HideInInspector]
+        public float delayTime;
+        [HideInInspector]
+        public bool isDelayRandom;
+        [HideInInspector]
+        public float[] delayRange = { 0.0f, 0.0f };
+        [HideInInspector]
+        public bool multipleActionsInTime;
+        private delegate void BehaviorHandler();
+        private List<Request> requests = new List<Request>();
+
+
         protected Gaze_Conditions gazable;
         protected Gaze_TriggerState triggerState;
         protected int TriggerCount;
@@ -50,6 +66,18 @@ namespace Gaze
             Gaze_EventManager.OnProximityEvent -= onProximityEvent;
         }
 
+        void Update()
+        {
+            for (int i = requests.Count - 1; i >= 0; i--)
+            {
+                if (Time.time > requests[i].GetTime())
+                {
+                    requests[i].CallHandler();
+                    requests.RemoveAt(i);
+                }
+            }
+        }
+
         /// <summary>
         /// When the camea enters the proximity's collider zone
         /// </summary>
@@ -72,13 +100,24 @@ namespace Gaze
                 switch (triggerState)
                 {
                     case Gaze_TriggerState.BEFORE:
-                        OnBefore();
+                        if (isDelayed)
+                            HandleActionsInTime(() => OnBefore(), TriggerEventsAndStates.OnBefore);
+                        else
+                            OnBefore();
                         break;
+
                     case Gaze_TriggerState.ACTIVE:
-                        OnActive();
+                        if (isDelayed)
+                            HandleActionsInTime(() => OnActive(), TriggerEventsAndStates.OnActive);
+                        else
+                            OnActive();
                         break;
+
                     case Gaze_TriggerState.AFTER:
-                        OnAfter();
+                        if (isDelayed)
+                            HandleActionsInTime(() => OnAfter(), TriggerEventsAndStates.OnAfter);
+                        else
+                            OnAfter();
                         break;
                 }
             }
@@ -95,7 +134,11 @@ namespace Gaze
                     TriggerCount = e.Count;
                     TimeLastTriggered = e.Time;
 
-                    OnTrigger();
+                    //check if the action should be delayed
+                    if (isDelayed)
+                        HandleActionsInTime(() => OnTrigger(), TriggerEventsAndStates.OnTrigger);
+                    else
+                        OnTrigger();
                 }
                 else if (e.IsReload)
                 {
@@ -103,7 +146,11 @@ namespace Gaze
                     ReloadCount = e.Count;
                     TimeLastReloaded = e.Time;
 
-                    OnReload();
+                    //check if the action should be delayed
+                    if (isDelayed)
+                        HandleActionsInTime(() => OnReload(), TriggerEventsAndStates.OnReload);
+                    else
+                        OnReload();
                 }
                 else
                 {
@@ -112,6 +159,21 @@ namespace Gaze
                     ReloadMode = e.ReloadMode;
                     ReloadMaxRepetitions = e.ReloadMaxRepetitions;
                 }
+            }
+        }
+
+        private void HandleActionsInTime(BehaviorHandler _handler, TriggerEventsAndStates _type)
+        {
+            if (multipleActionsInTime)
+                requests.Add(new Request(Time.time + delayTime, _handler, _type));
+            else
+            {
+                for (int i = 0; i < requests.Count; i++)
+                {
+                    if (requests[i].GetRequestType() == (_type))
+                        return;
+                }
+                requests.Add(new Request(Time.time + delayTime, _handler, _type));
             }
         }
 
@@ -130,6 +192,26 @@ namespace Gaze
         protected abstract void OnActive();
 
         protected abstract void OnAfter();
+
+
+        private struct Request
+        {
+            private float time;
+            public float GetTime() { return time; }
+
+            private BehaviorHandler handler;
+            public void CallHandler() { handler(); }
+
+            private TriggerEventsAndStates requestType;
+            public TriggerEventsAndStates GetRequestType() { return requestType; }
+
+            public Request(float tm, BehaviorHandler h, TriggerEventsAndStates tp)
+            {
+                time = tm;
+                handler = h;
+                requestType = tp;
+            }
+        }
 
     }
 }
