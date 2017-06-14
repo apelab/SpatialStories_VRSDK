@@ -1,3 +1,5 @@
+
+
 using System;
 using System.Collections.Generic;
 using UnityEditor;
@@ -263,6 +265,7 @@ namespace Gaze
             {
                 // Get All the renderers on this IO
                 allRenderers = actionsScript.visualsScript.GetAllRenderers();
+                actionsScript.UpdateSelectedRenderers(allRenderers.Count);
                 if (allRenderers.Count < 1)
                 {
                     // If no visuals on this object, dont show anything else than warning
@@ -278,7 +281,7 @@ namespace Gaze
                     for (int i = 0; i < allVisuals.Length; i++)
                         allVisuals[i] = allRenderers[i].gameObject.name;
 
-                    if (actionsScript.visualsScript.selectedRenderers.Count < 1)
+                    if (actionsScript.selectedRenderers.Count < 1)
                     {
                         EditorGUILayout.BeginHorizontal();
                         EditorGUILayout.HelpBox("Add at least one visual or deactivate this condition if not needed.", MessageType.Warning);
@@ -286,19 +289,19 @@ namespace Gaze
                     }
 
                     // for all selected renderers
-                    for (int i = 0; i < actionsScript.visualsScript.selectedRenderers.Count; i++)
+                    for (int i = 0; i < actionsScript.selectedRenderers.Count; i++)
                     {
                         // get the corresponding Renderer from the AllRenderers List
-                        int selectedEntryIndex = actionsScript.visualsScript.selectedRenderers[i];
+                        int selectedEntryIndex = actionsScript.selectedRenderers[i];
 
                         //display it
                         EditorGUILayout.BeginHorizontal();
-                        actionsScript.visualsScript.selectedRenderers[i] = EditorGUILayout.Popup(selectedEntryIndex, allVisuals);
+                        actionsScript.selectedRenderers[i] = EditorGUILayout.Popup(selectedEntryIndex, allVisuals);
 
                         // add a remove button
                         if (GUILayout.Button("-"))
                         {
-                            actionsScript.visualsScript.Remove(actionsScript.visualsScript.selectedRenderers[i]);
+                            actionsScript.RemoveSelectedRenderer(actionsScript.selectedRenderers[i]);
                         }
                         EditorGUILayout.EndHorizontal();
                     }
@@ -306,7 +309,7 @@ namespace Gaze
                     // display 'add' button
                     if (GUILayout.Button("+"))
                     {
-                        actionsScript.visualsScript.Add();
+                        actionsScript.AddSelectedRenderer(allRenderers.Count);
                     }
 
                     EditorGUILayout.Space();

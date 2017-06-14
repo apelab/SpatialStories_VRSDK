@@ -1,3 +1,4 @@
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -45,6 +46,7 @@ namespace Gaze
         // Visuals
         public Gaze_InteractiveObjectVisuals visualsScript;
         public bool AlterAllVisuals = true;
+        public List<int> selectedRenderers = new List<int>();
 
         // Animation
         public bool triggerAnimation;
@@ -70,7 +72,6 @@ namespace Gaze
 
         // Notification
         public bool triggerNotification;
-
 
         private void Awake()
         {
@@ -276,8 +277,40 @@ namespace Gaze
                 visualsScript.AlterAllVisuals(isEnabled);
 
             else
-                visualsScript.AlterSelectedVisuals(isEnabled);
+                visualsScript.AlterSelectedVisuals(isEnabled, selectedRenderers);
         }
+
+        public void UpdateSelectedRenderers(int n)
+        {
+            for (int i = 0; i < selectedRenderers.Count; i++)
+            {
+                if (selectedRenderers[i] >= n)
+                {
+                    selectedRenderers.RemoveAt(i);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Adds the first index of allRenderers to selectedRenderers.
+        /// </summary>
+        public void AddSelectedRenderer(int n)
+        {
+            if (n > 0 && selectedRenderers.Count < n)
+                selectedRenderers.Add(0);
+            else
+                return;
+        }
+
+        /// <summary>
+        /// Removes from selectedRenderers the int corresponding to the index of allRenderers.
+        /// </summary>
+        public void RemoveSelectedRenderer(int r)
+        {
+            if (selectedRenderers.Contains(r))
+                selectedRenderers.Remove(r);
+        }
+
 
         /// <summary>
         /// Enables or disables visuals according with the user preferences.

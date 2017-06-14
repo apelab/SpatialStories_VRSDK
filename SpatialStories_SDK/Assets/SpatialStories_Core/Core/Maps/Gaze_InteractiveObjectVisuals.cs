@@ -7,8 +7,6 @@ namespace Gaze
     [ExecuteInEditMode]
     public class Gaze_InteractiveObjectVisuals : MonoBehaviour
     {
-        [HideInInspector]
-        public List<int> selectedRenderers = new List<int>();
         private List<Renderer> allRenderers = new List<Renderer>();
         public List<Renderer> GetAllRenderers()
         {
@@ -36,36 +34,8 @@ namespace Gaze
 
             foreach (Renderer renderer in renderers)
                 allRenderers.Add(renderer);
-
-
-            for (int i = 0; i < selectedRenderers.Count; i++)
-            {
-                if (selectedRenderers[i] >= allRenderers.Count)
-                {
-                    selectedRenderers.RemoveAt(i);
-                }
-            }
         }
 
-        /// <summary>
-        /// Adds the first index of allRenderers to selectedRenderers.
-        /// </summary>
-        public void Add()
-        {
-            if (allRenderers.Count > 0 && selectedRenderers.Count < allRenderers.Count)
-                selectedRenderers.Add(0);
-            else
-                return;
-        }
-
-        /// <summary>
-        /// Removes from selectedRenderers the int corresponding to the index of allRenderers.
-        /// </summary>
-        public void Remove(int r)
-        {
-            if (selectedRenderers.Contains(r))
-                selectedRenderers.Remove(r);
-        }
 
         internal void AlterAllVisuals(bool enable)
         {
@@ -82,7 +52,7 @@ namespace Gaze
             }
         }
 
-        internal void AlterSelectedVisuals(bool enable)
+        internal void AlterSelectedVisuals(bool enable, List<int> selectedRenderers)
         {
             foreach (int r in selectedRenderers)
             {
@@ -101,4 +71,3 @@ namespace Gaze
     }
 
 }
-
