@@ -458,6 +458,7 @@ GameObject:
   m_Component:
   - component: {fileID: 144466670}
   - component: {fileID: 144466671}
+  - component: {fileID: 144466672}
   m_Layer: 0
   m_Name: Interaction
   m_TagString: Untagged
@@ -490,7 +491,119 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HasActions: 0
-  HasConditions: 0
+  HasConditions: 1
+--- !u!114 &144466672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 144466669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a11d97df356699943aab990d9fcca9f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dependent: 0
+  requireAllActivators: 0
+  requireAllDeactivators: 0
+  proximityMap:
+    proximityEntryList: []
+    proximityStateIndex: 0
+  grabMap:
+    grabEntryList: []
+    grabHandsIndex: 0
+    grabStateLeftIndex: 0
+    grabStateRightIndex: 0
+  customConditions: []
+  triggerStateIndex: 1
+  delayDuration: 0
+  delayed: 0
+  activeDuration: 0
+  expires: 0
+  autoTriggerModeIndex: 0
+  reload: 0
+  canBeTriggered: 1
+  TriggerCount: 0
+  reloadModeIndex: 0
+  reloadMaxRepetitions: 0
+  reloadCount: 0
+  reloadDelay: 0
+  focusDuration: 0
+  focusLossModeIndex: 0
+  FocusLossSpeed: 1
+  proximityEnabled: 0
+  grabEnabled: 0
+  teleportIndex: 0
+  teleportEnabled: 0
+  inputsEnabled: 0
+  InputsMap:
+    InputsEntries:
+    - inputType: 1
+      valid: 0
+    - inputType: 1
+      valid: 0
+    - inputType: 1
+      valid: 0
+    - inputType: 1
+      valid: 0
+    - inputType: 1
+      valid: 0
+    - inputType: 1
+      valid: 0
+    - inputType: 1
+      valid: 0
+    - inputType: 1
+      valid: 0
+    - inputType: 1
+      valid: 0
+    - inputType: 1
+      valid: 0
+    - inputType: 1
+      valid: 0
+    - inputType: 1
+      valid: 0
+    - inputType: 1
+      valid: 0
+    - inputType: 1
+      valid: 0
+    - inputType: 1
+      valid: 0
+    - inputType: 1
+      valid: 0
+    - inputType: 1
+      valid: 0
+    - inputType: 1
+      valid: 0
+    AreDependenciesSatisfied: 1
+  requireAllInputs: 0
+  customConditionsEnabled: 0
+  dragAndDropEnabled: 1
+  dndOnDropReadyIndex: 0
+  dndOnDropIndex: 1
+  dndOnPickupIndex: 0
+  dndOnRemoveIndex: 0
+  dragAndDropAnyTarget: 0
+  dndTargetModesIndex: 1
+  DnDAttached: 0
+  dndTargets: 0100000000000000
+  requireAllProximities: 0
+  touchMap:
+    TouchEnitry:
+      hand: 0
+      interactiveObject: {fileID: 0}
+    touchHandsIndex: 0
+    touchActionIndex: 0
+  gazeEnabled: 0
+  touchEnabled: 0
+  ActivateOnDependencyMap:
+    dependencies: []
+    AreDependenciesSatisfied: 1
+  DeactivateOnDependencyMap:
+    dependencies: []
+    AreDependenciesSatisfied: 0
+  gazeColliderIO: {fileID: 0}
+  ReloadDependencies: 0
+  isActive: 1
 --- !u!1 &157439651
 GameObject:
   m_ObjectHideFlags: 0
@@ -816,7 +929,7 @@ MonoBehaviour:
   AttractionSpeed: 1
   IsManipulable: 0
   RootMotion: {fileID: 0}
-  IsDragAndDropEnabled: 1
+  IsDragAndDropEnabled: 0
   DnD_minDistance: 1
   DnD_angleThreshold: 1
   DnD_respectXAxis: 1
@@ -837,7 +950,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 315177521}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.6, y: 2.42, z: 3.78}
+  m_LocalPosition: {x: -2.44, y: 1.08, z: 3.78}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1673889021}
@@ -1939,8 +2052,10 @@ MonoBehaviour:
   dndOnDropIndex: 0
   dndOnPickupIndex: 0
   dndOnRemoveIndex: 0
-  DnDTargetObject: {fileID: 0}
+  dragAndDropAnyTarget: 0
+  dndTargetModesIndex: 0
   DnDAttached: 0
+  dndTargets: 
   requireAllProximities: 0
   touchMap:
     TouchEnitry:
@@ -2144,8 +2259,10 @@ MonoBehaviour:
   dndOnDropIndex: 0
   dndOnPickupIndex: 0
   dndOnRemoveIndex: 0
-  DnDTargetObject: {fileID: 0}
+  dragAndDropAnyTarget: 0
+  dndTargetModesIndex: 0
   DnDAttached: 0
+  dndTargets: 
   requireAllProximities: 0
   touchMap:
     TouchEnitry:
@@ -2582,8 +2699,10 @@ MonoBehaviour:
   dndOnDropIndex: 0
   dndOnPickupIndex: 0
   dndOnRemoveIndex: 0
-  DnDTargetObject: {fileID: 0}
+  dragAndDropAnyTarget: 0
+  dndTargetModesIndex: 0
   DnDAttached: 0
+  dndTargets: 
   requireAllProximities: 0
   touchMap:
     TouchEnitry:
@@ -4255,7 +4374,7 @@ MonoBehaviour:
   IsDragAndDropEnabled: 1
   DnD_minDistance: 1
   DnD_angleThreshold: 1
-  DnD_respectXAxis: 1
+  DnD_respectXAxis: 0
   DnD_respectXAxisMirrored: 0
   DnD_respectYAxis: 0
   DnD_respectYAxisMirrored: 0
@@ -4263,7 +4382,7 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
-  DnD_TargetsIndexes: 00000000
+  DnD_TargetsIndexes: 04000000
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
 --- !u!4 &1409880801
@@ -4273,7 +4392,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1409880797}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.33, y: 2.42, z: 3.78}
+  m_LocalPosition: {x: 0.33, y: 1.08, z: 3.78}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1473731486}
@@ -5666,7 +5785,7 @@ MonoBehaviour:
   AttractionSpeed: 1
   IsManipulable: 0
   RootMotion: {fileID: 0}
-  IsDragAndDropEnabled: 1
+  IsDragAndDropEnabled: 0
   DnD_minDistance: 1
   DnD_angleThreshold: 1
   DnD_respectXAxis: 1
@@ -5687,7 +5806,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1689934026}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.19, y: 2.42, z: 3.78}
+  m_LocalPosition: {x: 3.19, y: 1.08, z: 3.78}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1006491366}

@@ -52,6 +52,8 @@ namespace Gaze
         private List<Gaze_AbstractConditions> hierarchyCustomConditions;
         private List<string> hierarchyCustomConditionsNames;
         private string[] customConditionActionEnum;
+        private string[] dndTargetsModes;
+        private List<string> dndTargetsNames;
 
         #endregion
 
@@ -71,6 +73,7 @@ namespace Gaze
             hierarchyInteractionsNames = new List<string>();
             hierarchyGazeColliders = new List<Collider>();
             hierarchyProximities = new List<Gaze_InteractiveObject>();
+            dndTargetsNames = new List<string>();
 
             focusLossModes = Enum.GetNames(typeof(Gaze_FocusLossMode));
             reloadModes = Enum.GetNames(typeof(Gaze_ReloadMode));
@@ -79,8 +82,22 @@ namespace Gaze
             hierarchyCustomConditions = new List<Gaze_AbstractConditions>();
             hierarchyCustomConditionsNames = new List<string>();
             customConditionActionEnum = Enum.GetNames(typeof(Gaze_CustomConditionActionEnum));
-
+            dndTargetsModes = Enum.GetNames(typeof(apelab_DnDTargetsModes));
+            FetchDnDTargets();
             FetchInputsList();
+        }
+
+        private void FetchDnDTargets()
+        {
+            // get names of targets IOs in the Gaze_InteractiveObject's editor list
+            int targetsCount = targetConditions.RootIO.DnD_TargetsIndexes.Count();
+            if (targetsCount > 0)
+            {
+                for (int i = 0; i < targetsCount; i++)
+                {
+                    dndTargetsNames.Add(Gaze_SceneInventory.Instance.InteractiveObjects[targetConditions.RootIO.DnD_TargetsIndexes[i]].ToString());
+                }
+            }
         }
 
         private void FetchInputsList()
@@ -843,9 +860,6 @@ namespace Gaze
             if (targetConditions.dragAndDropEnabled)
             {
                 EditorGUILayout.BeginHorizontal();
-                targetConditions.DnDTargetObject = (Gaze_InteractiveObject)EditorGUILayout.ObjectField("Target", targetConditions.DnDTargetObject, typeof(Gaze_InteractiveObject), true);
-                EditorGUILayout.EndHorizontal();
-                EditorGUILayout.BeginHorizontal();
                 targetConditions.dndOnDropReadyIndex = EditorGUILayout.Popup("On Drop Ready", targetConditions.dndOnDropReadyIndex, customConditionActionEnum);
                 EditorGUILayout.EndHorizontal();
                 EditorGUILayout.BeginHorizontal();
@@ -857,7 +871,57 @@ namespace Gaze
                 EditorGUILayout.BeginHorizontal();
                 targetConditions.dndOnRemoveIndex = EditorGUILayout.Popup("On Remove", targetConditions.dndOnRemoveIndex, customConditionActionEnum);
                 EditorGUILayout.EndHorizontal();
+                targetConditions.dndTargetModesIndex = EditorGUILayout.Popup("Targets", targetConditions.dndTargetModesIndex, dndTargetsModes);
+
+                if (targetConditions.dndTargetModesIndex.Equals((int)apelab_DnDTargetsModes.CUSTOM))
+                    DisplayDnDTargetsChoices();
             }
+        }
+
+        private void DisplayDnDTargetsChoices()
+        {
+            // get count of targets
+            int targetsCount = targetConditions.dndTargets.Count;
+
+            // help message if no target is specified
+            if (targetsCount < 1)
+            {
+                EditorGUILayout.BeginHorizontal();
+                EditorGUILayout.HelpBox("Add at least one target or deactivate this condition if not needed.", MessageType.Warning);
+                EditorGUILayout.EndHorizontal();
+            }
+            else
+            {
+                // update inputs list in Gaze_Interactions (Gaze_Interactions may have been removed in the hierarchy)
+                for (int i = 0; i < targetsCount; i++)
+                {
+                    // display the entry
+                    EditorGUILayout.BeginHorizontal();
+                    targetConditions.dndTargets[i] = EditorGUILayout.Popup(targetConditions.dndTargets[i], dndTargetsNames.ToArray());
+
+                    // and a '-' button to remove it if needed
+                    if (GUILayout.Button("-"))
+                        targetConditions.dndTargets.Remove(targetConditions.dndTargets[i]);
+
+                    EditorGUILayout.EndHorizontal();
+                }
+            }
+
+            // display 'add' button
+            if (GUILayout.Button("+"))
+            {
+                // by default, add the first IO in hierarchy
+                targetConditions.dndTargets.Add(0);
+
+                EditorGUILayout.BeginHorizontal();
+
+                if (GUILayout.Button("-"))
+                {
+                    targetConditions.dndTargets.Remove(0);
+                }
+                EditorGUILayout.EndHorizontal();
+            }
+            EditorGUILayout.Space();
         }
     }
 }

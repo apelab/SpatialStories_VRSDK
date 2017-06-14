@@ -26,8 +26,6 @@ namespace Gaze
     public class Gaze_DragAndDropManager : MonoBehaviour
     {
         #region public Members
-        public Gaze_Conditions CurrentDragAndDropCondition { get { return currentDragAndDropCondition; } set { currentDragAndDropCondition = value; } }
-
         public float m_MinDistance = 1f;
         // in unity units
         public float angleThreshold = 1f;
@@ -60,6 +58,7 @@ namespace Gaze
         private Quaternion m_StartGrabLocalRotation;
 
         [SerializeField]
+        //TODO @mike get rid of currentDragAndDropCondition BUT workaround fix caused bugs when removing it below
         private Gaze_Conditions currentDragAndDropCondition;
         private bool isCurrentlyAligned = false;
         private Gaze_InteractiveObject IO;
@@ -126,16 +125,9 @@ namespace Gaze
             }
         }
 
-        //TODO @mike see if currentDragAndDropCondition is still useful
         public void SetupDragAndDropProcess(Gaze_Conditions _dndCondition)
         {
-            if (_dndCondition == currentDragAndDropCondition)
-                return;
-
-
-            currentDragAndDropCondition = _dndCondition;
             ResetVariables();
-
         }
 
         private void ResetVariables()

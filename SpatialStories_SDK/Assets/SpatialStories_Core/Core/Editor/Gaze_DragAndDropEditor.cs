@@ -25,7 +25,7 @@ namespace Gaze
             // GUI components here...
 
             EditorGUILayout.BeginHorizontal();
-            target_DragAndDropManager.CurrentDragAndDropCondition = (Gaze_Conditions)EditorGUILayout.ObjectField("Current Drag And Drop Condition", target_DragAndDropManager.CurrentDragAndDropCondition, typeof(Gaze_Conditions), true);
+            //target_DragAndDropManager.CurrentDragAndDropCondition = (Gaze_Conditions)EditorGUILayout.ObjectField("Current Drag And Drop Condition", target_DragAndDropManager.CurrentDragAndDropCondition, typeof(Gaze_Conditions), true);
             EditorGUILayout.EndHorizontal();
 
             EditorGUILayout.BeginHorizontal();

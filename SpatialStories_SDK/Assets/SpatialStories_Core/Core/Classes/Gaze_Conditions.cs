@@ -250,8 +250,10 @@ namespace Gaze
         public int dndOnDropIndex;
         public int dndOnPickupIndex;
         public int dndOnRemoveIndex;
-        public Gaze_InteractiveObject DnDTargetObject;
+        public bool dragAndDropAnyTarget = true;
+        public int dndTargetModesIndex;
         public bool DnDAttached;
+        public List<int> dndTargets;
 
         /// <summary>
         /// All the proximities in the list are required in order to be validated.
@@ -329,7 +331,6 @@ namespace Gaze
 
         void OnEnable()
         {
-
             rootIO = GetComponentInParent<Gaze_InteractiveObject>();
             root = rootIO.gameObject;
 

@@ -40,6 +40,8 @@ namespace Gaze
 
         public Gaze_DragAndDropCondition(Gaze_Conditions _gazeConditionsScript) : base(_gazeConditionsScript) { }
 
+        private GameObject dropObject, dropTarget;
+
         protected override void CustomSetup()
         {
             Gaze_EventManager.OnDragAndDropEvent += OnDragAndDropEvent;
@@ -78,6 +80,9 @@ namespace Gaze
 
         private void HandleConditionAction(Gaze_CustomConditionActionEnum action)
         {
+            if (!IsTargetValid())
+                return;
+
             switch (action)
             {
                 case Gaze_CustomConditionActionEnum.SEND_TRUE:
@@ -95,20 +100,61 @@ namespace Gaze
                 default:
                     break;
             }
-            //GetComponentInParent<Gaze_InteractiveObject> ().isCatchable = !attached;
+        }
+
+        // check if the target is in the list
+        private bool IsTargetValid()
+        {
+            Gaze_InteractiveObject rootIO = gazeConditionsScript.RootIO;
+
+            // if any target validates the condition
+            if (gazeConditionsScript.dndTargetModesIndex.Equals((int)apelab_DnDTargetsModes.ANY))
+            {
+                // get targets count
+                int targetsCount = rootIO.DnD_TargetsIndexes.Count;
+
+                // iterate and find one valid
+                for (int i = 0; i < targetsCount; i++)
+                {
+                    if (Gaze_SceneInventory.Instance.InteractiveObjects[rootIO.DnD_TargetsIndexes[i]].Equals(dropTarget))
+                    {
+                        Debug.Log("valid drop target " + dropTarget);
+                        return true;
+                    }
+                }
+            }
+            else
+            {
+                // iterate through selected targets
+                int targetsCount = gazeConditionsScript.dndTargets.Count;
+                for (int i = 0; i < targetsCount; i++)
+                {
+                    Debug.Log(gazeConditionsScript.RootIO + " dnd targets " + Gaze_SceneInventory.Instance.InteractiveObjects[gazeConditionsScript.dndTargets[i]]);
+                }
+                //for (int i = 0; i < targetsCount; i++)
+                //{
+                //    if (Gaze_SceneInventory.Instance.InteractiveObjects[gazeConditionsScript.dndTargets[i]].Equals(dropTarget))
+                //    {
+                //        Debug.Log("valid drop target " + dropTarget);
+                //        return true;
+                //    }
+                //}
+            }
+
+            Debug.Log("invalid drop target " + dropTarget);
+            return false;
         }
 
         private void OnDragAndDropEvent(Gaze_DragAndDropEventArgs e)
         {
             // get the DragAndDrop 
             receivedDnDManager = ((GameObject)e.Sender).GetComponent<Gaze_DragAndDropManager>();
-
-            // TODO @apelab ?
-            if (((GameObject)e.Sender).GetComponent<Gaze_DragAndDropManager>().CurrentDragAndDropCondition != gazeConditionsScript)
-                return;
+            dropObject = (GameObject)e.Sender;
+            dropTarget = (GameObject)e.TargetObject;
 
             if (receivedDnDManager && (GameObject)e.Sender == receivedDnDManager.gameObject)
             {
+                // check if state is valid
                 switch (e.State)
                 {
                     case Gaze_DragAndDropStates.DROPREADY:
