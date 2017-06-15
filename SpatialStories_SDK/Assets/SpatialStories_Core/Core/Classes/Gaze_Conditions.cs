@@ -246,14 +246,11 @@ namespace Gaze
         /// Is Drag And Drop enabled.
         /// </summary>
         public bool dragAndDropEnabled;
-        public int dndOnDropReadyIndex;
-        public int dndOnDropIndex;
-        public int dndOnPickupIndex;
-        public int dndOnRemoveIndex;
-        public bool dragAndDropAnyTarget = true;
+        public int dndEventValidator;
+        public bool dndAnyTarget = true;
         public int dndTargetModesIndex;
-        public bool DnDAttached;
-        public List<int> dndTargets;
+        public bool dndAttached;
+        public List<GameObject> dndTargets;
 
         /// <summary>
         /// All the proximities in the list are required in order to be validated.

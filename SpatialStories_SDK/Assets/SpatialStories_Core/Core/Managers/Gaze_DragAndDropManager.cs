@@ -182,7 +182,7 @@ namespace Gaze
                 transform.SetParent(targetTransform.transform);
                 Gaze_InteractiveObject IO = GetComponent<Gaze_InteractiveObject>();
 
-                if (currentDragAndDropCondition != null && currentDragAndDropCondition.DnDAttached)
+                if (currentDragAndDropCondition != null && currentDragAndDropCondition.dndAttached)
                 {
                     IO.DisableManipulationMode(Gaze_ManipulationModes.GRAB);
                     IO.IsManipulable = false;
@@ -216,7 +216,7 @@ namespace Gaze
                 UnSnap();
 
             // get the list size of drop targets for this manager
-            int targetCount = interactiveObject.DnD_TargetsIndexes.Count;
+            int targetCount = interactiveObject.DnD_Targets.Count;
 
             // exit if there's no target
             if (targetCount < 1)
@@ -228,10 +228,10 @@ namespace Gaze
             for (int i = 0; i < targetCount; i++)
             {
                 // compare distance between me (the drop object) and the drop target
-                if (Vector3.Distance(transform.position, Gaze_SceneInventory.Instance.InteractiveObjects[interactiveObject.DnD_TargetsIndexes[i]].transform.position) <= m_MinDistance)
+                if (Vector3.Distance(transform.position, interactiveObject.DnD_Targets[i].transform.position) <= m_MinDistance)
                 {
                     // store the target in proximity's transform
-                    targetTransform = Gaze_SceneInventory.Instance.InteractiveObjects[interactiveObject.DnD_TargetsIndexes[i]].transform;
+                    targetTransform = interactiveObject.DnD_Targets[i].transform;
                     isWithinDistance = true;
                     break;
                 }
@@ -401,13 +401,13 @@ namespace Gaze
                 GameObject dropTarget = e.Other.GetComponentInParent<Gaze_InteractiveObject>().gameObject;
 
                 // get the list size of drop targets for this manager
-                int targetCount = interactiveObject.DnD_TargetsIndexes.Count;
+                int targetCount = interactiveObject.DnD_Targets.Count;
 
                 // for each drop target in the list
                 for (int i = 0; i < targetCount; i++)
                 {
                     // check if the target is in the list
-                    if (dropTarget.Equals(Gaze_SceneInventory.Instance.InteractiveObjects[interactiveObject.DnD_TargetsIndexes[i]]))
+                    if (dropTarget.Equals(interactiveObject.DnD_Targets[i]))
                     {
                         m_InProximity = e.IsInProximity;
 

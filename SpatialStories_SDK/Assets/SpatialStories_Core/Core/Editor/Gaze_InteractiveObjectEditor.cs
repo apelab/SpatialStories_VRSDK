@@ -224,7 +224,7 @@ namespace Gaze
             GUILayout.EndHorizontal();
 
             // help message if no input is specified
-            if (gaze_InteractiveObjectScript.DnD_TargetsIndexes.Count < 1)
+            if (gaze_InteractiveObjectScript.DnD_Targets.Count < 1)
             {
                 EditorGUILayout.BeginHorizontal();
                 EditorGUILayout.HelpBox("Add at least one drop target or deactivate this condition if not needed.", MessageType.Warning);
@@ -233,15 +233,15 @@ namespace Gaze
             else
             {
                 // for each DnD target
-                for (int i = 0; i < gaze_InteractiveObjectScript.DnD_TargetsIndexes.Count; i++)
+                for (int i = 0; i < gaze_InteractiveObjectScript.DnD_Targets.Count; i++)
                 {
                     // display it in a popup
                     EditorGUILayout.BeginHorizontal();
-                    gaze_InteractiveObjectScript.DnD_TargetsIndexes[i] = EditorGUILayout.Popup(gaze_InteractiveObjectScript.DnD_TargetsIndexes[i], dnd_dropTargetsNames.ToArray());
+                    gaze_InteractiveObjectScript.DnD_Targets[i] = Gaze_SceneInventory.Instance.InteractiveObjects[EditorGUILayout.Popup(Gaze_SceneInventory.Instance.InteractiveObjects.IndexOf(gaze_InteractiveObjectScript.DnD_Targets[i]), dnd_dropTargetsNames.ToArray())];
 
                     // and a '-' button to remove it if needed
                     if (GUILayout.Button("-"))
-                        gaze_InteractiveObjectScript.DnD_TargetsIndexes.Remove(gaze_InteractiveObjectScript.DnD_TargetsIndexes[i]);
+                        gaze_InteractiveObjectScript.DnD_Targets.Remove(gaze_InteractiveObjectScript.DnD_Targets[i]);
 
                     EditorGUILayout.EndHorizontal();
                 }
@@ -259,17 +259,21 @@ namespace Gaze
 
                 // add the first Interactive Object by default
                 // TODO @mike add only if doesn't exist already !
-                gaze_InteractiveObjectScript.DnD_TargetsIndexes.Add(0);
+                gaze_InteractiveObjectScript.DnD_Targets.Add(Gaze_SceneInventory.Instance.InteractiveObjects[0]);
 
                 EditorGUILayout.BeginHorizontal();
                 if (GUILayout.Button("-"))
                 {
                     //targetConditions.InputsMap.Delete(d);
-                    gaze_InteractiveObjectScript.DnD_TargetsIndexes.Remove(gaze_InteractiveObjectScript.DnD_TargetsIndexes[0]);
+                    gaze_InteractiveObjectScript.DnD_Targets.Remove(Gaze_SceneInventory.Instance.InteractiveObjects[0]);
                 }
                 EditorGUILayout.EndHorizontal();
             }
             EditorGUILayout.Space();
+            //for (int i = 0; i < gaze_InteractiveObjectScript.DnD_TargetsIndexes.Count; i++)
+            //{
+            //    Debug.Log("IO targets "+ gaze_InteractiveObjectScript.DnD_TargetsIndexes[i]);
+            //}
         }
     }
 }

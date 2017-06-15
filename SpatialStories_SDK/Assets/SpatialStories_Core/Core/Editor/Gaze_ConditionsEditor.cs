@@ -52,6 +52,7 @@ namespace Gaze
         private List<Gaze_AbstractConditions> hierarchyCustomConditions;
         private List<string> hierarchyCustomConditionsNames;
         private string[] customConditionActionEnum;
+        private string[] dndEventValidatorEnum;
         private string[] dndTargetsModes;
         private List<string> dndTargetsNames;
 
@@ -82,6 +83,8 @@ namespace Gaze
             hierarchyCustomConditions = new List<Gaze_AbstractConditions>();
             hierarchyCustomConditionsNames = new List<string>();
             customConditionActionEnum = Enum.GetNames(typeof(Gaze_CustomConditionActionEnum));
+            dndEventValidatorEnum = Enum.GetNames(typeof(Gaze_DragAndDropStates));
+            //dndEventValidatorEnum = Enum.GetNames(typeof(apelab_DnDStatesEditorEnum));
             dndTargetsModes = Enum.GetNames(typeof(apelab_DnDTargetsModes));
             FetchDnDTargets();
             FetchInputsList();
@@ -89,13 +92,15 @@ namespace Gaze
 
         private void FetchDnDTargets()
         {
+            dndTargetsNames.Clear();
             // get names of targets IOs in the Gaze_InteractiveObject's editor list
-            int targetsCount = targetConditions.RootIO.DnD_TargetsIndexes.Count();
+            int targetsCount = targetConditions.RootIO.DnD_Targets.Count();
             if (targetsCount > 0)
             {
                 for (int i = 0; i < targetsCount; i++)
                 {
-                    dndTargetsNames.Add(Gaze_SceneInventory.Instance.InteractiveObjects[targetConditions.RootIO.DnD_TargetsIndexes[i]].ToString());
+                    dndTargetsNames.Add(targetConditions.RootIO.DnD_Targets[i].ToString());
+                    //Debug.Log("conditions target index [" + i + "] " + Gaze_SceneInventory.Instance.InteractiveObjects[targetConditions.RootIO.DnD_TargetsIndexes[i]]);
                 }
             }
         }
@@ -856,22 +861,13 @@ namespace Gaze
             EditorGUILayout.BeginHorizontal();
             targetConditions.dragAndDropEnabled = EditorGUILayout.ToggleLeft("Drag And Drop", targetConditions.dragAndDropEnabled);
             EditorGUILayout.EndHorizontal();
-
+            FetchDnDTargets();
             if (targetConditions.dragAndDropEnabled)
             {
                 EditorGUILayout.BeginHorizontal();
-                targetConditions.dndOnDropReadyIndex = EditorGUILayout.Popup("On Drop Ready", targetConditions.dndOnDropReadyIndex, customConditionActionEnum);
+                targetConditions.dndEventValidator = EditorGUILayout.Popup("Valid When", targetConditions.dndEventValidator, dndEventValidatorEnum);
                 EditorGUILayout.EndHorizontal();
-                EditorGUILayout.BeginHorizontal();
-                targetConditions.dndOnDropIndex = EditorGUILayout.Popup("On Drop", targetConditions.dndOnDropIndex, customConditionActionEnum);
-                EditorGUILayout.EndHorizontal();
-                EditorGUILayout.BeginHorizontal();
-                targetConditions.dndOnPickupIndex = EditorGUILayout.Popup("On Pickup", targetConditions.dndOnPickupIndex, customConditionActionEnum);
-                EditorGUILayout.EndHorizontal();
-                EditorGUILayout.BeginHorizontal();
-                targetConditions.dndOnRemoveIndex = EditorGUILayout.Popup("On Remove", targetConditions.dndOnRemoveIndex, customConditionActionEnum);
-                EditorGUILayout.EndHorizontal();
-                targetConditions.dndTargetModesIndex = EditorGUILayout.Popup("Targets", targetConditions.dndTargetModesIndex, dndTargetsModes);
+                targetConditions.dndTargetModesIndex = EditorGUILayout.Popup("On Target(s)", targetConditions.dndTargetModesIndex, dndTargetsModes);
 
                 if (targetConditions.dndTargetModesIndex.Equals((int)apelab_DnDTargetsModes.CUSTOM))
                     DisplayDnDTargetsChoices();
@@ -897,7 +893,8 @@ namespace Gaze
                 {
                     // display the entry
                     EditorGUILayout.BeginHorizontal();
-                    targetConditions.dndTargets[i] = EditorGUILayout.Popup(targetConditions.dndTargets[i], dndTargetsNames.ToArray());
+                    int index = targetConditions.RootIO.DnD_Targets.IndexOf(targetConditions.dndTargets[i]);
+                    targetConditions.dndTargets[i] = targetConditions.RootIO.DnD_Targets[EditorGUILayout.Popup(index, dndTargetsNames.ToArray())];
 
                     // and a '-' button to remove it if needed
                     if (GUILayout.Button("-"))
@@ -911,13 +908,13 @@ namespace Gaze
             if (GUILayout.Button("+"))
             {
                 // by default, add the first IO in hierarchy
-                targetConditions.dndTargets.Add(0);
+                targetConditions.dndTargets.Add(Gaze_SceneInventory.Instance.InteractiveObjects[0]);
 
                 EditorGUILayout.BeginHorizontal();
 
                 if (GUILayout.Button("-"))
                 {
-                    targetConditions.dndTargets.Remove(0);
+                    targetConditions.dndTargets.Remove(Gaze_SceneInventory.Instance.InteractiveObjects[0]);
                 }
                 EditorGUILayout.EndHorizontal();
             }

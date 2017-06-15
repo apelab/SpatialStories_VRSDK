@@ -171,7 +171,7 @@ namespace Gaze
         public bool DnD_respectZAxisMirrored = false;
         public bool DnD_snapBeforeDrop = true;
         public float DnD_TimeToSnap = 0.5f;
-        public List<int> DnD_TargetsIndexes = new List<int>();
+        public List<GameObject> DnD_Targets = new List<GameObject>();
 
         private Gaze_DragAndDropManager dragAndDropManager;
         private Gaze_SceneInventory sceneInventory;
