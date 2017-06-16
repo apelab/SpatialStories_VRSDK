@@ -39,7 +39,6 @@ namespace Gaze
         }
         #endregion OwnEvents
 
-
         #region members
 
         /// <summary>
@@ -290,6 +289,8 @@ namespace Gaze
         public bool gazeEnabled;
         public bool touchEnabled;
 
+
+
         public Gaze_DependencyMap ActivateOnDependencyMap = new Gaze_DependencyMap();
         public Gaze_DependencyMap DeactivateOnDependencyMap = new Gaze_DependencyMap();
 
@@ -300,6 +301,14 @@ namespace Gaze
         public List<Gaze_AbstractCondition> allConditions = new List<Gaze_AbstractCondition>();
 
         public Gaze_InteractiveObject gazeColliderIO;
+
+        //Hover Condition
+        public bool handHoverEnabled;
+        public Gaze_InteractiveObject handHoverIO;
+        public int hoverHandIndex;
+        public UnityEngine.VR.VRNode hoverHand;
+        public int hoverStateIndex;
+        public bool hoverIn;
 
         public bool ReloadDependencies = false;
 
@@ -334,6 +343,9 @@ namespace Gaze
 
             if (teleportEnabled)
                 activeConditions.Add(new Gaze_TeleportCondition(this));
+
+            if (handHoverEnabled)
+                activeConditions.Add(new Gaze_HandHoverCondition(this, handHoverIO));
         }
 
         void OnEnable()

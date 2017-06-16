@@ -49,6 +49,8 @@ namespace Gaze
         private List<Collider> hierarchyGazeColliders;
         private List<string> hierarchyGazeCollidersNames;
 
+        private List<Collider> hierarchyHandHoverColliders;
+
         private Dictionary<Collider, string> interactiveObjectsDico;
 
         private List<Gaze_AbstractConditions> hierarchyCustomConditions;
@@ -73,6 +75,7 @@ namespace Gaze
             hierarchyGazeColliders = new List<Collider>();
             hierarchyGazeCollidersNames = new List<string>();
             hierarchyProximities = new List<Gaze_InteractiveObject>();
+            hierarchyHandHoverColliders = new List<Collider>();
 
             focusLossModes = Enum.GetNames(typeof(Gaze_FocusLossMode));
             reloadModes = Enum.GetNames(typeof(Gaze_ReloadMode));
@@ -103,6 +106,7 @@ namespace Gaze
 
                     #region Conditions
                     DisplayConditionsBlock();
+                    DisplayHandHoverBlock();
                     DisplayProximityList();
                     DisplayTouchCondition();
                     DisplayGrabCondition();
@@ -219,6 +223,7 @@ namespace Gaze
             hierarchyCustomConditions.Clear();
             hierarchyCustomConditionsNames.Clear();
             targetConditions.customConditions.Clear();
+            hierarchyHandHoverColliders.Clear();
 
             // rebuild them
             hierarchyIOsScripts = (FindObjectsOfType(typeof(Gaze_InteractiveObject)) as Gaze_InteractiveObject[]).ToList();
@@ -230,6 +235,7 @@ namespace Gaze
                 UpdateConditionsLists(hierarchyIOsScripts[i].gameObject);
                 UpdateGazeCollidersList(hierarchyIOsScripts[i].gameObject);
                 UpdateProximitiesList(hierarchyIOsScripts[i].gameObject);
+                UpdateHandHoverCollidersList(hierarchyIOsScripts[i].gameObject);
             }
             UpdateCustomConditionsList();
         }
@@ -251,6 +257,12 @@ namespace Gaze
                 // build conditions' names
                 hierarchyInteractionsNames.Add(interactions[i].name);
             }
+        }
+
+        private void UpdateHandHoverCollidersList(GameObject g)
+        {
+            if (g && g.GetComponentInChildren<Gaze_HandHover>())
+                hierarchyHandHoverColliders.Add(g.GetComponentInChildren<Gaze_HandHover>().GetComponent<Collider>());
         }
 
         private void UpdateGazeCollidersList(GameObject g)
@@ -424,7 +436,7 @@ namespace Gaze
                     targetConditions.touchMap.TouchEnitry.interactiveObject == null))
                     targetConditions.touchMap.AddActivableEntry(targetConditions.RootIO.gameObject);
 
-                // chose which hand to use
+                // chose which hand to use1
                 EditorGUILayout.BeginHorizontal();
                 targetConditions.touchMap.touchHandsIndex = EditorGUILayout.Popup(targetConditions.touchMap.touchHandsIndex, Enum.GetNames(typeof(Gaze_HandsEnum)));
 
@@ -616,7 +628,8 @@ namespace Gaze
                 !targetConditions.dependent &&
                 !targetConditions.touchEnabled &&
                 !targetConditions.grabEnabled &&
-                !targetConditions.customConditionsEnabled)
+                !targetConditions.customConditionsEnabled &&
+                !targetConditions.handHoverEnabled)
             {
                 EditorGUILayout.BeginHorizontal();
                 EditorGUILayout.HelpBox("No condition selected !\nThis Interactive Object will trigger immediately !", MessageType.Warning);
@@ -939,6 +952,48 @@ namespace Gaze
 
             }
             GUILayout.EndHorizontal();
+            EditorGUILayout.Space();
+        }
+
+        private void DisplayHandHoverBlock()
+        {
+            targetConditions.handHoverEnabled = EditorGUILayout.ToggleLeft("Hand Hover", targetConditions.handHoverEnabled);
+
+            if (targetConditions.handHoverEnabled)
+            {
+                if (hierarchyHandHoverColliders.Count > 0)
+                {
+                    GUILayout.BeginHorizontal();
+
+                    // Set the chosen hand
+                    targetConditions.hoverHandIndex = EditorGUILayout.Popup(targetConditions.hoverHandIndex, Enum.GetNames(typeof(Gaze_HandsEnum)));
+                    if (targetConditions.hoverHandIndex == ((int)Gaze_HandsEnum.LEFT))
+                        targetConditions.hoverHand = VRNode.LeftHand;
+                    if (targetConditions.hoverHandIndex == ((int)Gaze_HandsEnum.RIGHT))
+                        targetConditions.hoverHand = VRNode.RightHand;
+
+
+                    // Set the state of the hover (In or Out)
+                    targetConditions.hoverStateIndex = EditorGUILayout.Popup(targetConditions.hoverStateIndex, Enum.GetNames(typeof(Gaze_HoverStates)));
+                    if (targetConditions.hoverStateIndex == (int)Gaze_HoverStates.IN)
+                        targetConditions.hoverIn = true;
+                    if (targetConditions.hoverStateIndex == (int)Gaze_HoverStates.OUT)
+                        targetConditions.hoverIn = false;
+
+                    // Set the default IO for the Hand Hover
+                    if (targetConditions.handHoverIO == null)
+                        targetConditions.handHoverIO = targetConditions.GetComponentInParent<Gaze_InteractiveObject>();
+                    // Enable choosing another IO
+                    var handHoverObject = EditorGUILayout.ObjectField(targetConditions.handHoverIO, typeof(Gaze_InteractiveObject), true);
+                    if (handHoverObject != null)
+                    {
+                        targetConditions.handHoverIO = (Gaze_InteractiveObject)handHoverObject;
+                    }
+
+                    GUILayout.EndHorizontal();
+                }
+            }
+
             EditorGUILayout.Space();
         }
     }
