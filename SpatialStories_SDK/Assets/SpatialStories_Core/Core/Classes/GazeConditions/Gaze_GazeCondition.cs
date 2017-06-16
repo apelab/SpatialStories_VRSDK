@@ -5,7 +5,10 @@ namespace Gaze
 {
     public class Gaze_GazeCondition : Gaze_AbstractCondition
     {
+        // this boolean is a HOTFIX to be able to display the state of the condition in ToEditorGUI(),
+        // if the condition is set to reload on infinite, isValid is only true one frame and thus can't be used to display the state of the condition
         private Collider gazeCollider;
+        private bool validToEditorGUI;
 
         public Gaze_GazeCondition(Gaze_Conditions _gazeConditionsScript, Collider _gazeCollider) : base(_gazeConditionsScript)
         {
@@ -32,23 +35,50 @@ namespace Gaze
             // if sender is the gazable collider GameObject specified in the InteractiveObject Gaze field
             if (e.Sender != null && gazeCollider != null && (GameObject)e.Sender == gazeCollider.gameObject)
             {
-                IsValid = e.IsGazed;
+                // check if gaze is set to IN or OUT, and set IsValid accordingly
+                if (gazeConditionsScript.gazeIn)
+                {
+                    IsValid = e.IsGazed;
+                    validToEditorGUI = IsValid;
+                }
+                else
+                {
+                    IsValid = !e.IsGazed;
+                    validToEditorGUI = IsValid;
+                }
             }
         }
 
         public override void ToEditorGUI()
         {
             EditorGUILayout.BeginHorizontal();
-            if (IsValid)
+            if (gazeConditionsScript.gazeIn)
             {
-                RenderSatisfiedLabel("Gazed:");
-                RenderSatisfiedLabel("Gazed");
+                if (validToEditorGUI)
+                {
+                    RenderSatisfiedLabel("Gazed:");
+                    RenderSatisfiedLabel("Gazed");
+                }
+                else
+                {
+                    RenderNonSatisfiedLabel("Gazed:");
+                    RenderNonSatisfiedLabel("Ungazed");
+                }
             }
             else
             {
-                RenderNonSatisfiedLabel("Gazed:");
-                RenderNonSatisfiedLabel("Ungazed");
+                if (validToEditorGUI)
+                {
+                    RenderSatisfiedLabel("Gazed:");
+                    RenderSatisfiedLabel("Ungazed");
+                }
+                else
+                {
+                    RenderNonSatisfiedLabel("Gazed:");
+                    RenderNonSatisfiedLabel("Gazed");
+                }
             }
+
             EditorGUILayout.EndHorizontal();
         }
     }

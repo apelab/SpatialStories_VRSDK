@@ -287,8 +287,11 @@ namespace Gaze
         /// Corresponds to the editor checkbox as a trigger condition.
         /// </summary>
         public bool gazeEnabled;
-        public bool touchEnabled;
+        public int gazeStateIndex;
+        // is the gaze condition set to in?
+        public bool gazeIn;
 
+        public bool touchEnabled;
 
 
         public Gaze_DependencyMap ActivateOnDependencyMap = new Gaze_DependencyMap();
@@ -308,6 +311,7 @@ namespace Gaze
         public int hoverHandIndex;
         public UnityEngine.VR.VRNode hoverHand;
         public int hoverStateIndex;
+        // is the hover condition set to in?
         public bool hoverIn;
 
         public bool ReloadDependencies = false;

@@ -339,7 +339,6 @@ namespace Gaze
                     // update proximity list (gazables may have been removed in the hierarchy)
                     if (targetConditions.proximityMap.proximityEntryList.Count > 0)
                     {
-
                         // NOTE don't use foreach to avoid InvalidOperationException
                         for (int i = 0; i < targetConditions.proximityMap.proximityEntryList.Count; i++)
                         {
@@ -407,6 +406,7 @@ namespace Gaze
                             {
                                 targetConditions.proximityMap.DeleteProximityEntry(d);
                             }
+
                         }
                         EditorGUILayout.EndHorizontal();
                     }
@@ -928,19 +928,27 @@ namespace Gaze
 
         private void DisplayConditionsBlock()
         {
-            GUILayout.BeginHorizontal();
             targetConditions.gazeEnabled = EditorGUILayout.ToggleLeft("Gaze", targetConditions.gazeEnabled);
 
             if (targetConditions.gazeEnabled)
             {
                 if (hierarchyGazeColliders.Count > 0)
                 {
+                    GUILayout.BeginHorizontal();
+
+                    // Set the state (in or out) 
+                    targetConditions.gazeStateIndex = EditorGUILayout.Popup(targetConditions.gazeStateIndex, Enum.GetNames(typeof(Gaze_HoverStates)));
+                    if (targetConditions.gazeStateIndex == (int)Gaze_HoverStates.IN)
+                        targetConditions.gazeIn = true;
+                    if (targetConditions.gazeStateIndex == (int)Gaze_HoverStates.OUT)
+                        targetConditions.gazeIn = false;
+
                     // Set the default collider for the gaze
                     if (targetConditions.gazeColliderIO == null)
                     {
                         targetConditions.gazeColliderIO = targetConditions.GetComponentInParent<Gaze_InteractiveObject>();
                     }
-
+                    // Enable choosing another one
                     var gazeObject = EditorGUILayout.ObjectField(targetConditions.gazeColliderIO, typeof(Gaze_InteractiveObject), true);
 
                     if (gazeObject != null)
@@ -948,10 +956,10 @@ namespace Gaze
                         targetConditions.gazeColliderIO = (Gaze_InteractiveObject)gazeObject;
                     }
 
+                    GUILayout.EndHorizontal();
                 }
 
             }
-            GUILayout.EndHorizontal();
             EditorGUILayout.Space();
         }
 

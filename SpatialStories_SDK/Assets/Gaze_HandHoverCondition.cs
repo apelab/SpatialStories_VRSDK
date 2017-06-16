@@ -6,7 +6,7 @@ namespace Gaze
     public class Gaze_HandHoverCondition : Gaze_AbstractCondition
     {
         // this boolean is a HOTFIX to be able to display the state of the condition in ToEditorGUI(),
-        // as the hover condition automatically sets reload on infinite, isValid is only true one frame and thus can't be used to display the state of the condition
+        // if the hover condition is set to reload on infinite, isValid is only true one frame and thus can't be used to display the state of the condition
         private bool validToEditorGUI;
         private Gaze_InteractiveObject handHoverIO;
 
