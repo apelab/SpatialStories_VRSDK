@@ -318,6 +318,14 @@ namespace Gaze
 
         public bool isActive;
 
+        [SerializeField]
+        public int proximityGroupIndex = 0;
+        [SerializeField]
+        public List<string> rigCombinations = new List<string>();
+        [SerializeField]
+        public List<List<Gaze_InteractiveObject>> proximityRigGroups = new List<List<Gaze_InteractiveObject>>();
+
+
         #endregion
 
         private void Awake()
@@ -378,6 +386,20 @@ namespace Gaze
                     }
                 }
             }
+            /*
+            Debug.Log(this.root + " GroupList Size : " + proximityMap.proximityEntryGroupList.Count);
+            if (proximityMap.proximityEntryGroupList.Count > 0)
+            {
+                for (int i = 0; i < proximityMap.proximityEntryGroupList.Count; i++)
+                {
+                    for (int j = 0; j < proximityMap.proximityEntryGroupList[i].proximityEntries.Count; j++)
+                    {
+                        Debug.Log("ProxiGroup : " + proximityMap.proximityEntryGroupList[i].proximityEntries[j].dependentGameObject.name);
+                    }
+                }
+            }
+            Debug.Log(this.root + " EntryList Size : " + proximityMap.proximityEntryList.Count);
+            */
         }
 
         void OnDisable()

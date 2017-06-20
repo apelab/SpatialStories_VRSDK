@@ -16,7 +16,6 @@
 // <web>http://www.apelab.ch</web>
 // <date>2014-06-01</date>
 
-
 namespace Gaze
 {
     public static class Gaze_EventManager
@@ -84,7 +83,10 @@ namespace Gaze
         public static void FireProximityEvent(Gaze_ProximityEventArgs e)
         {
             if (OnProximityEvent != null)
+            {
                 OnProximityEvent(e);
+            }
+
         }
 
         /// <summary>

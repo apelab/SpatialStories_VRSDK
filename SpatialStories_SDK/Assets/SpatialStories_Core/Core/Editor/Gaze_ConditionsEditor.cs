@@ -44,6 +44,7 @@ namespace Gaze
         private List<string> hierarchyInteractionsNames;
         private string[] inputsNames;
         private List<Gaze_InteractiveObject> hierarchyProximities;
+        private List<Gaze_InteractiveObject> hierarchyRigProximities;
 
         // Reflection members
         private List<Collider> hierarchyGazeColliders;
@@ -55,6 +56,7 @@ namespace Gaze
 
         private List<Gaze_AbstractConditions> hierarchyCustomConditions;
         private List<string> hierarchyCustomConditionsNames;
+
 
         #endregion
 
@@ -75,6 +77,7 @@ namespace Gaze
             hierarchyGazeColliders = new List<Collider>();
             hierarchyGazeCollidersNames = new List<string>();
             hierarchyProximities = new List<Gaze_InteractiveObject>();
+            hierarchyRigProximities = new List<Gaze_InteractiveObject>();
             hierarchyHandHoverColliders = new List<Collider>();
 
             focusLossModes = Enum.GetNames(typeof(Gaze_FocusLossMode));
@@ -220,6 +223,7 @@ namespace Gaze
             hierarchyGazeColliders.Clear();
             hierarchyGazeCollidersNames.Clear();
             hierarchyProximities.Clear();
+            hierarchyRigProximities.Clear();
             hierarchyCustomConditions.Clear();
             hierarchyCustomConditionsNames.Clear();
             targetConditions.customConditions.Clear();
@@ -227,6 +231,7 @@ namespace Gaze
 
             // rebuild them
             hierarchyIOsScripts = (FindObjectsOfType(typeof(Gaze_InteractiveObject)) as Gaze_InteractiveObject[]).ToList();
+            UpdateRigProximitiesList();
             for (int i = 0; i < hierarchyIOsScripts.Count; i++)
             {
                 hierarchyIOsNames.Add(hierarchyIOsScripts[i].name);
@@ -273,7 +278,21 @@ namespace Gaze
 
         private void UpdateProximitiesList(GameObject g)
         {
-            hierarchyProximities.Add(g.GetComponentInChildren<Gaze_Proximity>().GetComponentInParent<Gaze_InteractiveObject>());
+            Gaze_InteractiveObject proximity = g.GetComponentInChildren<Gaze_Proximity>().GetComponentInParent<Gaze_InteractiveObject>();
+            hierarchyProximities.Add(proximity);
+        }
+
+        private void UpdateRigProximitiesList()
+        {
+            Gaze_InputManager rigRoot = (Gaze_InputManager)FindObjectOfType(typeof(Gaze_InputManager));
+            if (rigRoot)
+            {
+                Gaze_Proximity[] rigProximities = rigRoot.GetComponentsInChildren<Gaze_Proximity>();
+                for (int i = 0; i < rigProximities.Length; i++)
+                {
+                    hierarchyRigProximities.Add(rigProximities[i].GetComponentInParent<Gaze_InteractiveObject>());
+                }
+            }
         }
 
         private void UpdateCustomConditionsList()
@@ -312,6 +331,43 @@ namespace Gaze
             }
         }
 
+        private void UpdateRigSets()
+        {
+            targetConditions.rigCombinations.Clear();
+            targetConditions.proximityRigGroups.Clear();
+            if (hierarchyRigProximities.Count > 1)
+            {
+                int rigProxNum = hierarchyRigProximities.Count;
+                if (rigProxNum > 1)
+                {
+                    // get all the subsets of the hierarchyRigProximities list
+                    int subsetNum = 1 << rigProxNum;
+                    for (int set = 1; set < subsetNum; set++)
+                    {
+                        // building each subset
+                        string s = " || ";
+                        List<Gaze_InteractiveObject> l = new List<Gaze_InteractiveObject>();
+                        int count = 0;
+                        // for each value of  hierarchyRigProximity, check if the value should be in the subset
+                        for (int j = 0; j < rigProxNum; j++)
+                        {
+                            if ((set & (1 << j)) > 0)
+                            {
+                                s += hierarchyRigProximities[j].gameObject.name + " || ";
+                                l.Add(hierarchyRigProximities[j]);
+                                count++;
+                            }
+                        }
+                        if (count > 1)
+                        {
+                            targetConditions.rigCombinations.Add(s);
+                            targetConditions.proximityRigGroups.Add(l);
+                        }
+                    }
+                }
+            }
+        }
+
         private void DisplayProximityList()
         {
             EditorGUILayout.BeginHorizontal();
@@ -336,7 +392,6 @@ namespace Gaze
                 {
                     targetConditions.requireAllProximities = EditorGUILayout.ToggleLeft("Require all", targetConditions.requireAllProximities);
 
-                    // update proximity list (gazables may have been removed in the hierarchy)
                     if (targetConditions.proximityMap.proximityEntryList.Count > 0)
                     {
                         // NOTE don't use foreach to avoid InvalidOperationException
@@ -349,10 +404,43 @@ namespace Gaze
                             }
                         }
                     }
+
                     EditorGUILayout.EndHorizontal();
 
+                    // update the list of all possible rig groups
+                    UpdateRigSets();
 
-                    // display all the proximities
+                    if (targetConditions.proximityMap.proximityEntryGroupList.Count < 1 && hierarchyRigProximities.Count > 1)
+                    {
+                        // display 'add rig group' button
+                        if (GUILayout.Button("Add Rig Group"))
+                        {
+                            Gaze_ProximityEntryGroup d = targetConditions.proximityMap.AddProximityEntryGroup(targetConditions);
+                        }
+                    }
+
+                    for (int i = 0; i < targetConditions.proximityMap.proximityEntryGroupList.Count; i++)
+                    {
+                        EditorGUILayout.BeginHorizontal();
+
+                        // Display the popup with all possible combinations
+                        int selectedGroupIndex = targetConditions.proximityGroupIndex;
+                        targetConditions.proximityGroupIndex = EditorGUILayout.Popup(targetConditions.proximityGroupIndex, targetConditions.rigCombinations.ToArray());
+
+                        targetConditions.proximityMap.proximityEntryGroupList[i].proximityEntries.Clear();
+                        for (int j = 0; j < targetConditions.proximityRigGroups[targetConditions.proximityGroupIndex].Count; j++)
+                        {
+                            targetConditions.proximityMap.proximityEntryGroupList[i].AddProximityEntryToGroup(targetConditions.proximityRigGroups[targetConditions.proximityGroupIndex][j]);
+                        }
+
+                        if (GUILayout.Button("-"))
+                        {
+                            targetConditions.proximityMap.DeleteProximityEntryGroup(targetConditions.proximityMap.proximityEntryGroupList[i]);
+                        }
+                        EditorGUILayout.EndHorizontal();
+                    }
+
+
                     for (int i = 0; i < targetConditions.proximityMap.proximityEntryList.Count; i++)
                     {
                         EditorGUILayout.BeginHorizontal();
@@ -376,7 +464,8 @@ namespace Gaze
                         EditorGUILayout.EndHorizontal();
                     }
 
-                    if (targetConditions.proximityMap.proximityEntryList.Count < 2)
+
+                    if (targetConditions.proximityMap.proximityEntryList.Count + targetConditions.proximityMap.proximityEntryGroupList.Count < 2)
                     {
                         EditorGUILayout.BeginHorizontal();
                         EditorGUILayout.HelpBox("You need at least two proximities.", MessageType.Warning);

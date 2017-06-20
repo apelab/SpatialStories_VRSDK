@@ -15,12 +15,13 @@
 // <web>https://twitter.com/apelab_ch</web>
 // <web>http://www.apelab.ch</web>
 // <date>2014-06-01</date>
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Gaze
 {
-    [System.Serializable]
+    [Serializable]
     public class Gaze_ProximityEntry
     {
         /// <summary>
@@ -85,15 +86,29 @@ namespace Gaze
                 Debug.Log(item.name);
             }
         }
+    }
+
+    [System.Serializable]
+    public class Gaze_ProximityEntryGroup
+    {
+        [SerializeField]
+        public List<Gaze_ProximityEntry> proximityEntries = new List<Gaze_ProximityEntry>();
+
+        public void AddProximityEntryToGroup(Gaze_InteractiveObject dependentObject)
+        {
+            Gaze_ProximityEntry p = new Gaze_ProximityEntry();
+            p.dependentGameObject = dependentObject;
+            proximityEntries.Add(p);
+        }
+
 
     }
 
     [System.Serializable]
     public class Gaze_ProximityMap
     {
-
-        [SerializeField]
         public List<Gaze_ProximityEntry> proximityEntryList;
+        public List<Gaze_ProximityEntryGroup> proximityEntryGroupList;
 
         public int NumValidCollidingObjects { get { return GetValidatedEntriesCount(); } }
 
@@ -113,6 +128,7 @@ namespace Gaze
         public Gaze_ProximityMap()
         {
             proximityEntryList = new List<Gaze_ProximityEntry>();
+            proximityEntryGroupList = new List<Gaze_ProximityEntryGroup>();
         }
 
         public Gaze_ProximityEntry AddProximityEntry(Gaze_Conditions _conditions)
@@ -122,9 +138,21 @@ namespace Gaze
             return d;
         }
 
+        public Gaze_ProximityEntryGroup AddProximityEntryGroup(Gaze_Conditions _conditions)
+        {
+            Gaze_ProximityEntryGroup d = new Gaze_ProximityEntryGroup();
+            proximityEntryGroupList.Add(d);
+            return d;
+        }
+
         public bool DeleteProximityEntry(Gaze_ProximityEntry d)
         {
             return proximityEntryList.Remove(d);
+        }
+
+        public bool DeleteProximityEntryGroup(Gaze_ProximityEntryGroup d)
+        {
+            return proximityEntryGroupList.Remove(d);
         }
 
         public void AddCollidingObjectToEntry(Gaze_ProximityEntry _entry, Gaze_InteractiveObject _collidingObject, bool displayCollidingObjects = false)
@@ -154,6 +182,18 @@ namespace Gaze
                 if (p.IsValid(proximityStateIndex))
                     count++;
             }
+
+            foreach (Gaze_ProximityEntryGroup g in proximityEntryGroupList)
+            {
+                foreach (Gaze_ProximityEntry p in g.proximityEntries)
+                {
+                    if (p.IsValid(proximityStateIndex))
+                    {
+                        count++;
+                        break;
+                    }
+                }
+            }
             return count;
         }
 
@@ -170,60 +210,22 @@ namespace Gaze
                     return;
                 }
             }
+            foreach (Gaze_ProximityEntryGroup g in proximityEntryGroupList)
+            {
+                foreach (Gaze_ProximityEntry p in g.proximityEntries)
+                {
+                    if (p.CollidingObjects.Count < 1)
+                    {
+                        return;
+                    }
+                }
+            }
             isEveryoneColliding = true;
         }
 
         public void ResetEveryoneColliding()
         {
             isEveryoneColliding = false;
-        }
-
-        public void UpdateEveryoneColliding_old()
-        {
-            isEveryoneColliding = false;
-            foreach (Gaze_ProximityEntry p in proximityEntryList)
-            {
-                if (p.CollidingObjects.Count < 1)
-                {
-                    return;
-                }
-            }
-            isEveryoneColliding = true;
-        }
-
-        /// <summary>
-        /// Determines whether all the proximity entries are valid.
-        /// </summary>
-        /// <returns><c>true</c> if this instance is valid; otherwise, <c>false</c>.</returns>
-        public bool IsProximityListValid()
-        {
-            foreach (Gaze_ProximityEntry p in proximityEntryList)
-            {
-                if (!p.IsValid(proximityStateIndex))
-                    return false;
-            }
-
-            return true;
-        }
-
-        public void DisplayAllCollidingObjects()
-        {
-            foreach (Gaze_ProximityEntry item in proximityEntryList)
-            {
-                item.DisplayCollidingObjects();
-            }
-        }
-
-        public bool ContainsEntry(Gaze_InteractiveObject _entryGameObject)
-        {
-            for (int i = 0; i < proximityEntryList.Count; i++)
-            {
-                if (proximityEntryList[i].dependentGameObject.Equals(_entryGameObject))
-                {
-                    return true;
-                }
-            }
-            return false;
         }
     }
 }
