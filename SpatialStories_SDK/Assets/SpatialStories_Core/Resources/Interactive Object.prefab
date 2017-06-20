@@ -20,7 +20,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4000013055322216}
   - component: {fileID: 114000010841083782}
-  - component: {fileID: 114746154667141864}
   - component: {fileID: 114393922478971798}
   - component: {fileID: 114544087722382942}
   m_Layer: 0
@@ -39,7 +38,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4000013986762656}
   - component: {fileID: 114154902076240054}
-  - component: {fileID: 114628989291598488}
   - component: {fileID: 95000011677113014}
   - component: {fileID: 54586270227016684}
   m_Layer: 0
@@ -563,6 +561,18 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  IsDragAndDropEnabled: 0
+  DnD_minDistance: 1
+  DnD_angleThreshold: 1
+  DnD_respectXAxis: 0
+  DnD_respectXAxisMirrored: 0
+  DnD_respectYAxis: 0
+  DnD_respectYAxisMirrored: 0
+  DnD_respectZAxis: 0
+  DnD_respectZAxisMirrored: 0
+  DnD_snapBeforeDrop: 1
+  DnD_TimeToSnap: 0.5
+  DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
 --- !u!114 &114192969420758108
@@ -598,8 +608,7 @@ MonoBehaviour:
     grabHandsIndex: 0
     grabStateLeftIndex: 0
     grabStateRightIndex: 0
-  customConditions:
-  - {fileID: 114746154667141864}
+  customConditions: []
   triggerStateIndex: 1
   delayDuration: 0
   delayed: 0
@@ -638,6 +647,12 @@ MonoBehaviour:
     AreDependenciesSatisfied: 1
   requireAllInputs: 0
   customConditionsEnabled: 0
+  dragAndDropEnabled: 0
+  dndEventValidator: 0
+  dndAnyTarget: 1
+  dndTargetModesIndex: 0
+  dndAttached: 0
+  dndTargets: []
   requireAllProximities: 0
   touchMap:
     TouchEnitry:
@@ -646,6 +661,8 @@ MonoBehaviour:
     touchHandsIndex: 0
     touchActionIndex: 0
   gazeEnabled: 0
+  gazeStateIndex: 0
+  gazeIn: 0
   touchEnabled: 0
   ActivateOnDependencyMap:
     dependencies: []
@@ -654,6 +671,12 @@ MonoBehaviour:
     dependencies: []
     AreDependenciesSatisfied: 0
   gazeColliderIO: {fileID: 0}
+  handHoverEnabled: 0
+  handHoverIO: {fileID: 0}
+  hoverHandIndex: 0
+  hoverHand: 0
+  hoverStateIndex: 0
+  hoverIn: 0
   ReloadDependencies: 0
   isActive: 1
 --- !u!114 &114443437197172438
@@ -694,6 +717,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fe86aa1e2e51304b81a3f6820a3abdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDelayed: 0
+  delayTime: 0
+  isDelayRandom: 0
+  delayRange:
+  - 0
+  - 0
+  multipleActionsInTime: 0
   rootIO: {fileID: 0}
   isActive: 1
   ActionReset: 0
@@ -704,21 +734,15 @@ MonoBehaviour:
   ActionAudio: 0
   ActionColliders: 0
   DestroyOnTrigger: 0
-  isDelayed: 0
-  delayTime: 0
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  multipleActionsInTime: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
   ModifyGrabMode: 0
   grabDistance: 0
   touchDistance: 0
   grabModeIndex: 0
-  visualsScript: {fileID: 0}
+  visualsScript: {fileID: 114703547342893842}
   AlterAllVisuals: 1
+  selectedRenderers: 
   triggerAnimation: 0
   targetAnimator: {fileID: 0}
   activeTriggerStatesAnim: 0000000000
@@ -741,30 +765,8 @@ MonoBehaviour:
   audioVolumeMin: 0.2
   audioVolumeMax: 1
   fadeSpeed: 0.005
-  IO: {fileID: 0}
+  IO: {fileID: 114154902076240054}
   triggerNotification: 0
---- !u!114 &114628989291598488
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000010512863094}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6ec005bb801f6b42b79902e425cae65, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_MinDistance: 0.5
-  angleThreshold: 1
-  respectXAxis: 0
-  respectXAxisMirrored: 0
-  respectYAxis: 0
-  respectYAxisMirrored: 0
-  respectZAxis: 0
-  respectZAxisMirrored: 0
-  m_SnapBeforeDrop: 1
-  m_TimeToSnap: 0.5
-  currentDragAndDropCondition: {fileID: 114746154667141864}
 --- !u!114 &114682626370170554
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -787,25 +789,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3978acaf2eedc8f4889c42ba095690a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedRenderers: 
---- !u!114 &114746154667141864
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000010007351140}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 028afd6ab11f86e4ca542964abe9dfb4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  IsValid: 0
-  onDropReady: 0
-  onDrop: 0
-  onPickup: 0
-  onRemove: 0
-  TargetObject: {fileID: 0}
-  attached: 0
 --- !u!114 &114921984399802914
 MonoBehaviour:
   m_ObjectHideFlags: 1

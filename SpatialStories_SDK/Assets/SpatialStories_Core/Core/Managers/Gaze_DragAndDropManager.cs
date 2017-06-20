@@ -26,9 +26,7 @@ namespace Gaze
     public class Gaze_DragAndDropManager : MonoBehaviour
     {
         #region public Members
-        public Gaze_DragAndDropCondition CurrentDragAndDropCondition { get { return currentDragAndDropCondition; } set { currentDragAndDropCondition = value; } }
-
-        public float m_MinDistance = .5f;
+        public float m_MinDistance = 1f;
         // in unity units
         public float angleThreshold = 1f;
         // 0 is perpendicular, 1 is same direction
@@ -42,9 +40,7 @@ namespace Gaze
 
         // snaps only if attached on drop
         public float m_TimeToSnap = 0.5f;
-        #endregion
 
-        #region private Members
         [Gaze_ShowOnly]
         private bool m_Grabbed, isLevitating;
         [Gaze_ShowOnly]
@@ -66,6 +62,9 @@ namespace Gaze
         private bool isCurrentlyAligned = false;
         private Gaze_InteractiveObject IO;
         private Coroutine m_SnapCoroutine;
+        private Gaze_InteractiveObject interactiveObject;
+
+        private Transform targetTransform;
         #endregion
 
         void OnEnable()
@@ -78,6 +77,8 @@ namespace Gaze
 
             // to snap/unsnap by levitating the object
             Gaze_EventManager.OnLevitationEvent += OnLevitationEvent;
+
+            interactiveObject = GetComponent<Gaze_InteractiveObject>();
         }
 
         void OnDisable()
@@ -96,9 +97,6 @@ namespace Gaze
         void Update()
         {
 
-            if (currentDragAndDropCondition == null)
-                return;
-
             if (!m_Grabbed && !isLevitating)
                 return;
 
@@ -116,7 +114,8 @@ namespace Gaze
                 else
                 {
                     Remove();
-                    Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(gameObject, currentDragAndDropCondition.TargetObject.gameObject, Gaze_DragAndDropStates.DROPREADYCANCELED));
+                    //Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(gameObject, currentDragAndDropCondition.TargetObject.gameObject, Gaze_DragAndDropStates.DROPREADYCANCELED));
+                    Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(gameObject, targetTransform.gameObject, Gaze_DragAndDropStates.DROPREADYCANCELED));
                 }
 
                 // update flags
@@ -124,15 +123,9 @@ namespace Gaze
             }
         }
 
-        public void SetupDragAndDropProcess(Gaze_DragAndDropCondition _dndCondition)
+        public void SetupDragAndDropProcess(Gaze_Conditions _dndCondition)
         {
-            if (_dndCondition == currentDragAndDropCondition)
-                return;
-
-
-            currentDragAndDropCondition = _dndCondition;
             ResetVariables();
-
         }
 
         private void ResetVariables()
@@ -159,7 +152,8 @@ namespace Gaze
                 m_Snapped = true;
             }
 
-            Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(gameObject, currentDragAndDropCondition.TargetObject.gameObject, Gaze_DragAndDropStates.DROPREADY));
+            //Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(gameObject, currentDragAndDropCondition.TargetObject.gameObject, Gaze_DragAndDropStates.DROPREADY));
+            Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(gameObject, targetTransform.gameObject, Gaze_DragAndDropStates.DROPREADY));
         }
 
         private void Remove()
@@ -169,7 +163,8 @@ namespace Gaze
                 UnSnap();
                 m_Snapped = false;
             }
-            Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(gameObject, currentDragAndDropCondition.TargetObject.gameObject, Gaze_DragAndDropStates.REMOVE));
+            //Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(gameObject, currentDragAndDropCondition.TargetObject.gameObject, Gaze_DragAndDropStates.REMOVE));
+            Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(gameObject, targetTransform.gameObject, Gaze_DragAndDropStates.REMOVE));
 
             if (IO.ActualGravityState == Gaze_GravityState.LOCKED)
             {
@@ -184,7 +179,8 @@ namespace Gaze
             if (m_attachOnDrop)
             {
                 // parent to target object
-                transform.SetParent(currentDragAndDropCondition.TargetObject.transform);
+                //transform.SetParent(currentDragAndDropCondition.TargetObject.transform);
+                transform.SetParent(targetTransform.transform);
                 Gaze_InteractiveObject IO = GetComponent<Gaze_InteractiveObject>();
 
                 if (currentDragAndDropCondition != null && currentDragAndDropCondition.attached)
@@ -207,7 +203,7 @@ namespace Gaze
                 }
             }
 
-            Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(gameObject, currentDragAndDropCondition.TargetObject.gameObject, Gaze_DragAndDropStates.DROP));
+            Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(gameObject, targetTransform.gameObject, Gaze_DragAndDropStates.DROP));
         }
 
         private void PickUp()
@@ -218,28 +214,50 @@ namespace Gaze
                 m_Snapped = true;
             }
 
-            Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(gameObject, currentDragAndDropCondition.TargetObject.gameObject, Gaze_DragAndDropStates.PICKUP));
+            //Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(gameObject, currentDragAndDropCondition.TargetObject.gameObject, Gaze_DragAndDropStates.PICKUP));
+            Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(gameObject, targetTransform.gameObject, Gaze_DragAndDropStates.PICKUP));
         }
 
         private bool IsObjectAlignedWithItsTarget()
         {
-            if (currentDragAndDropCondition.TargetObject == null)
-                return false;
-
             // if already snapped, unsnap it
             if (m_Snapped)
                 UnSnap();
 
-            // return if object is too far from its DnD target
-            if (Vector3.Distance(transform.position, currentDragAndDropCondition.TargetObject.transform.position) >= m_MinDistance)
+            // get the list size of drop targets for this manager
+            int targetCount = interactiveObject.DnD_Targets.Count;
+
+            // exit if there's no target
+            if (targetCount < 1)
                 return false;
 
+            // for each drop target in the list
+            bool isWithinDistance = false;
+
+            for (int i = 0; i < targetCount; i++)
+            {
+                // compare distance between me (the drop object) and the drop target
+                if (Vector3.Distance(transform.position, interactiveObject.DnD_Targets[i].transform.position) <= m_MinDistance)
+                {
+                    // store the target in proximity's transform
+                    targetTransform = interactiveObject.DnD_Targets[i].transform;
+                    isWithinDistance = true;
+                    break;
+                }
+            }
+
+            // exit if none of the targets are aligned
+            if (!isWithinDistance)
+                return false;
 
             // calculation of dot products 
             float[] validArray = { 1, 1 };
-            float[] xDotProducts = { Vector3.Dot(transform.up, currentDragAndDropCondition.TargetObject.transform.up), Vector3.Dot(transform.forward, currentDragAndDropCondition.TargetObject.transform.forward) };
-            float[] yDotProducts = { Vector3.Dot(transform.right, currentDragAndDropCondition.TargetObject.transform.right), Vector3.Dot(transform.forward, currentDragAndDropCondition.TargetObject.transform.forward) };
-            float[] zDotProducts = { Vector3.Dot(transform.right, currentDragAndDropCondition.TargetObject.transform.right), Vector3.Dot(transform.up, currentDragAndDropCondition.TargetObject.transform.up) };
+            //float[] xDotProducts = { Vector3.Dot(transform.up, currentDragAndDropCondition.TargetObject.transform.up), Vector3.Dot(transform.forward, currentDragAndDropCondition.TargetObject.transform.forward) };
+            //float[] yDotProducts = { Vector3.Dot(transform.right, currentDragAndDropCondition.TargetObject.transform.right), Vector3.Dot(transform.forward, currentDragAndDropCondition.TargetObject.transform.forward) };
+            //float[] zDotProducts = { Vector3.Dot(transform.right, currentDragAndDropCondition.TargetObject.transform.right), Vector3.Dot(transform.up, currentDragAndDropCondition.TargetObject.transform.up) };
+            float[] xDotProducts = { Vector3.Dot(transform.up, targetTransform.up), Vector3.Dot(transform.forward, targetTransform.forward) };
+            float[] yDotProducts = { Vector3.Dot(transform.right, targetTransform.right), Vector3.Dot(transform.forward, targetTransform.forward) };
+            float[] zDotProducts = { Vector3.Dot(transform.right, targetTransform.right), Vector3.Dot(transform.up, targetTransform.up) };
 
             // is respectAxis checked?
             float[] xAxisSimilarity = respectXAxis ? xDotProducts : validArray;
@@ -288,8 +306,10 @@ namespace Gaze
         {
             if (timeToSnap == 0)
             {
-                transform.position = currentDragAndDropCondition.TargetObject.transform.position;
-                transform.rotation = currentDragAndDropCondition.TargetObject.transform.rotation;
+                //transform.position = currentDragAndDropCondition.TargetObject.transform.position;
+                // transform.rotation = currentDragAndDropCondition.TargetObject.transform.rotation;
+                transform.position = targetTransform.position;
+                transform.rotation = targetTransform.transform.rotation;
             }
             else
             {
@@ -305,8 +325,10 @@ namespace Gaze
             while (time < timeToSnap)
             {
                 float eased = QuadEaseOut(time, 0f, 1f, timeToSnap);
-                transform.position = Vector3.Lerp(startPos, currentDragAndDropCondition.TargetObject.transform.position, eased);
-                transform.rotation = Quaternion.Lerp(startRot, currentDragAndDropCondition.TargetObject.transform.rotation, eased);
+                //transform.position = Vector3.Lerp(startPos, currentDragAndDropCondition.TargetObject.transform.position, eased);
+                //transform.rotation = Quaternion.Lerp(startRot, currentDragAndDropCondition.TargetObject.transform.rotation, eased);
+                transform.position = Vector3.Lerp(startPos, targetTransform.position, eased);
+                transform.rotation = Quaternion.Lerp(startRot, targetTransform.rotation, eased);
                 time += Time.deltaTime;
                 yield return null;
             }
@@ -385,22 +407,37 @@ namespace Gaze
 
         private void OnProximityEvent(Gaze_ProximityEventArgs e)
         {
-            if (currentDragAndDropCondition == null)
-                return;
 
-            // if I'm the sender
-            if (((Gaze_InteractiveObject)e.Sender).gameObject == gameObject)
+            interactiveObject = GetComponent<Gaze_InteractiveObject>();
+
+            // if the sender is me (the DropObject)
+            if (((Gaze_InteractiveObject)e.Sender).gameObject.Equals(gameObject))
             {
-                // we collided with something
-                if (e.Other.GetComponentInParent<Gaze_InteractiveObject>() == currentDragAndDropCondition.TargetObject)
+                // get the drop target from the received event
+                GameObject dropTarget = e.Other.GetComponentInParent<Gaze_InteractiveObject>().gameObject;
+
+                // get the list size of drop targets for this manager
+                int targetCount = interactiveObject.DnD_Targets.Count;
+
+                // for each drop target in the list
+                for (int i = 0; i < targetCount; i++)
                 {
-                    m_InProximity = e.IsInProximity;
-                    if (!m_InProximity)
+                    // check if the target is in the list
+                    if (dropTarget.Equals(interactiveObject.DnD_Targets[i]))
                     {
-                        if (wasAligned)
+                        m_InProximity = e.IsInProximity;
+
+                        // if it's not in proximity
+                        if (!m_InProximity)
                         {
-                            wasAligned = false;
-                            Remove();
+                            // but was previously aligned
+                            if (wasAligned)
+                            {
+                                wasAligned = false;
+
+                                // that means the user removed the drop object from its target
+                                Remove();
+                            }
                         }
                     }
                 }

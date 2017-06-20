@@ -162,6 +162,24 @@ namespace Gaze
         public Gaze_Transform InitialTransform { get { return initialTransform; } }
         private Gaze_Transform initialTransform;
 
+        public bool IsDragAndDropEnabled = false;
+        public float DnD_minDistance = 1f;
+        // in unity units
+        public float DnD_angleThreshold = 1f;
+        // 0 is perpendicular, 1 is same direction
+        public bool DnD_respectXAxis = false;
+        public bool DnD_respectXAxisMirrored = false;
+        public bool DnD_respectYAxis = false;
+        public bool DnD_respectYAxisMirrored = false;
+        public bool DnD_respectZAxis = false;
+        public bool DnD_respectZAxisMirrored = false;
+        public bool DnD_snapBeforeDrop = true;
+        public float DnD_TimeToSnap = 0.5f;
+        public List<GameObject> DnD_Targets = new List<GameObject>();
+
+        private Gaze_DragAndDropManager dragAndDropManager;
+        private Gaze_SceneInventory sceneInventory;
+
         private void Awake()
         {
             SetActualGravityStateAsDefault();
@@ -200,6 +218,11 @@ namespace Gaze
         {
             Gaze_InputManager.OnControllerGrabEvent += OnControllerGrabEvent;
             Gaze_EventManager.OnControllerPointingEvent += OnControllerPointingEvent;
+            dragAndDropManager = gameObject.AddComponent<Gaze_DragAndDropManager>();
+            dragAndDropManager.hideFlags = HideFlags.HideInInspector;
+            sceneInventory = gameObject.AddComponent<Gaze_SceneInventory>();
+            // Uncomment the line below to hide the inventory in the editor
+            //sceneInventory.hideFlags = HideFlags.HideInInspector;
         }
 
         private void OnDisable()

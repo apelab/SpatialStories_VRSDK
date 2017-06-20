@@ -265,6 +265,16 @@ namespace Gaze
         public bool customConditionsEnabled;
 
         /// <summary>
+        /// Is Drag And Drop enabled.
+        /// </summary>
+        public bool dragAndDropEnabled;
+        public int dndEventValidator;
+        public bool dndAnyTarget = true;
+        public int dndTargetModesIndex;
+        public bool dndAttached;
+        public List<GameObject> dndTargets;
+
+        /// <summary>
         /// All the proximities in the list are required in order to be validated.
         /// </summary>
         public bool requireAllProximities;
@@ -356,13 +366,14 @@ namespace Gaze
             if (teleportEnabled)
                 activeConditions.Add(new Gaze_TeleportCondition(this));
 
+            if (dragAndDropEnabled)
+                activeConditions.Add(new Gaze_DragAndDropCondition(this));
+
             if (handHoverEnabled)
-                activeConditions.Add(new Gaze_HandHoverCondition(this, handHoverIO));
-        }
+                activeConditions.Add(new Gaze_HandHoverCondition(this, handHoverIO));        }
 
         void OnEnable()
         {
-
             rootIO = GetComponentInParent<Gaze_InteractiveObject>();
             root = rootIO.gameObject;
 

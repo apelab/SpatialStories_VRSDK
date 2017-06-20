@@ -132,8 +132,6 @@ namespace Gaze
 
         private void ValidateInputs(Gaze_InputEventArgs e)
         {
-            bool allValid = false;
-
             // for all input conditions specified (in the map)
             for (int i = 0; i < entriesCount; i++)
             {

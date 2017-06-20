@@ -17,117 +17,150 @@
 // <date>2016-01-25</date>
 // </copyright>
 //-----------------------------------------------------------------------
+using UnityEditor;
 using UnityEngine;
 
 namespace Gaze
 {
-    public class Gaze_DragAndDropCondition : Gaze_AbstractConditions
+    public class Gaze_DragAndDropCondition : Gaze_AbstractCondition
     {
-
-        public Gaze_CustomConditionActionEnum onDropReady = Gaze_CustomConditionActionEnum.NONE;
-        public Gaze_CustomConditionActionEnum onDrop = Gaze_CustomConditionActionEnum.NONE;
-        public Gaze_CustomConditionActionEnum onPickup = Gaze_CustomConditionActionEnum.NONE;
-        public Gaze_CustomConditionActionEnum onRemove = Gaze_CustomConditionActionEnum.NONE;
-
         public Gaze_InteractiveObject TargetObject;
-        private Gaze_DragAndDropManager DragAndDropManager;
+        private Gaze_DragAndDropManager dragAndDropManager, receivedDnDManager;
 
         /// <summary>
         /// If TRUE, once dropped, the object can't be grabbed again.
         /// </summary>
         public bool attached = false;
 
-        private void Awake()
-        {
-            DragAndDropManager = Gaze_Utils.GetIOFromObject(gameObject).GetComponent<Gaze_DragAndDropManager>();
-        }
+        public Gaze_DragAndDropCondition(Gaze_Conditions _gazeConditionsScript) : base(_gazeConditionsScript) { }
 
-        void OnEnable()
+        private GameObject dropTarget;
+
+        protected override void CustomSetup()
         {
             Gaze_EventManager.OnDragAndDropEvent += OnDragAndDropEvent;
             Gaze_EventManager.OnTriggerStateEvent += Gaze_EventManager_OnTriggerStateEvent;
             Gaze_EventManager.OnDependenciesValidated += Gaze_EventManager_OnDependenciesValidated;
+            dragAndDropManager = Gaze_Utils.GetIOFromObject(gazeConditionsScript.gameObject).GetComponent<Gaze_DragAndDropManager>();
         }
 
-        void OnDisable()
+        protected override void CustomDispose()
         {
             Gaze_EventManager.OnDragAndDropEvent -= OnDragAndDropEvent;
             Gaze_EventManager.OnTriggerStateEvent -= Gaze_EventManager_OnTriggerStateEvent;
             Gaze_EventManager.OnDependenciesValidated -= Gaze_EventManager_OnDependenciesValidated;
-
         }
 
-        void HandleConditionAction(Gaze_CustomConditionActionEnum action)
+        public override bool IsValidated()
         {
-            switch (action)
+            return IsValid;
+        }
+
+        public override void ToEditorGUI()
+        {
+            EditorGUILayout.BeginHorizontal();
+            if (IsValid)
             {
-                case Gaze_CustomConditionActionEnum.SEND_TRUE:
-                    ValidateCustomCondition(true);
-                    break;
-                case Gaze_CustomConditionActionEnum.SEND_FALSE:
-                    ValidateCustomCondition(false);
-                    break;
-                case Gaze_CustomConditionActionEnum.RELOAD:
-                    GetComponent<Gaze_Conditions>().ManualReload();
-                    break;
-                default:
-                    break;
+                RenderSatisfiedLabel("Drag And Drop:");
+                RenderSatisfiedLabel("True");
             }
-            //GetComponentInParent<Gaze_InteractiveObject> ().isCatchable = !attached;
+            else
+            {
+                RenderNonSatisfiedLabel("Drag And Drop:");
+                RenderNonSatisfiedLabel("False");
+            }
+            EditorGUILayout.EndHorizontal();
         }
 
-        void OnDragAndDropEvent(Gaze_DragAndDropEventArgs e)
+        private void HandleConditionAction(Gaze_DragAndDropStates state)
         {
-            Gaze_DragAndDropManager manager = GetComponentInParent<Gaze_DragAndDropManager>();
-
-            if (((GameObject)e.Sender).GetComponent<Gaze_DragAndDropManager>().CurrentDragAndDropCondition != this)
+            // exit if target is the not a valid one (not in the list)
+            if (!IsTargetValid())
                 return;
 
-            if (manager && (GameObject)e.Sender == manager.gameObject)
+            // compare the received state with the one specified in the dnd conditions
+            if (gazeConditionsScript.dndEventValidator.Equals((int)state))
+                IsValid = true;
+        }
+
+        // check if the target is in the list
+        private bool IsTargetValid()
+        {
+            Gaze_InteractiveObject rootIO = gazeConditionsScript.RootIO;
+
+            // if any target validates the condition
+            if (gazeConditionsScript.dndTargetModesIndex.Equals((int)apelab_DnDTargetsModes.ANY))
             {
-                switch (e.State)
+                // get targets count
+                int targetsCount = rootIO.DnD_Targets.Count;
+
+                // iterate and find one valid
+                for (int i = 0; i < targetsCount; i++)
                 {
-                    case Gaze_DragAndDropStates.DROPREADY:
-                        HandleConditionAction(onDropReady);
-                        break;
-                    case Gaze_DragAndDropStates.DROP:
-                        HandleConditionAction(onDrop);
-                        break;
-                    case Gaze_DragAndDropStates.PICKUP:
-                        HandleConditionAction(onPickup);
-                        break;
-                    case Gaze_DragAndDropStates.REMOVE:
-                        HandleConditionAction(onRemove);
-                        break;
-                    default:
-                        break;
+                    if (rootIO.DnD_Targets[i].Equals(dropTarget))
+                    {
+                        return true;
+                    }
+                }
+            }
+            else
+            {
+                // iterate through selected targets
+                int targetsCount = gazeConditionsScript.dndTargets.Count;
+                for (int i = 0; i < targetsCount; i++)
+                {
+                    if (gazeConditionsScript.dndTargets[i].Equals(dropTarget))
+                        return true;
                 }
             }
 
+            return false;
+        }
+
+        private void OnDragAndDropEvent(Gaze_DragAndDropEventArgs e)
+        {
+            // get the DragAndDrop 
+            receivedDnDManager = ((GameObject)e.Sender).GetComponent<Gaze_DragAndDropManager>();
+            dropTarget = (GameObject)e.TargetObject;
+            if (receivedDnDManager && receivedDnDManager.gameObject.Equals(Gaze_Utils.GetIOFromObject(gazeConditionsScript.gameObject).GetComponent<Gaze_DragAndDropManager>().gameObject))
+            {
+                // check if state is valid
+                HandleConditionAction(e.State);
+            }
         }
 
         private void Gaze_EventManager_OnTriggerStateEvent(Gaze_TriggerStateEventArgs e)
         {
-            if (DragAndDropManager == null)
+            // exit if I have no DnD manager
+            if (dragAndDropManager == null)
                 return;
 
-            if (!Gaze_Utils.AreUnderSameGameObject(gameObject, e.Sender) ||
-                e.TriggerState != Gaze_TriggerState.ACTIVE ||
-                !GetComponent<Gaze_Conditions>().ActivateOnDependencyMap.AreDependenciesSatisfied)
+            // exit if the sender is not my manager
+            if (!Gaze_Utils.AreUnderSameGameObject(gazeConditionsScript.gameObject, e.Sender))
                 return;
 
-            DragAndDropManager.SetupDragAndDropProcess(this);
+            // exit if my IO is not active
+            if (e.TriggerState != Gaze_TriggerState.ACTIVE)
+                return;
+
+            // exit if my dependencies are not satisfied
+            if (!gazeConditionsScript.GetComponent<Gaze_Conditions>().ActivateOnDependencyMap.AreDependenciesSatisfied)
+                return;
+
+            dragAndDropManager.SetupDragAndDropProcess(gazeConditionsScript);
         }
 
         private void Gaze_EventManager_OnDependenciesValidated(Gaze_DependenciesValidatedEventArgs e)
         {
-            if (DragAndDropManager == null)
+            // exit if I have no DnD manager
+            if (dragAndDropManager == null)
                 return;
 
+            // exit if the sender is not my manager
             if (!Gaze_Utils.AreUnderSameGameObject(e.Sender, this))
                 return;
 
-            DragAndDropManager.SetupDragAndDropProcess(this);
+            dragAndDropManager.SetupDragAndDropProcess(gazeConditionsScript);
         }
     }
 }
