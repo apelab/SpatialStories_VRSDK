@@ -62,6 +62,9 @@ namespace Gaze
         private bool isCurrentlyAligned = false;
         private Gaze_InteractiveObject IO;
         private Coroutine m_SnapCoroutine;
+        private Gaze_InteractiveObject interactiveObject;
+
+        private Transform targetTransform;
         #endregion
 
         void OnEnable()
@@ -74,6 +77,8 @@ namespace Gaze
 
             // to snap/unsnap by levitating the object
             Gaze_EventManager.OnLevitationEvent += OnLevitationEvent;
+
+            interactiveObject = GetComponent<Gaze_InteractiveObject>();
         }
 
         void OnDisable()
@@ -118,7 +123,7 @@ namespace Gaze
             }
         }
 
-        //public void SetupDragAndDropProcess(Gaze_Conditions _dndCondition)
+        public void SetupDragAndDropProcess(Gaze_Conditions _dndCondition)
         {
             ResetVariables();
         }
@@ -178,7 +183,7 @@ namespace Gaze
                 transform.SetParent(targetTransform.transform);
                 Gaze_InteractiveObject IO = GetComponent<Gaze_InteractiveObject>();
 
-                //if (currentDragAndDropCondition != null && currentDragAndDropCondition.dndAttached)
+                if (currentDragAndDropCondition != null && currentDragAndDropCondition.attached)
                 {
                     Gaze_Manipulation manipulation = IO.GetComponent<Gaze_Manipulation>();
                     Gaze_HandHover handHover = IO.GetComponentInChildren<Gaze_HandHover>();
@@ -215,9 +220,6 @@ namespace Gaze
 
         private bool IsObjectAlignedWithItsTarget()
         {
-            if (currentDragAndDropCondition.TargetObject == null)
-                return false;
-
             // if already snapped, unsnap it
             if (m_Snapped)
                 UnSnap();
@@ -305,7 +307,7 @@ namespace Gaze
             if (timeToSnap == 0)
             {
                 //transform.position = currentDragAndDropCondition.TargetObject.transform.position;
-               // transform.rotation = currentDragAndDropCondition.TargetObject.transform.rotation;
+                // transform.rotation = currentDragAndDropCondition.TargetObject.transform.rotation;
                 transform.position = targetTransform.position;
                 transform.rotation = targetTransform.transform.rotation;
             }
@@ -423,23 +425,23 @@ namespace Gaze
                     // check if the target is in the list
                     if (dropTarget.Equals(interactiveObject.DnD_Targets[i]))
                     {
-                    m_InProximity = e.IsInProximity;
+                        m_InProximity = e.IsInProximity;
 
                         // if it's not in proximity
-                    if (!m_InProximity)
-                    {
-                            // but was previously aligned
-                        if (wasAligned)
+                        if (!m_InProximity)
                         {
-                            wasAligned = false;
+                            // but was previously aligned
+                            if (wasAligned)
+                            {
+                                wasAligned = false;
 
                                 // that means the user removed the drop object from its target
-                            Remove();
+                                Remove();
+                            }
                         }
                     }
                 }
             }
-        }
         }
 
         private void OnControllerGrabEvent(Gaze_ControllerGrabEventArgs e)

@@ -77,9 +77,8 @@ namespace Gaze
             hierarchyInteractionsNames = new List<string>();
             hierarchyGazeColliders = new List<Collider>();
             hierarchyProximities = new List<Gaze_InteractiveObject>();
-<<<<<<< .mine            hierarchyHandHoverColliders = new List<Collider>();
-=======            dndTargetsNames = new List<string>();
->>>>>>> .theirs
+            hierarchyHandHoverColliders = new List<Collider>();
+            dndTargetsNames = new List<string>();
             focusLossModes = Enum.GetNames(typeof(Gaze_FocusLossMode));
             reloadModes = Enum.GetNames(typeof(Gaze_ReloadMode));
             autoTriggerModes = Enum.GetNames(typeof(Gaze_AutoTriggerMode));
@@ -1043,8 +1042,8 @@ namespace Gaze
 
                 if (targetConditions.dndTargetModesIndex.Equals((int)apelab_DnDTargetsModes.CUSTOM))
                     DisplayDnDTargetsChoices();
-    }
-}
+            }
+        }
 
         private void DisplayDnDTargetsChoices()
         {

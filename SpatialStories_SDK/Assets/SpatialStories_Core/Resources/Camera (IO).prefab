@@ -954,6 +954,7 @@ GameObject:
   - component: {fileID: 4330613532683412}
   - component: {fileID: 114349680535224100}
   - component: {fileID: 114010110958322394}
+  - component: {fileID: 114219190042395278}
   m_Layer: 0
   m_Name: Camera (IO)
   m_TagString: MainCamera
@@ -4019,11 +4020,15 @@ MonoBehaviour:
   delayDuration: 0
   delayed: 0
   isDelayRandom: 0
-  randomRange:
+  delayRange:
   - 0
   - 0
   activeDuration: 0
   expires: 0
+  isExpireRandom: 0
+  expireRange:
+  - 0
+  - 0
   autoTriggerModeIndex: 0
   reload: 0
   canBeTriggered: 1
@@ -4032,6 +4037,10 @@ MonoBehaviour:
   reloadMaxRepetitions: 0
   reloadCount: 0
   reloadDelay: 0
+  isReloadRandom: 0
+  reloadRange:
+  - 0
+  - 0
   focusDuration: 0
   focusLossModeIndex: 0
   FocusLossSpeed: 1
@@ -4045,6 +4054,12 @@ MonoBehaviour:
     AreDependenciesSatisfied: 1
   requireAllInputs: 0
   customConditionsEnabled: 0
+  dragAndDropEnabled: 0
+  dndEventValidator: 0
+  dndAnyTarget: 1
+  dndTargetModesIndex: 0
+  dndAttached: 0
+  dndTargets: []
   requireAllProximities: 0
   touchMap:
     TouchEnitry:
@@ -4053,6 +4068,8 @@ MonoBehaviour:
     touchHandsIndex: 0
     touchActionIndex: 0
   gazeEnabled: 0
+  gazeStateIndex: 0
+  gazeIn: 0
   touchEnabled: 0
   ActivateOnDependencyMap:
     dependencies: []
@@ -4061,6 +4078,12 @@ MonoBehaviour:
     dependencies: []
     AreDependenciesSatisfied: 0
   gazeColliderIO: {fileID: 114485687126287418}
+  handHoverEnabled: 0
+  handHoverIO: {fileID: 0}
+  hoverHandIndex: 0
+  hoverHand: 0
+  hoverStateIndex: 0
+  hoverIn: 0
   ReloadDependencies: 0
   isActive: 0
 --- !u!114 &114059806136862798
@@ -4184,6 +4207,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debug: 0
+--- !u!114 &114219190042395278
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1518787635232588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb7d934857afa904284ff7024514bef5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InteractiveObjectScripts: []
+  InteractiveObjects: []
+  InteractiveObjectsCount: 0
 --- !u!114 &114243278959470296
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4238,6 +4275,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fe86aa1e2e51304b81a3f6820a3abdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDelayed: 0
+  delayTime: 0
+  isDelayRandom: 0
+  delayRange:
+  - 0
+  - 0
+  multipleActionsInTime: 0
   rootIO: {fileID: 0}
   isActive: 0
   ActionReset: 0
@@ -4254,6 +4298,9 @@ MonoBehaviour:
   grabDistance: 0
   touchDistance: 0
   grabModeIndex: 0
+  visualsScript: {fileID: 0}
+  AlterAllVisuals: 1
+  selectedRenderers: 
   triggerAnimation: 0
   targetAnimator: {fileID: 0}
   activeTriggerStatesAnim: 0000000000
@@ -4277,8 +4324,6 @@ MonoBehaviour:
   audioVolumeMax: 1
   fadeSpeed: 0.005
   IO: {fileID: 0}
-  VisualsToAlter: []
-  AlterAllVisuals: 1
   triggerNotification: 0
 --- !u!114 &114333447657965670
 MonoBehaviour:
@@ -4316,6 +4361,18 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  IsDragAndDropEnabled: 0
+  DnD_minDistance: 1
+  DnD_angleThreshold: 1
+  DnD_respectXAxis: 0
+  DnD_respectXAxisMirrored: 0
+  DnD_respectYAxis: 0
+  DnD_respectYAxisMirrored: 0
+  DnD_respectZAxis: 0
+  DnD_respectZAxisMirrored: 0
+  DnD_snapBeforeDrop: 1
+  DnD_TimeToSnap: 0.5
+  DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
 --- !u!114 &114349680535224100
@@ -4419,6 +4476,18 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  IsDragAndDropEnabled: 0
+  DnD_minDistance: 1
+  DnD_angleThreshold: 1
+  DnD_respectXAxis: 0
+  DnD_respectXAxisMirrored: 0
+  DnD_respectYAxis: 0
+  DnD_respectYAxisMirrored: 0
+  DnD_respectZAxis: 0
+  DnD_respectZAxisMirrored: 0
+  DnD_snapBeforeDrop: 1
+  DnD_TimeToSnap: 0.5
+  DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
 --- !u!114 &114506083538733454
@@ -4448,11 +4517,15 @@ MonoBehaviour:
   delayDuration: 0
   delayed: 0
   isDelayRandom: 0
-  randomRange:
+  delayRange:
   - 0
   - 0
   activeDuration: 0
   expires: 0
+  isExpireRandom: 0
+  expireRange:
+  - 0
+  - 0
   autoTriggerModeIndex: 0
   reload: 0
   canBeTriggered: 1
@@ -4461,6 +4534,10 @@ MonoBehaviour:
   reloadMaxRepetitions: 0
   reloadCount: 0
   reloadDelay: 0
+  isReloadRandom: 0
+  reloadRange:
+  - 0
+  - 0
   focusDuration: 0
   focusLossModeIndex: 0
   FocusLossSpeed: 1
@@ -4474,6 +4551,12 @@ MonoBehaviour:
     AreDependenciesSatisfied: 1
   requireAllInputs: 0
   customConditionsEnabled: 0
+  dragAndDropEnabled: 0
+  dndEventValidator: 0
+  dndAnyTarget: 1
+  dndTargetModesIndex: 0
+  dndAttached: 0
+  dndTargets: []
   requireAllProximities: 0
   touchMap:
     TouchEnitry:
@@ -4482,6 +4565,8 @@ MonoBehaviour:
     touchHandsIndex: 0
     touchActionIndex: 0
   gazeEnabled: 0
+  gazeStateIndex: 0
+  gazeIn: 0
   touchEnabled: 0
   ActivateOnDependencyMap:
     dependencies: []
@@ -4490,6 +4575,12 @@ MonoBehaviour:
     dependencies: []
     AreDependenciesSatisfied: 0
   gazeColliderIO: {fileID: 0}
+  handHoverEnabled: 0
+  handHoverIO: {fileID: 0}
+  hoverHandIndex: 0
+  hoverHand: 0
+  hoverStateIndex: 0
+  hoverIn: 0
   ReloadDependencies: 0
   isActive: 0
 --- !u!114 &114573144645241684
@@ -4503,6 +4594,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fe86aa1e2e51304b81a3f6820a3abdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDelayed: 0
+  delayTime: 0
+  isDelayRandom: 0
+  delayRange:
+  - 0
+  - 0
+  multipleActionsInTime: 0
   rootIO: {fileID: 0}
   isActive: 0
   ActionReset: 0
@@ -4519,6 +4617,9 @@ MonoBehaviour:
   grabDistance: 0
   touchDistance: 0
   grabModeIndex: 0
+  visualsScript: {fileID: 0}
+  AlterAllVisuals: 1
+  selectedRenderers: 
   triggerAnimation: 0
   targetAnimator: {fileID: 0}
   activeTriggerStatesAnim: 0000000000
@@ -4542,8 +4643,6 @@ MonoBehaviour:
   audioVolumeMax: 1
   fadeSpeed: 0.005
   IO: {fileID: 0}
-  VisualsToAlter: []
-  AlterAllVisuals: 1
   triggerNotification: 0
 --- !u!114 &114669035429232872
 MonoBehaviour:
@@ -4651,6 +4750,18 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  IsDragAndDropEnabled: 0
+  DnD_minDistance: 1
+  DnD_angleThreshold: 1
+  DnD_respectXAxis: 0
+  DnD_respectXAxisMirrored: 0
+  DnD_respectYAxis: 0
+  DnD_respectYAxisMirrored: 0
+  DnD_respectZAxis: 0
+  DnD_respectZAxisMirrored: 0
+  DnD_snapBeforeDrop: 1
+  DnD_TimeToSnap: 0.5
+  DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
 --- !u!114 &114762883065776206
@@ -4843,6 +4954,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fe86aa1e2e51304b81a3f6820a3abdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDelayed: 0
+  delayTime: 0
+  isDelayRandom: 0
+  delayRange:
+  - 0
+  - 0
+  multipleActionsInTime: 0
   rootIO: {fileID: 0}
   isActive: 0
   ActionReset: 0
@@ -4859,6 +4977,9 @@ MonoBehaviour:
   grabDistance: 0
   touchDistance: 0
   grabModeIndex: 0
+  visualsScript: {fileID: 0}
+  AlterAllVisuals: 1
+  selectedRenderers: 
   triggerAnimation: 0
   targetAnimator: {fileID: 0}
   activeTriggerStatesAnim: 0000000000
@@ -4882,8 +5003,6 @@ MonoBehaviour:
   audioVolumeMax: 1
   fadeSpeed: 0.005
   IO: {fileID: 0}
-  VisualsToAlter: []
-  AlterAllVisuals: 1
   triggerNotification: 0
 --- !u!114 &114978793445472990
 MonoBehaviour:
@@ -4925,11 +5044,15 @@ MonoBehaviour:
   delayDuration: 0
   delayed: 0
   isDelayRandom: 0
-  randomRange:
+  delayRange:
   - 0
   - 0
   activeDuration: 0
   expires: 0
+  isExpireRandom: 0
+  expireRange:
+  - 0
+  - 0
   autoTriggerModeIndex: 0
   reload: 0
   canBeTriggered: 1
@@ -4938,6 +5061,10 @@ MonoBehaviour:
   reloadMaxRepetitions: 0
   reloadCount: 0
   reloadDelay: 0
+  isReloadRandom: 0
+  reloadRange:
+  - 0
+  - 0
   focusDuration: 0
   focusLossModeIndex: 0
   FocusLossSpeed: 1
@@ -4951,6 +5078,12 @@ MonoBehaviour:
     AreDependenciesSatisfied: 1
   requireAllInputs: 0
   customConditionsEnabled: 0
+  dragAndDropEnabled: 0
+  dndEventValidator: 0
+  dndAnyTarget: 1
+  dndTargetModesIndex: 0
+  dndAttached: 0
+  dndTargets: []
   requireAllProximities: 0
   touchMap:
     TouchEnitry:
@@ -4959,6 +5092,8 @@ MonoBehaviour:
     touchHandsIndex: 0
     touchActionIndex: 0
   gazeEnabled: 0
+  gazeStateIndex: 0
+  gazeIn: 0
   touchEnabled: 0
   ActivateOnDependencyMap:
     dependencies: []
@@ -4967,6 +5102,12 @@ MonoBehaviour:
     dependencies: []
     AreDependenciesSatisfied: 0
   gazeColliderIO: {fileID: 0}
+  handHoverEnabled: 0
+  handHoverIO: {fileID: 0}
+  hoverHandIndex: 0
+  hoverHand: 0
+  hoverStateIndex: 0
+  hoverIn: 0
   ReloadDependencies: 0
   isActive: 0
 --- !u!120 &120167720715539006

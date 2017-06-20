@@ -28,7 +28,7 @@ namespace Gaze
     public class Gaze_InteractiveObjectEditor : Editor
     {
         #region Members
-        //private Gaze_InteractiveObject gaze_InteractiveObjectScript;
+        private Gaze_InteractiveObject gaze_InteractiveObjectScript;
 
         // logo image
         private Texture logo;
@@ -36,8 +36,8 @@ namespace Gaze
         private string[] grabModes;
         private string[] manipulationModes;
         private List<string> dnd_dropTargetsNames;
-        //private List<Gaze_InteractiveObject> hierarchyIOsScripts;
-        //public List<GameObject> hierarchyIOs;
+        private List<Gaze_InteractiveObject> hierarchyIOsScripts;
+        public List<GameObject> hierarchyIOs;
         #endregion
 
         void OnEnable()
@@ -47,7 +47,7 @@ namespace Gaze
 
         private void InitMembers()
         {
-            //gaze_InteractiveObjectScript = (Gaze_InteractiveObject)target;
+            gaze_InteractiveObjectScript = (Gaze_InteractiveObject)target;
 
             grabModes = Enum.GetNames(typeof(Gaze_GrabMode));
             manipulationModes = Enum.GetNames(typeof(Gaze_ManipulationModes));
@@ -56,8 +56,8 @@ namespace Gaze
             logoRect = new Rect();
             logoRect.x = 10;
             logoRect.y = 10;
-            //hierarchyIOs = new List<GameObject>();
-            //hierarchyIOsScripts = new List<Gaze_InteractiveObject>();
+            hierarchyIOs = new List<GameObject>();
+            hierarchyIOsScripts = new List<Gaze_InteractiveObject>();
             dnd_dropTargetsNames = new List<string>();
         }
 
@@ -114,54 +114,54 @@ namespace Gaze
 
         private void DisplayManipulationMode()
         {
-            //gaze_InteractiveObjectScript.ManipulationModeIndex = EditorGUILayout.Popup("Manipulation Modes", gaze_InteractiveObjectScript.ManipulationModeIndex, manipulationModes);
+            gaze_InteractiveObjectScript.ManipulationModeIndex = EditorGUILayout.Popup("Manipulation Modes", gaze_InteractiveObjectScript.ManipulationModeIndex, manipulationModes);
         }
 
         private void DisplayTouchDistance()
         {
-            //if (gaze_InteractiveObjectScript.ManipulationMode != Gaze_ManipulationModes.TOUCH)
+            if (gaze_InteractiveObjectScript.ManipulationMode != Gaze_ManipulationModes.TOUCH)
                 return;
 
             GUILayout.BeginHorizontal();
-            //gaze_InteractiveObjectScript.TouchDistance = EditorGUILayout.FloatField("Touch Distance", gaze_InteractiveObjectScript.TouchDistance);
-            //Gaze_Utils.EnsureFieldIsPositiveOrZero(ref gaze_InteractiveObjectScript.TouchDistance);
+            gaze_InteractiveObjectScript.TouchDistance = EditorGUILayout.FloatField("Touch Distance", gaze_InteractiveObjectScript.TouchDistance);
+            Gaze_Utils.EnsureFieldIsPositiveOrZero(ref gaze_InteractiveObjectScript.TouchDistance);
             GUILayout.EndHorizontal();
         }
 
         private void DisplayGrabDistance()
         {
-            //if (gaze_InteractiveObjectScript.ManipulationMode != Gaze_ManipulationModes.GRAB)
+            if (gaze_InteractiveObjectScript.ManipulationMode != Gaze_ManipulationModes.GRAB)
                 return;
 
             GUILayout.BeginHorizontal();
-            //gaze_InteractiveObjectScript.GrabDistance = EditorGUILayout.FloatField("Grab Distance", gaze_InteractiveObjectScript.GrabDistance);
+            gaze_InteractiveObjectScript.GrabDistance = EditorGUILayout.FloatField("Grab Distance", gaze_InteractiveObjectScript.GrabDistance);
             GUILayout.EndHorizontal();
             GUILayout.BeginHorizontal();
-            //gaze_InteractiveObjectScript.AttractionSpeed = EditorGUILayout.FloatField("Attraction Speed", gaze_InteractiveObjectScript.AttractionSpeed);
+            gaze_InteractiveObjectScript.AttractionSpeed = EditorGUILayout.FloatField("Attraction Speed", gaze_InteractiveObjectScript.AttractionSpeed);
             GUILayout.EndHorizontal();
-            //Gaze_Utils.EnsureFieldIsPositiveOrZero(ref gaze_InteractiveObjectScript.GrabDistance);
-            //Gaze_Utils.EnsureFieldIsPositiveOrZero(ref gaze_InteractiveObjectScript.AttractionSpeed);
+            Gaze_Utils.EnsureFieldIsPositiveOrZero(ref gaze_InteractiveObjectScript.GrabDistance);
+            Gaze_Utils.EnsureFieldIsPositiveOrZero(ref gaze_InteractiveObjectScript.AttractionSpeed);
             GUILayout.BeginHorizontal();
-            targetIO.SnapOnGrab = EditorGUILayout.Toggle("Snap On Grab", targetIO.SnapOnGrab);
-            if (targetIO.SnapOnGrab)
+            gaze_InteractiveObjectScript.SnapOnGrab = EditorGUILayout.Toggle("Snap On Grab", gaze_InteractiveObjectScript.SnapOnGrab);
+            if (gaze_InteractiveObjectScript.SnapOnGrab)
             {
-                targetIO.IsManipulable = EditorGUILayout.Toggle("Is Manipulable", targetIO.IsManipulable);
+                gaze_InteractiveObjectScript.IsManipulable = EditorGUILayout.Toggle("Is Manipulable", gaze_InteractiveObjectScript.IsManipulable);
             }
             else
             {
-                targetIO.IsManipulable = true;
+                gaze_InteractiveObjectScript.IsManipulable = true;
             }
             GUILayout.EndHorizontal();
         }
 
         private void DisplayLevitationDistance()
         {
-            //if (gaze_InteractiveObjectScript.ManipulationMode != Gaze_ManipulationModes.LEVITATE)
+            if (gaze_InteractiveObjectScript.ManipulationMode != Gaze_ManipulationModes.LEVITATE)
                 return;
 
             GUILayout.BeginHorizontal();
-            //gaze_InteractiveObjectScript.GrabDistance = EditorGUILayout.FloatField("Levitation Distance", gaze_InteractiveObjectScript.GrabDistance);
-            //Gaze_Utils.EnsureFieldIsPositiveOrZero(ref gaze_InteractiveObjectScript.GrabDistance);
+            gaze_InteractiveObjectScript.GrabDistance = EditorGUILayout.FloatField("Levitation Distance", gaze_InteractiveObjectScript.GrabDistance);
+            Gaze_Utils.EnsureFieldIsPositiveOrZero(ref gaze_InteractiveObjectScript.GrabDistance);
             GUILayout.EndHorizontal();
         }
 
@@ -193,7 +193,7 @@ namespace Gaze
                 EditorGUILayout.BeginHorizontal();
                 gaze_InteractiveObjectScript.DnD_TimeToSnap = EditorGUILayout.FloatField("Time To Snap", gaze_InteractiveObjectScript.DnD_TimeToSnap);
                 EditorGUILayout.EndHorizontal();
-    }
+            }
         }
 
         private void DisplayAxisConstraints()
