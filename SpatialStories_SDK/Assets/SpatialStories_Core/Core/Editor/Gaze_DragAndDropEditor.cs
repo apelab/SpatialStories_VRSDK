@@ -4,17 +4,17 @@ namespace Gaze
 {
     [CanEditMultipleObjects]
     [InitializeOnLoad]
-    [CustomEditor(typeof(Gaze_DragAndDropManager))]
+    //[CustomEditor(typeof(Gaze_DragAndDropManager))]
     public class Gaze_DragAndDropEditor : Gaze_Editor
     {
         private Gaze_InteractiveObject rootIO;
 
-        private Gaze_DragAndDropManager targetConditions;
+        //private Gaze_DragAndDropManager target_DragAndDropManager;
 
         void OnEnable()
         {
-            targetConditions = (Gaze_DragAndDropManager)target;
-            rootIO = targetConditions.GetComponentInParent<Gaze_InteractiveObject>();
+            //target_DragAndDropManager = (Gaze_DragAndDropManager)target;
+           // rootIO = target_DragAndDropManager.GetComponentInParent<Gaze_InteractiveObject>();
         }
 
         void OnDisable()
@@ -27,33 +27,33 @@ namespace Gaze
 
 
             EditorGUILayout.BeginHorizontal();
-            targetConditions.m_MinDistance = EditorGUILayout.FloatField("Minimum Distance", targetConditions.m_MinDistance);
+            //target_DragAndDropManager.m_MinDistance = EditorGUILayout.FloatField("Minimum Distance", target_DragAndDropManager.m_MinDistance);
             EditorGUILayout.EndHorizontal();
 
 
             EditorGUILayout.BeginHorizontal();
-            targetConditions.respectXAxis = EditorGUILayout.ToggleLeft("Respect X Axis", targetConditions.respectXAxis);
-            if (targetConditions.respectXAxis)
+            //target_DragAndDropManager.respectXAxis = EditorGUILayout.ToggleLeft("Respect X Axis", target_DragAndDropManager.respectXAxis);
+            //if (target_DragAndDropManager.respectXAxis)
             {
-                targetConditions.respectXAxisMirrored = EditorGUILayout.ToggleLeft("Respect X Axis Mirrored", targetConditions.respectXAxisMirrored);
+                //target_DragAndDropManager.respectXAxisMirrored = EditorGUILayout.ToggleLeft("Respect X Axis Mirrored", target_DragAndDropManager.respectXAxisMirrored);
             }
             EditorGUILayout.EndHorizontal();
 
 
             EditorGUILayout.BeginHorizontal();
-            targetConditions.respectYAxis = EditorGUILayout.ToggleLeft("Respect Y Axis", targetConditions.respectYAxis);
-            if (targetConditions.respectYAxis)
+            //target_DragAndDropManager.respectYAxis = EditorGUILayout.ToggleLeft("Respect Y Axis", target_DragAndDropManager.respectYAxis);
+            //if (target_DragAndDropManager.respectYAxis)
             {
-                targetConditions.respectYAxisMirrored = EditorGUILayout.ToggleLeft("Respect Y Axis Mirrored", targetConditions.respectYAxisMirrored);
+                //target_DragAndDropManager.respectYAxisMirrored = EditorGUILayout.ToggleLeft("Respect Y Axis Mirrored", target_DragAndDropManager.respectYAxisMirrored);
             }
             EditorGUILayout.EndHorizontal();
 
 
             EditorGUILayout.BeginHorizontal();
-            targetConditions.respectZAxis = EditorGUILayout.ToggleLeft("Respect Z Axis", targetConditions.respectZAxis);
-            if (targetConditions.respectZAxis)
+            //target_DragAndDropManager.respectZAxis = EditorGUILayout.ToggleLeft("Respect Z Axis", target_DragAndDropManager.respectZAxis);
+            //if (target_DragAndDropManager.respectZAxis)
             {
-                targetConditions.respectZAxisMirrored = EditorGUILayout.ToggleLeft("Respect Z Axis Mirrored", targetConditions.respectZAxisMirrored);
+            //    target_DragAndDropManager.respectZAxisMirrored = EditorGUILayout.ToggleLeft("Respect Z Axis Mirrored", target_DragAndDropManager.respectZAxisMirrored);
             }
             EditorGUILayout.EndHorizontal();
 
@@ -72,7 +72,7 @@ namespace Gaze
 
 
             EditorGUILayout.BeginHorizontal();
-            targetConditions.m_TimeToSnap = EditorGUILayout.FloatField("Time To Snap", targetConditions.m_TimeToSnap);
+            target_DragAndDropManager.m_TimeToSnap = EditorGUILayout.FloatField("Time To Snap", target_DragAndDropManager.m_TimeToSnap);
             EditorGUILayout.EndHorizontal();
 
 
@@ -82,7 +82,7 @@ namespace Gaze
 
 
             // save changes
-            EditorUtility.SetDirty(targetConditions);
+            //EditorUtility.SetDirty(target_DragAndDropManager);
         }
     }
 }
