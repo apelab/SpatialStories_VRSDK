@@ -16,15 +16,47 @@
 // <web>http://www.apelab.ch</web>
 // <date>2014-06-01</date>
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 namespace Gaze
 {
     [ExecuteInEditMode]
     public class Gaze_Proximity : MonoBehaviour
     {
+        private static List<Gaze_InteractiveObject> hierarchyRigProximities;
+        public static List<Gaze_InteractiveObject> HierarchyRigProximities
+        {
+            get
+            {
+                if (hierarchyRigProximities == null)
+                    hierarchyRigProximities = new List<Gaze_InteractiveObject>();
+                UpdateRigProximitiesList();
+                return hierarchyRigProximities;
+            }
+        }
+        private static void UpdateRigProximitiesList()
+        {
+            hierarchyRigProximities.Clear();
+            Gaze_InputManager rigRoot = (Gaze_InputManager)FindObjectOfType(typeof(Gaze_InputManager));
+            if (rigRoot)
+            {
+                Gaze_Proximity[] rigProximities = rigRoot.GetComponentsInChildren<Gaze_Proximity>();
+                for (int i = 0; i < rigProximities.Length; i++)
+                {
+                    Gaze_InteractiveObject io = rigProximities[i].GetComponentInParent<Gaze_InteractiveObject>();
+                    if (io && io.transform.parent == rigRoot.transform)
+                    {
+                        hierarchyRigProximities.Add(io);
+                    }
+                }
+            }
+        }
+
+
         public bool debug = false;
         private bool proximityFlag = false;
         private GameObject otherGameObject;
+
 
         [HideInInspector]
         public Gaze_InteractiveObject IOScript;
