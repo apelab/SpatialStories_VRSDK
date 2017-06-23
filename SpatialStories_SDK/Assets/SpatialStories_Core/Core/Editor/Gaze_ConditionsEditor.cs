@@ -59,6 +59,9 @@ namespace Gaze
         private string[] dndTargetsModes;
         private List<string> dndTargetsNames;
 
+        private int selectedGroupIndex = 0;
+
+
         #endregion
 
         void OnEnable()
@@ -293,7 +296,8 @@ namespace Gaze
 
         private void UpdateProximitiesList(GameObject g)
         {
-            hierarchyProximities.Add(g.GetComponentInChildren<Gaze_Proximity>().GetComponentInParent<Gaze_InteractiveObject>());
+            Gaze_InteractiveObject proximity = g.GetComponentInChildren<Gaze_Proximity>().GetComponentInParent<Gaze_InteractiveObject>();
+            hierarchyProximities.Add(proximity);
         }
 
         private void UpdateCustomConditionsList()
@@ -334,6 +338,8 @@ namespace Gaze
 
         private void DisplayProximityList()
         {
+            Debug.Log(targetConditions.proximityGroupIndex);
+
             EditorGUILayout.BeginHorizontal();
             targetConditions.proximityEnabled = EditorGUILayout.ToggleLeft("Proximity", targetConditions.proximityEnabled);
             EditorGUILayout.EndHorizontal();
@@ -356,7 +362,6 @@ namespace Gaze
                 {
                     targetConditions.requireAllProximities = EditorGUILayout.ToggleLeft("Require all", targetConditions.requireAllProximities);
 
-                    // update proximity list (gazables may have been removed in the hierarchy)
                     if (targetConditions.proximityMap.proximityEntryList.Count > 0)
                     {
                         // NOTE don't use foreach to avoid InvalidOperationException
@@ -369,10 +374,57 @@ namespace Gaze
                             }
                         }
                     }
+
                     EditorGUILayout.EndHorizontal();
 
+                    // update the list of all possible rig groups
+                    targetConditions.UpdateRigSets(Gaze_Proximity.HierarchyRigProximities);
 
-                    // display all the proximities
+                    if (targetConditions.proximityMap.proximityEntryGroupList.Count < 1 && Gaze_Proximity.HierarchyRigProximities.Count > 1)
+                    {
+                        // display 'add rig group' button
+                        if (GUILayout.Button("Add Rig Group"))
+                        {
+                            Gaze_ProximityEntryGroup d = targetConditions.proximityMap.AddProximityEntryGroup(targetConditions);
+                        }
+                    }
+
+
+                    // This is a HOTFIX for solving editor problems that appear when user deletes every element of rig except one and there is a proximity rig group set up somewhere
+                    // will need to be changed if custom proximity groups (other than rig group) are implemented
+                    if (Gaze_Proximity.HierarchyRigProximities.Count < 2)
+                    {
+                        if (targetConditions.proximityMap.proximityEntryGroupList.Count > 0)
+                            targetConditions.proximityMap.proximityEntryGroupList.Clear();
+
+                    }
+                    else
+                    {
+                        for (int i = 0; i < targetConditions.proximityMap.proximityEntryGroupList.Count; i++)
+                        {
+                            EditorGUILayout.BeginHorizontal();
+
+                            // Display the popup with all possible combinations
+
+                            selectedGroupIndex = EditorGUILayout.Popup(selectedGroupIndex, targetConditions.rigCombinations.ToArray());
+                            if (selectedGroupIndex != targetConditions.proximityGroupIndex)
+                                targetConditions.proximityGroupIndex = selectedGroupIndex;
+
+                            targetConditions.proximityMap.proximityEntryGroupList[i].proximityEntries.Clear();
+                            for (int j = 0; j < targetConditions.proximityRigGroups[targetConditions.proximityGroupIndex].Count; j++)
+                            {
+                                targetConditions.proximityMap.proximityEntryGroupList[i].AddProximityEntryToGroup(targetConditions.proximityRigGroups[targetConditions.proximityGroupIndex][j]);
+                            }
+
+                            if (GUILayout.Button("-"))
+                            {
+                                targetConditions.proximityMap.DeleteProximityEntryGroup(targetConditions.proximityMap.proximityEntryGroupList[i]);
+                            }
+                            EditorGUILayout.EndHorizontal();
+                        }
+                    }
+
+
                     for (int i = 0; i < targetConditions.proximityMap.proximityEntryList.Count; i++)
                     {
                         EditorGUILayout.BeginHorizontal();
@@ -396,7 +448,8 @@ namespace Gaze
                         EditorGUILayout.EndHorizontal();
                     }
 
-                    if (targetConditions.proximityMap.proximityEntryList.Count < 2)
+
+                    if (targetConditions.proximityMap.proximityEntryList.Count + targetConditions.proximityMap.proximityEntryGroupList.Count < 2)
                     {
                         EditorGUILayout.BeginHorizontal();
                         EditorGUILayout.HelpBox("You need at least two proximities.", MessageType.Warning);

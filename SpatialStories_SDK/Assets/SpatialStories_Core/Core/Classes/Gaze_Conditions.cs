@@ -328,6 +328,14 @@ namespace Gaze
 
         public bool isActive;
 
+        [SerializeField]
+        public int proximityGroupIndex = 0;
+        [SerializeField]
+        public List<string> rigCombinations = new List<string>();
+        [SerializeField]
+        public List<List<Gaze_InteractiveObject>> proximityRigGroups = new List<List<Gaze_InteractiveObject>>();
+
+
         #endregion
 
         private void Awake()
@@ -362,7 +370,8 @@ namespace Gaze
                 activeConditions.Add(new Gaze_DragAndDropCondition(this));
 
             if (handHoverEnabled)
-                activeConditions.Add(new Gaze_HandHoverCondition(this, handHoverIO));        }
+                activeConditions.Add(new Gaze_HandHoverCondition(this, handHoverIO));
+        }
 
         void OnEnable()
         {
@@ -380,6 +389,7 @@ namespace Gaze
                 Gaze_EventManager.OnTriggerStateEvent += OnTriggerStateEvent;
                 Gaze_EventManager.OnTriggerEvent += OnTriggerEvent;
                 Gaze_EventManager.OnCustomConditionEvent += OnCustomConditionEvent;
+                Gaze_EventManager.OnIODestroyed += OnIODestroyed;
 
                 if (customConditionsDico.Count != customConditions.Count)
                 {
@@ -404,6 +414,7 @@ namespace Gaze
                 Gaze_EventManager.OnTriggerStateEvent -= OnTriggerStateEvent;
                 Gaze_EventManager.OnTriggerEvent -= OnTriggerEvent;
                 Gaze_EventManager.OnCustomConditionEvent -= OnCustomConditionEvent;
+                Gaze_EventManager.OnIODestroyed -= OnIODestroyed;
             }
         }
 
@@ -892,6 +903,52 @@ namespace Gaze
         {
             if (isReloadRandom)
                 reloadDelay = UnityEngine.Random.Range(reloadRange[0], reloadRange[1]);
+        }
+
+        private void OnIODestroyed(Gaze_IODestroyEventArgs e)
+        {
+            if (Gaze_Proximity.HierarchyRigProximities.Contains(e.IO))
+            {
+                UpdateRigSets(Gaze_Proximity.HierarchyRigProximities);
+                proximityGroupIndex = 0;
+            }
+        }
+
+        public void UpdateRigSets(List<Gaze_InteractiveObject> hierarchyRigProximities)
+        {
+            rigCombinations.Clear();
+            proximityRigGroups.Clear();
+            if (hierarchyRigProximities.Count > 1)
+            {
+                int rigProxNum = hierarchyRigProximities.Count;
+                if (rigProxNum > 1)
+                {
+                    // get all the subsets of the hierarchyRigProximities list
+                    int subsetNum = 1 << rigProxNum;
+                    for (int set = 1; set < subsetNum; set++)
+                    {
+                        // building each subset
+                        string s = "  ||  ";
+                        List<Gaze_InteractiveObject> l = new List<Gaze_InteractiveObject>();
+                        int count = 0;
+                        // for each value of  hierarchyRigProximity, check if the value should be in the subset
+                        for (int j = 0; j < rigProxNum; j++)
+                        {
+                            if ((set & (1 << j)) > 0)
+                            {
+                                s += hierarchyRigProximities[j].gameObject.name + "  ||  ";
+                                l.Add(hierarchyRigProximities[j]);
+                                count++;
+                            }
+                        }
+                        if (count > 1)
+                        {
+                            rigCombinations.Add(s);
+                            proximityRigGroups.Add(l);
+                        }
+                    }
+                }
+            }
         }
 
         #region ConditionListManagement
