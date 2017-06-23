@@ -23,11 +23,9 @@ namespace Gaze
         public ACTIVABLE_OPTION ActionGravity;
         public ACTIVABLE_OPTION ActionAudio;
         public ACTIVABLE_OPTION ActionColliders;
+        public ACTIVABLE_OPTION ActionDragAndDrop;
 
         public bool DestroyOnTrigger;
-
-
-
 
         // grab and touch distances
         public ALTERABLE_OPTION ModifyGrabDistance = ALTERABLE_OPTION.NOTHING;
@@ -35,6 +33,24 @@ namespace Gaze
         public ALTERABLE_OPTION ModifyGrabMode = ALTERABLE_OPTION.NOTHING;
         public float grabDistance, touchDistance;
         public int grabModeIndex = 0;
+
+        // Drag and drop
+        public ALTERABLE_OPTION ModifyDragAndDrop = ALTERABLE_OPTION.NOTHING;
+        public ALTERABLE_OPTION ModifyDragAndDropTargets = ALTERABLE_OPTION.NOTHING;
+        public ALTERABLE_OPTION ModifyDnDMinDistance = ALTERABLE_OPTION.NOTHING;
+        public ACTIVABLE_OPTION ModifyDnDSnapBeforeDrop = ACTIVABLE_OPTION.NOTHING;
+        public ALTERABLE_OPTION ModifyDnDRespectAxis = ALTERABLE_OPTION.NOTHING;
+        public float dnDMinDistance;
+        public bool dnDSnapBeforeDrop;
+        public bool dnDRespectXAxis;
+        public bool dnDRespectYAxis;
+        public bool dnDRespectZAxis;
+        public bool dnDRespectXAxisMirror;
+        public bool dnDRespectYAxisMirror;
+        public bool dnDRespectZAxisMirror;
+        public ALTERABLE_OPTION ModifyDnDAngleThreshold = ALTERABLE_OPTION.NOTHING;
+        public float dnDAngleThreshold;
+        public List<GameObject> DnD_Targets = new List<GameObject>();
 
         // Visuals
         public Gaze_InteractiveObjectVisuals visualsScript;
@@ -304,7 +320,6 @@ namespace Gaze
                 selectedRenderers.Remove(r);
         }
 
-
         /// <summary>
         /// Enables or disables visuals according with the user preferences.
         /// </summary>
@@ -336,6 +351,52 @@ namespace Gaze
             }
         }
 
+        private void HandleDragAndDrop()
+        {
+            // exit if no action is required
+            if (ModifyDragAndDrop == Gaze_Actions.ALTERABLE_OPTION.NOTHING)
+                return;
+
+            // change values according to Actions required
+            switch (ActionDragAndDrop)
+            {
+                case ACTIVABLE_OPTION.ACTIVATE:
+                    GetIO().IsDragAndDropEnabled = true;
+                    break;
+                case ACTIVABLE_OPTION.DEACTIVATE:
+                    GetIO().IsDragAndDropEnabled = false;
+                    break;
+            }
+
+            if (ModifyDnDMinDistance == Gaze_Actions.ALTERABLE_OPTION.MODIFY)
+                GetIO().DnD_minDistance = dnDMinDistance;
+
+            if (ModifyDragAndDropTargets == Gaze_Actions.ALTERABLE_OPTION.MODIFY)
+                GetIO().DnD_Targets = DnD_Targets;
+
+            if (ModifyDnDRespectAxis == Gaze_Actions.ALTERABLE_OPTION.MODIFY)
+            {
+                GetIO().DnD_respectXAxis = dnDRespectXAxis;
+                GetIO().DnD_respectYAxis = dnDRespectYAxis;
+                GetIO().DnD_respectZAxis = dnDRespectZAxis;
+                GetIO().DnD_respectXAxisMirrored = dnDRespectXAxisMirror;
+                GetIO().DnD_respectYAxisMirrored = dnDRespectYAxisMirror;
+                GetIO().DnD_respectZAxisMirrored = dnDRespectZAxisMirror;
+            }
+
+            if (ModifyDnDAngleThreshold == Gaze_Actions.ALTERABLE_OPTION.MODIFY)
+                GetIO().DnD_angleThreshold = dnDAngleThreshold;
+
+            switch (ModifyDnDSnapBeforeDrop)
+            {
+                case ACTIVABLE_OPTION.ACTIVATE:
+                    GetIO().DnD_snapBeforeDrop = true;
+                    break;
+                case ACTIVABLE_OPTION.DEACTIVATE:
+                    GetIO().DnD_snapBeforeDrop = false;
+                    break;
+            }
+        }
 
         /// <summary>
         /// Enables or disables audio acording with the user preferences
@@ -399,6 +460,7 @@ namespace Gaze
             HandleTouch();
             HandleColliders();
             HandleGrabMode();
+            HandleDragAndDrop();
         }
 
         // Actions executed when OnReload, OnBefore, OnActive or OnAfter
@@ -415,7 +477,6 @@ namespace Gaze
             }
         }
 
-
         #region implemented abstract members of Gaze_AbstractBehaviour
         protected override void OnTrigger()
         {
@@ -425,13 +486,10 @@ namespace Gaze
             ActionLogic();
         }
 
-
         protected override void OnReload()
         {
             TimeFrameLogic(1);
         }
-
-
 
         protected override void OnBefore()
         {

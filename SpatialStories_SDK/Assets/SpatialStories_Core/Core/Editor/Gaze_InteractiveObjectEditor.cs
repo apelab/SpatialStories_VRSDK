@@ -35,6 +35,7 @@ namespace Gaze
         private Rect logoRect;
         private string[] grabModes;
         private string[] manipulationModes;
+        public List<string> Dnd_DropTargetsNames { get { return dnd_dropTargetsNames; } private set { } }
         private List<string> dnd_dropTargetsNames;
         private List<Gaze_InteractiveObject> hierarchyIOsScripts;
         public List<GameObject> hierarchyIOs;
@@ -261,10 +262,6 @@ namespace Gaze
             // display 'add' button
             if (GUILayout.Button("+"))
             {
-                // TODO @apelab mike : add a new target in the list with a default value from a list of all IOs
-                //Debug.Log("Gaze_SceneInventory.Instance =" + Gaze_SceneInventory.Instance);
-                //Debug.Log("target to add : " + Gaze_SceneInventory.Instance.InteractiveObjects[0]);
-
                 // exit if there are no Interactive Object in the scene
                 if (Gaze_SceneInventory.Instance.InteractiveObjectsCount < 1)
                     return;
@@ -282,10 +279,6 @@ namespace Gaze
                 EditorGUILayout.EndHorizontal();
             }
             EditorGUILayout.Space();
-            //for (int i = 0; i < gaze_InteractiveObjectScript.DnD_TargetsIndexes.Count; i++)
-            //{
-            //    Debug.Log("IO targets "+ gaze_InteractiveObjectScript.DnD_TargetsIndexes[i]);
-            //}
         }
     }
 }

@@ -338,8 +338,6 @@ namespace Gaze
 
         private void DisplayProximityList()
         {
-            Debug.Log(targetConditions.proximityGroupIndex);
-
             EditorGUILayout.BeginHorizontal();
             targetConditions.proximityEnabled = EditorGUILayout.ToggleLeft("Proximity", targetConditions.proximityEnabled);
             EditorGUILayout.EndHorizontal();
