@@ -39,6 +39,8 @@ namespace Gaze
         private List<string> dnd_dropTargetsNames;
         private List<Gaze_InteractiveObject> hierarchyIOsScripts;
         public List<GameObject> hierarchyIOs;
+        public int dnd_targetsToGenerate;
+        private Material dnd_targetMaterial;
         #endregion
 
         void OnEnable()
@@ -60,6 +62,7 @@ namespace Gaze
             hierarchyIOs = new List<GameObject>();
             hierarchyIOsScripts = new List<Gaze_InteractiveObject>();
             dnd_dropTargetsNames = new List<string>();
+            dnd_targetMaterial = Resources.Load("DnD_TargetMaterial", typeof(Material)) as Material;
         }
 
         public override void OnInspectorGUI()
@@ -194,7 +197,20 @@ namespace Gaze
                 EditorGUILayout.BeginHorizontal();
                 gaze_InteractiveObjectScript.DnD_TimeToSnap = EditorGUILayout.FloatField("Time To Snap", gaze_InteractiveObjectScript.DnD_TimeToSnap);
                 EditorGUILayout.EndHorizontal();
+
+                DisplayTargetGenerator();
             }
+        }
+
+        private void DisplayTargetGenerator()
+        {
+            EditorGUILayout.BeginHorizontal();
+            dnd_targetsToGenerate = EditorGUILayout.IntField("Generate Targets", dnd_targetsToGenerate);
+            if (GUILayout.Button("GO"))
+            {
+                GenerateDnDTargets();
+            }
+            EditorGUILayout.EndHorizontal();
         }
 
         private void DisplayAxisConstraints()
@@ -229,7 +245,6 @@ namespace Gaze
             }
         }
 
-        // TODO @apelab add targets list with plus button
         private void DisplayTargets()
         {
             GUILayout.BeginHorizontal();
@@ -248,17 +263,22 @@ namespace Gaze
                 // for each DnD target
                 for (int i = 0; i < gaze_InteractiveObjectScript.DnD_Targets.Count; i++)
                 {
-                    // display it in a popup
-                    EditorGUILayout.BeginHorizontal();
-                    gaze_InteractiveObjectScript.DnD_Targets[i] = Gaze_SceneInventory.Instance.InteractiveObjects[EditorGUILayout.Popup(Gaze_SceneInventory.Instance.InteractiveObjects.IndexOf(gaze_InteractiveObjectScript.DnD_Targets[i]), dnd_dropTargetsNames.ToArray())];
+                    //TODO @mike refresh DnD_Targets IOs list modification (an IO target may has been destroyed)
+                    if (Gaze_SceneInventory.Instance.InteractiveObjects.Contains(gaze_InteractiveObjectScript.DnD_Targets[i]))
+                    {
+                        // display it in a popup
+                        EditorGUILayout.BeginHorizontal();
+                        gaze_InteractiveObjectScript.DnD_Targets[i] = Gaze_SceneInventory.Instance.InteractiveObjects[EditorGUILayout.Popup(Gaze_SceneInventory.Instance.InteractiveObjects.IndexOf(gaze_InteractiveObjectScript.DnD_Targets[i]), dnd_dropTargetsNames.ToArray())];
 
-                    // and a '-' button to remove it if needed
-                    if (GUILayout.Button("-"))
-                        gaze_InteractiveObjectScript.DnD_Targets.Remove(gaze_InteractiveObjectScript.DnD_Targets[i]);
+                        // and a '-' button to remove it if needed
+                        if (GUILayout.Button("-"))
+                            gaze_InteractiveObjectScript.DnD_Targets.Remove(gaze_InteractiveObjectScript.DnD_Targets[i]);
 
-                    EditorGUILayout.EndHorizontal();
+                        EditorGUILayout.EndHorizontal();
+                    }
                 }
             }
+
             // display 'add' button
             if (GUILayout.Button("+"))
             {
@@ -279,6 +299,53 @@ namespace Gaze
                 EditorGUILayout.EndHorizontal();
             }
             EditorGUILayout.Space();
+        }
+
+        private void GenerateDnDTargets()
+        {
+            GameObject instance;
+            Gaze_InteractiveObject gaze_InteractiveObject;
+            for (int i = 0; i < dnd_targetsToGenerate; i++)
+            {
+                instance = Instantiate(gaze_InteractiveObjectScript.gameObject);
+                instance.name = gaze_InteractiveObjectScript.gameObject.name + " (DnD Target " + i + ")";
+                // get the visuals
+                Gaze_InteractiveObjectVisuals visualsRoot = instance.GetComponentInChildren<Gaze_InteractiveObjectVisuals>();
+                Renderer[] visualsChildren = visualsRoot.gameObject.GetComponentsInChildren<Renderer>();
+
+                // for every visual
+                for (int k = 0; k < visualsChildren.Length; k++)
+                {
+                    // assign ghost material for each generated target
+                    visualsChildren[k].material = dnd_targetMaterial;
+
+                    // set all colliders in this visual gameobject to isTrigger
+                    Collider[] collider = visualsChildren[k].gameObject.GetComponents<Collider>();
+                    if (collider != null && collider.Length > 0)
+                    {
+                        for (int l = 0; l < collider.Length; l++)
+                        {
+                            collider[l].isTrigger = true;
+                        }
+                    }
+                }
+
+                // get the InteractiveObject script
+                gaze_InteractiveObject = instance.GetComponent<Gaze_InteractiveObject>();
+
+                // change manipulation mode to NONE
+                gaze_InteractiveObject.ManipulationModeIndex = (int)Gaze_ManipulationModes.NONE;
+
+                // deactivate DnD
+                gaze_InteractiveObject.IsDragAndDropEnabled = false;
+
+                // change gravity to none and kinematic to true
+                instance.GetComponent<Rigidbody>().useGravity = false;
+                instance.GetComponent<Rigidbody>().isKinematic = true;
+
+                //TODO @mike add the generated targets in the list of targets for this drop object
+                gaze_InteractiveObjectScript.DnD_Targets.Add(instance);
+            }
         }
     }
 }
