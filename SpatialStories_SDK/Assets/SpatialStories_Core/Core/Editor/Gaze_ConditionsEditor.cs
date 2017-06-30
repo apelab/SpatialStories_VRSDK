@@ -955,7 +955,6 @@ namespace Gaze
             targetConditions.ReloadDependencies = EditorGUILayout.ToggleLeft("Reload Dependencies", targetConditions.ReloadDependencies);
         }
 
-
         private void DisplayReloadDelayBlock()
         {
             EditorGUILayout.LabelField("Delay");
@@ -997,7 +996,6 @@ namespace Gaze
 
             GUILayout.EndVertical();
         }
-
 
         private void DisplayConditionsBlock()
         {
@@ -1086,13 +1084,26 @@ namespace Gaze
             FetchDnDTargets();
             if (targetConditions.dragAndDropEnabled)
             {
-                EditorGUILayout.BeginHorizontal();
-                targetConditions.dndEventValidator = EditorGUILayout.Popup("Valid When", targetConditions.dndEventValidator, dndEventValidatorEnum);
-                EditorGUILayout.EndHorizontal();
-                targetConditions.dndTargetModesIndex = EditorGUILayout.Popup("On Target(s)", targetConditions.dndTargetModesIndex, dndTargetsModes);
+                //TODO @mike check if targets in the Gaze_InteractiveObject component
+                // if not, I'm a drop target then display only Valid When GUI
+                // if yes, display valid when & On targets choice GUI
+                if (!targetConditions.RootIO.IsDragAndDropEnabled || targetConditions.RootIO.DnD_Targets == null || targetConditions.RootIO.DnD_Targets.Count < 1)
+                {
+                    targetConditions.RootIO.DnD_IsTarget = true;
+                    EditorGUILayout.BeginHorizontal();
+                    targetConditions.dndEventValidator = EditorGUILayout.Popup("Valid When", targetConditions.dndEventValidator, dndEventValidatorEnum);
+                    EditorGUILayout.EndHorizontal();
+                }
+                else
+                {
+                    EditorGUILayout.BeginHorizontal();
+                    targetConditions.dndEventValidator = EditorGUILayout.Popup("Valid When", targetConditions.dndEventValidator, dndEventValidatorEnum);
+                    EditorGUILayout.EndHorizontal();
+                    targetConditions.dndTargetModesIndex = EditorGUILayout.Popup("On Target(s)", targetConditions.dndTargetModesIndex, dndTargetsModes);
 
-                if (targetConditions.dndTargetModesIndex.Equals((int)apelab_DnDTargetsModes.CUSTOM))
-                    DisplayDnDTargetsChoices();
+                    if (targetConditions.dndTargetModesIndex.Equals((int)apelab_DnDTargetsModes.CUSTOM))
+                        DisplayDnDTargetsChoices();
+                }
             }
         }
 

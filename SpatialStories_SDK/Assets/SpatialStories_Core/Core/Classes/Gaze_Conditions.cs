@@ -848,7 +848,6 @@ namespace Gaze
             return true;
         }
 
-
         private void OnTriggerEvent(Gaze_TriggerEventArgs e)
         {
             if (e.Sender != null)
@@ -885,7 +884,6 @@ namespace Gaze
         {
             customConditionsDico[(int)e.Sender] = e.IsValid;
         }
-
 
         private void SetDelayRandom()
         {

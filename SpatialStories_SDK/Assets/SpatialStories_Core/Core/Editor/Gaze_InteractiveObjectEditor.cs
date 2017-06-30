@@ -247,6 +247,11 @@ namespace Gaze
 
         private void DisplayTargets()
         {
+            if (gaze_InteractiveObjectScript.DnD_Targets != null && gaze_InteractiveObjectScript.DnD_Targets.Count > 0)
+                gaze_InteractiveObjectScript.DnD_IsTarget = false;
+            else
+                gaze_InteractiveObjectScript.DnD_IsTarget = true;
+
             GUILayout.BeginHorizontal();
             EditorGUILayout.LabelField("Drop Targets");
             GUILayout.EndHorizontal();
@@ -263,7 +268,7 @@ namespace Gaze
                 // for each DnD target
                 for (int i = 0; i < gaze_InteractiveObjectScript.DnD_Targets.Count; i++)
                 {
-                    //TODO @mike refresh DnD_Targets IOs list modification (an IO target may has been destroyed)
+                    // refresh DnD_Targets IOs list modification (an IO target may has been destroyed)
                     if (Gaze_SceneInventory.Instance.InteractiveObjects.Contains(gaze_InteractiveObjectScript.DnD_Targets[i]))
                     {
                         // display it in a popup
@@ -307,9 +312,13 @@ namespace Gaze
             Gaze_InteractiveObject gaze_InteractiveObject;
             for (int i = 0; i < dnd_targetsToGenerate; i++)
             {
+                // instantiate a target
                 instance = Instantiate(gaze_InteractiveObjectScript.gameObject);
+
+                // add suffix to its name
                 instance.name = gaze_InteractiveObjectScript.gameObject.name + " (DnD Target " + i + ")";
-                // get the visuals
+
+                // get the visuals of Drop object
                 Gaze_InteractiveObjectVisuals visualsRoot = instance.GetComponentInChildren<Gaze_InteractiveObjectVisuals>();
                 Renderer[] visualsChildren = visualsRoot.gameObject.GetComponentsInChildren<Renderer>();
 
@@ -333,6 +342,8 @@ namespace Gaze
                 // get the InteractiveObject script
                 gaze_InteractiveObject = instance.GetComponent<Gaze_InteractiveObject>();
 
+                gaze_InteractiveObject.DnD_Targets.Clear();
+
                 // change manipulation mode to NONE
                 gaze_InteractiveObject.ManipulationModeIndex = (int)Gaze_ManipulationModes.NONE;
 
@@ -343,8 +354,11 @@ namespace Gaze
                 instance.GetComponent<Rigidbody>().useGravity = false;
                 instance.GetComponent<Rigidbody>().isKinematic = true;
 
-                //TODO @mike add the generated targets in the list of targets for this drop object
+                // add the generated targets in the list of targets for this drop object
                 gaze_InteractiveObjectScript.DnD_Targets.Add(instance);
+
+                // add an interaction for hiding the ghost when drop object is snapped
+                instance.GetComponent<Gaze_InteractiveObject>().AddInteraction();
             }
         }
     }

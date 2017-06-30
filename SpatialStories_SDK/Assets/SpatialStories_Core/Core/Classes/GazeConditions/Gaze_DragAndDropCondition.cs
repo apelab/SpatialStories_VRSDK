@@ -74,8 +74,8 @@ namespace Gaze
 
         private void HandleConditionAction(Gaze_DragAndDropStates state)
         {
-            // exit if target is the not a valid one (not in the list)
-            if (!IsTargetValid())
+            // exit if we are a drop object and target is the not a valid one (not in the list)
+            if (!gazeConditionsScript.RootIO.DnD_IsTarget && !IsTargetValid())
                 return;
 
             // compare the received state with the one specified in the dnd conditions
@@ -83,7 +83,6 @@ namespace Gaze
                 IsValid = true;
         }
 
-        // check if the target is in the list
         private bool IsTargetValid()
         {
             Gaze_InteractiveObject rootIO = gazeConditionsScript.RootIO;
@@ -122,7 +121,9 @@ namespace Gaze
             // get the DragAndDrop 
             receivedDnDManager = ((GameObject)e.Sender).GetComponent<Gaze_DragAndDropManager>();
             dropTarget = (GameObject)e.TargetObject;
-            if (receivedDnDManager && receivedDnDManager.gameObject.Equals(Gaze_Utils.GetIOFromObject(gazeConditionsScript.gameObject).GetComponent<Gaze_DragAndDropManager>().gameObject))
+
+            if (gazeConditionsScript.RootIO.DnD_IsTarget
+                || receivedDnDManager && receivedDnDManager.gameObject.Equals(Gaze_Utils.GetIOFromObject(gazeConditionsScript.gameObject).GetComponent<Gaze_DragAndDropManager>().gameObject))
             {
                 // check if state is valid
                 HandleConditionAction(e.State);

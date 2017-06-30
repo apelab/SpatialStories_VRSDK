@@ -175,6 +175,7 @@ namespace Gaze
         public bool DnD_respectZAxisMirrored = false;
         public bool DnD_snapBeforeDrop = true;
         public float DnD_TimeToSnap = 0.5f;
+        public bool DnD_IsTarget = false;
         public List<GameObject> DnD_Targets = new List<GameObject>();
 
         private Gaze_DragAndDropManager dragAndDropManager;
@@ -564,10 +565,49 @@ namespace Gaze
             return rb != null && !rb.isKinematic && rb.useGravity;
         }
 
+        public void AddInteraction()
+        {
+            GameObject interactionsRoot = GetComponentInChildren<Gaze_Interaction>().transform.parent.gameObject;
+
+            GameObject interactionHide = new GameObject("HideOnDrop");
+            interactionHide.transform.parent = interactionsRoot.transform;
+            Gaze_Interaction i1 = interactionHide.AddComponent<Gaze_Interaction>();
+            i1.AddActions();
+            i1.AddConditions();
+            Gaze_Conditions c1 = i1.GetComponent<Gaze_Conditions>();
+            c1.dragAndDropEnabled = true;
+            c1.dndEventValidator = (int)Gaze_DragAndDropStates.DROPREADY;
+            c1.reload = true;
+            c1.reloadModeIndex = (int)Gaze_ReloadMode.INFINITE;
+            Gaze_Actions a1 = i1.GetComponent<Gaze_Actions>();
+            a1.ActionVisuals = Gaze_Actions.ACTIVABLE_OPTION.DEACTIVATE;
+
+            GameObject interactionShow = new GameObject("ShowOnRemove");
+            interactionShow.transform.parent = interactionsRoot.transform;
+            Gaze_Interaction i2 = interactionShow.AddComponent<Gaze_Interaction>();
+            i2.AddActions();
+            i2.AddConditions();
+            Gaze_Conditions c2 = i2.GetComponent<Gaze_Conditions>();
+            c2.dragAndDropEnabled = true;
+            c2.dndEventValidator = (int)Gaze_DragAndDropStates.DROPREADYCANCELED;
+            c2.reload = true;
+            c2.reloadModeIndex = (int)Gaze_ReloadMode.INFINITE;
+            Gaze_Actions a2 = i2.GetComponent<Gaze_Actions>();
+            a2.ActionVisuals = Gaze_Actions.ACTIVABLE_OPTION.ACTIVATE;
+        }
+
+        public void RemoveInteractions()
+        {
+            Gaze_Interaction[] interactions = GetComponentsInChildren<Gaze_Interaction>();
+            int interactionsCount = interactions.Length;
+            for (int i = 0; i < interactionsCount; i++)
+            {
+                DestroyImmediate(interactions[i]);
+            }
+        }
         #endregion GravityManagement
 
         #region ManipulationManagement
-
         public void EnableManipulationMode(Gaze_ManipulationModes _manipulationMode)
         {
             ManipulationModeIndex = (int)_manipulationMode;
@@ -579,11 +619,8 @@ namespace Gaze
                 ManipulationModeIndex = (int)Gaze_ManipulationModes.NONE;
         }
 
-        #endregion ManipulationManagement
-
-        #region PointingManagement
-
         public bool IsPointedWithLeftHand;
+
         public bool IsPointedWithRightHand;
 
         private void OnControllerPointingEvent(Gaze_ControllerPointingEventArgs e)
