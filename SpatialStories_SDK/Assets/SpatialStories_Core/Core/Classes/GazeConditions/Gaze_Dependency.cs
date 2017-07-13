@@ -42,9 +42,9 @@ namespace Gaze
 
         }
 
-#if UNITY_EDITOR
         public override void ToEditorGUI()
         {
+#if UNITY_EDITOR
             EditorGUILayout.BeginHorizontal();
 
             if (IsValid)
@@ -59,8 +59,8 @@ namespace Gaze
             }
 
             EditorGUILayout.EndHorizontal();
-        }
 #endif
+        }
 
         public void SetSatisfied(bool isSatisfied)
         {

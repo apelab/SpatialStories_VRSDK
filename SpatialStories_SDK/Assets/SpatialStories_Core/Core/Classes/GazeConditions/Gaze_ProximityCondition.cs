@@ -35,9 +35,9 @@ namespace Gaze
             Gaze_EventManager.OnProximityEvent -= OnProximityEvent;
         }
 
-#if UNITY_EDITOR
         public override void ToEditorGUI()
         {
+#if UNITY_EDITOR
             EditorGUILayout.BeginHorizontal();
             if (IsValid)
             {
@@ -72,8 +72,8 @@ namespace Gaze
                 RenderNonSatisfiedLabel("---");
             }
             EditorGUILayout.Space();
-        }
 #endif
+        }
 
         private void OnProximityEvent(Gaze_ProximityEventArgs e)
         {

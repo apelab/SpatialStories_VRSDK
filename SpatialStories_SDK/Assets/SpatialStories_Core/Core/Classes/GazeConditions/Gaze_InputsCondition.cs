@@ -113,9 +113,9 @@ namespace Gaze
             #endregion inputs subscription
         }
 
-#if UNITY_EDITOR
         public override void ToEditorGUI()
         {
+#if UNITY_EDITOR
             for (int i = 0; i < entriesCount; i++)
             {
                 EditorGUILayout.BeginHorizontal();
@@ -131,8 +131,8 @@ namespace Gaze
                 }
                 EditorGUILayout.EndHorizontal();
             }
-        }
 #endif
+        }
 
         private void ValidateInputs(Gaze_InputEventArgs e)
         {

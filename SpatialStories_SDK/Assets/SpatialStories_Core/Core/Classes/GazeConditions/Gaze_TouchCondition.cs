@@ -44,9 +44,9 @@ namespace Gaze
             Gaze_InputManager.OnControllerTouchEvent -= OnControllerTouchEvent;
         }
 
-#if UNITY_EDITOR
         public override void ToEditorGUI()
         {
+#if UNITY_EDITOR
             EditorGUILayout.BeginHorizontal();
             // TODO(4nc3str4l): Show more detailed information depending on the configuration.
             if (IsValid)
@@ -60,8 +60,8 @@ namespace Gaze
                 RenderNonSatisfiedLabel("False");
             }
             EditorGUILayout.EndHorizontal();
-        }
 #endif
+        }
 
         /// <summary>
         /// To validate a touch, multiple conditions need to be met.

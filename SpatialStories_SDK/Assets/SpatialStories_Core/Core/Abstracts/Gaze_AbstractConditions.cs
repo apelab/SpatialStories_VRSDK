@@ -15,7 +15,9 @@
 // <web>https://twitter.com/apelab_ch</web>
 // <web>http://www.apelab.ch</web>
 // <date>2014-06-01</date>
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using UnityEngine;
 
 namespace Gaze
@@ -29,6 +31,7 @@ namespace Gaze
             Gaze_EventManager.FireCustomConditionEvent(new Gaze_CustomConditionEventArgs(this.GetInstanceID(), _conditionValidated));
         }
 
+#if UNITY_EDITOR
         public void ToGUI()
         {
             EditorGUILayout.BeginHorizontal();
@@ -44,5 +47,6 @@ namespace Gaze
             }
             EditorGUILayout.EndHorizontal();
         }
+#endif
     }
 }

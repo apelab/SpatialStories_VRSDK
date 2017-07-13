@@ -43,9 +43,9 @@ namespace Gaze
             return IsValid;
         }
 
-#if UNITY_EDITOR
         public override void ToEditorGUI()
         {
+#if UNITY_EDITOR
             EditorGUILayout.BeginHorizontal();
             if (IsValid)
             {
@@ -58,8 +58,8 @@ namespace Gaze
                 RenderNonSatisfiedLabel("False");
             }
             EditorGUILayout.EndHorizontal();
-        }
 #endif
+        }
 
         private void ValidateGrab(Gaze_TeleportEventArgs e)
         {

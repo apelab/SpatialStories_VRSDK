@@ -51,9 +51,9 @@ namespace Gaze
             }
         }
 
-#if UNITY_EDITOR
         public override void ToEditorGUI()
         {
+#if UNITY_EDITOR
             EditorGUILayout.BeginHorizontal();
             if (gazeConditionsScript.gazeIn)
             {
@@ -83,7 +83,7 @@ namespace Gaze
             }
 
             EditorGUILayout.EndHorizontal();
+#endif
         }
     }
-#endif
 }

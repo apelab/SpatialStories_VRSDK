@@ -47,13 +47,12 @@ public class Gaze_Camera : MonoBehaviour
         Transform cameraIO = GetComponentInParent<Gaze_InteractiveObject>().transform;
         Transform rootIO = GetComponentInParent<Gaze_InputManager>().transform;
 
-
-        transform.localPosition = rootIO.localPosition;
-        transform.localRotation = rootIO.localRotation;
+        transform.position = rootIO.localPosition;
+        transform.rotation = rootIO.localRotation;
         transform.parent = cameraIO.parent.transform;
         cameraIO.parent = transform;
-        rootIO.localPosition = Vector3.zero;
-        rootIO.localRotation = Quaternion.identity;
+        transform.localPosition = Vector3.zero;
+        transform.localRotation = Quaternion.identity;
         isReconfigurationNeeded = false;
     }
 }

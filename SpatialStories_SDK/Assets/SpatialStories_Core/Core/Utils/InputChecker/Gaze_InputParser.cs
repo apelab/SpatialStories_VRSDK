@@ -112,6 +112,7 @@ namespace Gaze
 
             return true;
         }
-    }
 #endif
+
+    }
 }

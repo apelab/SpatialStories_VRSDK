@@ -20,14 +20,16 @@ namespace Gaze
 
         private static bool AreInputFixed = false;
 
-#if UNITY_EDITOR
         public static void ShowExplorer(string itemPath)
         {
+#if UNITY_EDITOR
             EditorUtility.RevealInFinder(itemPath);
+#endif
         }
 
         public static void ShowInputNotCorrectlyConfiguredDialog()
         {
+#if UNITY_EDITOR
             PathToAssetsFolder = Gaze_InputFileManager.GetAssetsFolderPath();
             string path = Gaze_InputFileManager.GetActualInputManagerPath();
 
@@ -43,7 +45,7 @@ namespace Gaze
                 }
             }
             EditorApplication.ExecuteMenuItem("Edit/Play");
-
+#endif
         }
 
         public static bool IsInputManagerAssetIsInstaled()
@@ -61,6 +63,7 @@ namespace Gaze
 
         public static void AddMissingInputsToPoject()
         {
+#if UNITY_EDITOR
             if (AreInputFixed)
                 return;
 
@@ -102,19 +105,21 @@ namespace Gaze
 
             EditorUtility.DisplayDialog("Spatial Stories SDK", "Inputs Fixed," + Environment.NewLine + Environment.NewLine + "(A new input manager file has been added to the project. After clicking “OK” the location of the old input manager will appear in case you want to recover it)", "Ok");
             ShowExplorer(backupFile);
+#endif
         }
 
+#if UNITY_EDITOR
         public static List<Gaze_InputConfig> GetActualInputConfig(SerializationMode _serializationMode)
         {
             return _serializationMode == SerializationMode.ForceText ?
                 Gaze_InputParser.ParseInputFile(ActualInputManagerPath) :
                 Gaze_InputParser.ReadBinaryInputs(ActualInputManagerPath);
         }
+#endif
 
         public static List<Gaze_InputConfig> FindMissingInputsFromTo(List<Gaze_InputConfig> _actualInputConfig, List<Gaze_InputConfig> _ssdkInputs)
         {
             return _ssdkInputs.Where(inp => !_actualInputConfig.Any(inp2 => inp.m_Name == inp2.m_Name)).ToList();
         }
-#endif
     }
 }
