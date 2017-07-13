@@ -18,7 +18,9 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 
 namespace Gaze
 {
@@ -111,6 +113,7 @@ namespace Gaze
             #endregion inputs subscription
         }
 
+#if UNITY_EDITOR
         public override void ToEditorGUI()
         {
             for (int i = 0; i < entriesCount; i++)
@@ -129,6 +132,7 @@ namespace Gaze
                 EditorGUILayout.EndHorizontal();
             }
         }
+#endif
 
         private void ValidateInputs(Gaze_InputEventArgs e)
         {

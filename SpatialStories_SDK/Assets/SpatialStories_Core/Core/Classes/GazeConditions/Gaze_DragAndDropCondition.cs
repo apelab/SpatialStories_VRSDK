@@ -17,7 +17,9 @@
 // <date>2016-01-25</date>
 // </copyright>
 //-----------------------------------------------------------------------
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using UnityEngine;
 
 namespace Gaze
@@ -56,6 +58,7 @@ namespace Gaze
             return IsValid;
         }
 
+#if UNITY_EDITOR
         public override void ToEditorGUI()
         {
             EditorGUILayout.BeginHorizontal();
@@ -71,6 +74,7 @@ namespace Gaze
             }
             EditorGUILayout.EndHorizontal();
         }
+#endif
 
         private void HandleConditionAction(Gaze_DragAndDropStates state)
         {

@@ -1,5 +1,7 @@
 ﻿using System;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using UnityEngine;
 
 namespace Gaze
@@ -52,8 +54,8 @@ namespace Gaze
         }
 
         protected abstract void CustomSetup();
-        protected abstract void CustomDispose();
 
+        protected abstract void CustomDispose();
 
         public abstract bool IsValidated();
 
@@ -68,6 +70,7 @@ namespace Gaze
         // This allows us to show the condition state on the GUI
         public abstract void ToEditorGUI();
 
+#if UNITY_EDITOR
         public static void RenderDefaultLabel(string text)
         {
             EditorGUILayout.LabelField(text);
@@ -84,7 +87,7 @@ namespace Gaze
         {
             EditorGUILayout.LabelField(text, EditorStyles.whiteLabel);
         }
-
+#endif
 
     }
 }

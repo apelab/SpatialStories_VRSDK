@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using UnityEngine;
 
 namespace Gaze
@@ -18,6 +20,7 @@ namespace Gaze
 
         private static bool AreInputFixed = false;
 
+#if UNITY_EDITOR
         public static void ShowExplorer(string itemPath)
         {
             EditorUtility.RevealInFinder(itemPath);
@@ -112,5 +115,6 @@ namespace Gaze
         {
             return _ssdkInputs.Where(inp => !_actualInputConfig.Any(inp2 => inp.m_Name == inp2.m_Name)).ToList();
         }
+#endif
     }
 }

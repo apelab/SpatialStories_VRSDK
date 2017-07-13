@@ -16,10 +16,14 @@
 // <web>http://www.apelab.ch</web>
 // <date>2014-06-01</date>
 using Gaze;
+
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 
 public class Gaze_InputManagerReader
 {
+#if UNITY_EDITOR
     [MenuItem("Assets/Repair Input Manager")]
     public static void RepairInputsIfNeeded()
     {
@@ -32,5 +36,5 @@ public class Gaze_InputManagerReader
             EditorUtility.DisplayDialog("Spatial Stories SDK", "InputManager.asset is OK, nothing to change.", "Ok");
         }
     }
-
+#endif
 }

@@ -1,4 +1,7 @@
-﻿using UnityEditor;
+﻿
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 using UnityEngine;
 using UnityEngine.VR;
 
@@ -41,6 +44,7 @@ namespace Gaze
             Gaze_InputManager.OnControllerTouchEvent -= OnControllerTouchEvent;
         }
 
+#if UNITY_EDITOR
         public override void ToEditorGUI()
         {
             EditorGUILayout.BeginHorizontal();
@@ -57,6 +61,7 @@ namespace Gaze
             }
             EditorGUILayout.EndHorizontal();
         }
+#endif
 
         /// <summary>
         /// To validate a touch, multiple conditions need to be met.

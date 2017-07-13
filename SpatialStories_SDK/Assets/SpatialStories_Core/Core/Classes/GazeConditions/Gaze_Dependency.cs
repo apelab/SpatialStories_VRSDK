@@ -1,4 +1,6 @@
-﻿using UnityEditor;
+﻿#if UNITY_EDITOR
+using UnityEditor;
+#endif
 using UnityEngine;
 
 namespace Gaze
@@ -40,6 +42,7 @@ namespace Gaze
 
         }
 
+#if UNITY_EDITOR
         public override void ToEditorGUI()
         {
             EditorGUILayout.BeginHorizontal();
@@ -57,6 +60,7 @@ namespace Gaze
 
             EditorGUILayout.EndHorizontal();
         }
+#endif
 
         public void SetSatisfied(bool isSatisfied)
         {

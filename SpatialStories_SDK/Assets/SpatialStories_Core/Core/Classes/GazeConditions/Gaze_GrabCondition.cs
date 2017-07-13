@@ -18,7 +18,9 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using UnityEngine;
 using UnityEngine.VR;
 
@@ -38,6 +40,7 @@ namespace Gaze
             return IsValid;
         }
 
+#if UNITY_EDITOR
         public override void ToEditorGUI()
         {
             EditorGUILayout.BeginHorizontal();
@@ -53,6 +56,7 @@ namespace Gaze
             }
             EditorGUILayout.EndHorizontal();
         }
+#endif
 
         protected override void CustomDispose()
         {

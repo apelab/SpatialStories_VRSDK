@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Text.RegularExpressions;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 
 namespace Gaze
 {
@@ -56,6 +58,7 @@ namespace Gaze
             }
         }
 
+#if UNITY_EDITOR
         /// <summary>
         /// Creates an input config from a binary object
         /// </summary>
@@ -128,5 +131,6 @@ namespace Gaze
         }
 
     }
+#endif
 }
 
