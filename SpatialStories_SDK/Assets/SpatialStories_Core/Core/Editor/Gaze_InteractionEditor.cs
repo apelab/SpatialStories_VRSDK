@@ -234,7 +234,7 @@ namespace Gaze
         /// </summary>
         private void UpdateInteractiveObjectsList()
         {
-            interactiveObjectsList = (FindObjectsOfType(typeof(Gaze_InteractiveObject)) as Gaze_InteractiveObject[]).ToList();
+            interactiveObjectsList = Gaze_SceneInventory.Instance.InteractiveObjectScripts;
         }
 
     }

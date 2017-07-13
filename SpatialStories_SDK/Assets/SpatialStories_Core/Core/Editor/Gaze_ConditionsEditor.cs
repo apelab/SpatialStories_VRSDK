@@ -249,7 +249,7 @@ namespace Gaze
             hierarchyHandHoverColliders.Clear();
 
             // rebuild them
-            hierarchyIOsScripts = (FindObjectsOfType(typeof(Gaze_InteractiveObject)) as Gaze_InteractiveObject[]).ToList();
+            hierarchyIOsScripts = Gaze_SceneInventory.Instance.InteractiveObjectScripts;
             for (int i = 0; i < hierarchyIOsScripts.Count; i++)
             {
                 hierarchyIOsNames.Add(hierarchyIOsScripts[i].name);

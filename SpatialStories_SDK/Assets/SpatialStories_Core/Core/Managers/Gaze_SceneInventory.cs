@@ -28,14 +28,13 @@ public class Gaze_SceneInventory : MonoBehaviour
     {
         InteractiveObjectScripts = new List<Gaze_InteractiveObject>();
         InteractiveObjects = new List<GameObject>();
+        UpdateListsFromHierarchy();
     }
 
     private void Update()
     {
-#if UNITY_EDITOR
         if (!Application.isPlaying)
             UpdateListsFromHierarchy();
-#endif
     }
 
     private void UpdateListsFromHierarchy()

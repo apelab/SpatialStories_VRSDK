@@ -221,7 +221,7 @@ namespace Gaze
             Gaze_EventManager.OnControllerPointingEvent += OnControllerPointingEvent;
             dragAndDropManager = gameObject.AddComponent<Gaze_DragAndDropManager>();
             dragAndDropManager.hideFlags = HideFlags.HideInInspector;
-            sceneInventory = gameObject.AddComponent<Gaze_SceneInventory>();
+            //sceneInventory = gameObject.AddComponent<Gaze_SceneInventory>();
             // Uncomment the line below to hide the inventory in the editor
             //sceneInventory.hideFlags = HideFlags.HideInInspector;
         }

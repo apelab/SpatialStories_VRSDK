@@ -531,6 +531,7 @@ MonoBehaviour:
   requireAllDeactivators: 0
   proximityMap:
     proximityEntryList: []
+    proximityEntryGroupList: []
     proximityStateIndex: 0
   grabMap:
     grabEntryList: []
@@ -576,6 +577,12 @@ MonoBehaviour:
     AreDependenciesSatisfied: 1
   requireAllInputs: 0
   customConditionsEnabled: 0
+  dragAndDropEnabled: 0
+  dndEventValidator: 0
+  dndAnyTarget: 1
+  dndTargetModesIndex: 0
+  dndAttached: 0
+  dndTargets: []
   requireAllProximities: 0
   touchMap:
     TouchEnitry:
@@ -584,6 +591,8 @@ MonoBehaviour:
     touchHandsIndex: 0
     touchActionIndex: 0
   gazeEnabled: 0
+  gazeStateIndex: 0
+  gazeIn: 0
   touchEnabled: 0
   ActivateOnDependencyMap:
     dependencies:
@@ -596,8 +605,16 @@ MonoBehaviour:
     dependencies: []
     AreDependenciesSatisfied: 0
   gazeColliderIO: {fileID: 0}
+  handHoverEnabled: 0
+  handHoverIO: {fileID: 0}
+  hoverHandIndex: 0
+  hoverHand: 0
+  hoverStateIndex: 0
+  hoverIn: 0
   ReloadDependencies: 0
   isActive: 1
+  proximityGroupIndex: 0
+  rigCombinations: []
 --- !u!114 &73786062
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -610,6 +627,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fe86aa1e2e51304b81a3f6820a3abdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDelayed: 0
+  delayTime: 0
+  isDelayRandom: 0
+  delayRange:
+  - 0
+  - 0
+  multipleActionsInTime: 0
   rootIO: {fileID: 0}
   isActive: 1
   ActionReset: 0
@@ -619,22 +643,33 @@ MonoBehaviour:
   ActionGravity: 0
   ActionAudio: 1
   ActionColliders: 0
+  ActionDragAndDrop: 0
   DestroyOnTrigger: 0
-  isDelayed: 0
-  delayTime: 0
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  multipleActionsInTime: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
   ModifyGrabMode: 0
   grabDistance: 0
   touchDistance: 0
   grabModeIndex: 0
-  visualsScript: {fileID: 0}
+  ModifyDragAndDrop: 0
+  ModifyDragAndDropTargets: 0
+  ModifyDnDMinDistance: 0
+  ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDRespectAxis: 0
+  dnDMinDistance: 0
+  dnDSnapBeforeDrop: 0
+  dnDRespectXAxis: 0
+  dnDRespectYAxis: 0
+  dnDRespectZAxis: 0
+  dnDRespectXAxisMirror: 0
+  dnDRespectYAxisMirror: 0
+  dnDRespectZAxisMirror: 0
+  ModifyDnDAngleThreshold: 0
+  dnDAngleThreshold: 0
+  DnD_Targets: []
+  visualsScript: {fileID: 1931508564}
   AlterAllVisuals: 1
+  selectedRenderers: 
   triggerAnimation: 0
   targetAnimator: {fileID: 1238660177}
   activeTriggerStatesAnim: 0100000000
@@ -809,6 +844,19 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  IsDragAndDropEnabled: 0
+  DnD_minDistance: 1
+  DnD_angleThreshold: 1
+  DnD_respectXAxis: 0
+  DnD_respectXAxisMirrored: 0
+  DnD_respectYAxis: 0
+  DnD_respectYAxisMirrored: 0
+  DnD_respectZAxis: 0
+  DnD_respectZAxisMirrored: 0
+  DnD_snapBeforeDrop: 1
+  DnD_TimeToSnap: 0.5
+  DnD_IsTarget: 0
+  DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
 --- !u!4 &83828761
@@ -907,6 +955,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fe86aa1e2e51304b81a3f6820a3abdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDelayed: 0
+  delayTime: 0
+  isDelayRandom: 0
+  delayRange:
+  - 0
+  - 0
+  multipleActionsInTime: 0
   rootIO: {fileID: 0}
   isActive: 1
   ActionReset: 0
@@ -916,22 +971,33 @@ MonoBehaviour:
   ActionGravity: 0
   ActionAudio: 1
   ActionColliders: 0
+  ActionDragAndDrop: 0
   DestroyOnTrigger: 0
-  isDelayed: 0
-  delayTime: 0
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  multipleActionsInTime: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
   ModifyGrabMode: 0
   grabDistance: 0
   touchDistance: 0
   grabModeIndex: 0
-  visualsScript: {fileID: 0}
+  ModifyDragAndDrop: 0
+  ModifyDragAndDropTargets: 0
+  ModifyDnDMinDistance: 0
+  ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDRespectAxis: 0
+  dnDMinDistance: 0
+  dnDSnapBeforeDrop: 0
+  dnDRespectXAxis: 0
+  dnDRespectYAxis: 0
+  dnDRespectZAxis: 0
+  dnDRespectXAxisMirror: 0
+  dnDRespectYAxisMirror: 0
+  dnDRespectZAxisMirror: 0
+  ModifyDnDAngleThreshold: 0
+  dnDAngleThreshold: 0
+  DnD_Targets: []
+  visualsScript: {fileID: 1828961570}
   AlterAllVisuals: 1
+  selectedRenderers: 
   triggerAnimation: 0
   targetAnimator: {fileID: 0}
   activeTriggerStatesAnim: 0000000000
@@ -973,6 +1039,7 @@ MonoBehaviour:
   requireAllDeactivators: 0
   proximityMap:
     proximityEntryList: []
+    proximityEntryGroupList: []
     proximityStateIndex: 0
   grabMap:
     grabEntryList: []
@@ -1018,6 +1085,12 @@ MonoBehaviour:
     AreDependenciesSatisfied: 1
   requireAllInputs: 0
   customConditionsEnabled: 0
+  dragAndDropEnabled: 0
+  dndEventValidator: 0
+  dndAnyTarget: 1
+  dndTargetModesIndex: 0
+  dndAttached: 0
+  dndTargets: []
   requireAllProximities: 0
   touchMap:
     TouchEnitry:
@@ -1026,6 +1099,8 @@ MonoBehaviour:
     touchHandsIndex: 2
     touchActionIndex: 0
   gazeEnabled: 0
+  gazeStateIndex: 0
+  gazeIn: 0
   touchEnabled: 1
   ActivateOnDependencyMap:
     dependencies: []
@@ -1034,8 +1109,16 @@ MonoBehaviour:
     dependencies: []
     AreDependenciesSatisfied: 0
   gazeColliderIO: {fileID: 0}
+  handHoverEnabled: 0
+  handHoverIO: {fileID: 0}
+  hoverHandIndex: 0
+  hoverHand: 0
+  hoverStateIndex: 0
+  hoverIn: 0
   ReloadDependencies: 0
   isActive: 1
+  proximityGroupIndex: 0
+  rigCombinations: []
 --- !u!114 &93340066
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1144,7 +1227,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3978acaf2eedc8f4889c42ba095690a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedRenderers: 
 --- !u!1 &109092987
 GameObject:
   m_ObjectHideFlags: 0
@@ -1395,7 +1477,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3978acaf2eedc8f4889c42ba095690a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedRenderers: 
 --- !u!1 &137969689
 GameObject:
   m_ObjectHideFlags: 0
@@ -2079,7 +2160,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3978acaf2eedc8f4889c42ba095690a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedRenderers: 
 --- !u!1 &206945776
 GameObject:
   m_ObjectHideFlags: 0
@@ -2349,6 +2429,7 @@ MonoBehaviour:
   requireAllDeactivators: 0
   proximityMap:
     proximityEntryList: []
+    proximityEntryGroupList: []
     proximityStateIndex: 0
   grabMap:
     grabEntryList: []
@@ -2394,6 +2475,12 @@ MonoBehaviour:
     AreDependenciesSatisfied: 1
   requireAllInputs: 0
   customConditionsEnabled: 0
+  dragAndDropEnabled: 0
+  dndEventValidator: 0
+  dndAnyTarget: 1
+  dndTargetModesIndex: 0
+  dndAttached: 0
+  dndTargets: []
   requireAllProximities: 0
   touchMap:
     TouchEnitry:
@@ -2402,6 +2489,8 @@ MonoBehaviour:
     touchHandsIndex: 0
     touchActionIndex: 0
   gazeEnabled: 0
+  gazeStateIndex: 0
+  gazeIn: 0
   touchEnabled: 0
   ActivateOnDependencyMap:
     dependencies:
@@ -2414,8 +2503,16 @@ MonoBehaviour:
     dependencies: []
     AreDependenciesSatisfied: 0
   gazeColliderIO: {fileID: 0}
+  handHoverEnabled: 0
+  handHoverIO: {fileID: 0}
+  hoverHandIndex: 0
+  hoverHand: 0
+  hoverStateIndex: 0
+  hoverIn: 0
   ReloadDependencies: 0
   isActive: 1
+  proximityGroupIndex: 0
+  rigCombinations: []
 --- !u!114 &213547620
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2428,6 +2525,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fe86aa1e2e51304b81a3f6820a3abdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDelayed: 0
+  delayTime: 0
+  isDelayRandom: 0
+  delayRange:
+  - 0
+  - 0
+  multipleActionsInTime: 0
   rootIO: {fileID: 0}
   isActive: 1
   ActionReset: 0
@@ -2437,22 +2541,33 @@ MonoBehaviour:
   ActionGravity: 0
   ActionAudio: 0
   ActionColliders: 0
+  ActionDragAndDrop: 0
   DestroyOnTrigger: 0
-  isDelayed: 0
-  delayTime: 0
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  multipleActionsInTime: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
   ModifyGrabMode: 0
   grabDistance: 0
   touchDistance: 0
   grabModeIndex: 0
-  visualsScript: {fileID: 0}
+  ModifyDragAndDrop: 0
+  ModifyDragAndDropTargets: 0
+  ModifyDnDMinDistance: 0
+  ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDRespectAxis: 0
+  dnDMinDistance: 0
+  dnDSnapBeforeDrop: 0
+  dnDRespectXAxis: 0
+  dnDRespectYAxis: 0
+  dnDRespectZAxis: 0
+  dnDRespectXAxisMirror: 0
+  dnDRespectYAxisMirror: 0
+  dnDRespectZAxisMirror: 0
+  ModifyDnDAngleThreshold: 0
+  dnDAngleThreshold: 0
+  DnD_Targets: []
+  visualsScript: {fileID: 668136677}
   AlterAllVisuals: 1
+  selectedRenderers: 
   triggerAnimation: 0
   targetAnimator: {fileID: 0}
   activeTriggerStatesAnim: 0000000000
@@ -2563,7 +2678,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3978acaf2eedc8f4889c42ba095690a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedRenderers: 
 --- !u!1 &246174482
 GameObject:
   m_ObjectHideFlags: 0
@@ -3067,11 +3181,24 @@ MonoBehaviour:
   GrabPositionnerCollider: {fileID: 0}
   VibratesOnGrab: 0
   GrabDistance: 30
-  TouchDistance: 1
+  TouchDistance: 10
   AttractionSpeed: 50
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  IsDragAndDropEnabled: 0
+  DnD_minDistance: 1
+  DnD_angleThreshold: 1
+  DnD_respectXAxis: 0
+  DnD_respectXAxisMirrored: 0
+  DnD_respectYAxis: 0
+  DnD_respectYAxisMirrored: 0
+  DnD_respectZAxis: 0
+  DnD_respectZAxisMirrored: 0
+  DnD_snapBeforeDrop: 1
+  DnD_TimeToSnap: 0.5
+  DnD_IsTarget: 0
+  DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
 --- !u!4 &289490866
@@ -3228,6 +3355,7 @@ GameObject:
   - component: {fileID: 321947424}
   - component: {fileID: 321947423}
   - component: {fileID: 321947422}
+  - component: {fileID: 321947425}
   m_Layer: 0
   m_Name: Camera (IO)
   m_TagString: MainCamera
@@ -3285,6 +3413,60 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &321947425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 321947421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb7d934857afa904284ff7024514bef5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InteractiveObjectScripts:
+  - {fileID: 83828760}
+  - {fileID: 289490865}
+  - {fileID: 360028284}
+  - {fileID: 725494209}
+  - {fileID: 774117944}
+  - {fileID: 925675616}
+  - {fileID: 1052934486}
+  - {fileID: 1065180336}
+  - {fileID: 1084573452}
+  - {fileID: 1198208605}
+  - {fileID: 1231828707}
+  - {fileID: 1238660176}
+  - {fileID: 1267269799}
+  - {fileID: 1272767020}
+  - {fileID: 1352670781}
+  - {fileID: 1675010686}
+  - {fileID: 1688595992}
+  - {fileID: 1846678928}
+  - {fileID: 2027702720}
+  - {fileID: 2036026540}
+  InteractiveObjects:
+  - {fileID: 83828757}
+  - {fileID: 289490862}
+  - {fileID: 360028280}
+  - {fileID: 725494207}
+  - {fileID: 774117941}
+  - {fileID: 925675614}
+  - {fileID: 1052934483}
+  - {fileID: 1065180334}
+  - {fileID: 1084573449}
+  - {fileID: 1198208602}
+  - {fileID: 1231828705}
+  - {fileID: 1238660174}
+  - {fileID: 1267269797}
+  - {fileID: 1272767019}
+  - {fileID: 1352670778}
+  - {fileID: 1675010684}
+  - {fileID: 1688595990}
+  - {fileID: 1846678925}
+  - {fileID: 2027702718}
+  - {fileID: 2036026538}
+  InteractiveObjectsCount: 20
 --- !u!1 &328676244
 GameObject:
   m_ObjectHideFlags: 0
@@ -3357,7 +3539,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3978acaf2eedc8f4889c42ba095690a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedRenderers: 
 --- !u!1 &345093222
 GameObject:
   m_ObjectHideFlags: 0
@@ -3653,6 +3834,19 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  IsDragAndDropEnabled: 0
+  DnD_minDistance: 1
+  DnD_angleThreshold: 1
+  DnD_respectXAxis: 0
+  DnD_respectXAxisMirrored: 0
+  DnD_respectYAxis: 0
+  DnD_respectYAxisMirrored: 0
+  DnD_respectZAxis: 0
+  DnD_respectZAxisMirrored: 0
+  DnD_snapBeforeDrop: 1
+  DnD_TimeToSnap: 0.5
+  DnD_IsTarget: 0
+  DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
 --- !u!95 &360028285
@@ -3750,6 +3944,7 @@ SpriteRenderer:
   m_Size: {x: 40.96, y: 40.96}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
 --- !u!4 &361862603
 Transform:
   m_ObjectHideFlags: 0
@@ -3941,7 +4136,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3978acaf2eedc8f4889c42ba095690a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedRenderers: 
 --- !u!1 &377862519
 GameObject:
   m_ObjectHideFlags: 0
@@ -4049,6 +4243,7 @@ MonoBehaviour:
   requireAllDeactivators: 0
   proximityMap:
     proximityEntryList: []
+    proximityEntryGroupList: []
     proximityStateIndex: 0
   grabMap:
     grabEntryList: []
@@ -4094,6 +4289,12 @@ MonoBehaviour:
     AreDependenciesSatisfied: 1
   requireAllInputs: 0
   customConditionsEnabled: 0
+  dragAndDropEnabled: 0
+  dndEventValidator: 0
+  dndAnyTarget: 1
+  dndTargetModesIndex: 0
+  dndAttached: 0
+  dndTargets: []
   requireAllProximities: 0
   touchMap:
     TouchEnitry:
@@ -4102,6 +4303,8 @@ MonoBehaviour:
     touchHandsIndex: 0
     touchActionIndex: 0
   gazeEnabled: 0
+  gazeStateIndex: 0
+  gazeIn: 0
   touchEnabled: 0
   ActivateOnDependencyMap:
     dependencies:
@@ -4114,8 +4317,16 @@ MonoBehaviour:
     dependencies: []
     AreDependenciesSatisfied: 0
   gazeColliderIO: {fileID: 0}
+  handHoverEnabled: 0
+  handHoverIO: {fileID: 0}
+  hoverHandIndex: 0
+  hoverHand: 0
+  hoverStateIndex: 0
+  hoverIn: 0
   ReloadDependencies: 0
   isActive: 1
+  proximityGroupIndex: 0
+  rigCombinations: []
 --- !u!114 &384737485
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4128,6 +4339,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fe86aa1e2e51304b81a3f6820a3abdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDelayed: 0
+  delayTime: 8
+  isDelayRandom: 0
+  delayRange:
+  - 0
+  - 0
+  multipleActionsInTime: 0
   rootIO: {fileID: 0}
   isActive: 1
   ActionReset: 0
@@ -4137,22 +4355,33 @@ MonoBehaviour:
   ActionGravity: 0
   ActionAudio: 1
   ActionColliders: 0
+  ActionDragAndDrop: 0
   DestroyOnTrigger: 0
-  isDelayed: 0
-  delayTime: 8
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  multipleActionsInTime: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
   ModifyGrabMode: 0
   grabDistance: 0
   touchDistance: 0
   grabModeIndex: 0
-  visualsScript: {fileID: 0}
+  ModifyDragAndDrop: 0
+  ModifyDragAndDropTargets: 0
+  ModifyDnDMinDistance: 0
+  ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDRespectAxis: 0
+  dnDMinDistance: 0
+  dnDSnapBeforeDrop: 0
+  dnDRespectXAxis: 0
+  dnDRespectYAxis: 0
+  dnDRespectZAxis: 0
+  dnDRespectXAxisMirror: 0
+  dnDRespectYAxisMirror: 0
+  dnDRespectZAxisMirror: 0
+  ModifyDnDAngleThreshold: 0
+  dnDAngleThreshold: 0
+  DnD_Targets: []
+  visualsScript: {fileID: 1931508564}
   AlterAllVisuals: 1
+  selectedRenderers: 
   triggerAnimation: 0
   targetAnimator: {fileID: 1238660177}
   activeTriggerStatesAnim: 0100000000
@@ -4762,6 +4991,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fe86aa1e2e51304b81a3f6820a3abdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDelayed: 0
+  delayTime: 0
+  isDelayRandom: 0
+  delayRange:
+  - 0
+  - 0
+  multipleActionsInTime: 0
   rootIO: {fileID: 0}
   isActive: 1
   ActionReset: 0
@@ -4771,22 +5007,33 @@ MonoBehaviour:
   ActionGravity: 0
   ActionAudio: 1
   ActionColliders: 0
+  ActionDragAndDrop: 0
   DestroyOnTrigger: 0
-  isDelayed: 0
-  delayTime: 0
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  multipleActionsInTime: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
   ModifyGrabMode: 0
   grabDistance: 0
   touchDistance: 0
   grabModeIndex: 0
-  visualsScript: {fileID: 0}
+  ModifyDragAndDrop: 0
+  ModifyDragAndDropTargets: 0
+  ModifyDnDMinDistance: 0
+  ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDRespectAxis: 0
+  dnDMinDistance: 0
+  dnDSnapBeforeDrop: 0
+  dnDRespectXAxis: 0
+  dnDRespectYAxis: 0
+  dnDRespectZAxis: 0
+  dnDRespectXAxisMirror: 0
+  dnDRespectYAxisMirror: 0
+  dnDRespectZAxisMirror: 0
+  ModifyDnDAngleThreshold: 0
+  dnDAngleThreshold: 0
+  DnD_Targets: []
+  visualsScript: {fileID: 571438004}
   AlterAllVisuals: 1
+  selectedRenderers: 
   triggerAnimation: 0
   targetAnimator: {fileID: 0}
   activeTriggerStatesAnim: 0000000000
@@ -4828,6 +5075,7 @@ MonoBehaviour:
   requireAllDeactivators: 0
   proximityMap:
     proximityEntryList: []
+    proximityEntryGroupList: []
     proximityStateIndex: 0
   grabMap:
     grabEntryList: []
@@ -4873,6 +5121,12 @@ MonoBehaviour:
     AreDependenciesSatisfied: 1
   requireAllInputs: 0
   customConditionsEnabled: 0
+  dragAndDropEnabled: 0
+  dndEventValidator: 0
+  dndAnyTarget: 1
+  dndTargetModesIndex: 0
+  dndAttached: 0
+  dndTargets: []
   requireAllProximities: 0
   touchMap:
     TouchEnitry:
@@ -4881,6 +5135,8 @@ MonoBehaviour:
     touchHandsIndex: 2
     touchActionIndex: 0
   gazeEnabled: 0
+  gazeStateIndex: 0
+  gazeIn: 0
   touchEnabled: 1
   ActivateOnDependencyMap:
     dependencies: []
@@ -4889,8 +5145,16 @@ MonoBehaviour:
     dependencies: []
     AreDependenciesSatisfied: 0
   gazeColliderIO: {fileID: 0}
+  handHoverEnabled: 0
+  handHoverIO: {fileID: 0}
+  hoverHandIndex: 0
+  hoverHand: 0
+  hoverStateIndex: 0
+  hoverIn: 0
   ReloadDependencies: 0
   isActive: 1
+  proximityGroupIndex: 0
+  rigCombinations: []
 --- !u!114 &427440265
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5317,6 +5581,7 @@ SpriteRenderer:
   m_Size: {x: 7.2, y: 7.2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
 --- !u!4 &470585213
 Transform:
   m_ObjectHideFlags: 0
@@ -6057,6 +6322,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fe86aa1e2e51304b81a3f6820a3abdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDelayed: 0
+  delayTime: 0
+  isDelayRandom: 0
+  delayRange:
+  - 0
+  - 0
+  multipleActionsInTime: 0
   rootIO: {fileID: 0}
   isActive: 1
   ActionReset: 0
@@ -6066,22 +6338,33 @@ MonoBehaviour:
   ActionGravity: 0
   ActionAudio: 1
   ActionColliders: 0
+  ActionDragAndDrop: 0
   DestroyOnTrigger: 0
-  isDelayed: 0
-  delayTime: 0
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  multipleActionsInTime: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
   ModifyGrabMode: 0
   grabDistance: 0
   touchDistance: 0
   grabModeIndex: 0
-  visualsScript: {fileID: 0}
+  ModifyDragAndDrop: 0
+  ModifyDragAndDropTargets: 0
+  ModifyDnDMinDistance: 0
+  ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDRespectAxis: 0
+  dnDMinDistance: 0
+  dnDSnapBeforeDrop: 0
+  dnDRespectXAxis: 0
+  dnDRespectYAxis: 0
+  dnDRespectZAxis: 0
+  dnDRespectXAxisMirror: 0
+  dnDRespectYAxisMirror: 0
+  dnDRespectZAxisMirror: 0
+  ModifyDnDAngleThreshold: 0
+  dnDAngleThreshold: 0
+  DnD_Targets: []
+  visualsScript: {fileID: 1758444017}
   AlterAllVisuals: 1
+  selectedRenderers: 
   triggerAnimation: 0
   targetAnimator: {fileID: 0}
   activeTriggerStatesAnim: 0000000000
@@ -6123,6 +6406,7 @@ MonoBehaviour:
   requireAllDeactivators: 0
   proximityMap:
     proximityEntryList: []
+    proximityEntryGroupList: []
     proximityStateIndex: 0
   grabMap:
     grabEntryList: []
@@ -6168,6 +6452,12 @@ MonoBehaviour:
     AreDependenciesSatisfied: 1
   requireAllInputs: 0
   customConditionsEnabled: 0
+  dragAndDropEnabled: 0
+  dndEventValidator: 0
+  dndAnyTarget: 1
+  dndTargetModesIndex: 0
+  dndAttached: 0
+  dndTargets: []
   requireAllProximities: 0
   touchMap:
     TouchEnitry:
@@ -6176,6 +6466,8 @@ MonoBehaviour:
     touchHandsIndex: 2
     touchActionIndex: 0
   gazeEnabled: 0
+  gazeStateIndex: 0
+  gazeIn: 0
   touchEnabled: 1
   ActivateOnDependencyMap:
     dependencies: []
@@ -6184,8 +6476,16 @@ MonoBehaviour:
     dependencies: []
     AreDependenciesSatisfied: 0
   gazeColliderIO: {fileID: 0}
+  handHoverEnabled: 0
+  handHoverIO: {fileID: 0}
+  hoverHandIndex: 0
+  hoverHand: 0
+  hoverStateIndex: 0
+  hoverIn: 0
   ReloadDependencies: 0
   isActive: 1
+  proximityGroupIndex: 0
+  rigCombinations: []
 --- !u!114 &569372384
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6243,7 +6543,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3978acaf2eedc8f4889c42ba095690a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedRenderers: 
 --- !u!1 &572194354
 GameObject:
   m_ObjectHideFlags: 0
@@ -6487,6 +6786,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fe86aa1e2e51304b81a3f6820a3abdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDelayed: 0
+  delayTime: 0
+  isDelayRandom: 0
+  delayRange:
+  - 0
+  - 0
+  multipleActionsInTime: 0
   rootIO: {fileID: 0}
   isActive: 1
   ActionReset: 0
@@ -6496,22 +6802,33 @@ MonoBehaviour:
   ActionGravity: 0
   ActionAudio: 1
   ActionColliders: 0
+  ActionDragAndDrop: 0
   DestroyOnTrigger: 0
-  isDelayed: 0
-  delayTime: 0
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  multipleActionsInTime: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
   ModifyGrabMode: 0
   grabDistance: 0
   touchDistance: 0
   grabModeIndex: 0
-  visualsScript: {fileID: 0}
+  ModifyDragAndDrop: 0
+  ModifyDragAndDropTargets: 0
+  ModifyDnDMinDistance: 0
+  ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDRespectAxis: 0
+  dnDMinDistance: 0
+  dnDSnapBeforeDrop: 0
+  dnDRespectXAxis: 0
+  dnDRespectYAxis: 0
+  dnDRespectZAxis: 0
+  dnDRespectXAxisMirror: 0
+  dnDRespectYAxisMirror: 0
+  dnDRespectZAxisMirror: 0
+  ModifyDnDAngleThreshold: 0
+  dnDAngleThreshold: 0
+  DnD_Targets: []
+  visualsScript: {fileID: 1431850991}
   AlterAllVisuals: 1
+  selectedRenderers: 
   triggerAnimation: 0
   targetAnimator: {fileID: 0}
   activeTriggerStatesAnim: 0000000000
@@ -6553,6 +6870,7 @@ MonoBehaviour:
   requireAllDeactivators: 0
   proximityMap:
     proximityEntryList: []
+    proximityEntryGroupList: []
     proximityStateIndex: 0
   grabMap:
     grabEntryList: []
@@ -6598,6 +6916,12 @@ MonoBehaviour:
     AreDependenciesSatisfied: 1
   requireAllInputs: 0
   customConditionsEnabled: 0
+  dragAndDropEnabled: 0
+  dndEventValidator: 0
+  dndAnyTarget: 1
+  dndTargetModesIndex: 0
+  dndAttached: 0
+  dndTargets: []
   requireAllProximities: 0
   touchMap:
     TouchEnitry:
@@ -6606,6 +6930,8 @@ MonoBehaviour:
     touchHandsIndex: 2
     touchActionIndex: 0
   gazeEnabled: 0
+  gazeStateIndex: 0
+  gazeIn: 0
   touchEnabled: 1
   ActivateOnDependencyMap:
     dependencies: []
@@ -6614,8 +6940,16 @@ MonoBehaviour:
     dependencies: []
     AreDependenciesSatisfied: 0
   gazeColliderIO: {fileID: 0}
+  handHoverEnabled: 0
+  handHoverIO: {fileID: 0}
+  hoverHandIndex: 0
+  hoverHand: 0
+  hoverStateIndex: 0
+  hoverIn: 0
   ReloadDependencies: 0
   isActive: 1
+  proximityGroupIndex: 0
+  rigCombinations: []
 --- !u!114 &598648734
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6997,7 +7331,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3978acaf2eedc8f4889c42ba095690a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedRenderers: 
 --- !u!1 &631913621
 GameObject:
   m_ObjectHideFlags: 0
@@ -7151,6 +7484,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fe86aa1e2e51304b81a3f6820a3abdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDelayed: 0
+  delayTime: 0
+  isDelayRandom: 0
+  delayRange:
+  - 0
+  - 0
+  multipleActionsInTime: 0
   rootIO: {fileID: 0}
   isActive: 0
   ActionReset: 0
@@ -7160,22 +7500,33 @@ MonoBehaviour:
   ActionGravity: 0
   ActionAudio: 0
   ActionColliders: 0
+  ActionDragAndDrop: 0
   DestroyOnTrigger: 0
-  isDelayed: 0
-  delayTime: 0
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  multipleActionsInTime: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
   ModifyGrabMode: 0
   grabDistance: 0
   touchDistance: 0
   grabModeIndex: 0
-  visualsScript: {fileID: 0}
+  ModifyDragAndDrop: 0
+  ModifyDragAndDropTargets: 0
+  ModifyDnDMinDistance: 0
+  ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDRespectAxis: 0
+  dnDMinDistance: 0
+  dnDSnapBeforeDrop: 0
+  dnDRespectXAxis: 0
+  dnDRespectYAxis: 0
+  dnDRespectZAxis: 0
+  dnDRespectXAxisMirror: 0
+  dnDRespectYAxisMirror: 0
+  dnDRespectZAxisMirror: 0
+  ModifyDnDAngleThreshold: 0
+  dnDAngleThreshold: 0
+  DnD_Targets: []
+  visualsScript: {fileID: 999607124}
   AlterAllVisuals: 1
+  selectedRenderers: 
   triggerAnimation: 0
   targetAnimator: {fileID: 0}
   activeTriggerStatesAnim: 0000000000
@@ -7216,6 +7567,7 @@ MonoBehaviour:
   requireAllDeactivators: 0
   proximityMap:
     proximityEntryList: []
+    proximityEntryGroupList: []
     proximityStateIndex: 0
   grabMap:
     grabEntryList:
@@ -7263,6 +7615,12 @@ MonoBehaviour:
     AreDependenciesSatisfied: 1
   requireAllInputs: 0
   customConditionsEnabled: 0
+  dragAndDropEnabled: 0
+  dndEventValidator: 0
+  dndAnyTarget: 1
+  dndTargetModesIndex: 0
+  dndAttached: 0
+  dndTargets: []
   requireAllProximities: 0
   touchMap:
     TouchEnitry:
@@ -7271,6 +7629,8 @@ MonoBehaviour:
     touchHandsIndex: 0
     touchActionIndex: 0
   gazeEnabled: 0
+  gazeStateIndex: 0
+  gazeIn: 0
   touchEnabled: 0
   ActivateOnDependencyMap:
     dependencies: []
@@ -7279,8 +7639,16 @@ MonoBehaviour:
     dependencies: []
     AreDependenciesSatisfied: 0
   gazeColliderIO: {fileID: 725494209}
+  handHoverEnabled: 0
+  handHoverIO: {fileID: 0}
+  hoverHandIndex: 0
+  hoverHand: 0
+  hoverStateIndex: 0
+  hoverIn: 0
   ReloadDependencies: 0
   isActive: 0
+  proximityGroupIndex: 0
+  rigCombinations: []
 --- !u!114 &661873088
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7337,7 +7705,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3978acaf2eedc8f4889c42ba095690a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedRenderers: 
 --- !u!1 &668888675
 GameObject:
   m_ObjectHideFlags: 0
@@ -7521,6 +7888,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fe86aa1e2e51304b81a3f6820a3abdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDelayed: 0
+  delayTime: 0
+  isDelayRandom: 0
+  delayRange:
+  - 0
+  - 0
+  multipleActionsInTime: 0
   rootIO: {fileID: 0}
   isActive: 1
   ActionReset: 0
@@ -7530,22 +7904,33 @@ MonoBehaviour:
   ActionGravity: 0
   ActionAudio: 1
   ActionColliders: 0
+  ActionDragAndDrop: 0
   DestroyOnTrigger: 0
-  isDelayed: 0
-  delayTime: 0
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  multipleActionsInTime: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
   ModifyGrabMode: 0
   grabDistance: 0
   touchDistance: 0
   grabModeIndex: 0
-  visualsScript: {fileID: 0}
+  ModifyDragAndDrop: 0
+  ModifyDragAndDropTargets: 0
+  ModifyDnDMinDistance: 0
+  ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDRespectAxis: 0
+  dnDMinDistance: 0
+  dnDSnapBeforeDrop: 0
+  dnDRespectXAxis: 0
+  dnDRespectYAxis: 0
+  dnDRespectZAxis: 0
+  dnDRespectXAxisMirror: 0
+  dnDRespectYAxisMirror: 0
+  dnDRespectZAxisMirror: 0
+  ModifyDnDAngleThreshold: 0
+  dnDAngleThreshold: 0
+  DnD_Targets: []
+  visualsScript: {fileID: 236929806}
   AlterAllVisuals: 1
+  selectedRenderers: 
   triggerAnimation: 0
   targetAnimator: {fileID: 0}
   activeTriggerStatesAnim: 0000000000
@@ -7587,6 +7972,7 @@ MonoBehaviour:
   requireAllDeactivators: 0
   proximityMap:
     proximityEntryList: []
+    proximityEntryGroupList: []
     proximityStateIndex: 0
   grabMap:
     grabEntryList: []
@@ -7632,6 +8018,12 @@ MonoBehaviour:
     AreDependenciesSatisfied: 1
   requireAllInputs: 0
   customConditionsEnabled: 0
+  dragAndDropEnabled: 0
+  dndEventValidator: 0
+  dndAnyTarget: 1
+  dndTargetModesIndex: 0
+  dndAttached: 0
+  dndTargets: []
   requireAllProximities: 0
   touchMap:
     TouchEnitry:
@@ -7640,6 +8032,8 @@ MonoBehaviour:
     touchHandsIndex: 2
     touchActionIndex: 0
   gazeEnabled: 0
+  gazeStateIndex: 0
+  gazeIn: 0
   touchEnabled: 1
   ActivateOnDependencyMap:
     dependencies: []
@@ -7648,8 +8042,16 @@ MonoBehaviour:
     dependencies: []
     AreDependenciesSatisfied: 0
   gazeColliderIO: {fileID: 0}
+  handHoverEnabled: 0
+  handHoverIO: {fileID: 0}
+  hoverHandIndex: 0
+  hoverHand: 0
+  hoverStateIndex: 0
+  hoverIn: 0
   ReloadDependencies: 0
   isActive: 1
+  proximityGroupIndex: 0
+  rigCombinations: []
 --- !u!114 &689207722
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7709,6 +8111,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fe86aa1e2e51304b81a3f6820a3abdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDelayed: 0
+  delayTime: 0
+  isDelayRandom: 0
+  delayRange:
+  - 0
+  - 0
+  multipleActionsInTime: 0
   rootIO: {fileID: 0}
   isActive: 1
   ActionReset: 0
@@ -7718,22 +8127,33 @@ MonoBehaviour:
   ActionGravity: 0
   ActionAudio: 1
   ActionColliders: 0
+  ActionDragAndDrop: 0
   DestroyOnTrigger: 0
-  isDelayed: 0
-  delayTime: 0
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  multipleActionsInTime: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
   ModifyGrabMode: 0
   grabDistance: 0
   touchDistance: 0
   grabModeIndex: 0
-  visualsScript: {fileID: 0}
+  ModifyDragAndDrop: 0
+  ModifyDragAndDropTargets: 0
+  ModifyDnDMinDistance: 0
+  ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDRespectAxis: 0
+  dnDMinDistance: 0
+  dnDSnapBeforeDrop: 0
+  dnDRespectXAxis: 0
+  dnDRespectYAxis: 0
+  dnDRespectZAxis: 0
+  dnDRespectXAxisMirror: 0
+  dnDRespectYAxisMirror: 0
+  dnDRespectZAxisMirror: 0
+  ModifyDnDAngleThreshold: 0
+  dnDAngleThreshold: 0
+  DnD_Targets: []
+  visualsScript: {fileID: 1625238630}
   AlterAllVisuals: 1
+  selectedRenderers: 
   triggerAnimation: 0
   targetAnimator: {fileID: 0}
   activeTriggerStatesAnim: 0000000000
@@ -7775,6 +8195,7 @@ MonoBehaviour:
   requireAllDeactivators: 0
   proximityMap:
     proximityEntryList: []
+    proximityEntryGroupList: []
     proximityStateIndex: 0
   grabMap:
     grabEntryList: []
@@ -7820,6 +8241,12 @@ MonoBehaviour:
     AreDependenciesSatisfied: 1
   requireAllInputs: 0
   customConditionsEnabled: 0
+  dragAndDropEnabled: 0
+  dndEventValidator: 0
+  dndAnyTarget: 1
+  dndTargetModesIndex: 0
+  dndAttached: 0
+  dndTargets: []
   requireAllProximities: 0
   touchMap:
     TouchEnitry:
@@ -7828,6 +8255,8 @@ MonoBehaviour:
     touchHandsIndex: 2
     touchActionIndex: 0
   gazeEnabled: 0
+  gazeStateIndex: 0
+  gazeIn: 0
   touchEnabled: 1
   ActivateOnDependencyMap:
     dependencies: []
@@ -7836,8 +8265,16 @@ MonoBehaviour:
     dependencies: []
     AreDependenciesSatisfied: 0
   gazeColliderIO: {fileID: 0}
+  handHoverEnabled: 0
+  handHoverIO: {fileID: 0}
+  hoverHandIndex: 0
+  hoverHand: 0
+  hoverStateIndex: 0
+  hoverIn: 0
   ReloadDependencies: 0
   isActive: 1
+  proximityGroupIndex: 0
+  rigCombinations: []
 --- !u!114 &698969503
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8022,7 +8459,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3978acaf2eedc8f4889c42ba095690a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedRenderers: 
 --- !u!1 &725494207
 GameObject:
   m_ObjectHideFlags: 0
@@ -8088,6 +8524,19 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  IsDragAndDropEnabled: 0
+  DnD_minDistance: 1
+  DnD_angleThreshold: 1
+  DnD_respectXAxis: 0
+  DnD_respectXAxisMirrored: 0
+  DnD_respectYAxis: 0
+  DnD_respectYAxisMirrored: 0
+  DnD_respectZAxis: 0
+  DnD_respectZAxisMirrored: 0
+  DnD_snapBeforeDrop: 1
+  DnD_TimeToSnap: 0.5
+  DnD_IsTarget: 0
+  DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
 --- !u!54 &725494210
@@ -8514,6 +8963,7 @@ MonoBehaviour:
   requireAllDeactivators: 0
   proximityMap:
     proximityEntryList: []
+    proximityEntryGroupList: []
     proximityStateIndex: 0
   grabMap:
     grabEntryList: []
@@ -8559,6 +9009,12 @@ MonoBehaviour:
     AreDependenciesSatisfied: 1
   requireAllInputs: 0
   customConditionsEnabled: 0
+  dragAndDropEnabled: 0
+  dndEventValidator: 0
+  dndAnyTarget: 1
+  dndTargetModesIndex: 0
+  dndAttached: 0
+  dndTargets: []
   requireAllProximities: 0
   touchMap:
     TouchEnitry:
@@ -8567,6 +9023,8 @@ MonoBehaviour:
     touchHandsIndex: 0
     touchActionIndex: 0
   gazeEnabled: 1
+  gazeStateIndex: 0
+  gazeIn: 0
   touchEnabled: 0
   ActivateOnDependencyMap:
     dependencies: []
@@ -8575,8 +9033,16 @@ MonoBehaviour:
     dependencies: []
     AreDependenciesSatisfied: 0
   gazeColliderIO: {fileID: 1352670781}
+  handHoverEnabled: 0
+  handHoverIO: {fileID: 0}
+  hoverHandIndex: 0
+  hoverHand: 0
+  hoverStateIndex: 0
+  hoverIn: 0
   ReloadDependencies: 0
   isActive: 1
+  proximityGroupIndex: 0
+  rigCombinations: []
 --- !u!114 &763341219
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8588,6 +9054,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fe86aa1e2e51304b81a3f6820a3abdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDelayed: 0
+  delayTime: 0
+  isDelayRandom: 0
+  delayRange:
+  - 0
+  - 0
+  multipleActionsInTime: 0
   rootIO: {fileID: 0}
   isActive: 1
   ActionReset: 0
@@ -8597,22 +9070,33 @@ MonoBehaviour:
   ActionGravity: 0
   ActionAudio: 0
   ActionColliders: 0
+  ActionDragAndDrop: 0
   DestroyOnTrigger: 0
-  isDelayed: 0
-  delayTime: 0
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  multipleActionsInTime: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
   ModifyGrabMode: 0
   grabDistance: 0
   touchDistance: 0
   grabModeIndex: 0
-  visualsScript: {fileID: 0}
+  ModifyDragAndDrop: 0
+  ModifyDragAndDropTargets: 0
+  ModifyDnDMinDistance: 0
+  ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDRespectAxis: 0
+  dnDMinDistance: 0
+  dnDSnapBeforeDrop: 0
+  dnDRespectXAxis: 0
+  dnDRespectYAxis: 0
+  dnDRespectZAxis: 0
+  dnDRespectXAxisMirror: 0
+  dnDRespectYAxisMirror: 0
+  dnDRespectZAxisMirror: 0
+  ModifyDnDAngleThreshold: 0
+  dnDAngleThreshold: 0
+  DnD_Targets: []
+  visualsScript: {fileID: 1524818768}
   AlterAllVisuals: 1
+  selectedRenderers: 
   triggerAnimation: 1
   targetAnimator: {fileID: 361862604}
   activeTriggerStatesAnim: 0100000000
@@ -8870,6 +9354,19 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  IsDragAndDropEnabled: 0
+  DnD_minDistance: 1
+  DnD_angleThreshold: 1
+  DnD_respectXAxis: 0
+  DnD_respectXAxisMirrored: 0
+  DnD_respectYAxis: 0
+  DnD_respectYAxisMirrored: 0
+  DnD_respectZAxis: 0
+  DnD_respectZAxisMirrored: 0
+  DnD_snapBeforeDrop: 1
+  DnD_TimeToSnap: 0.5
+  DnD_IsTarget: 0
+  DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
 --- !u!4 &774117945
@@ -9466,6 +9963,7 @@ SpriteRenderer:
   m_Size: {x: 4.99, y: 4.98}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
 --- !u!1 &847765036
 GameObject:
   m_ObjectHideFlags: 0
@@ -9890,6 +10388,7 @@ MonoBehaviour:
   requireAllDeactivators: 0
   proximityMap:
     proximityEntryList: []
+    proximityEntryGroupList: []
     proximityStateIndex: 0
   grabMap:
     grabEntryList: []
@@ -9935,6 +10434,12 @@ MonoBehaviour:
     AreDependenciesSatisfied: 1
   requireAllInputs: 0
   customConditionsEnabled: 0
+  dragAndDropEnabled: 0
+  dndEventValidator: 0
+  dndAnyTarget: 1
+  dndTargetModesIndex: 0
+  dndAttached: 0
+  dndTargets: []
   requireAllProximities: 0
   touchMap:
     TouchEnitry:
@@ -9943,6 +10448,8 @@ MonoBehaviour:
     touchHandsIndex: 2
     touchActionIndex: 0
   gazeEnabled: 0
+  gazeStateIndex: 0
+  gazeIn: 0
   touchEnabled: 1
   ActivateOnDependencyMap:
     dependencies:
@@ -9955,8 +10462,16 @@ MonoBehaviour:
     dependencies: []
     AreDependenciesSatisfied: 0
   gazeColliderIO: {fileID: 0}
+  handHoverEnabled: 0
+  handHoverIO: {fileID: 0}
+  hoverHandIndex: 0
+  hoverHand: 0
+  hoverStateIndex: 0
+  hoverIn: 0
   ReloadDependencies: 0
   isActive: 1
+  proximityGroupIndex: 0
+  rigCombinations: []
 --- !u!114 &873858003
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9969,6 +10484,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fe86aa1e2e51304b81a3f6820a3abdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDelayed: 0
+  delayTime: 0
+  isDelayRandom: 0
+  delayRange:
+  - 0
+  - 0
+  multipleActionsInTime: 0
   rootIO: {fileID: 0}
   isActive: 1
   ActionReset: 0
@@ -9978,22 +10500,33 @@ MonoBehaviour:
   ActionGravity: 0
   ActionAudio: 1
   ActionColliders: 0
+  ActionDragAndDrop: 0
   DestroyOnTrigger: 0
-  isDelayed: 0
-  delayTime: 0
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  multipleActionsInTime: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
   ModifyGrabMode: 0
   grabDistance: 0
   touchDistance: 0
   grabModeIndex: 0
-  visualsScript: {fileID: 0}
+  ModifyDragAndDrop: 0
+  ModifyDragAndDropTargets: 0
+  ModifyDnDMinDistance: 0
+  ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDRespectAxis: 0
+  dnDMinDistance: 0
+  dnDSnapBeforeDrop: 0
+  dnDRespectXAxis: 0
+  dnDRespectYAxis: 0
+  dnDRespectZAxis: 0
+  dnDRespectXAxisMirror: 0
+  dnDRespectYAxisMirror: 0
+  dnDRespectZAxisMirror: 0
+  ModifyDnDAngleThreshold: 0
+  dnDAngleThreshold: 0
+  DnD_Targets: []
+  visualsScript: {fileID: 629724906}
   AlterAllVisuals: 1
+  selectedRenderers: 
   triggerAnimation: 1
   targetAnimator: {fileID: 925675618}
   activeTriggerStatesAnim: 0100000000
@@ -10089,7 +10622,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3978acaf2eedc8f4889c42ba095690a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedRenderers: 
 --- !u!1 &882421633
 GameObject:
   m_ObjectHideFlags: 0
@@ -10128,6 +10660,7 @@ MonoBehaviour:
     proximityEntryList:
     - dependentGameObject: {fileID: 1272767020}
     - dependentGameObject: {fileID: 725494209}
+    proximityEntryGroupList: []
     proximityStateIndex: 0
   grabMap:
     grabEntryList: []
@@ -10173,6 +10706,12 @@ MonoBehaviour:
     AreDependenciesSatisfied: 1
   requireAllInputs: 0
   customConditionsEnabled: 0
+  dragAndDropEnabled: 0
+  dndEventValidator: 0
+  dndAnyTarget: 1
+  dndTargetModesIndex: 0
+  dndAttached: 0
+  dndTargets: []
   requireAllProximities: 0
   touchMap:
     TouchEnitry:
@@ -10181,6 +10720,8 @@ MonoBehaviour:
     touchHandsIndex: 0
     touchActionIndex: 0
   gazeEnabled: 0
+  gazeStateIndex: 0
+  gazeIn: 0
   touchEnabled: 0
   ActivateOnDependencyMap:
     dependencies: []
@@ -10189,8 +10730,16 @@ MonoBehaviour:
     dependencies: []
     AreDependenciesSatisfied: 0
   gazeColliderIO: {fileID: 0}
+  handHoverEnabled: 0
+  handHoverIO: {fileID: 0}
+  hoverHandIndex: 0
+  hoverHand: 0
+  hoverStateIndex: 0
+  hoverIn: 0
   ReloadDependencies: 0
   isActive: 1
+  proximityGroupIndex: 0
+  rigCombinations: []
 --- !u!114 &882421635
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10203,6 +10752,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fe86aa1e2e51304b81a3f6820a3abdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDelayed: 0
+  delayTime: 0
+  isDelayRandom: 0
+  delayRange:
+  - 0
+  - 0
+  multipleActionsInTime: 0
   rootIO: {fileID: 0}
   isActive: 1
   ActionReset: 0
@@ -10212,22 +10768,33 @@ MonoBehaviour:
   ActionGravity: 0
   ActionAudio: 1
   ActionColliders: 0
+  ActionDragAndDrop: 0
   DestroyOnTrigger: 0
-  isDelayed: 0
-  delayTime: 0
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  multipleActionsInTime: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
   ModifyGrabMode: 0
   grabDistance: 0
   touchDistance: 0
   grabModeIndex: 0
-  visualsScript: {fileID: 0}
+  ModifyDragAndDrop: 0
+  ModifyDragAndDropTargets: 0
+  ModifyDnDMinDistance: 0
+  ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDRespectAxis: 0
+  dnDMinDistance: 0
+  dnDSnapBeforeDrop: 0
+  dnDRespectXAxis: 0
+  dnDRespectYAxis: 0
+  dnDRespectZAxis: 0
+  dnDRespectXAxisMirror: 0
+  dnDRespectYAxisMirror: 0
+  dnDRespectZAxisMirror: 0
+  ModifyDnDAngleThreshold: 0
+  dnDAngleThreshold: 0
+  DnD_Targets: []
+  visualsScript: {fileID: 1251218327}
   AlterAllVisuals: 1
+  selectedRenderers: 
   triggerAnimation: 1
   targetAnimator: {fileID: 1272767022}
   activeTriggerStatesAnim: 0100000000
@@ -10568,6 +11135,19 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  IsDragAndDropEnabled: 0
+  DnD_minDistance: 1
+  DnD_angleThreshold: 1
+  DnD_respectXAxis: 0
+  DnD_respectXAxisMirrored: 0
+  DnD_respectYAxis: 0
+  DnD_respectYAxisMirrored: 0
+  DnD_respectZAxis: 0
+  DnD_respectZAxisMirrored: 0
+  DnD_snapBeforeDrop: 1
+  DnD_TimeToSnap: 0.5
+  DnD_IsTarget: 0
+  DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
 --- !u!54 &925675617
@@ -10640,6 +11220,7 @@ MonoBehaviour:
   requireAllDeactivators: 0
   proximityMap:
     proximityEntryList: []
+    proximityEntryGroupList: []
     proximityStateIndex: 0
   grabMap:
     grabEntryList: []
@@ -10685,6 +11266,12 @@ MonoBehaviour:
     AreDependenciesSatisfied: 1
   requireAllInputs: 0
   customConditionsEnabled: 0
+  dragAndDropEnabled: 0
+  dndEventValidator: 0
+  dndAnyTarget: 1
+  dndTargetModesIndex: 0
+  dndAttached: 0
+  dndTargets: []
   requireAllProximities: 0
   touchMap:
     TouchEnitry:
@@ -10693,6 +11280,8 @@ MonoBehaviour:
     touchHandsIndex: 2
     touchActionIndex: 0
   gazeEnabled: 0
+  gazeStateIndex: 0
+  gazeIn: 0
   touchEnabled: 1
   ActivateOnDependencyMap:
     dependencies:
@@ -10705,8 +11294,16 @@ MonoBehaviour:
     dependencies: []
     AreDependenciesSatisfied: 0
   gazeColliderIO: {fileID: 0}
+  handHoverEnabled: 0
+  handHoverIO: {fileID: 0}
+  hoverHandIndex: 0
+  hoverHand: 0
+  hoverStateIndex: 0
+  hoverIn: 0
   ReloadDependencies: 0
   isActive: 1
+  proximityGroupIndex: 0
+  rigCombinations: []
 --- !u!114 &926783217
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10719,6 +11316,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fe86aa1e2e51304b81a3f6820a3abdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDelayed: 0
+  delayTime: 0
+  isDelayRandom: 0
+  delayRange:
+  - 0
+  - 0
+  multipleActionsInTime: 0
   rootIO: {fileID: 0}
   isActive: 1
   ActionReset: 0
@@ -10728,22 +11332,33 @@ MonoBehaviour:
   ActionGravity: 0
   ActionAudio: 0
   ActionColliders: 0
+  ActionDragAndDrop: 0
   DestroyOnTrigger: 0
-  isDelayed: 0
-  delayTime: 0
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  multipleActionsInTime: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
   ModifyGrabMode: 0
   grabDistance: 0
   touchDistance: 0
   grabModeIndex: 0
-  visualsScript: {fileID: 0}
+  ModifyDragAndDrop: 0
+  ModifyDragAndDropTargets: 0
+  ModifyDnDMinDistance: 0
+  ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDRespectAxis: 0
+  dnDMinDistance: 0
+  dnDSnapBeforeDrop: 0
+  dnDRespectXAxis: 0
+  dnDRespectYAxis: 0
+  dnDRespectZAxis: 0
+  dnDRespectXAxisMirror: 0
+  dnDRespectYAxisMirror: 0
+  dnDRespectZAxisMirror: 0
+  ModifyDnDAngleThreshold: 0
+  dnDAngleThreshold: 0
+  DnD_Targets: []
+  visualsScript: {fileID: 127520266}
   AlterAllVisuals: 1
+  selectedRenderers: 
   triggerAnimation: 1
   targetAnimator: {fileID: 1846678926}
   activeTriggerStatesAnim: 0100000000
@@ -11351,6 +11966,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fe86aa1e2e51304b81a3f6820a3abdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDelayed: 0
+  delayTime: 0
+  isDelayRandom: 0
+  delayRange:
+  - 0
+  - 0
+  multipleActionsInTime: 0
   rootIO: {fileID: 0}
   isActive: 1
   ActionReset: 0
@@ -11360,22 +11982,33 @@ MonoBehaviour:
   ActionGravity: 0
   ActionAudio: 1
   ActionColliders: 0
+  ActionDragAndDrop: 0
   DestroyOnTrigger: 0
-  isDelayed: 0
-  delayTime: 0
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  multipleActionsInTime: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
   ModifyGrabMode: 0
   grabDistance: 0
   touchDistance: 0
   grabModeIndex: 0
-  visualsScript: {fileID: 0}
+  ModifyDragAndDrop: 0
+  ModifyDragAndDropTargets: 0
+  ModifyDnDMinDistance: 0
+  ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDRespectAxis: 0
+  dnDMinDistance: 0
+  dnDSnapBeforeDrop: 0
+  dnDRespectXAxis: 0
+  dnDRespectYAxis: 0
+  dnDRespectZAxis: 0
+  dnDRespectXAxisMirror: 0
+  dnDRespectYAxisMirror: 0
+  dnDRespectZAxisMirror: 0
+  ModifyDnDAngleThreshold: 0
+  dnDAngleThreshold: 0
+  DnD_Targets: []
+  visualsScript: {fileID: 2093273917}
   AlterAllVisuals: 1
+  selectedRenderers: 
   triggerAnimation: 0
   targetAnimator: {fileID: 0}
   activeTriggerStatesAnim: 0000000000
@@ -11417,6 +12050,7 @@ MonoBehaviour:
   requireAllDeactivators: 0
   proximityMap:
     proximityEntryList: []
+    proximityEntryGroupList: []
     proximityStateIndex: 0
   grabMap:
     grabEntryList: []
@@ -11462,6 +12096,12 @@ MonoBehaviour:
     AreDependenciesSatisfied: 1
   requireAllInputs: 0
   customConditionsEnabled: 0
+  dragAndDropEnabled: 0
+  dndEventValidator: 0
+  dndAnyTarget: 1
+  dndTargetModesIndex: 0
+  dndAttached: 0
+  dndTargets: []
   requireAllProximities: 0
   touchMap:
     TouchEnitry:
@@ -11470,6 +12110,8 @@ MonoBehaviour:
     touchHandsIndex: 2
     touchActionIndex: 0
   gazeEnabled: 0
+  gazeStateIndex: 0
+  gazeIn: 0
   touchEnabled: 1
   ActivateOnDependencyMap:
     dependencies: []
@@ -11478,8 +12120,16 @@ MonoBehaviour:
     dependencies: []
     AreDependenciesSatisfied: 0
   gazeColliderIO: {fileID: 0}
+  handHoverEnabled: 0
+  handHoverIO: {fileID: 0}
+  hoverHandIndex: 0
+  hoverHand: 0
+  hoverStateIndex: 0
+  hoverIn: 0
   ReloadDependencies: 0
   isActive: 1
+  proximityGroupIndex: 0
+  rigCombinations: []
 --- !u!114 &960171072
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11756,6 +12406,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fe86aa1e2e51304b81a3f6820a3abdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDelayed: 0
+  delayTime: 0
+  isDelayRandom: 0
+  delayRange:
+  - 0
+  - 0
+  multipleActionsInTime: 0
   rootIO: {fileID: 0}
   isActive: 1
   ActionReset: 0
@@ -11765,22 +12422,33 @@ MonoBehaviour:
   ActionGravity: 0
   ActionAudio: 0
   ActionColliders: 0
+  ActionDragAndDrop: 0
   DestroyOnTrigger: 0
-  isDelayed: 0
-  delayTime: 0
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  multipleActionsInTime: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
   ModifyGrabMode: 0
   grabDistance: 0
   touchDistance: 0
   grabModeIndex: 0
-  visualsScript: {fileID: 0}
+  ModifyDragAndDrop: 0
+  ModifyDragAndDropTargets: 0
+  ModifyDnDMinDistance: 0
+  ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDRespectAxis: 0
+  dnDMinDistance: 0
+  dnDSnapBeforeDrop: 0
+  dnDRespectXAxis: 0
+  dnDRespectYAxis: 0
+  dnDRespectZAxis: 0
+  dnDRespectXAxisMirror: 0
+  dnDRespectYAxisMirror: 0
+  dnDRespectZAxisMirror: 0
+  ModifyDnDAngleThreshold: 0
+  dnDAngleThreshold: 0
+  DnD_Targets: []
+  visualsScript: {fileID: 719173151}
   AlterAllVisuals: 1
+  selectedRenderers: 
   triggerAnimation: 1
   targetAnimator: {fileID: 1052934484}
   activeTriggerStatesAnim: 0100000000
@@ -11822,6 +12490,7 @@ MonoBehaviour:
   requireAllDeactivators: 0
   proximityMap:
     proximityEntryList: []
+    proximityEntryGroupList: []
     proximityStateIndex: 0
   grabMap:
     grabEntryList: []
@@ -11867,6 +12536,12 @@ MonoBehaviour:
     AreDependenciesSatisfied: 1
   requireAllInputs: 0
   customConditionsEnabled: 0
+  dragAndDropEnabled: 0
+  dndEventValidator: 0
+  dndAnyTarget: 1
+  dndTargetModesIndex: 0
+  dndAttached: 0
+  dndTargets: []
   requireAllProximities: 0
   touchMap:
     TouchEnitry:
@@ -11875,6 +12550,8 @@ MonoBehaviour:
     touchHandsIndex: 2
     touchActionIndex: 0
   gazeEnabled: 0
+  gazeStateIndex: 0
+  gazeIn: 0
   touchEnabled: 1
   ActivateOnDependencyMap:
     dependencies:
@@ -11887,8 +12564,16 @@ MonoBehaviour:
     dependencies: []
     AreDependenciesSatisfied: 0
   gazeColliderIO: {fileID: 0}
+  handHoverEnabled: 0
+  handHoverIO: {fileID: 0}
+  hoverHandIndex: 0
+  hoverHand: 0
+  hoverStateIndex: 0
+  hoverIn: 0
   ReloadDependencies: 0
   isActive: 1
+  proximityGroupIndex: 0
+  rigCombinations: []
 --- !u!114 &978195779
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12018,7 +12703,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3978acaf2eedc8f4889c42ba095690a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedRenderers: 
 --- !u!1 &1007822151
 GameObject:
   m_ObjectHideFlags: 0
@@ -12624,6 +13308,19 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  IsDragAndDropEnabled: 0
+  DnD_minDistance: 1
+  DnD_angleThreshold: 1
+  DnD_respectXAxis: 0
+  DnD_respectXAxisMirrored: 0
+  DnD_respectYAxis: 0
+  DnD_respectYAxisMirrored: 0
+  DnD_respectZAxis: 0
+  DnD_respectZAxisMirrored: 0
+  DnD_snapBeforeDrop: 1
+  DnD_TimeToSnap: 0.5
+  DnD_IsTarget: 0
+  DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
 --- !u!4 &1052934487
@@ -12829,6 +13526,19 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  IsDragAndDropEnabled: 0
+  DnD_minDistance: 1
+  DnD_angleThreshold: 1
+  DnD_respectXAxis: 0
+  DnD_respectXAxisMirrored: 0
+  DnD_respectYAxis: 0
+  DnD_respectYAxisMirrored: 0
+  DnD_respectZAxis: 0
+  DnD_respectZAxisMirrored: 0
+  DnD_snapBeforeDrop: 1
+  DnD_TimeToSnap: 0.5
+  DnD_IsTarget: 0
+  DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
 --- !u!54 &1065180337
@@ -12997,6 +13707,19 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  IsDragAndDropEnabled: 0
+  DnD_minDistance: 1
+  DnD_angleThreshold: 1
+  DnD_respectXAxis: 0
+  DnD_respectXAxisMirrored: 0
+  DnD_respectYAxis: 0
+  DnD_respectYAxisMirrored: 0
+  DnD_respectZAxis: 0
+  DnD_respectZAxisMirrored: 0
+  DnD_snapBeforeDrop: 1
+  DnD_TimeToSnap: 0.5
+  DnD_IsTarget: 0
+  DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
 --- !u!4 &1084573453
@@ -13917,6 +14640,7 @@ MonoBehaviour:
   requireAllDeactivators: 0
   proximityMap:
     proximityEntryList: []
+    proximityEntryGroupList: []
     proximityStateIndex: 0
   grabMap:
     grabEntryList: []
@@ -13962,6 +14686,12 @@ MonoBehaviour:
     AreDependenciesSatisfied: 1
   requireAllInputs: 0
   customConditionsEnabled: 0
+  dragAndDropEnabled: 0
+  dndEventValidator: 0
+  dndAnyTarget: 1
+  dndTargetModesIndex: 0
+  dndAttached: 0
+  dndTargets: []
   requireAllProximities: 0
   touchMap:
     TouchEnitry:
@@ -13970,6 +14700,8 @@ MonoBehaviour:
     touchHandsIndex: 2
     touchActionIndex: 0
   gazeEnabled: 0
+  gazeStateIndex: 0
+  gazeIn: 0
   touchEnabled: 1
   ActivateOnDependencyMap:
     dependencies:
@@ -13982,8 +14714,16 @@ MonoBehaviour:
     dependencies: []
     AreDependenciesSatisfied: 0
   gazeColliderIO: {fileID: 0}
+  handHoverEnabled: 0
+  handHoverIO: {fileID: 0}
+  hoverHandIndex: 0
+  hoverHand: 0
+  hoverStateIndex: 0
+  hoverIn: 0
   ReloadDependencies: 0
   isActive: 1
+  proximityGroupIndex: 0
+  rigCombinations: []
 --- !u!114 &1194820019
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13996,6 +14736,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fe86aa1e2e51304b81a3f6820a3abdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDelayed: 0
+  delayTime: 0
+  isDelayRandom: 0
+  delayRange:
+  - 0
+  - 0
+  multipleActionsInTime: 0
   rootIO: {fileID: 0}
   isActive: 1
   ActionReset: 0
@@ -14005,22 +14752,33 @@ MonoBehaviour:
   ActionGravity: 0
   ActionAudio: 0
   ActionColliders: 0
+  ActionDragAndDrop: 0
   DestroyOnTrigger: 0
-  isDelayed: 0
-  delayTime: 0
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  multipleActionsInTime: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
   ModifyGrabMode: 0
   grabDistance: 0
   touchDistance: 0
   grabModeIndex: 0
-  visualsScript: {fileID: 0}
+  ModifyDragAndDrop: 0
+  ModifyDragAndDropTargets: 0
+  ModifyDnDMinDistance: 0
+  ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDRespectAxis: 0
+  dnDMinDistance: 0
+  dnDSnapBeforeDrop: 0
+  dnDRespectXAxis: 0
+  dnDRespectYAxis: 0
+  dnDRespectZAxis: 0
+  dnDRespectXAxisMirror: 0
+  dnDRespectYAxisMirror: 0
+  dnDRespectZAxisMirror: 0
+  ModifyDnDAngleThreshold: 0
+  dnDAngleThreshold: 0
+  DnD_Targets: []
+  visualsScript: {fileID: 878809658}
   AlterAllVisuals: 1
+  selectedRenderers: 
   triggerAnimation: 1
   targetAnimator: {fileID: 1084573450}
   activeTriggerStatesAnim: 0100000000
@@ -14181,6 +14939,19 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  IsDragAndDropEnabled: 0
+  DnD_minDistance: 1
+  DnD_angleThreshold: 1
+  DnD_respectXAxis: 0
+  DnD_respectXAxisMirrored: 0
+  DnD_respectYAxis: 0
+  DnD_respectYAxisMirrored: 0
+  DnD_respectZAxis: 0
+  DnD_respectZAxisMirrored: 0
+  DnD_snapBeforeDrop: 1
+  DnD_TimeToSnap: 0.5
+  DnD_IsTarget: 0
+  DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
 --- !u!4 &1198208606
@@ -14507,6 +15278,19 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  IsDragAndDropEnabled: 0
+  DnD_minDistance: 1
+  DnD_angleThreshold: 1
+  DnD_respectXAxis: 0
+  DnD_respectXAxisMirrored: 0
+  DnD_respectYAxis: 0
+  DnD_respectYAxisMirrored: 0
+  DnD_respectZAxis: 0
+  DnD_respectZAxisMirrored: 0
+  DnD_snapBeforeDrop: 1
+  DnD_TimeToSnap: 0.5
+  DnD_IsTarget: 0
+  DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
 --- !u!54 &1231828708
@@ -14613,6 +15397,19 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  IsDragAndDropEnabled: 0
+  DnD_minDistance: 1
+  DnD_angleThreshold: 1
+  DnD_respectXAxis: 0
+  DnD_respectXAxisMirrored: 0
+  DnD_respectYAxis: 0
+  DnD_respectYAxisMirrored: 0
+  DnD_respectZAxis: 0
+  DnD_respectZAxisMirrored: 0
+  DnD_snapBeforeDrop: 1
+  DnD_TimeToSnap: 0.5
+  DnD_IsTarget: 0
+  DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
 --- !u!95 &1238660177
@@ -14781,7 +15578,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3978acaf2eedc8f4889c42ba095690a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedRenderers: 
 --- !u!1 &1255319240
 GameObject:
   m_ObjectHideFlags: 0
@@ -14995,6 +15791,19 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  IsDragAndDropEnabled: 0
+  DnD_minDistance: 1
+  DnD_angleThreshold: 1
+  DnD_respectXAxis: 0
+  DnD_respectXAxisMirrored: 0
+  DnD_respectYAxis: 0
+  DnD_respectYAxisMirrored: 0
+  DnD_respectZAxis: 0
+  DnD_respectZAxisMirrored: 0
+  DnD_snapBeforeDrop: 1
+  DnD_TimeToSnap: 0.5
+  DnD_IsTarget: 0
+  DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
 --- !u!54 &1267269800
@@ -15076,6 +15885,7 @@ MonoBehaviour:
   requireAllDeactivators: 0
   proximityMap:
     proximityEntryList: []
+    proximityEntryGroupList: []
     proximityStateIndex: 0
   grabMap:
     grabEntryList: []
@@ -15121,6 +15931,12 @@ MonoBehaviour:
     AreDependenciesSatisfied: 1
   requireAllInputs: 0
   customConditionsEnabled: 0
+  dragAndDropEnabled: 0
+  dndEventValidator: 0
+  dndAnyTarget: 1
+  dndTargetModesIndex: 0
+  dndAttached: 0
+  dndTargets: []
   requireAllProximities: 0
   touchMap:
     TouchEnitry:
@@ -15129,6 +15945,8 @@ MonoBehaviour:
     touchHandsIndex: 0
     touchActionIndex: 0
   gazeEnabled: 1
+  gazeStateIndex: 0
+  gazeIn: 0
   touchEnabled: 0
   ActivateOnDependencyMap:
     dependencies:
@@ -15141,8 +15959,16 @@ MonoBehaviour:
     dependencies: []
     AreDependenciesSatisfied: 0
   gazeColliderIO: {fileID: 1352670781}
+  handHoverEnabled: 0
+  handHoverIO: {fileID: 0}
+  hoverHandIndex: 0
+  hoverHand: 0
+  hoverStateIndex: 0
+  hoverIn: 0
   ReloadDependencies: 0
   isActive: 1
+  proximityGroupIndex: 0
+  rigCombinations: []
 --- !u!114 &1267279153
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15154,6 +15980,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fe86aa1e2e51304b81a3f6820a3abdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDelayed: 1
+  delayTime: 2
+  isDelayRandom: 0
+  delayRange:
+  - 0
+  - 0
+  multipleActionsInTime: 0
   rootIO: {fileID: 0}
   isActive: 1
   ActionReset: 0
@@ -15163,22 +15996,33 @@ MonoBehaviour:
   ActionGravity: 0
   ActionAudio: 0
   ActionColliders: 0
+  ActionDragAndDrop: 0
   DestroyOnTrigger: 1
-  isDelayed: 1
-  delayTime: 2
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  multipleActionsInTime: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
   ModifyGrabMode: 0
   grabDistance: 0
   touchDistance: 0
   grabModeIndex: 0
-  visualsScript: {fileID: 0}
+  ModifyDragAndDrop: 0
+  ModifyDragAndDropTargets: 0
+  ModifyDnDMinDistance: 0
+  ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDRespectAxis: 0
+  dnDMinDistance: 0
+  dnDSnapBeforeDrop: 0
+  dnDRespectXAxis: 0
+  dnDRespectYAxis: 0
+  dnDRespectZAxis: 0
+  dnDRespectXAxisMirror: 0
+  dnDRespectYAxisMirror: 0
+  dnDRespectZAxisMirror: 0
+  ModifyDnDAngleThreshold: 0
+  dnDAngleThreshold: 0
+  DnD_Targets: []
+  visualsScript: {fileID: 1524818768}
   AlterAllVisuals: 1
+  selectedRenderers: 
   triggerAnimation: 0
   targetAnimator: {fileID: 361862604}
   activeTriggerStatesAnim: 0100000000
@@ -15261,6 +16105,19 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  IsDragAndDropEnabled: 0
+  DnD_minDistance: 1
+  DnD_angleThreshold: 1
+  DnD_respectXAxis: 0
+  DnD_respectXAxisMirrored: 0
+  DnD_respectYAxis: 0
+  DnD_respectYAxisMirrored: 0
+  DnD_respectZAxis: 0
+  DnD_respectZAxisMirrored: 0
+  DnD_snapBeforeDrop: 1
+  DnD_TimeToSnap: 0.5
+  DnD_IsTarget: 0
+  DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
 --- !u!54 &1272767021
@@ -15993,6 +16850,19 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  IsDragAndDropEnabled: 0
+  DnD_minDistance: 1
+  DnD_angleThreshold: 1
+  DnD_respectXAxis: 0
+  DnD_respectXAxisMirrored: 0
+  DnD_respectYAxis: 0
+  DnD_respectYAxisMirrored: 0
+  DnD_respectZAxis: 0
+  DnD_respectZAxisMirrored: 0
+  DnD_snapBeforeDrop: 1
+  DnD_TimeToSnap: 0.5
+  DnD_IsTarget: 0
+  DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
 --- !u!4 &1352670782
@@ -16195,7 +17065,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3978acaf2eedc8f4889c42ba095690a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedRenderers: 
 --- !u!1 &1438265740
 GameObject:
   m_ObjectHideFlags: 0
@@ -16517,7 +17386,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3978acaf2eedc8f4889c42ba095690a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedRenderers: 
 --- !u!1 &1533490802
 GameObject:
   m_ObjectHideFlags: 0
@@ -17332,7 +18200,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3978acaf2eedc8f4889c42ba095690a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedRenderers: 
 --- !u!1 &1634350554
 GameObject:
   m_ObjectHideFlags: 0
@@ -17583,6 +18450,7 @@ MonoBehaviour:
   requireAllDeactivators: 0
   proximityMap:
     proximityEntryList: []
+    proximityEntryGroupList: []
     proximityStateIndex: 0
   grabMap:
     grabEntryList: []
@@ -17628,6 +18496,12 @@ MonoBehaviour:
     AreDependenciesSatisfied: 1
   requireAllInputs: 0
   customConditionsEnabled: 0
+  dragAndDropEnabled: 0
+  dndEventValidator: 0
+  dndAnyTarget: 1
+  dndTargetModesIndex: 0
+  dndAttached: 0
+  dndTargets: []
   requireAllProximities: 0
   touchMap:
     TouchEnitry:
@@ -17636,6 +18510,8 @@ MonoBehaviour:
     touchHandsIndex: 0
     touchActionIndex: 0
   gazeEnabled: 0
+  gazeStateIndex: 0
+  gazeIn: 0
   touchEnabled: 0
   ActivateOnDependencyMap:
     dependencies:
@@ -17648,8 +18524,16 @@ MonoBehaviour:
     dependencies: []
     AreDependenciesSatisfied: 0
   gazeColliderIO: {fileID: 0}
+  handHoverEnabled: 0
+  handHoverIO: {fileID: 0}
+  hoverHandIndex: 0
+  hoverHand: 0
+  hoverStateIndex: 0
+  hoverIn: 0
   ReloadDependencies: 0
   isActive: 1
+  proximityGroupIndex: 0
+  rigCombinations: []
 --- !u!114 &1652396229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17661,6 +18545,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fe86aa1e2e51304b81a3f6820a3abdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDelayed: 0
+  delayTime: 0
+  isDelayRandom: 0
+  delayRange:
+  - 0
+  - 0
+  multipleActionsInTime: 0
   rootIO: {fileID: 0}
   isActive: 1
   ActionReset: 0
@@ -17670,22 +18561,33 @@ MonoBehaviour:
   ActionGravity: 0
   ActionAudio: 0
   ActionColliders: 0
+  ActionDragAndDrop: 0
   DestroyOnTrigger: 1
-  isDelayed: 0
-  delayTime: 0
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  multipleActionsInTime: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
   ModifyGrabMode: 0
   grabDistance: 0
   touchDistance: 0
   grabModeIndex: 0
-  visualsScript: {fileID: 0}
+  ModifyDragAndDrop: 0
+  ModifyDragAndDropTargets: 0
+  ModifyDnDMinDistance: 0
+  ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDRespectAxis: 0
+  dnDMinDistance: 0
+  dnDSnapBeforeDrop: 0
+  dnDRespectXAxis: 0
+  dnDRespectYAxis: 0
+  dnDRespectZAxis: 0
+  dnDRespectXAxisMirror: 0
+  dnDRespectYAxisMirror: 0
+  dnDRespectZAxisMirror: 0
+  ModifyDnDAngleThreshold: 0
+  dnDAngleThreshold: 0
+  DnD_Targets: []
+  visualsScript: {fileID: 373774349}
   AlterAllVisuals: 1
+  selectedRenderers: 
   triggerAnimation: 0
   targetAnimator: {fileID: 0}
   activeTriggerStatesAnim: 0000000000
@@ -17978,6 +18880,19 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  IsDragAndDropEnabled: 0
+  DnD_minDistance: 1
+  DnD_angleThreshold: 1
+  DnD_respectXAxis: 0
+  DnD_respectXAxisMirrored: 0
+  DnD_respectYAxis: 0
+  DnD_respectYAxisMirrored: 0
+  DnD_respectZAxis: 0
+  DnD_respectZAxisMirrored: 0
+  DnD_snapBeforeDrop: 1
+  DnD_TimeToSnap: 0.5
+  DnD_IsTarget: 0
+  DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
 --- !u!54 &1675010687
@@ -18148,6 +19063,19 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  IsDragAndDropEnabled: 0
+  DnD_minDistance: 1
+  DnD_angleThreshold: 1
+  DnD_respectXAxis: 0
+  DnD_respectXAxisMirrored: 0
+  DnD_respectYAxis: 0
+  DnD_respectYAxisMirrored: 0
+  DnD_respectZAxis: 0
+  DnD_respectZAxisMirrored: 0
+  DnD_snapBeforeDrop: 1
+  DnD_TimeToSnap: 0.5
+  DnD_IsTarget: 0
+  DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
 --- !u!54 &1688595993
@@ -18545,6 +19473,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd0a2d0115ea9bc47bf96b7cfdf4b98b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDelayed: 0
+  delayTime: 0
+  isDelayRandom: 0
+  delayRange:
+  - 0
+  - 0
+  multipleActionsInTime: 0
   objectToParent: {fileID: 321947424}
   parented: 1
 --- !u!114 &1731808060
@@ -18564,6 +19499,7 @@ MonoBehaviour:
   requireAllDeactivators: 0
   proximityMap:
     proximityEntryList: []
+    proximityEntryGroupList: []
     proximityStateIndex: 0
   grabMap:
     grabEntryList: []
@@ -18609,6 +19545,12 @@ MonoBehaviour:
     AreDependenciesSatisfied: 1
   requireAllInputs: 0
   customConditionsEnabled: 0
+  dragAndDropEnabled: 0
+  dndEventValidator: 0
+  dndAnyTarget: 1
+  dndTargetModesIndex: 0
+  dndAttached: 0
+  dndTargets: []
   requireAllProximities: 0
   touchMap:
     TouchEnitry:
@@ -18617,6 +19559,8 @@ MonoBehaviour:
     touchHandsIndex: 0
     touchActionIndex: 0
   gazeEnabled: 0
+  gazeStateIndex: 0
+  gazeIn: 0
   touchEnabled: 0
   ActivateOnDependencyMap:
     dependencies:
@@ -18629,8 +19573,16 @@ MonoBehaviour:
     dependencies: []
     AreDependenciesSatisfied: 0
   gazeColliderIO: {fileID: 0}
+  handHoverEnabled: 0
+  handHoverIO: {fileID: 0}
+  hoverHandIndex: 0
+  hoverHand: 0
+  hoverStateIndex: 0
+  hoverIn: 0
   ReloadDependencies: 0
   isActive: 1
+  proximityGroupIndex: 0
+  rigCombinations: []
 --- !u!114 &1731808061
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18643,6 +19595,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fe86aa1e2e51304b81a3f6820a3abdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDelayed: 0
+  delayTime: 0
+  isDelayRandom: 0
+  delayRange:
+  - 0
+  - 0
+  multipleActionsInTime: 0
   rootIO: {fileID: 0}
   isActive: 1
   ActionReset: 0
@@ -18652,22 +19611,33 @@ MonoBehaviour:
   ActionGravity: 0
   ActionAudio: 0
   ActionColliders: 0
+  ActionDragAndDrop: 0
   DestroyOnTrigger: 0
-  isDelayed: 0
-  delayTime: 0
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  multipleActionsInTime: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
   ModifyGrabMode: 0
   grabDistance: 0
   touchDistance: 0
   grabModeIndex: 0
-  visualsScript: {fileID: 0}
+  ModifyDragAndDrop: 0
+  ModifyDragAndDropTargets: 0
+  ModifyDnDMinDistance: 0
+  ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDRespectAxis: 0
+  dnDMinDistance: 0
+  dnDSnapBeforeDrop: 0
+  dnDRespectXAxis: 0
+  dnDRespectYAxis: 0
+  dnDRespectZAxis: 0
+  dnDRespectXAxisMirror: 0
+  dnDRespectYAxisMirror: 0
+  dnDRespectZAxisMirror: 0
+  ModifyDnDAngleThreshold: 0
+  dnDAngleThreshold: 0
+  DnD_Targets: []
+  visualsScript: {fileID: 1931508564}
   AlterAllVisuals: 1
+  selectedRenderers: 
   triggerAnimation: 1
   targetAnimator: {fileID: 1238660177}
   activeTriggerStatesAnim: 0100000000
@@ -18869,7 +19839,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3978acaf2eedc8f4889c42ba095690a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedRenderers: 
 --- !u!1 &1766374012
 GameObject:
   m_ObjectHideFlags: 0
@@ -19269,6 +20238,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fe86aa1e2e51304b81a3f6820a3abdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDelayed: 0
+  delayTime: 0
+  isDelayRandom: 0
+  delayRange:
+  - 0
+  - 0
+  multipleActionsInTime: 0
   rootIO: {fileID: 0}
   isActive: 0
   ActionReset: 0
@@ -19278,22 +20254,33 @@ MonoBehaviour:
   ActionGravity: 0
   ActionAudio: 0
   ActionColliders: 0
+  ActionDragAndDrop: 0
   DestroyOnTrigger: 0
-  isDelayed: 0
-  delayTime: 0
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  multipleActionsInTime: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
   ModifyGrabMode: 0
   grabDistance: 0
   touchDistance: 0
   grabModeIndex: 0
-  visualsScript: {fileID: 0}
+  ModifyDragAndDrop: 0
+  ModifyDragAndDropTargets: 0
+  ModifyDnDMinDistance: 0
+  ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDRespectAxis: 0
+  dnDMinDistance: 0
+  dnDSnapBeforeDrop: 0
+  dnDRespectXAxis: 0
+  dnDRespectYAxis: 0
+  dnDRespectZAxis: 0
+  dnDRespectXAxisMirror: 0
+  dnDRespectYAxisMirror: 0
+  dnDRespectZAxisMirror: 0
+  ModifyDnDAngleThreshold: 0
+  dnDAngleThreshold: 0
+  DnD_Targets: []
+  visualsScript: {fileID: 107908499}
   AlterAllVisuals: 1
+  selectedRenderers: 
   triggerAnimation: 0
   targetAnimator: {fileID: 0}
   activeTriggerStatesAnim: 0000000000
@@ -19334,6 +20321,7 @@ MonoBehaviour:
   requireAllDeactivators: 0
   proximityMap:
     proximityEntryList: []
+    proximityEntryGroupList: []
     proximityStateIndex: 0
   grabMap:
     grabEntryList: []
@@ -19379,6 +20367,12 @@ MonoBehaviour:
     AreDependenciesSatisfied: 1
   requireAllInputs: 0
   customConditionsEnabled: 0
+  dragAndDropEnabled: 0
+  dndEventValidator: 0
+  dndAnyTarget: 1
+  dndTargetModesIndex: 0
+  dndAttached: 0
+  dndTargets: []
   requireAllProximities: 0
   touchMap:
     TouchEnitry:
@@ -19387,6 +20381,8 @@ MonoBehaviour:
     touchHandsIndex: 0
     touchActionIndex: 0
   gazeEnabled: 0
+  gazeStateIndex: 0
+  gazeIn: 0
   touchEnabled: 0
   ActivateOnDependencyMap:
     dependencies: []
@@ -19395,8 +20391,16 @@ MonoBehaviour:
     dependencies: []
     AreDependenciesSatisfied: 0
   gazeColliderIO: {fileID: 0}
+  handHoverEnabled: 0
+  handHoverIO: {fileID: 0}
+  hoverHandIndex: 0
+  hoverHand: 0
+  hoverStateIndex: 0
+  hoverIn: 0
   ReloadDependencies: 0
   isActive: 0
+  proximityGroupIndex: 0
+  rigCombinations: []
 --- !u!114 &1799143547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19538,7 +20542,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3978acaf2eedc8f4889c42ba095690a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedRenderers: 
 --- !u!1 &1830131156
 GameObject:
   m_ObjectHideFlags: 0
@@ -19686,6 +20689,19 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  IsDragAndDropEnabled: 0
+  DnD_minDistance: 1
+  DnD_angleThreshold: 1
+  DnD_respectXAxis: 0
+  DnD_respectXAxisMirrored: 0
+  DnD_respectYAxis: 0
+  DnD_respectYAxisMirrored: 0
+  DnD_respectZAxis: 0
+  DnD_respectZAxisMirrored: 0
+  DnD_snapBeforeDrop: 1
+  DnD_TimeToSnap: 0.5
+  DnD_IsTarget: 0
+  DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
 --- !u!4 &1846678929
@@ -20162,7 +21178,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3978acaf2eedc8f4889c42ba095690a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedRenderers: 
 --- !u!1 &1943959107
 GameObject:
   m_ObjectHideFlags: 0
@@ -20285,6 +21300,7 @@ MonoBehaviour:
   requireAllDeactivators: 0
   proximityMap:
     proximityEntryList: []
+    proximityEntryGroupList: []
     proximityStateIndex: 0
   grabMap:
     grabEntryList: []
@@ -20330,6 +21346,12 @@ MonoBehaviour:
     AreDependenciesSatisfied: 1
   requireAllInputs: 0
   customConditionsEnabled: 0
+  dragAndDropEnabled: 0
+  dndEventValidator: 0
+  dndAnyTarget: 1
+  dndTargetModesIndex: 0
+  dndAttached: 0
+  dndTargets: []
   requireAllProximities: 0
   touchMap:
     TouchEnitry:
@@ -20338,6 +21360,8 @@ MonoBehaviour:
     touchHandsIndex: 0
     touchActionIndex: 0
   gazeEnabled: 0
+  gazeStateIndex: 0
+  gazeIn: 0
   touchEnabled: 0
   ActivateOnDependencyMap:
     dependencies: []
@@ -20346,8 +21370,16 @@ MonoBehaviour:
     dependencies: []
     AreDependenciesSatisfied: 0
   gazeColliderIO: {fileID: 0}
+  handHoverEnabled: 0
+  handHoverIO: {fileID: 0}
+  hoverHandIndex: 0
+  hoverHand: 0
+  hoverStateIndex: 0
+  hoverIn: 0
   ReloadDependencies: 0
   isActive: 0
+  proximityGroupIndex: 0
+  rigCombinations: []
 --- !u!114 &1970183758
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20359,6 +21391,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fe86aa1e2e51304b81a3f6820a3abdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDelayed: 0
+  delayTime: 0
+  isDelayRandom: 0
+  delayRange:
+  - 0
+  - 0
+  multipleActionsInTime: 0
   rootIO: {fileID: 0}
   isActive: 0
   ActionReset: 0
@@ -20368,22 +21407,33 @@ MonoBehaviour:
   ActionGravity: 0
   ActionAudio: 0
   ActionColliders: 0
+  ActionDragAndDrop: 0
   DestroyOnTrigger: 0
-  isDelayed: 0
-  delayTime: 0
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  multipleActionsInTime: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
   ModifyGrabMode: 0
   grabDistance: 0
   touchDistance: 0
   grabModeIndex: 0
-  visualsScript: {fileID: 0}
+  ModifyDragAndDrop: 0
+  ModifyDragAndDropTargets: 0
+  ModifyDnDMinDistance: 0
+  ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDRespectAxis: 0
+  dnDMinDistance: 0
+  dnDSnapBeforeDrop: 0
+  dnDRespectXAxis: 0
+  dnDRespectYAxis: 0
+  dnDRespectZAxis: 0
+  dnDRespectXAxisMirror: 0
+  dnDRespectYAxisMirror: 0
+  dnDRespectZAxisMirror: 0
+  ModifyDnDAngleThreshold: 0
+  dnDAngleThreshold: 0
+  DnD_Targets: []
+  visualsScript: {fileID: 198399038}
   AlterAllVisuals: 1
+  selectedRenderers: 
   triggerAnimation: 0
   targetAnimator: {fileID: 0}
   activeTriggerStatesAnim: 0000000000
@@ -20563,6 +21613,7 @@ SpriteRenderer:
   m_Size: {x: 3.38, y: 2.51}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
 --- !u!4 &1970725797
 Transform:
   m_ObjectHideFlags: 0
@@ -21048,6 +22099,19 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  IsDragAndDropEnabled: 0
+  DnD_minDistance: 1
+  DnD_angleThreshold: 1
+  DnD_respectXAxis: 0
+  DnD_respectXAxisMirrored: 0
+  DnD_respectYAxis: 0
+  DnD_respectYAxisMirrored: 0
+  DnD_respectZAxis: 0
+  DnD_respectZAxisMirrored: 0
+  DnD_snapBeforeDrop: 1
+  DnD_TimeToSnap: 0.5
+  DnD_IsTarget: 0
+  DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
 --- !u!54 &2027702721
@@ -21239,6 +22303,19 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  IsDragAndDropEnabled: 0
+  DnD_minDistance: 1
+  DnD_angleThreshold: 1
+  DnD_respectXAxis: 0
+  DnD_respectXAxisMirrored: 0
+  DnD_respectYAxis: 0
+  DnD_respectYAxisMirrored: 0
+  DnD_respectZAxis: 0
+  DnD_respectZAxisMirrored: 0
+  DnD_snapBeforeDrop: 1
+  DnD_TimeToSnap: 0.5
+  DnD_IsTarget: 0
+  DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
 --- !u!54 &2036026541
@@ -21559,7 +22636,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3978acaf2eedc8f4889c42ba095690a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedRenderers: 
 --- !u!1 &2100393575
 GameObject:
   m_ObjectHideFlags: 0
@@ -21937,6 +23013,7 @@ MonoBehaviour:
   requireAllDeactivators: 0
   proximityMap:
     proximityEntryList: []
+    proximityEntryGroupList: []
     proximityStateIndex: 0
   grabMap:
     grabEntryList: []
@@ -21982,6 +23059,12 @@ MonoBehaviour:
     AreDependenciesSatisfied: 1
   requireAllInputs: 0
   customConditionsEnabled: 0
+  dragAndDropEnabled: 0
+  dndEventValidator: 0
+  dndAnyTarget: 1
+  dndTargetModesIndex: 0
+  dndAttached: 0
+  dndTargets: []
   requireAllProximities: 0
   touchMap:
     TouchEnitry:
@@ -21990,6 +23073,8 @@ MonoBehaviour:
     touchHandsIndex: 0
     touchActionIndex: 0
   gazeEnabled: 0
+  gazeStateIndex: 0
+  gazeIn: 0
   touchEnabled: 0
   ActivateOnDependencyMap:
     dependencies:
@@ -22002,8 +23087,16 @@ MonoBehaviour:
     dependencies: []
     AreDependenciesSatisfied: 0
   gazeColliderIO: {fileID: 0}
+  handHoverEnabled: 0
+  handHoverIO: {fileID: 0}
+  hoverHandIndex: 0
+  hoverHand: 0
+  hoverStateIndex: 0
+  hoverIn: 0
   ReloadDependencies: 0
   isActive: 1
+  proximityGroupIndex: 0
+  rigCombinations: []
 --- !u!114 &2122346658
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22016,6 +23109,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fe86aa1e2e51304b81a3f6820a3abdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDelayed: 0
+  delayTime: 9
+  isDelayRandom: 0
+  delayRange:
+  - 0
+  - 0
+  multipleActionsInTime: 0
   rootIO: {fileID: 0}
   isActive: 1
   ActionReset: 0
@@ -22025,22 +23125,33 @@ MonoBehaviour:
   ActionGravity: 0
   ActionAudio: 1
   ActionColliders: 0
+  ActionDragAndDrop: 0
   DestroyOnTrigger: 0
-  isDelayed: 0
-  delayTime: 9
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  multipleActionsInTime: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
   ModifyGrabMode: 0
   grabDistance: 0
   touchDistance: 0
   grabModeIndex: 0
-  visualsScript: {fileID: 0}
+  ModifyDragAndDrop: 0
+  ModifyDragAndDropTargets: 0
+  ModifyDnDMinDistance: 0
+  ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDRespectAxis: 0
+  dnDMinDistance: 0
+  dnDSnapBeforeDrop: 0
+  dnDRespectXAxis: 0
+  dnDRespectYAxis: 0
+  dnDRespectZAxis: 0
+  dnDRespectXAxisMirror: 0
+  dnDRespectYAxisMirror: 0
+  dnDRespectZAxisMirror: 0
+  ModifyDnDAngleThreshold: 0
+  dnDAngleThreshold: 0
+  DnD_Targets: []
+  visualsScript: {fileID: 1931508564}
   AlterAllVisuals: 1
+  selectedRenderers: 
   triggerAnimation: 0
   targetAnimator: {fileID: 1238660177}
   activeTriggerStatesAnim: 0100000000
@@ -22314,6 +23425,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fe86aa1e2e51304b81a3f6820a3abdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDelayed: 0
+  delayTime: 0
+  isDelayRandom: 0
+  delayRange:
+  - 0
+  - 0
+  multipleActionsInTime: 0
   rootIO: {fileID: 0}
   isActive: 1
   ActionReset: 0
@@ -22323,22 +23441,33 @@ MonoBehaviour:
   ActionGravity: 0
   ActionAudio: 1
   ActionColliders: 0
+  ActionDragAndDrop: 0
   DestroyOnTrigger: 0
-  isDelayed: 0
-  delayTime: 0
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  multipleActionsInTime: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
   ModifyGrabMode: 0
   grabDistance: 0
   touchDistance: 0
   grabModeIndex: 0
-  visualsScript: {fileID: 0}
+  ModifyDragAndDrop: 0
+  ModifyDragAndDropTargets: 0
+  ModifyDnDMinDistance: 0
+  ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDRespectAxis: 0
+  dnDMinDistance: 0
+  dnDSnapBeforeDrop: 0
+  dnDRespectXAxis: 0
+  dnDRespectYAxis: 0
+  dnDRespectZAxis: 0
+  dnDRespectXAxisMirror: 0
+  dnDRespectYAxisMirror: 0
+  dnDRespectZAxisMirror: 0
+  ModifyDnDAngleThreshold: 0
+  dnDAngleThreshold: 0
+  DnD_Targets: []
+  visualsScript: {fileID: 334738025}
   AlterAllVisuals: 1
+  selectedRenderers: 
   triggerAnimation: 0
   targetAnimator: {fileID: 0}
   activeTriggerStatesAnim: 0000000000
@@ -22380,6 +23509,7 @@ MonoBehaviour:
   requireAllDeactivators: 0
   proximityMap:
     proximityEntryList: []
+    proximityEntryGroupList: []
     proximityStateIndex: 0
   grabMap:
     grabEntryList: []
@@ -22425,6 +23555,12 @@ MonoBehaviour:
     AreDependenciesSatisfied: 1
   requireAllInputs: 0
   customConditionsEnabled: 0
+  dragAndDropEnabled: 0
+  dndEventValidator: 0
+  dndAnyTarget: 1
+  dndTargetModesIndex: 0
+  dndAttached: 0
+  dndTargets: []
   requireAllProximities: 0
   touchMap:
     TouchEnitry:
@@ -22433,6 +23569,8 @@ MonoBehaviour:
     touchHandsIndex: 2
     touchActionIndex: 0
   gazeEnabled: 0
+  gazeStateIndex: 0
+  gazeIn: 0
   touchEnabled: 1
   ActivateOnDependencyMap:
     dependencies: []
@@ -22441,8 +23579,16 @@ MonoBehaviour:
     dependencies: []
     AreDependenciesSatisfied: 0
   gazeColliderIO: {fileID: 0}
+  handHoverEnabled: 0
+  handHoverIO: {fileID: 0}
+  hoverHandIndex: 0
+  hoverHand: 0
+  hoverStateIndex: 0
+  hoverIn: 0
   ReloadDependencies: 0
   isActive: 1
+  proximityGroupIndex: 0
+  rigCombinations: []
 --- !u!114 &2138297671
 MonoBehaviour:
   m_ObjectHideFlags: 0
