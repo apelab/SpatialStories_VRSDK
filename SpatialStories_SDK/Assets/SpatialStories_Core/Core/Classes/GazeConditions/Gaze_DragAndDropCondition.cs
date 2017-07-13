@@ -121,8 +121,7 @@ namespace Gaze
             // get the DragAndDrop 
             receivedDnDManager = ((GameObject)e.Sender).GetComponent<Gaze_DragAndDropManager>();
             dropTarget = (GameObject)e.TargetObject;
-
-            if (gazeConditionsScript.RootIO.DnD_IsTarget
+            if ((gazeConditionsScript.RootIO.DnD_IsTarget && gazeConditionsScript.RootIO.gameObject.Equals(dropTarget))
                 || receivedDnDManager && receivedDnDManager.gameObject.Equals(Gaze_Utils.GetIOFromObject(gazeConditionsScript.gameObject).GetComponent<Gaze_DragAndDropManager>().gameObject))
             {
                 // check if state is valid

@@ -403,8 +403,8 @@ public class Gaze_InputManager : MonoBehaviour
     // if position tracking is disabled, parent the controllers to the camera
     private void ParentControllersToCamera()
     {
-        FixesLeftPosition = GetComponentInChildren<Gaze_PlayerTorso>().transform.FindChild("LeftHandFixedPosition").transform;
-        FixedRightPosition = GetComponentInChildren<Gaze_PlayerTorso>().transform.FindChild("RightHandFixedPosition").transform;
+        FixesLeftPosition = GetComponentInChildren<Gaze_PlayerTorso>().transform.Find("LeftHandFixedPosition").transform;
+        FixedRightPosition = GetComponentInChildren<Gaze_PlayerTorso>().transform.Find("RightHandFixedPosition").transform;
         leftHandIO.transform.localPosition = Vector3.zero;
         rightHandIO.transform.localPosition = Vector3.zero;
         localHandsHeigth = transform.position.y - GetComponentInChildren<Gaze_PlayerTorso>().transform.position.y;

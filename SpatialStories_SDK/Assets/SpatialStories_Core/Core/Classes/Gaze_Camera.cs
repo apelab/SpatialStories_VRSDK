@@ -45,7 +45,8 @@ public class Gaze_Camera : MonoBehaviour
             return;
 
         Transform cameraIO = GetComponentInParent<Gaze_InteractiveObject>().transform;
-        Transform rootIO = cameraIO.GetComponentInParent<Gaze_InteractiveObject>().transform;
+        Transform rootIO = GetComponentInParent<Gaze_InputManager>().transform;
+
 
         transform.localPosition = rootIO.localPosition;
         transform.localRotation = rootIO.localRotation;

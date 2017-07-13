@@ -151,7 +151,7 @@ namespace Gaze
         {
             actualHand = GetComponentInChildren<Gaze_GrabManager>().isLeftHand ? Gaze_HandsEnum.LEFT : Gaze_HandsEnum.RIGHT;
             isControllerTrigger = false;
-            targetLocation = transform.FindChild("Levitation Target").gameObject;
+            targetLocation = transform.Find("Levitation Target").gameObject;
 
             beam = gameObject.AddComponent<LineRenderer>();
             beam.receiveShadows = false;
@@ -206,7 +206,6 @@ namespace Gaze
 
         private IEnumerator UpdateBeamFeedback(bool _dropReady)
         {
-            Color lerpingStartColor, lerpingEndColor;
             Color attachPointColor = attachPoint.GetComponent<Renderer>().material.color;
 
             if (_dropReady)
@@ -222,35 +221,6 @@ namespace Gaze
                 attachPoint.GetComponent<Renderer>().material.color = dropOffEndColor;
             }
             yield return null;
-
-            /*
-            if (_dropReady)
-            {
-                for (float i = 0f; i < dropReadyFeedbackDuration; i += Time.deltaTime)
-                {
-                    lerpingStartColor = Color.Lerp(attachPointColor, dropOnStartColor, i);
-                    lerpingEndColor = Color.Lerp(attachPointColor, dropOnEndColor, i);
-
-                    beam.startColor = lerpingStartColor;
-                    beam.endColor = lerpingEndColor;
-                    attachPoint.GetComponent<Renderer>().material.color = lerpingEndColor;
-                    yield return new WaitForEndOfFrame();
-                }
-            }
-            else
-            {
-                for (float i = 0f; i < dropReadyFeedbackDuration; i += Time.deltaTime)
-                {
-                    lerpingStartColor = Color.Lerp(attachPointColor, dropOffStartColor, i);
-                    lerpingEndColor = Color.Lerp(attachPointColor, dropOffEndColor, i);
-
-                    beam.startColor = lerpingStartColor;
-                    beam.endColor = lerpingEndColor;
-                    attachPoint.GetComponent<Renderer>().material.color = lerpingEndColor;
-                    yield return new WaitForEndOfFrame();
-                }
-            }
-            */
         }
 
         private IEnumerator FindControllers()

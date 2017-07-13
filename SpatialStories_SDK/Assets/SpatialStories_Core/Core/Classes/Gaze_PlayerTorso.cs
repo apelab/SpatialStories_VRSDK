@@ -11,8 +11,8 @@ public class Gaze_PlayerTorso : MonoBehaviour
     private void Start()
     {
         IOCamera = transform.GetComponentInParent<Gaze_InputManager>().GetComponentInChildren<Camera>();
-        LeftHandFixedPosition = transform.FindChild("LeftHandFixedPosition").gameObject;
-        RightHandFixedPosition = transform.FindChild("RightHandFixedPosition").gameObject;
+        LeftHandFixedPosition = transform.Find("LeftHandFixedPosition").gameObject;
+        RightHandFixedPosition = transform.Find("RightHandFixedPosition").gameObject;
     }
 
     void Update()

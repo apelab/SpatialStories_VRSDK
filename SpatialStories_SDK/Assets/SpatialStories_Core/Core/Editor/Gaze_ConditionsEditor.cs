@@ -1084,9 +1084,6 @@ namespace Gaze
             FetchDnDTargets();
             if (targetConditions.dragAndDropEnabled)
             {
-                //TODO @mike check if targets in the Gaze_InteractiveObject component
-                // if not, I'm a drop target then display only Valid When GUI
-                // if yes, display valid when & On targets choice GUI
                 if (!targetConditions.RootIO.IsDragAndDropEnabled || targetConditions.RootIO.DnD_Targets == null || targetConditions.RootIO.DnD_Targets.Count < 1)
                 {
                     targetConditions.RootIO.DnD_IsTarget = true;

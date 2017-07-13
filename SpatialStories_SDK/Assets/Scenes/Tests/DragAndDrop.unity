@@ -986,7 +986,7 @@ Light:
   serializedVersion: 8
   m_Type: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0
+  m_Intensity: 0.87
   m_Range: 10
   m_SpotAngle: 30
   m_CookieSize: 10
@@ -2742,11 +2742,11 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 453188630}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.3827505, y: -0.37, z: 1.0441303}
-  m_LocalScale: {x: 4.2376733, y: 4.237672, z: 4.237672}
+  m_LocalPosition: {x: 0, y: -2.52, z: 0}
+  m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &459229052
 GameObject:
@@ -5760,6 +5760,7 @@ SpriteRenderer:
   m_Size: {x: 3.38, y: 2.51}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
 --- !u!1 &1204706041
 GameObject:
   m_ObjectHideFlags: 0
@@ -8660,17 +8661,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InteractiveObjectScripts:
-  - {fileID: 1420650104}
-  - {fileID: 1204706044}
-  - {fileID: 854533080}
   - {fileID: 643604790}
+  - {fileID: 854533080}
+  - {fileID: 1204706044}
+  - {fileID: 1420650104}
   - {fileID: 1809490284}
   - {fileID: 1921851566}
   InteractiveObjects:
-  - {fileID: 1420650101}
-  - {fileID: 1204706041}
-  - {fileID: 854533077}
   - {fileID: 643604785}
+  - {fileID: 854533077}
+  - {fileID: 1204706041}
+  - {fileID: 1420650101}
   - {fileID: 1809490278}
   - {fileID: 1921851560}
   InteractiveObjectsCount: 6
@@ -8714,16 +8715,16 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1922816789}
-  m_LocalRotation: {x: -0, y: 0.69127935, z: -0, w: 0.72258765}
-  m_LocalPosition: {x: 5.3827505, y: 0.47693443, z: 1.0441303}
+  m_LocalRotation: {x: -0, y: 0.6781079, z: -0, w: 0.73496234}
+  m_LocalPosition: {x: 0, y: 2.37, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 643604789}
   - {fileID: 1809490283}
   - {fileID: 1921851565}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 87.463005, z: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 85.392006, z: 0}
 --- !u!1 &1927934938
 GameObject:
   m_ObjectHideFlags: 0

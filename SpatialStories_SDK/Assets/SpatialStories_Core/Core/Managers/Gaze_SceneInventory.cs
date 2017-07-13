@@ -32,7 +32,10 @@ public class Gaze_SceneInventory : MonoBehaviour
 
     private void Update()
     {
-        UpdateListsFromHierarchy();
+#if UNITY_EDITOR
+        if (!Application.isPlaying)
+            UpdateListsFromHierarchy();
+#endif
     }
 
     private void UpdateListsFromHierarchy()

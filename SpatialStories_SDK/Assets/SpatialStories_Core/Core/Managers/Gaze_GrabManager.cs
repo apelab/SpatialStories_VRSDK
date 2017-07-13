@@ -606,11 +606,6 @@ public class Gaze_GrabManager : MonoBehaviour
                         gaze_ControllerPointingEventArgs.Dico = new KeyValuePair<VRNode, GameObject>(isLeftHand ? VRNode.LeftHand : VRNode.RightHand, interactiveObject.gameObject);
                         gaze_ControllerPointingEventArgs.IsPointed = true;
                         Gaze_EventManager.FireControllerPointingEvent(gaze_ControllerPointingEventArgs);
-
-                        // analytics
-                        analyticsDico["GrabbedObject"] = interactiveObject.name;
-                        analyticsDico["IsLeftHand"] = isLeftHand;
-                        Analytics.CustomEvent("ControllerPointing", analyticsDico);
                     }
 
                     if (interactiveObject != null)
