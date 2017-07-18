@@ -25,7 +25,7 @@ namespace Gaze
     [InitializeOnLoad]
     [CanEditMultipleObjects]
     [CustomEditor(typeof(Gaze_InteractiveObject))]
-    public class Gaze_InteractiveObjectEditor : Editor
+    public class Gaze_InteractiveObjectEditor : Gaze_Editor
     {
         #region Members
         private Gaze_InteractiveObject gaze_InteractiveObjectScript;
@@ -61,8 +61,10 @@ namespace Gaze
             dnd_targetMaterial = Resources.Load("DnD_TargetMaterial", typeof(Material)) as Material;
         }
 
-        public override void OnInspectorGUI()
+        public override void Gaze_OnInspectorGUI()
         {
+            base.BeginChangeComparision();
+
             //UpdateListsFromHierarchy();
             UpdateDropTargetsNames();
             DisplayLogo();
@@ -71,6 +73,9 @@ namespace Gaze
             DisplayGrabDistance();
             DisplayLevitationDistance();
             DisplayDragAndDrop();
+
+            base.EndChangeComparision();
+            EditorUtility.SetDirty(gaze_InteractiveObjectScript);
         }
 
         private void UpdateDropTargetsNames()
