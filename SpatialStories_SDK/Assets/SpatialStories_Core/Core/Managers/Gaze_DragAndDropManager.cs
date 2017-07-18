@@ -26,7 +26,6 @@ namespace Gaze
     public class Gaze_DragAndDropManager : MonoBehaviour
     {
         #region public Members
-        public float m_MinDistance = 1f;
         // in unity units
         public float angleThreshold = 1f;
         // 0 is perpendicular, 1 is same direction
@@ -236,13 +235,21 @@ namespace Gaze
 
             for (int i = 0; i < targetCount; i++)
             {
-                // compare distance between me (the drop object) and the drop target
-                if (Vector3.Distance(transform.position, interactiveObject.DnD_Targets[i].transform.position) <= m_MinDistance)
+                // if target doesn't exist anymore, remove it !
+                if (interactiveObject.DnD_Targets[i] == null)
                 {
-                    // store the target in proximity's transform
-                    targetTransform = interactiveObject.DnD_Targets[i].transform;
-                    isWithinDistance = true;
-                    break;
+                    interactiveObject.DnD_Targets.RemoveAt(i);
+                }
+                else
+                {
+                    // compare distance between me (the drop object) and the drop target
+                    if (Vector3.Distance(transform.position, interactiveObject.DnD_Targets[i].transform.position) <= interactiveObject.DnD_minDistance)
+                    {
+                        // store the target in proximity's transform
+                        targetTransform = interactiveObject.DnD_Targets[i].transform;
+                        isWithinDistance = true;
+                        break;
+                    }
                 }
             }
 
@@ -252,9 +259,6 @@ namespace Gaze
 
             // calculation of dot products 
             float[] validArray = { 1, 1 };
-            //float[] xDotProducts = { Vector3.Dot(transform.up, currentDragAndDropCondition.TargetObject.transform.up), Vector3.Dot(transform.forward, currentDragAndDropCondition.TargetObject.transform.forward) };
-            //float[] yDotProducts = { Vector3.Dot(transform.right, currentDragAndDropCondition.TargetObject.transform.right), Vector3.Dot(transform.forward, currentDragAndDropCondition.TargetObject.transform.forward) };
-            //float[] zDotProducts = { Vector3.Dot(transform.right, currentDragAndDropCondition.TargetObject.transform.right), Vector3.Dot(transform.up, currentDragAndDropCondition.TargetObject.transform.up) };
             float[] xDotProducts = { Vector3.Dot(transform.up, targetTransform.up), Vector3.Dot(transform.forward, targetTransform.forward) };
             float[] yDotProducts = { Vector3.Dot(transform.right, targetTransform.right), Vector3.Dot(transform.forward, targetTransform.forward) };
             float[] zDotProducts = { Vector3.Dot(transform.right, targetTransform.right), Vector3.Dot(transform.up, targetTransform.up) };

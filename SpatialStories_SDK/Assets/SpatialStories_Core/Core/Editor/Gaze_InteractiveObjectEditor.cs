@@ -37,8 +37,6 @@ namespace Gaze
         private string[] manipulationModes;
         public List<string> Dnd_DropTargetsNames { get { return dnd_dropTargetsNames; } private set { } }
         private List<string> dnd_dropTargetsNames;
-        private List<Gaze_InteractiveObject> hierarchyIOsScripts;
-        public List<GameObject> hierarchyIOs;
         public int dnd_targetsToGenerate;
         private Material dnd_targetMaterial;
         #endregion
@@ -59,8 +57,6 @@ namespace Gaze
             logoRect = new Rect();
             logoRect.x = 10;
             logoRect.y = 10;
-            hierarchyIOs = new List<GameObject>();
-            hierarchyIOsScripts = new List<Gaze_InteractiveObject>();
             dnd_dropTargetsNames = new List<string>();
             dnd_targetMaterial = Resources.Load("DnD_TargetMaterial", typeof(Material)) as Material;
         }
@@ -106,6 +102,7 @@ namespace Gaze
                 dnd_dropTargetsNames.Add(hierarchyIOsScripts[i].gameObject.name);
             }
             */
+
         }
 
         private void DisplayLogo()
@@ -177,7 +174,6 @@ namespace Gaze
             gaze_InteractiveObjectScript.IsDragAndDropEnabled = EditorGUILayout.ToggleLeft("Enable Drag And Drop", gaze_InteractiveObjectScript.IsDragAndDropEnabled);
             EditorGUILayout.EndHorizontal();
 
-
             if (gaze_InteractiveObjectScript.IsDragAndDropEnabled)
             {
                 DisplayTargets();
@@ -247,16 +243,12 @@ namespace Gaze
 
         private void DisplayTargets()
         {
-            if (gaze_InteractiveObjectScript.DnD_Targets != null && gaze_InteractiveObjectScript.DnD_Targets.Count > 0)
-                gaze_InteractiveObjectScript.DnD_IsTarget = false;
-            else
-                gaze_InteractiveObjectScript.DnD_IsTarget = true;
 
             GUILayout.BeginHorizontal();
             EditorGUILayout.LabelField("Drop Targets");
             GUILayout.EndHorizontal();
 
-            // help message if no input is specified
+            // help message if no target is specified
             if (gaze_InteractiveObjectScript.DnD_Targets.Count < 1)
             {
                 EditorGUILayout.BeginHorizontal();
@@ -268,6 +260,9 @@ namespace Gaze
                 // for each DnD target
                 for (int i = 0; i < gaze_InteractiveObjectScript.DnD_Targets.Count; i++)
                 {
+                    if (gaze_InteractiveObjectScript.DnD_Targets[i] == null)
+                        gaze_InteractiveObjectScript.DnD_Targets.RemoveAt(i);
+
                     // refresh DnD_Targets IOs list modification (an IO target may has been destroyed)
                     if (Gaze_SceneInventory.Instance.InteractiveObjects.Contains(gaze_InteractiveObjectScript.DnD_Targets[i]))
                     {
@@ -342,7 +337,7 @@ namespace Gaze
                 // get the InteractiveObject script
                 gaze_InteractiveObject = instance.GetComponent<Gaze_InteractiveObject>();
 
-                gaze_InteractiveObject.DnD_Targets.Clear();
+                //gaze_InteractiveObject.DnD_Targets.Clear();
 
                 // change manipulation mode to NONE
                 gaze_InteractiveObject.ManipulationModeIndex = (int)Gaze_ManipulationModes.NONE;
