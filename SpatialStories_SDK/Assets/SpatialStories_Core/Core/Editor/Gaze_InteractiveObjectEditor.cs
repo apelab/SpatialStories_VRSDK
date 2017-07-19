@@ -248,13 +248,12 @@ namespace Gaze
 
         private void DisplayTargets()
         {
-
             GUILayout.BeginHorizontal();
             EditorGUILayout.LabelField("Drop Targets");
             GUILayout.EndHorizontal();
 
             // help message if no target is specified
-            if (gaze_InteractiveObjectScript.DnD_Targets.Count < 1)
+            if (gaze_InteractiveObjectScript.DnD_Targets == null || gaze_InteractiveObjectScript.DnD_Targets.Count < 1)
             {
                 EditorGUILayout.BeginHorizontal();
                 EditorGUILayout.HelpBox("Add at least one drop target or deactivate this condition if not needed.", MessageType.Warning);

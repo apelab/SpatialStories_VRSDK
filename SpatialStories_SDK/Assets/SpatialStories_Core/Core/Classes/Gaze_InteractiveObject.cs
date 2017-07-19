@@ -175,23 +175,8 @@ namespace Gaze
         public bool DnD_respectZAxisMirrored = false;
         public bool DnD_snapBeforeDrop = true;
         public float DnD_TimeToSnap = 0.5f;
-        public bool DnD_IsTarget = false;
-        private List<GameObject> dnD_Targets;
-        public List<GameObject> DnD_Targets
-        {
-            get { return dnD_Targets; }
-            set
-            {
-                dnD_Targets = value;
-                if (dnD_Targets != null && dnD_Targets.Count > 0)
-                {
-                    DnD_IsTarget = false;
-                }
-                else
-                    DnD_IsTarget = true;
-                Debug.Log(this + " target = " + DnD_IsTarget);
-            }
-        }
+        //public bool DnD_IsTarget = false;
+        public List<GameObject> DnD_Targets;
 
         private Gaze_DragAndDropManager dragAndDropManager;
 

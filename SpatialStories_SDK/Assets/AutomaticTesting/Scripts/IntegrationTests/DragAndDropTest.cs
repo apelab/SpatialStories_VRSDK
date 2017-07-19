@@ -7,7 +7,7 @@ public class DragAndDropTest : Gaze_AbstractTest
     public GameObject CubeToMove;
     public GameObject CubeGhost;
 
-    private enum TEST_PHASE { BEFORE_EXPOSITION, EXPOSING, WAITING_FOR_TRIGGER}
+    private enum TEST_PHASE { BEFORE_EXPOSITION, EXPOSING, WAITING_FOR_TRIGGER }
     private TEST_PHASE actualTestPhase = TEST_PHASE.BEFORE_EXPOSITION;
 
     private void OnEnable()
@@ -24,7 +24,6 @@ public class DragAndDropTest : Gaze_AbstractTest
     {
         Debug.Log(e.State);
         PassTest();
-        
     }
 
     public override void Gaze_Update()
@@ -42,6 +41,6 @@ public class DragAndDropTest : Gaze_AbstractTest
                 break;
             case TEST_PHASE.WAITING_FOR_TRIGGER:
                 break;
-        }        
+        }
     }
 }

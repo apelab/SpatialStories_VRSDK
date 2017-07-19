@@ -113,8 +113,8 @@ namespace Gaze
                 else
                 {
                     Remove();
-                    //Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(gameObject, currentDragAndDropCondition.TargetObject.gameObject, Gaze_DragAndDropStates.DROPREADYCANCELED));
-                    Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(gameObject, targetTransform.gameObject, Gaze_DragAndDropStates.DROPREADYCANCELED));
+                    //Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(gameObject, targetTransform.gameObject, Gaze_DragAndDropStates.DROPREADYCANCELED));
+                    Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(this, gameObject, targetTransform.gameObject, Gaze_DragAndDropStates.DROPREADYCANCELED));
                 }
 
                 // update flags
@@ -151,8 +151,8 @@ namespace Gaze
                 m_Snapped = true;
             }
 
-            //Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(gameObject, currentDragAndDropCondition.TargetObject.gameObject, Gaze_DragAndDropStates.DROPREADY));
-            Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(gameObject, targetTransform.gameObject, Gaze_DragAndDropStates.DROPREADY));
+            //Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(gameObject, targetTransform.gameObject, Gaze_DragAndDropStates.DROPREADY));
+            Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(this, gameObject, targetTransform.gameObject, Gaze_DragAndDropStates.DROPREADY));
         }
 
         private void Remove()
@@ -162,8 +162,8 @@ namespace Gaze
                 UnSnap();
                 m_Snapped = false;
             }
-            //Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(gameObject, currentDragAndDropCondition.TargetObject.gameObject, Gaze_DragAndDropStates.REMOVE));
-            Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(gameObject, targetTransform.gameObject, Gaze_DragAndDropStates.REMOVE));
+            //Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(gameObject, targetTransform.gameObject, Gaze_DragAndDropStates.REMOVE));
+            Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(this, gameObject, targetTransform.gameObject, Gaze_DragAndDropStates.REMOVE));
 
             if (IO.ActualGravityState == Gaze_GravityState.LOCKED)
             {
@@ -202,7 +202,8 @@ namespace Gaze
                 }
             }
 
-            Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(gameObject, targetTransform.gameObject, Gaze_DragAndDropStates.DROP));
+            //Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(gameObject, targetTransform.gameObject, Gaze_DragAndDropStates.DROP));
+            Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(this, gameObject, targetTransform.gameObject, Gaze_DragAndDropStates.DROP));
         }
 
         private void PickUp()
@@ -213,8 +214,8 @@ namespace Gaze
                 m_Snapped = true;
             }
 
-            //Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(gameObject, currentDragAndDropCondition.TargetObject.gameObject, Gaze_DragAndDropStates.PICKUP));
-            Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(gameObject, targetTransform.gameObject, Gaze_DragAndDropStates.PICKUP));
+            //Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(gameObject, targetTransform.gameObject, Gaze_DragAndDropStates.PICKUP));
+            Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(this, gameObject, targetTransform.gameObject, Gaze_DragAndDropStates.PICKUP));
         }
 
         private bool IsObjectAlignedWithItsTarget()
@@ -222,6 +223,9 @@ namespace Gaze
             // if already snapped, unsnap it
             if (m_Snapped)
                 UnSnap();
+
+            if (interactiveObject.DnD_Targets == null)
+                return false;
 
             // get the list size of drop targets for this manager
             int targetCount = interactiveObject.DnD_Targets.Count;

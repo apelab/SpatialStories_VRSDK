@@ -1086,7 +1086,6 @@ namespace Gaze
             {
                 if (!targetConditions.RootIO.IsDragAndDropEnabled || targetConditions.RootIO.DnD_Targets == null || targetConditions.RootIO.DnD_Targets.Count < 1)
                 {
-                    targetConditions.RootIO.DnD_IsTarget = true;
                     EditorGUILayout.BeginHorizontal();
                     targetConditions.dndEventValidator = EditorGUILayout.Popup("Valid When", targetConditions.dndEventValidator, dndEventValidatorEnum);
                     EditorGUILayout.EndHorizontal();

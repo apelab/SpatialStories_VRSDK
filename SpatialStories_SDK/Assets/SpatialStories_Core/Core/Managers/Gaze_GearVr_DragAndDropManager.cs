@@ -120,7 +120,8 @@ namespace Gaze
                 //if (grabbingControllers[1] != null)
                 //    Gaze_InputManager.instance.HapticFeedback(true, Gaze_InputManager.instance.RightController);
             }
-            Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(gameObject, m_TargetObject.gameObject, Gaze_DragAndDropStates.DROPREADY));
+            //Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(gameObject, m_TargetObject.gameObject, Gaze_DragAndDropStates.DROPREADY));
+            Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(this, gameObject, m_TargetObject.gameObject, Gaze_DragAndDropStates.DROPREADY));
         }
         void Remove()
         {
@@ -130,8 +131,8 @@ namespace Gaze
                 UnSnap();
                 m_Snapped = false;
             }
-            //Gaze_InputManager.instance.HapticFeedback(false);
-            Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(gameObject, m_TargetObject.gameObject, Gaze_DragAndDropStates.REMOVE));
+            //Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(gameObject, m_TargetObject.gameObject, Gaze_DragAndDropStates.REMOVE));
+            Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(this, gameObject, m_TargetObject.gameObject, Gaze_DragAndDropStates.REMOVE));
         }
         void Drop()
         {
@@ -156,7 +157,8 @@ namespace Gaze
             }
             //if (m_PulseOnDropReady)
             //    Gaze_InputManager.instance.HapticFeedback(false);
-            Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(gameObject, m_TargetObject.gameObject, Gaze_DragAndDropStates.DROP));
+            //Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(gameObject, m_TargetObject.gameObject, Gaze_DragAndDropStates.DROP));
+            Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(this, gameObject, m_TargetObject.gameObject, Gaze_DragAndDropStates.DROP));
         }
         private void PickUp()
         {
@@ -181,7 +183,8 @@ namespace Gaze
                     Debug.LogWarning("Start Pulse not implmented! " + ex.Message);
                 }
             }
-            Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(gameObject, m_TargetObject.gameObject, Gaze_DragAndDropStates.PICKUP));
+            //Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(gameObject, m_TargetObject.gameObject, Gaze_DragAndDropStates.PICKUP));
+            Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(this, gameObject, m_TargetObject.gameObject, Gaze_DragAndDropStates.PICKUP));
         }
         private bool IsInPlace()
         {

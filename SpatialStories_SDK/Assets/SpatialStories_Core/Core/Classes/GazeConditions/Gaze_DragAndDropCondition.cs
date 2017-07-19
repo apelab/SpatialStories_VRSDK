@@ -27,7 +27,8 @@ namespace Gaze
     public class Gaze_DragAndDropCondition : Gaze_AbstractCondition
     {
         public Gaze_InteractiveObject TargetObject;
-        private Gaze_DragAndDropManager dragAndDropManager, receivedDnDManager;
+        private Gaze_DragAndDropManager dragAndDropManager;
+        private bool debug = false;
 
         /// <summary>
         /// If TRUE, once dropped, the object can't be grabbed again.
@@ -37,6 +38,7 @@ namespace Gaze
         public Gaze_DragAndDropCondition(Gaze_Conditions _gazeConditionsScript) : base(_gazeConditionsScript) { }
 
         private GameObject dropTarget;
+        private GameObject dropObject;
 
         protected override void CustomSetup()
         {
@@ -76,61 +78,55 @@ namespace Gaze
 #endif
         }
 
-        private void HandleConditionAction(Gaze_DragAndDropStates state)
+        private void IsDropTargetValid(GameObject dropObject, GameObject dropTarget, Gaze_DragAndDropStates state)
         {
-            // exit if we are a drop object and target is the not a valid one (not in the list)
-            if (!gazeConditionsScript.RootIO.DnD_IsTarget && !IsTargetValid())
-                return;
+            if (debug)
+                Debug.Log("Hey, I'm the DnD Condition (" + gazeConditionsScript.gameObject + ") on DROP TARGET " + dropTarget + " with state =" + state);
 
-            // compare the received state with the one specified in the dnd conditions
-            if (gazeConditionsScript.dndEventValidator.Equals((int)state))
-                IsValid = true;
+            if (dropTarget.Equals(gazeConditionsScript.Root))
+            {
+
+                // check if action is ok (DROP, CANCEL...)
+                if (((int)state).Equals(gazeConditionsScript.dndEventValidator))
+                {
+                    if (debug)
+                        Debug.Log("IsDropTargetValid OK with state =" + state);
+
+                    IsValid = true;
+                }
+            }
         }
 
-        private bool IsTargetValid()
+        // TODO @apelab implement IsDropObjectValid
+        private bool IsDropObjectValid(GameObject dropObject, Gaze_DragAndDropStates state)
         {
-            Gaze_InteractiveObject rootIO = gazeConditionsScript.RootIO;
-
-            // if any target validates the condition
-            if (gazeConditionsScript.dndTargetModesIndex.Equals((int)apelab_DnDTargetsModes.ANY))
-            {
-                // get targets count
-                int targetsCount = rootIO.DnD_Targets.Count;
-
-                // iterate and find one valid
-                for (int i = 0; i < targetsCount; i++)
-                {
-                    if (rootIO.DnD_Targets[i].Equals(dropTarget))
-                    {
-                        return true;
-                    }
-                }
-            }
-            else
-            {
-                // iterate through selected targets
-                int targetsCount = gazeConditionsScript.dndTargets.Count;
-                for (int i = 0; i < targetsCount; i++)
-                {
-                    if (gazeConditionsScript.dndTargets[i].Equals(dropTarget))
-                        return true;
-                }
-            }
+            if (debug)
+                Debug.Log("Hey, I'm the DnD Condition (" + gazeConditionsScript.gameObject + ") on DROP OBJECT " + dropObject + " with state =" + state);
 
             return false;
         }
 
+        private void HandleDnDCondition(Gaze_DragAndDropEventArgs e)
+        {
+            // get the drop object and drop target 
+            dropTarget = (GameObject)e.DropTarget;
+            dropObject = (GameObject)e.DropObject;
+
+            // if I'm the drop object
+            if (dropObject.Equals(gazeConditionsScript.Root))
+            {
+                IsDropObjectValid(dropObject, e.State);
+            }
+            // if I'm the dropped target
+            else if (gazeConditionsScript.Root.Equals(dropTarget))
+            {
+                IsDropTargetValid(dropObject, dropTarget, e.State);
+            }
+        }
+
         private void OnDragAndDropEvent(Gaze_DragAndDropEventArgs e)
         {
-            // get the DragAndDrop 
-            receivedDnDManager = ((GameObject)e.Sender).GetComponent<Gaze_DragAndDropManager>();
-            dropTarget = (GameObject)e.TargetObject;
-            if ((gazeConditionsScript.RootIO.DnD_IsTarget && gazeConditionsScript.RootIO.gameObject.Equals(dropTarget))
-                || receivedDnDManager && receivedDnDManager.gameObject.Equals(Gaze_Utils.GetIOFromObject(gazeConditionsScript.gameObject).GetComponent<Gaze_DragAndDropManager>().gameObject))
-            {
-                // check if state is valid
-                HandleConditionAction(e.State);
-            }
+            HandleDnDCondition(e);
         }
 
         private void Gaze_EventManager_OnTriggerStateEvent(Gaze_TriggerStateEventArgs e)
