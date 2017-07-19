@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,12 +8,17 @@ namespace Gaze
     [ExecuteInEditMode]
     public class Gaze_Actions : Gaze_AbstractBehaviour
     {
+        private Gaze_Interaction gazeInteraction;
         public Gaze_InteractiveObject rootIO;
 
         public bool isActive = true;
 
         public enum ACTIVABLE_OPTION { NOTHING, ACTIVATE, DEACTIVATE }
+        public enum AUDIO_LOOP { None, Single, Playlist }
         public enum ALTERABLE_OPTION { NOTHING, MODIFY }
+        public enum AUDIO_SEQUENCE { InOrder, Random }
+        public enum ANIMATION_OPTION { NOTHING, MECANIM, CLIP, DEACTIVATE }
+        public enum ANIMATION_LOOP { Loop, PingPong }
 
         public bool ActionReset;
         public ACTIVABLE_OPTION ActionVisuals;
@@ -24,6 +28,7 @@ namespace Gaze
         public ACTIVABLE_OPTION ActionAudio;
         public ACTIVABLE_OPTION ActionColliders;
         public ACTIVABLE_OPTION ActionDragAndDrop;
+        public ANIMATION_OPTION ActionAnimation;
 
         public bool DestroyOnTrigger;
 
@@ -63,6 +68,15 @@ namespace Gaze
         public bool[] activeTriggerStatesAnim = new bool[Enum<TriggerEventsAndStates>.Count];
         public string[] animatorTriggers = new string[Enum<TriggerEventsAndStates>.Count];
 
+        public Gaze_AnimationPlaylist animationClip = new Gaze_AnimationPlaylist();
+
+        public Animation targetAnimationSource;
+        private Gaze_AnimationPlayer gazeAnimationPlayer;
+        private int Animation_PlayList_Key;
+        public AUDIO_LOOP[] loopAnim = new AUDIO_LOOP[Enum<TriggerEventsAndStates>.Count];
+        public ANIMATION_LOOP[] loopAnimType = new ANIMATION_LOOP[Enum<TriggerEventsAndStates>.Count];
+        public AUDIO_SEQUENCE[] animationSequence = new AUDIO_SEQUENCE[Enum<TriggerEventsAndStates>.Count];
+
         // Audio
         public AudioSource targetAudioSource;
         public bool[] activeTriggerStatesAudio = new bool[Enum<TriggerEventsAndStates>.Count];
@@ -72,16 +86,38 @@ namespace Gaze
         public float audioVolumeMin = .2f;
         public float audioVolumeMax = 1f;
         public float fadeSpeed = .005f;
-        private Coroutine raiseAudioVolume;
-        private Coroutine lowerAudioVolume;
-
         public Gaze_InteractiveObject IO;
 
-        private Gaze_Interaction gazeInteraction;
+        public bool OldAudio = true;
+
+        [SerializeField]
+        public Gaze_AudioPlayList audioClipsNew = new Gaze_AudioPlayList();
+        public AUDIO_LOOP[] loopAudioNew = new AUDIO_LOOP[Enum<TriggerEventsAndStates>.Count];
+        public AUDIO_SEQUENCE[] audio_sequence = new AUDIO_SEQUENCE[Enum<TriggerEventsAndStates>.Count];
+        public bool[] fadeInBetween = new bool[Enum<TriggerEventsAndStates>.Count];
+
+        public bool fadeInEnabled = false;
+        public bool fadeOutEnabled = false;
+        public bool fadeOutDeactEnabled = false;
+        public float fadeInTime = 1f;
+        public float fadeOutTime = 1f;
+        public float fadeOutDeactTime = 1f;
+        public AnimationCurve fadeInCurve = AnimationCurve.Linear(0f, 0f, 1f, 1f);
+        public AnimationCurve fadeOutDeactCurve = AnimationCurve.Linear(0f, 1f, 1f, 0f);
+        public AnimationCurve fadeOutCurve = AnimationCurve.Linear(0f, 1f, 1f, 0f);
+
+        public bool audio_ForceStop = false;
+        public bool audio_AllowMultiple = false;
+        public bool audio_randomizePitch = false;
+        public float audio_minPitch = 0f;
+        public float audio_maxPitch = 2f;
+        public int audio_MaxConcurrentSound = 8;
+
+        private Gaze_AudioPlayer gazeAudioPlayer;
+        private int Audio_PlayList_Key;
 
         // Notification
         public bool triggerNotification;
-
         private void Awake()
         {
             gazeInteraction = GetComponent<Gaze_Interaction>();
@@ -113,15 +149,30 @@ namespace Gaze
 
             SetCustomActionsDelay();
 
-            if (ActionAudio == ACTIVABLE_OPTION.ACTIVATE && targetAudioSource != null)
+            if (ActionAudio != ACTIVABLE_OPTION.NOTHING && targetAudioSource != null)
             {
-                targetAudioSource.volume = duckingEnabled ? audioVolumeMin : audioVolumeMax;
+                if (targetAudioSource.GetComponent<Gaze_AudioPlayer>() == null)
+                {
+                    targetAudioSource.gameObject.AddComponent<Gaze_AudioPlayer>();
+                }
+
+                gazeAudioPlayer = targetAudioSource.GetComponent<Gaze_AudioPlayer>();
+                Audio_PlayList_Key = gazeAudioPlayer.setParameters(audioClipsNew, loopAudioNew, audio_sequence, fadeInBetween, audioVolumeMin, audioVolumeMax, duckingEnabled, fadeSpeed, fadeInTime, fadeOutTime, fadeOutDeactTime, fadeInEnabled, fadeOutEnabled, fadeOutDeactEnabled, fadeInCurve, fadeOutCurve, fadeOutDeactCurve, activeTriggerStatesAudio, audio_ForceStop, audio_AllowMultiple, audio_MaxConcurrentSound, audio_randomizePitch, audio_minPitch, audio_maxPitch);
             }
 
             if (!gazeInteraction.HasConditions)
             {
                 OnTrigger();
             }
+        }
+
+        public bool DontHaveAudioLoop()
+        {
+            foreach (AUDIO_LOOP loop in loopAudioNew)
+            {
+                if (loop != AUDIO_LOOP.Single) return true;
+            }
+            return false;
         }
 
         private void SetCustomActionsDelay()
@@ -147,56 +198,14 @@ namespace Gaze
             }
         }
 
-        private void PlayAudio(int i)
-        {
-            if (ActionAudio == ACTIVABLE_OPTION.ACTIVATE)
-            {
-                targetAudioSource.clip = audioClips[i];
-                targetAudioSource.loop = loopAudio[i];
-                targetAudioSource.Play();
-            }
-        }
-
-        private IEnumerator LowerAudioVolume()
-        {
-            while (targetAudioSource.volume > audioVolumeMin)
-            {
-                if (targetAudioSource.volume - fadeSpeed > audioVolumeMin)
-                {
-                    targetAudioSource.volume -= fadeSpeed;
-                }
-                else
-                {
-                    targetAudioSource.volume = audioVolumeMin;
-                }
-                yield return new WaitForEndOfFrame();
-            }
-        }
-
-        private IEnumerator RaiseAudioVolume()
-        {
-            if (targetAudioSource != null)
-            {
-                while (targetAudioSource.volume < audioVolumeMax)
-                {
-
-                    if (targetAudioSource.volume + fadeSpeed < audioVolumeMax)
-                    {
-                        targetAudioSource.volume += fadeSpeed;
-                    }
-                    else
-                    {
-                        targetAudioSource.volume = audioVolumeMax;
-                    }
-                    yield return new WaitForEndOfFrame();
-                }
-            }
-        }
-
         private void HandleReset()
         {
             if (ActionReset)
             {
+                // Reset transform
+                //if (GetIO().GrabLogic.IsBeingGrabbed && GetIO().GrabLogic.GrabbingManager != null)
+                //    GetIO().GrabLogic.GrabbingManager.TryDetach();
+
                 // Reset transform
                 GetIO().transform.position = GetIO().InitialTransform.position;
                 GetIO().transform.rotation = GetIO().InitialTransform.rotation;
@@ -234,8 +243,8 @@ namespace Gaze
             }
             else if (ActionGrab == ACTIVABLE_OPTION.DEACTIVATE)
             {
-                if (IO.GrabbingManager != null)
-                    IO.GrabbingManager.TryDetach();
+                //if (IO.GrabLogic.GrabbingManager != null)
+                //    IO.GrabLogic.GrabbingManager.TryDetach();
 
                 IO.DisableManipulationMode(Gaze_ManipulationModes.GRAB);
             }
@@ -409,18 +418,12 @@ namespace Gaze
             // If we want to activate audio just do it.
             if (ActionAudio == ACTIVABLE_OPTION.ACTIVATE)
             {
-                if (activeTriggerStatesAudio.Length > 0 && activeTriggerStatesAudio[0])
-                {
-                    PlayAudio(0);
-                }
-
+                gazeAudioPlayer.playAudio(Audio_PlayList_Key, 0);
             }
             else //Stop the current audio.
             {
-                if (targetAudioSource != null && targetAudioSource.isPlaying)
-                {
-                    targetAudioSource.Stop();
-                }
+                gazeAudioPlayer.stopAudio();
+
             }
         }
 
@@ -473,7 +476,7 @@ namespace Gaze
 
             if (activeTriggerStatesAudio.Length > _animIndex && activeTriggerStatesAudio[_animIndex])
             {
-                PlayAudio(_animIndex);
+                gazeAudioPlayer.playAudio(Audio_PlayList_Key, _animIndex);
             }
         }
 
@@ -506,28 +509,5 @@ namespace Gaze
             TimeFrameLogic(4);
         }
         #endregion
-
-
-        // TODO (Arthur): see if commenting this method causes any problem in production.
-        // Commented because eventual source of bugs with the delay routine.
-        /*
-        private void OnGazeEvent(Gaze_GazeEventArgs e)
-        {
-            // if sender is the gazable collider GameObject
-            if (e.Sender != null && gazable.gazeColliderIO != null && ((GameObject)e.Sender).Equals(gazable.gazeColliderIO.gameObject) && duckingEnabled && ActionAudio == Gaze_Actions.ACTIVABLE_OPTION.ACTIVATE)
-            {
-                StopAllCoroutines();
-                if (e.IsGazed)
-                {
-                    raiseAudioVolume = StartCoroutine(RaiseAudioVolume());
-                }
-                else
-                {
-                    lowerAudioVolume = StartCoroutine(LowerAudioVolume());
-                }
-            }
-        }
-        */
-
     }
 }
