@@ -26,6 +26,8 @@ namespace Gaze
     [SelectionBase]
     public class Gaze_InteractiveObject : MonoBehaviour
     {
+        #region Members
+
         /// <summary>
         /// Defines how the user can interact with the IO by using 
         /// his controllers.
@@ -179,6 +181,7 @@ namespace Gaze
         public List<GameObject> DnD_Targets;
 
         private Gaze_DragAndDropManager dragAndDropManager;
+        #endregion Members
 
         private void Awake()
         {
@@ -637,6 +640,6 @@ namespace Gaze
                 }
             }
         }
-        #endregion PointingManagement
+        #endregion ManipulationManagement
     }
 }
