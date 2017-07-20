@@ -715,6 +715,12 @@ namespace Gaze
             {
                 canBeTriggered = true;
             }
+
+            for (int i = 0; i < customConditions.Count; i++)
+            {
+                customConditions[i].ValidateCustomCondition(false);
+            }
+
         }
 
         /// <summary>
