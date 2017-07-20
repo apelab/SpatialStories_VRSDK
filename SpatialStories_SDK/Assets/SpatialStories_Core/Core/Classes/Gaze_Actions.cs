@@ -153,7 +153,7 @@ namespace Gaze
                 }
 
                 gazeAudioPlayer = targetAudioSource.GetComponent<Gaze_AudioPlayer>();
-                Audio_PlayList_Key = gazeAudioPlayer.setParameters(audioClipsNew, loopAudioNew, audio_sequence, fadeInBetween, audioVolumeMin, audioVolumeMax, duckingEnabled, fadeSpeed, fadeInTime, fadeOutTime, fadeOutDeactTime, fadeInEnabled, fadeOutEnabled, fadeOutDeactEnabled, fadeInCurve, fadeOutCurve, fadeOutDeactCurve, activeTriggerStatesAudio, audio_ForceStop, audio_AllowMultiple, audio_MaxConcurrentSound, audio_randomizePitch, audio_minPitch, audio_maxPitch);
+                Audio_PlayList_Key = gazeAudioPlayer.setParameters(audioClips, loopAudio, audio_sequence, fadeInBetween, audioVolumeMin, audioVolumeMax, duckingEnabled, fadeSpeed, fadeInTime, fadeOutTime, fadeOutDeactTime, fadeInEnabled, fadeOutEnabled, fadeOutDeactEnabled, fadeInCurve, fadeOutCurve, fadeOutDeactCurve, activeTriggerStatesAudio, audio_ForceStop, audio_AllowMultiple, audio_MaxConcurrentSound, audio_randomizePitch, audio_minPitch, audio_maxPitch);
             }
 
             if (ActionAnimation == ANIMATION_OPTION.CLIP && targetAnimationSource != null)
