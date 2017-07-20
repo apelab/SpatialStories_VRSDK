@@ -80,38 +80,34 @@ namespace Gaze
         // Audio
         public AudioSource targetAudioSource;
         public bool[] activeTriggerStatesAudio = new bool[Enum<TriggerEventsAndStates>.Count];
-        public AudioClip[] audioClips = new AudioClip[Enum<TriggerEventsAndStates>.Count];
-        public bool[] loopAudio = new bool[Enum<TriggerEventsAndStates>.Count];
-        public bool duckingEnabled = true;
-        public float audioVolumeMin = .2f;
-        public float audioVolumeMax = 1f;
-        public float fadeSpeed = .005f;
-        public Gaze_InteractiveObject IO;
-
-        public bool OldAudio = true;
 
         [SerializeField]
-        public Gaze_AudioPlayList audioClipsNew = new Gaze_AudioPlayList();
-        public AUDIO_LOOP[] loopAudioNew = new AUDIO_LOOP[Enum<TriggerEventsAndStates>.Count];
+        public Gaze_AudioPlayList audioClips = new Gaze_AudioPlayList();
+        public AUDIO_LOOP[] loopAudio = new AUDIO_LOOP[Enum<TriggerEventsAndStates>.Count];
         public AUDIO_SEQUENCE[] audio_sequence = new AUDIO_SEQUENCE[Enum<TriggerEventsAndStates>.Count];
         public bool[] fadeInBetween = new bool[Enum<TriggerEventsAndStates>.Count];
-
-        public bool fadeInEnabled = false;
-        public bool fadeOutEnabled = false;
-        public bool fadeOutDeactEnabled = false;
+        public Gaze_AudioPlayList audioClipsNew = new Gaze_AudioPlayList();
+        public AUDIO_LOOP[] loopAudioNew = new AUDIO_LOOP[Enum<TriggerEventsAndStates>.Count];
+        public bool duckingEnabled = true;
         public float fadeInTime = 1f;
         public float fadeOutTime = 1f;
         public float fadeOutDeactTime = 1f;
         public AnimationCurve fadeInCurve = AnimationCurve.Linear(0f, 0f, 1f, 1f);
         public AnimationCurve fadeOutDeactCurve = AnimationCurve.Linear(0f, 1f, 1f, 0f);
         public AnimationCurve fadeOutCurve = AnimationCurve.Linear(0f, 1f, 1f, 0f);
-
+        public bool fadeInEnabled = false;
+        public bool fadeOutEnabled = false;
+        public bool fadeOutDeactEnabled = false;
+        public float audioVolumeMin = .2f;
+        public float audioVolumeMax = 1f;
+        public float fadeSpeed = .005f;
         public bool audio_ForceStop = false;
         public bool audio_AllowMultiple = false;
         public bool audio_randomizePitch = false;
         public float audio_minPitch = 0f;
         public float audio_maxPitch = 2f;
         public int audio_MaxConcurrentSound = 8;
+        public Gaze_InteractiveObject IO;
 
         private Gaze_AudioPlayer gazeAudioPlayer;
         private int Audio_PlayList_Key;
@@ -158,6 +154,18 @@ namespace Gaze
 
                 gazeAudioPlayer = targetAudioSource.GetComponent<Gaze_AudioPlayer>();
                 Audio_PlayList_Key = gazeAudioPlayer.setParameters(audioClipsNew, loopAudioNew, audio_sequence, fadeInBetween, audioVolumeMin, audioVolumeMax, duckingEnabled, fadeSpeed, fadeInTime, fadeOutTime, fadeOutDeactTime, fadeInEnabled, fadeOutEnabled, fadeOutDeactEnabled, fadeInCurve, fadeOutCurve, fadeOutDeactCurve, activeTriggerStatesAudio, audio_ForceStop, audio_AllowMultiple, audio_MaxConcurrentSound, audio_randomizePitch, audio_minPitch, audio_maxPitch);
+            }
+
+            if (ActionAnimation == ANIMATION_OPTION.CLIP && targetAnimationSource != null)
+            {
+                if (targetAnimationSource.GetComponent<Gaze_AnimationPlayer>() == null)
+                {
+                    targetAnimationSource.gameObject.AddComponent<Gaze_AnimationPlayer>();
+                }
+
+                gazeAnimationPlayer = targetAnimationSource.GetComponent<Gaze_AnimationPlayer>();
+                Animation_PlayList_Key = gazeAnimationPlayer.setParameters(animationClip, activeTriggerStatesAnim, loopAnimType, animationSequence);
+
             }
 
             if (!gazeInteraction.HasConditions)
