@@ -265,20 +265,25 @@ namespace Gaze
                 for (int i = 0; i < gaze_InteractiveObjectScript.DnD_Targets.Count; i++)
                 {
                     if (gaze_InteractiveObjectScript.DnD_Targets[i] == null)
-                        gaze_InteractiveObjectScript.DnD_Targets.RemoveAt(i);
-
-                    // refresh DnD_Targets IOs list modification (an IO target may has been destroyed)
-                    if (Gaze_SceneInventory.Instance.InteractiveObjects.Contains(gaze_InteractiveObjectScript.DnD_Targets[i]))
                     {
-                        // display it in a popup
-                        EditorGUILayout.BeginHorizontal();
-                        gaze_InteractiveObjectScript.DnD_Targets[i] = Gaze_SceneInventory.Instance.InteractiveObjects[EditorGUILayout.Popup(Gaze_SceneInventory.Instance.InteractiveObjects.IndexOf(gaze_InteractiveObjectScript.DnD_Targets[i]), dnd_dropTargetsNames.ToArray())];
+                        gaze_InteractiveObjectScript.DnD_Targets.RemoveAt(i);
+                    }
+                    else
+                    {
+                        // refresh DnD_Targets IOs list modification (an IO target may has been destroyed)
+                        if (Gaze_SceneInventory.Instance.InteractiveObjects.Contains(gaze_InteractiveObjectScript.DnD_Targets[i]))
+                        {
+                            // display it in a popup
+                            EditorGUILayout.BeginHorizontal();
 
-                        // and a '-' button to remove it if needed
-                        if (GUILayout.Button("-"))
-                            gaze_InteractiveObjectScript.DnD_Targets.Remove(gaze_InteractiveObjectScript.DnD_Targets[i]);
+                            gaze_InteractiveObjectScript.DnD_Targets[i] = Gaze_SceneInventory.Instance.InteractiveObjects[EditorGUILayout.Popup(Gaze_SceneInventory.Instance.InteractiveObjects.IndexOf(gaze_InteractiveObjectScript.DnD_Targets[i]), dnd_dropTargetsNames.ToArray())];
 
-                        EditorGUILayout.EndHorizontal();
+                            // and a '-' button to remove it if needed
+                            if (GUILayout.Button("-"))
+                                gaze_InteractiveObjectScript.DnD_Targets.Remove(gaze_InteractiveObjectScript.DnD_Targets[i]);
+
+                            EditorGUILayout.EndHorizontal();
+                        }
                     }
                 }
             }

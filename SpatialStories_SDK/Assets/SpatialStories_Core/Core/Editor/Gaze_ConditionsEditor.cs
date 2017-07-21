@@ -105,8 +105,10 @@ namespace Gaze
             {
                 for (int i = 0; i < targetsCount; i++)
                 {
-                    dndTargetsNames.Add(targetConditions.RootIO.DnD_Targets[i].ToString());
-                    //Debug.Log("conditions target index [" + i + "] " + Gaze_SceneInventory.Instance.InteractiveObjects[targetConditions.RootIO.DnD_TargetsIndexes[i]]);
+                    if (targetConditions.RootIO.DnD_Targets[i] == null)
+                        targetConditions.RootIO.DnD_Targets.RemoveAt(i);
+                    else
+                        dndTargetsNames.Add(targetConditions.RootIO.DnD_Targets[i].ToString());
                 }
             }
         }
