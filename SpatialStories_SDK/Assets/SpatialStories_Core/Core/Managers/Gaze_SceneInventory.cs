@@ -31,10 +31,8 @@ public class Gaze_SceneInventory : MonoBehaviour
 
     private void UpdateListsFromHierarchy()
     {
-        // clear lists
-        //InteractiveObjectScripts.Clear();
-        //InteractiveObjects.Clear();
-
+        // clear list
+        InteractiveObjects.Clear();
 
         // repopulate them
         InteractiveObjectScripts = (FindObjectsOfType(typeof(Gaze_InteractiveObject)) as Gaze_InteractiveObject[]).ToList();
