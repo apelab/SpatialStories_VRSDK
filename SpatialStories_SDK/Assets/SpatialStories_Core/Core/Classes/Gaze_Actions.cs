@@ -14,7 +14,7 @@ namespace Gaze
         public bool isActive = true;
 
         public enum ACTIVABLE_OPTION { NOTHING, ACTIVATE, DEACTIVATE }
-        public enum AUDIO_LOOP { None, Single, Playlist }
+        public enum LOOP_MODES { None, Single, Playlist }
         public enum ALTERABLE_OPTION { NOTHING, MODIFY }
         public enum AUDIO_SEQUENCE { InOrder, Random }
         public enum ANIMATION_OPTION { NOTHING, MECANIM, CLIP, DEACTIVATE }
@@ -71,7 +71,7 @@ namespace Gaze
         public Gaze_AnimationPlaylist animationClip = new Gaze_AnimationPlaylist();
 
         public Animation targetAnimationSource;
-        public AUDIO_LOOP[] loopAnim = new AUDIO_LOOP[Enum<TriggerEventsAndStates>.Count];
+        public LOOP_MODES[] loopAnim = new LOOP_MODES[Enum<TriggerEventsAndStates>.Count];
         public ANIMATION_LOOP[] loopAnimType = new ANIMATION_LOOP[Enum<TriggerEventsAndStates>.Count];
         public AUDIO_SEQUENCE[] animationSequence = new AUDIO_SEQUENCE[Enum<TriggerEventsAndStates>.Count];
 
@@ -81,11 +81,11 @@ namespace Gaze
 
         [SerializeField]
         public Gaze_AudioPlayList audioClips = new Gaze_AudioPlayList();
-        public AUDIO_LOOP[] loopAudio = new AUDIO_LOOP[Enum<TriggerEventsAndStates>.Count];
+        public LOOP_MODES[] loopAudio = new LOOP_MODES[Enum<TriggerEventsAndStates>.Count];
         public AUDIO_SEQUENCE[] audio_sequence = new AUDIO_SEQUENCE[Enum<TriggerEventsAndStates>.Count];
         public bool[] fadeInBetween = new bool[Enum<TriggerEventsAndStates>.Count];
         public Gaze_AudioPlayList audioClipsNew = new Gaze_AudioPlayList();
-        public AUDIO_LOOP[] loopAudioNew = new AUDIO_LOOP[Enum<TriggerEventsAndStates>.Count];
+        public LOOP_MODES[] loopAudioNew = new LOOP_MODES[Enum<TriggerEventsAndStates>.Count];
         public bool duckingEnabled = true;
         public float fadeInTime = 1f;
         public float fadeOutTime = 1f;
@@ -109,6 +109,8 @@ namespace Gaze
 
         private Gaze_AudioPlayer gazeAudioPlayer;
         private int Audio_PlayList_Key;
+        private int Animation_PlayList_Key;
+        private Gaze_AnimationPlayer gazeAnimationPlayer;
 
         // Notification
         public bool triggerNotification;
@@ -160,6 +162,9 @@ namespace Gaze
                 {
                     targetAnimationSource.gameObject.AddComponent<Gaze_AnimationPlayer>();
                 }
+
+                gazeAnimationPlayer = targetAnimationSource.GetComponent<Gaze_AnimationPlayer>();
+                Animation_PlayList_Key = gazeAnimationPlayer.setParameters(animationClip, activeTriggerStatesAnim, loopAnimType, animationSequence);
             }
 
             if (!gazeInteraction.HasConditions)
@@ -170,9 +175,9 @@ namespace Gaze
 
         public bool DontHaveAudioLoop()
         {
-            foreach (AUDIO_LOOP loop in loopAudioNew)
+            foreach (LOOP_MODES loop in loopAudioNew)
             {
-                if (loop != AUDIO_LOOP.Single) return true;
+                if (loop != LOOP_MODES.Single) return true;
             }
             return false;
         }
@@ -194,9 +199,13 @@ namespace Gaze
 
         private void PlayAnim(int i)
         {
-            if (triggerAnimation)
+            if (ActionAnimation == ANIMATION_OPTION.MECANIM)
             {
                 targetAnimator.SetTrigger(animatorTriggers[i]);
+            }
+            else if (ActionAnimation == ANIMATION_OPTION.CLIP)
+            {
+                gazeAnimationPlayer.PlayAnim(Animation_PlayList_Key, i);
             }
         }
 

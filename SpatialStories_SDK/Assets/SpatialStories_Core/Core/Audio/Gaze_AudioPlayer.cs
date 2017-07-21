@@ -98,7 +98,7 @@ namespace Gaze
         private int MAX_AUDIOS = 8;
 
         private List<Gaze_AudioPlayList> clips = new List<Gaze_AudioPlayList>();
-        private Gaze_Actions.AUDIO_LOOP[] loopAudio = new Gaze_Actions.AUDIO_LOOP[5];
+        private Gaze_Actions.LOOP_MODES[] loopAudio = new Gaze_Actions.LOOP_MODES[5];
         private Gaze_Actions.AUDIO_SEQUENCE[] sequence = new Gaze_Actions.AUDIO_SEQUENCE[5];
         private bool[] fadeInBetween = new bool[5];
         private bool ducking = true;
@@ -131,7 +131,7 @@ namespace Gaze
 
         private int key;
 
-        public int setParameters(Gaze_AudioPlayList audioClips, Gaze_Actions.AUDIO_LOOP[] loop, Gaze_Actions.AUDIO_SEQUENCE[] sequence, bool[] fadeInBetween, float volumeMin, float volumeMax, bool duckingEnabled, float fadeSpeed, float fadeInTime, float fadeOutTime, float fadeOutDeactTime, bool fadeInEnabled, bool fadeOutEnabled, bool fadeOutDeactEnabled, AnimationCurve fadeInCurve, AnimationCurve fadeOutCurve, AnimationCurve fadeOutDeactCurve, bool[] activeTriggerStatesAudio, bool forceStop, bool allowMultiple, int maxConcurrentSound, bool randomizePitch, float minPitch, float maxPitch)
+        public int setParameters(Gaze_AudioPlayList audioClips, Gaze_Actions.LOOP_MODES[] loop, Gaze_Actions.AUDIO_SEQUENCE[] sequence, bool[] fadeInBetween, float volumeMin, float volumeMax, bool duckingEnabled, float fadeSpeed, float fadeInTime, float fadeOutTime, float fadeOutDeactTime, bool fadeInEnabled, bool fadeOutEnabled, bool fadeOutDeactEnabled, AnimationCurve fadeInCurve, AnimationCurve fadeOutCurve, AnimationCurve fadeOutDeactCurve, bool[] activeTriggerStatesAudio, bool forceStop, bool allowMultiple, int maxConcurrentSound, bool randomizePitch, float minPitch, float maxPitch)
         {
             clips.Add(new Gaze_AudioPlayList());
 
@@ -417,8 +417,8 @@ namespace Gaze
 
                 audios[i].clipIndex %= clips[audios[i].key].Count(audios[i].track);
 
-                audios[i].loop = loopAudio[trackIndex] == Gaze_Actions.AUDIO_LOOP.Single;
-                audios[i].loopPlaylist = loopAudio[trackIndex] == Gaze_Actions.AUDIO_LOOP.Playlist;
+                audios[i].loop = loopAudio[trackIndex] == Gaze_Actions.LOOP_MODES.Single;
+                audios[i].loopPlaylist = loopAudio[trackIndex] == Gaze_Actions.LOOP_MODES.Playlist;
                 audios[i].track = trackIndex;
                 audios[i].audioSource.Play();
                 audios[i].setTimer(audios[i].audioSource.clip.length);
@@ -447,7 +447,7 @@ namespace Gaze
 
         public bool playAudioTrack(int key, int audioSourceIndex)
         {
-            return playAudioTrack(key, audios[audioSourceIndex].track, audioSourceIndex, loopAudio[audios[audioSourceIndex].track] == Gaze_Actions.AUDIO_LOOP.Single, false);
+            return playAudioTrack(key, audios[audioSourceIndex].track, audioSourceIndex, loopAudio[audios[audioSourceIndex].track] == Gaze_Actions.LOOP_MODES.Single, false);
         }
 
         public void playAudio(int key, int index)

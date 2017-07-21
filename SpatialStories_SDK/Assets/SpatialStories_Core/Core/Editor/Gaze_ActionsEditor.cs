@@ -580,9 +580,9 @@ namespace Gaze
                 }
 
                 EditorGUILayout.BeginHorizontal();
-                actionsScript.loopAnim[k] = (Gaze_Actions.AUDIO_LOOP)EditorGUILayout.EnumPopup("Loop", actionsScript.loopAnim[k]);
+                actionsScript.loopAnim[k] = (Gaze_Actions.LOOP_MODES)EditorGUILayout.EnumPopup("Loop", actionsScript.loopAnim[k]);
 
-                if (actionsScript.loopAnim[k] == Gaze_Actions.AUDIO_LOOP.Single)
+                if (actionsScript.loopAnim[k] == Gaze_Actions.LOOP_MODES.Single)
                 {
                     actionsScript.loopAnimType[k] = (Gaze_Actions.ANIMATION_LOOP)EditorGUILayout.EnumPopup("", actionsScript.loopAnimType[k]);
 
@@ -649,9 +649,9 @@ namespace Gaze
             }
 
             EditorGUILayout.BeginHorizontal();
-            actionsScript.loopAudio[k] = (Gaze_Actions.AUDIO_LOOP)EditorGUILayout.EnumPopup("Loop", actionsScript.loopAudio[k]);
+            actionsScript.loopAudio[k] = (Gaze_Actions.LOOP_MODES)EditorGUILayout.EnumPopup("Loop", actionsScript.loopAudio[k]);
 
-            if (actionsScript.audioClips.Count(k) > 1 && actionsScript.loopAudio[k] == Gaze_Actions.AUDIO_LOOP.Playlist)
+            if (actionsScript.audioClips.Count(k) > 1 && actionsScript.loopAudio[k] == Gaze_Actions.LOOP_MODES.Playlist)
             {
                 actionsScript.fadeInBetween[k] = EditorGUILayout.ToggleLeft("Fade in between", actionsScript.fadeInBetween[k]);
 
