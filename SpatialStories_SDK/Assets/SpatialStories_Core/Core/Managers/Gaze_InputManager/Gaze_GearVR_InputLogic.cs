@@ -39,9 +39,6 @@ namespace Gaze
             // Returns true if the touchpad was released this frame
             bool touchpadReleasedThisFrame = OVRInput.GetUp(OVRInput.Button.PrimaryTouchpad, handedRemote);
 
-            // Returns true if the touchpad was pressed down this frame
-            bool touchpadPressedThisFrame = OVRInput.GetDown(OVRInput.Button.PrimaryTouchpad, handedRemote);
-
             // Queries the touchpad position of the GearVR Controller explicitly
             if (triggerPressedThisFrame)
                 Gaze_InputManager.FireOnHandRightDownEvent(new Gaze_InputEventArgs(this, VRNode.RightHand, Gaze_InputTypes.HAND_RIGHT_DOWN, Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_HAND_RIGHT)));

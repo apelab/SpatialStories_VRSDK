@@ -18,16 +18,8 @@ public class Gaze_SceneInventory : MonoBehaviour
         InteractiveObjects = new List<GameObject>();
     }
 
-    void Awake()
-    {
-        // Here we save our singleton instance
-        Instance = this;
-    }
-
     void Start()
     {
-        InteractiveObjectScripts = new List<Gaze_InteractiveObject>();
-        InteractiveObjects = new List<GameObject>();
         UpdateListsFromHierarchy();
     }
 
@@ -40,8 +32,8 @@ public class Gaze_SceneInventory : MonoBehaviour
     private void UpdateListsFromHierarchy()
     {
         // clear lists
-        InteractiveObjectScripts.Clear();
-        InteractiveObjects.Clear();
+        //InteractiveObjectScripts.Clear();
+        //InteractiveObjects.Clear();
 
 
         // repopulate them
@@ -50,7 +42,6 @@ public class Gaze_SceneInventory : MonoBehaviour
         for (int i = 0; i < InteractiveObjectsCount; i++)
         {
             InteractiveObjects.Add(InteractiveObjectScripts[i].gameObject);
-            //Debug.Log("hiererachy index [" + i + "] " + InteractiveObjectScripts[i]);
         }
     }
 }

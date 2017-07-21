@@ -52,13 +52,11 @@ public class Gaze_GrabManager : MonoBehaviour
 
     private Gaze_InteractiveObject closerIO;
     public Transform grabPosition;
-    private Rigidbody controllerRB;
     private Vector3 lastPosition;
     private Vector3 lastRotation;
     private short positionsIndex = 0;
     private short samples = 10;
     private Vector3[] positions;
-    private Vector3[] angularVelocities;
     private Vector3 velocity;
     private Vector3 angularVelocity;
     private bool isGrabbing = false;
@@ -66,7 +64,6 @@ public class Gaze_GrabManager : MonoBehaviour
     private LineRenderer laserPointer;
     private RaycastHit[] hits;
     public List<GameObject> hitsIOs;
-    private Transform handPivot;
     private bool isTriggerPressed = false;
     private List<GameObject> objectsInProximity = new List<GameObject>();
     private GameObject distantGrabOrigin;
@@ -175,8 +172,6 @@ public class Gaze_GrabManager : MonoBehaviour
     {
         distantGrabOrigin = GetComponentInChildren<Gaze_DistantGrabPointer>().gameObject;
         positions = new Vector3[samples];
-        angularVelocities = new Vector3[samples];
-        controllerRB = GetComponentInParent<Gaze_InteractiveObject>().GetComponentInChildren<Gaze_Proximity>().GetComponent<Rigidbody>();
         if (displayGrabPointer)
         {
             if (GetComponent<LineRenderer>() == null)
@@ -187,7 +182,6 @@ public class Gaze_GrabManager : MonoBehaviour
             laserPointer.startWidth = laserStartWidth;
             laserPointer.endWidth = laserEndWidth;
             laserPointer.positionCount = 2;
-            handPivot = GetComponentInParent<Gaze_InteractiveObject>().GetComponentInChildren<Gaze_Proximity>().transform;
             laserPointer.material = laserMaterial;
         }
 
@@ -902,6 +896,7 @@ public class Gaze_GrabManager : MonoBehaviour
         }
         catch (Exception ex)
         {
+            Debug.Log(ex.Message);
             return 0;
         }
     }

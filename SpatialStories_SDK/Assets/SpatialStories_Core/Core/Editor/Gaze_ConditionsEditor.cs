@@ -137,7 +137,6 @@ namespace Gaze
                     DisplayInputsCondition();
                     DisplayTeleportCondition();
                     DisplayDragAndDropCondition();
-
                     EditorGUILayout.Space();
                     #endregion
 
@@ -249,7 +248,10 @@ namespace Gaze
             hierarchyHandHoverColliders.Clear();
 
             // rebuild them
-            hierarchyIOsScripts = Gaze_SceneInventory.Instance.InteractiveObjectScripts;
+            //Gaze_SceneInventory inventory = (Gaze_SceneInventory)FindObjectOfType(typeof(Gaze_SceneInventory));
+            //hierarchyIOsScripts = inventory.InteractiveObjectScripts;
+
+            hierarchyIOsScripts = (FindObjectsOfType(typeof(Gaze_InteractiveObject)) as Gaze_InteractiveObject[]).ToList();
             for (int i = 0; i < hierarchyIOsScripts.Count; i++)
             {
                 hierarchyIOsNames.Add(hierarchyIOsScripts[i].name);
@@ -1005,7 +1007,7 @@ namespace Gaze
             {
                 if (hierarchyGazeColliders.Count > 0)
                 {
-                    GUILayout.BeginHorizontal();
+                    EditorGUILayout.BeginHorizontal();
 
                     // Set the state (in or out) 
                     targetConditions.gazeStateIndex = EditorGUILayout.Popup(targetConditions.gazeStateIndex, Enum.GetNames(typeof(Gaze_HoverStates)));
@@ -1027,9 +1029,8 @@ namespace Gaze
                         targetConditions.gazeColliderIO = (Gaze_InteractiveObject)gazeObject;
                     }
 
-                    GUILayout.EndHorizontal();
+                    EditorGUILayout.EndHorizontal();
                 }
-
             }
             EditorGUILayout.Space();
         }

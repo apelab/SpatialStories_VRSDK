@@ -81,7 +81,6 @@ namespace Gaze
             bool isTouchControllerValid = IsTouchControllerValid(eventHand);
             bool isTouchActionValid = IsTouchActionValid(eventHand, IsValid);
             bool isTouchDistanceValid = IsTouchDistanceValid(DistanceMode, eventHand);
-            bool isTouchInputValid = IsTouchInputValid(isTriggerPressed);
 
             bool valid = false;
 
@@ -219,7 +218,6 @@ namespace Gaze
             if (_touchedObject == null)
                 return false;
 
-            int index = _handIndex.Equals((int)Gaze_HandsEnum.BOTH) ? 1 : 0;
             return _touchedObject.Equals(gazeConditionsScript.touchMap.TouchEnitry.interactiveObject);
         }
 

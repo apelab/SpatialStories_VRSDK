@@ -73,7 +73,7 @@ namespace Gaze
         }
         private void CheckItsAlreadyGazed()
         {
-            if (visuals.GetComponentInParent<Gaze_InteractiveObject>().GetComponentInChildren<Gaze_Conditions>().IsGazed)
+            if (visuals.GetComponentInParent<Gaze_InteractiveObject>().GetComponentInChildren<Gaze_Conditions>().IsConditionOfTypeValid<Gaze_GazeCondition>())
             {
                 Gaze_EventManager.FireLevitationEvent(new Gaze_LevitationEventArgs(this, visuals, Gaze_LevitationTypes.GAZED, Gaze_HandsEnum.BOTH));
                 checkEnabled = false;

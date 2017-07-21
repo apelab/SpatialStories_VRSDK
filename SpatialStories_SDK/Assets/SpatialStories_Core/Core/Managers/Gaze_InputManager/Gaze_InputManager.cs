@@ -212,10 +212,6 @@ public class Gaze_InputManager : MonoBehaviour
     private bool controllersConnected;
     // the names of the connected controllers (HTC, Oculus Touch...)
     private string[] controllersNames;
-    // flag to know whether oculus or HTC controllers are used
-    private bool oculusControllersUsed = true;
-    private VRNode? leftHand = VRNode.LeftHand;
-    private VRNode? rightHand = VRNode.RightHand;
     private bool isHandRightDown = false, isHandLeftDown = false;
     private bool isIndexLeftDown = false, isIndexRightDown = false;
     private Vector2 axisValueLeft, axisValueRight;
@@ -255,8 +251,6 @@ public class Gaze_InputManager : MonoBehaviour
         }
         remove { setupEvent -= value; }
     }
-    private Gaze_InputEventArgs gaze_InputEventArgs;
-
     #endregion
 
     void Awake()
@@ -291,8 +285,6 @@ public class Gaze_InputManager : MonoBehaviour
         // CPU / GPU Throttling
         OVRPlugin.cpuLevel = 3;
         OVRPlugin.gpuLevel = 3;
-
-        gaze_InputEventArgs = new Gaze_InputEventArgs(this.gameObject);
     }
 
     void OnEnable()
@@ -541,7 +533,6 @@ public class Gaze_InputManager : MonoBehaviour
 
     private void CheckControllers()
     {
-        oculusControllersUsed = false;
         controllersConnected = false;
 
         string[] names = Input.GetJoystickNames();
@@ -550,13 +541,11 @@ public class Gaze_InputManager : MonoBehaviour
         {
             if (names[i].Contains("Oculus"))
             {
-                oculusControllersUsed = true;
                 controllersConnected = true;
                 break;
             }
             else if (names[i].Contains("OpenVR"))
             {
-                oculusControllersUsed = false;
                 controllersConnected = true;
                 break;
             }
@@ -570,12 +559,12 @@ public class Gaze_InputManager : MonoBehaviour
 
         if (!controllersConnected)
         {
-            if (!UnpluggedControllerMessage.active)
+            if (!UnpluggedControllerMessage.activeSelf)
                 UnpluggedControllerMessage.SetActive(true);
         }
         else
         {
-            if (UnpluggedControllerMessage.active)
+            if (UnpluggedControllerMessage.activeSelf)
                 UnpluggedControllerMessage.SetActive(false);
         }
     }

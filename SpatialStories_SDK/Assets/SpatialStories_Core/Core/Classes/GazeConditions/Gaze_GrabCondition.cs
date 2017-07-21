@@ -126,19 +126,16 @@ namespace Gaze
                     bool isGrabbingControllerInMap = IsGrabbingControllerInMap(dicoVRNode);
 
                     return isGrabbingControllerInMap && isGrabbingControllerStateValid && grabbedObjectValid;
-                    break;
 
                 //  the LEFT hand
                 case (int)Gaze_HandsEnum.LEFT:
                     grabLeftValid = IsGrabbingControllerInMap(dicoVRNode) && IsGrabbingControllerStateValid(e.IsGrabbing, Gaze_HandsEnum.LEFT, eventVRNode) && grabbedObjectValid;
                     return grabLeftValid;
-                    break;
 
                 //  the RIGHT hand
                 case (int)Gaze_HandsEnum.RIGHT:
                     grabRightValid = IsGrabbingControllerInMap(dicoVRNode) && IsGrabbingControllerStateValid(e.IsGrabbing, Gaze_HandsEnum.RIGHT, eventVRNode) && grabbedObjectValid;
                     return grabRightValid;
-                    break;
             }
 
             return false;

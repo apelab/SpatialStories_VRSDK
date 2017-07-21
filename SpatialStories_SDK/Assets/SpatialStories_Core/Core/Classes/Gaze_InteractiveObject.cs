@@ -121,10 +121,7 @@ namespace Gaze
         // TODO test if this works with a FBX that already has a root motion
         public Transform RootMotion;
 
-        private Gaze_Manipulation manipulationCollider;
-
         private float DISABLE_MANIPULATION_TIME = 1f;
-        private static Vector3 NULL_VECTOR_3 = new Vector3(float.MinValue, float.MinValue, float.MinValue);
 
         /// <summary>
         /// This bool is used to check if the object is being manipulated
@@ -209,15 +206,6 @@ namespace Gaze
             }
         }
 
-        void Update()
-        {
-
-            if (RootMotion != null)
-            {
-                FollowRoot();
-            }
-        }
-
         private void OnEnable()
         {
             Gaze_InputManager.OnControllerGrabEvent += OnControllerGrabEvent;
@@ -292,14 +280,6 @@ namespace Gaze
                     SetManipulationMode(false);
             }
 
-        }
-
-        private void FollowRoot()
-        {
-            if (manipulationCollider != null)
-            {
-                transform.localPosition = Vector3.zero + manipulationCollider.transform.position;
-            }
         }
 
         /// <summary>

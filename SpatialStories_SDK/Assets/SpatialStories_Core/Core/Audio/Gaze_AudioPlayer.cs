@@ -104,10 +104,7 @@ namespace Gaze
         private bool ducking = true;
         private float audioVolumeMin = .2f;
         private float audioVolumeMax = 1f;
-        private float fadeSpeed = .15f;
-        private float fadeInTime = 0f;
         private float fadeOutTime = 0f;
-        private float fadeOutDeactTime = 0f;
         private bool fadeInEnabled = false;
         private bool fadeOutEnabled = false;
         private bool fadeOutDeactEnabled = false;
@@ -166,13 +163,11 @@ namespace Gaze
             if (duckingEnabled)
             {
                 this.ducking = true;
-                this.fadeSpeed = fadeSpeed;
             }
 
             if (fadeInEnabled)
             {
                 this.fadeInEnabled = true;
-                this.fadeInTime = fadeInTime;
                 this.fadeInCurve = fadeInCurve;
             }
 
@@ -185,7 +180,6 @@ namespace Gaze
 
             if (fadeOutDeactEnabled)
             {
-                this.fadeOutDeactTime = fadeOutDeactTime;
                 this.fadeOutDeactEnabled = true;
                 this.fadeOutDeactCurve = fadeOutDeactCurve;
             }

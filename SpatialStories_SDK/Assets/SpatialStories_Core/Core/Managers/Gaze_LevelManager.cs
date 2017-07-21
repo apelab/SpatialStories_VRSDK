@@ -34,11 +34,12 @@ public class Gaze_LevelManager : MonoBehaviour
     void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
+
     }
 
-    void OnLevelWasLoaded(int _level)
+    void OnDisable()
     {
-        sceneLoader = GameObject.FindObjectOfType<Gaze_SceneLoader>();
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     public string getNextLevelName()
@@ -66,6 +67,6 @@ public class Gaze_LevelManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene _scene, LoadSceneMode _mode)
     {
-
+        sceneLoader = GameObject.FindObjectOfType<Gaze_SceneLoader>();
     }
 }

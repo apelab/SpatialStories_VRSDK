@@ -71,8 +71,6 @@ namespace Gaze
         public Gaze_AnimationPlaylist animationClip = new Gaze_AnimationPlaylist();
 
         public Animation targetAnimationSource;
-        private Gaze_AnimationPlayer gazeAnimationPlayer;
-        private int Animation_PlayList_Key;
         public AUDIO_LOOP[] loopAnim = new AUDIO_LOOP[Enum<TriggerEventsAndStates>.Count];
         public ANIMATION_LOOP[] loopAnimType = new ANIMATION_LOOP[Enum<TriggerEventsAndStates>.Count];
         public AUDIO_SEQUENCE[] animationSequence = new AUDIO_SEQUENCE[Enum<TriggerEventsAndStates>.Count];
@@ -162,10 +160,6 @@ namespace Gaze
                 {
                     targetAnimationSource.gameObject.AddComponent<Gaze_AnimationPlayer>();
                 }
-
-                gazeAnimationPlayer = targetAnimationSource.GetComponent<Gaze_AnimationPlayer>();
-                Animation_PlayList_Key = gazeAnimationPlayer.setParameters(animationClip, activeTriggerStatesAnim, loopAnimType, animationSequence);
-
             }
 
             if (!gazeInteraction.HasConditions)

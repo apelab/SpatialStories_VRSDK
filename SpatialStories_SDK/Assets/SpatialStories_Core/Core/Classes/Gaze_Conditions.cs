@@ -995,7 +995,6 @@ namespace Gaze
         {
             get
             {
-                Gaze_GazeCondition gazeCondition = GetConditionOfType<Gaze_GazeCondition>();
                 return IsConditionOfTypeValid<Gaze_GazeCondition>();
             }
         }
