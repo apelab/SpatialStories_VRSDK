@@ -15,7 +15,6 @@
 // <web>https://twitter.com/apelab_ch</web>
 // <web>http://www.apelab.ch</web>
 // <date>2014-06-01</date>
-using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
@@ -34,9 +33,6 @@ namespace Gaze
         private static bool showStateBlock = true;
 
         private Gaze_Conditions conditionsScript;
-
-        // NEW list
-        private List<Gaze_InteractiveObject> interactiveObjectsList;
 
         SerializedProperty HasConditions;
         SerializedProperty HasActions;
@@ -69,10 +65,6 @@ namespace Gaze
 
             if (!Application.isPlaying)
             {
-                #region Update InteractiveObjects list
-                UpdateInteractiveObjectsList();
-                #endregion
-
                 bool lastHasActions = HasActions.boolValue;
                 bool LastHasConditions = HasConditions.boolValue;
 
@@ -216,9 +208,6 @@ namespace Gaze
 
         private void InitMembers()
         {
-
-            interactiveObjectsList = new List<Gaze_InteractiveObject>();
-
             #region Logo
             logo = (Texture)Resources.Load("SpatialStorires_Logo_256", typeof(Texture));
             logoRect = new Rect();
@@ -226,16 +215,5 @@ namespace Gaze
             logoRect.y = 10;
             #endregion
         }
-
-
-        /// <summary>
-        /// Get all InteractiveObjects in the scene !
-        /// Only executed in Editor Mode (not at runtime)
-        /// </summary>
-        private void UpdateInteractiveObjectsList()
-        {
-            interactiveObjectsList = Gaze_SceneInventory.Instance.InteractiveObjectScripts;
-        }
-
     }
 }

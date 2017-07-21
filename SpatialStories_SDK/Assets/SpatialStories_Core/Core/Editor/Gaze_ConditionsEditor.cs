@@ -32,7 +32,6 @@ namespace Gaze
         #region Members
 
         private Gaze_Conditions targetConditions;
-        private string[] focusLossModes;
         private string[] reloadModes;
         private string[] autoTriggerModes;
 
@@ -54,7 +53,6 @@ namespace Gaze
 
         private List<Gaze_AbstractConditions> hierarchyCustomConditions;
         private List<string> hierarchyCustomConditionsNames;
-        private string[] customConditionActionEnum;
         private string[] dndEventValidatorEnum;
         private string[] dndTargetsModes;
         private List<string> dndTargetsNames;
@@ -82,13 +80,11 @@ namespace Gaze
             hierarchyProximities = new List<Gaze_InteractiveObject>();
             hierarchyHandHoverColliders = new List<Collider>();
             dndTargetsNames = new List<string>();
-            focusLossModes = Enum.GetNames(typeof(Gaze_FocusLossMode));
             reloadModes = Enum.GetNames(typeof(Gaze_ReloadMode));
             autoTriggerModes = Enum.GetNames(typeof(Gaze_AutoTriggerMode));
 
             hierarchyCustomConditions = new List<Gaze_AbstractConditions>();
             hierarchyCustomConditionsNames = new List<string>();
-            customConditionActionEnum = Enum.GetNames(typeof(Gaze_CustomConditionActionEnum));
             dndEventValidatorEnum = Enum.GetNames(typeof(Gaze_DragAndDropStates));
             //dndEventValidatorEnum = Enum.GetNames(typeof(apelab_DnDStatesEditorEnum));
             dndTargetsModes = Enum.GetNames(typeof(apelab_DnDTargetsModes));
@@ -387,7 +383,7 @@ namespace Gaze
                         // display 'add rig group' button
                         if (GUILayout.Button("Add Rig Group"))
                         {
-                            Gaze_ProximityEntryGroup d = targetConditions.proximityMap.AddProximityEntryGroup(targetConditions);
+                            targetConditions.proximityMap.AddProximityEntryGroup(targetConditions);
                         }
                     }
 
@@ -846,7 +842,7 @@ namespace Gaze
                 Gaze_Dependency d = targetConditions.DeactivateOnDependencyMap.Add(targetConditions);
                 EditorGUILayout.BeginHorizontal();
                 d.dependentGameObject = hierarchyInteractions[EditorGUILayout.Popup(0, hierarchyInteractionsNames.ToArray())];
-                d.triggerStateIndex = d.triggerStateIndex = (int)DependencyTriggerEventsAndStates.Triggered;
+                d.triggerStateIndex = (int)DependencyTriggerEventsAndStates.Triggered;
                 if (GUILayout.Button("-"))
                 {
                     targetConditions.DeactivateOnDependencyMap.Delete(d);

@@ -10,10 +10,7 @@ namespace Gaze
     [CustomEditor(typeof(Gaze_Actions))]
     public class Gaze_ActionsEditor : Gaze_Editor
     {
-        private Gaze_InteractiveObject rootIO;
-
         private Gaze_Actions actionsScript;
-        private Gaze_Conditions targetConditions;
         private List<Animator> hierarchyAnimators;
         private List<string> hierarchyAnimatorNames;
         private List<AudioSource> hierarchyAudioSources;
@@ -24,18 +21,12 @@ namespace Gaze
         private string[] allVisuals;
         private List<Renderer> allRenderers;
 
-        private List<AudioClip> hierarchyClips;
         private List<Animation> hierarchyAnimationSources;
         private List<string> hierarchyAnimationSourcesNames;
-        private List<string> dnd_dropTargetsNames;
-        private string[] dndEventValidatorEnum;
 
         void OnEnable()
         {
             actionsScript = (Gaze_Actions)target;
-
-            targetConditions = actionsScript.GetComponent<Gaze_Conditions>();
-            rootIO = actionsScript.GetComponentInParent<Gaze_InteractiveObject>();
 
             EditorApplication.update += OnEditorApplicationUpdate;
 
@@ -46,9 +37,6 @@ namespace Gaze
             hierarchyAnimationSources = new List<Animation>();
             hierarchyAnimationSourcesNames = new List<string>();
             selectedAnimatorTriggers = new List<string>();
-            dnd_dropTargetsNames = new List<string>();
-            dndEventValidatorEnum = Enum.GetNames(typeof(Gaze_DragAndDropStates));
-            hierarchyClips = new List<AudioClip>();
 
             grabModes = Enum.GetNames(typeof(Gaze_GrabMode));
 

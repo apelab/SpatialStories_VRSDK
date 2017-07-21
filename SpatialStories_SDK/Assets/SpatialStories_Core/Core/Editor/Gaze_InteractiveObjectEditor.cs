@@ -33,7 +33,6 @@ namespace Gaze
         // logo image
         private Texture logo;
         private Rect logoRect;
-        private string[] grabModes;
         private string[] manipulationModes;
         public List<string> Dnd_DropTargetsNames { get { return dnd_dropTargetsNames; } private set { } }
         private List<string> dnd_dropTargetsNames;
@@ -50,7 +49,6 @@ namespace Gaze
         {
             gaze_InteractiveObjectScript = (Gaze_InteractiveObject)target;
 
-            grabModes = Enum.GetNames(typeof(Gaze_GrabMode));
             manipulationModes = Enum.GetNames(typeof(Gaze_ManipulationModes));
 
             logo = (Texture)Resources.Load("SpatialStorires_Logo_256", typeof(Texture));
@@ -65,7 +63,6 @@ namespace Gaze
         {
             base.BeginChangeComparision();
 
-            //UpdateListsFromHierarchy();
             UpdateDropTargetsNames();
             DisplayLogo();
             DisplayManipulationMode();
@@ -90,24 +87,6 @@ namespace Gaze
                     dnd_dropTargetsNames.Add(Gaze_SceneInventory.Instance.InteractiveObjects[i].gameObject.name);
                 }
             }
-        }
-
-        private void UpdateListsFromHierarchy()
-        {
-            /*
-            hierarchyiosscripts.clear();
-            hierarchyIOs.Clear();
-            dnd_dropTargetsNames.Clear();
-
-            // rebuild them
-            hierarchyIOsScripts = (FindObjectsOfType(typeof(Gaze_InteractiveObject)) as Gaze_InteractiveObject[]).ToList();
-            for (int i = 0; i < hierarchyIOsScripts.Count; i++)
-            {
-                hierarchyIOs.Add(hierarchyIOsScripts[i].gameObject);
-                dnd_dropTargetsNames.Add(hierarchyIOsScripts[i].gameObject.name);
-            }
-            */
-
         }
 
         private void DisplayLogo()
