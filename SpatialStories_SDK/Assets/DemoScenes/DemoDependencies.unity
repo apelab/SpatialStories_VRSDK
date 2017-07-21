@@ -693,18 +693,15 @@ MonoBehaviour:
   targetAudioSource: {fileID: 398105473}
   activeTriggerStatesAudio: 0100000000
   audioClips:
-  - {fileID: 8300000, guid: 2d8a7e5dd8c1c4544935ee8638bc1c04, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  loopAudio: 0100000000
-  duckingEnabled: 1
-  audioVolumeMin: 0.2
-  audioVolumeMax: 1
-  fadeSpeed: 0.005
-  IO: {fileID: 1238660176}
-  OldAudio: 1
+    ClipEntries00:
+    - {fileID: 8300000, guid: 2d8a7e5dd8c1c4544935ee8638bc1c04, type: 3}
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudio: 01000000
+  audio_sequence: 0000000000000000000000000000000000000000
+  fadeInBetween: 0000000000
   audioClipsNew:
     ClipEntries00: []
     ClipEntries01: []
@@ -712,11 +709,7 @@ MonoBehaviour:
     ClipEntries03: []
     ClipEntries04: []
   loopAudioNew: 0000000000000000000000000000000000000000
-  audio_sequence: 0000000000000000000000000000000000000000
-  fadeInBetween: 0000000000
-  fadeInEnabled: 0
-  fadeOutEnabled: 0
-  fadeOutDeactEnabled: 0
+  duckingEnabled: 1
   fadeInTime: 1
   fadeOutTime: 1
   fadeOutDeactTime: 1
@@ -774,12 +767,19 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  fadeInEnabled: 0
+  fadeOutEnabled: 0
+  fadeOutDeactEnabled: 0
+  audioVolumeMin: 0.2
+  audioVolumeMax: 1
+  fadeSpeed: 0.005
   audio_ForceStop: 0
   audio_AllowMultiple: 0
   audio_randomizePitch: 0
   audio_minPitch: 0
   audio_maxPitch: 2
   audio_MaxConcurrentSound: 8
+  IO: {fileID: 1238660176}
   triggerNotification: 0
 --- !u!114 &73786063
 MonoBehaviour:
@@ -1107,18 +1107,15 @@ MonoBehaviour:
   targetAudioSource: {fileID: 1042457780}
   activeTriggerStatesAudio: 0100000000
   audioClips:
-  - {fileID: 8300000, guid: fbb50aaa9c1d75b4e95e490a4ba1b347, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  loopAudio: 0000000000
-  duckingEnabled: 1
-  audioVolumeMin: 0.2
-  audioVolumeMax: 1
-  fadeSpeed: 0.005
-  IO: {fileID: 1065180336}
-  OldAudio: 1
+    ClipEntries00:
+    - {fileID: 8300000, guid: fbb50aaa9c1d75b4e95e490a4ba1b347, type: 3}
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudio: 00000000
+  audio_sequence: 0000000000000000000000000000000000000000
+  fadeInBetween: 0000000000
   audioClipsNew:
     ClipEntries00: []
     ClipEntries01: []
@@ -1126,11 +1123,7 @@ MonoBehaviour:
     ClipEntries03: []
     ClipEntries04: []
   loopAudioNew: 0000000000000000000000000000000000000000
-  audio_sequence: 0000000000000000000000000000000000000000
-  fadeInBetween: 0000000000
-  fadeInEnabled: 0
-  fadeOutEnabled: 0
-  fadeOutDeactEnabled: 0
+  duckingEnabled: 1
   fadeInTime: 1
   fadeOutTime: 1
   fadeOutDeactTime: 1
@@ -1188,12 +1181,19 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  fadeInEnabled: 0
+  fadeOutEnabled: 0
+  fadeOutDeactEnabled: 0
+  audioVolumeMin: 0.2
+  audioVolumeMax: 1
+  fadeSpeed: 0.005
   audio_ForceStop: 0
   audio_AllowMultiple: 0
   audio_randomizePitch: 0
   audio_minPitch: 0
   audio_maxPitch: 2
   audio_MaxConcurrentSound: 8
+  IO: {fileID: 1065180336}
   triggerNotification: 0
 --- !u!114 &93340065
 MonoBehaviour:
@@ -2776,18 +2776,14 @@ MonoBehaviour:
   targetAudioSource: {fileID: 0}
   activeTriggerStatesAudio: 0000000000
   audioClips:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  loopAudio: 0000000000
-  duckingEnabled: 1
-  audioVolumeMin: 0.2
-  audioVolumeMax: 1
-  fadeSpeed: 0.005
-  IO: {fileID: 2036026540}
-  OldAudio: 1
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudio: 00000000
+  audio_sequence: 0000000000000000000000000000000000000000
+  fadeInBetween: 0000000000
   audioClipsNew:
     ClipEntries00: []
     ClipEntries01: []
@@ -2795,11 +2791,7 @@ MonoBehaviour:
     ClipEntries03: []
     ClipEntries04: []
   loopAudioNew: 0000000000000000000000000000000000000000
-  audio_sequence: 0000000000000000000000000000000000000000
-  fadeInBetween: 0000000000
-  fadeInEnabled: 0
-  fadeOutEnabled: 0
-  fadeOutDeactEnabled: 0
+  duckingEnabled: 1
   fadeInTime: 1
   fadeOutTime: 1
   fadeOutDeactTime: 1
@@ -2857,12 +2849,19 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  fadeInEnabled: 0
+  fadeOutEnabled: 0
+  fadeOutDeactEnabled: 0
+  audioVolumeMin: 0.2
+  audioVolumeMax: 1
+  fadeSpeed: 0.005
   audio_ForceStop: 0
   audio_AllowMultiple: 0
   audio_randomizePitch: 0
   audio_minPitch: 0
   audio_maxPitch: 2
   audio_MaxConcurrentSound: 8
+  IO: {fileID: 2036026540}
   triggerNotification: 0
 --- !u!114 &213547621
 MonoBehaviour:
@@ -3699,7 +3698,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 321947421}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.8, z: -12}
+  m_LocalPosition: {x: 0.22, y: 1.8, z: -12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 725494208}
@@ -4699,18 +4698,15 @@ MonoBehaviour:
   targetAudioSource: {fileID: 188362690}
   activeTriggerStatesAudio: 0100000000
   audioClips:
-  - {fileID: 8300000, guid: 8a1f07ad0b4e2b7468684476b41c58c7, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  loopAudio: 0000000000
-  duckingEnabled: 1
-  audioVolumeMin: 0.642
-  audioVolumeMax: 1
-  fadeSpeed: 0.005
-  IO: {fileID: 1238660176}
-  OldAudio: 1
+    ClipEntries00:
+    - {fileID: 8300000, guid: 8a1f07ad0b4e2b7468684476b41c58c7, type: 3}
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudio: 00000000
+  audio_sequence: 0000000000000000000000000000000000000000
+  fadeInBetween: 0000000000
   audioClipsNew:
     ClipEntries00: []
     ClipEntries01: []
@@ -4718,11 +4714,7 @@ MonoBehaviour:
     ClipEntries03: []
     ClipEntries04: []
   loopAudioNew: 0000000000000000000000000000000000000000
-  audio_sequence: 0000000000000000000000000000000000000000
-  fadeInBetween: 0000000000
-  fadeInEnabled: 0
-  fadeOutEnabled: 0
-  fadeOutDeactEnabled: 0
+  duckingEnabled: 1
   fadeInTime: 1
   fadeOutTime: 1
   fadeOutDeactTime: 1
@@ -4780,12 +4772,19 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  fadeInEnabled: 0
+  fadeOutEnabled: 0
+  fadeOutDeactEnabled: 0
+  audioVolumeMin: 0.642
+  audioVolumeMax: 1
+  fadeSpeed: 0.005
   audio_ForceStop: 0
   audio_AllowMultiple: 0
   audio_randomizePitch: 0
   audio_minPitch: 0
   audio_maxPitch: 2
   audio_MaxConcurrentSound: 8
+  IO: {fileID: 1238660176}
   triggerNotification: 0
 --- !u!114 &384737486
 MonoBehaviour:
@@ -5450,18 +5449,15 @@ MonoBehaviour:
   targetAudioSource: {fileID: 767836743}
   activeTriggerStatesAudio: 0100000000
   audioClips:
-  - {fileID: 8300000, guid: fbb50aaa9c1d75b4e95e490a4ba1b347, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  loopAudio: 0000000000
-  duckingEnabled: 1
-  audioVolumeMin: 0.2
-  audioVolumeMax: 1
-  fadeSpeed: 0.005
-  IO: {fileID: 83828760}
-  OldAudio: 1
+    ClipEntries00:
+    - {fileID: 8300000, guid: fbb50aaa9c1d75b4e95e490a4ba1b347, type: 3}
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudio: 00000000
+  audio_sequence: 0000000000000000000000000000000000000000
+  fadeInBetween: 0000000000
   audioClipsNew:
     ClipEntries00: []
     ClipEntries01: []
@@ -5469,11 +5465,7 @@ MonoBehaviour:
     ClipEntries03: []
     ClipEntries04: []
   loopAudioNew: 0000000000000000000000000000000000000000
-  audio_sequence: 0000000000000000000000000000000000000000
-  fadeInBetween: 0000000000
-  fadeInEnabled: 0
-  fadeOutEnabled: 0
-  fadeOutDeactEnabled: 0
+  duckingEnabled: 1
   fadeInTime: 1
   fadeOutTime: 1
   fadeOutDeactTime: 1
@@ -5531,12 +5523,19 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  fadeInEnabled: 0
+  fadeOutEnabled: 0
+  fadeOutDeactEnabled: 0
+  audioVolumeMin: 0.2
+  audioVolumeMax: 1
+  fadeSpeed: 0.005
   audio_ForceStop: 0
   audio_AllowMultiple: 0
   audio_randomizePitch: 0
   audio_minPitch: 0
   audio_maxPitch: 2
   audio_MaxConcurrentSound: 8
+  IO: {fileID: 83828760}
   triggerNotification: 0
 --- !u!114 &427440264
 MonoBehaviour:
@@ -6868,18 +6867,15 @@ MonoBehaviour:
   targetAudioSource: {fileID: 602700935}
   activeTriggerStatesAudio: 0100000000
   audioClips:
-  - {fileID: 8300000, guid: fbb50aaa9c1d75b4e95e490a4ba1b347, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  loopAudio: 0000000000
-  duckingEnabled: 1
-  audioVolumeMin: 0.2
-  audioVolumeMax: 1
-  fadeSpeed: 0.005
-  IO: {fileID: 1198208605}
-  OldAudio: 1
+    ClipEntries00:
+    - {fileID: 8300000, guid: fbb50aaa9c1d75b4e95e490a4ba1b347, type: 3}
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudio: 00000000
+  audio_sequence: 0000000000000000000000000000000000000000
+  fadeInBetween: 0000000000
   audioClipsNew:
     ClipEntries00: []
     ClipEntries01: []
@@ -6887,11 +6883,7 @@ MonoBehaviour:
     ClipEntries03: []
     ClipEntries04: []
   loopAudioNew: 0000000000000000000000000000000000000000
-  audio_sequence: 0000000000000000000000000000000000000000
-  fadeInBetween: 0000000000
-  fadeInEnabled: 0
-  fadeOutEnabled: 0
-  fadeOutDeactEnabled: 0
+  duckingEnabled: 1
   fadeInTime: 1
   fadeOutTime: 1
   fadeOutDeactTime: 1
@@ -6949,12 +6941,19 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  fadeInEnabled: 0
+  fadeOutEnabled: 0
+  fadeOutDeactEnabled: 0
+  audioVolumeMin: 0.2
+  audioVolumeMax: 1
+  fadeSpeed: 0.005
   audio_ForceStop: 0
   audio_AllowMultiple: 0
   audio_randomizePitch: 0
   audio_minPitch: 0
   audio_maxPitch: 2
   audio_MaxConcurrentSound: 8
+  IO: {fileID: 1198208605}
   triggerNotification: 0
 --- !u!114 &569372383
 MonoBehaviour:
@@ -7431,18 +7430,15 @@ MonoBehaviour:
   targetAudioSource: {fileID: 246174484}
   activeTriggerStatesAudio: 0100000000
   audioClips:
-  - {fileID: 8300000, guid: fbb50aaa9c1d75b4e95e490a4ba1b347, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  loopAudio: 0000000000
-  duckingEnabled: 1
-  audioVolumeMin: 0.2
-  audioVolumeMax: 1
-  fadeSpeed: 0.005
-  IO: {fileID: 289490865}
-  OldAudio: 1
+    ClipEntries00:
+    - {fileID: 8300000, guid: fbb50aaa9c1d75b4e95e490a4ba1b347, type: 3}
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudio: 00000000
+  audio_sequence: 0000000000000000000000000000000000000000
+  fadeInBetween: 0000000000
   audioClipsNew:
     ClipEntries00: []
     ClipEntries01: []
@@ -7450,11 +7446,7 @@ MonoBehaviour:
     ClipEntries03: []
     ClipEntries04: []
   loopAudioNew: 0000000000000000000000000000000000000000
-  audio_sequence: 0000000000000000000000000000000000000000
-  fadeInBetween: 0000000000
-  fadeInEnabled: 0
-  fadeOutEnabled: 0
-  fadeOutDeactEnabled: 0
+  duckingEnabled: 1
   fadeInTime: 1
   fadeOutTime: 1
   fadeOutDeactTime: 1
@@ -7512,12 +7504,19 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  fadeInEnabled: 0
+  fadeOutEnabled: 0
+  fadeOutDeactEnabled: 0
+  audioVolumeMin: 0.2
+  audioVolumeMax: 1
+  fadeSpeed: 0.005
   audio_ForceStop: 0
   audio_AllowMultiple: 0
   audio_randomizePitch: 0
   audio_minPitch: 0
   audio_maxPitch: 2
   audio_MaxConcurrentSound: 8
+  IO: {fileID: 289490865}
   triggerNotification: 0
 --- !u!114 &598648733
 MonoBehaviour:
@@ -8228,18 +8227,14 @@ MonoBehaviour:
   targetAudioSource: {fileID: 0}
   activeTriggerStatesAudio: 0000000000
   audioClips:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  loopAudio: 0000000000
-  duckingEnabled: 1
-  audioVolumeMin: 0.2
-  audioVolumeMax: 1
-  fadeSpeed: 0.005
-  IO: {fileID: 725494209}
-  OldAudio: 1
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudio: 00000000
+  audio_sequence: 0000000000000000000000000000000000000000
+  fadeInBetween: 0000000000
   audioClipsNew:
     ClipEntries00: []
     ClipEntries01: []
@@ -8247,11 +8242,7 @@ MonoBehaviour:
     ClipEntries03: []
     ClipEntries04: []
   loopAudioNew: 0000000000000000000000000000000000000000
-  audio_sequence: 0000000000000000000000000000000000000000
-  fadeInBetween: 0000000000
-  fadeInEnabled: 0
-  fadeOutEnabled: 0
-  fadeOutDeactEnabled: 0
+  duckingEnabled: 1
   fadeInTime: 1
   fadeOutTime: 1
   fadeOutDeactTime: 1
@@ -8309,12 +8300,19 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  fadeInEnabled: 0
+  fadeOutEnabled: 0
+  fadeOutDeactEnabled: 0
+  audioVolumeMin: 0.2
+  audioVolumeMax: 1
+  fadeSpeed: 0.005
   audio_ForceStop: 0
   audio_AllowMultiple: 0
   audio_randomizePitch: 0
   audio_minPitch: 0
   audio_maxPitch: 2
   audio_MaxConcurrentSound: 8
+  IO: {fileID: 725494209}
   triggerNotification: 0
 --- !u!114 &661873087
 MonoBehaviour:
@@ -8719,18 +8717,15 @@ MonoBehaviour:
   targetAudioSource: {fileID: 1653384199}
   activeTriggerStatesAudio: 0100000000
   audioClips:
-  - {fileID: 8300000, guid: fbb50aaa9c1d75b4e95e490a4ba1b347, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  loopAudio: 0000000000
-  duckingEnabled: 1
-  audioVolumeMin: 0.2
-  audioVolumeMax: 1
-  fadeSpeed: 0.005
-  IO: {fileID: 1231828707}
-  OldAudio: 1
+    ClipEntries00:
+    - {fileID: 8300000, guid: fbb50aaa9c1d75b4e95e490a4ba1b347, type: 3}
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudio: 00000000
+  audio_sequence: 0000000000000000000000000000000000000000
+  fadeInBetween: 0000000000
   audioClipsNew:
     ClipEntries00: []
     ClipEntries01: []
@@ -8738,11 +8733,7 @@ MonoBehaviour:
     ClipEntries03: []
     ClipEntries04: []
   loopAudioNew: 0000000000000000000000000000000000000000
-  audio_sequence: 0000000000000000000000000000000000000000
-  fadeInBetween: 0000000000
-  fadeInEnabled: 0
-  fadeOutEnabled: 0
-  fadeOutDeactEnabled: 0
+  duckingEnabled: 1
   fadeInTime: 1
   fadeOutTime: 1
   fadeOutDeactTime: 1
@@ -8800,12 +8791,19 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  fadeInEnabled: 0
+  fadeOutEnabled: 0
+  fadeOutDeactEnabled: 0
+  audioVolumeMin: 0.2
+  audioVolumeMax: 1
+  fadeSpeed: 0.005
   audio_ForceStop: 0
   audio_AllowMultiple: 0
   audio_randomizePitch: 0
   audio_minPitch: 0
   audio_maxPitch: 2
   audio_MaxConcurrentSound: 8
+  IO: {fileID: 1231828707}
   triggerNotification: 0
 --- !u!114 &689207721
 MonoBehaviour:
@@ -9029,18 +9027,15 @@ MonoBehaviour:
   targetAudioSource: {fileID: 1340542174}
   activeTriggerStatesAudio: 0100000000
   audioClips:
-  - {fileID: 8300000, guid: fbb50aaa9c1d75b4e95e490a4ba1b347, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  loopAudio: 0000000000
-  duckingEnabled: 1
-  audioVolumeMin: 0.2
-  audioVolumeMax: 1
-  fadeSpeed: 0.005
-  IO: {fileID: 2027702720}
-  OldAudio: 1
+    ClipEntries00:
+    - {fileID: 8300000, guid: fbb50aaa9c1d75b4e95e490a4ba1b347, type: 3}
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudio: 00000000
+  audio_sequence: 0000000000000000000000000000000000000000
+  fadeInBetween: 0000000000
   audioClipsNew:
     ClipEntries00: []
     ClipEntries01: []
@@ -9048,11 +9043,7 @@ MonoBehaviour:
     ClipEntries03: []
     ClipEntries04: []
   loopAudioNew: 0000000000000000000000000000000000000000
-  audio_sequence: 0000000000000000000000000000000000000000
-  fadeInBetween: 0000000000
-  fadeInEnabled: 0
-  fadeOutEnabled: 0
-  fadeOutDeactEnabled: 0
+  duckingEnabled: 1
   fadeInTime: 1
   fadeOutTime: 1
   fadeOutDeactTime: 1
@@ -9110,12 +9101,19 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  fadeInEnabled: 0
+  fadeOutEnabled: 0
+  fadeOutDeactEnabled: 0
+  audioVolumeMin: 0.2
+  audioVolumeMax: 1
+  fadeSpeed: 0.005
   audio_ForceStop: 0
   audio_AllowMultiple: 0
   audio_randomizePitch: 0
   audio_minPitch: 0
   audio_maxPitch: 2
   audio_MaxConcurrentSound: 8
+  IO: {fileID: 2027702720}
   triggerNotification: 0
 --- !u!114 &698969502
 MonoBehaviour:
@@ -9975,7 +9973,7 @@ MonoBehaviour:
     touchActionIndex: 0
   gazeEnabled: 1
   gazeStateIndex: 0
-  gazeIn: 0
+  gazeIn: 1
   touchEnabled: 0
   ActivateOnDependencyMap:
     dependencies: []
@@ -10022,7 +10020,7 @@ MonoBehaviour:
   ActionAudio: 0
   ActionColliders: 0
   ActionDragAndDrop: 0
-  ActionAnimation: 0
+  ActionAnimation: 1
   DestroyOnTrigger: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
@@ -10071,18 +10069,14 @@ MonoBehaviour:
   targetAudioSource: {fileID: 0}
   activeTriggerStatesAudio: 0000000000
   audioClips:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  loopAudio: 0000000000
-  duckingEnabled: 1
-  audioVolumeMin: 0.2
-  audioVolumeMax: 1
-  fadeSpeed: 0.005
-  IO: {fileID: 1352670781}
-  OldAudio: 1
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudio: 00000000
+  audio_sequence: 0000000000000000000000000000000000000000
+  fadeInBetween: 0000000000
   audioClipsNew:
     ClipEntries00: []
     ClipEntries01: []
@@ -10090,11 +10084,7 @@ MonoBehaviour:
     ClipEntries03: []
     ClipEntries04: []
   loopAudioNew: 0000000000000000000000000000000000000000
-  audio_sequence: 0000000000000000000000000000000000000000
-  fadeInBetween: 0000000000
-  fadeInEnabled: 0
-  fadeOutEnabled: 0
-  fadeOutDeactEnabled: 0
+  duckingEnabled: 1
   fadeInTime: 1
   fadeOutTime: 1
   fadeOutDeactTime: 1
@@ -10152,12 +10142,19 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  fadeInEnabled: 0
+  fadeOutEnabled: 0
+  fadeOutDeactEnabled: 0
+  audioVolumeMin: 0.2
+  audioVolumeMax: 1
+  fadeSpeed: 0.005
   audio_ForceStop: 0
   audio_AllowMultiple: 0
   audio_randomizePitch: 0
   audio_minPitch: 0
   audio_maxPitch: 2
   audio_MaxConcurrentSound: 8
+  IO: {fileID: 1352670781}
   triggerNotification: 0
 --- !u!114 &763341220
 MonoBehaviour:
@@ -11550,7 +11547,7 @@ MonoBehaviour:
   ActionAudio: 1
   ActionColliders: 0
   ActionDragAndDrop: 0
-  ActionAnimation: 0
+  ActionAnimation: 1
   DestroyOnTrigger: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
@@ -11599,18 +11596,15 @@ MonoBehaviour:
   targetAudioSource: {fileID: 572194355}
   activeTriggerStatesAudio: 0100000000
   audioClips:
-  - {fileID: 8300000, guid: c35746740a291044e9d9405209a4d9ad, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  loopAudio: 0000000000
-  duckingEnabled: 1
-  audioVolumeMin: 0.2
-  audioVolumeMax: 1
-  fadeSpeed: 0.005
-  IO: {fileID: 925675616}
-  OldAudio: 1
+    ClipEntries00:
+    - {fileID: 8300000, guid: c35746740a291044e9d9405209a4d9ad, type: 3}
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudio: 00000000
+  audio_sequence: 0000000000000000000000000000000000000000
+  fadeInBetween: 0000000000
   audioClipsNew:
     ClipEntries00: []
     ClipEntries01: []
@@ -11618,11 +11612,7 @@ MonoBehaviour:
     ClipEntries03: []
     ClipEntries04: []
   loopAudioNew: 0000000000000000000000000000000000000000
-  audio_sequence: 0000000000000000000000000000000000000000
-  fadeInBetween: 0000000000
-  fadeInEnabled: 0
-  fadeOutEnabled: 0
-  fadeOutDeactEnabled: 0
+  duckingEnabled: 1
   fadeInTime: 1
   fadeOutTime: 1
   fadeOutDeactTime: 1
@@ -11680,12 +11670,19 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  fadeInEnabled: 0
+  fadeOutEnabled: 0
+  fadeOutDeactEnabled: 0
+  audioVolumeMin: 0.2
+  audioVolumeMax: 1
+  fadeSpeed: 0.005
   audio_ForceStop: 0
   audio_AllowMultiple: 0
   audio_randomizePitch: 0
   audio_minPitch: 0
   audio_maxPitch: 2
   audio_MaxConcurrentSound: 8
+  IO: {fileID: 925675616}
   triggerNotification: 0
 --- !u!114 &873858004
 MonoBehaviour:
@@ -11874,8 +11871,12 @@ MonoBehaviour:
   hoverIn: 0
   ReloadDependencies: 0
   isActive: 1
-  proximityGroupIndex: 0
-  rigCombinations: []
+  proximityGroupIndex: 3
+  rigCombinations:
+  - '  ||  Head (IO)  ||  Left Hand (IO)  ||  '
+  - '  ||  Head (IO)  ||  Right Hand (IO)  ||  '
+  - '  ||  Left Hand (IO)  ||  Right Hand (IO)  ||  '
+  - '  ||  Head (IO)  ||  Left Hand (IO)  ||  Right Hand (IO)  ||  '
 --- !u!114 &882421635
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11905,7 +11906,7 @@ MonoBehaviour:
   ActionAudio: 1
   ActionColliders: 0
   ActionDragAndDrop: 0
-  ActionAnimation: 0
+  ActionAnimation: 1
   DestroyOnTrigger: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
@@ -11954,18 +11955,15 @@ MonoBehaviour:
   targetAudioSource: {fileID: 2065261152}
   activeTriggerStatesAudio: 0100000000
   audioClips:
-  - {fileID: 8300000, guid: b98bb7cc0e614e243a6a37d40299fecb, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  loopAudio: 0000000000
-  duckingEnabled: 1
-  audioVolumeMin: 0.2
-  audioVolumeMax: 1
-  fadeSpeed: 0.005
-  IO: {fileID: 1272767020}
-  OldAudio: 1
+    ClipEntries00:
+    - {fileID: 8300000, guid: b98bb7cc0e614e243a6a37d40299fecb, type: 3}
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudio: 00000000
+  audio_sequence: 0000000000000000000000000000000000000000
+  fadeInBetween: 0000000000
   audioClipsNew:
     ClipEntries00: []
     ClipEntries01: []
@@ -11973,11 +11971,7 @@ MonoBehaviour:
     ClipEntries03: []
     ClipEntries04: []
   loopAudioNew: 0000000000000000000000000000000000000000
-  audio_sequence: 0000000000000000000000000000000000000000
-  fadeInBetween: 0000000000
-  fadeInEnabled: 0
-  fadeOutEnabled: 0
-  fadeOutDeactEnabled: 0
+  duckingEnabled: 1
   fadeInTime: 1
   fadeOutTime: 1
   fadeOutDeactTime: 1
@@ -12035,12 +12029,19 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  fadeInEnabled: 0
+  fadeOutEnabled: 0
+  fadeOutDeactEnabled: 0
+  audioVolumeMin: 0.2
+  audioVolumeMax: 1
+  fadeSpeed: 0.005
   audio_ForceStop: 0
   audio_AllowMultiple: 0
   audio_randomizePitch: 0
   audio_minPitch: 0
   audio_maxPitch: 2
   audio_MaxConcurrentSound: 8
+  IO: {fileID: 1272767020}
   triggerNotification: 0
 --- !u!114 &882421636
 MonoBehaviour:
@@ -12555,7 +12556,7 @@ MonoBehaviour:
   ActionAudio: 0
   ActionColliders: 0
   ActionDragAndDrop: 0
-  ActionAnimation: 0
+  ActionAnimation: 1
   DestroyOnTrigger: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
@@ -12604,18 +12605,14 @@ MonoBehaviour:
   targetAudioSource: {fileID: 0}
   activeTriggerStatesAudio: 0000000000
   audioClips:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  loopAudio: 0000000000
-  duckingEnabled: 1
-  audioVolumeMin: 0.2
-  audioVolumeMax: 1
-  fadeSpeed: 0.005
-  IO: {fileID: 1846678928}
-  OldAudio: 1
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudio: 00000000
+  audio_sequence: 0000000000000000000000000000000000000000
+  fadeInBetween: 0000000000
   audioClipsNew:
     ClipEntries00: []
     ClipEntries01: []
@@ -12623,11 +12620,7 @@ MonoBehaviour:
     ClipEntries03: []
     ClipEntries04: []
   loopAudioNew: 0000000000000000000000000000000000000000
-  audio_sequence: 0000000000000000000000000000000000000000
-  fadeInBetween: 0000000000
-  fadeInEnabled: 0
-  fadeOutEnabled: 0
-  fadeOutDeactEnabled: 0
+  duckingEnabled: 1
   fadeInTime: 1
   fadeOutTime: 1
   fadeOutDeactTime: 1
@@ -12685,12 +12678,19 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  fadeInEnabled: 0
+  fadeOutEnabled: 0
+  fadeOutDeactEnabled: 0
+  audioVolumeMin: 0.2
+  audioVolumeMax: 1
+  fadeSpeed: 0.005
   audio_ForceStop: 0
   audio_AllowMultiple: 0
   audio_randomizePitch: 0
   audio_minPitch: 0
   audio_maxPitch: 2
   audio_MaxConcurrentSound: 8
+  IO: {fileID: 1846678928}
   triggerNotification: 0
 --- !u!114 &926783218
 MonoBehaviour:
@@ -13341,18 +13341,15 @@ MonoBehaviour:
   targetAudioSource: {fileID: 1025448933}
   activeTriggerStatesAudio: 0100000000
   audioClips:
-  - {fileID: 8300000, guid: fbb50aaa9c1d75b4e95e490a4ba1b347, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  loopAudio: 0000000000
-  duckingEnabled: 1
-  audioVolumeMin: 0.2
-  audioVolumeMax: 1
-  fadeSpeed: 0.005
-  IO: {fileID: 1688595992}
-  OldAudio: 1
+    ClipEntries00:
+    - {fileID: 8300000, guid: fbb50aaa9c1d75b4e95e490a4ba1b347, type: 3}
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudio: 00000000
+  audio_sequence: 0000000000000000000000000000000000000000
+  fadeInBetween: 0000000000
   audioClipsNew:
     ClipEntries00: []
     ClipEntries01: []
@@ -13360,11 +13357,7 @@ MonoBehaviour:
     ClipEntries03: []
     ClipEntries04: []
   loopAudioNew: 0000000000000000000000000000000000000000
-  audio_sequence: 0000000000000000000000000000000000000000
-  fadeInBetween: 0000000000
-  fadeInEnabled: 0
-  fadeOutEnabled: 0
-  fadeOutDeactEnabled: 0
+  duckingEnabled: 1
   fadeInTime: 1
   fadeOutTime: 1
   fadeOutDeactTime: 1
@@ -13422,12 +13415,19 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  fadeInEnabled: 0
+  fadeOutEnabled: 0
+  fadeOutDeactEnabled: 0
+  audioVolumeMin: 0.2
+  audioVolumeMax: 1
+  fadeSpeed: 0.005
   audio_ForceStop: 0
   audio_AllowMultiple: 0
   audio_randomizePitch: 0
   audio_minPitch: 0
   audio_maxPitch: 2
   audio_MaxConcurrentSound: 8
+  IO: {fileID: 1688595992}
   triggerNotification: 0
 --- !u!114 &960171071
 MonoBehaviour:
@@ -13831,7 +13831,7 @@ MonoBehaviour:
   ActionAudio: 0
   ActionColliders: 0
   ActionDragAndDrop: 0
-  ActionAnimation: 0
+  ActionAnimation: 1
   DestroyOnTrigger: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
@@ -13880,18 +13880,14 @@ MonoBehaviour:
   targetAudioSource: {fileID: 0}
   activeTriggerStatesAudio: 0000000000
   audioClips:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  loopAudio: 0000000000
-  duckingEnabled: 1
-  audioVolumeMin: 0.2
-  audioVolumeMax: 1
-  fadeSpeed: 0.005
-  IO: {fileID: 1052934486}
-  OldAudio: 1
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudio: 00000000
+  audio_sequence: 0000000000000000000000000000000000000000
+  fadeInBetween: 0000000000
   audioClipsNew:
     ClipEntries00: []
     ClipEntries01: []
@@ -13899,11 +13895,7 @@ MonoBehaviour:
     ClipEntries03: []
     ClipEntries04: []
   loopAudioNew: 0000000000000000000000000000000000000000
-  audio_sequence: 0000000000000000000000000000000000000000
-  fadeInBetween: 0000000000
-  fadeInEnabled: 0
-  fadeOutEnabled: 0
-  fadeOutDeactEnabled: 0
+  duckingEnabled: 1
   fadeInTime: 1
   fadeOutTime: 1
   fadeOutDeactTime: 1
@@ -13961,12 +13953,19 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  fadeInEnabled: 0
+  fadeOutEnabled: 0
+  fadeOutDeactEnabled: 0
+  audioVolumeMin: 0.2
+  audioVolumeMax: 1
+  fadeSpeed: 0.005
   audio_ForceStop: 0
   audio_AllowMultiple: 0
   audio_randomizePitch: 0
   audio_minPitch: 0
   audio_maxPitch: 2
   audio_MaxConcurrentSound: 8
+  IO: {fileID: 1052934486}
   triggerNotification: 0
 --- !u!114 &978195778
 MonoBehaviour:
@@ -16269,7 +16268,7 @@ MonoBehaviour:
   ActionAudio: 0
   ActionColliders: 0
   ActionDragAndDrop: 0
-  ActionAnimation: 0
+  ActionAnimation: 1
   DestroyOnTrigger: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
@@ -16318,18 +16317,14 @@ MonoBehaviour:
   targetAudioSource: {fileID: 0}
   activeTriggerStatesAudio: 0000000000
   audioClips:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  loopAudio: 0000000000
-  duckingEnabled: 1
-  audioVolumeMin: 0.2
-  audioVolumeMax: 1
-  fadeSpeed: 0.005
-  IO: {fileID: 1084573452}
-  OldAudio: 1
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudio: 00000000
+  audio_sequence: 0000000000000000000000000000000000000000
+  fadeInBetween: 0000000000
   audioClipsNew:
     ClipEntries00: []
     ClipEntries01: []
@@ -16337,11 +16332,7 @@ MonoBehaviour:
     ClipEntries03: []
     ClipEntries04: []
   loopAudioNew: 0000000000000000000000000000000000000000
-  audio_sequence: 0000000000000000000000000000000000000000
-  fadeInBetween: 0000000000
-  fadeInEnabled: 0
-  fadeOutEnabled: 0
-  fadeOutDeactEnabled: 0
+  duckingEnabled: 1
   fadeInTime: 1
   fadeOutTime: 1
   fadeOutDeactTime: 1
@@ -16399,12 +16390,19 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  fadeInEnabled: 0
+  fadeOutEnabled: 0
+  fadeOutDeactEnabled: 0
+  audioVolumeMin: 0.2
+  audioVolumeMax: 1
+  fadeSpeed: 0.005
   audio_ForceStop: 0
   audio_AllowMultiple: 0
   audio_randomizePitch: 0
   audio_minPitch: 0
   audio_maxPitch: 2
   audio_MaxConcurrentSound: 8
+  IO: {fileID: 1084573452}
   triggerNotification: 0
 --- !u!114 &1194820020
 MonoBehaviour:
@@ -17645,18 +17643,14 @@ MonoBehaviour:
   targetAudioSource: {fileID: 0}
   activeTriggerStatesAudio: 0000000000
   audioClips:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  loopAudio: 0000000000
-  duckingEnabled: 1
-  audioVolumeMin: 0.2
-  audioVolumeMax: 1
-  fadeSpeed: 0.005
-  IO: {fileID: 1352670781}
-  OldAudio: 1
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudio: 00000000
+  audio_sequence: 0000000000000000000000000000000000000000
+  fadeInBetween: 0000000000
   audioClipsNew:
     ClipEntries00: []
     ClipEntries01: []
@@ -17664,11 +17658,7 @@ MonoBehaviour:
     ClipEntries03: []
     ClipEntries04: []
   loopAudioNew: 0000000000000000000000000000000000000000
-  audio_sequence: 0000000000000000000000000000000000000000
-  fadeInBetween: 0000000000
-  fadeInEnabled: 0
-  fadeOutEnabled: 0
-  fadeOutDeactEnabled: 0
+  duckingEnabled: 1
   fadeInTime: 1
   fadeOutTime: 1
   fadeOutDeactTime: 1
@@ -17726,12 +17716,19 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  fadeInEnabled: 0
+  fadeOutEnabled: 0
+  fadeOutDeactEnabled: 0
+  audioVolumeMin: 0.2
+  audioVolumeMax: 1
+  fadeSpeed: 0.005
   audio_ForceStop: 0
   audio_AllowMultiple: 0
   audio_randomizePitch: 0
   audio_minPitch: 0
   audio_maxPitch: 2
   audio_MaxConcurrentSound: 8
+  IO: {fileID: 1352670781}
   triggerNotification: 0
 --- !u!114 &1267279154
 MonoBehaviour:
@@ -20307,18 +20304,14 @@ MonoBehaviour:
   targetAudioSource: {fileID: 0}
   activeTriggerStatesAudio: 0000000000
   audioClips:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  loopAudio: 0000000000
-  duckingEnabled: 1
-  audioVolumeMin: 0.2
-  audioVolumeMax: 1
-  fadeSpeed: 0.005
-  IO: {fileID: 1267269799}
-  OldAudio: 1
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudio: 00000000
+  audio_sequence: 0000000000000000000000000000000000000000
+  fadeInBetween: 0000000000
   audioClipsNew:
     ClipEntries00: []
     ClipEntries01: []
@@ -20326,11 +20319,7 @@ MonoBehaviour:
     ClipEntries03: []
     ClipEntries04: []
   loopAudioNew: 0000000000000000000000000000000000000000
-  audio_sequence: 0000000000000000000000000000000000000000
-  fadeInBetween: 0000000000
-  fadeInEnabled: 0
-  fadeOutEnabled: 0
-  fadeOutDeactEnabled: 0
+  duckingEnabled: 1
   fadeInTime: 1
   fadeOutTime: 1
   fadeOutDeactTime: 1
@@ -20388,12 +20377,19 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  fadeInEnabled: 0
+  fadeOutEnabled: 0
+  fadeOutDeactEnabled: 0
+  audioVolumeMin: 0.2
+  audioVolumeMax: 1
+  fadeSpeed: 0.005
   audio_ForceStop: 0
   audio_AllowMultiple: 0
   audio_randomizePitch: 0
   audio_minPitch: 0
   audio_maxPitch: 2
   audio_MaxConcurrentSound: 8
+  IO: {fileID: 1267269799}
   triggerNotification: 0
 --- !u!114 &1652396230
 MonoBehaviour:
@@ -21405,7 +21401,7 @@ MonoBehaviour:
   ActionAudio: 0
   ActionColliders: 0
   ActionDragAndDrop: 0
-  ActionAnimation: 0
+  ActionAnimation: 1
   DestroyOnTrigger: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
@@ -21454,18 +21450,14 @@ MonoBehaviour:
   targetAudioSource: {fileID: 398105473}
   activeTriggerStatesAudio: 0000000000
   audioClips:
-  - {fileID: 8300000, guid: 2d8a7e5dd8c1c4544935ee8638bc1c04, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  loopAudio: 0000000000
-  duckingEnabled: 1
-  audioVolumeMin: 0.2
-  audioVolumeMax: 1
-  fadeSpeed: 0.005
-  IO: {fileID: 1238660176}
-  OldAudio: 1
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudio: 00000000
+  audio_sequence: 0000000000000000000000000000000000000000
+  fadeInBetween: 0000000000
   audioClipsNew:
     ClipEntries00: []
     ClipEntries01: []
@@ -21473,11 +21465,7 @@ MonoBehaviour:
     ClipEntries03: []
     ClipEntries04: []
   loopAudioNew: 0000000000000000000000000000000000000000
-  audio_sequence: 0000000000000000000000000000000000000000
-  fadeInBetween: 0000000000
-  fadeInEnabled: 0
-  fadeOutEnabled: 0
-  fadeOutDeactEnabled: 0
+  duckingEnabled: 1
   fadeInTime: 1
   fadeOutTime: 1
   fadeOutDeactTime: 1
@@ -21535,12 +21523,19 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  fadeInEnabled: 0
+  fadeOutEnabled: 0
+  fadeOutDeactEnabled: 0
+  audioVolumeMin: 0.2
+  audioVolumeMax: 1
+  fadeSpeed: 0.005
   audio_ForceStop: 0
   audio_AllowMultiple: 0
   audio_randomizePitch: 0
   audio_minPitch: 0
   audio_maxPitch: 2
   audio_MaxConcurrentSound: 8
+  IO: {fileID: 1238660176}
   triggerNotification: 0
 --- !u!114 &1731808062
 MonoBehaviour:
@@ -22184,18 +22179,14 @@ MonoBehaviour:
   targetAudioSource: {fileID: 0}
   activeTriggerStatesAudio: 0000000000
   audioClips:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  loopAudio: 0000000000
-  duckingEnabled: 1
-  audioVolumeMin: 0.2
-  audioVolumeMax: 1
-  fadeSpeed: 0.005
-  IO: {fileID: 360028284}
-  OldAudio: 1
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudio: 00000000
+  audio_sequence: 0000000000000000000000000000000000000000
+  fadeInBetween: 0000000000
   audioClipsNew:
     ClipEntries00: []
     ClipEntries01: []
@@ -22203,11 +22194,7 @@ MonoBehaviour:
     ClipEntries03: []
     ClipEntries04: []
   loopAudioNew: 0000000000000000000000000000000000000000
-  audio_sequence: 0000000000000000000000000000000000000000
-  fadeInBetween: 0000000000
-  fadeInEnabled: 0
-  fadeOutEnabled: 0
-  fadeOutDeactEnabled: 0
+  duckingEnabled: 1
   fadeInTime: 1
   fadeOutTime: 1
   fadeOutDeactTime: 1
@@ -22265,12 +22252,19 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  fadeInEnabled: 0
+  fadeOutEnabled: 0
+  fadeOutDeactEnabled: 0
+  audioVolumeMin: 0.2
+  audioVolumeMax: 1
+  fadeSpeed: 0.005
   audio_ForceStop: 0
   audio_AllowMultiple: 0
   audio_randomizePitch: 0
   audio_minPitch: 0
   audio_maxPitch: 2
   audio_MaxConcurrentSound: 8
+  IO: {fileID: 360028284}
   triggerNotification: 0
 --- !u!114 &1799143546
 MonoBehaviour:
@@ -23423,18 +23417,14 @@ MonoBehaviour:
   targetAudioSource: {fileID: 0}
   activeTriggerStatesAudio: 0000000000
   audioClips:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  loopAudio: 0000000000
-  duckingEnabled: 1
-  audioVolumeMin: 0.2
-  audioVolumeMax: 1
-  fadeSpeed: 0.005
-  IO: {fileID: 1675010686}
-  OldAudio: 1
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudio: 00000000
+  audio_sequence: 0000000000000000000000000000000000000000
+  fadeInBetween: 0000000000
   audioClipsNew:
     ClipEntries00: []
     ClipEntries01: []
@@ -23442,11 +23432,7 @@ MonoBehaviour:
     ClipEntries03: []
     ClipEntries04: []
   loopAudioNew: 0000000000000000000000000000000000000000
-  audio_sequence: 0000000000000000000000000000000000000000
-  fadeInBetween: 0000000000
-  fadeInEnabled: 0
-  fadeOutEnabled: 0
-  fadeOutDeactEnabled: 0
+  duckingEnabled: 1
   fadeInTime: 1
   fadeOutTime: 1
   fadeOutDeactTime: 1
@@ -23504,12 +23490,19 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  fadeInEnabled: 0
+  fadeOutEnabled: 0
+  fadeOutDeactEnabled: 0
+  audioVolumeMin: 0.2
+  audioVolumeMax: 1
+  fadeSpeed: 0.005
   audio_ForceStop: 0
   audio_AllowMultiple: 0
   audio_randomizePitch: 0
   audio_minPitch: 0
   audio_maxPitch: 2
   audio_MaxConcurrentSound: 8
+  IO: {fileID: 1675010686}
   triggerNotification: 0
 --- !u!114 &1970183759
 MonoBehaviour:
@@ -25238,18 +25231,15 @@ MonoBehaviour:
   targetAudioSource: {fileID: 268218481}
   activeTriggerStatesAudio: 0100000000
   audioClips:
-  - {fileID: 8300000, guid: 383a0714b133fa8438837f91b0ff079d, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  loopAudio: 0000000000
-  duckingEnabled: 1
-  audioVolumeMin: 0.642
-  audioVolumeMax: 1
-  fadeSpeed: 0.005
-  IO: {fileID: 1238660176}
-  OldAudio: 1
+    ClipEntries00:
+    - {fileID: 8300000, guid: 383a0714b133fa8438837f91b0ff079d, type: 3}
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudio: 00000000
+  audio_sequence: 0000000000000000000000000000000000000000
+  fadeInBetween: 0000000000
   audioClipsNew:
     ClipEntries00: []
     ClipEntries01: []
@@ -25257,11 +25247,7 @@ MonoBehaviour:
     ClipEntries03: []
     ClipEntries04: []
   loopAudioNew: 0000000000000000000000000000000000000000
-  audio_sequence: 0000000000000000000000000000000000000000
-  fadeInBetween: 0000000000
-  fadeInEnabled: 0
-  fadeOutEnabled: 0
-  fadeOutDeactEnabled: 0
+  duckingEnabled: 1
   fadeInTime: 1
   fadeOutTime: 1
   fadeOutDeactTime: 1
@@ -25319,12 +25305,19 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  fadeInEnabled: 0
+  fadeOutEnabled: 0
+  fadeOutDeactEnabled: 0
+  audioVolumeMin: 0.642
+  audioVolumeMax: 1
+  fadeSpeed: 0.005
   audio_ForceStop: 0
   audio_AllowMultiple: 0
   audio_randomizePitch: 0
   audio_minPitch: 0
   audio_maxPitch: 2
   audio_MaxConcurrentSound: 8
+  IO: {fileID: 1238660176}
   triggerNotification: 0
 --- !u!114 &2122346659
 MonoBehaviour:
@@ -25641,18 +25634,15 @@ MonoBehaviour:
   targetAudioSource: {fileID: 966004541}
   activeTriggerStatesAudio: 0100000000
   audioClips:
-  - {fileID: 8300000, guid: fbb50aaa9c1d75b4e95e490a4ba1b347, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  loopAudio: 0000000000
-  duckingEnabled: 1
-  audioVolumeMin: 0.2
-  audioVolumeMax: 1
-  fadeSpeed: 0.005
-  IO: {fileID: 774117944}
-  OldAudio: 1
+    ClipEntries00:
+    - {fileID: 8300000, guid: fbb50aaa9c1d75b4e95e490a4ba1b347, type: 3}
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudio: 00000000
+  audio_sequence: 0000000000000000000000000000000000000000
+  fadeInBetween: 0000000000
   audioClipsNew:
     ClipEntries00: []
     ClipEntries01: []
@@ -25660,11 +25650,7 @@ MonoBehaviour:
     ClipEntries03: []
     ClipEntries04: []
   loopAudioNew: 0000000000000000000000000000000000000000
-  audio_sequence: 0000000000000000000000000000000000000000
-  fadeInBetween: 0000000000
-  fadeInEnabled: 0
-  fadeOutEnabled: 0
-  fadeOutDeactEnabled: 0
+  duckingEnabled: 1
   fadeInTime: 1
   fadeOutTime: 1
   fadeOutDeactTime: 1
@@ -25722,12 +25708,19 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  fadeInEnabled: 0
+  fadeOutEnabled: 0
+  fadeOutDeactEnabled: 0
+  audioVolumeMin: 0.2
+  audioVolumeMax: 1
+  fadeSpeed: 0.005
   audio_ForceStop: 0
   audio_AllowMultiple: 0
   audio_randomizePitch: 0
   audio_minPitch: 0
   audio_maxPitch: 2
   audio_MaxConcurrentSound: 8
+  IO: {fileID: 774117944}
   triggerNotification: 0
 --- !u!114 &2138297670
 MonoBehaviour:

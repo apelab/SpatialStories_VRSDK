@@ -644,6 +644,7 @@ MonoBehaviour:
   ActionAudio: 1
   ActionColliders: 0
   ActionDragAndDrop: 0
+  ActionAnimation: 0
   DestroyOnTrigger: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
@@ -679,19 +680,105 @@ MonoBehaviour:
   - 
   - 
   - 
+  animationClip:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  targetAnimationSource: {fileID: 0}
+  loopAnim: 0000000000000000000000000000000000000000
+  loopAnimType: 0000000000000000000000000000000000000000
+  animationSequence: 0000000000000000000000000000000000000000
   targetAudioSource: {fileID: 1745226201}
   activeTriggerStatesAudio: 0100000000
   audioClips:
-  - {fileID: 8300000, guid: 9bb717b1bdd258e4bb9d68a1f0556c67, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  loopAudio: 0000000000
+    ClipEntries00:
+    - {fileID: 8300000, guid: 9bb717b1bdd258e4bb9d68a1f0556c67, type: 3}
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudio: 00000000
+  audio_sequence: 0000000000000000000000000000000000000000
+  fadeInBetween: 0000000000
+  audioClipsNew:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudioNew: 0000000000000000000000000000000000000000
   duckingEnabled: 1
+  fadeInTime: 1
+  fadeOutTime: 1
+  fadeOutDeactTime: 1
+  fadeInCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutDeactCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeInEnabled: 0
+  fadeOutEnabled: 0
+  fadeOutDeactEnabled: 0
   audioVolumeMin: 0.5
   audioVolumeMax: 1
   fadeSpeed: 0.005
+  audio_ForceStop: 0
+  audio_AllowMultiple: 0
+  audio_randomizePitch: 0
+  audio_minPitch: 0
+  audio_maxPitch: 2
+  audio_MaxConcurrentSound: 8
   IO: {fileID: 583646497}
   triggerNotification: 0
 --- !u!114 &37511763
@@ -793,7 +880,11 @@ MonoBehaviour:
   ReloadDependencies: 0
   isActive: 1
   proximityGroupIndex: 0
-  rigCombinations: []
+  rigCombinations:
+  - '  ||  Head (IO)  ||  Left Hand (IO)  ||  '
+  - '  ||  Head (IO)  ||  Right Hand (IO)  ||  '
+  - '  ||  Left Hand (IO)  ||  Right Hand (IO)  ||  '
+  - '  ||  Head (IO)  ||  Left Hand (IO)  ||  Right Hand (IO)  ||  '
 --- !u!114 &37511764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1166,6 +1257,7 @@ MonoBehaviour:
   ActionAudio: 1
   ActionColliders: 0
   ActionDragAndDrop: 0
+  ActionAnimation: 0
   DestroyOnTrigger: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
@@ -1201,19 +1293,105 @@ MonoBehaviour:
   - 
   - 
   - 
+  animationClip:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  targetAnimationSource: {fileID: 0}
+  loopAnim: 0000000000000000000000000000000000000000
+  loopAnimType: 0000000000000000000000000000000000000000
+  animationSequence: 0000000000000000000000000000000000000000
   targetAudioSource: {fileID: 490909997}
   activeTriggerStatesAudio: 0100000000
   audioClips:
-  - {fileID: 8300000, guid: 9bb717b1bdd258e4bb9d68a1f0556c67, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  loopAudio: 0000000000
+    ClipEntries00:
+    - {fileID: 8300000, guid: 9bb717b1bdd258e4bb9d68a1f0556c67, type: 3}
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudio: 00000000
+  audio_sequence: 0000000000000000000000000000000000000000
+  fadeInBetween: 0000000000
+  audioClipsNew:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudioNew: 0000000000000000000000000000000000000000
   duckingEnabled: 1
+  fadeInTime: 1
+  fadeOutTime: 1
+  fadeOutDeactTime: 1
+  fadeInCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutDeactCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeInEnabled: 0
+  fadeOutEnabled: 0
+  fadeOutDeactEnabled: 0
   audioVolumeMin: 0.5
   audioVolumeMax: 1
   fadeSpeed: 0.005
+  audio_ForceStop: 0
+  audio_AllowMultiple: 0
+  audio_randomizePitch: 0
+  audio_minPitch: 0
+  audio_maxPitch: 2
+  audio_MaxConcurrentSound: 8
   IO: {fileID: 616646606}
   triggerNotification: 0
 --- !u!114 &66253259
@@ -1315,7 +1493,11 @@ MonoBehaviour:
   ReloadDependencies: 0
   isActive: 1
   proximityGroupIndex: 0
-  rigCombinations: []
+  rigCombinations:
+  - '  ||  Head (IO)  ||  Left Hand (IO)  ||  '
+  - '  ||  Head (IO)  ||  Right Hand (IO)  ||  '
+  - '  ||  Left Hand (IO)  ||  Right Hand (IO)  ||  '
+  - '  ||  Head (IO)  ||  Left Hand (IO)  ||  Right Hand (IO)  ||  '
 --- !u!114 &66253260
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1980,6 +2162,7 @@ MonoBehaviour:
   ActionAudio: 1
   ActionColliders: 0
   ActionDragAndDrop: 0
+  ActionAnimation: 0
   DestroyOnTrigger: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
@@ -2015,19 +2198,105 @@ MonoBehaviour:
   - 
   - 
   - 
+  animationClip:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  targetAnimationSource: {fileID: 0}
+  loopAnim: 0000000000000000000000000000000000000000
+  loopAnimType: 0000000000000000000000000000000000000000
+  animationSequence: 0000000000000000000000000000000000000000
   targetAudioSource: {fileID: 1608493540}
   activeTriggerStatesAudio: 0100000000
   audioClips:
-  - {fileID: 8300000, guid: 9bb717b1bdd258e4bb9d68a1f0556c67, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  loopAudio: 0000000000
+    ClipEntries00:
+    - {fileID: 8300000, guid: 9bb717b1bdd258e4bb9d68a1f0556c67, type: 3}
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudio: 00000000
+  audio_sequence: 0000000000000000000000000000000000000000
+  fadeInBetween: 0000000000
+  audioClipsNew:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudioNew: 0000000000000000000000000000000000000000
   duckingEnabled: 1
+  fadeInTime: 1
+  fadeOutTime: 1
+  fadeOutDeactTime: 1
+  fadeInCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutDeactCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeInEnabled: 0
+  fadeOutEnabled: 0
+  fadeOutDeactEnabled: 0
   audioVolumeMin: 0.5
   audioVolumeMax: 1
   fadeSpeed: 0.005
+  audio_ForceStop: 0
+  audio_AllowMultiple: 0
+  audio_randomizePitch: 0
+  audio_minPitch: 0
+  audio_maxPitch: 2
+  audio_MaxConcurrentSound: 8
   IO: {fileID: 2126061402}
   triggerNotification: 0
 --- !u!114 &135886766
@@ -2129,7 +2398,11 @@ MonoBehaviour:
   ReloadDependencies: 0
   isActive: 1
   proximityGroupIndex: 0
-  rigCombinations: []
+  rigCombinations:
+  - '  ||  Head (IO)  ||  Left Hand (IO)  ||  '
+  - '  ||  Head (IO)  ||  Right Hand (IO)  ||  '
+  - '  ||  Left Hand (IO)  ||  Right Hand (IO)  ||  '
+  - '  ||  Head (IO)  ||  Left Hand (IO)  ||  Right Hand (IO)  ||  '
 --- !u!114 &135886767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2318,12 +2591,12 @@ GameObject:
   - component: {fileID: 158216152}
   - component: {fileID: 158216151}
   m_Layer: 0
-  m_Name: Interaction
+  m_Name: AudioOnScore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &158216150
 Transform:
   m_ObjectHideFlags: 0
@@ -2361,7 +2634,7 @@ MonoBehaviour:
     grabStateLeftIndex: 0
     grabStateRightIndex: 0
   customConditions: []
-  triggerStateIndex: 0
+  triggerStateIndex: 1
   delayDuration: 0
   delayed: 0
   isDelayRandom: 0
@@ -2418,7 +2691,7 @@ MonoBehaviour:
   touchEnabled: 0
   ActivateOnDependencyMap:
     dependencies: []
-    AreDependenciesSatisfied: 0
+    AreDependenciesSatisfied: 1
   DeactivateOnDependencyMap:
     dependencies: []
     AreDependenciesSatisfied: 0
@@ -2430,9 +2703,13 @@ MonoBehaviour:
   hoverStateIndex: 0
   hoverIn: 0
   ReloadDependencies: 0
-  isActive: 0
+  isActive: 1
   proximityGroupIndex: 0
-  rigCombinations: []
+  rigCombinations:
+  - '  ||  Head (IO)  ||  Left Hand (IO)  ||  '
+  - '  ||  Head (IO)  ||  Right Hand (IO)  ||  '
+  - '  ||  Left Hand (IO)  ||  Right Hand (IO)  ||  '
+  - '  ||  Head (IO)  ||  Left Hand (IO)  ||  Right Hand (IO)  ||  '
 --- !u!114 &158216152
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2452,7 +2729,7 @@ MonoBehaviour:
   - 0
   multipleActionsInTime: 0
   rootIO: {fileID: 0}
-  isActive: 0
+  isActive: 1
   ActionReset: 0
   ActionVisuals: 0
   ActionGrab: 0
@@ -2461,6 +2738,7 @@ MonoBehaviour:
   ActionAudio: 0
   ActionColliders: 0
   ActionDragAndDrop: 0
+  ActionAnimation: 0
   DestroyOnTrigger: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
@@ -2484,7 +2762,7 @@ MonoBehaviour:
   ModifyDnDAngleThreshold: 0
   dnDAngleThreshold: 0
   DnD_Targets: []
-  visualsScript: {fileID: 0}
+  visualsScript: {fileID: 650422914}
   AlterAllVisuals: 1
   selectedRenderers: 
   triggerAnimation: 0
@@ -2496,20 +2774,105 @@ MonoBehaviour:
   - 
   - 
   - 
+  animationClip:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  targetAnimationSource: {fileID: 0}
+  loopAnim: 0000000000000000000000000000000000000000
+  loopAnimType: 0000000000000000000000000000000000000000
+  animationSequence: 0000000000000000000000000000000000000000
   targetAudioSource: {fileID: 1110837075}
   activeTriggerStatesAudio: 0000000000
   audioClips:
-  - {fileID: 8300000, guid: 9bb717b1bdd258e4bb9d68a1f0556c67, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  loopAudio: 0000000000
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudio: 00000000
+  audio_sequence: 0000000000000000000000000000000000000000
+  fadeInBetween: 0000000000
+  audioClipsNew:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudioNew: 0000000000000000000000000000000000000000
   duckingEnabled: 0
+  fadeInTime: 1
+  fadeOutTime: 1
+  fadeOutDeactTime: 1
+  fadeInCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutDeactCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeInEnabled: 0
+  fadeOutEnabled: 0
+  fadeOutDeactEnabled: 0
   audioVolumeMin: 0.2
   audioVolumeMax: 1
   fadeSpeed: 0.005
-  IO: {fileID: 0}
+  audio_ForceStop: 0
+  audio_AllowMultiple: 0
+  audio_randomizePitch: 0
+  audio_minPitch: 0
+  audio_maxPitch: 2
+  audio_MaxConcurrentSound: 8
+  IO: {fileID: 1028396739}
   triggerNotification: 0
 --- !u!114 &158216153
 MonoBehaviour:
@@ -2522,8 +2885,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c5e5d36d57be5841bfb50b6dbe7c062, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HasActions: 0
-  HasConditions: 0
+  HasActions: 1
+  HasConditions: 1
 --- !u!1 &162166483
 GameObject:
   m_ObjectHideFlags: 0
@@ -2533,6 +2896,7 @@ GameObject:
   m_Component:
   - component: {fileID: 162166484}
   - component: {fileID: 162166485}
+  - component: {fileID: 162166486}
   m_Layer: 0
   m_Name: AudioSource
   m_TagString: Untagged
@@ -2633,6 +2997,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &162166486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 162166483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8170862739ecdb04392511ce00051beb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &182658634
 GameObject:
   m_ObjectHideFlags: 0
@@ -3564,6 +3939,7 @@ MonoBehaviour:
   ActionAudio: 1
   ActionColliders: 0
   ActionDragAndDrop: 0
+  ActionAnimation: 0
   DestroyOnTrigger: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
@@ -3599,19 +3975,105 @@ MonoBehaviour:
   - 
   - 
   - 
+  animationClip:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  targetAnimationSource: {fileID: 0}
+  loopAnim: 0000000000000000000000000000000000000000
+  loopAnimType: 0000000000000000000000000000000000000000
+  animationSequence: 0000000000000000000000000000000000000000
   targetAudioSource: {fileID: 162166485}
   activeTriggerStatesAudio: 0100000000
   audioClips:
-  - {fileID: 8300000, guid: 9bb717b1bdd258e4bb9d68a1f0556c67, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  loopAudio: 0000000000
+    ClipEntries00:
+    - {fileID: 8300000, guid: 9bb717b1bdd258e4bb9d68a1f0556c67, type: 3}
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudio: 00000000
+  audio_sequence: 0000000000000000000000000000000000000000
+  fadeInBetween: 0000000000
+  audioClipsNew:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudioNew: 0000000000000000000000000000000000000000
   duckingEnabled: 1
+  fadeInTime: 1
+  fadeOutTime: 1
+  fadeOutDeactTime: 1
+  fadeInCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutDeactCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeInEnabled: 0
+  fadeOutEnabled: 0
+  fadeOutDeactEnabled: 0
   audioVolumeMin: 0.5
   audioVolumeMax: 1
   fadeSpeed: 0.005
+  audio_ForceStop: 0
+  audio_AllowMultiple: 0
+  audio_randomizePitch: 0
+  audio_minPitch: 0
+  audio_maxPitch: 2
+  audio_MaxConcurrentSound: 8
   IO: {fileID: 610316412}
   triggerNotification: 0
 --- !u!114 &334798007
@@ -3713,7 +4175,11 @@ MonoBehaviour:
   ReloadDependencies: 0
   isActive: 1
   proximityGroupIndex: 0
-  rigCombinations: []
+  rigCombinations:
+  - '  ||  Head (IO)  ||  Left Hand (IO)  ||  '
+  - '  ||  Head (IO)  ||  Right Hand (IO)  ||  '
+  - '  ||  Left Hand (IO)  ||  Right Hand (IO)  ||  '
+  - '  ||  Head (IO)  ||  Left Hand (IO)  ||  Right Hand (IO)  ||  '
 --- !u!114 &334798008
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4380,6 +4846,7 @@ GameObject:
   m_Component:
   - component: {fileID: 414512843}
   - component: {fileID: 414512844}
+  - component: {fileID: 414512845}
   m_Layer: 0
   m_Name: AudioSource
   m_TagString: Untagged
@@ -4480,6 +4947,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &414512845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 414512842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8170862739ecdb04392511ce00051beb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &419798188
 GameObject:
   m_ObjectHideFlags: 0
@@ -4612,6 +5090,7 @@ GameObject:
   m_Component:
   - component: {fileID: 443938984}
   - component: {fileID: 443938985}
+  - component: {fileID: 443938986}
   m_Layer: 0
   m_Name: AudioSource
   m_TagString: Untagged
@@ -4712,6 +5191,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &443938986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 443938983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8170862739ecdb04392511ce00051beb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &450058566
 GameObject:
   m_ObjectHideFlags: 0
@@ -4993,6 +5483,7 @@ GameObject:
   m_Component:
   - component: {fileID: 490909996}
   - component: {fileID: 490909997}
+  - component: {fileID: 490909998}
   m_Layer: 0
   m_Name: AudioSource
   m_TagString: Untagged
@@ -5093,6 +5584,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &490909998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 490909995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8170862739ecdb04392511ce00051beb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &498165943
 Prefab:
   m_ObjectHideFlags: 0
@@ -5457,6 +5959,7 @@ MonoBehaviour:
   ActionAudio: 1
   ActionColliders: 0
   ActionDragAndDrop: 0
+  ActionAnimation: 0
   DestroyOnTrigger: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
@@ -5492,19 +5995,105 @@ MonoBehaviour:
   - 
   - 
   - 
+  animationClip:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  targetAnimationSource: {fileID: 0}
+  loopAnim: 0000000000000000000000000000000000000000
+  loopAnimType: 0000000000000000000000000000000000000000
+  animationSequence: 0000000000000000000000000000000000000000
   targetAudioSource: {fileID: 2058943646}
   activeTriggerStatesAudio: 0100000000
   audioClips:
-  - {fileID: 8300000, guid: 9bb717b1bdd258e4bb9d68a1f0556c67, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  loopAudio: 0000000000
+    ClipEntries00:
+    - {fileID: 8300000, guid: 9bb717b1bdd258e4bb9d68a1f0556c67, type: 3}
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudio: 00000000
+  audio_sequence: 0000000000000000000000000000000000000000
+  fadeInBetween: 0000000000
+  audioClipsNew:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudioNew: 0000000000000000000000000000000000000000
   duckingEnabled: 1
+  fadeInTime: 1
+  fadeOutTime: 1
+  fadeOutDeactTime: 1
+  fadeInCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutDeactCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeInEnabled: 0
+  fadeOutEnabled: 0
+  fadeOutDeactEnabled: 0
   audioVolumeMin: 0.5
   audioVolumeMax: 1
   fadeSpeed: 0.005
+  audio_ForceStop: 0
+  audio_AllowMultiple: 0
+  audio_randomizePitch: 0
+  audio_minPitch: 0
+  audio_maxPitch: 2
+  audio_MaxConcurrentSound: 8
   IO: {fileID: 777038504}
   triggerNotification: 0
 --- !u!114 &523578295
@@ -5606,7 +6195,11 @@ MonoBehaviour:
   ReloadDependencies: 0
   isActive: 1
   proximityGroupIndex: 0
-  rigCombinations: []
+  rigCombinations:
+  - '  ||  Head (IO)  ||  Left Hand (IO)  ||  '
+  - '  ||  Head (IO)  ||  Right Hand (IO)  ||  '
+  - '  ||  Left Hand (IO)  ||  Right Hand (IO)  ||  '
+  - '  ||  Head (IO)  ||  Left Hand (IO)  ||  Right Hand (IO)  ||  '
 --- !u!114 &523578296
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6117,7 +6710,6 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
-  DnD_IsTarget: 0
   DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
@@ -6452,7 +7044,6 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
-  DnD_IsTarget: 0
   DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
@@ -6554,7 +7145,6 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
-  DnD_IsTarget: 0
   DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
@@ -6744,6 +7334,7 @@ MonoBehaviour:
   ActionAudio: 0
   ActionColliders: 0
   ActionDragAndDrop: 0
+  ActionAnimation: 0
   DestroyOnTrigger: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
@@ -6779,19 +7370,104 @@ MonoBehaviour:
   - 
   - 
   - 
+  animationClip:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  targetAnimationSource: {fileID: 0}
+  loopAnim: 0000000000000000000000000000000000000000
+  loopAnimType: 0000000000000000000000000000000000000000
+  animationSequence: 0000000000000000000000000000000000000000
   targetAudioSource: {fileID: 0}
   activeTriggerStatesAudio: 0000000000
   audioClips:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  loopAudio: 0000000000
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudio: 00000000
+  audio_sequence: 0000000000000000000000000000000000000000
+  fadeInBetween: 0000000000
+  audioClipsNew:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudioNew: 0000000000000000000000000000000000000000
   duckingEnabled: 1
+  fadeInTime: 1
+  fadeOutTime: 1
+  fadeOutDeactTime: 1
+  fadeInCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutDeactCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeInEnabled: 0
+  fadeOutEnabled: 0
+  fadeOutDeactEnabled: 0
   audioVolumeMin: 0.2
   audioVolumeMax: 1
   fadeSpeed: 0.005
+  audio_ForceStop: 0
+  audio_AllowMultiple: 0
+  audio_randomizePitch: 0
+  audio_minPitch: 0
+  audio_maxPitch: 2
+  audio_MaxConcurrentSound: 8
   IO: {fileID: 694549797}
   triggerNotification: 0
 --- !u!114 &626408527
@@ -6984,6 +7660,7 @@ MonoBehaviour:
   ActionAudio: 1
   ActionColliders: 0
   ActionDragAndDrop: 0
+  ActionAnimation: 0
   DestroyOnTrigger: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
@@ -7019,19 +7696,105 @@ MonoBehaviour:
   - 
   - 
   - 
+  animationClip:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  targetAnimationSource: {fileID: 0}
+  loopAnim: 0000000000000000000000000000000000000000
+  loopAnimType: 0000000000000000000000000000000000000000
+  animationSequence: 0000000000000000000000000000000000000000
   targetAudioSource: {fileID: 1634580208}
   activeTriggerStatesAudio: 0100000000
   audioClips:
-  - {fileID: 8300000, guid: 9bb717b1bdd258e4bb9d68a1f0556c67, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  loopAudio: 0000000000
+    ClipEntries00:
+    - {fileID: 8300000, guid: 9bb717b1bdd258e4bb9d68a1f0556c67, type: 3}
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudio: 00000000
+  audio_sequence: 0000000000000000000000000000000000000000
+  fadeInBetween: 0000000000
+  audioClipsNew:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudioNew: 0000000000000000000000000000000000000000
   duckingEnabled: 1
+  fadeInTime: 1
+  fadeOutTime: 1
+  fadeOutDeactTime: 1
+  fadeInCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutDeactCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeInEnabled: 0
+  fadeOutEnabled: 0
+  fadeOutDeactEnabled: 0
   audioVolumeMin: 0.5
   audioVolumeMax: 1
   fadeSpeed: 0.005
+  audio_ForceStop: 0
+  audio_AllowMultiple: 0
+  audio_randomizePitch: 0
+  audio_minPitch: 0
+  audio_maxPitch: 2
+  audio_MaxConcurrentSound: 8
   IO: {fileID: 1563981295}
   triggerNotification: 0
 --- !u!114 &626834438
@@ -7133,7 +7896,11 @@ MonoBehaviour:
   ReloadDependencies: 0
   isActive: 1
   proximityGroupIndex: 0
-  rigCombinations: []
+  rigCombinations:
+  - '  ||  Head (IO)  ||  Left Hand (IO)  ||  '
+  - '  ||  Head (IO)  ||  Right Hand (IO)  ||  '
+  - '  ||  Left Hand (IO)  ||  Right Hand (IO)  ||  '
+  - '  ||  Head (IO)  ||  Left Hand (IO)  ||  Right Hand (IO)  ||  '
 --- !u!114 &626834439
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7455,6 +8222,7 @@ MonoBehaviour:
   ActionAudio: 0
   ActionColliders: 0
   ActionDragAndDrop: 0
+  ActionAnimation: 0
   DestroyOnTrigger: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
@@ -7490,19 +8258,104 @@ MonoBehaviour:
   - 
   - 
   - 
+  animationClip:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  targetAnimationSource: {fileID: 0}
+  loopAnim: 0000000000000000000000000000000000000000
+  loopAnimType: 0000000000000000000000000000000000000000
+  animationSequence: 0000000000000000000000000000000000000000
   targetAudioSource: {fileID: 0}
   activeTriggerStatesAudio: 0000000000
   audioClips:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  loopAudio: 0000000000
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudio: 00000000
+  audio_sequence: 0000000000000000000000000000000000000000
+  fadeInBetween: 0000000000
+  audioClipsNew:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudioNew: 0000000000000000000000000000000000000000
   duckingEnabled: 1
+  fadeInTime: 1
+  fadeOutTime: 1
+  fadeOutDeactTime: 1
+  fadeInCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutDeactCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeInEnabled: 0
+  fadeOutEnabled: 0
+  fadeOutDeactEnabled: 0
   audioVolumeMin: 0.2
   audioVolumeMax: 1
   fadeSpeed: 0.005
+  audio_ForceStop: 0
+  audio_AllowMultiple: 0
+  audio_randomizePitch: 0
+  audio_minPitch: 0
+  audio_maxPitch: 2
+  audio_MaxConcurrentSound: 8
   IO: {fileID: 1261962328}
   triggerNotification: 0
 --- !u!114 &649311668
@@ -7861,7 +8714,6 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
-  DnD_IsTarget: 0
   DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
@@ -8177,6 +9029,7 @@ MonoBehaviour:
   ActionAudio: 0
   ActionColliders: 0
   ActionDragAndDrop: 0
+  ActionAnimation: 0
   DestroyOnTrigger: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
@@ -8212,19 +9065,104 @@ MonoBehaviour:
   - 
   - 
   - 
+  animationClip:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  targetAnimationSource: {fileID: 0}
+  loopAnim: 0000000000000000000000000000000000000000
+  loopAnimType: 0000000000000000000000000000000000000000
+  animationSequence: 0000000000000000000000000000000000000000
   targetAudioSource: {fileID: 0}
   activeTriggerStatesAudio: 0000000000
   audioClips:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  loopAudio: 0000000000
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudio: 00000000
+  audio_sequence: 0000000000000000000000000000000000000000
+  fadeInBetween: 0000000000
+  audioClipsNew:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudioNew: 0000000000000000000000000000000000000000
   duckingEnabled: 1
+  fadeInTime: 1
+  fadeOutTime: 1
+  fadeOutDeactTime: 1
+  fadeInCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutDeactCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeInEnabled: 0
+  fadeOutEnabled: 0
+  fadeOutDeactEnabled: 0
   audioVolumeMin: 0.2
   audioVolumeMax: 1
   fadeSpeed: 0.005
+  audio_ForceStop: 0
+  audio_AllowMultiple: 0
+  audio_randomizePitch: 0
+  audio_minPitch: 0
+  audio_maxPitch: 2
+  audio_MaxConcurrentSound: 8
   IO: {fileID: 1396123514}
   triggerNotification: 0
 --- !u!114 &728340489
@@ -9026,7 +9964,6 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
-  DnD_IsTarget: 0
   DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
@@ -9133,6 +10070,7 @@ MonoBehaviour:
   ActionAudio: 1
   ActionColliders: 0
   ActionDragAndDrop: 0
+  ActionAnimation: 0
   DestroyOnTrigger: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
@@ -9168,19 +10106,105 @@ MonoBehaviour:
   - 
   - 
   - 
+  animationClip:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  targetAnimationSource: {fileID: 0}
+  loopAnim: 0000000000000000000000000000000000000000
+  loopAnimType: 0000000000000000000000000000000000000000
+  animationSequence: 0000000000000000000000000000000000000000
   targetAudioSource: {fileID: 1290528375}
   activeTriggerStatesAudio: 0100000000
   audioClips:
-  - {fileID: 8300000, guid: 9bb717b1bdd258e4bb9d68a1f0556c67, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  loopAudio: 0000000000
+    ClipEntries00:
+    - {fileID: 8300000, guid: 9bb717b1bdd258e4bb9d68a1f0556c67, type: 3}
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudio: 00000000
+  audio_sequence: 0000000000000000000000000000000000000000
+  fadeInBetween: 0000000000
+  audioClipsNew:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudioNew: 0000000000000000000000000000000000000000
   duckingEnabled: 1
+  fadeInTime: 1
+  fadeOutTime: 1
+  fadeOutDeactTime: 1
+  fadeInCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutDeactCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeInEnabled: 0
+  fadeOutEnabled: 0
+  fadeOutDeactEnabled: 0
   audioVolumeMin: 0.5
   audioVolumeMax: 1
   fadeSpeed: 0.005
+  audio_ForceStop: 0
+  audio_AllowMultiple: 0
+  audio_randomizePitch: 0
+  audio_minPitch: 0
+  audio_maxPitch: 2
+  audio_MaxConcurrentSound: 8
   IO: {fileID: 924219154}
   triggerNotification: 0
 --- !u!114 &783893063
@@ -9282,7 +10306,11 @@ MonoBehaviour:
   ReloadDependencies: 0
   isActive: 1
   proximityGroupIndex: 0
-  rigCombinations: []
+  rigCombinations:
+  - '  ||  Head (IO)  ||  Left Hand (IO)  ||  '
+  - '  ||  Head (IO)  ||  Right Hand (IO)  ||  '
+  - '  ||  Left Hand (IO)  ||  Right Hand (IO)  ||  '
+  - '  ||  Head (IO)  ||  Left Hand (IO)  ||  Right Hand (IO)  ||  '
 --- !u!114 &783893064
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9377,6 +10405,7 @@ MonoBehaviour:
   ActionAudio: 1
   ActionColliders: 0
   ActionDragAndDrop: 0
+  ActionAnimation: 0
   DestroyOnTrigger: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
@@ -9412,19 +10441,105 @@ MonoBehaviour:
   - 
   - 
   - 
+  animationClip:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  targetAnimationSource: {fileID: 0}
+  loopAnim: 0000000000000000000000000000000000000000
+  loopAnimType: 0000000000000000000000000000000000000000
+  animationSequence: 0000000000000000000000000000000000000000
   targetAudioSource: {fileID: 1360411283}
   activeTriggerStatesAudio: 0100000000
   audioClips:
-  - {fileID: 8300000, guid: 9bb717b1bdd258e4bb9d68a1f0556c67, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  loopAudio: 0000000000
+    ClipEntries00:
+    - {fileID: 8300000, guid: 9bb717b1bdd258e4bb9d68a1f0556c67, type: 3}
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudio: 00000000
+  audio_sequence: 0000000000000000000000000000000000000000
+  fadeInBetween: 0000000000
+  audioClipsNew:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudioNew: 0000000000000000000000000000000000000000
   duckingEnabled: 1
+  fadeInTime: 1
+  fadeOutTime: 1
+  fadeOutDeactTime: 1
+  fadeInCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutDeactCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeInEnabled: 0
+  fadeOutEnabled: 0
+  fadeOutDeactEnabled: 0
   audioVolumeMin: 0.5
   audioVolumeMax: 1
   fadeSpeed: 0.005
+  audio_ForceStop: 0
+  audio_AllowMultiple: 0
+  audio_randomizePitch: 0
+  audio_minPitch: 0
+  audio_maxPitch: 2
+  audio_MaxConcurrentSound: 8
   IO: {fileID: 1177448335}
   triggerNotification: 0
 --- !u!114 &785770456
@@ -9526,7 +10641,11 @@ MonoBehaviour:
   ReloadDependencies: 0
   isActive: 1
   proximityGroupIndex: 0
-  rigCombinations: []
+  rigCombinations:
+  - '  ||  Head (IO)  ||  Left Hand (IO)  ||  '
+  - '  ||  Head (IO)  ||  Right Hand (IO)  ||  '
+  - '  ||  Left Hand (IO)  ||  Right Hand (IO)  ||  '
+  - '  ||  Head (IO)  ||  Left Hand (IO)  ||  Right Hand (IO)  ||  '
 --- !u!114 &785770457
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9720,6 +10839,7 @@ MonoBehaviour:
   ActionAudio: 1
   ActionColliders: 0
   ActionDragAndDrop: 0
+  ActionAnimation: 0
   DestroyOnTrigger: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
@@ -9755,19 +10875,105 @@ MonoBehaviour:
   - 
   - 
   - 
+  animationClip:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  targetAnimationSource: {fileID: 0}
+  loopAnim: 0000000000000000000000000000000000000000
+  loopAnimType: 0000000000000000000000000000000000000000
+  animationSequence: 0000000000000000000000000000000000000000
   targetAudioSource: {fileID: 414512844}
   activeTriggerStatesAudio: 0100000000
   audioClips:
-  - {fileID: 8300000, guid: 9bb717b1bdd258e4bb9d68a1f0556c67, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  loopAudio: 0000000000
+    ClipEntries00:
+    - {fileID: 8300000, guid: 9bb717b1bdd258e4bb9d68a1f0556c67, type: 3}
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudio: 00000000
+  audio_sequence: 0000000000000000000000000000000000000000
+  fadeInBetween: 0000000000
+  audioClipsNew:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudioNew: 0000000000000000000000000000000000000000
   duckingEnabled: 1
+  fadeInTime: 1
+  fadeOutTime: 1
+  fadeOutDeactTime: 1
+  fadeInCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutDeactCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeInEnabled: 0
+  fadeOutEnabled: 0
+  fadeOutDeactEnabled: 0
   audioVolumeMin: 0.5
   audioVolumeMax: 1
   fadeSpeed: 0.005
+  audio_ForceStop: 0
+  audio_AllowMultiple: 0
+  audio_randomizePitch: 0
+  audio_minPitch: 0
+  audio_maxPitch: 2
+  audio_MaxConcurrentSound: 8
   IO: {fileID: 2092183897}
   triggerNotification: 0
 --- !u!114 &825499051
@@ -9869,7 +11075,11 @@ MonoBehaviour:
   ReloadDependencies: 0
   isActive: 1
   proximityGroupIndex: 0
-  rigCombinations: []
+  rigCombinations:
+  - '  ||  Head (IO)  ||  Left Hand (IO)  ||  '
+  - '  ||  Head (IO)  ||  Right Hand (IO)  ||  '
+  - '  ||  Left Hand (IO)  ||  Right Hand (IO)  ||  '
+  - '  ||  Head (IO)  ||  Left Hand (IO)  ||  Right Hand (IO)  ||  '
 --- !u!114 &825499052
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10525,7 +11735,6 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
-  DnD_IsTarget: 0
   DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
@@ -11393,7 +12602,6 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
-  DnD_IsTarget: 0
   DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
@@ -11715,6 +12923,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1101270826}
   - component: {fileID: 1101270827}
+  - component: {fileID: 1101270828}
   m_Layer: 0
   m_Name: AudioSource
   m_TagString: Untagged
@@ -11815,6 +13024,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &1101270828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1101270825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8170862739ecdb04392511ce00051beb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1110837073
 GameObject:
   m_ObjectHideFlags: 0
@@ -12582,7 +13802,6 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
-  DnD_IsTarget: 0
   DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
@@ -13266,7 +14485,6 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
-  DnD_IsTarget: 0
   DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
@@ -13409,6 +14627,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1280701832}
   - component: {fileID: 1280701833}
+  - component: {fileID: 1280701834}
   m_Layer: 0
   m_Name: AudioSource
   m_TagString: Untagged
@@ -13509,6 +14728,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &1280701834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1280701831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8170862739ecdb04392511ce00051beb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1290528373
 GameObject:
   m_ObjectHideFlags: 0
@@ -13518,6 +14748,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1290528374}
   - component: {fileID: 1290528375}
+  - component: {fileID: 1290528376}
   m_Layer: 0
   m_Name: AudioSource
   m_TagString: Untagged
@@ -13618,6 +14849,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &1290528376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1290528373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8170862739ecdb04392511ce00051beb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1308944208
 Prefab:
   m_ObjectHideFlags: 0
@@ -13823,7 +15065,6 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
-  DnD_IsTarget: 0
   DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
@@ -14242,7 +15483,6 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
-  DnD_IsTarget: 0
   DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
@@ -14451,6 +15691,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1360411282}
   - component: {fileID: 1360411283}
+  - component: {fileID: 1360411284}
   m_Layer: 0
   m_Name: AudioSource
   m_TagString: Untagged
@@ -14551,6 +15792,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &1360411284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1360411281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8170862739ecdb04392511ce00051beb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1368071853
 GameObject:
   m_ObjectHideFlags: 0
@@ -14805,7 +16057,7 @@ MonoBehaviour:
     touchActionIndex: 0
   gazeEnabled: 1
   gazeStateIndex: 0
-  gazeIn: 0
+  gazeIn: 1
   touchEnabled: 0
   ActivateOnDependencyMap:
     dependencies:
@@ -14856,6 +16108,7 @@ MonoBehaviour:
   ActionAudio: 0
   ActionColliders: 0
   ActionDragAndDrop: 0
+  ActionAnimation: 0
   DestroyOnTrigger: 1
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
@@ -14891,19 +16144,104 @@ MonoBehaviour:
   - 
   - 
   - 
+  animationClip:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  targetAnimationSource: {fileID: 0}
+  loopAnim: 0000000000000000000000000000000000000000
+  loopAnimType: 0000000000000000000000000000000000000000
+  animationSequence: 0000000000000000000000000000000000000000
   targetAudioSource: {fileID: 0}
   activeTriggerStatesAudio: 0000000000
   audioClips:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  loopAudio: 0000000000
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudio: 00000000
+  audio_sequence: 0000000000000000000000000000000000000000
+  fadeInBetween: 0000000000
+  audioClipsNew:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudioNew: 0000000000000000000000000000000000000000
   duckingEnabled: 1
+  fadeInTime: 1
+  fadeOutTime: 1
+  fadeOutDeactTime: 1
+  fadeInCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutDeactCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeInEnabled: 0
+  fadeOutEnabled: 0
+  fadeOutDeactEnabled: 0
   audioVolumeMin: 0.2
   audioVolumeMax: 1
   fadeSpeed: 0.005
+  audio_ForceStop: 0
+  audio_AllowMultiple: 0
+  audio_randomizePitch: 0
+  audio_minPitch: 0
+  audio_maxPitch: 2
+  audio_MaxConcurrentSound: 8
   IO: {fileID: 1686884730}
   triggerNotification: 0
 --- !u!114 &1384609873
@@ -15063,6 +16401,7 @@ MonoBehaviour:
   ActionAudio: 1
   ActionColliders: 0
   ActionDragAndDrop: 0
+  ActionAnimation: 0
   DestroyOnTrigger: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
@@ -15098,19 +16437,105 @@ MonoBehaviour:
   - 
   - 
   - 
+  animationClip:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  targetAnimationSource: {fileID: 0}
+  loopAnim: 0000000000000000000000000000000000000000
+  loopAnimType: 0000000000000000000000000000000000000000
+  animationSequence: 0000000000000000000000000000000000000000
   targetAudioSource: {fileID: 443938985}
   activeTriggerStatesAudio: 0100000000
   audioClips:
-  - {fileID: 8300000, guid: 9bb717b1bdd258e4bb9d68a1f0556c67, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  loopAudio: 0000000000
+    ClipEntries00:
+    - {fileID: 8300000, guid: 9bb717b1bdd258e4bb9d68a1f0556c67, type: 3}
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudio: 00000000
+  audio_sequence: 0000000000000000000000000000000000000000
+  fadeInBetween: 0000000000
+  audioClipsNew:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudioNew: 0000000000000000000000000000000000000000
   duckingEnabled: 1
+  fadeInTime: 1
+  fadeOutTime: 1
+  fadeOutDeactTime: 1
+  fadeInCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutDeactCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeInEnabled: 0
+  fadeOutEnabled: 0
+  fadeOutDeactEnabled: 0
   audioVolumeMin: 0.5
   audioVolumeMax: 1
   fadeSpeed: 0.005
+  audio_ForceStop: 0
+  audio_AllowMultiple: 0
+  audio_randomizePitch: 0
+  audio_minPitch: 0
+  audio_maxPitch: 2
+  audio_MaxConcurrentSound: 8
   IO: {fileID: 1578176446}
   triggerNotification: 0
 --- !u!114 &1393067648
@@ -15212,7 +16637,11 @@ MonoBehaviour:
   ReloadDependencies: 0
   isActive: 1
   proximityGroupIndex: 0
-  rigCombinations: []
+  rigCombinations:
+  - '  ||  Head (IO)  ||  Left Hand (IO)  ||  '
+  - '  ||  Head (IO)  ||  Right Hand (IO)  ||  '
+  - '  ||  Left Hand (IO)  ||  Right Hand (IO)  ||  '
+  - '  ||  Head (IO)  ||  Left Hand (IO)  ||  Right Hand (IO)  ||  '
 --- !u!114 &1393067649
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15379,7 +16808,6 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
-  DnD_IsTarget: 0
   DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
@@ -15826,6 +17254,7 @@ MonoBehaviour:
   ActionAudio: 1
   ActionColliders: 0
   ActionDragAndDrop: 0
+  ActionAnimation: 0
   DestroyOnTrigger: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
@@ -15861,19 +17290,105 @@ MonoBehaviour:
   - 
   - 
   - 
+  animationClip:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  targetAnimationSource: {fileID: 0}
+  loopAnim: 0000000000000000000000000000000000000000
+  loopAnimType: 0000000000000000000000000000000000000000
+  animationSequence: 0000000000000000000000000000000000000000
   targetAudioSource: {fileID: 1280701833}
   activeTriggerStatesAudio: 0100000000
   audioClips:
-  - {fileID: 8300000, guid: 9bb717b1bdd258e4bb9d68a1f0556c67, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  loopAudio: 0000000000
+    ClipEntries00:
+    - {fileID: 8300000, guid: 9bb717b1bdd258e4bb9d68a1f0556c67, type: 3}
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudio: 00000000
+  audio_sequence: 0000000000000000000000000000000000000000
+  fadeInBetween: 0000000000
+  audioClipsNew:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudioNew: 0000000000000000000000000000000000000000
   duckingEnabled: 1
+  fadeInTime: 1
+  fadeOutTime: 1
+  fadeOutDeactTime: 1
+  fadeInCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutDeactCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeInEnabled: 0
+  fadeOutEnabled: 0
+  fadeOutDeactEnabled: 0
   audioVolumeMin: 0.5
   audioVolumeMax: 1
   fadeSpeed: 0.005
+  audio_ForceStop: 0
+  audio_AllowMultiple: 0
+  audio_randomizePitch: 0
+  audio_minPitch: 0
+  audio_maxPitch: 2
+  audio_MaxConcurrentSound: 8
   IO: {fileID: 1343802610}
   triggerNotification: 0
 --- !u!114 &1442577052
@@ -15975,7 +17490,11 @@ MonoBehaviour:
   ReloadDependencies: 0
   isActive: 1
   proximityGroupIndex: 0
-  rigCombinations: []
+  rigCombinations:
+  - '  ||  Head (IO)  ||  Left Hand (IO)  ||  '
+  - '  ||  Head (IO)  ||  Right Hand (IO)  ||  '
+  - '  ||  Left Hand (IO)  ||  Right Hand (IO)  ||  '
+  - '  ||  Head (IO)  ||  Left Hand (IO)  ||  Right Hand (IO)  ||  '
 --- !u!114 &1442577053
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16701,7 +18220,6 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
-  DnD_IsTarget: 0
   DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
@@ -16895,7 +18413,6 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
-  DnD_IsTarget: 0
   DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
@@ -17030,6 +18547,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1608493539}
   - component: {fileID: 1608493540}
+  - component: {fileID: 1608493541}
   m_Layer: 0
   m_Name: AudioSource
   m_TagString: Untagged
@@ -17130,6 +18648,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &1608493541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1608493538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8170862739ecdb04392511ce00051beb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1618481228
 GameObject:
   m_ObjectHideFlags: 0
@@ -17244,6 +18773,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1634580207}
   - component: {fileID: 1634580208}
+  - component: {fileID: 1634580209}
   m_Layer: 0
   m_Name: AudioSource
   m_TagString: Untagged
@@ -17344,6 +18874,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &1634580209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1634580206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8170862739ecdb04392511ce00051beb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1637602477
 GameObject:
   m_ObjectHideFlags: 0
@@ -17638,7 +19179,6 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
-  DnD_IsTarget: 0
   DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
@@ -17938,6 +19478,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1745226200}
   - component: {fileID: 1745226201}
+  - component: {fileID: 1745226202}
   m_Layer: 0
   m_Name: AudioSource
   m_TagString: Untagged
@@ -18038,6 +19579,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &1745226202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1745226199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8170862739ecdb04392511ce00051beb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1754543643
 GameObject:
   m_ObjectHideFlags: 0
@@ -18175,7 +19727,7 @@ MonoBehaviour:
     touchActionIndex: 0
   gazeEnabled: 1
   gazeStateIndex: 0
-  gazeIn: 0
+  gazeIn: 1
   touchEnabled: 0
   ActivateOnDependencyMap:
     dependencies: []
@@ -18222,6 +19774,7 @@ MonoBehaviour:
   ActionAudio: 0
   ActionColliders: 0
   ActionDragAndDrop: 0
+  ActionAnimation: 1
   DestroyOnTrigger: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
@@ -18257,19 +19810,104 @@ MonoBehaviour:
   - 
   - 
   - 
+  animationClip:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  targetAnimationSource: {fileID: 0}
+  loopAnim: 0000000000000000000000000000000000000000
+  loopAnimType: 0000000000000000000000000000000000000000
+  animationSequence: 0000000000000000000000000000000000000000
   targetAudioSource: {fileID: 0}
   activeTriggerStatesAudio: 0000000000
   audioClips:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  loopAudio: 0000000000
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudio: 00000000
+  audio_sequence: 0000000000000000000000000000000000000000
+  fadeInBetween: 0000000000
+  audioClipsNew:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudioNew: 0000000000000000000000000000000000000000
   duckingEnabled: 1
+  fadeInTime: 1
+  fadeOutTime: 1
+  fadeOutDeactTime: 1
+  fadeInCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutDeactCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeInEnabled: 0
+  fadeOutEnabled: 0
+  fadeOutDeactEnabled: 0
   audioVolumeMin: 0.2
   audioVolumeMax: 1
   fadeSpeed: 0.005
+  audio_ForceStop: 0
+  audio_AllowMultiple: 0
+  audio_randomizePitch: 0
+  audio_minPitch: 0
+  audio_maxPitch: 2
+  audio_MaxConcurrentSound: 8
   IO: {fileID: 1686884730}
   triggerNotification: 0
 --- !u!114 &1768116520
@@ -19309,36 +20947,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InteractiveObjectScripts:
-  - {fileID: 694549797}
-  - {fileID: 1261962328}
-  - {fileID: 1396123514}
   - {fileID: 583646497}
   - {fileID: 610316412}
   - {fileID: 616646606}
+  - {fileID: 694549797}
   - {fileID: 777038504}
   - {fileID: 924219154}
   - {fileID: 1028396739}
   - {fileID: 1177448335}
+  - {fileID: 1261962328}
   - {fileID: 1318517725}
   - {fileID: 1343802610}
+  - {fileID: 1396123514}
   - {fileID: 1563981295}
   - {fileID: 1578176446}
   - {fileID: 1686884730}
   - {fileID: 2092183897}
   - {fileID: 2126061402}
   InteractiveObjects:
-  - {fileID: 694549791}
-  - {fileID: 1261962322}
-  - {fileID: 1396123509}
   - {fileID: 583646494}
   - {fileID: 610316409}
   - {fileID: 616646604}
+  - {fileID: 694549791}
   - {fileID: 777038501}
   - {fileID: 924219152}
   - {fileID: 1028396736}
   - {fileID: 1177448332}
+  - {fileID: 1261962322}
   - {fileID: 1318517723}
   - {fileID: 1343802608}
+  - {fileID: 1396123509}
   - {fileID: 1563981293}
   - {fileID: 1578176443}
   - {fileID: 1686884727}
@@ -19682,6 +21320,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2058943645}
   - component: {fileID: 2058943646}
+  - component: {fileID: 2058943647}
   m_Layer: 0
   m_Name: AudioSource
   m_TagString: Untagged
@@ -19782,6 +21421,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &2058943647
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2058943644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8170862739ecdb04392511ce00051beb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2064112081
 GameObject:
   m_ObjectHideFlags: 0
@@ -20143,7 +21793,6 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
-  DnD_IsTarget: 0
   DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
@@ -20260,6 +21909,7 @@ MonoBehaviour:
   ActionAudio: 1
   ActionColliders: 0
   ActionDragAndDrop: 0
+  ActionAnimation: 0
   DestroyOnTrigger: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
@@ -20295,19 +21945,105 @@ MonoBehaviour:
   - 
   - 
   - 
+  animationClip:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  targetAnimationSource: {fileID: 0}
+  loopAnim: 0000000000000000000000000000000000000000
+  loopAnimType: 0000000000000000000000000000000000000000
+  animationSequence: 0000000000000000000000000000000000000000
   targetAudioSource: {fileID: 1101270827}
   activeTriggerStatesAudio: 0100000000
   audioClips:
-  - {fileID: 8300000, guid: 9bb717b1bdd258e4bb9d68a1f0556c67, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  loopAudio: 0000000000
+    ClipEntries00:
+    - {fileID: 8300000, guid: 9bb717b1bdd258e4bb9d68a1f0556c67, type: 3}
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudio: 00000000
+  audio_sequence: 0000000000000000000000000000000000000000
+  fadeInBetween: 0000000000
+  audioClipsNew:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudioNew: 0000000000000000000000000000000000000000
   duckingEnabled: 1
+  fadeInTime: 1
+  fadeOutTime: 1
+  fadeOutDeactTime: 1
+  fadeInCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutDeactCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeInEnabled: 0
+  fadeOutEnabled: 0
+  fadeOutDeactEnabled: 0
   audioVolumeMin: 0.5
   audioVolumeMax: 1
   fadeSpeed: 0.005
+  audio_ForceStop: 0
+  audio_AllowMultiple: 0
+  audio_randomizePitch: 0
+  audio_minPitch: 0
+  audio_maxPitch: 2
+  audio_MaxConcurrentSound: 8
   IO: {fileID: 1318517725}
   triggerNotification: 0
 --- !u!114 &2096059212
@@ -20409,7 +22145,11 @@ MonoBehaviour:
   ReloadDependencies: 0
   isActive: 1
   proximityGroupIndex: 0
-  rigCombinations: []
+  rigCombinations:
+  - '  ||  Head (IO)  ||  Left Hand (IO)  ||  '
+  - '  ||  Head (IO)  ||  Right Hand (IO)  ||  '
+  - '  ||  Left Hand (IO)  ||  Right Hand (IO)  ||  '
+  - '  ||  Head (IO)  ||  Left Hand (IO)  ||  Right Hand (IO)  ||  '
 --- !u!114 &2096059213
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20552,7 +22292,6 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
-  DnD_IsTarget: 0
   DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
