@@ -438,11 +438,15 @@ namespace Gaze
             {
                 case Gaze_LevitationStates.PUSH:
                     if (Vector3.Distance(targetLocation.transform.position, handLocation.transform.position) > closestDistance)
+                    {
                         targetLocation.transform.localPosition = new Vector3(targetLocation.transform.localPosition.x, targetLocation.transform.localPosition.y, targetLocation.transform.localPosition.z + (-levitatingObjectAttractingSpeed * attractionForce * Time.deltaTime));
+                        Gaze_EventManager.FireLevitationEvent(new Gaze_LevitationEventArgs(this, objectToLevitate, Gaze_LevitationTypes.PUSH, actualHand));
+                    }
                     break;
 
                 case Gaze_LevitationStates.PULL:
                     targetLocation.transform.localPosition = new Vector3(targetLocation.transform.localPosition.x, targetLocation.transform.localPosition.y, targetLocation.transform.localPosition.z + (levitatingObjectAttractingSpeed * attractionForce * Time.deltaTime));
+                    Gaze_EventManager.FireLevitationEvent(new Gaze_LevitationEventArgs(this, objectToLevitate, Gaze_LevitationTypes.PULL, actualHand));
                     break;
 
                 default:
