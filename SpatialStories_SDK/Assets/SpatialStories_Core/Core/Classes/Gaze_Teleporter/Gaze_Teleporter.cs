@@ -111,7 +111,7 @@ public class Gaze_Teleporter : MonoBehaviour
         switch (actualController)
         {
             case Gaze_Controllers.HTC_VIVE:
-                actualTeleportLogic = new Gaze_GenericTeleport(this);
+                actualTeleportLogic = new Gaze_ViveTeleport(this);
                 break;
             case Gaze_Controllers.OCULUS_RIFT:
                 actualTeleportLogic = new Gaze_GenericTeleport(this);
