@@ -94,7 +94,7 @@ namespace Gaze
             }
         }
 
-        private List<Gaze_Audio> audios;
+        private List<Gaze_Audio> audios = new List<Gaze_Audio>();
         private int MAX_AUDIOS = 8;
 
         private List<Gaze_AudioPlayList> clips = new List<Gaze_AudioPlayList>();
@@ -109,8 +109,6 @@ namespace Gaze
         private bool fadeOutEnabled = false;
         private bool fadeOutDeactEnabled = false;
 
-        private int trackIndex;
-
         private bool randomizePitch = false;
         private float minPitch = 0;
         private float maxPitch = 2;
@@ -124,12 +122,15 @@ namespace Gaze
         private AnimationCurve fadeOutCurve;
         private AnimationCurve fadeOutDeactCurve;
 
-        private bool triggered = false;
+        private Queue<int> triggered = new Queue<int>();
         private bool stopping = false;
 
         private int frame_count;
 
         private int key;
+
+        private int[] lastClipIndex = new int[5];
+
 
         public int setParameters(Gaze_AudioPlayList audioClips, Gaze_Actions.LOOP_MODES[] loop, Gaze_Actions.AUDIO_SEQUENCE[] sequence, bool[] fadeInBetween, float volumeMin, float volumeMax, bool duckingEnabled, float fadeSpeed, float fadeInTime, float fadeOutTime, float fadeOutDeactTime, bool fadeInEnabled, bool fadeOutEnabled, bool fadeOutDeactEnabled, AnimationCurve fadeInCurve, AnimationCurve fadeOutCurve, AnimationCurve fadeOutDeactCurve, bool[] activeTriggerStatesAudio, bool forceStop, bool allowMultiple, int maxConcurrentSound, bool randomizePitch, float minPitch, float maxPitch)
         {
@@ -207,10 +208,10 @@ namespace Gaze
             {
                 audios[i].state2Next();
 
-                if (triggered && forceStop)
+                if (triggered.Count > 0 && forceStop)
                 {
                     startPlaying(i);
-                    triggered = false;
+                    audios[i].track = triggered.Dequeue();
                     return;
                 }
 
@@ -218,11 +219,11 @@ namespace Gaze
                 {
                     case AudioState.STOPPED:
                         {
-                            if (triggered)
+                            if (triggered.Count > 0)
                             {
                                 audios[i].key = key;
+                                audios[i].track = triggered.Dequeue();
                                 startPlaying(i);
-                                triggered = false;
                             }
                             break;
                         }
@@ -253,6 +254,7 @@ namespace Gaze
                                     audios.Add(new Gaze_Audio(gameObject.GetComponents<AudioSource>()[audios.Count]));
                                     audios[audios.Count - 1].track = audios[i].track;
                                     audios[audios.Count - 1].clipIndex = audios[i].clipIndex;
+                                    lastClipIndex[audios[i].track] = audios[i].clipIndex;
                                     audios[audios.Count - 1].key = audios[i].key;
                                     startPlaying(audios.Count - 1);
                                 }
@@ -307,6 +309,7 @@ namespace Gaze
                                     audios.Add(new Gaze_Audio(gameObject.GetComponents<AudioSource>()[audios.Count]));
                                     audios[audios.Count - 1].track = audios[i].track;
                                     audios[audios.Count - 1].clipIndex = audios[i].clipIndex;
+                                    lastClipIndex[audios[i].track] = audios[i].clipIndex;
                                     audios[audios.Count - 1].key = audios[i].key;
                                     startPlaying(audios.Count - 1);
                                 }
@@ -343,12 +346,13 @@ namespace Gaze
                         }
                     case AudioState.FADING_OUT_STOP:
                         {
-                            if (triggered)
+                            if (triggered.Count >1)
                             {
                                 if (audios[i].audioSource.loop)
                                 {
                                     audios[i].setNextState(AudioState.FADING_IN);
                                     audios[i].setFadeStartingVolume(audios[i].audioSource.volume);
+                                    audios[i].track = triggered.Dequeue();
                                 }
                             }
                             else
@@ -362,7 +366,6 @@ namespace Gaze
                 audios[i].setTimer(Mathf.Max(audios[i].timer - Time.deltaTime, 0f));
             }
             stopping = false;
-            triggered = false;
             frame_count++;
 
             // Delete unused audio every 100 frames
@@ -387,6 +390,18 @@ namespace Gaze
 
         private void startPlaying(int i)
         {
+            if (sequence[audios[i].track] == Gaze_Actions.AUDIO_SEQUENCE.Random)
+            {
+                audios[i].clipIndex = (audios[i].clipIndex + Random.Range(0, clips[audios[i].key].Count(audios[i].track) - 1));
+            }
+            else
+            {
+                audios[i].clipIndex++;
+            }
+
+            audios[i].clipIndex %= clips[audios[i].key].Count(audios[i].track);
+            lastClipIndex[audios[i].track] = audios[i].clipIndex;
+
             if (playAudioTrack(audios[i].key, i))
             {
                 if (randomizePitch)
@@ -406,20 +421,8 @@ namespace Gaze
                     audios[i].setNextState(AudioState.PLAYING);
                 }
 
-                if (sequence[audios[i].track] == Gaze_Actions.AUDIO_SEQUENCE.Random)
-                {
-                    audios[i].clipIndex = (audios[i].clipIndex + Random.Range(0, clips[audios[i].key].Count(audios[i].track) - 1));
-                }
-                else
-                {
-                    audios[i].clipIndex++;
-                }
-
-                audios[i].clipIndex %= clips[audios[i].key].Count(audios[i].track);
-
-                audios[i].loop = loopAudio[trackIndex] == Gaze_Actions.LOOP_MODES.Single;
-                audios[i].loopPlaylist = loopAudio[trackIndex] == Gaze_Actions.LOOP_MODES.Playlist;
-                audios[i].track = trackIndex;
+                audios[i].loop = loopAudio[audios[i].track] == Gaze_Actions.LOOP_MODES.Single;
+                audios[i].loopPlaylist = loopAudio[audios[i].track] == Gaze_Actions.LOOP_MODES.Playlist;
                 audios[i].audioSource.Play();
                 audios[i].setTimer(audios[i].audioSource.clip.length);
             }
@@ -452,28 +455,61 @@ namespace Gaze
 
         public void playAudio(int key, int index)
         {
+            if (index == 3)
+            {
+                stopTrack(2);
+            }
+            else if (index == 4)
+            {
+                stopTrack(3);
+            }
+
             if (allowMultiple && !forceStop && audios.Count < MAX_AUDIOS && nonAvailable() || !isPlaying(key))
             {
                 gameObject.AddComponent<AudioSource>();
                 audios.Add(new Gaze_Audio(gameObject.GetComponents<AudioSource>()[audios.Count]));
+                audios[audios.Count - 1].clipIndex = lastClipIndex[index];
             }
 
-            trackIndex = index;
-            foreach (var a in audios)
+            if (!allowMultiple && !forceStop)
             {
-                if (a.audioSource.isPlaying && a.key == key && !allowMultiple)
+                foreach (var a in audios)
                 {
-                    return;
+                    if (a.audioSource.isPlaying && a.key == key)
+                    {
+                        return;
+                    }
                 }
             }
 
             this.key = key;
-            triggered = true;
+            triggered.Enqueue(index);
         }
 
         public void stopAudio()
         {
             stopping = true;
+        }
+
+
+        public void stopTrack(int i)
+        {
+            foreach (var a in audios)
+            {
+                if (a.track == i)
+                {
+                    if (fadeOutEnabled)
+                    {
+                        a.setNextState(AudioState.FADING_OUT);
+                        a.setFadeStartingVolume(a.audioSource.volume);
+                        a.setFadeTimer(0);
+                    }
+                    else
+                    {
+                        a.Stop();
+                    }
+                }
+            }
         }
 
         private bool isPlaying(int key)

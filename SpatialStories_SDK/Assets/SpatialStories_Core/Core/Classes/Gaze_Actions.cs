@@ -129,6 +129,12 @@ namespace Gaze
             IO = GetIO();
             visualsScript = IO.GetComponentInChildren<Gaze_InteractiveObjectVisuals>();
             //Gaze_EventManager.OnGazeEvent += OnGazeEvent;
+
+            if (loopAudio.Length < 5)
+            {
+                loopAudio = new LOOP_MODES[5];
+            }
+
         }
 
         public override void OnDisable()
@@ -429,7 +435,8 @@ namespace Gaze
             // If we want to activate audio just do it.
             if (ActionAudio == ACTIVABLE_OPTION.ACTIVATE)
             {
-                gazeAudioPlayer.playAudio(Audio_PlayList_Key, 0);
+                if (activeTriggerStatesAudio[0])
+                    gazeAudioPlayer.playAudio(Audio_PlayList_Key, 0);
             }
             else //Stop the current audio.
             {
@@ -489,6 +496,11 @@ namespace Gaze
             {
                 gazeAudioPlayer.playAudio(Audio_PlayList_Key, _animIndex);
             }
+            else if (activeTriggerStatesAudio.Length > _animIndex && _animIndex >= 3 && ActionAudio == ACTIVABLE_OPTION.ACTIVATE)
+            {
+                gazeAudioPlayer.stopTrack(_animIndex - 1);
+            }
+
         }
 
         #region implemented abstract members of Gaze_AbstractBehaviour
