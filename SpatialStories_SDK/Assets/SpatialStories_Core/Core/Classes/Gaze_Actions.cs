@@ -170,7 +170,7 @@ namespace Gaze
                 }
 
                 gazeAnimationPlayer = targetAnimationSource.GetComponent<Gaze_AnimationPlayer>();
-                Animation_PlayList_Key = gazeAnimationPlayer.setParameters(animationClip, activeTriggerStatesAnim, loopAnimType, animationSequence);
+                Animation_PlayList_Key = gazeAnimationPlayer.setParameters(animationClip, activeTriggerStatesAnim, loopAnimType, loopAnim, animationSequence);
             }
 
             if (!gazeInteraction.HasConditions)
@@ -454,6 +454,10 @@ namespace Gaze
             {
                 PlayAnim(0);
             }
+            else if (ActionAnimation == ANIMATION_OPTION.DEACTIVATE)
+            {
+                gazeAnimationPlayer.Stop();
+            }
         }
 
         /// <summary>
@@ -489,7 +493,7 @@ namespace Gaze
         {
             if (activeTriggerStatesAnim.Length > _animIndex && activeTriggerStatesAnim[_animIndex])
             {
-                PlayAnim(1);
+                PlayAnim(_animIndex);
             }
 
             if (activeTriggerStatesAudio.Length > _animIndex && activeTriggerStatesAudio[_animIndex])
