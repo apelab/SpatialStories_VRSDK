@@ -44,6 +44,7 @@ namespace Gaze
         public ALTERABLE_OPTION ModifyDragAndDropTargets = ALTERABLE_OPTION.NOTHING;
         public ALTERABLE_OPTION ModifyDnDMinDistance = ALTERABLE_OPTION.NOTHING;
         public ACTIVABLE_OPTION ModifyDnDSnapBeforeDrop = ACTIVABLE_OPTION.NOTHING;
+        public ACTIVABLE_OPTION ModifyDnDAttached = ACTIVABLE_OPTION.NOTHING;
         public ALTERABLE_OPTION ModifyDnDRespectAxis = ALTERABLE_OPTION.NOTHING;
         public float dnDMinDistance;
         public bool dnDSnapBeforeDrop;
@@ -422,6 +423,18 @@ namespace Gaze
                     GetIO().DnD_snapBeforeDrop = false;
                     break;
             }
+
+            switch (ModifyDnDAttached)
+            {
+                case ACTIVABLE_OPTION.ACTIVATE:
+                    GetIO().DnD_attached = true;
+                    break;
+                case ACTIVABLE_OPTION.DEACTIVATE:
+                    GetIO().UnAttachDnDObject();
+                    GetIO().DnD_attached = false;
+                    break;
+            }
+
         }
 
         /// <summary>
