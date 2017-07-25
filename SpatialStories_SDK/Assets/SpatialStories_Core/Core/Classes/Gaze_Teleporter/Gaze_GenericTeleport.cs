@@ -6,7 +6,7 @@ namespace Gaze
     {
         public Gaze_GenericTeleport(Gaze_Teleporter _teleporter) : base(_teleporter)
         {
-
+            Debug.Log("Oculus on!");
         }
 
         public override void Setup()

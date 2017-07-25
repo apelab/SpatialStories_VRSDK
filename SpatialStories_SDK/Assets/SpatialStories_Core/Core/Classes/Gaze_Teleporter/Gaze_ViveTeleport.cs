@@ -2,9 +2,16 @@
 
 namespace Gaze
 {
-    public class Gaze_ViveTeleport : Gaze_GenericTeleport
+    public class Gaze_ViveTeleport : Gaze_TeleportLogic
     {
         private bool touchpadDown;
+
+        /// <summary>
+        /// TODO: This will be moved to the InputManger after the release
+        /// </summary>
+        private const string TUMBSTICK_LEFT = "apelab Thumbstick Left";
+        private const string TUMBSTICK_RIGHT = "apelab Thumbstick Right";
+        private string buttonToCheck;
 
         public Gaze_ViveTeleport(Gaze_Teleporter _teleporter) : base(_teleporter)
         {
@@ -15,17 +22,13 @@ namespace Gaze
         {
             if (teleporter.GetComponentInChildren<Gaze_HandController>().leftHand)
             {
-                Gaze_InputManager.OnStickLeftAxisEvent += StickAxisEvent;
-                Gaze_InputManager.OnStickLeftDownEvent += OnTouchPadDownEvent;
-                Gaze_InputManager.OnStickLeftUpEvent += OnTouchpadUpEvent;
-
+                Gaze_InputManager.OnStickLeftAxisEvent += OnStickLeftAxisEvent;
+                buttonToCheck = TUMBSTICK_LEFT;
             }
             else
             {
                 Gaze_InputManager.OnStickRightAxisEvent += OnStickLeftAxisEvent;
-                Gaze_InputManager.OnStickRightDownEvent += OnTouchPadDownEvent;
-                Gaze_InputManager.OnStickRightUpEvent += OnTouchpadUpEvent;
-
+                buttonToCheck = TUMBSTICK_RIGHT;
             }
         }
 
@@ -33,39 +36,74 @@ namespace Gaze
         {
             if (teleporter.GetComponentInChildren<Gaze_HandController>().leftHand)
             {
-                Gaze_InputManager.OnStickLeftAxisEvent -= StickAxisEvent;
-                Gaze_InputManager.OnStickLeftDownEvent -= OnTouchPadDownEvent;
-                Gaze_InputManager.OnStickLeftUpEvent -= OnTouchpadUpEvent;
-
+                Gaze_InputManager.OnStickLeftAxisEvent -= OnStickLeftAxisEvent;
             }
             else
             {
                 Gaze_InputManager.OnStickRightAxisEvent -= OnStickLeftAxisEvent;
-                Gaze_InputManager.OnStickRightDownEvent -= OnTouchPadDownEvent;
-                Gaze_InputManager.OnStickRightUpEvent -= OnTouchpadUpEvent;
-
             }
         }
 
-        private void OnTouchPadDownEvent(Gaze_InputEventArgs _args)
+        public override void Update()
         {
-            touchpadDown = true;
-            Debug.Log("TouchpadDown = True");
+            if (Input.GetButtonDown(buttonToCheck))
+            {
+                touchpadDown = true;
+            }
+
+            if (Input.GetButtonUp(buttonToCheck))
+            {
+                touchpadDown = false;
+
+                if (teleporter._goodSpot)
+                {
+                    teleporter.Teleport();
+                }
+
+                teleporter.DisableTeleport();
+
+                if (teleporter.gyroInstance)
+                    teleporter.gyroInstance.SetActive(false);
+            }
+
+            if (touchpadDown)
+                teleporter.CalculateArc();
+
         }
 
-        private void OnTouchpadUpEvent(Gaze_InputEventArgs _args)
-        {
-
-            Debug.Log("TouchpadDown = False");
-            touchpadDown = false;
-        }
-
-        private void StickAxisEvent(Gaze_InputEventArgs _e)
+        protected void OnStickLeftAxisEvent(Gaze_InputEventArgs e)
         {
             if (!touchpadDown)
                 return;
 
-            OnStickLeftAxisEvent(_e);
+            teleporter.axisValue = e.AxisValue.magnitude;
+
+            //If the teleport is not allowed we need to deactivate it and return
+            if (!Gaze_Teleporter.IsTeleportAllowed)
+            {
+                teleporter.DisableTeleport();
+                return;
+            }
+
+            if (!teleporter.teleportActive)
+                teleporter.EnableTeleport();
+
+            if (teleporter._goodSpot)
+            {
+                teleporter.gyroInstance.SetActive(true);
+
+                if (teleporter.OrientOnTeleport)
+                {
+                    teleporter.angle = Mathf.Atan2(e.AxisValue.x, -e.AxisValue.y) * Mathf.Rad2Deg;
+
+                    // angle take hand's rotation into account
+                    teleporter.angle += teleporter.transform.eulerAngles.y;
+                }
+                else
+                    teleporter.angle = teleporter.cam.transform.eulerAngles.y;
+
+            }
         }
     }
 }
+
