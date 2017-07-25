@@ -569,6 +569,14 @@ public class Gaze_Teleporter : MonoBehaviour
         }
     }
 
+    public void MoveToGyro()
+    {
+        if (OrientOnTeleport)
+            RotateCamera();
+
+        MoveToTarget(gyroInstance.transform.position);
+    }
+
     /*
     private void RecenterSpaceOnCameraPosition()
     {

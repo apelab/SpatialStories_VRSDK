@@ -46,6 +46,9 @@ namespace Gaze
 
         public override void Update()
         {
+            if (!Gaze_Teleporter.IsTeleportAllowed)
+                return;
+
             if (Input.GetButtonDown(buttonToCheck))
             {
                 touchpadDown = true;
@@ -73,6 +76,7 @@ namespace Gaze
 
         protected void OnStickLeftAxisEvent(Gaze_InputEventArgs e)
         {
+
             if (!touchpadDown)
                 return;
 
