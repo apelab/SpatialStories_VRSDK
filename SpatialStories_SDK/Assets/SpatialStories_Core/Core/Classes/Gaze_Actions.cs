@@ -428,10 +428,11 @@ namespace Gaze
             {
                 case ACTIVABLE_OPTION.ACTIVATE:
                     GetIO().DnD_attached = true;
+                    GetIO().ChangeDnDAttach(false);
                     break;
                 case ACTIVABLE_OPTION.DEACTIVATE:
-                    GetIO().UnAttachDnDObject();
                     GetIO().DnD_attached = false;
+                    GetIO().ChangeDnDAttach(true);
                     break;
             }
 

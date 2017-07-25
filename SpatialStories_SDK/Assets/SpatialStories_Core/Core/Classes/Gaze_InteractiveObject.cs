@@ -379,10 +379,11 @@ namespace Gaze
             }
         }
 
-        public void UnAttachDnDObject()
+        public void ChangeDnDAttach(bool attach)
         {
-            dragAndDropManager.UnAttach();
+            dragAndDropManager.ChangeAttach(attach);
         }
+
 
 
         /// <summary>

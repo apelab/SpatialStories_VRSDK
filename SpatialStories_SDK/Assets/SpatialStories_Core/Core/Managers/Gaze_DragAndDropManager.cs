@@ -50,6 +50,7 @@ namespace Gaze
         private Gaze_InteractiveObject interactiveObject;
         private Gaze_Manipulation IO_Manipulation;
         private Gaze_HandHover IO_HandHover;
+        private bool isCurrentlyDropped = false;
 
 
         private Transform targetTransform;
@@ -148,6 +149,7 @@ namespace Gaze
 
         private void Remove()
         {
+            isCurrentlyDropped = false;
             if (interactiveObject.DnD_snapBeforeDrop)
             {
                 UnSnap();
@@ -166,6 +168,7 @@ namespace Gaze
 
         private void Drop()
         {
+            isCurrentlyDropped = true;
             if (m_attachOnDrop)
             {
                 // parent to target object
@@ -473,19 +476,22 @@ namespace Gaze
             }
         }
 
-        public void UnAttach()
+        public void ChangeAttach(bool attach)
         {
-            if (IO_Manipulation != null)
+            if (isCurrentlyDropped)
             {
-                IO_Manipulation.gameObject.SetActive(true);
-            }
+                if (IO_Manipulation != null)
+                {
+                    IO_Manipulation.gameObject.SetActive(attach);
+                }
 
-            if (IO_HandHover != null)
-            {
-                IO_HandHover.gameObject.SetActive(true);
+                if (IO_HandHover != null)
+                {
+                    IO_HandHover.gameObject.SetActive(attach);
+                }
+                IO.IsManipulable = attach;
+                IO.SetManipulationMode(attach, true);
             }
-            IO.IsManipulable = true;
-            IO.SetManipulationMode(true, true);
         }
     }
 }
