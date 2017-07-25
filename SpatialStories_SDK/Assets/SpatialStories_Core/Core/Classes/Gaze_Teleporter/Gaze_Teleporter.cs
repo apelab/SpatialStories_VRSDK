@@ -125,7 +125,6 @@ public class Gaze_Teleporter : MonoBehaviour
 
         if (actualTeleportLogic != null)
             actualTeleportLogic.Setup();
-
     }
 
     void OnEnable()

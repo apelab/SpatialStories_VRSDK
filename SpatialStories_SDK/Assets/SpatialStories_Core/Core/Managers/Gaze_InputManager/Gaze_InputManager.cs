@@ -323,8 +323,8 @@ public class Gaze_InputManager : MonoBehaviour
 
         if (setupEvent != null)
         {
-            setupEvent(PluggedControllerType);
             CurrentController = PluggedControllerType;
+            setupEvent(PluggedControllerType);
         }
     }
 
@@ -780,7 +780,7 @@ public class Gaze_InputManager : MonoBehaviour
                 Debug.Log(Gaze_InputConstants.APELAB_INPUT_INDEX_RIGHT + " Down" + Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_INDEX_RIGHT));
             isIndexRightDown = true;
             if (OnIndexRightDownEvent != null)
-                OnIndexRightDownEvent(new Gaze_InputEventArgs(this.gameObject, VRNode.LeftHand, Gaze_InputTypes.INDEX_RIGHT_DOWN, Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_INDEX_RIGHT)));
+                OnIndexRightDownEvent(new Gaze_InputEventArgs(this.gameObject, VRNode.RightHand, Gaze_InputTypes.INDEX_RIGHT_DOWN, Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_INDEX_RIGHT)));
 
             //HACK: This is done for the Samsung VR controller
             if (OVRInput.IsControllerConnected(OVRInput.Controller.RTrackedRemote))
@@ -793,7 +793,7 @@ public class Gaze_InputManager : MonoBehaviour
                 Debug.Log(Gaze_InputConstants.APELAB_INPUT_INDEX_RIGHT + " Up" + Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_INDEX_RIGHT));
             isIndexRightDown = false;
             if (OnIndexRightUpEvent != null)
-                OnIndexRightUpEvent(new Gaze_InputEventArgs(this.gameObject, VRNode.LeftHand, Gaze_InputTypes.INDEX_RIGHT_UP, Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_INDEX_RIGHT)));
+                OnIndexRightUpEvent(new Gaze_InputEventArgs(this.gameObject, VRNode.RightHand, Gaze_InputTypes.INDEX_RIGHT_UP, Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_INDEX_RIGHT)));
 
             //HACK: This is done for the Samsung VR controller
             if (OVRInput.IsControllerConnected(OVRInput.Controller.RTrackedRemote))

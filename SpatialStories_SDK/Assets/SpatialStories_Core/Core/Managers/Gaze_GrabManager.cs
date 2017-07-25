@@ -124,13 +124,10 @@ public class Gaze_GrabManager : MonoBehaviour
 
     void OnEnable()
     {
+        Gaze_InputManager.OnControlerSetup += OnControllerSetup;
         Gaze_EventManager.OnGrabEvent += OnGrabEvent;
         Gaze_InputManager.OnControllerCollisionEvent += OnControllerCollisionEvent;
         Gaze_InputManager.OnControllerGrabEvent += OnControllerGrabEvent;
-        Gaze_InputManager.OnHandRightDownEvent += OnHandRightDownEvent;
-        Gaze_InputManager.OnHandRightUpEvent += OnHandRightUpEvent;
-        Gaze_InputManager.OnHandLeftDownEvent += OnHandLeftDownEvent;
-        Gaze_InputManager.OnHandLeftUpEvent += OnHandLeftUpEvent;
         Gaze_HandsReplacer.OnHandsReplaced += OnHandsReplaced;
         Gaze_EventManager.OnIODestroyed += OnIODestroyed;
 
@@ -142,19 +139,55 @@ public class Gaze_GrabManager : MonoBehaviour
         GrabManagers.Add(this);
     }
 
+    private bool setupDone = false;
+    void OnControllerSetup(Gaze_Controllers _controller)
+    {
+        if (setupDone)
+            return;
 
+        Debug.Log(_controller);
+
+        if (_controller != Gaze_Controllers.HTC_VIVE)
+        {
+            Gaze_InputManager.OnHandRightDownEvent += OnHandRightDownEvent;
+            Gaze_InputManager.OnHandRightUpEvent += OnHandRightUpEvent;
+            Gaze_InputManager.OnHandLeftDownEvent += OnHandLeftDownEvent;
+            Gaze_InputManager.OnHandLeftUpEvent += OnHandLeftUpEvent;
+        }
+        else
+        {
+            Gaze_InputManager.OnIndexRightDownEvent += OnHandRightDownEvent;
+            Gaze_InputManager.OnIndexRightUpEvent += OnHandRightUpEvent;
+            Gaze_InputManager.OnIndexLeftDownEvent += OnHandLeftDownEvent;
+            Gaze_InputManager.OnIndexLeftUpEvent += OnHandLeftUpEvent;
+        }
+        setupDone = true;
+    }
 
     void OnDisable()
     {
+        Gaze_InputManager.OnControlerSetup -= OnControllerSetup;
         Gaze_EventManager.OnGrabEvent -= OnGrabEvent;
         Gaze_InputManager.OnControllerCollisionEvent -= OnControllerCollisionEvent;
+
         Gaze_InputManager.OnControllerGrabEvent -= OnControllerGrabEvent;
-        Gaze_InputManager.OnHandRightDownEvent -= OnHandRightDownEvent;
-        Gaze_InputManager.OnHandRightUpEvent -= OnHandRightUpEvent;
-        Gaze_InputManager.OnHandLeftDownEvent -= OnHandLeftDownEvent;
-        Gaze_InputManager.OnHandLeftUpEvent -= OnHandLeftUpEvent;
-        Gaze_HandsReplacer.OnHandsReplaced -= OnHandsReplaced;
         Gaze_EventManager.OnIODestroyed -= OnIODestroyed;
+        Gaze_HandsReplacer.OnHandsReplaced -= OnHandsReplaced;
+
+        if (Gaze_InputManager.PluggedControllerType != Gaze_Controllers.HTC_VIVE)
+        {
+            Gaze_InputManager.OnHandRightDownEvent -= OnHandRightDownEvent;
+            Gaze_InputManager.OnHandRightUpEvent -= OnHandRightUpEvent;
+            Gaze_InputManager.OnHandLeftDownEvent -= OnHandLeftDownEvent;
+            Gaze_InputManager.OnHandLeftUpEvent -= OnHandLeftUpEvent;
+        }
+        else
+        {
+            Gaze_InputManager.OnIndexRightEvent -= OnHandRightDownEvent;
+            Gaze_InputManager.OnIndexRightUpEvent -= OnHandRightUpEvent;
+            Gaze_InputManager.OnIndexLeftEvent -= OnHandLeftDownEvent;
+            Gaze_InputManager.OnIndexLeftUpEvent -= OnHandLeftUpEvent;
+        }
 
         // Remove this grab manager from the list
         GrabManagers.Remove(this);
@@ -1107,11 +1140,8 @@ public class Gaze_GrabManager : MonoBehaviour
     {
         if (e.VrNode.Equals(VRNode.RightHand) && !isLeftHand)
         {
-            if (e.InputType.Equals(Gaze_InputTypes.HAND_RIGHT_DOWN))
-            {
-                grabState = GRAB_STATE.SEARCHING;
-                isTriggerPressed = true;
-            }
+            grabState = GRAB_STATE.SEARCHING;
+            isTriggerPressed = true;
         }
     }
 
@@ -1119,16 +1149,13 @@ public class Gaze_GrabManager : MonoBehaviour
     {
         if (e.VrNode.Equals(VRNode.RightHand) && !isLeftHand)
         {
-            if (e.InputType.Equals(Gaze_InputTypes.HAND_RIGHT_UP))
+            if (interactableIO)
             {
-                if (interactableIO)
-                {
-                    Gaze_EventManager.FireControllerPointingEvent(new Gaze_ControllerPointingEventArgs(this.gameObject, new KeyValuePair<VRNode, GameObject>(isLeftHand ? VRNode.LeftHand : VRNode.RightHand, interactableIO.gameObject), false));
-                    TriggerReleased(interactableIO.gameObject);
-                    ResetGrabStateAfterHandUp();
-                }
-                grabState = GRAB_STATE.EMPTY;
+                Gaze_EventManager.FireControllerPointingEvent(new Gaze_ControllerPointingEventArgs(this.gameObject, new KeyValuePair<VRNode, GameObject>(isLeftHand ? VRNode.LeftHand : VRNode.RightHand, interactableIO.gameObject), false));
+                TriggerReleased(interactableIO.gameObject);
+                ResetGrabStateAfterHandUp();
             }
+            grabState = GRAB_STATE.EMPTY;
         }
     }
 
@@ -1136,11 +1163,8 @@ public class Gaze_GrabManager : MonoBehaviour
     {
         if (e.VrNode.Equals(VRNode.LeftHand) && isLeftHand)
         {
-            if (e.InputType.Equals(Gaze_InputTypes.HAND_LEFT_DOWN))
-            {
-                grabState = GRAB_STATE.SEARCHING;
-                isTriggerPressed = true;
-            }
+            grabState = GRAB_STATE.SEARCHING;
+            isTriggerPressed = true;
         }
     }
 
@@ -1148,18 +1172,15 @@ public class Gaze_GrabManager : MonoBehaviour
     {
         if (e.VrNode.Equals(VRNode.LeftHand) && isLeftHand)
         {
-            if (e.InputType.Equals(Gaze_InputTypes.HAND_LEFT_UP))
+            if (interactableIO)
             {
-                if (interactableIO)
-                {
-                    Dictionary<VRNode, GameObject> dico = new Dictionary<VRNode, GameObject>();
-                    dico.Add(isLeftHand ? VRNode.LeftHand : VRNode.RightHand, interactableIO.gameObject);
-                    Gaze_EventManager.FireControllerPointingEvent(new Gaze_ControllerPointingEventArgs(this.gameObject, new KeyValuePair<VRNode, GameObject>(isLeftHand ? VRNode.LeftHand : VRNode.RightHand, interactableIO.gameObject), false));
-                    TriggerReleased(interactableIO.gameObject);
-                    ResetGrabStateAfterHandUp();
-                }
-                grabState = GRAB_STATE.EMPTY;
+                Dictionary<VRNode, GameObject> dico = new Dictionary<VRNode, GameObject>();
+                dico.Add(isLeftHand ? VRNode.LeftHand : VRNode.RightHand, interactableIO.gameObject);
+                Gaze_EventManager.FireControllerPointingEvent(new Gaze_ControllerPointingEventArgs(this.gameObject, new KeyValuePair<VRNode, GameObject>(isLeftHand ? VRNode.LeftHand : VRNode.RightHand, interactableIO.gameObject), false));
+                TriggerReleased(interactableIO.gameObject);
+                ResetGrabStateAfterHandUp();
             }
+            grabState = GRAB_STATE.EMPTY;
         }
     }
 
