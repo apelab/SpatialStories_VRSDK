@@ -171,6 +171,10 @@ namespace Gaze
                 GUILayout.EndHorizontal();
 
                 EditorGUILayout.BeginHorizontal();
+                gaze_InteractiveObjectScript.DnD_attached = EditorGUILayout.ToggleLeft("Attached", gaze_InteractiveObjectScript.DnD_attached);
+                EditorGUILayout.EndHorizontal();
+
+                EditorGUILayout.BeginHorizontal();
                 gaze_InteractiveObjectScript.DnD_snapBeforeDrop = EditorGUILayout.ToggleLeft("Snap Before Drop", gaze_InteractiveObjectScript.DnD_snapBeforeDrop);
                 EditorGUILayout.EndHorizontal();
 
