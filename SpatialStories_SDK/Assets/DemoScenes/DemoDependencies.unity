@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.4964127, b: 0.5748172, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -699,7 +699,7 @@ MonoBehaviour:
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  loopAudio: 01000000
+  loopAudio: 0000000000000000000000000000000000000000
   audio_sequence: 0000000000000000000000000000000000000000
   fadeInBetween: 0000000000
   audioClipsNew:
@@ -942,6 +942,7 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
+  DnD_attached: 0
   DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
@@ -1113,7 +1114,7 @@ MonoBehaviour:
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  loopAudio: 00000000
+  loopAudio: 0000000000000000000000000000000000000000
   audio_sequence: 0000000000000000000000000000000000000000
   fadeInBetween: 0000000000
   audioClipsNew:
@@ -2781,7 +2782,7 @@ MonoBehaviour:
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  loopAudio: 00000000
+  loopAudio: 0000000000000000000000000000000000000000
   audio_sequence: 0000000000000000000000000000000000000000
   fadeInBetween: 0000000000
   audioClipsNew:
@@ -3492,6 +3493,7 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
+  DnD_attached: 0
   DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
@@ -4139,6 +4141,7 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
+  DnD_attached: 0
   DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
@@ -4704,7 +4707,7 @@ MonoBehaviour:
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  loopAudio: 00000000
+  loopAudio: 0000000000000000000000000000000000000000
   audio_sequence: 0000000000000000000000000000000000000000
   fadeInBetween: 0000000000
   audioClipsNew:
@@ -5455,7 +5458,7 @@ MonoBehaviour:
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  loopAudio: 00000000
+  loopAudio: 0000000000000000000000000000000000000000
   audio_sequence: 0000000000000000000000000000000000000000
   fadeInBetween: 0000000000
   audioClipsNew:
@@ -6873,7 +6876,7 @@ MonoBehaviour:
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  loopAudio: 00000000
+  loopAudio: 0000000000000000000000000000000000000000
   audio_sequence: 0000000000000000000000000000000000000000
   fadeInBetween: 0000000000
   audioClipsNew:
@@ -7436,7 +7439,7 @@ MonoBehaviour:
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  loopAudio: 00000000
+  loopAudio: 0000000000000000000000000000000000000000
   audio_sequence: 0000000000000000000000000000000000000000
   fadeInBetween: 0000000000
   audioClipsNew:
@@ -8232,7 +8235,7 @@ MonoBehaviour:
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  loopAudio: 00000000
+  loopAudio: 0000000000000000000000000000000000000000
   audio_sequence: 0000000000000000000000000000000000000000
   fadeInBetween: 0000000000
   audioClipsNew:
@@ -8723,7 +8726,7 @@ MonoBehaviour:
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  loopAudio: 00000000
+  loopAudio: 0000000000000000000000000000000000000000
   audio_sequence: 0000000000000000000000000000000000000000
   fadeInBetween: 0000000000
   audioClipsNew:
@@ -9033,7 +9036,7 @@ MonoBehaviour:
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  loopAudio: 00000000
+  loopAudio: 0000000000000000000000000000000000000000
   audio_sequence: 0000000000000000000000000000000000000000
   fadeInBetween: 0000000000
   audioClipsNew:
@@ -9361,7 +9364,7 @@ Transform:
   m_GameObject: {fileID: 703429707}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -0, z: -0.0284}
-  m_LocalScale: {x: 0.87986207, y: 0.9136318, z: 0.5313615}
+  m_LocalScale: {x: 1.76037, y: 1.269309, z: 0.82947224}
   m_Children: []
   m_Father: {fileID: 373774348}
   m_RootOrder: 0
@@ -9485,6 +9488,7 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
+  DnD_attached: 0
   DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
@@ -10074,7 +10078,7 @@ MonoBehaviour:
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  loopAudio: 00000000
+  loopAudio: 0000000000000000000000000000000000000000
   audio_sequence: 0000000000000000000000000000000000000000
   fadeInBetween: 0000000000
   audioClipsNew:
@@ -10412,6 +10416,7 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
+  DnD_attached: 0
   DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
@@ -11602,7 +11607,7 @@ MonoBehaviour:
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  loopAudio: 00000000
+  loopAudio: 0000000000000000000000000000000000000000
   audio_sequence: 0000000000000000000000000000000000000000
   fadeInBetween: 0000000000
   audioClipsNew:
@@ -11961,7 +11966,7 @@ MonoBehaviour:
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  loopAudio: 00000000
+  loopAudio: 0000000000000000000000000000000000000000
   audio_sequence: 0000000000000000000000000000000000000000
   fadeInBetween: 0000000000
   audioClipsNew:
@@ -12370,6 +12375,7 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
+  DnD_attached: 0
   DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
@@ -12610,7 +12616,7 @@ MonoBehaviour:
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  loopAudio: 00000000
+  loopAudio: 0000000000000000000000000000000000000000
   audio_sequence: 0000000000000000000000000000000000000000
   fadeInBetween: 0000000000
   audioClipsNew:
@@ -13347,7 +13353,7 @@ MonoBehaviour:
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  loopAudio: 00000000
+  loopAudio: 0000000000000000000000000000000000000000
   audio_sequence: 0000000000000000000000000000000000000000
   fadeInBetween: 0000000000
   audioClipsNew:
@@ -13885,7 +13891,7 @@ MonoBehaviour:
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  loopAudio: 00000000
+  loopAudio: 0000000000000000000000000000000000000000
   audio_sequence: 0000000000000000000000000000000000000000
   fadeInBetween: 0000000000
   audioClipsNew:
@@ -14837,6 +14843,7 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
+  DnD_attached: 0
   DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
@@ -15054,6 +15061,7 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
+  DnD_attached: 0
   DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
@@ -15234,6 +15242,7 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
+  DnD_attached: 0
   DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
@@ -16322,7 +16331,7 @@ MonoBehaviour:
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  loopAudio: 00000000
+  loopAudio: 0000000000000000000000000000000000000000
   audio_sequence: 0000000000000000000000000000000000000000
   fadeInBetween: 0000000000
   audioClipsNew:
@@ -16551,6 +16560,7 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
+  DnD_attached: 0
   DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
@@ -16889,6 +16899,7 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
+  DnD_attached: 0
   DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
@@ -17007,6 +17018,7 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
+  DnD_attached: 0
   DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
@@ -17400,6 +17412,7 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
+  DnD_attached: 0
   DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
@@ -17648,7 +17661,7 @@ MonoBehaviour:
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  loopAudio: 00000000
+  loopAudio: 0000000000000000000000000000000000000000
   audio_sequence: 0000000000000000000000000000000000000000
   fadeInBetween: 0000000000
   audioClipsNew:
@@ -17799,6 +17812,7 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
+  DnD_attached: 0
   DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
@@ -18555,6 +18569,7 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
+  DnD_attached: 0
   DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
@@ -20309,7 +20324,7 @@ MonoBehaviour:
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  loopAudio: 00000000
+  loopAudio: 0000000000000000000000000000000000000000
   audio_sequence: 0000000000000000000000000000000000000000
   fadeInBetween: 0000000000
   audioClipsNew:
@@ -20682,6 +20697,7 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
+  DnD_attached: 0
   DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
@@ -20864,6 +20880,7 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
+  DnD_attached: 0
   DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
@@ -21455,7 +21472,7 @@ MonoBehaviour:
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  loopAudio: 00000000
+  loopAudio: 0000000000000000000000000000000000000000
   audio_sequence: 0000000000000000000000000000000000000000
   fadeInBetween: 0000000000
   audioClipsNew:
@@ -22184,7 +22201,7 @@ MonoBehaviour:
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  loopAudio: 00000000
+  loopAudio: 0000000000000000000000000000000000000000
   audio_sequence: 0000000000000000000000000000000000000000
   fadeInBetween: 0000000000
   audioClipsNew:
@@ -22661,6 +22678,7 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
+  DnD_attached: 0
   DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
@@ -23422,7 +23440,7 @@ MonoBehaviour:
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  loopAudio: 00000000
+  loopAudio: 0000000000000000000000000000000000000000
   audio_sequence: 0000000000000000000000000000000000000000
   fadeInBetween: 0000000000
   audioClipsNew:
@@ -24156,6 +24174,7 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
+  DnD_attached: 0
   DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
@@ -24359,6 +24378,7 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
+  DnD_attached: 0
   DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
@@ -25237,7 +25257,7 @@ MonoBehaviour:
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  loopAudio: 00000000
+  loopAudio: 0000000000000000000000000000000000000000
   audio_sequence: 0000000000000000000000000000000000000000
   fadeInBetween: 0000000000
   audioClipsNew:
@@ -25640,7 +25660,7 @@ MonoBehaviour:
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  loopAudio: 00000000
+  loopAudio: 0000000000000000000000000000000000000000
   audio_sequence: 0000000000000000000000000000000000000000
   fadeInBetween: 0000000000
   audioClipsNew:
