@@ -921,8 +921,8 @@ InputManager:
     m_Name: apelab Thumbstick Left
     descriptiveName:
     descriptiveNegativeName:
-    negativeButton:
-    positiveButton: joystick button 9
+    negativeButton: 
+    positiveButton: joystick button 8
     altNegativeButton:
     altPositiveButton:
     gravity: 1000
