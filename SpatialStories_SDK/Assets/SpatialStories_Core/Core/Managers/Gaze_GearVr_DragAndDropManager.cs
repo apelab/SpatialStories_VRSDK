@@ -142,7 +142,7 @@ namespace Gaze
                 transform.SetParent(m_TargetObject.transform);
                 Gaze_InteractiveObject IO = GetComponent<Gaze_InteractiveObject>();
                 Gaze_DragAndDropCondition conditions = GetComponentInChildren<Gaze_DragAndDropCondition>();
-                if (conditions != null && conditions.attached)
+                if (IO.DnD_attached)
                 {
                     IO.DisableManipulationMode(Gaze_ManipulationModes.GRAB);
                     IO.IsManipulable = false;

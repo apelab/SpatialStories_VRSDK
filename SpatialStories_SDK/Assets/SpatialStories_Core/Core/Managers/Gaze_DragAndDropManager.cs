@@ -26,20 +26,6 @@ namespace Gaze
     public class Gaze_DragAndDropManager : MonoBehaviour
     {
         #region public Members
-        // in unity units
-        public float angleThreshold = 1f;
-        // 0 is perpendicular, 1 is same direction
-        public bool respectXAxis = false;
-        public bool respectXAxisMirrored = false;
-        public bool respectYAxis = false;
-        public bool respectYAxisMirrored = false;
-        public bool respectZAxis = false;
-        public bool respectZAxisMirrored = false;
-        public bool m_SnapBeforeDrop = true;
-
-        // snaps only if attached on drop
-        public float m_TimeToSnap = 0.5f;
-
         [Gaze_ShowOnly]
         private bool m_Grabbed, isLevitating;
         [Gaze_ShowOnly]
@@ -145,9 +131,9 @@ namespace Gaze
                 Gaze_GravityManager.ChangeGravityState(GetComponent<Gaze_InteractiveObject>(), Gaze_GravityRequestType.LOCK);
             }
 
-            if (m_SnapBeforeDrop)
+            if (interactiveObject.DnD_snapBeforeDrop)
             {
-                Snap(m_TimeToSnap);
+                Snap(interactiveObject.DnD_TimeToSnap);
                 m_Snapped = true;
             }
 
@@ -157,7 +143,7 @@ namespace Gaze
 
         private void Remove()
         {
-            if (m_SnapBeforeDrop)
+            if (interactiveObject.DnD_snapBeforeDrop)
             {
                 UnSnap();
                 m_Snapped = false;
@@ -180,12 +166,11 @@ namespace Gaze
                 // parent to target object
                 //transform.SetParent(currentDragAndDropCondition.TargetObject.transform);
                 transform.SetParent(targetTransform.transform);
-                Gaze_InteractiveObject IO = GetComponent<Gaze_InteractiveObject>();
 
-                if (currentDragAndDropCondition != null && currentDragAndDropCondition.attached)
+                if (interactiveObject.DnD_attached)
                 {
-                    Gaze_Manipulation manipulation = IO.GetComponent<Gaze_Manipulation>();
-                    Gaze_HandHover handHover = IO.GetComponentInChildren<Gaze_HandHover>();
+                    Gaze_Manipulation manipulation = interactiveObject.GetComponent<Gaze_Manipulation>();
+                    Gaze_HandHover handHover = interactiveObject.GetComponentInChildren<Gaze_HandHover>();
 
                     if (manipulation != null)
                         IO.GetComponentInChildren<Gaze_Manipulation>().gameObject.SetActive(false);
@@ -198,7 +183,7 @@ namespace Gaze
 
                 if (m_SnapOnDrop)
                 {
-                    Snap(m_TimeToSnap);
+                    Snap(interactiveObject.DnD_TimeToSnap);
                 }
             }
 
@@ -208,7 +193,7 @@ namespace Gaze
 
         private void PickUp()
         {
-            if (m_SnapBeforeDrop)
+            if (interactiveObject.DnD_snapBeforeDrop)
             {
                 Snap();
                 m_Snapped = true;
@@ -268,31 +253,31 @@ namespace Gaze
             float[] zDotProducts = { Vector3.Dot(transform.right, targetTransform.right), Vector3.Dot(transform.up, targetTransform.up) };
 
             // is respectAxis checked?
-            float[] xAxisSimilarity = respectXAxis ? xDotProducts : validArray;
-            if (respectXAxisMirrored)
+            float[] xAxisSimilarity = interactiveObject.DnD_respectXAxis ? xDotProducts : validArray;
+            if (interactiveObject.DnD_respectXAxisMirrored)
             {
                 xAxisSimilarity[0] = Mathf.Abs(xAxisSimilarity[0]);
                 xAxisSimilarity[1] = Mathf.Abs(xAxisSimilarity[1]);
             }
 
-            float[] yAxisSimilarity = respectYAxis ? yDotProducts : validArray;
-            if (respectYAxisMirrored)
+            float[] yAxisSimilarity = interactiveObject.DnD_respectYAxis ? yDotProducts : validArray;
+            if (interactiveObject.DnD_respectYAxisMirrored)
             {
                 yAxisSimilarity[0] = Mathf.Abs(yAxisSimilarity[0]);
                 yAxisSimilarity[1] = Mathf.Abs(yAxisSimilarity[1]);
             }
 
-            float[] zAxisSimilarity = respectZAxis ? zDotProducts : validArray;
-            if (respectZAxisMirrored)
+            float[] zAxisSimilarity = interactiveObject.DnD_respectZAxis ? zDotProducts : validArray;
+            if (interactiveObject.DnD_respectZAxisMirrored)
             {
                 zAxisSimilarity[0] = Mathf.Abs(zAxisSimilarity[0]);
                 zAxisSimilarity[1] = Mathf.Abs(zAxisSimilarity[1]);
             }
 
             // check if rotations are valid
-            bool xValidRotation = xAxisSimilarity[0] > (angleThreshold / 100) || xAxisSimilarity[1] > (angleThreshold / 100);
-            bool yValidRotation = yAxisSimilarity[0] > (angleThreshold / 100) || yAxisSimilarity[1] > (angleThreshold / 100);
-            bool zValidRotation = zAxisSimilarity[0] > (angleThreshold / 100) || zAxisSimilarity[1] > (angleThreshold / 100);
+            bool xValidRotation = xAxisSimilarity[0] > (interactiveObject.DnD_angleThreshold / 100) || xAxisSimilarity[1] > (interactiveObject.DnD_angleThreshold / 100);
+            bool yValidRotation = yAxisSimilarity[0] > (interactiveObject.DnD_angleThreshold / 100) || yAxisSimilarity[1] > (interactiveObject.DnD_angleThreshold / 100);
+            bool zValidRotation = zAxisSimilarity[0] > (interactiveObject.DnD_angleThreshold / 100) || zAxisSimilarity[1] > (interactiveObject.DnD_angleThreshold / 100);
             bool validRotation = xValidRotation && yValidRotation && zValidRotation;
 
 

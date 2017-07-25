@@ -174,6 +174,11 @@ namespace Gaze
         public bool DnD_respectZAxisMirrored = false;
         public bool DnD_snapBeforeDrop = true;
         public float DnD_TimeToSnap = 0.5f;
+        /// <summary>
+        /// If TRUE, once dropped, the object can't be grabbed again.
+        /// </summary>
+        public bool DnD_attached;
+
         //public bool DnD_IsTarget = false;
         public List<GameObject> DnD_Targets;
 

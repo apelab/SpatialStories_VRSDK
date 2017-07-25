@@ -30,11 +30,6 @@ namespace Gaze
         private Gaze_DragAndDropManager dragAndDropManager;
         private bool debug = false;
 
-        /// <summary>
-        /// If TRUE, once dropped, the object can't be grabbed again.
-        /// </summary>
-        public bool attached = false;
-
         public Gaze_DragAndDropCondition(Gaze_Conditions _gazeConditionsScript) : base(_gazeConditionsScript) { }
 
         private GameObject dropTarget;

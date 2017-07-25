@@ -445,7 +445,7 @@ namespace Gaze
                 {
                     // This avoids the false positive problem created by the fact that the obejct is already attached by the dnd manager. 
                     Gaze_DragAndDropCondition dndCondition = actionsScript.GetComponent<Gaze_DragAndDropCondition>();
-                    if (dndCondition == null || !dndCondition.attached)
+                    if (!actionsScript.GetIO().DnD_attached)
                         EditorGUILayout.HelpBox("Object will fall off the map (deactivate gravity to prevent it).", MessageType.Warning);
                 }
             }
