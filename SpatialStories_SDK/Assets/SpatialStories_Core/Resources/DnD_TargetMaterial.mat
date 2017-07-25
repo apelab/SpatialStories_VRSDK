@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: DnD_TargetMaterial
-  m_Shader: {fileID: 4800000, guid: 6125cc3cbec4b464b9a2877f0e452cf0, type: 3}
+  m_Shader: {fileID: 4800000, guid: 2490ff1b892c40646b2b0d6fa52c8339, type: 3}
   m_ShaderKeywords: _EMISSION
   m_LightmapFlags: 1
   m_EnableInstancingVariants: 0
@@ -79,17 +79,18 @@ Material:
     - _BiasMT: 1
     - _BiasMT2: 1
     - _BiasMT3: 1
-    - _Bri: 0.2
+    - _Bri: -0.024
     - _BumpScale: 1
-    - _Con: 1.22
+    - _Con: 0.938
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DisTexType: 1
     - _DslEA: 0.5
-    - _DslEI: 0.992
+    - _DslEI: 0.459
     - _DslER: 0.182
     - _DslGl: -1.96
     - _DstBlend: 0
+    - _FPOW: 19.4
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
@@ -99,6 +100,7 @@ Material:
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _Queue: 3000
+    - _R0: 0.51
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
@@ -129,7 +131,7 @@ Material:
     - _tTA: 0
     - _tTAE: 0
     m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 0, g: 0.91724133, b: 1, a: 1}
     - _DslEC: {r: 0.7794118, g: 0.16619812, b: 0.16619812, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Pan1: {r: 0, g: 0, b: 0, a: 0}
@@ -147,4 +149,4 @@ Material:
     - _Tile3: {r: 1, g: 1, b: 0, a: 0}
     - _TileDs: {r: 1, g: 1, b: 0, a: 0}
     - _TileDsl: {r: 1, g: 1, b: 0, a: 0}
-    - _TintColor: {r: 0, g: 0.8758622, b: 1, a: 0.078431375}
+    - _TintColor: {r: 0, g: 0.8758622, b: 1, a: 0.228}

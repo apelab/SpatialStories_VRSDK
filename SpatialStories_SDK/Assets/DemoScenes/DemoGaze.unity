@@ -270,6 +270,7 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
+  DnD_attached: 0
   DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
@@ -343,7 +344,7 @@ Transform:
   m_GameObject: {fileID: 22504286}
   m_LocalRotation: {x: 0, y: 0.8319541, z: 0, w: 0.55484444}
   m_LocalPosition: {x: 5.27, y: 2.7225013, z: -12.07}
-  m_LocalScale: {x: 1.1529417, y: 1, z: 0.8755924}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1303804977}
   - {fileID: 1098332627}
@@ -393,6 +394,7 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
+  DnD_attached: 0
   DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
@@ -908,7 +910,7 @@ Transform:
   - {fileID: 2045722895}
   - {fileID: 558669654}
   m_Father: {fileID: 1548245425}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 112.6, z: 0}
 --- !u!114 &86907240
 MonoBehaviour:
@@ -946,6 +948,7 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
+  DnD_attached: 0
   DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
@@ -1548,7 +1551,7 @@ MonoBehaviour:
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  loopAudio: 00000000
+  loopAudio: 0000000000000000000000000000000000000000
   audio_sequence: 0000000000000000000000000000000000000000
   fadeInBetween: 0000000000
   audioClipsNew:
@@ -2044,7 +2047,7 @@ MonoBehaviour:
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  loopAudio: 00000000
+  loopAudio: 0000000000000000000000000000000000000000
   audio_sequence: 0000000000000000000000000000000000000000
   fadeInBetween: 0000000000
   audioClipsNew:
@@ -2447,9 +2450,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 217761374}
-  m_LocalRotation: {x: 0, y: 0.19979553, z: 0, w: 0.97983766}
-  m_LocalPosition: {x: 2.323, y: 2.2225013, z: -4.845}
-  m_LocalScale: {x: 1.5256133, y: 2.1438344, z: 1.3295094}
+  m_LocalRotation: {x: -0, y: 0.3871133, z: -0, w: 0.9220322}
+  m_LocalPosition: {x: 2.72317, y: 0, z: -1.3399428}
+  m_LocalScale: {x: 1.0751665, y: 1, z: 0.9344957}
   m_Children:
   - {fileID: 2061111428}
   - {fileID: 1689654489}
@@ -2460,8 +2463,8 @@ Transform:
   - {fileID: 1771738748}
   - {fileID: 1132526193}
   - {fileID: 1741171621}
-  m_Father: {fileID: 1548245425}
-  m_RootOrder: 1
+  m_Father: {fileID: 858839171}
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 23.05, z: 0}
 --- !u!114 &217761376
 MonoBehaviour:
@@ -2499,6 +2502,7 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
+  DnD_attached: 0
   DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
@@ -2780,7 +2784,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 84b1acb7cb7dca14088a41d25bb3143c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -2969,7 +2973,7 @@ Transform:
   - {fileID: 1586648920}
   - {fileID: 1575400324}
   m_Father: {fileID: 1548245425}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: -202.8, z: 0}
 --- !u!114 &264245637
 MonoBehaviour:
@@ -3007,6 +3011,7 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
+  DnD_attached: 0
   DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
@@ -3310,6 +3315,7 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
+  DnD_attached: 0
   DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
@@ -3768,7 +3774,7 @@ MonoBehaviour:
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  loopAudio: 00000000
+  loopAudio: 0000000000000000000000000000000000000000
   audio_sequence: 0000000000000000000000000000000000000000
   fadeInBetween: 0000000000
   audioClipsNew:
@@ -4434,7 +4440,7 @@ MonoBehaviour:
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  loopAudio: 00000000
+  loopAudio: 0000000000000000000000000000000000000000
   audio_sequence: 0000000000000000000000000000000000000000
   fadeInBetween: 0000000000
   audioClipsNew:
@@ -4598,7 +4604,7 @@ Transform:
   m_GameObject: {fileID: 474410875}
   m_LocalRotation: {x: 0, y: -0.5555702, z: 0, w: 0.8314697}
   m_LocalPosition: {x: -5.22, y: 2.7225013, z: -7.8}
-  m_LocalScale: {x: 1.5325758, y: 1, z: 0.67128336}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 435492130}
   - {fileID: 874376588}
@@ -4648,6 +4654,7 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
+  DnD_attached: 0
   DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
@@ -5116,7 +5123,7 @@ Transform:
   - {fileID: 120373977}
   - {fileID: 1207573144}
   m_Father: {fileID: 1548245425}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: -157.3, z: 0}
 --- !u!114 &549426142
 MonoBehaviour:
@@ -5154,6 +5161,7 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
+  DnD_attached: 0
   DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
@@ -7832,7 +7840,7 @@ MonoBehaviour:
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  loopAudio: 00000000
+  loopAudio: 0000000000000000000000000000000000000000
   audio_sequence: 0000000000000000000000000000000000000000
   fadeInBetween: 0000000000
   audioClipsNew:
@@ -8287,6 +8295,7 @@ Transform:
   - {fileID: 597280754}
   - {fileID: 554648246}
   - {fileID: 471541252}
+  - {fileID: 217761375}
   m_Father: {fileID: 1548245425}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -22.5, z: 0}
@@ -8326,6 +8335,7 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
+  DnD_attached: 0
   DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
@@ -8771,7 +8781,7 @@ Transform:
   m_GameObject: {fileID: 903777289}
   m_LocalRotation: {x: 0, y: -0.5555702, z: 0, w: 0.8314697}
   m_LocalPosition: {x: -5.22, y: 2.2225013, z: -7.8}
-  m_LocalScale: {x: 1.5256133, y: 2.1438344, z: 1.3295094}
+  m_LocalScale: {x: 1.525614, y: 2.1438344, z: 1.3295094}
   m_Children:
   - {fileID: 233714077}
   - {fileID: 2122188350}
@@ -8783,7 +8793,7 @@ Transform:
   - {fileID: 94553746}
   - {fileID: 1591950611}
   m_Father: {fileID: 1548245425}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: -67.5, z: 0}
 --- !u!114 &903777291
 MonoBehaviour:
@@ -8821,6 +8831,7 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
+  DnD_attached: 0
   DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
@@ -9108,7 +9119,7 @@ MonoBehaviour:
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  loopAudio: 00000000
+  loopAudio: 0000000000000000000000000000000000000000
   audio_sequence: 0000000000000000000000000000000000000000
   fadeInBetween: 0000000000
   audioClipsNew:
@@ -9601,7 +9612,7 @@ MonoBehaviour:
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  loopAudio: 00000000
+  loopAudio: 0000000000000000000000000000000000000000
   audio_sequence: 0000000000000000000000000000000000000000
   fadeInBetween: 0000000000
   audioClipsNew:
@@ -10132,7 +10143,7 @@ MonoBehaviour:
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  loopAudio: 00000000
+  loopAudio: 0000000000000000000000000000000000000000
   audio_sequence: 0000000000000000000000000000000000000000
   fadeInBetween: 0000000000
   audioClipsNew:
@@ -10727,7 +10738,7 @@ Transform:
   m_GameObject: {fileID: 1107565955}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.00000062511, y: -0.00000022242, z: -8.6e-14}
-  m_LocalScale: {x: 0.019345954, y: 0.023177043, z: 1}
+  m_LocalScale: {x: 0.024336603, y: 0.023177043, z: 1}
   m_Children: []
   m_Father: {fileID: 1866562137}
   m_RootOrder: 0
@@ -11063,6 +11074,7 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
+  DnD_attached: 0
   DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
@@ -12198,6 +12210,7 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
+  DnD_attached: 0
   DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
@@ -12227,7 +12240,7 @@ Transform:
   m_GameObject: {fileID: 1273045694}
   m_LocalRotation: {x: 0, y: -0.83146966, z: 0, w: 0.55557024}
   m_LocalPosition: {x: -5.23, y: 2.7225003, z: -12.19}
-  m_LocalScale: {x: 1.4273074, y: 1, z: 0.7173882}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 358003667}
   - {fileID: 1873829130}
@@ -12277,6 +12290,7 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
+  DnD_attached: 0
   DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
@@ -13006,7 +13020,7 @@ MonoBehaviour:
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  loopAudio: 00000000
+  loopAudio: 0000000000000000000000000000000000000000
   audio_sequence: 0000000000000000000000000000000000000000
   fadeInBetween: 0000000000
   audioClipsNew:
@@ -13847,7 +13861,7 @@ MonoBehaviour:
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  loopAudio: 00000000
+  loopAudio: 0000000000000000000000000000000000000000
   audio_sequence: 0000000000000000000000000000000000000000
   fadeInBetween: 0000000000
   audioClipsNew:
@@ -14334,7 +14348,7 @@ MonoBehaviour:
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  loopAudio: 00000000
+  loopAudio: 0000000000000000000000000000000000000000
   audio_sequence: 0000000000000000000000000000000000000000
   fadeInBetween: 0000000000
   audioClipsNew:
@@ -14816,7 +14830,7 @@ Transform:
   m_GameObject: {fileID: 1530059384}
   m_LocalRotation: {x: 0, y: -0.9804433, z: 0, w: 0.19680174}
   m_LocalPosition: {x: -2.146, y: 2.7225013, z: -15.248}
-  m_LocalScale: {x: 1.3292723, y: 1, z: 0.76666325}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 834694650}
   - {fileID: 664780323}
@@ -14866,6 +14880,7 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
+  DnD_attached: 0
   DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
@@ -15005,6 +15020,7 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
+  DnD_attached: 0
   DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
@@ -15095,7 +15111,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 858839171}
-  - {fileID: 217761375}
   - {fileID: 1726659153}
   - {fileID: 86907239}
   - {fileID: 264245636}
@@ -15788,7 +15803,7 @@ MonoBehaviour:
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  loopAudio: 00000000
+  loopAudio: 0000000000000000000000000000000000000000
   audio_sequence: 0000000000000000000000000000000000000000
   fadeInBetween: 0000000000
   audioClipsNew:
@@ -16438,7 +16453,7 @@ MonoBehaviour:
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  loopAudio: 00000000
+  loopAudio: 0000000000000000000000000000000000000000
   audio_sequence: 0000000000000000000000000000000000000000
   fadeInBetween: 0000000000
   audioClipsNew:
@@ -16742,7 +16757,7 @@ MonoBehaviour:
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  loopAudio: 00000000
+  loopAudio: 0000000000000000000000000000000000000000
   audio_sequence: 0000000000000000000000000000000000000000
   fadeInBetween: 0000000000
   audioClipsNew:
@@ -17616,7 +17631,7 @@ MonoBehaviour:
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  loopAudio: 00000000
+  loopAudio: 0000000000000000000000000000000000000000
   audio_sequence: 0000000000000000000000000000000000000000
   fadeInBetween: 0000000000
   audioClipsNew:
@@ -17985,7 +18000,7 @@ Transform:
   - {fileID: 2121782568}
   - {fileID: 1100493811}
   m_Father: {fileID: 1548245425}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 67.6, z: 0}
 --- !u!114 &1726659154
 MonoBehaviour:
@@ -18023,6 +18038,7 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
+  DnD_attached: 0
   DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
@@ -18552,7 +18568,7 @@ MonoBehaviour:
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  loopAudio: 00000000
+  loopAudio: 0000000000000000000000000000000000000000
   audio_sequence: 0000000000000000000000000000000000000000
   fadeInBetween: 0000000000
   audioClipsNew:
@@ -19270,7 +19286,7 @@ MonoBehaviour:
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  loopAudio: 00000000
+  loopAudio: 0000000000000000000000000000000000000000
   audio_sequence: 0000000000000000000000000000000000000000
   fadeInBetween: 0000000000
   audioClipsNew:
@@ -19574,7 +19590,7 @@ MonoBehaviour:
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  loopAudio: 00000000
+  loopAudio: 0000000000000000000000000000000000000000
   audio_sequence: 0000000000000000000000000000000000000000
   fadeInBetween: 0000000000
   audioClipsNew:
@@ -19887,7 +19903,7 @@ Transform:
   m_GameObject: {fileID: 1826290308}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.00000062511, y: -0.00000022242, z: -8.6e-14}
-  m_LocalScale: {x: 0.018968655, y: 0.021369651, z: 1}
+  m_LocalScale: {x: 0.025484052, y: 0.021369651, z: 1}
   m_Children: []
   m_Father: {fileID: 1643462166}
   m_RootOrder: 0
@@ -20147,6 +20163,7 @@ GameObject:
   - component: {fileID: 1847431881}
   - component: {fileID: 1847431880}
   - component: {fileID: 1847431879}
+  - component: {fileID: 1847431883}
   m_Layer: 0
   m_Name: Camera (IO)
   m_TagString: MainCamera
@@ -20260,6 +20277,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1847431883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1847431878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58d4e2d162e9e4047a2a5939860c8413, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  viveHeigth: 0
 --- !u!1 &1849172421
 GameObject:
   m_ObjectHideFlags: 0
@@ -20469,7 +20498,7 @@ MonoBehaviour:
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  loopAudio: 00000000
+  loopAudio: 0000000000000000000000000000000000000000
   audio_sequence: 0000000000000000000000000000000000000000
   fadeInBetween: 0000000000
   audioClipsNew:
@@ -20806,7 +20835,7 @@ MonoBehaviour:
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  loopAudio: 00000000
+  loopAudio: 0000000000000000000000000000000000000000
   audio_sequence: 0000000000000000000000000000000000000000
   fadeInBetween: 0000000000
   audioClipsNew:
@@ -21113,7 +21142,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1860826624}
   m_LocalRotation: {x: 0, y: 0.19979553, z: 0, w: 0.97983766}
-  m_LocalPosition: {x: 2.323, y: 2.7225013, z: -4.845}
+  m_LocalPosition: {x: 2.313, y: 2.7225013, z: -4.868}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1867425988}
@@ -21164,6 +21193,7 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
+  DnD_attached: 0
   DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
@@ -21499,7 +21529,7 @@ Transform:
   - {fileID: 877267006}
   - {fileID: 576535888}
   m_Father: {fileID: 1548245425}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: -112.5, z: 0}
 --- !u!114 &1867720265
 MonoBehaviour:
@@ -21537,6 +21567,7 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
+  DnD_attached: 0
   DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
@@ -22205,7 +22236,7 @@ MonoBehaviour:
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  loopAudio: 00000000
+  loopAudio: 0000000000000000000000000000000000000000
   audio_sequence: 0000000000000000000000000000000000000000
   fadeInBetween: 0000000000
   audioClipsNew:
@@ -22550,7 +22581,7 @@ MonoBehaviour:
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  loopAudio: 00000000
+  loopAudio: 0000000000000000000000000000000000000000
   audio_sequence: 0000000000000000000000000000000000000000
   fadeInBetween: 0000000000
   audioClipsNew:
@@ -23441,7 +23472,7 @@ Transform:
   m_GameObject: {fileID: 1992424133}
   m_LocalRotation: {x: 0, y: 0.55629563, z: 0, w: 0.83098453}
   m_LocalPosition: {x: 5.209, y: 2.7225003, z: -7.755}
-  m_LocalScale: {x: 1.073751, y: 1, z: 0.93573016}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 953650876}
   - {fileID: 776403461}
@@ -23491,6 +23522,7 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
+  DnD_attached: 0
   DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
@@ -24002,6 +24034,7 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
+  DnD_attached: 0
   DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
@@ -24399,7 +24432,7 @@ MonoBehaviour:
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  loopAudio: 00000000
+  loopAudio: 0000000000000000000000000000000000000000
   audio_sequence: 0000000000000000000000000000000000000000
   fadeInBetween: 0000000000
   audioClipsNew:
@@ -24549,7 +24582,7 @@ Transform:
   m_GameObject: {fileID: 2111305141}
   m_LocalRotation: {x: -0, y: -0.9802712, z: 0, w: -0.19765717}
   m_LocalPosition: {x: 2.227, y: 2.7225013, z: -15.207}
-  m_LocalScale: {x: 1.2379726, y: 1, z: 0.8193176}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 552728455}
   - {fileID: 554381332}
@@ -24599,6 +24632,7 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
+  DnD_attached: 0
   DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0

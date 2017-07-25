@@ -378,14 +378,7 @@ namespace Gaze
                     // update the list of all possible rig groups
                     targetConditions.UpdateRigSets(Gaze_Proximity.HierarchyRigProximities);
 
-                    if (targetConditions.proximityMap.proximityEntryGroupList.Count < 1 && Gaze_Proximity.HierarchyRigProximities.Count > 1)
-                    {
-                        // display 'add rig group' button
-                        if (GUILayout.Button("Add Rig Group"))
-                        {
-                            targetConditions.proximityMap.AddProximityEntryGroup(targetConditions);
-                        }
-                    }
+             
 
 
                     // This is a HOTFIX for solving editor problems that appear when user deletes every element of rig except one and there is a proximity rig group set up somewhere
@@ -421,6 +414,8 @@ namespace Gaze
                             EditorGUILayout.EndHorizontal();
                         }
                     }
+
+
 
 
                     for (int i = 0; i < targetConditions.proximityMap.proximityEntryList.Count; i++)
@@ -481,8 +476,18 @@ namespace Gaze
                         }
                         EditorGUILayout.EndHorizontal();
                     }
+
+                    if (targetConditions.proximityMap.proximityEntryGroupList.Count < 1 && Gaze_Proximity.HierarchyRigProximities.Count > 1)
+                    {
+                        // display 'add rig group' button
+                        if (GUILayout.Button("Add Rig Group"))
+                        {
+                            targetConditions.proximityMap.AddProximityEntryGroup(targetConditions);
+                        }
+                    }
                 }
             }
+
             EditorGUILayout.Space();
         }
 

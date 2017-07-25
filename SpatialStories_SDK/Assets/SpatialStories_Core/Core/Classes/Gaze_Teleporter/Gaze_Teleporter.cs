@@ -125,7 +125,6 @@ public class Gaze_Teleporter : MonoBehaviour
 
         if (actualTeleportLogic != null)
             actualTeleportLogic.Setup();
-
     }
 
     void OnEnable()
@@ -568,6 +567,14 @@ public class Gaze_Teleporter : MonoBehaviour
             gaze_TeleportEventArgs.Mode = Gaze_TeleportMode.TELEPORT;
             Gaze_EventManager.FireTeleportEvent(gaze_TeleportEventArgs);
         }
+    }
+
+    public void MoveToGyro()
+    {
+        if (OrientOnTeleport)
+            RotateCamera();
+
+        MoveToTarget(gyroInstance.transform.position);
     }
 
     /*
