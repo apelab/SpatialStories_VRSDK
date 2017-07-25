@@ -48,6 +48,9 @@ namespace Gaze
         private Gaze_InteractiveObject IO;
         private Coroutine m_SnapCoroutine;
         private Gaze_InteractiveObject interactiveObject;
+        private Gaze_Manipulation IO_Manipulation;
+        private Gaze_HandHover IO_HandHover;
+
 
         private Transform targetTransform;
         #endregion
@@ -76,13 +79,15 @@ namespace Gaze
         void Start()
         {
             IO = GetComponent<Gaze_InteractiveObject>();
+            IO_HandHover = IO.GetComponentInChildren<Gaze_HandHover>();
+            IO_Manipulation = IO.GetComponentInChildren<Gaze_Manipulation>();
             grabbingControllers = new Gaze_HandController[2];
         }
 
         void Update()
         {
 
-            if (!m_Grabbed && !isLevitating)
+            if ((!m_Grabbed && !isLevitating) || !interactiveObject.IsDragAndDropEnabled)
                 return;
 
             isCurrentlyAligned = IsObjectAlignedWithItsTarget();
@@ -169,13 +174,11 @@ namespace Gaze
 
                 if (interactiveObject.DnD_attached)
                 {
-                    Gaze_Manipulation manipulation = interactiveObject.GetComponent<Gaze_Manipulation>();
-                    Gaze_HandHover handHover = interactiveObject.GetComponentInChildren<Gaze_HandHover>();
+                    if (IO_Manipulation != null)
+                        IO_Manipulation.gameObject.SetActive(false);
+                    if (IO_HandHover != null)
+                        IO_HandHover.gameObject.SetActive(false);
 
-                    if (manipulation != null)
-                        IO.GetComponentInChildren<Gaze_Manipulation>().gameObject.SetActive(false);
-                    if (handHover != null)
-                        IO.GetComponentInChildren<Gaze_HandHover>().gameObject.SetActive(false);
 
                     IO.IsManipulable = false;
                     IO.SetManipulationMode(false, true);
@@ -468,6 +471,21 @@ namespace Gaze
                     Unlevitate();
                 }
             }
+        }
+
+        public void UnAttach()
+        {
+            if (IO_Manipulation != null)
+            {
+                IO_Manipulation.gameObject.SetActive(true);
+            }
+
+            if (IO_HandHover != null)
+            {
+                IO_HandHover.gameObject.SetActive(true);
+            }
+            IO.IsManipulable = true;
+            IO.SetManipulationMode(true, true);
         }
     }
 }

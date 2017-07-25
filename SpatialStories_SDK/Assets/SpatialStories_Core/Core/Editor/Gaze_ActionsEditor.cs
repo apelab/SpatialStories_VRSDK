@@ -304,6 +304,7 @@ namespace Gaze
                         ShowGrabModeOption();
                         ShowTouchAbilityOption();
                         ShowTouchDistanceOption();
+                        ShowDragAndDropOptions();
 
                         ShowCollidersOption();
                         ShowGravityOption();
@@ -322,6 +323,8 @@ namespace Gaze
             base.EndChangeComparision();
             EditorUtility.SetDirty(actionsScript);
         }
+
+
 
         private void ShowTouchDistanceOption()
         {
@@ -517,6 +520,99 @@ namespace Gaze
                 GUILayout.EndHorizontal();
             }
         }
+
+        private void ShowDragAndDropOptions()
+        {
+            actionsScript.ModifyDragAndDrop = (Gaze_Actions.ALTERABLE_OPTION)EditorGUILayout.EnumPopup("Drag And Drop", actionsScript.ModifyDragAndDrop);
+            if (actionsScript.ModifyDragAndDrop == Gaze_Actions.ALTERABLE_OPTION.MODIFY)
+            {
+                EditorGUILayout.BeginHorizontal();
+                actionsScript.ActionDragAndDrop = (Gaze_Actions.ACTIVABLE_OPTION)EditorGUILayout.EnumPopup(actionsScript.ActionDragAndDrop);
+                EditorGUILayout.EndHorizontal();
+
+                EditorGUILayout.BeginHorizontal();
+                actionsScript.ModifyDnDMinDistance = (Gaze_Actions.ALTERABLE_OPTION)EditorGUILayout.EnumPopup("Min Distance", actionsScript.ModifyDnDMinDistance);
+                EditorGUILayout.EndHorizontal();
+                if (actionsScript.ModifyDnDMinDistance == Gaze_Actions.ALTERABLE_OPTION.MODIFY)
+                {
+                    EditorGUILayout.BeginHorizontal();
+                    actionsScript.dnDMinDistance = EditorGUILayout.FloatField("", actionsScript.dnDMinDistance);
+                    Gaze_Utils.EnsureFieldIsPositiveOrZero(ref actionsScript.dnDMinDistance);
+                    EditorGUILayout.EndHorizontal();
+                }
+
+                EditorGUILayout.BeginHorizontal();
+                actionsScript.ModifyDnDSnapBeforeDrop = (Gaze_Actions.ACTIVABLE_OPTION)EditorGUILayout.EnumPopup("Snap Before Drop", actionsScript.ModifyDnDSnapBeforeDrop);
+                EditorGUILayout.EndHorizontal();
+
+                EditorGUILayout.BeginHorizontal();
+                actionsScript.ModifyDnDAttached = (Gaze_Actions.ACTIVABLE_OPTION)EditorGUILayout.EnumPopup("Attached", actionsScript.ModifyDnDAttached);
+                EditorGUILayout.EndHorizontal();
+
+                DisplayDnDAxisConstraints();
+
+
+                EditorGUILayout.BeginHorizontal();
+                actionsScript.ModifyDnDAngleThreshold = (Gaze_Actions.ALTERABLE_OPTION)EditorGUILayout.EnumPopup("Angle Threshold", actionsScript.ModifyDnDAngleThreshold);
+                EditorGUILayout.EndHorizontal();
+                if (actionsScript.ModifyDnDAngleThreshold == Gaze_Actions.ALTERABLE_OPTION.MODIFY)
+                {
+                    EditorGUILayout.BeginHorizontal();
+                    actionsScript.dnDAngleThreshold = EditorGUILayout.FloatField("", actionsScript.dnDAngleThreshold);
+                    Gaze_Utils.EnsureFieldIsPositiveOrZero(ref actionsScript.dnDAngleThreshold);
+                    EditorGUILayout.EndHorizontal();
+                }
+
+
+                DisplayDnDTargets();
+
+                EditorGUILayout.Space();
+            }
+        }
+
+        private void DisplayDnDTargets()
+        {
+            /*
+            EditorGUILayout.BeginHorizontal();
+            actionsScript.ModifyDragAndDropTargets = (Gaze_Actions.ALTERABLE_OPTION)EditorGUILayout.EnumPopup("Targets", actionsScript.ModifyDragAndDropTargets);
+            EditorGUILayout.EndHorizontal();
+            if (actionsScript.ModifyDragAndDropTargets == Gaze_Actions.ALTERABLE_OPTION.MODIFY)
+            {
+                for (int i = 0; i < actionsScript.DnD_Targets.Count; i++)
+                    EditorGUILayout.BeginHorizontal();
+                actionsScript.DnD_Targets = EditorGUILayout.FloatField("", actionsScript.dnDMinDistance);
+                EditorGUILayout.EndHorizontal();
+            }
+            */
+        }
+
+        private void DisplayDnDAxisConstraints()
+        {
+            EditorGUILayout.BeginHorizontal();
+            actionsScript.ModifyDnDRespectAxis = (Gaze_Actions.ALTERABLE_OPTION)EditorGUILayout.EnumPopup("Respect Axis", actionsScript.ModifyDnDRespectAxis);
+            EditorGUILayout.EndHorizontal();
+            if (actionsScript.ModifyDnDRespectAxis == Gaze_Actions.ALTERABLE_OPTION.MODIFY)
+            {
+                EditorGUILayout.BeginHorizontal();
+                actionsScript.dnDRespectXAxis = EditorGUILayout.ToggleLeft("Respect X Axis", actionsScript.dnDRespectXAxis);
+                if (actionsScript.dnDRespectXAxis)
+                    actionsScript.dnDRespectXAxisMirror = EditorGUILayout.ToggleLeft("Mirrored", actionsScript.dnDRespectXAxisMirror);
+                EditorGUILayout.EndHorizontal();
+
+                EditorGUILayout.BeginHorizontal();
+                actionsScript.dnDRespectYAxis = EditorGUILayout.ToggleLeft("Respect Y Axis", actionsScript.dnDRespectYAxis);
+                if (actionsScript.dnDRespectYAxis)
+                    actionsScript.dnDRespectYAxisMirror = EditorGUILayout.ToggleLeft("Mirrored", actionsScript.dnDRespectYAxisMirror);
+                EditorGUILayout.EndHorizontal();
+
+                EditorGUILayout.BeginHorizontal();
+                actionsScript.dnDRespectZAxis = EditorGUILayout.ToggleLeft("Respect Z Axis", actionsScript.dnDRespectZAxis);
+                if (actionsScript.dnDRespectZAxis)
+                    actionsScript.dnDRespectZAxisMirror = EditorGUILayout.ToggleLeft("Mirrored", actionsScript.dnDRespectZAxisMirror);
+                EditorGUILayout.EndHorizontal();
+            }
+        }
+
 
         private void DisplayAnimBlock(int k)
         {

@@ -379,6 +379,12 @@ namespace Gaze
             }
         }
 
+        public void UnAttachDnDObject()
+        {
+            dragAndDropManager.UnAttach();
+        }
+
+
         /// <summary>
         /// Notify to everyone that this IO has been destroyed 
         /// </summary>
