@@ -26,6 +26,9 @@ namespace Gaze
 {
     public class Gaze_LevitationManager : MonoBehaviour
     {
+        public float DetachDistance = 0.5f;
+        public float DetachTime = 3f;
+
         #region members
         [Tooltip("The duration in seconds to charge the levitation")]
         public float chargeDuration = .1f;
@@ -52,6 +55,7 @@ namespace Gaze
         public bool active = true;
         public bool debug = false;
 
+        private bool isLeftHand;
         private GameObject controllerLeft, controllerRight;
         private Gaze_HandsEnum actualHand;
         private GameObject targetLocation;
@@ -89,6 +93,8 @@ namespace Gaze
         private bool dropReady;
         private IEnumerator updateBeamColorRoutine;
 
+        private Gaze_InteractiveObject IOToLevitate;
+        private GameObject DynamicLevitationPoint;
 
         public static List<Gaze_LevitationManager> LevitationManagers = new List<Gaze_LevitationManager>();
         #endregion
@@ -149,6 +155,7 @@ namespace Gaze
 
         void Start()
         {
+            isLeftHand = GetComponentInChildren<Gaze_GrabManager>().isLeftHand;
             actualHand = GetComponentInChildren<Gaze_GrabManager>().isLeftHand ? Gaze_HandsEnum.LEFT : Gaze_HandsEnum.RIGHT;
             isControllerTrigger = false;
             targetLocation = transform.Find("Levitation Target").gameObject;
@@ -180,27 +187,24 @@ namespace Gaze
             active = true;
         }
 
-        void Update()
+
+        void FixedUpdate()
         {
-            if (active)
+
+            if (IOToLevitate != null && IOToLevitate.GrabLogic.GrabbingManager != null && IOToLevitate.GrabLogic.GrabbingManager.isLeftHand != isLeftHand)
+                return;
+
+            if ((!isCharged && !isCharging) && isControllerTrigger)
             {
-                if ((!isCharged && !isCharging) && isControllerTrigger)
-                {
-                    StartCoroutine(Charge());
+                StartCoroutine(Charge());
+            }
 
-                }
-                else if (isCharging && !isControllerTrigger)
-                    ResetCharge();
-
-                if (isCharged)
-                {
-                    if (isControllerTrigger)
-                    {
-                        Levitate();
-                    }
-                    else
-                        ResetCharge();
-                }
+            if (!isCharged) return;
+            if (!isControllerTrigger)
+                ResetCharge();
+            else
+            {
+                Levitate();
             }
         }
 
@@ -305,6 +309,13 @@ namespace Gaze
 
             // get distance between headset and handsMidPoint
             startCameraHandsDistance = Vector3.Distance(Camera.main.transform.position, transform.position);
+
+            IOToLevitate.GrabLogic.SetDistanceTolerance(DetachDistance);
+            IOToLevitate.GrabLogic.SetTimeTolerance(DetachTime);
+
+            Gaze_EventManager.FireLevitationEvent(new Gaze_LevitationEventArgs(this, IOToLevitate.gameObject, Gaze_LevitationTypes.LEVITATE_START, actualHand));
+            IOToLevitate.GetComponent<Rigidbody>().collisionDetectionMode = CollisionDetectionMode.Continuous;
+
             #endregion
         }
 
@@ -388,35 +399,36 @@ namespace Gaze
 
         private void Levitate()
         {
-            if (objectToLevitate != null)
+            if (IOToLevitate == null) return;
+
+            // beam update
+            UpdateBeamControlPoints();
+            beamSplinePoints = Gaze_CatmullRomSpline.getSplinePoints(beamControlPoints);
+            for (int i = 0; i < beamSplinePoints.Length; i++)
             {
-                // beam update
-                UpdateBeamControlPoints();
-                beamSplinePoints = Gaze_CatmullRomSpline.getSplinePoints(beamControlPoints);
-                for (int i = 0; i < beamSplinePoints.Length; i++)
-                {
-                    beam.SetPosition(i, beamSplinePoints[i]);
-                }
-                AnimateBeamTexture();
-
-                // push / pull levitating object if needed
-                PullPush();
-
-                // move object to target's position
-                attachPoint.transform.position = Vector3.Lerp(attachPoint.transform.position, targetLocation.transform.position, Time.deltaTime * attractionForce);
-
-                // rotate attach point towards the controller
-                attachPoint.transform.LookAt(handLocation);
-
-                // rotate attach point according to controller's 'Z' rotation
-                attachPoint.transform.eulerAngles = new Vector3(attachPoint.transform.eulerAngles.x, attachPoint.transform.eulerAngles.y, handLocation.transform.eulerAngles.z * -1);
-
-                // get object's velocity
-                newPos = attachPoint.transform.position;
-                objectToLevitateVelocity = (newPos - oldPos) / Time.deltaTime;
-                oldPos = newPos;
-                newPos = attachPoint.transform.position;
+                beam.SetPosition(i, beamSplinePoints[i]);
             }
+
+            AnimateBeamTexture();
+
+            // push / pull levitating object if needed
+            PullPush();
+
+            // move object to target's position
+            attachPoint.transform.position = Vector3.Lerp(attachPoint.transform.position, targetLocation.transform.position, Time.fixedDeltaTime * attractionForce);
+
+            // rotate attach point towards the controller
+            attachPoint.transform.LookAt(handLocation);
+
+            // get object's velocity
+            newPos = attachPoint.transform.position;
+            objectToLevitateVelocity = (newPos - oldPos) / Time.deltaTime;
+            oldPos = newPos;
+            newPos = attachPoint.transform.position;
+
+            // rotate attach point according to controller's 'Z' rotation
+            attachPoint.transform.eulerAngles = new Vector3(attachPoint.transform.eulerAngles.x, attachPoint.transform.eulerAngles.y, handLocation.transform.eulerAngles.z * -1);
+            IOToLevitate.GrabLogic.FollowPoint(attachPoint.transform, DynamicLevitationPoint.transform);
         }
 
         private void PullPush()
@@ -483,21 +495,20 @@ namespace Gaze
         private void ResetCharge()
         {
             StopAllCoroutines();
-            if (isCharged)
-                tryActivateGravity(true);
             isCharged = false;
             isCharging = false;
             beam.positionCount = 1;
 
             GetComponent<AudioSource>().Stop();
 
-            // deactivate gravity if exists
-            TrySwitchGravity(objectToLevitate, true);
-
             // notify the levitation has stopped
-            Gaze_EventManager.FireLevitationEvent(new Gaze_LevitationEventArgs(this, objectToLevitate, Gaze_LevitationTypes.LEVITATE_STOP, actualHand));
+            if (IOToLevitate != null)
+                Gaze_EventManager.FireLevitationEvent(new Gaze_LevitationEventArgs(this, IOToLevitate.gameObject, Gaze_LevitationTypes.LEVITATE_STOP, actualHand));
+
             Gaze_GrabManager.EnableAllGrabManagers();
+            UpdateBeamFeedback(false);
         }
+
 
         private void tryActivateGravity(bool _enableGravity)
         {
@@ -520,37 +531,48 @@ namespace Gaze
 
             if (e.Type.Equals(Gaze_LevitationTypes.LEVITATE_START))
             {
+                IOToLevitate = Gaze_Utils.GetIOFromGameObject(e.ObjectToLevitate);
                 beam.enabled = true;
-                objectToLevitate = e.ObjectToLevitate;
                 Gaze_Teleporter.IsTeleportAllowed = false;
             }
             else if (e.Type.Equals(Gaze_LevitationTypes.LEVITATE_STOP))
             {
-                if (objectToLevitate)
-                    objectToLevitate.transform.parent = null;
-
-                objectToLevitate = null;
+                Destroy(DynamicLevitationPoint);
+                SetAttachColorVisibility(false);
+                IOToLevitate = null;
                 Gaze_GrabManager.EnableAllGrabManagers();
-                ClearAttachPoint();
                 Gaze_Teleporter.IsTeleportAllowed = true;
-
             }
         }
 
         private void OnControllerGrabEvent(Gaze_ControllerGrabEventArgs e)
         {
             // else, if the I'm the concerned controller
-            if ((e.ControllerObjectPair.Key.Equals(VRNode.LeftHand) && actualHand == Gaze_HandsEnum.LEFT) || (e.ControllerObjectPair.Key.Equals(VRNode.RightHand) && actualHand == Gaze_HandsEnum.RIGHT))
+            if ((e.ControllerObjectPair.Key.Equals(VRNode.LeftHand) && isLeftHand) || (e.ControllerObjectPair.Key.Equals(VRNode.RightHand) && !isLeftHand))
             {
                 // and this object is in LEVITATE mode
-                if (e.ControllerObjectPair.Value.GetComponent<Gaze_InteractiveObject>().GrabModeIndex.Equals((int)Gaze_GrabMode.LEVITATE))
+                if (e.ControllerObjectPair.Value.GetComponent<Gaze_InteractiveObject>().ManipulationMode == Gaze_ManipulationModes.LEVITATE)
                 {
                     isControllerTrigger = e.IsGrabbing;
-                    objectToLevitate = e.ControllerObjectPair.Value.GetComponent<Gaze_InteractiveObject>().gameObject;
+                    IOToLevitate = e.ControllerObjectPair.Value.GetComponent<Gaze_InteractiveObject>();
                     hitPosition = e.HitPosition;
+
+                    // Ensure 1 dynamic levitation point on the manager.
+
+                    Destroy(DynamicLevitationPoint);
+                    DynamicLevitationPoint = new GameObject();
+                    //DynamicLevitationPoint = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+                    DynamicLevitationPoint.transform.localScale = Vector3.zero;
+
+                    DynamicLevitationPoint.transform.position = e.HitPosition;
+                    DynamicLevitationPoint.transform.SetParent(IOToLevitate.transform);
+                    DynamicLevitationPoint.transform.rotation =
+                        IOToLevitate.transform.rotation;
                 }
+
             }
         }
+
 
         private void OnDragAndDropEvent(Gaze_DragAndDropEventArgs e)
         {
@@ -590,6 +612,19 @@ namespace Gaze
             beam.startColor = dropOffStartColor;
             beam.endColor = dropOffEndColor;
             attachPoint.GetComponent<Renderer>().material.color = dropOffEndColor;
+        }
+
+
+        public static bool IsIOBeingLevitatedByHand(Gaze_InteractiveObject io, bool isLefHand)
+        {
+            foreach (Gaze_LevitationManager manager in LevitationManagers)
+            {
+                if (manager.IOToLevitate == io && manager.actualHand == (isLefHand ? Gaze_HandsEnum.LEFT : Gaze_HandsEnum.RIGHT))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         #region GearVR Controller

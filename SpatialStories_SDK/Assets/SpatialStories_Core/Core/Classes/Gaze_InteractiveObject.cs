@@ -29,6 +29,12 @@ namespace Gaze
         #region Members
 
         /// <summary>
+        /// If this is active the gameobject won't be detached of the hand
+        /// </summary>
+        public bool IsSticky { get { return isSticky; } }
+        private bool isSticky = false;
+
+        /// <summary>
         /// Defines how the user can interact with the IO by using 
         /// his controllers.
         /// </summary>
@@ -123,35 +129,14 @@ namespace Gaze
 
         private float DISABLE_MANIPULATION_TIME = 1f;
 
-        /// <summary>
-        /// This bool is used to check if the object is being manipulated
-        /// </summary>
-        private bool isBeingManipulated = false;
-        public bool IsBeingManipulated { get { return isBeingManipulated; } }
-
         private GameObject actualGrabPoint = null;
         //private Gaze_Handle handle;
 
-        private Coroutine cancelManipulation;
-        private Vector3 lastPosition;
+        public Coroutine CancelManipulation;
 
-        /// <summary>
-        /// This flag defines when an object has been grabbed.
-        /// </summary>
-        private bool isBeingGrabbed = false;
-        public bool IsBeingGrabbed { get { return isBeingGrabbed; } }
+        private Gaze_GrabLogic grabLogic;
+        public Gaze_GrabLogic GrabLogic { get { if (grabLogic == null) grabLogic = new Gaze_GrabLogic(this); return grabLogic; } }
 
-        /// <summary>
-        /// If this is active the gameobject won't be detached of the hand
-        /// </summary>
-        public bool IsSticky { get { return isSticky; } }
-        private bool isSticky = false;
-
-        /// <summary>
-        /// The current grab manager that is grabbing this object
-        /// </summary>
-        public Gaze_GrabManager GrabbingManager { get { return grabbingMananger; } }
-        private Gaze_GrabManager grabbingMananger;
 
         public Gaze_GravityState ActualGravityState { get { return actualGravityState; } }
         private Gaze_GravityState actualGravityState;
@@ -187,6 +172,7 @@ namespace Gaze
 
         private void Awake()
         {
+            grabLogic = new Gaze_GrabLogic(this);
             SetActualGravityStateAsDefault();
 
             initialTransform = new Gaze_Transform(transform);
@@ -213,20 +199,18 @@ namespace Gaze
 
         private void OnEnable()
         {
-            Gaze_InputManager.OnControllerGrabEvent += OnControllerGrabEvent;
+            GrabLogic.SubscribeToEvents();
             Gaze_EventManager.OnControllerPointingEvent += OnControllerPointingEvent;
             dragAndDropManager = gameObject.AddComponent<Gaze_DragAndDropManager>();
             dragAndDropManager.hideFlags = HideFlags.HideInInspector;
-            //sceneInventory = gameObject.AddComponent<Gaze_SceneInventory>();
-            // Uncomment the line below to hide the inventory in the editor
-            //sceneInventory.hideFlags = HideFlags.HideInInspector;
         }
 
         private void OnDisable()
         {
-            Gaze_InputManager.OnControllerGrabEvent -= OnControllerGrabEvent;
+            GrabLogic.UnsubscribeToEvents();
             Gaze_EventManager.OnControllerPointingEvent -= OnControllerPointingEvent;
         }
+
 
         /// <summary>
         /// Changes the sticky state of a game object
@@ -237,69 +221,8 @@ namespace Gaze
         {
             isSticky = _isSticky;
             if (_dropInmediatelly && !isSticky)
-                grabbingMananger.TryDetach();
+                GrabLogic.GrabbingManager.TryDetach();
         }
-
-        /// <summary>
-        /// Used to update the grab state of this game s
-        /// </summary>
-        /// <param name="e"></param>
-        public void OnControllerGrabEvent(Gaze_ControllerGrabEventArgs e)
-        {
-            // Mark the object as grabbed or ungrabbed
-
-            if (e.ControllerObjectPair.Value != gameObject)
-                return;
-
-            isBeingGrabbed = e.IsGrabbing;
-
-            // Handle all the manipulation states
-            if (isBeingGrabbed)
-            {
-                grabbingMananger = (Gaze_GrabManager)e.Sender;
-
-                if (grabbingMananger != null)
-                    RootMotion = grabbingMananger.grabPosition;
-
-                if (IsManipulable && !IsBeingManipulated)
-                    SetManipulationMode(true);
-
-                else if (IsBeingManipulated)
-                    ContinueManipulation();
-
-                List<Gaze_GrabManager> GrabManagers = Gaze_GrabManager.GetGrabbingHands(this);
-                if (GrabManagers.Count > 1)
-                {
-                    foreach (Gaze_GrabManager gm in GrabManagers)
-                    {
-                        if (gm != grabbingMananger)
-                            gm.TryDetach(false);
-                    }
-                }
-            }
-            else
-            {
-                grabbingMananger = null;
-                RootMotion = null;
-                if (IsManipulable)
-                    SetManipulationMode(false);
-            }
-
-        }
-
-        /// <summary>
-        /// Returns the grab point in order to inform from where this object should be taken
-        /// </summary>
-        /// <returns></returns>
-        public Vector3 GetGrabPoint()
-        {
-            Gaze_Manipulation handle = GetComponentInChildren<Gaze_Manipulation>();
-            if (handle == null)
-                Debug.LogAssertion("An interactive object should have a Gaze_Handle child.");
-            Vector3 point = actualGrabPoint != null ? actualGrabPoint.transform.position : GetComponentInChildren<Gaze_Manipulation>().transform.position;
-            return point - transform.position;
-        }
-
 
         /// <summary>
         /// This method will be called when we need to change the grab point of the
@@ -318,37 +241,11 @@ namespace Gaze
 
         public void ContinueManipulation()
         {
-            if (cancelManipulation == null) return;
-            StopCoroutine(cancelManipulation);
-            cancelManipulation = null;
+            if (CancelManipulation == null) return;
+            StopCoroutine(CancelManipulation);
+            CancelManipulation = null;
         }
 
-        /// <summary>
-        /// In order to be able to manipulate a gaze interactive object we need to
-        /// set the manipulation mode to on.
-        /// </summary>
-        /// <param name="isOn"></param>
-        public void SetManipulationMode(bool isOn, bool inmeditelly = false)
-        {
-            // Don't allow to change the manipulation mode if the object is not manipulable
-            if (!IsManipulable)
-                return;
-
-            if (isOn)
-            {
-                isBeingManipulated = true;
-            }
-            else
-            {
-                lastPosition = transform.position;
-                if (!inmeditelly)
-                    cancelManipulation = StartCoroutine(DisableManipulationModeInTime());
-                else
-                {
-                    RemoveManipulationData();
-                }
-            }
-        }
 
         private IEnumerator DisableManipulationModeInTime()
         {
@@ -356,28 +253,6 @@ namespace Gaze
             DisableManipulationMode();
         }
 
-        private void RemoveManipulationData()
-        {
-            cancelManipulation = null;
-            isBeingManipulated = false;
-            if (actualGrabPoint != null)
-                Destroy(actualGrabPoint);
-            actualGrabPoint = null;
-        }
-
-        private void DisableManipulationMode()
-        {
-
-            if (Vector3.Distance(lastPosition, transform.position) <= 0.05f)
-            {
-                RemoveManipulationData();
-            }
-            else
-            {
-                lastPosition = transform.position;
-                cancelManipulation = StartCoroutine(DisableManipulationModeInTime());
-            }
-        }
 
         public void UnAttachDnDObject()
         {
