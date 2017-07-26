@@ -266,6 +266,8 @@ namespace Gaze
             chargeStartTime = Time.time;
             #endregion
 
+            CreateAttachPoint();
+
             #region CHARGING
             GetComponent<AudioSource>().Play();
             while (Time.time - chargeStartTime < chargeDuration)

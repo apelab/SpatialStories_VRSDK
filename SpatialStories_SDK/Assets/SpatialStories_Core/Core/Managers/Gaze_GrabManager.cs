@@ -268,18 +268,12 @@ public class Gaze_GrabManager : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        UpdateGrabState();
-    }
-
     private void FixedUpdate()
     {
         //Debug.Log(interactableIO +" isTriggerPressed = "+isTriggerPressed);
         if (grabState == GRAB_STATE.EMPTY || grabState == GRAB_STATE.SEARCHING)
             FindValidDistantObject();
-        //else
-        //    ClearLaserPointer();
+        UpdateGrabState();
     }
 
     /// <summary>
