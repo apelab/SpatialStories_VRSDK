@@ -17,27 +17,21 @@
 // <date>2016-01-25</date>
 // </copyright>
 //-----------------------------------------------------------------------
-using UnityEngine;
 using System;
+using UnityEngine;
 
 public class Gaze_ControllerCollisionEventArgs : EventArgs
 {
-	private GameObject sender;
+    public GameObject Sender { get; private set; }
+    public GameObject Other { get; private set; }
+    public Gaze_CollisionTypes CollisionType { get; private set; }
+    public Gaze_GrabManager GrabManger { get; private set; }
 
-	public GameObject Sender{ get { return sender; } }
-
-	private GameObject other;
-
-	public GameObject Other{ get { return other; } }
-
-	private Gaze_CollisionTypes collisionType;
-
-	public Gaze_CollisionTypes CollisionType{ get { return collisionType; } }
-
-	public Gaze_ControllerCollisionEventArgs (GameObject _sender, GameObject _other, Gaze_CollisionTypes _collisionType)
-	{
-		sender = _sender;
-		other = _other;
-		collisionType = _collisionType;
-	}
+    public Gaze_ControllerCollisionEventArgs(GameObject _sender, GameObject _other, Gaze_CollisionTypes _collisionType, Gaze_GrabManager _grabManager)
+    {
+        Sender = _sender;
+        Other = _other;
+        CollisionType = _collisionType;
+        GrabManger = _grabManager;
+    }
 }

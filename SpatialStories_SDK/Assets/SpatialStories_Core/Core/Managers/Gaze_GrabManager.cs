@@ -1155,6 +1155,13 @@ public class Gaze_GrabManager : MonoBehaviour
     /// 'Sender' is always the controller triggering the event
     /// </summary>
     /// <param name="_e">E.</param>
+    /// <summary>
+    /// Calls on controller collision event.
+    /// Grabbed objects have to be Interactive Object ('Gaze objects')
+    /// 'Other' is either the Proximity for Interactive Objects or the object itself.
+    /// 'Sender' is always the controller triggering the event
+    /// </summary>
+    /// <param name="_e">E.</param>
     private void OnControllerCollisionEvent(Gaze_ControllerCollisionEventArgs _e)
     {
 

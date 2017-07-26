@@ -18,6 +18,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Gaze
@@ -176,7 +177,6 @@ namespace Gaze
             SetActualGravityStateAsDefault();
 
             initialTransform = new Gaze_Transform(transform);
-            GrabPositionnerCollider = GetComponentInChildren<Gaze_Manipulation>().GetComponent<Collider>();
 
             Gaze_SnapPosition[] snapPositions = GetComponentsInChildren<Gaze_SnapPosition>();
             foreach (Gaze_SnapPosition pos in snapPositions)
@@ -195,6 +195,9 @@ namespace Gaze
             {
                 transform.SetParent(RootMotion);
             }
+
+            if (IsGrabColliderRequired())
+                GetRigitBodyOrError().maxAngularVelocity = 100f;
         }
 
         private void OnEnable()
@@ -250,7 +253,7 @@ namespace Gaze
         private IEnumerator DisableManipulationModeInTime()
         {
             yield return new WaitForSeconds(DISABLE_MANIPULATION_TIME);
-            DisableManipulationMode();
+            GrabLogic.DisableManipulationMode();
         }
 
 
@@ -507,5 +510,19 @@ namespace Gaze
             }
         }
         #endregion ManipulationManagement
+
+
+        /// <summary>
+        /// Checks if this object is grabbable or will be grabable in a future.
+        /// </summary>
+        /// <returns></returns>
+        public bool IsGrabColliderRequired()
+        {
+            if (ManipulationMode == Gaze_ManipulationModes.GRAB)
+                return true;
+
+            Gaze_Actions[] actions = GetComponentsInChildren<Gaze_Actions>();
+            return actions.Any(_action => _action.ActionGrab == Gaze_Actions.ACTIVABLE_OPTION.ACTIVATE);
+        }
     }
 }
