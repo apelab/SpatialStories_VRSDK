@@ -8,6 +8,7 @@ namespace Gaze
 {
     public class Gaze_GrabLogic
     {
+
         #region constants
 
         /// <summary>

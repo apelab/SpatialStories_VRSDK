@@ -76,7 +76,6 @@ namespace Gaze
 
         protected void OnStickLeftAxisEvent(Gaze_InputEventArgs e)
         {
-
             if (!touchpadDown)
                 return;
 

@@ -250,7 +250,7 @@ namespace Gaze
         }
 
 
-        private IEnumerator DisableManipulationModeInTime()
+        public IEnumerator DisableManipulationModeInTime()
         {
             yield return new WaitForSeconds(DISABLE_MANIPULATION_TIME);
             GrabLogic.DisableManipulationMode();

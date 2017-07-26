@@ -101,13 +101,6 @@ namespace Gaze
         }
         void DropReady()
         {
-            if (m_attachOnDrop)
-            {
-                Gaze_GravityManager.ChangeGravityState(GetComponent<Gaze_InteractiveObject>(), Gaze_GravityRequestType.DEACTIVATE_AND_ATTACH);
-                Gaze_GravityManager.ChangeGravityState(GetComponent<Gaze_InteractiveObject>(), Gaze_GravityRequestType.LOCK);
-            }
-
-            //		Debug.Log ("DROP READY");
             if (m_SnapBeforeDrop)
             {
                 Snap(m_TimeToSnap);
@@ -146,9 +139,9 @@ namespace Gaze
                 {
                     IO.DisableManipulationMode(Gaze_ManipulationModes.GRAB);
                     IO.IsManipulable = false;
-                    IO.SetManipulationMode(false, true);
-                    if (IO.GrabbingManager != null)
-                        IO.GrabbingManager.TryDetach();
+                    IO.GrabLogic.SetManipulationMode(false, true);
+                    if (IO.GrabLogic.GrabbingManager != null)
+                        IO.GrabLogic.GrabbingManager.TryDetach();
                 }
                 if (m_SnapOnDrop)
                 {

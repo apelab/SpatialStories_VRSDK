@@ -315,12 +315,6 @@ namespace Gaze
             // set position of the pointer to the hit point
             attachPoint.transform.position = hitPosition;
 
-            // attachPoint look at controller
-            attachPoint.transform.LookAt(handLocation);
-
-            // parent levitable to attach point
-            objectToLevitate.transform.parent = attachPoint.transform;
-
             // show attach point
             attachPoint.GetComponent<Renderer>().enabled = true;
         }
@@ -330,9 +324,6 @@ namespace Gaze
             // reset pointer when levitation finished
             if (attachPoint)
                 attachPoint.GetComponent<Renderer>().enabled = false;
-
-            if (objectToLevitate)
-                objectToLevitate.transform.parent = null;
         }
 
         private void SetTargetLocation()

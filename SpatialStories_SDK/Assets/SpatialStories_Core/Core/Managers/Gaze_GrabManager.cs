@@ -845,7 +845,6 @@ public class Gaze_GrabManager : MonoBehaviour
     }
 
 
-
     private static Vector3[] SortCicularList(Vector3[] _circularList, int currentIndex)
     {
         Vector3[] sortedList = new Vector3[_circularList.Length];
@@ -929,7 +928,6 @@ public class Gaze_GrabManager : MonoBehaviour
         yield return new WaitForSeconds(_time);
         TryDetach();
         interactableIO = _objectToTake;
-        Gaze_GravityManager.ChangeGravityState(_objectToTake, Gaze_GravityRequestType.DEACTIVATE_AND_ATTACH);
         grabState = GRAB_STATE.ATTRACTING;
     }
 
