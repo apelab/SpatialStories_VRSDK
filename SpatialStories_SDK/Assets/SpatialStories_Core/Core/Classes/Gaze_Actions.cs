@@ -261,10 +261,10 @@ namespace Gaze
             }
             else if (ActionGrab == ACTIVABLE_OPTION.DEACTIVATE)
             {
-                //if (IO.GrabLogic.GrabbingManager != null)
-                //    IO.GrabLogic.GrabbingManager.TryDetach();
-
-                IO.DisableManipulationMode(Gaze_ManipulationModes.GRAB);
+                if (IO.ManipulationMode == Gaze_ManipulationModes.GRAB)
+                    IO.DisableManipulationMode(Gaze_ManipulationModes.GRAB);
+                else if (IO.ManipulationMode == Gaze_ManipulationModes.LEVITATE)
+                    IO.DisableManipulationMode(Gaze_ManipulationModes.LEVITATE);
             }
         }
 
