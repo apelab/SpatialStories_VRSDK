@@ -529,7 +529,6 @@ namespace Gaze
             else if (e.Type.Equals(Gaze_LevitationTypes.LEVITATE_STOP))
             {
                 Destroy(DynamicLevitationPoint);
-                SetAttachColorVisibility(false);
                 IOToLevitate = null;
                 Gaze_GrabManager.EnableAllGrabManagers();
                 Gaze_Teleporter.IsTeleportAllowed = true;
@@ -563,7 +562,6 @@ namespace Gaze
 
             }
         }
-
 
         private void OnDragAndDropEvent(Gaze_DragAndDropEventArgs e)
         {
