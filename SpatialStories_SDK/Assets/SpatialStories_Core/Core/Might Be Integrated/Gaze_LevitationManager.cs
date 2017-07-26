@@ -249,13 +249,13 @@ namespace Gaze
 
         private void CreateAttachPoint()
         {
-            attachPoint = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-            attachPoint.transform.localScale = new Vector3(pointerDiameter, pointerDiameter, pointerDiameter);
-            if (pointerMaterial)
-                attachPoint.GetComponent<Renderer>().sharedMaterial = pointerMaterial;
+            if (attachPoint != null)
+                return;
 
-            attachPoint.GetComponent<Renderer>().sharedMaterial.color = Color.white;
-            attachPointColor = attachPoint.GetComponent<Renderer>().material.color;
+            attachPoint = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+            Destroy(attachPoint.GetComponent<Collider>());
+            attachPoint.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
+            attachPoint.name = " - Target";
         }
 
         private IEnumerator Charge()
@@ -298,24 +298,13 @@ namespace Gaze
             SetTargetLocation();
 
             // initialize start position for velocity computations
-            //oldPos = objectToLevitate.transform.position;
             oldPos = attachPoint.transform.position;
-
-            // deactivate gravity if exists
-            TrySwitchGravity(objectToLevitate, false);
-
-            // notify the levitation is occuring
-            Gaze_EventManager.FireLevitationEvent(new Gaze_LevitationEventArgs(this, objectToLevitate, Gaze_LevitationTypes.LEVITATE_START, actualHand));
-
-            // get distance between headset and handsMidPoint
-            startCameraHandsDistance = Vector3.Distance(Camera.main.transform.position, transform.position);
 
             IOToLevitate.GrabLogic.SetDistanceTolerance(DetachDistance);
             IOToLevitate.GrabLogic.SetTimeTolerance(DetachTime);
 
             Gaze_EventManager.FireLevitationEvent(new Gaze_LevitationEventArgs(this, IOToLevitate.gameObject, Gaze_LevitationTypes.LEVITATE_START, actualHand));
             IOToLevitate.GetComponent<Rigidbody>().collisionDetectionMode = CollisionDetectionMode.Continuous;
-
             #endregion
         }
 
