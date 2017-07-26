@@ -23,9 +23,8 @@ namespace Gaze
 {
     public class Gaze_TeleportEventArgs : EventArgs
     {
-        private object sender;
 
-        public object Sender { get { return sender; } }
+        public object Sender;
 
         private Gaze_TeleportMode mode;
 
@@ -33,12 +32,12 @@ namespace Gaze
 
         public Gaze_TeleportEventArgs(object _sender)
         {
-            sender = _sender;
+            Sender = _sender;
         }
 
         public Gaze_TeleportEventArgs(object _sender, Gaze_TeleportMode _mode)
         {
-            sender = _sender;
+            Sender = _sender;
             mode = _mode;
         }
     }

@@ -615,18 +615,6 @@ namespace Gaze
         }
 
 
-        public static bool IsIOBeingLevitatedByHand(Gaze_InteractiveObject io, bool isLefHand)
-        {
-            foreach (Gaze_LevitationManager manager in LevitationManagers)
-            {
-                if (manager.IOToLevitate == io && manager.actualHand == (isLefHand ? Gaze_HandsEnum.LEFT : Gaze_HandsEnum.RIGHT))
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
         #region GearVR Controller
         private void OnPadRightTouchDownEvent(Gaze_InputEventArgs e)
         {
@@ -644,18 +632,18 @@ namespace Gaze
                 levitationState = Gaze_LevitationStates.NEUTRAL;
         }
 
+        #endregion
+
         public static bool IsIOBeingLevitatedByHand(Gaze_InteractiveObject io, bool isLefHand)
         {
             foreach (Gaze_LevitationManager manager in LevitationManagers)
             {
-                if (manager.objectToLevitate == io.gameObject
-                    && manager.actualHand == (isLefHand ? Gaze_HandsEnum.LEFT : Gaze_HandsEnum.RIGHT))
+                if (manager.IOToLevitate == io && manager.actualHand == (isLefHand ? Gaze_HandsEnum.LEFT : Gaze_HandsEnum.RIGHT))
                 {
                     return true;
                 }
             }
             return false;
         }
-        #endregion
     }
 }

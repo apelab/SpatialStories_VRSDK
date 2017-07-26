@@ -533,7 +533,7 @@ public class Gaze_GrabManager : MonoBehaviour
             grabState = GRAB_STATE.SEARCHING;
             return;
         }
-        interactableIO.transform.position = Vector3.MoveTowards(interactableIO.transform.position, controllerSnapTransform.position - interactableIO.GetGrabPoint(), interactableIO.AttractionSpeed * Time.deltaTime);
+        interactableIO.transform.position = Vector3.MoveTowards(interactableIO.transform.position, controllerSnapTransform.position - interactableIO.GrabLogic.GetGrabPoint(), interactableIO.AttractionSpeed * Time.deltaTime);
     }
 
     /// <summary>
