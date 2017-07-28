@@ -203,7 +203,7 @@ namespace Gaze
 
             #region MECANIM
             #region Animator
-            if (actionsScript.ActionAnimation == Gaze_Actions.ANIMATION_OPTION.MECANIM)
+            if (actionsScript.ActionAnimation != Gaze_Actions.ANIMATION_OPTION.NOTHING)
             {
                 EditorGUILayout.BeginHorizontal();
                 if (hierarchyAnimators.Count > 0)
@@ -248,27 +248,7 @@ namespace Gaze
             #region CLIP           
             #region AnimationTriggers
             if (actionsScript.ActionAnimation == Gaze_Actions.ANIMATION_OPTION.CLIP)
-            {
-                EditorGUILayout.BeginVertical();
-                EditorGUILayout.BeginHorizontal();
-                if (hierarchyAnimators.Count > 0)
-                {
-
-                    EditorGUILayout.LabelField("Animator");
-
-                    if (!hierarchyAnimators.Contains(actionsScript.targetAnimator))
-                    {
-                        actionsScript.targetAnimator = hierarchyAnimators[0];
-                    }
-
-                    actionsScript.targetAnimator = hierarchyAnimators[EditorGUILayout.Popup(hierarchyAnimators.IndexOf(actionsScript.targetAnimator), hierarchyAnimatorNames.ToArray())];
-                }
-                else
-                {
-                    EditorGUILayout.HelpBox("No animators found.", MessageType.Warning);
-                }
-                EditorGUILayout.EndHorizontal();
-
+            {                
                 for (int i = 0; i < Gaze_HashIDs.TriggerEventsAndStates.Length; i++)
                 {
                     actionsScript.activeTriggerStatesAnim[i] = EditorGUILayout.ToggleLeft(Gaze_HashIDs.TriggerEventsAndStates[i], actionsScript.activeTriggerStatesAnim[i]);
@@ -760,9 +740,14 @@ namespace Gaze
             }
             EditorGUILayout.EndHorizontal();
 
-            if (actionsScript.audioClips.Count(k) > 1)
+            if (actionsScript.audioClips.Count(k) > 1 && actionsScript.loopAudio[k] != Gaze_Actions.LOOP_MODES.PlaylistOnce)
             {
                 actionsScript.audio_sequence[k] = (Gaze_Actions.AUDIO_SEQUENCE)EditorGUILayout.EnumPopup("Sequence", actionsScript.audio_sequence[k]);
+            }
+
+            if (actionsScript.loopAudio[k] == Gaze_Actions.LOOP_MODES.PlaylistOnce)
+            {
+                actionsScript.audioLoopOnLast[k] = EditorGUILayout.ToggleLeft("Loop on last", actionsScript.audioLoopOnLast[k]);
             }
         }
 

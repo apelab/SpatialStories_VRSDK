@@ -87,6 +87,8 @@ namespace Gaze
         public bool[] fadeInBetween = new bool[Enum<TriggerEventsAndStates>.Count];
         public Gaze_AudioPlayList audioClipsNew = new Gaze_AudioPlayList();
         public LOOP_MODES[] loopAudioNew = new LOOP_MODES[Enum<TriggerEventsAndStates>.Count];
+        public bool[] audioLoopOnLast = new bool[Enum<TriggerEventsAndStates>.Count];
+
         public bool duckingEnabled = true;
         public float fadeInTime = 1f;
         public float fadeOutTime = 1f;
@@ -160,7 +162,11 @@ namespace Gaze
                 }
 
                 gazeAudioPlayer = targetAudioSource.GetComponent<Gaze_AudioPlayer>();
-                Audio_PlayList_Key = gazeAudioPlayer.setParameters(targetAudioSource, audioClips, loopAudio, audio_sequence, fadeInBetween, audioVolumeMin, audioVolumeMax, duckingEnabled, fadeSpeed, fadeInTime, fadeOutTime, fadeOutDeactTime, fadeInEnabled, fadeOutEnabled, fadeOutDeactEnabled, fadeInCurve, fadeOutCurve, fadeOutDeactCurve, activeTriggerStatesAudio, audio_ForceStop, audio_AllowMultiple, audio_MaxConcurrentSound, audio_randomizePitch, audio_minPitch, audio_maxPitch);
+
+                if (ActionAudio == ACTIVABLE_OPTION.ACTIVATE)
+                {
+                    Audio_PlayList_Key = gazeAudioPlayer.setParameters(targetAudioSource, audioClips, loopAudio, audio_sequence, fadeInBetween, audioVolumeMin, audioVolumeMax, duckingEnabled, fadeSpeed, fadeInTime, fadeOutTime, fadeOutDeactTime, fadeInEnabled, fadeOutEnabled, fadeOutDeactEnabled, fadeInCurve, fadeOutCurve, fadeOutDeactCurve, activeTriggerStatesAudio, audio_ForceStop, audio_AllowMultiple, audio_MaxConcurrentSound, audio_randomizePitch, audio_minPitch, audio_maxPitch, audioLoopOnLast);
+                }
             }
 
             if (ActionAnimation == ANIMATION_OPTION.CLIP)
@@ -468,15 +474,16 @@ namespace Gaze
         {
             if (ActionAnimation == ANIMATION_OPTION.DEACTIVATE)
             {
-                if (targetAnimator.GetComponent<Gaze_AnimationPlayer>() != null)
-                {
-                    targetAnimator.GetComponent<Gaze_AnimationPlayer>().Stop();
-                }
-
                 if (targetAnimator != null)
                 {
+                    if (targetAnimator.GetComponent<Gaze_AnimationPlayer>() != null)
+                    {
+                        targetAnimator.GetComponent<Gaze_AnimationPlayer>().Stop();
+                    }
+
                     targetAnimator.enabled = false;
                 }
+
             }
             else if (activeTriggerStatesAnim.Length > 0 && activeTriggerStatesAnim[0])
             {
