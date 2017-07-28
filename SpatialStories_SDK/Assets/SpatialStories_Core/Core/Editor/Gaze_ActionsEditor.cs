@@ -21,8 +21,8 @@ namespace Gaze
         private string[] allVisuals;
         private List<Renderer> allRenderers;
 
-        private List<Animation> hierarchyAnimationSources;
-        private List<string> hierarchyAnimationSourcesNames;
+        private List<string> selectedAnimatorStatesNames;
+        private List<AnimationClip> selectedAnimatorStates;
 
         void OnEnable()
         {
@@ -34,14 +34,13 @@ namespace Gaze
             hierarchyAnimatorNames = new List<string>();
             hierarchyAudioSources = new List<AudioSource>();
             hierarchyAudioSourceNames = new List<string>();
-            hierarchyAnimationSources = new List<Animation>();
-            hierarchyAnimationSourcesNames = new List<string>();
+            selectedAnimatorStatesNames = new List<string>();
+            selectedAnimatorStates = new List<AnimationClip>();
             selectedAnimatorTriggers = new List<string>();
 
             grabModes = Enum.GetNames(typeof(Gaze_GrabMode));
 
             FindAnimatorsInHierarchy();
-            FindAnimationSourcesInHierarchy();
             FindAudioSourcesInHierarchy();
         }
 
@@ -251,25 +250,24 @@ namespace Gaze
             if (actionsScript.ActionAnimation == Gaze_Actions.ANIMATION_OPTION.CLIP)
             {
                 EditorGUILayout.BeginVertical();
-                if (hierarchyAnimationSources.Count > 0)
+                EditorGUILayout.BeginHorizontal();
+                if (hierarchyAnimators.Count > 0)
                 {
-                    EditorGUILayout.BeginHorizontal();
-                    EditorGUILayout.LabelField("Animation Source");
 
-                    if (!hierarchyAnimationSources.Contains(actionsScript.targetAnimationSource))
+                    EditorGUILayout.LabelField("Animator");
+
+                    if (!hierarchyAnimators.Contains(actionsScript.targetAnimator))
                     {
-                        actionsScript.targetAnimationSource = hierarchyAnimationSources[0];
+                        actionsScript.targetAnimator = hierarchyAnimators[0];
                     }
 
-                    actionsScript.targetAnimationSource = hierarchyAnimationSources[EditorGUILayout.Popup(hierarchyAnimationSources.IndexOf(actionsScript.targetAnimationSource), hierarchyAnimationSourcesNames.ToArray())];
-
-                    EditorGUILayout.EndHorizontal();
+                    actionsScript.targetAnimator = hierarchyAnimators[EditorGUILayout.Popup(hierarchyAnimators.IndexOf(actionsScript.targetAnimator), hierarchyAnimatorNames.ToArray())];
                 }
                 else
                 {
-                    EditorGUILayout.HelpBox("No animation found.", MessageType.Warning);
+                    EditorGUILayout.HelpBox("No animators found.", MessageType.Warning);
                 }
-                EditorGUILayout.EndVertical();
+                EditorGUILayout.EndHorizontal();
 
                 for (int i = 0; i < Gaze_HashIDs.TriggerEventsAndStates.Length; i++)
                 {
@@ -617,69 +615,91 @@ namespace Gaze
             }
             else if (actionsScript.ActionAnimation == Gaze_Actions.ANIMATION_OPTION.CLIP)
             {
-                // help message if no input is specified
-                if (actionsScript.animationClip.Count(k) < 1)
+                // help message if no aniamtion are found
+                if (!FindAnimatorStates())
                 {
                     EditorGUILayout.BeginHorizontal();
-                    EditorGUILayout.HelpBox("Add at least one animation or deactivate this action if not needed.", MessageType.Warning);
+                    EditorGUILayout.HelpBox("There are no animation in your animator", MessageType.Warning);
                     EditorGUILayout.EndHorizontal();
                 }
                 else
                 {
-                    // update inputs list in Gaze_Interactions (Gaze_Interactions may have been removed in the hierarchy)
-                    for (int i = 0; i < actionsScript.animationClip.Count(k); i++)
+                    if (actionsScript.animationClip.Count(k) < 1)
                     {
-                        // display the entry
+                        AnimationClip d = actionsScript.animationClip.Add(k);
+                        d = selectedAnimatorStates[0];
+                    }
+                    else
+                    {
                         EditorGUILayout.BeginHorizontal();
-                        AnimationClip clip = (AnimationClip)EditorGUILayout.ObjectField("", actionsScript.animationClip.Get(k, i), typeof(AnimationClip), false, GUILayout.Width(300));
-                        if (clip != null)
-                        {
-                            clip.legacy = true;
-                            actionsScript.targetAnimationSource.AddClip(clip, clip.name);
-                        }
-                        actionsScript.animationClip.Set(k, i, clip);
+                        int index = EditorGUILayout.Popup(selectedAnimatorStates.IndexOf(actionsScript.animationClip.Get(k, 0)), selectedAnimatorStatesNames.ToArray());
+                        index = Mathf.Max(index, 0);
+                        actionsScript.animationClip.Set(k, 0, selectedAnimatorStates[index]);
+                        EditorGUILayout.EndHorizontal();
 
-                        // and a '-' button to remove it if needed
-                        if (GUILayout.Button("-", GUILayout.Width(100)))
+                        // update inputs list in Gaze_Interactions (Gaze_Interactions may have been removed in the hierarchy)
+                        for (int i = 1; i < actionsScript.animationClip.Count(k); i++)
                         {
-                            actionsScript.targetAnimationSource.RemoveClip(actionsScript.animationClip.Get(k, i));
-                            actionsScript.animationClip.Remove(k, i);
-                        }
+                            if (!selectedAnimatorStates.Contains(actionsScript.animationClip.Get(k, i)))
+                            {
+                                actionsScript.animationClip.Set(k, i, selectedAnimatorStates[0]);
+                            }
 
+                            // display the entry
+                            EditorGUILayout.BeginHorizontal();
+                            AnimationClip clip = selectedAnimatorStates[EditorGUILayout.Popup(selectedAnimatorStates.IndexOf(actionsScript.animationClip.Get(k, i)), selectedAnimatorStatesNames.ToArray())];
+                            actionsScript.animationClip.Set(k, i, clip);
+
+                            // and a '-' button to remove it if needed
+                            if (GUILayout.Button("-", GUILayout.Width(100)))
+                            {
+                                actionsScript.animationClip.Remove(k, i);
+                            }
+
+                            EditorGUILayout.EndHorizontal();
+                        }
+                    }
+
+                    // display 'add' button
+                    if (GUILayout.Button("+", GUILayout.Width(400)))
+                    {
+                        AnimationClip d = actionsScript.animationClip.Add(k);
+
+                        EditorGUILayout.BeginHorizontal();
+
+                        if (GUILayout.Button("-"))
+                        {
+                            actionsScript.animationClip.Remove(k, d);
+
+                        }
+                        EditorGUILayout.EndHorizontal();
+                    }
+
+                    EditorGUILayout.BeginHorizontal();
+                    actionsScript.loopAnim[k] = (Gaze_Actions.LOOP_MODES)EditorGUILayout.EnumPopup("Loop", actionsScript.loopAnim[k]);
+
+                    if (actionsScript.loopAnim[k] == Gaze_Actions.LOOP_MODES.Single)
+                    {
+                        actionsScript.loopAnimType[k] = (Gaze_Actions.ANIMATION_LOOP)EditorGUILayout.EnumPopup("", actionsScript.loopAnimType[k]);
+                    }
+                    EditorGUILayout.EndHorizontal();
+
+                    if (actionsScript.animationClip.Count(k) > 1 && actionsScript.loopAnim[k] != Gaze_Actions.LOOP_MODES.PlaylistOnce)
+                    {
+                        actionsScript.animationSequence[k] = (Gaze_Actions.AUDIO_SEQUENCE)EditorGUILayout.EnumPopup("Sequence", actionsScript.animationSequence[k]);
+                    }
+
+                    if (actionsScript.loopAnim[k] == Gaze_Actions.LOOP_MODES.PlaylistOnce)
+                    {
+                        EditorGUILayout.BeginHorizontal();
+                        actionsScript.loopOnLast[k] = EditorGUILayout.ToggleLeft("Loop on last", actionsScript.loopOnLast[k]);
+                        if (actionsScript.loopOnLast[k])
+                        {
+                            actionsScript.loopAnimType[k] = (Gaze_Actions.ANIMATION_LOOP)EditorGUILayout.EnumPopup("", actionsScript.loopAnimType[k]);
+                        }
                         EditorGUILayout.EndHorizontal();
                     }
                 }
-
-                // display 'add' button
-                if (GUILayout.Button("+", GUILayout.Width(400)))
-                {
-                    AnimationClip d = actionsScript.animationClip.Add(k);
-
-                    EditorGUILayout.BeginHorizontal();
-
-                    if (GUILayout.Button("-"))
-                    {
-                        actionsScript.animationClip.Remove(k, d);
-
-                    }
-                    EditorGUILayout.EndHorizontal();
-                }
-
-                EditorGUILayout.BeginHorizontal();
-                actionsScript.loopAnim[k] = (Gaze_Actions.LOOP_MODES)EditorGUILayout.EnumPopup("Loop", actionsScript.loopAnim[k]);
-
-                if (actionsScript.loopAnim[k] == Gaze_Actions.LOOP_MODES.Single)
-                {
-                    actionsScript.loopAnimType[k] = (Gaze_Actions.ANIMATION_LOOP)EditorGUILayout.EnumPopup("", actionsScript.loopAnimType[k]);
-
-                }
-                EditorGUILayout.EndHorizontal();
-
-                if (actionsScript.animationClip.Count(k) > 1)
-                {
-                    actionsScript.animationSequence[k] = (Gaze_Actions.AUDIO_SEQUENCE)EditorGUILayout.EnumPopup("Sequence", actionsScript.animationSequence[k]);
-                }
-
             }
         }
 
@@ -688,21 +708,21 @@ namespace Gaze
             // help message if no input is specified
             if (actionsScript.audioClips.Count(k) < 1)
             {
-                EditorGUILayout.BeginHorizontal();
-                EditorGUILayout.HelpBox("Add at least one audio or deactivate this action if not needed.", MessageType.Warning);
-                EditorGUILayout.EndHorizontal();
+                AudioClip d = actionsScript.audioClips.Add(k);
             }
             else
             {
+
+                EditorGUILayout.BeginHorizontal();
+                actionsScript.audioClips.Set(k, 0, (AudioClip)EditorGUILayout.ObjectField("", actionsScript.audioClips.Get(k, 0), typeof(AudioClip), false, GUILayout.Width(300)));
+                EditorGUILayout.EndHorizontal();
+
                 // update inputs list in Gaze_Interactions (Gaze_Interactions may have been removed in the hierarchy)
-                for (int i = 0; i < actionsScript.audioClips.Count(k); i++)
+                for (int i = 1; i < actionsScript.audioClips.Count(k); i++)
                 {
                     // display the entry
                     EditorGUILayout.BeginHorizontal();
                     actionsScript.audioClips.Set(k, i, (AudioClip)EditorGUILayout.ObjectField("", actionsScript.audioClips.Get(k, i), typeof(AudioClip), false, GUILayout.Width(300)));
-
-
-                    // TODO @apelab add/remove event subscription with the new popup value
 
                     // and a '-' button to remove it if needed
                     if (GUILayout.Button("-", GUILayout.Width(100)))
@@ -716,10 +736,6 @@ namespace Gaze
             if (GUILayout.Button("+", GUILayout.Width(400)))
             {
                 AudioClip d = actionsScript.audioClips.Add(k);
-
-
-                // TODO @apelab add event subscription with a default value
-                //Gaze_InputsCondition inputscondition = targetConditions.activeConditions.GetType(typeof(Gaze_InputsCondition));
 
                 EditorGUILayout.BeginHorizontal();
 
@@ -748,7 +764,6 @@ namespace Gaze
             {
                 actionsScript.audio_sequence[k] = (Gaze_Actions.AUDIO_SEQUENCE)EditorGUILayout.EnumPopup("Sequence", actionsScript.audio_sequence[k]);
             }
-
         }
 
         private void DisplayAudioDuckingBlock()
@@ -818,20 +833,6 @@ namespace Gaze
             }
         }
 
-        private void FindAnimationSourcesInHierarchy()
-        {
-            Animation[] asrc = actionsScript.GetComponentInParent<Gaze_InteractiveObject>().GetComponentsInChildren<Animation>();
-
-            hierarchyAnimationSources.Clear();
-            hierarchyAnimationSourcesNames.Clear();
-
-            foreach (Animation a in asrc)
-            {
-                hierarchyAnimationSources.Add(a);
-                hierarchyAnimationSourcesNames.Add(a.gameObject.name);
-            }
-        }
-
         private bool FindAnimatorTriggers()
         {
             selectedAnimatorTriggers.Clear();
@@ -851,6 +852,25 @@ namespace Gaze
             // TODO no triggers found when Animator view changes
 
             return selectedAnimatorTriggers.Count > 0;
+        }
+
+        private bool FindAnimatorStates()
+        {
+            selectedAnimatorStates.Clear();
+
+            if (actionsScript.targetAnimator != null && actionsScript.targetAnimator.isInitialized)
+            {
+                for (int i = 0; i < actionsScript.targetAnimator.runtimeAnimatorController.animationClips.Length; i++)
+                {
+                    AnimationClip p = actionsScript.targetAnimator.runtimeAnimatorController.animationClips[i];
+
+                    selectedAnimatorStates.Add(p);
+                    selectedAnimatorStatesNames.Add(p.name);
+
+                }
+            }
+
+            return selectedAnimatorStates.Count > 0;
         }
     }
 }
