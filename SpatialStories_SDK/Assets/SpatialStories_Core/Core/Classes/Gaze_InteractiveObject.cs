@@ -92,6 +92,9 @@ namespace Gaze
 
         public Transform GrabPositionnerTransform { get { return GrabPositionnerCollider.gameObject.transform; } }
 
+
+        public Transform GrabPositioner;
+
         /// <summary>
         /// If true, the object being catched will vibrate the controllers while grabbed.
         /// </summary>
@@ -164,7 +167,6 @@ namespace Gaze
         /// If TRUE, once dropped, the object can't be grabbed again.
         /// </summary>
         public bool DnD_attached;
-
         //public bool DnD_IsTarget = false;
         public List<GameObject> DnD_Targets;
 
@@ -210,7 +212,7 @@ namespace Gaze
 
         private void OnDisable()
         {
-            GrabLogic.UnsubscribeToEvents();
+            grabLogic.UnsubscribeToEvents();
             Gaze_EventManager.OnControllerPointingEvent -= OnControllerPointingEvent;
         }
 
@@ -227,21 +229,6 @@ namespace Gaze
                 GrabLogic.GrabbingManager.TryDetach();
         }
 
-        /// <summary>
-        /// This method will be called when we need to change the grab point of the
-        /// gaze interactive object.
-        /// </summary>
-        /// <param name="hit"></param>
-        public void SetGrabPoint(Vector3 point)
-        {
-            if (actualGrabPoint != null)
-                Destroy(actualGrabPoint);
-
-            actualGrabPoint = new GameObject();
-            actualGrabPoint.transform.position = point;
-            actualGrabPoint.transform.parent = transform;
-        }
-
         public void ContinueManipulation()
         {
             if (CancelManipulation == null) return;
@@ -249,19 +236,16 @@ namespace Gaze
             CancelManipulation = null;
         }
 
-
         public IEnumerator DisableManipulationModeInTime()
         {
             yield return new WaitForSeconds(DISABLE_MANIPULATION_TIME);
             GrabLogic.DisableManipulationMode();
         }
 
-
-        public void UnAttachDnDObject()
+        public void ChangeDnDAttach(bool attach)
         {
-            dragAndDropManager.UnAttach();
+            dragAndDropManager.ChangeAttach(attach);
         }
-
 
         /// <summary>
         /// Notify to everyone that this IO has been destroyed 
@@ -269,6 +253,11 @@ namespace Gaze
         private void OnDestroy()
         {
             Gaze_EventManager.FireOnIODestroyed(new Gaze_IODestroyEventArgs(this, this));
+        }
+
+        void FixedUpdate()
+        {
+            GrabLogic.Update();
         }
 
         #region GravityManagement

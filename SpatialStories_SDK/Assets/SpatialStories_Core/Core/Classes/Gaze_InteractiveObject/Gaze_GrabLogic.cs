@@ -8,7 +8,6 @@ namespace Gaze
 {
     public class Gaze_GrabLogic
     {
-
         #region constants
 
         /// <summary>
@@ -20,6 +19,7 @@ namespace Gaze
         /// How many seconds the object will resist far of the point before dropping it.
         /// </summary>
         const float DEFAULT_TIME_UNTIL_DETACH = 1f;
+
         private float actualTimeUntilDetach = DEFAULT_TIME_UNTIL_DETACH;
 
         /// <summary>
@@ -27,11 +27,13 @@ namespace Gaze
         /// he is not moving anymore and it has been released.
         /// </summary>
         public float DISABLE_MANIPULATION_TIME = 1f;
+
         /// <summary>
         /// If the distance of the io to to the controler is more than this constant for more thanb
         /// a certain time it will be detached.
         /// </summary>
         public const float DEFAULT_DETACH_DISTANCE = 0.05f;
+
         private float actualDetachDistance = DEFAULT_DETACH_DISTANCE;
 
         /// <summary>
@@ -39,31 +41,39 @@ namespace Gaze
         /// as bigger as it gets more attached to the tracking point the IO will be.
         /// </summary>
         private const float VELOCITY_CONST = 6000f;
+
         /// <summary>
         /// How fast the rotation of the object will be corrected.
         /// </summary>
         private const float ANGULAR_VELOCITY_CONST = 100f;
+
         /// <summary>
         /// Expected delta time.
         /// </summary>
         private const float EXPECTED_DELTA_TIME = 0.0111f;
+
         /// <summary>
         /// Number of samples that will be used to calculate the throw parameters when an object is released.
         /// </summary>
         public const int SAMPLES = 21;
+
         private const float MAX_VELOCITY_CHANGE = 500f;
         private const float MAX_ANGULAR_VELOCITY_CHANGE = 500f;
+
         #endregion constants
 
         #region vars
+
         /// <summary>
         /// IO
         /// </summary>
         private Gaze_InteractiveObject owner;
+
         /// <summary>
         /// /History of angular velocities and positions usefull in the moment of calculating the throw force of an object
         /// </summary>
         public Vector3?[] AngularVelocityHistory = new Vector3?[SAMPLES];
+
         private int angularVelocityTrackingIndex = 0;
         public List<Vector3> PositionHistory = new List<Vector3>();
 
@@ -82,13 +92,21 @@ namespace Gaze
         /// This flag defines when an object has been grabbed.
         /// </summary>
         private bool isBeingGrabbed = false;
-        public bool IsBeingGrabbed { get { return isBeingGrabbed; } }
+
+        public bool IsBeingGrabbed
+        {
+            get { return isBeingGrabbed; }
+        }
 
         /// <summary>
         /// This bool is used to check if the object is being manipulated
         /// </summary>
         private bool isBeingManipulated = false;
-        public bool IsBeingManipulated { get { return isBeingManipulated; } }
+
+        public bool IsBeingManipulated
+        {
+            get { return isBeingManipulated; }
+        }
 
         /// <summary>
         /// It's the collider used to manipulate the object.
@@ -105,6 +123,7 @@ namespace Gaze
         /// object is dropped.
         /// </summary>
         private readonly bool isKinematicByDefault;
+
         private readonly Rigidbody rigidBody;
 
         /// <summary>
@@ -127,7 +146,15 @@ namespace Gaze
         /// Determines where the object will be hold if it has not a grab positioner.
         /// </summary>
         private Gaze_Manipulation defaultHandle;
-        public Gaze_Manipulation DefaultHandle { get { if (defaultHandle == null) defaultHandle = owner.GetComponentInChildren<Gaze_Manipulation>(); return defaultHandle; } }
+
+        public Gaze_Manipulation DefaultHandle
+        {
+            get
+            {
+                if (defaultHandle == null) defaultHandle = owner.GetComponentInChildren<Gaze_Manipulation>();
+                return defaultHandle;
+            }
+        }
 
         protected Vector3 ExternalVelocity;
         protected Vector3 ExternalAngularVelocity;
@@ -209,6 +236,7 @@ namespace Gaze
             FollowPhysicPoint(_transformToFollow, _followOriginTransform);
             AddExternalVelocities();
         }
+
         /// <summary>
         /// TODO: Spit this method i little ones
         /// </summary>
@@ -225,23 +253,39 @@ namespace Gaze
             float velocityMagic = VELOCITY_CONST / (Time.fixedDeltaTime / EXPECTED_DELTA_TIME);
             float angularVelocityMagic = ANGULAR_VELOCITY_CONST / (Time.fixedDeltaTime / EXPECTED_DELTA_TIME);
 
-
             if (_followOriginTransform != null)
             {
-                rotationDelta = _transformToFollow.transform.rotation * Quaternion.Inverse(_followOriginTransform.transform.rotation);
+                rotationDelta = _transformToFollow.transform.rotation *
+                                Quaternion.Inverse(_followOriginTransform.transform.rotation);
                 desiredPosition = _transformToFollow.transform.position - _followOriginTransform.transform.position;
                 positionDelta = desiredPosition;
+                Debug.Log("Move to FollowOrigin");
             }
             else if (owner.SnapOnGrab && owner.GrabPositionnerCollider == null)
             {
-                rotationDelta = _transformToFollow.transform.rotation * Quaternion.Inverse(GetSnapPointForHand(GrabbingManager.isLeftHand).transform.rotation);
-                desiredPosition = _transformToFollow.transform.position - GetSnapPointForHand(GrabbingManager.isLeftHand).transform.position;
+                rotationDelta = _transformToFollow.transform.rotation *
+                                Quaternion.Inverse(GetSnapPointForHand(GrabbingManager.isLeftHand).transform.rotation);
+                desiredPosition = _transformToFollow.transform.position -
+                                  GetSnapPointForHand(GrabbingManager.isLeftHand).transform.position;
                 positionDelta = desiredPosition;
+                Debug.Log("Move to GetSnapPointForHand");
+            }
+            else if (owner.GrabPositionnerCollider != null)
+            {
+                rotationDelta = _transformToFollow.transform.rotation *
+                                Quaternion.Inverse(owner.GrabPositionnerCollider.transform.rotation);
+                desiredPosition = _transformToFollow.transform.position -
+                                  owner.GrabPositionnerCollider.transform.position;
+                positionDelta = desiredPosition;
+                Debug.Log("Move to GrabPositionerCollider");
             }
             else
             {
-                rotationDelta = _transformToFollow.transform.rotation * Quaternion.Inverse(owner.GrabPositionnerCollider.transform.rotation);
-                desiredPosition = _transformToFollow.transform.position - owner.GrabPositionnerCollider.transform.position;
+                rotationDelta = _transformToFollow.transform.rotation *
+                                Quaternion.Inverse(DefaultHandle.transform.rotation);
+                desiredPosition = _transformToFollow.transform.position -
+                                  DefaultHandle.transform.position;
+                Debug.Log("Move to DefaultHandle");
                 positionDelta = desiredPosition;
             }
 
@@ -256,7 +300,8 @@ namespace Gaze
                 if (float.IsNaN(angularTarget.x) == false)
                 {
                     angularTarget = (angularTarget * angularVelocityMagic) * Time.fixedDeltaTime;
-                    rigidBody.angularVelocity = Vector3.MoveTowards(rigidBody.angularVelocity, angularTarget, MAX_ANGULAR_VELOCITY_CHANGE);
+                    rigidBody.angularVelocity = Vector3.MoveTowards(rigidBody.angularVelocity, angularTarget,
+                        MAX_ANGULAR_VELOCITY_CHANGE);
                 }
             }
 
@@ -278,7 +323,6 @@ namespace Gaze
                 if (PositionHistory.Count > SAMPLES)
                     PositionHistory.RemoveAt(PositionHistory.Count() - 1);
                 PositionHistory.Insert(0, _transformToFollow.transform.position);
-
             }
 
             if (owner.ManipulationMode != Gaze_ManipulationModes.LEVITATE)
@@ -288,7 +332,8 @@ namespace Gaze
                     if (owner.GrabPositionnerCollider == null)
                     {
                         if (Vector3.Distance(controllerGrabLocation.position,
-                                GetSnapPointForHand(GrabbingManager.isLeftHand).transform.position) > actualDetachDistance)
+                                GetSnapPointForHand(GrabbingManager.isLeftHand).transform.position) >
+                            actualDetachDistance)
                         {
                             remainingTimeUntilDetach -= Time.fixedDeltaTime;
                             if (remainingTimeUntilDetach <= 0)
@@ -297,16 +342,26 @@ namespace Gaze
                     }
                     else
                     {
-                        if (!owner.SnapOnGrab && Vector3.Distance(controllerGrabLocation.position, owner.GrabPositionnerCollider.transform.position) > actualDetachDistance)
+                        if (!owner.SnapOnGrab &&
+                            Vector3.Distance(controllerGrabLocation.position,
+                                owner.GrabPositionnerCollider.transform.position) > actualDetachDistance)
                         {
                             remainingTimeUntilDetach -= Time.fixedDeltaTime;
                             if (remainingTimeUntilDetach <= 0)
                                 StopGrabbing();
                         }
                     }
-
                 }
-                else if (!owner.SnapOnGrab && Vector3.Distance(controllerGrabLocation.position, owner.GrabPositionnerCollider.transform.position) > actualDetachDistance)
+                else if (owner.GrabPositionnerCollider != null && (!owner.SnapOnGrab &&
+                                                                   Vector3.Distance(controllerGrabLocation.position,
+                                                                       owner.GrabPositionnerCollider.transform.position) > actualDetachDistance))
+                {
+                    remainingTimeUntilDetach -= Time.fixedDeltaTime;
+                    if (remainingTimeUntilDetach <= 0)
+                        StopGrabbing();
+                }
+                else if (owner.GrabPositionnerCollider == null && Vector3.Distance(controllerGrabLocation.position,
+                             DefaultHandle.transform.position) > actualDetachDistance)
                 {
                     remainingTimeUntilDetach -= Time.fixedDeltaTime;
                     if (remainingTimeUntilDetach <= 0)
@@ -317,8 +372,11 @@ namespace Gaze
             }
             else
             {
-                Transform desiredPos = _followOriginTransform == null ? defaultHandle.transform : _followOriginTransform;
-                if (Vector3.Distance(desiredPos.transform.position, _transformToFollow.transform.position) > actualDetachDistance)
+                Transform desiredPos = _followOriginTransform == null
+                    ? defaultHandle.transform
+                    : _followOriginTransform;
+                if (Vector3.Distance(desiredPos.transform.position, _transformToFollow.transform.position) >
+                    actualDetachDistance)
                 {
                     remainingTimeUntilDetach -= Time.fixedDeltaTime;
                     if (remainingTimeUntilDetach <= 0)
@@ -338,7 +396,9 @@ namespace Gaze
         /// </summary>
         public void StopGrabbing()
         {
-            KeyValuePair<VRNode, GameObject> dico = new KeyValuePair<VRNode, GameObject>(GrabbingManager.isLeftHand ? VRNode.LeftHand : VRNode.RightHand, owner.gameObject);
+            KeyValuePair<VRNode, GameObject> dico =
+                new KeyValuePair<VRNode, GameObject>(GrabbingManager.isLeftHand ? VRNode.LeftHand : VRNode.RightHand,
+                    owner.gameObject);
             Gaze_InputManager.FireControllerGrabEvent(new Gaze_ControllerGrabEventArgs(GrabbingManager, dico, false));
         }
 
@@ -353,14 +413,13 @@ namespace Gaze
                 GameObject go = new GameObject("Dynamic Grab Point");
                 owner.GrabPositionnerCollider = go.AddComponent<BoxCollider>();
                 owner.GrabPositionnerCollider.isTrigger = true;
-                go.transform.localScale = Vector3.zero;
                 go.transform.SetParent(owner.transform);
             }
 
             owner.GrabPositionnerCollider.transform.position = _hitPoint;
             owner.GrabPositionnerCollider.transform.forward = _hitPoint - Camera.main.transform.position;
-            _grabManager.gameObject.GetComponentInChildren<Gaze_GrabPositionController>().transform.forward = owner.GrabPositionnerCollider.transform.forward;
-
+            _grabManager.gameObject.GetComponentInChildren<Gaze_GrabPositionController>().transform.forward =
+                owner.GrabPositionnerCollider.transform.forward;
         }
 
         /// <summary>
@@ -382,7 +441,9 @@ namespace Gaze
             Gaze_Manipulation handle = owner.GetComponentInChildren<Gaze_Manipulation>();
             if (handle == null)
                 Debug.LogAssertion("An interactive object should have a Gaze_Handle child.");
-            Vector3 point = actualGrabPoint != null ? actualGrabPoint.transform.position : owner.GetComponentInChildren<Gaze_Manipulation>().transform.position;
+            Vector3 point = actualGrabPoint != null
+                ? actualGrabPoint.transform.position
+                : owner.GetComponentInChildren<Gaze_Manipulation>().transform.position;
             return point - owner.transform.position;
         }
 
@@ -447,7 +508,7 @@ namespace Gaze
         /// </summary>
         public void DisableManipulationMode()
         {
-            if (Vector3.Distance(lastPosition, owner.transform.position) <= 0.05f)
+            if (Vector3.Distance(lastPosition, owner.transform.position) <= 0.05f && !IsBeingGrabbed)
                 CleanManipulationData();
             else
                 owner.CancelManipulation = owner.StartCoroutine(owner.DisableManipulationModeInTime());
@@ -487,7 +548,6 @@ namespace Gaze
             {
                 rigidBody.angularVelocity = meanAngularVelocity.Value;
             }
-
         }
 
         /// <summary>
@@ -499,7 +559,8 @@ namespace Gaze
             List<float> velocities = new List<float>();
             for (int i = 0; i < PositionHistory.Count - 5; i++)
             {
-                velocities.Add(Vector3.Distance(PositionHistory[i], PositionHistory[i + 1]) / Mathf.Pow(Time.deltaTime, 2));
+                velocities.Add(Vector3.Distance(PositionHistory[i], PositionHistory[i + 1]) /
+                               Mathf.Pow(Time.deltaTime, 2));
             }
 
             return velocities.Average();
@@ -539,7 +600,6 @@ namespace Gaze
         }
 
 
-
         protected virtual void AddExternalVelocities()
         {
             if (ExternalVelocity != Vector3.zero)
@@ -549,21 +609,27 @@ namespace Gaze
             }
 
             if (ExternalAngularVelocity == Vector3.zero) return;
-            this.rigidBody.angularVelocity = Vector3.Lerp(this.rigidBody.angularVelocity, ExternalAngularVelocity, 0.5f);
+            this.rigidBody.angularVelocity = Vector3.Lerp(this.rigidBody.angularVelocity, ExternalAngularVelocity,
+                0.5f);
             ExternalAngularVelocity = Vector3.zero;
         }
 
         public void AddExternalVelocity(Vector3 _velocity)
         {
-            ExternalVelocity = ExternalVelocity == Vector3.zero ? _velocity : Vector3.Lerp(ExternalVelocity, _velocity, 0.5f);
+            ExternalVelocity = ExternalVelocity == Vector3.zero
+                ? _velocity
+                : Vector3.Lerp(ExternalVelocity, _velocity, 0.5f);
         }
 
         public void AddExternalAngularVelocity(Vector3 _angularVelocity)
         {
-            ExternalAngularVelocity = ExternalAngularVelocity == Vector3.zero ? _angularVelocity : Vector3.Lerp(ExternalAngularVelocity, _angularVelocity, 0.5f);
+            ExternalAngularVelocity = ExternalAngularVelocity == Vector3.zero
+                ? _angularVelocity
+                : Vector3.Lerp(ExternalAngularVelocity, _angularVelocity, 0.5f);
         }
 
         #region EventHandlers
+
         public void OnTeleportEvent(Gaze_TeleportEventArgs args)
         {
             if (IsBeingGrabbed)
@@ -571,15 +637,16 @@ namespace Gaze
                 owner.transform.position = controllerGrabLocation.transform.position;
                 Camera cam = Gaze_InputManager.instance.GetComponentInChildren<Camera>();
                 Ray ray = new Ray(cam.transform.position, owner.transform.position - cam.transform.position);
-                RaycastHit[] hits = Physics.RaycastAll(ray, Vector3.Distance(cam.transform.position, owner.transform.position));
+                RaycastHit[] hits = Physics.RaycastAll(ray,
+                    Vector3.Distance(cam.transform.position, owner.transform.position));
                 foreach (RaycastHit hit in hits)
                 {
                     if (!hit.collider.isTrigger)
                     {
-                        owner.transform.position = Gaze_InputManager.instance.gameObject.GetComponentInChildren<Gaze_PlayerTorso>().transform.position;
+                        owner.transform.position = Gaze_InputManager.instance.gameObject
+                            .GetComponentInChildren<Gaze_PlayerTorso>().transform.position;
                         break;
                     }
-
                 }
             }
         }
@@ -610,6 +677,7 @@ namespace Gaze
         /// <param name="_e"></param>
         private void GrabObject(Gaze_ControllerGrabEventArgs _e)
         {
+            Debug.ClearDeveloperConsole();
             GrabbingManager = (Gaze_GrabManager)_e.Sender;
 
             if (owner.IsManipulable && !IsBeingManipulated)
@@ -681,6 +749,7 @@ namespace Gaze
         /// Do this every 100 updates to make sure that the ce
         /// </summary>
         private const int UPDATES_TO_SKIP = 100;
+
         private int skypUpdates = UPDATES_TO_SKIP;
 
         private bool IsCenterOfMassCorrectionNeeded(Transform _followingTransform)
@@ -716,6 +785,7 @@ namespace Gaze
         }
 
         private Transform leftSnapPoint, rigtSnapPoint;
+
         public Transform GetSnapPointForHand(bool _isLeftHand)
         {
             if ((leftSnapPoint == null && Gaze_InputManager.instance.LeftHandActive) ||
@@ -733,13 +803,15 @@ namespace Gaze
                 if (leftSnapPoint == null && Gaze_InputManager.instance.LeftHandActive)
                 {
                     Debug.LogError(string.Format("{0} needs an snap left point to be grabbable, " +
-                                                 "setting the object transform as a default left snap point", owner.name));
+                                                 "setting the object transform as a default left snap point",
+                        owner.name));
                     leftSnapPoint = owner.transform;
                 }
                 if (rigtSnapPoint == null && Gaze_InputManager.instance.RightHandActive)
                 {
                     Debug.LogError(string.Format("{0} needs an snap right point to be grabbable, " +
-                                                 "setting the object transform as a default left snap point", owner.name));
+                                                 "setting the object transform as a default left snap point",
+                        owner.name));
                     rigtSnapPoint = owner.transform;
                 }
             }
