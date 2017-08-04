@@ -519,17 +519,27 @@ namespace Gaze
                 stopTrack(3);
             }
 
+            Gaze_AudioSource available_AS = null;
+
             if (((audiosActions[key].allowMultiple && !audiosActions[key].forceStop && audiosActions[key].nAudioPlaying < audiosActions[key].MAX_AUDIOS)
-                    || (!isPlaying(key))) && nonAvailable())
+                    || (!isPlaying(key))))
             {
-                AudioSource newAudioSource = gameObject.AddComponent<AudioSource>();
-                newAudioSource.hideFlags = HideFlags.HideInInspector;
-                audios.Add(new Gaze_AudioSource(newAudioSource));
-                audios[audios.Count - 1].clipIndex = audiosActions[key].lastClipIndex[index];
-                audios[audios.Count - 1].key = key;
+                if (!nonAvailable(out available_AS))
+                {
+                    AudioSource newAudioSource = gameObject.AddComponent<AudioSource>();
+                    //newAudioSource.hideFlags = HideFlags.HideInInspector;
+                    audios.Add(new Gaze_AudioSource(newAudioSource));
+                    audios[audios.Count - 1].clipIndex = audiosActions[key].lastClipIndex[index];
+                    audios[audios.Count - 1].key = key;
+                }
+                else
+                {
+                    available_AS.clipIndex = audiosActions[key].lastClipIndex[index];
+                    available_AS.key = key;
+                }
             }
 
-            if (!audiosActions[key].allowMultiple && !audiosActions[key].forceStop)
+            if (!audiosActions[key].allowMultiple)
             {
                 if (isPlaying(key)) return;
                 else
@@ -583,12 +593,15 @@ namespace Gaze
             return false;
         }
 
-        private bool nonAvailable()
+        private bool nonAvailable(out Gaze_AudioSource gas)
         {
+            gas = null;
+            if (audios.Count < 1) return true;
             foreach (var a in audios)
             {
                 if (a.nextAudioState == AudioState.STOPPED && a.audioState == AudioState.STOPPED && !a.audioSource.isPlaying)
                 {
+                    gas = a;
                     return false;
                 }
             }
