@@ -12,7 +12,7 @@ namespace Gaze
         private Vector2 touchpadValue = Vector2.zero;
         private float lastTouchpadInputTime;
 
-        public Gaze_GearVR_InputLogic()
+        public Gaze_GearVR_InputLogic(Gaze_InputManager _inputManager) : base(_inputManager)
         {
             CheckIfControllerConnected();
         }
@@ -121,6 +121,17 @@ namespace Gaze
             handedRemote = actualHandedRemote;
 
             return isControllerConnected;
+        }
+
+        public override void SetOrientation(GameObject _rightHand, GameObject _leftHand)
+        {
+            _rightHand.transform.localPosition = handedRemote == OVRInput.Controller.RTrackedRemote ? InputTracking.GetLocalPosition(VRNode.RightHand) : InputTracking.GetLocalPosition(VRNode.LeftHand);
+        }
+
+        public override void SetPosition(GameObject _rightHand, GameObject _leftHand)
+        {
+            inputManager.FixedRightPosition.localPosition = handedRemote == OVRInput.Controller.RTrackedRemote ? inputManager.OriginalRightHandFixedPosition : inputManager.FixedLeftPosition.localPosition;
+            _rightHand.transform.localRotation = handedRemote == OVRInput.Controller.RTrackedRemote ? OVRInput.GetLocalControllerRotation(OVRInput.Controller.RTrackedRemote) : OVRInput.GetLocalControllerRotation(OVRInput.Controller.LTrackedRemote);
         }
     }
 }
