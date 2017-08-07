@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using Gaze;
 using UnityEngine;
 
 [System.Serializable]
@@ -78,4 +80,24 @@ public class Gaze_AnimationPlaylist : System.Object
         }
     }
 
+    public void setLoop(int k, Gaze_Actions.LOOP_MODES mode, Gaze_Actions.ANIMATION_LOOP loop, bool loopOnLast)
+    {
+        foreach (var a in Get(k))
+        {
+            if (mode == Gaze_Actions.LOOP_MODES.Single)
+            {
+                if (loop == Gaze_Actions.ANIMATION_LOOP.Loop) a.wrapMode = WrapMode.Loop;
+                else a.wrapMode = WrapMode.PingPong;
+            }
+            else
+            {
+                a.wrapMode = WrapMode.Clamp;
+            }
+        }
+
+        if (mode == Gaze_Actions.LOOP_MODES.PlaylistOnce && loopOnLast)
+        {
+            Get(k)[Count(k) - 1].wrapMode = WrapMode.Loop;
+        }
+    }
 }

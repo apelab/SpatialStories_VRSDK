@@ -501,6 +501,7 @@ MonoBehaviour:
   ModifyDragAndDropTargets: 0
   ModifyDnDMinDistance: 0
   ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDAttached: 0
   ModifyDnDRespectAxis: 0
   dnDMinDistance: 0
   dnDSnapBeforeDrop: 0
@@ -525,13 +526,13 @@ MonoBehaviour:
   - 
   - 
   - 
+  loopOnLast: 0000000000
   animationClip:
     ClipEntries00: []
     ClipEntries01: []
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  targetAnimationSource: {fileID: 0}
   loopAnim: 0000000000000000000000000000000000000000
   loopAnimType: 0000000000000000000000000000000000000000
   animationSequence: 0000000000000000000000000000000000000000
@@ -553,6 +554,7 @@ MonoBehaviour:
     ClipEntries03: []
     ClipEntries04: []
   loopAudioNew: 0000000000000000000000000000000000000000
+  audioLoopOnLast: 0000000000
   duckingEnabled: 1
   fadeInTime: 1
   fadeOutTime: 1
@@ -776,6 +778,7 @@ MonoBehaviour:
   ManipulableHandle: {fileID: 0}
   HasGrabPositionner: 0
   GrabPositionnerCollider: {fileID: 0}
+  GrabPositioner: {fileID: 0}
   VibratesOnGrab: 0
   GrabDistance: 30
   TouchDistance: 0
@@ -1044,6 +1047,7 @@ MonoBehaviour:
   ModifyDragAndDropTargets: 0
   ModifyDnDMinDistance: 0
   ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDAttached: 0
   ModifyDnDRespectAxis: 0
   dnDMinDistance: 0
   dnDSnapBeforeDrop: 0
@@ -1068,13 +1072,13 @@ MonoBehaviour:
   - 
   - 
   - 
+  loopOnLast: 0000000000
   animationClip:
     ClipEntries00: []
     ClipEntries01: []
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  targetAnimationSource: {fileID: 0}
   loopAnim: 0000000000000000000000000000000000000000
   loopAnimType: 0000000000000000000000000000000000000000
   animationSequence: 0000000000000000000000000000000000000000
@@ -1096,6 +1100,7 @@ MonoBehaviour:
     ClipEntries03: []
     ClipEntries04: []
   loopAudioNew: 0000000000000000000000000000000000000000
+  audioLoopOnLast: 0000000000
   duckingEnabled: 1
   fadeInTime: 1
   fadeOutTime: 1
@@ -1444,6 +1449,7 @@ MonoBehaviour:
   ModifyDragAndDropTargets: 0
   ModifyDnDMinDistance: 0
   ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDAttached: 0
   ModifyDnDRespectAxis: 0
   dnDMinDistance: 0
   dnDSnapBeforeDrop: 0
@@ -1468,13 +1474,13 @@ MonoBehaviour:
   - 
   - 
   - 
+  loopOnLast: 0000000000
   animationClip:
     ClipEntries00: []
     ClipEntries01: []
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  targetAnimationSource: {fileID: 0}
   loopAnim: 0000000000000000000000000000000000000000
   loopAnimType: 0000000000000000000000000000000000000000
   animationSequence: 0000000000000000000000000000000000000000
@@ -1496,6 +1502,7 @@ MonoBehaviour:
     ClipEntries03: []
     ClipEntries04: []
   loopAudioNew: 0000000000000000000000000000000000000000
+  audioLoopOnLast: 0000000000
   duckingEnabled: 1
   fadeInTime: 1
   fadeOutTime: 1
@@ -1705,6 +1712,9 @@ MonoBehaviour:
   padTouchDirectionThreshold: 0.5
   debug: 0
   UnpluggedControllerMessage: {fileID: 483765959}
+  FixedLeftPosition: {fileID: 0}
+  FixedRightPosition: {fileID: 0}
+  OriginalRightHandFixedPosition: {x: 0, y: 0, z: 0}
 --- !u!4 &153561859
 Transform:
   m_ObjectHideFlags: 0
@@ -2146,6 +2156,7 @@ MonoBehaviour:
   ModifyDragAndDropTargets: 0
   ModifyDnDMinDistance: 0
   ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDAttached: 0
   ModifyDnDRespectAxis: 0
   dnDMinDistance: 0
   dnDSnapBeforeDrop: 0
@@ -2170,13 +2181,13 @@ MonoBehaviour:
   - 
   - 
   - 
+  loopOnLast: 0000000000
   animationClip:
     ClipEntries00: []
     ClipEntries01: []
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  targetAnimationSource: {fileID: 0}
   loopAnim: 0000000000000000000000000000000000000000
   loopAnimType: 0000000000000000000000000000000000000000
   animationSequence: 0000000000000000000000000000000000000000
@@ -2198,6 +2209,7 @@ MonoBehaviour:
     ClipEntries03: []
     ClipEntries04: []
   loopAudioNew: 0000000000000000000000000000000000000000
+  audioLoopOnLast: 0000000000
   duckingEnabled: 1
   fadeInTime: 1
   fadeOutTime: 1
@@ -2928,6 +2940,7 @@ MonoBehaviour:
   ModifyDragAndDropTargets: 0
   ModifyDnDMinDistance: 0
   ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDAttached: 0
   ModifyDnDRespectAxis: 0
   dnDMinDistance: 0
   dnDSnapBeforeDrop: 0
@@ -2952,13 +2965,13 @@ MonoBehaviour:
   - 
   - 
   - 
+  loopOnLast: 0000000000
   animationClip:
     ClipEntries00: []
     ClipEntries01: []
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  targetAnimationSource: {fileID: 0}
   loopAnim: 0000000000000000000000000000000000000000
   loopAnimType: 0000000000000000000000000000000000000000
   animationSequence: 0000000000000000000000000000000000000000
@@ -2980,6 +2993,7 @@ MonoBehaviour:
     ClipEntries03: []
     ClipEntries04: []
   loopAudioNew: 0000000000000000000000000000000000000000
+  audioLoopOnLast: 0000000000
   duckingEnabled: 1
   fadeInTime: 1
   fadeOutTime: 1
@@ -3686,6 +3700,7 @@ MonoBehaviour:
   ModifyDragAndDropTargets: 0
   ModifyDnDMinDistance: 0
   ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDAttached: 0
   ModifyDnDRespectAxis: 0
   dnDMinDistance: 0
   dnDSnapBeforeDrop: 0
@@ -3710,13 +3725,13 @@ MonoBehaviour:
   - 
   - 
   - 
+  loopOnLast: 0000000000
   animationClip:
     ClipEntries00: []
     ClipEntries01: []
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  targetAnimationSource: {fileID: 0}
   loopAnim: 0000000000000000000000000000000000000000
   loopAnimType: 0000000000000000000000000000000000000000
   animationSequence: 0000000000000000000000000000000000000000
@@ -3739,6 +3754,7 @@ MonoBehaviour:
     ClipEntries03: []
     ClipEntries04: []
   loopAudioNew: 0000000000000000000000000000000000000000
+  audioLoopOnLast: 0000000000
   duckingEnabled: 1
   fadeInTime: 1
   fadeOutTime: 1
@@ -4111,6 +4127,7 @@ MonoBehaviour:
   ModifyDragAndDropTargets: 0
   ModifyDnDMinDistance: 0
   ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDAttached: 0
   ModifyDnDRespectAxis: 0
   dnDMinDistance: 0
   dnDSnapBeforeDrop: 0
@@ -4135,13 +4152,13 @@ MonoBehaviour:
   - 
   - 
   - 
+  loopOnLast: 0000000000
   animationClip:
     ClipEntries00: []
     ClipEntries01: []
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  targetAnimationSource: {fileID: 0}
   loopAnim: 0000000000000000000000000000000000000000
   loopAnimType: 0000000000000000000000000000000000000000
   animationSequence: 0000000000000000000000000000000000000000
@@ -4163,6 +4180,7 @@ MonoBehaviour:
     ClipEntries03: []
     ClipEntries04: []
   loopAudioNew: 0000000000000000000000000000000000000000
+  audioLoopOnLast: 0000000000
   duckingEnabled: 1
   fadeInTime: 1
   fadeOutTime: 1
@@ -4412,6 +4430,7 @@ MonoBehaviour:
   ManipulableHandle: {fileID: 0}
   HasGrabPositionner: 0
   GrabPositionnerCollider: {fileID: 0}
+  GrabPositioner: {fileID: 0}
   VibratesOnGrab: 0
   GrabDistance: 30
   TouchDistance: 0
@@ -5040,6 +5059,7 @@ MonoBehaviour:
   ManipulableHandle: {fileID: 0}
   HasGrabPositionner: 0
   GrabPositionnerCollider: {fileID: 0}
+  GrabPositioner: {fileID: 0}
   VibratesOnGrab: 0
   GrabDistance: 30
   TouchDistance: 0
@@ -5185,6 +5205,7 @@ MonoBehaviour:
   ManipulableHandle: {fileID: 0}
   HasGrabPositionner: 0
   GrabPositionnerCollider: {fileID: 0}
+  GrabPositioner: {fileID: 0}
   VibratesOnGrab: 0
   GrabDistance: 0
   TouchDistance: 0
@@ -5403,6 +5424,7 @@ MonoBehaviour:
   ModifyDragAndDropTargets: 0
   ModifyDnDMinDistance: 0
   ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDAttached: 0
   ModifyDnDRespectAxis: 0
   dnDMinDistance: 0
   dnDSnapBeforeDrop: 0
@@ -5427,13 +5449,13 @@ MonoBehaviour:
   - 
   - 
   - 
+  loopOnLast: 0000000000
   animationClip:
     ClipEntries00: []
     ClipEntries01: []
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  targetAnimationSource: {fileID: 0}
   loopAnim: 0000000000000000000000000000000000000000
   loopAnimType: 0000000000000000000000000000000000000000
   animationSequence: 0000000000000000000000000000000000000000
@@ -5456,6 +5478,7 @@ MonoBehaviour:
     ClipEntries03: []
     ClipEntries04: []
   loopAudioNew: 0000000000000000000000000000000000000000
+  audioLoopOnLast: 0000000000
   duckingEnabled: 1
   fadeInTime: 1
   fadeOutTime: 1
@@ -5949,6 +5972,7 @@ MonoBehaviour:
   ModifyDragAndDropTargets: 0
   ModifyDnDMinDistance: 0
   ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDAttached: 0
   ModifyDnDRespectAxis: 0
   dnDMinDistance: 0
   dnDSnapBeforeDrop: 0
@@ -5973,13 +5997,13 @@ MonoBehaviour:
   - 
   - 
   - 
+  loopOnLast: 0000000000
   animationClip:
     ClipEntries00: []
     ClipEntries01: []
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  targetAnimationSource: {fileID: 0}
   loopAnim: 0000000000000000000000000000000000000000
   loopAnimType: 0000000000000000000000000000000000000000
   animationSequence: 0000000000000000000000000000000000000000
@@ -6002,6 +6026,7 @@ MonoBehaviour:
     ClipEntries03: []
     ClipEntries04: []
   loopAudioNew: 0000000000000000000000000000000000000000
+  audioLoopOnLast: 0000000000
   duckingEnabled: 1
   fadeInTime: 1
   fadeOutTime: 1
@@ -6336,6 +6361,7 @@ MonoBehaviour:
   ModifyDragAndDropTargets: 0
   ModifyDnDMinDistance: 0
   ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDAttached: 0
   ModifyDnDRespectAxis: 0
   dnDMinDistance: 0
   dnDSnapBeforeDrop: 0
@@ -6360,13 +6386,13 @@ MonoBehaviour:
   - 
   - 
   - 
+  loopOnLast: 0000000000
   animationClip:
     ClipEntries00: []
     ClipEntries01: []
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  targetAnimationSource: {fileID: 0}
   loopAnim: 0000000000000000000000000000000000000000
   loopAnimType: 0000000000000000000000000000000000000000
   animationSequence: 0000000000000000000000000000000000000000
@@ -6388,6 +6414,7 @@ MonoBehaviour:
     ClipEntries03: []
     ClipEntries04: []
   loopAudioNew: 0000000000000000000000000000000000000000
+  audioLoopOnLast: 0000000000
   duckingEnabled: 1
   fadeInTime: 1
   fadeOutTime: 1
@@ -6723,6 +6750,7 @@ MonoBehaviour:
   ModifyDragAndDropTargets: 0
   ModifyDnDMinDistance: 0
   ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDAttached: 0
   ModifyDnDRespectAxis: 0
   dnDMinDistance: 0
   dnDSnapBeforeDrop: 0
@@ -6747,13 +6775,13 @@ MonoBehaviour:
   - 
   - 
   - 
+  loopOnLast: 0000000000
   animationClip:
     ClipEntries00: []
     ClipEntries01: []
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  targetAnimationSource: {fileID: 0}
   loopAnim: 0000000000000000000000000000000000000000
   loopAnimType: 0000000000000000000000000000000000000000
   animationSequence: 0000000000000000000000000000000000000000
@@ -6776,6 +6804,7 @@ MonoBehaviour:
     ClipEntries03: []
     ClipEntries04: []
   loopAudioNew: 0000000000000000000000000000000000000000
+  audioLoopOnLast: 0000000000
   duckingEnabled: 1
   fadeInTime: 1
   fadeOutTime: 1
@@ -7519,6 +7548,7 @@ MonoBehaviour:
   ModifyDragAndDropTargets: 0
   ModifyDnDMinDistance: 0
   ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDAttached: 0
   ModifyDnDRespectAxis: 0
   dnDMinDistance: 0
   dnDSnapBeforeDrop: 0
@@ -7543,13 +7573,13 @@ MonoBehaviour:
   - 
   - 
   - 
+  loopOnLast: 0000000000
   animationClip:
     ClipEntries00: []
     ClipEntries01: []
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  targetAnimationSource: {fileID: 0}
   loopAnim: 0000000000000000000000000000000000000000
   loopAnimType: 0000000000000000000000000000000000000000
   animationSequence: 0000000000000000000000000000000000000000
@@ -7571,6 +7601,7 @@ MonoBehaviour:
     ClipEntries03: []
     ClipEntries04: []
   loopAudioNew: 0000000000000000000000000000000000000000
+  audioLoopOnLast: 0000000000
   duckingEnabled: 1
   fadeInTime: 1
   fadeOutTime: 1
@@ -7823,6 +7854,7 @@ MonoBehaviour:
   ModifyDragAndDropTargets: 0
   ModifyDnDMinDistance: 0
   ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDAttached: 0
   ModifyDnDRespectAxis: 0
   dnDMinDistance: 0
   dnDSnapBeforeDrop: 0
@@ -7847,13 +7879,13 @@ MonoBehaviour:
   - 
   - 
   - 
+  loopOnLast: 0000000000
   animationClip:
     ClipEntries00: []
     ClipEntries01: []
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  targetAnimationSource: {fileID: 0}
   loopAnim: 0000000000000000000000000000000000000000
   loopAnimType: 0000000000000000000000000000000000000000
   animationSequence: 0000000000000000000000000000000000000000
@@ -7875,6 +7907,7 @@ MonoBehaviour:
     ClipEntries03: []
     ClipEntries04: []
   loopAudioNew: 0000000000000000000000000000000000000000
+  audioLoopOnLast: 0000000000
   duckingEnabled: 1
   fadeInTime: 1
   fadeOutTime: 1
@@ -8512,6 +8545,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   colliderSize: 0.15
+  grabManager: {fileID: 0}
 --- !u!114 &767392086
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8911,6 +8945,7 @@ MonoBehaviour:
   ManipulableHandle: {fileID: 0}
   HasGrabPositionner: 0
   GrabPositionnerCollider: {fileID: 0}
+  GrabPositioner: {fileID: 0}
   VibratesOnGrab: 0
   GrabDistance: 30
   TouchDistance: 0
@@ -9919,6 +9954,7 @@ MonoBehaviour:
   ModifyDragAndDropTargets: 0
   ModifyDnDMinDistance: 0
   ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDAttached: 0
   ModifyDnDRespectAxis: 0
   dnDMinDistance: 0
   dnDSnapBeforeDrop: 0
@@ -9943,13 +9979,13 @@ MonoBehaviour:
   - 
   - 
   - 
+  loopOnLast: 0000000000
   animationClip:
     ClipEntries00: []
     ClipEntries01: []
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  targetAnimationSource: {fileID: 0}
   loopAnim: 0000000000000000000000000000000000000000
   loopAnimType: 0000000000000000000000000000000000000000
   animationSequence: 0000000000000000000000000000000000000000
@@ -9971,6 +10007,7 @@ MonoBehaviour:
     ClipEntries03: []
     ClipEntries04: []
   loopAudioNew: 0000000000000000000000000000000000000000
+  audioLoopOnLast: 0000000000
   duckingEnabled: 1
   fadeInTime: 1
   fadeOutTime: 1
@@ -10449,6 +10486,7 @@ MonoBehaviour:
   ManipulableHandle: {fileID: 0}
   HasGrabPositionner: 0
   GrabPositionnerCollider: {fileID: 0}
+  GrabPositioner: {fileID: 0}
   VibratesOnGrab: 0
   GrabDistance: 30
   TouchDistance: 0
@@ -10599,6 +10637,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   colliderSize: 0.15
+  grabManager: {fileID: 0}
 --- !u!114 &1105993087
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11215,6 +11254,7 @@ MonoBehaviour:
   ModifyDragAndDropTargets: 0
   ModifyDnDMinDistance: 0
   ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDAttached: 0
   ModifyDnDRespectAxis: 0
   dnDMinDistance: 0
   dnDSnapBeforeDrop: 0
@@ -11239,13 +11279,13 @@ MonoBehaviour:
   - 
   - 
   - 
+  loopOnLast: 0000000000
   animationClip:
     ClipEntries00: []
     ClipEntries01: []
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  targetAnimationSource: {fileID: 0}
   loopAnim: 0000000000000000000000000000000000000000
   loopAnimType: 0000000000000000000000000000000000000000
   animationSequence: 0000000000000000000000000000000000000000
@@ -11267,6 +11307,7 @@ MonoBehaviour:
     ClipEntries03: []
     ClipEntries04: []
   loopAudioNew: 0000000000000000000000000000000000000000
+  audioLoopOnLast: 0000000000
   duckingEnabled: 1
   fadeInTime: 1
   fadeOutTime: 1
@@ -12050,6 +12091,7 @@ MonoBehaviour:
   ManipulableHandle: {fileID: 0}
   HasGrabPositionner: 0
   GrabPositionnerCollider: {fileID: 0}
+  GrabPositioner: {fileID: 0}
   VibratesOnGrab: 0
   GrabDistance: 30
   TouchDistance: 0
@@ -12850,6 +12892,7 @@ MonoBehaviour:
   ModifyDragAndDropTargets: 0
   ModifyDnDMinDistance: 0
   ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDAttached: 0
   ModifyDnDRespectAxis: 0
   dnDMinDistance: 0
   dnDSnapBeforeDrop: 0
@@ -12874,13 +12917,13 @@ MonoBehaviour:
   - 
   - 
   - 
+  loopOnLast: 0000000000
   animationClip:
     ClipEntries00: []
     ClipEntries01: []
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  targetAnimationSource: {fileID: 0}
   loopAnim: 0000000000000000000000000000000000000000
   loopAnimType: 0000000000000000000000000000000000000000
   animationSequence: 0000000000000000000000000000000000000000
@@ -12902,6 +12945,7 @@ MonoBehaviour:
     ClipEntries03: []
     ClipEntries04: []
   loopAudioNew: 0000000000000000000000000000000000000000
+  audioLoopOnLast: 0000000000
   duckingEnabled: 1
   fadeInTime: 1
   fadeOutTime: 1
@@ -13193,6 +13237,7 @@ MonoBehaviour:
   ModifyDragAndDropTargets: 0
   ModifyDnDMinDistance: 0
   ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDAttached: 0
   ModifyDnDRespectAxis: 0
   dnDMinDistance: 0
   dnDSnapBeforeDrop: 0
@@ -13217,13 +13262,13 @@ MonoBehaviour:
   - 
   - 
   - 
+  loopOnLast: 0000000000
   animationClip:
     ClipEntries00: []
     ClipEntries01: []
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  targetAnimationSource: {fileID: 0}
   loopAnim: 0000000000000000000000000000000000000000
   loopAnimType: 0000000000000000000000000000000000000000
   animationSequence: 0000000000000000000000000000000000000000
@@ -13245,6 +13290,7 @@ MonoBehaviour:
     ClipEntries03: []
     ClipEntries04: []
   loopAudioNew: 0000000000000000000000000000000000000000
+  audioLoopOnLast: 0000000000
   duckingEnabled: 1
   fadeInTime: 1
   fadeOutTime: 1
@@ -13566,6 +13612,7 @@ MonoBehaviour:
   ManipulableHandle: {fileID: 0}
   HasGrabPositionner: 0
   GrabPositionnerCollider: {fileID: 0}
+  GrabPositioner: {fileID: 0}
   VibratesOnGrab: 0
   GrabDistance: 30
   TouchDistance: 0
@@ -13584,7 +13631,7 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 0
   DnD_TimeToSnap: 0.5
-  DnD_attached: 1
+  DnD_attached: 0
   DnD_Targets:
   - {fileID: 1807666369}
   IsPointedWithLeftHand: 0
@@ -13986,6 +14033,7 @@ MonoBehaviour:
   ModifyDragAndDropTargets: 0
   ModifyDnDMinDistance: 0
   ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDAttached: 0
   ModifyDnDRespectAxis: 0
   dnDMinDistance: 0
   dnDSnapBeforeDrop: 0
@@ -14010,13 +14058,13 @@ MonoBehaviour:
   - 
   - 
   - 
+  loopOnLast: 0000000000
   animationClip:
     ClipEntries00: []
     ClipEntries01: []
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  targetAnimationSource: {fileID: 0}
   loopAnim: 0000000000000000000000000000000000000000
   loopAnimType: 0000000000000000000000000000000000000000
   animationSequence: 0000000000000000000000000000000000000000
@@ -14038,6 +14086,7 @@ MonoBehaviour:
     ClipEntries03: []
     ClipEntries04: []
   loopAudioNew: 0000000000000000000000000000000000000000
+  audioLoopOnLast: 0000000000
   duckingEnabled: 1
   fadeInTime: 1
   fadeOutTime: 1
@@ -15102,6 +15151,7 @@ MonoBehaviour:
   ManipulableHandle: {fileID: 0}
   HasGrabPositionner: 0
   GrabPositionnerCollider: {fileID: 0}
+  GrabPositioner: {fileID: 0}
   VibratesOnGrab: 0
   GrabDistance: 30
   TouchDistance: 0
@@ -15537,6 +15587,7 @@ MonoBehaviour:
   ModifyDragAndDropTargets: 0
   ModifyDnDMinDistance: 0
   ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDAttached: 0
   ModifyDnDRespectAxis: 0
   dnDMinDistance: 0
   dnDSnapBeforeDrop: 0
@@ -15561,13 +15612,13 @@ MonoBehaviour:
   - 
   - 
   - 
+  loopOnLast: 0000000000
   animationClip:
     ClipEntries00: []
     ClipEntries01: []
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  targetAnimationSource: {fileID: 0}
   loopAnim: 0000000000000000000000000000000000000000
   loopAnimType: 0000000000000000000000000000000000000000
   animationSequence: 0000000000000000000000000000000000000000
@@ -15590,6 +15641,7 @@ MonoBehaviour:
     ClipEntries03: []
     ClipEntries04: []
   loopAudioNew: 0000000000000000000000000000000000000000
+  audioLoopOnLast: 0000000000
   duckingEnabled: 1
   fadeInTime: 1
   fadeOutTime: 1
@@ -16061,6 +16113,7 @@ MonoBehaviour:
   ModifyDragAndDropTargets: 0
   ModifyDnDMinDistance: 0
   ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDAttached: 0
   ModifyDnDRespectAxis: 0
   dnDMinDistance: 0
   dnDSnapBeforeDrop: 0
@@ -16085,13 +16138,13 @@ MonoBehaviour:
   - 
   - 
   - 
+  loopOnLast: 0000000000
   animationClip:
     ClipEntries00: []
     ClipEntries01: []
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  targetAnimationSource: {fileID: 0}
   loopAnim: 0000000000000000000000000000000000000000
   loopAnimType: 0000000000000000000000000000000000000000
   animationSequence: 0000000000000000000000000000000000000000
@@ -16113,6 +16166,7 @@ MonoBehaviour:
     ClipEntries03: []
     ClipEntries04: []
   loopAudioNew: 0000000000000000000000000000000000000000
+  audioLoopOnLast: 0000000000
   duckingEnabled: 1
   fadeInTime: 1
   fadeOutTime: 1
@@ -16951,6 +17005,7 @@ MonoBehaviour:
   ManipulableHandle: {fileID: 0}
   HasGrabPositionner: 0
   GrabPositionnerCollider: {fileID: 0}
+  GrabPositioner: {fileID: 0}
   VibratesOnGrab: 0
   GrabDistance: 30
   TouchDistance: 0
@@ -17100,12 +17155,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20b848e8484b4a14e882b701411fb0b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DetachDistance: 0.5
+  DetachTime: 3
   chargeDuration: 0.1
   attractionForce: 3
   levitatingObjectAttractingSpeed: 5
   closestDistance: 1
   beamSplineSmoothness: 0.1
   beamSoundClip: {fileID: 0}
+  audioFXVolume: 1
   beamNumberOfControlPoints: 5
   beamWidth: 0.005
   beamVerticalOffsetPosition: 0.02
@@ -17213,6 +17271,7 @@ MonoBehaviour:
   ManipulableHandle: {fileID: 0}
   HasGrabPositionner: 0
   GrabPositionnerCollider: {fileID: 0}
+  GrabPositioner: {fileID: 0}
   VibratesOnGrab: 0
   GrabDistance: 0
   TouchDistance: 0
@@ -17735,6 +17794,7 @@ MonoBehaviour:
   ModifyDragAndDropTargets: 0
   ModifyDnDMinDistance: 0
   ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDAttached: 0
   ModifyDnDRespectAxis: 0
   dnDMinDistance: 0
   dnDSnapBeforeDrop: 0
@@ -17759,13 +17819,13 @@ MonoBehaviour:
   - 
   - 
   - 
+  loopOnLast: 0000000000
   animationClip:
     ClipEntries00: []
     ClipEntries01: []
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  targetAnimationSource: {fileID: 0}
   loopAnim: 0000000000000000000000000000000000000000
   loopAnimType: 0000000000000000000000000000000000000000
   animationSequence: 0000000000000000000000000000000000000000
@@ -17788,6 +17848,7 @@ MonoBehaviour:
     ClipEntries03: []
     ClipEntries04: []
   loopAudioNew: 0000000000000000000000000000000000000000
+  audioLoopOnLast: 0000000000
   duckingEnabled: 1
   fadeInTime: 1
   fadeOutTime: 1
@@ -18433,6 +18494,7 @@ MonoBehaviour:
   ModifyDragAndDropTargets: 0
   ModifyDnDMinDistance: 0
   ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDAttached: 0
   ModifyDnDRespectAxis: 0
   dnDMinDistance: 0
   dnDSnapBeforeDrop: 0
@@ -18457,13 +18519,13 @@ MonoBehaviour:
   - 
   - 
   - 
+  loopOnLast: 0000000000
   animationClip:
     ClipEntries00: []
     ClipEntries01: []
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  targetAnimationSource: {fileID: 0}
   loopAnim: 0000000000000000000000000000000000000000
   loopAnimType: 0000000000000000000000000000000000000000
   animationSequence: 0000000000000000000000000000000000000000
@@ -18485,6 +18547,7 @@ MonoBehaviour:
     ClipEntries03: []
     ClipEntries04: []
   loopAudioNew: 0000000000000000000000000000000000000000
+  audioLoopOnLast: 0000000000
   duckingEnabled: 1
   fadeInTime: 1
   fadeOutTime: 1
@@ -19128,12 +19191,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20b848e8484b4a14e882b701411fb0b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DetachDistance: 0.5
+  DetachTime: 3
   chargeDuration: 0.1
   attractionForce: 3
   levitatingObjectAttractingSpeed: 5
   closestDistance: 1
   beamSplineSmoothness: 0.1
   beamSoundClip: {fileID: 0}
+  audioFXVolume: 1
   beamNumberOfControlPoints: 5
   beamWidth: 0.005
   beamVerticalOffsetPosition: 0.02
@@ -19241,6 +19307,7 @@ MonoBehaviour:
   ManipulableHandle: {fileID: 0}
   HasGrabPositionner: 0
   GrabPositionnerCollider: {fileID: 0}
+  GrabPositioner: {fileID: 0}
   VibratesOnGrab: 0
   GrabDistance: 0
   TouchDistance: 0
@@ -19331,6 +19398,7 @@ MonoBehaviour:
   ManipulableHandle: {fileID: 0}
   HasGrabPositionner: 0
   GrabPositionnerCollider: {fileID: 0}
+  GrabPositioner: {fileID: 0}
   VibratesOnGrab: 0
   GrabDistance: 30
   TouchDistance: 0
@@ -19596,6 +19664,7 @@ MonoBehaviour:
   ModifyDragAndDropTargets: 0
   ModifyDnDMinDistance: 0
   ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDAttached: 0
   ModifyDnDRespectAxis: 0
   dnDMinDistance: 0
   dnDSnapBeforeDrop: 0
@@ -19620,13 +19689,13 @@ MonoBehaviour:
   - 
   - 
   - 
+  loopOnLast: 0000000000
   animationClip:
     ClipEntries00: []
     ClipEntries01: []
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  targetAnimationSource: {fileID: 0}
   loopAnim: 0000000000000000000000000000000000000000
   loopAnimType: 0000000000000000000000000000000000000000
   animationSequence: 0000000000000000000000000000000000000000
@@ -19648,6 +19717,7 @@ MonoBehaviour:
     ClipEntries03: []
     ClipEntries04: []
   loopAudioNew: 0000000000000000000000000000000000000000
+  audioLoopOnLast: 0000000000
   duckingEnabled: 1
   fadeInTime: 1
   fadeOutTime: 1

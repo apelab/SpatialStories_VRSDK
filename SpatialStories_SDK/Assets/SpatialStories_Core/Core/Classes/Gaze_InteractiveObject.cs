@@ -212,7 +212,8 @@ namespace Gaze
 
         private void OnDisable()
         {
-            grabLogic.UnsubscribeToEvents();
+            if (grabLogic != null)
+                grabLogic.UnsubscribeToEvents();
             Gaze_EventManager.OnControllerPointingEvent -= OnControllerPointingEvent;
         }
 

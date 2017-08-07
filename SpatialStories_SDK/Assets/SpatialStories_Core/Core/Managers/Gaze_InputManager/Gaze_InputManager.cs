@@ -31,6 +31,7 @@ public class Gaze_InputManager : MonoBehaviour
 {
     #region members
 
+
     public static Gaze_Controllers PluggedControllerType = Gaze_Controllers.NOT_DETERMINED;
 
     [ReadOnly]
@@ -302,9 +303,9 @@ public class Gaze_InputManager : MonoBehaviour
     private void IdentifyInputType()
     {
         // Check if GearVR_Controller is conected if dont just add the generic controller
-        if (OVRInput.IsControllerConnected(OVRInput.Controller.RTrackedRemote))
+        if (OVRInput.IsControllerConnected(OVRInput.Controller.RTrackedRemote) || OVRInput.IsControllerConnected(OVRInput.Controller.LTrackedRemote))
         {
-            SpecialInputLogic = new Gaze_GearVR_InputLogic();
+            SpecialInputLogic = new Gaze_GearVR_InputLogic(this);
             PluggedControllerType = Gaze_Controllers.GEARVR_CONTROLLER;
         }
         else
@@ -389,14 +390,16 @@ public class Gaze_InputManager : MonoBehaviour
             rightHandIO.SetActive(false);
     }
 
-    Transform FixesLeftPosition;
-    Transform FixedRightPosition;
+    public Transform FixedLeftPosition;
+    public Transform FixedRightPosition;
+    public Vector3 OriginalRightHandFixedPosition;
 
     // if position tracking is disabled, parent the controllers to the camera
     private void ParentControllersToCamera()
     {
-        FixesLeftPosition = GetComponentInChildren<Gaze_PlayerTorso>().transform.Find("LeftHandFixedPosition").transform;
+        FixedLeftPosition = GetComponentInChildren<Gaze_PlayerTorso>().transform.Find("LeftHandFixedPosition").transform;
         FixedRightPosition = GetComponentInChildren<Gaze_PlayerTorso>().transform.Find("RightHandFixedPosition").transform;
+        OriginalRightHandFixedPosition = FixedRightPosition.localPosition;
         leftHandIO.transform.localPosition = Vector3.zero;
         rightHandIO.transform.localPosition = Vector3.zero;
         localHandsHeigth = transform.position.y - GetComponentInChildren<Gaze_PlayerTorso>().transform.position.y;
@@ -405,26 +408,29 @@ public class Gaze_InputManager : MonoBehaviour
 
     private void SetPosition()
     {
-        leftHandIO.transform.localPosition = InputTracking.GetLocalPosition(VRNode.LeftHand);
-        rightHandIO.transform.localPosition = InputTracking.GetLocalPosition(VRNode.RightHand);
+        if (SpecialInputLogic == null)
+        {
+            leftHandIO.transform.localPosition = InputTracking.GetLocalPosition(VRNode.LeftHand);
+            rightHandIO.transform.localPosition = InputTracking.GetLocalPosition(VRNode.RightHand);
+        }
+        else
+            SpecialInputLogic.SetPosition(rightHandIO, leftHandIO);
     }
 
     private void SetOrientation()
     {
-        leftHandIO.transform.localRotation = InputTracking.GetLocalRotation(VRNode.LeftHand);
-        rightHandIO.transform.localRotation = InputTracking.GetLocalRotation(VRNode.RightHand);
-
-        // take camera rotation into account if tracking position is disabled
-        if (!trackPosition)
+        if (SpecialInputLogic == null)
         {
-            //leftHandIO.transform.localEulerAngles -= Camera.main.transform.localEulerAngles;
-            //rightHandIO.transform.localEulerAngles -= Camera.main.transform.localEulerAngles;
+            leftHandIO.transform.localRotation = InputTracking.GetLocalRotation(VRNode.LeftHand);
+            rightHandIO.transform.localRotation = InputTracking.GetLocalRotation(VRNode.RightHand);
         }
+        else
+            SpecialInputLogic.SetOrientation(rightHandIO, leftHandIO);
     }
 
     private void FixedPositionLogic()
     {
-        leftHandIO.transform.position = FixesLeftPosition.position;
+        leftHandIO.transform.position = FixedLeftPosition.position;
         rightHandIO.transform.position = FixedRightPosition.position;
 
         leftHandIO.transform.position = new Vector3(leftHandIO.transform.position.x, transform.position.y - localHandsHeigth, leftHandIO.transform.position.z);
@@ -468,7 +474,6 @@ public class Gaze_InputManager : MonoBehaviour
 
                     // stop pulse
                     m_hapticsChannelL.Clear();
-
                 }
                 else
                 {

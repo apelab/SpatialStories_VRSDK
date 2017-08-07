@@ -40,6 +40,8 @@ namespace Gaze
         public float closestDistance = 1f;
         public float beamSplineSmoothness = .1f;
         public AudioClip beamSoundClip;
+        [Range(0f, 1f)]
+        public float audioFXVolume = 1f;
         public int beamNumberOfControlPoints = 5;
         public float beamWidth = .005f;
         public float beamVerticalOffsetPosition = .02f;
@@ -58,7 +60,10 @@ namespace Gaze
         private bool isLeftHand;
         private GameObject controllerLeft, controllerRight;
         private Gaze_HandsEnum actualHand;
+
+        public GameObject TargetLocation { get { return targetLocation; } }
         private GameObject targetLocation;
+
         private GameObject objectToLevitate;
         private float chargeStartTime;
         private bool isCharged;
@@ -87,12 +92,16 @@ namespace Gaze
         private Vector3 beamStartPosition;
         private Gaze_LevitationStates levitationState;
         private Vector3 hitPosition;
+
+        public GameObject AttachPoint { get { return attachPoint; } }
         private GameObject attachPoint;
+
         private Color attachPointColor;
         private Transform handLocation;
         private bool dropReady;
         private IEnumerator updateBeamColorRoutine;
 
+        // Interaction physX vars
         private Gaze_InteractiveObject IOToLevitate;
         private GameObject DynamicLevitationPoint;
 
@@ -127,6 +136,7 @@ namespace Gaze
             GetComponent<AudioSource>().playOnAwake = false;
             GetComponent<AudioSource>().loop = true;
             GetComponent<AudioSource>().clip = beamSoundClip;
+            GetComponent<AudioSource>().volume = audioFXVolume;
             LevitationManagers.Add(this);
         }
 
@@ -204,7 +214,8 @@ namespace Gaze
                 ResetCharge();
             else
             {
-                Levitate();
+                if (IOToLevitate != null)
+                    Levitate();
             }
         }
 
@@ -250,12 +261,14 @@ namespace Gaze
         private void CreateAttachPoint()
         {
             if (attachPoint != null)
-                return;
+                Destroy(attachPoint);
 
             attachPoint = GameObject.CreatePrimitive(PrimitiveType.Sphere);
             Destroy(attachPoint.GetComponent<Collider>());
             attachPoint.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
             attachPoint.name = " - Target";
+            attachPoint.GetComponent<Renderer>().enabled = false;
+
         }
 
         private IEnumerator Charge()
@@ -306,8 +319,9 @@ namespace Gaze
             IOToLevitate.GrabLogic.SetTimeTolerance(DetachTime);
 
             Gaze_EventManager.FireLevitationEvent(new Gaze_LevitationEventArgs(this, IOToLevitate.gameObject, Gaze_LevitationTypes.LEVITATE_START, actualHand));
-            IOToLevitate.GetComponent<Rigidbody>().collisionDetectionMode = CollisionDetectionMode.Continuous;
             #endregion
+
+
         }
 
         private void SetAttachPoint()
@@ -383,6 +397,8 @@ namespace Gaze
         {
             if (IOToLevitate == null) return;
 
+            beam.enabled = true;
+
             // beam update
             UpdateBeamControlPoints();
             beamSplinePoints = Gaze_CatmullRomSpline.getSplinePoints(beamControlPoints);
@@ -412,6 +428,7 @@ namespace Gaze
             attachPoint.transform.eulerAngles = new Vector3(attachPoint.transform.eulerAngles.x, attachPoint.transform.eulerAngles.y, handLocation.transform.eulerAngles.z * -1);
             IOToLevitate.GrabLogic.FollowPoint(attachPoint.transform, DynamicLevitationPoint.transform);
         }
+
 
         private void PullPush()
         {
@@ -510,18 +527,24 @@ namespace Gaze
         {
             if (e.Hand != actualHand && e.Hand != Gaze_HandsEnum.BOTH)
                 return;
-
             if (e.Type.Equals(Gaze_LevitationTypes.LEVITATE_START))
             {
                 IOToLevitate = Gaze_Utils.GetIOFromGameObject(e.ObjectToLevitate);
-                beam.enabled = true;
+                Gaze_GravityManager.ChangeGravityState(IOToLevitate, Gaze_GravityRequestType.UNLOCK);
+                Gaze_GravityManager.ChangeGravityState(IOToLevitate, Gaze_GravityRequestType.ACTIVATE_AND_DETACH);
+                IOToLevitate.SetActualGravityStateAsDefault();
+                targetLocation.transform.position = IOToLevitate.transform.position;
+                UpdateBeamControlPoints();
                 Gaze_Teleporter.IsTeleportAllowed = false;
             }
             else if (e.Type.Equals(Gaze_LevitationTypes.LEVITATE_STOP))
             {
+                beam.enabled = false;
                 Destroy(DynamicLevitationPoint);
+                Gaze_GravityManager.ChangeGravityState(IOToLevitate, Gaze_GravityRequestType.RETURN_TO_DEFAULT);
                 IOToLevitate = null;
                 Gaze_GrabManager.EnableAllGrabManagers();
+                ClearAttachPoint();
                 Gaze_Teleporter.IsTeleportAllowed = true;
             }
         }
@@ -568,6 +591,16 @@ namespace Gaze
                     StopCoroutine(updateBeamColorRoutine);
                 updateBeamColorRoutine = UpdateBeamFeedback(true);
                 StartCoroutine(updateBeamColorRoutine);
+
+                if (objectToLevitate.GetComponent<Gaze_InteractiveObject>().DnD_snapBeforeDrop)
+                {
+                    ResetBeamColor();
+
+                    // Trying to hide everything 
+                    beam.enabled = false;
+                    attachPoint.GetComponent<Renderer>().enabled = false;
+                }
+
             }
             else if (e.State.Equals(Gaze_DragAndDropStates.DROPREADYCANCELED) && dropReady)
             {
@@ -586,6 +619,7 @@ namespace Gaze
                 attachPoint.GetComponent<Renderer>().enabled = false;
             }
         }
+
 
         public void ResetBeamColor()
         {

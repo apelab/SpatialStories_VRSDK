@@ -510,7 +510,72 @@ public class Gaze_GrabManager : MonoBehaviour
     {
         ClearLaserPointer();
         TryAttach();
+
         grabState = GRAB_STATE.GRABBED;
+    }
+
+    private void TryAttach()
+    {
+
+        if (interactableIO == null)
+            return;
+
+        // get the snap location from the controller
+        Transform controllerSnapLocation = gameObject.GetComponentInChildren<Gaze_GrabPositionController>().transform;
+
+        // snap in position if needed
+        if (interactableIO.GrabPositionnerCollider != null)
+        {
+            // get the snap location from the IO
+            Transform grabbedObjectPositionnerTransform = interactableIO.GrabPositionnerCollider.transform;
+
+            // get the delta vector between object and hand grab location
+            Vector3 delta = controllerSnapLocation.position - grabbedObjectPositionnerTransform.position;
+
+            // add the delta to the IO
+            interactableIO.transform.position = interactableIO.transform.position + delta;
+
+            // parent grabbed object to the hand
+            interactableIO.transform.SetParent(controllerSnapLocation, true);
+        }
+        else
+        {
+            // store hand grab positionner rotation
+            Quaternion originalHandGrabPositionRotation = controllerSnapLocation.rotation;
+
+            // rotate hand grab positionner like grabbed object's grab location's rotation
+            Quaternion rotation = interactableIO.GrabLogic.DefaultHandle.transform.rotation;
+
+            controllerSnapLocation.rotation = rotation;
+
+            // get the delta vector between object and hand grab location
+            Vector3 delta = controllerSnapLocation.position - interactableIO.GrabLogic.DefaultHandle.transform.position;
+
+            // add the delta to the IO
+            interactableIO.transform.position = interactableIO.transform.position + delta;
+
+
+            // parent grabbed object to the hand
+            interactableIO.transform.SetParent(controllerSnapLocation, true);
+
+
+            // restore original hand grab positionner's rotation (this will rotate the grabbed object to)
+            controllerSnapLocation.rotation = originalHandGrabPositionRotation;
+        }
+
+
+        interactableIO.transform.SetParent(null);
+
+        if (interactableIO == null)
+            return;
+
+        grabbedObject = interactableIO.gameObject;
+
+        // notify
+        KeyValuePair<VRNode, GameObject> grabbedObjects = new KeyValuePair<VRNode, GameObject>(isLeftHand ? VRNode.LeftHand : VRNode.RightHand, grabbedObject);
+        isGrabbing = true;
+
+        Gaze_InputManager.FireControllerGrabEvent(new Gaze_ControllerGrabEventArgs(this, grabbedObjects, isGrabbing));
     }
 
     private void ClearLaserPointer()
@@ -741,61 +806,7 @@ public class Gaze_GrabManager : MonoBehaviour
 
     }
 
-    private void TryAttach()
-    {
 
-        if (interactableIO == null)
-            return;
-
-        // get the snap location from the controller
-        Transform controllerSnapLocation = gameObject.GetComponentInChildren<Gaze_GrabPositionController>().transform;
-
-        // snap in position if needed
-        if (interactableIO.GrabPositionnerCollider != null)
-        {
-            // get the snap location from the IO
-            Transform grabbedObjectPositionnerTransform = interactableIO.GrabPositionnerCollider.transform;
-
-            // get the delta vector between object and hand grab location
-            Vector3 delta = controllerSnapLocation.position - grabbedObjectPositionnerTransform.position;
-
-            // add the delta to the IO
-            interactableIO.transform.position = interactableIO.transform.position + delta;
-        }
-        else
-        {
-            // store hand grab positionner rotation
-            Quaternion originalHandGrabPositionRotation = controllerSnapLocation.rotation;
-
-            // rotate hand grab positionner like grabbed object's grab location's rotation
-            Quaternion rotation = interactableIO.GrabLogic.DefaultHandle.transform.rotation;
-
-            controllerSnapLocation.rotation = rotation;
-
-            // get the delta vector between object and hand grab location
-            Vector3 delta = controllerSnapLocation.position - interactableIO.GrabLogic.DefaultHandle.transform.position;
-
-            // add the delta to the IO
-            interactableIO.transform.position = interactableIO.transform.position + delta;
-
-            // restore original hand grab positionner's rotation (this will rotate the grabbed object to)
-            controllerSnapLocation.rotation = originalHandGrabPositionRotation;
-        }
-
-        interactableIO.transform.SetParent(null);
-
-
-        if (interactableIO == null)
-            return;
-
-        grabbedObject = interactableIO.gameObject;
-
-        // notify
-        KeyValuePair<VRNode, GameObject> grabbedObjects = new KeyValuePair<VRNode, GameObject>(isLeftHand ? VRNode.LeftHand : VRNode.RightHand, grabbedObject);
-        isGrabbing = true;
-
-        Gaze_InputManager.FireControllerGrabEvent(new Gaze_ControllerGrabEventArgs(this, grabbedObjects, isGrabbing));
-    }
 
 
     public void TryDetach()

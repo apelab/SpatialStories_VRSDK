@@ -50,6 +50,8 @@ namespace Gaze
         private bool isCurrentlyDropped = false;
 
         private Transform targetTransform;
+
+        private Gaze_ManipulationModes lastManipulationMode;
         #endregion
 
         void OnEnable()
@@ -100,7 +102,6 @@ namespace Gaze
                 else
                 {
                     Remove();
-                    //Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(gameObject, targetTransform.gameObject, Gaze_DragAndDropStates.DROPREADYCANCELED));
                     Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(this, gameObject, targetTransform.gameObject, Gaze_DragAndDropStates.DROPREADYCANCELED));
                 }
 
@@ -164,21 +165,8 @@ namespace Gaze
             //transform.SetParent(currentDragAndDropCondition.TargetObject.transform);
             transform.SetParent(targetTransform.transform);
 
-            if (interactiveObject.DnD_attached)
-            {
-                if (IO_Manipulation != null)
-                    IO_Manipulation.gameObject.SetActive(false);
-                if (IO_HandHover != null)
-                    IO_HandHover.gameObject.SetActive(false);
-
-                IO.IsManipulable = false;
-                IO.GrabLogic.SetManipulationMode(false, true);
-
-            }
-
             Snap(interactiveObject.DnD_TimeToSnap);
 
-            //Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(gameObject, targetTransform.gameObject, Gaze_DragAndDropStates.DROP));
             Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(this, gameObject, targetTransform.gameObject, Gaze_DragAndDropStates.DROP));
         }
 
@@ -290,12 +278,16 @@ namespace Gaze
         {
             if (timeToSnap == 0)
             {
-                //transform.position = currentDragAndDropCondition.TargetObject.transform.position;
-                // transform.rotation = currentDragAndDropCondition.TargetObject.transform.rotation;
                 transform.position = targetTransform.position;
                 transform.rotation = targetTransform.transform.rotation;
                 Gaze_GravityManager.ChangeGravityState(GetComponent<Gaze_InteractiveObject>(), Gaze_GravityRequestType.DEACTIVATE_AND_ATTACH);
                 Gaze_GravityManager.ChangeGravityState(GetComponent<Gaze_InteractiveObject>(), Gaze_GravityRequestType.LOCK);
+                if (interactiveObject.DnD_attached)
+                {
+                    IO.EnableManipulationMode(Gaze_ManipulationModes.NONE);
+                    if (IO.GrabLogic.GrabbingManager != null)
+                        IO.GrabLogic.GrabbingManager.TryDetach();
+                }
             }
             else
             {
@@ -315,8 +307,6 @@ namespace Gaze
             while (time < timeToSnap)
             {
                 float eased = QuadEaseOut(time, 0f, 1f, timeToSnap);
-                //transform.position = Vector3.Lerp(startPos, currentDragAndDropCondition.TargetObject.transform.position, eased);
-                //transform.rotation = Quaternion.Lerp(startRot, currentDragAndDropCondition.TargetObject.transform.rotation, eased);
                 transform.position = Vector3.Lerp(startPos, targetTransform.position, eased);
                 transform.rotation = Quaternion.Lerp(startRot, targetTransform.rotation, eased);
                 time += Time.deltaTime;
@@ -325,6 +315,13 @@ namespace Gaze
 
             transform.position = targetTransform.position;
             transform.rotation = targetTransform.transform.rotation;
+
+            if (interactiveObject.DnD_attached)
+            {
+                IO.EnableManipulationMode(Gaze_ManipulationModes.NONE);
+                if (IO.GrabLogic.GrabbingManager != null)
+                    IO.GrabLogic.GrabbingManager.TryDetach();
+            }
 
         }
 
@@ -341,8 +338,9 @@ namespace Gaze
                 StopCoroutine(m_SnapCoroutine);
                 m_SnapCoroutine = null;
             }
-            transform.localPosition = m_StartGrabLocalPosition;
-            transform.localRotation = m_StartGrabLocalRotation;
+
+            //transform.localPosition = m_StartGrabLocalPosition;
+            //transform.localRotation = m_StartGrabLocalRotation;
         }
 
         private void Grab(GameObject _controller)
@@ -475,17 +473,11 @@ namespace Gaze
         {
             if (isCurrentlyDropped)
             {
-                if (IO_Manipulation != null)
-                {
-                    IO_Manipulation.gameObject.SetActive(attach);
-                }
+                if (!attach)
+                    IO.EnableManipulationMode(lastManipulationMode);
+                else
+                    IO.EnableManipulationMode(Gaze_ManipulationModes.NONE);
 
-                if (IO_HandHover != null)
-                {
-                    IO_HandHover.gameObject.SetActive(attach);
-                }
-                IO.IsManipulable = attach;
-                IO.GrabLogic.SetManipulationMode(attach, true);
             }
         }
     }

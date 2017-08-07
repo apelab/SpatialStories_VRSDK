@@ -57,8 +57,8 @@ namespace Gaze
         /// </summary>
         public const int SAMPLES = 21;
 
-        private const float MAX_VELOCITY_CHANGE = 500f;
-        private const float MAX_ANGULAR_VELOCITY_CHANGE = 500f;
+        private const float MAX_VELOCITY_CHANGE = 10f;
+        private const float MAX_ANGULAR_VELOCITY_CHANGE = 20f;
 
         #endregion constants
 
@@ -141,6 +141,7 @@ namespace Gaze
         /// </summary>
         private Transform controllerGrabLocation;
 
+        bool IsBeingReleasedBecauseOfDistance = false;
 
         /// <summary>
         /// Determines where the object will be hold if it has not a grab positioner.
@@ -167,6 +168,8 @@ namespace Gaze
         {
             owner = _owner;
             rigidBody = owner.GetRigitBodyOrError();
+            if (rigidBody == null)
+                return;
             originalCenterOfMass = rigidBody.centerOfMass;
             isKinematicByDefault = rigidBody.isKinematic;
             Time.fixedDeltaTime = EXPECTED_DELTA_TIME;
@@ -259,7 +262,6 @@ namespace Gaze
                                 Quaternion.Inverse(_followOriginTransform.transform.rotation);
                 desiredPosition = _transformToFollow.transform.position - _followOriginTransform.transform.position;
                 positionDelta = desiredPosition;
-                Debug.Log("Move to FollowOrigin");
             }
             else if (owner.SnapOnGrab && owner.GrabPositionnerCollider == null)
             {
@@ -268,7 +270,6 @@ namespace Gaze
                 desiredPosition = _transformToFollow.transform.position -
                                   GetSnapPointForHand(GrabbingManager.isLeftHand).transform.position;
                 positionDelta = desiredPosition;
-                Debug.Log("Move to GetSnapPointForHand");
             }
             else if (owner.GrabPositionnerCollider != null)
             {
@@ -277,7 +278,6 @@ namespace Gaze
                 desiredPosition = _transformToFollow.transform.position -
                                   owner.GrabPositionnerCollider.transform.position;
                 positionDelta = desiredPosition;
-                Debug.Log("Move to GrabPositionerCollider");
             }
             else
             {
@@ -285,7 +285,6 @@ namespace Gaze
                                 Quaternion.Inverse(DefaultHandle.transform.rotation);
                 desiredPosition = _transformToFollow.transform.position -
                                   DefaultHandle.transform.position;
-                Debug.Log("Move to DefaultHandle");
                 positionDelta = desiredPosition;
             }
 
@@ -337,7 +336,7 @@ namespace Gaze
                         {
                             remainingTimeUntilDetach -= Time.fixedDeltaTime;
                             if (remainingTimeUntilDetach <= 0)
-                                StopGrabbing();
+                                StopGrabbing(true);
                         }
                     }
                     else
@@ -348,7 +347,7 @@ namespace Gaze
                         {
                             remainingTimeUntilDetach -= Time.fixedDeltaTime;
                             if (remainingTimeUntilDetach <= 0)
-                                StopGrabbing();
+                                StopGrabbing(true);
                         }
                     }
                 }
@@ -358,14 +357,14 @@ namespace Gaze
                 {
                     remainingTimeUntilDetach -= Time.fixedDeltaTime;
                     if (remainingTimeUntilDetach <= 0)
-                        StopGrabbing();
+                        StopGrabbing(true);
                 }
                 else if (owner.GrabPositionnerCollider == null && Vector3.Distance(controllerGrabLocation.position,
                              DefaultHandle.transform.position) > actualDetachDistance)
                 {
                     remainingTimeUntilDetach -= Time.fixedDeltaTime;
                     if (remainingTimeUntilDetach <= 0)
-                        StopGrabbing();
+                        StopGrabbing(true);
                 }
                 else
                     remainingTimeUntilDetach = actualTimeUntilDetach;
@@ -380,22 +379,24 @@ namespace Gaze
                 {
                     remainingTimeUntilDetach -= Time.fixedDeltaTime;
                     if (remainingTimeUntilDetach <= 0)
-                        StopGrabbing();
+                        StopGrabbing(true);
                 }
                 else
                     remainingTimeUntilDetach = actualTimeUntilDetach;
             }
-
-            //Check if we need to recalibrate the center of mass
-            if (IsCenterOfMassCorrectionNeeded(_transformToFollow))
-                CorrectCenterOfMass(_transformToFollow);
         }
+
 
         /// <summary>
         /// Fires the grab stop event in order interrupt the grabbing of an object
         /// </summary>
-        public void StopGrabbing()
+        public void StopGrabbing(bool _tooFar)
         {
+            if (_tooFar)
+            {
+                IsBeingReleasedBecauseOfDistance = true;
+            }
+
             KeyValuePair<VRNode, GameObject> dico =
                 new KeyValuePair<VRNode, GameObject>(GrabbingManager.isLeftHand ? VRNode.LeftHand : VRNode.RightHand,
                     owner.gameObject);
@@ -523,31 +524,41 @@ namespace Gaze
             if (PositionHistory.Count < SAMPLES)
                 return;
 
-            //Help the user a little bit if he is not levitating the object
-            float userHelp = owner.ManipulationMode != Gaze_ManipulationModes.LEVITATE ? 2.6f : 1.0f;
-
-            // Throw Impulse
-            float meanAcceleration = GetMeanVelocity() * userHelp;
-
-            Vector3 direction;
-            if (Gaze_InputManager.instance.trackPosition)
-                direction = owner.transform.position - PositionHistory[PositionHistory.Count - 1];
+            if (IsBeingReleasedBecauseOfDistance)
+            {
+                rigidBody.velocity = Vector3.zero;
+                rigidBody.angularVelocity = Vector3.zero;
+            }
             else
             {
-                if (controllerGrabLocation != null)
-                    direction = controllerGrabLocation.transform.forward.normalized;
+                //Help the user a little bit if he is not levitating the object
+                float userHelp = owner.ManipulationMode != Gaze_ManipulationModes.LEVITATE ? 2.6f : 1.0f;
+
+                // Throw Impulse
+                float meanAcceleration = GetMeanVelocity() * userHelp;
+
+                Vector3 direction;
+                if (Gaze_InputManager.instance.trackPosition)
+                    direction = owner.transform.position - PositionHistory[PositionHistory.Count - 1];
                 else
-                    direction = GrabbingManager.transform.forward.normalized;
+                {
+                    if (controllerGrabLocation != null)
+                        direction = controllerGrabLocation.transform.forward.normalized;
+                    else
+                        direction = GrabbingManager.transform.forward.normalized;
+                }
+
+                rigidBody.velocity = direction * meanAcceleration * Time.deltaTime;
+
+                // Angular Velocity
+                Vector3? meanAngularVelocity = GetMeanVector(AngularVelocityHistory);
+                if (meanAngularVelocity != null)
+                {
+                    rigidBody.angularVelocity = meanAngularVelocity.Value;
+                }
             }
 
-            rigidBody.velocity = direction * meanAcceleration * Time.deltaTime;
 
-            // Angular Velocity
-            Vector3? meanAngularVelocity = GetMeanVector(AngularVelocityHistory);
-            if (meanAngularVelocity != null)
-            {
-                rigidBody.angularVelocity = meanAngularVelocity.Value;
-            }
         }
 
         /// <summary>
@@ -700,18 +711,24 @@ namespace Gaze
             rigidBody.angularDrag = 0.05f;
 
 
-            if (!owner.SnapOnGrab)
+            originalCenterOfMass = rigidBody.centerOfMass;
+
+            if (owner.HasGrabPositionner)
             {
-                if (!IsBeingManipulated)
-                    rigidBody.centerOfMass = DefaultHandle.transform.localPosition;
-                else
-                    rigidBody.centerOfMass = owner.GrabPositionnerCollider.transform.localPosition;
+                rigidBody.centerOfMass = owner.GrabPositionnerCollider.transform.localPosition;
             }
             else
             {
-                rigidBody.centerOfMass = GetSnapPointForHand(GrabbingManager.isLeftHand).transform.localPosition;
+                rigidBody.centerOfMass = DefaultHandle.transform.localPosition;
             }
+
+
+            isCenterOfMassAlreadyCorrected = false;
+
+            IsBeingReleasedBecauseOfDistance = false;
         }
+
+        bool isCenterOfMassAlreadyCorrected = false;
 
         /// <summary>
         /// Perform all the operations needed after the release of an object has been received from an 
@@ -736,52 +753,12 @@ namespace Gaze
             if (rigidBody)
             {
                 rigidBody.centerOfMass = originalCenterOfMass;
-                rigidBody.collisionDetectionMode = CollisionDetectionMode.Discrete;
             }
 
             GrabbingManager = null;
             controllerGrabLocation = null;
             Gaze_GravityManager.ChangeGravityState(owner, Gaze_GravityRequestType.RETURN_TO_DEFAULT);
             CleanPositionsAndVelocityHistory();
-        }
-
-        /// <summary>
-        /// Do this every 100 updates to make sure that the ce
-        /// </summary>
-        private const int UPDATES_TO_SKIP = 100;
-
-        private int skypUpdates = UPDATES_TO_SKIP;
-
-        private bool IsCenterOfMassCorrectionNeeded(Transform _followingTransform)
-        {
-            if (skypUpdates > 0)
-            {
-                skypUpdates--;
-                return false;
-            }
-            float distance = 0;
-            Transform lastParent = _followingTransform.parent;
-            _followingTransform.SetParent(owner.transform);
-            distance = Vector3.Distance(_followingTransform.localPosition, rigidBody.centerOfMass);
-            _followingTransform.SetParent(lastParent);
-            skypUpdates = UPDATES_TO_SKIP;
-            return distance > CENTER_OF_MASS_CORRECTION_THRESHOLD;
-        }
-
-        /// <summary>
-        /// Avoid object shaking
-        /// </summary>
-        /// <param name="_followingTransform"></param>
-        /// <returns></returns>
-        private void CorrectCenterOfMass(Transform _followingTransform)
-        {
-            if (rigidBody != null)
-            {
-                Transform lastParent = _followingTransform.parent;
-                _followingTransform.SetParent(owner.transform);
-                rigidBody.centerOfMass = _followingTransform.localPosition;
-                _followingTransform.SetParent(lastParent);
-            }
         }
 
         private Transform leftSnapPoint, rigtSnapPoint;
