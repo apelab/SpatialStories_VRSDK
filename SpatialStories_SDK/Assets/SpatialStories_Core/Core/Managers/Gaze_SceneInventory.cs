@@ -18,6 +18,21 @@ public class Gaze_SceneInventory : MonoBehaviour
         InteractiveObjects = new List<GameObject>();
     }
 
+    private void OnEnable()
+    {
+        Gaze_EventManager.OnIODestroyed += OnIODestroyed;
+    }
+
+    private void OnDisable()
+    {
+        Gaze_EventManager.OnIODestroyed -= OnIODestroyed;
+    }
+
+    private void OnIODestroyed(Gaze_IODestroyEventArgs _args)
+    {
+        InteractiveObjects.Remove(_args.IO.gameObject);
+    }
+
     void Start()
     {
         UpdateListsFromHierarchy();
