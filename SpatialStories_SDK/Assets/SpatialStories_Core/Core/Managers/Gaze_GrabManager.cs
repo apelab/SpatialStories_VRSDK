@@ -141,9 +141,7 @@ public class Gaze_GrabManager : MonoBehaviour
     {
         if (setupDone)
             return;
-
-        Debug.Log(_controller);
-
+        
         if (_controller != Gaze_Controllers.HTC_VIVE)
         {
             Gaze_InputManager.OnHandRightDownEvent += OnHandRightDownEvent;

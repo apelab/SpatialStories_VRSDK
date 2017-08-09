@@ -105,7 +105,17 @@ namespace Gaze
         private Gaze_InteractiveObject IOToLevitate;
         private GameObject DynamicLevitationPoint;
 
+        // The current drag and drop manager
+        private Gaze_DragAndDropManager currentDragAndDropManager;
+
+        // Is this object being controlled by the drag and drop manager (Snap on Drop)
+        private bool snappedByDragAndDrop = false;
+
+        // This is the offset distance between the Dynamic levitaion point and the object position
+        private float snappedTolerance = 0f;
+
         public static List<Gaze_LevitationManager> LevitationManagers = new List<Gaze_LevitationManager>();
+
         #endregion
 
         void OnEnable()
@@ -214,8 +224,13 @@ namespace Gaze
                 ResetCharge();
             else
             {
-                if (IOToLevitate != null)
+                if (IOToLevitate != null && IOToLevitate.ManipulationMode == Gaze_ManipulationModes.LEVITATE)
                     Levitate();
+                else
+                {
+                    Gaze_EventManager.FireLevitationEvent(new Gaze_LevitationEventArgs(this, IOToLevitate.gameObject, Gaze_LevitationTypes.LEVITATE_STOP, actualHand));
+                    isControllerTrigger = false;
+                }
             }
         }
 
@@ -426,7 +441,19 @@ namespace Gaze
 
             // rotate attach point according to controller's 'Z' rotation
             attachPoint.transform.eulerAngles = new Vector3(attachPoint.transform.eulerAngles.x, attachPoint.transform.eulerAngles.y, handLocation.transform.eulerAngles.z * -1);
-            IOToLevitate.GrabLogic.FollowPoint(attachPoint.transform, DynamicLevitationPoint.transform);
+            if (!snappedByDragAndDrop)
+                IOToLevitate.GrabLogic.FollowPoint(attachPoint.transform, DynamicLevitationPoint.transform);
+            else
+            {
+                if (!currentDragAndDropManager.IsInDistance(attachPoint.transform.position, snappedTolerance))
+                {
+                    IOToLevitate.transform.position = attachPoint.transform.position;
+                    Gaze_GravityManager.ChangeGravityState(IOToLevitate, Gaze_GravityRequestType.UNLOCK);
+                    Gaze_GravityManager.ChangeGravityState(IOToLevitate, Gaze_GravityRequestType.ACTIVATE_AND_DETACH);
+                    snappedByDragAndDrop = false;
+                }
+            }
+
         }
 
 
@@ -527,6 +554,7 @@ namespace Gaze
         {
             if (e.Hand != actualHand && e.Hand != Gaze_HandsEnum.BOTH)
                 return;
+
             if (e.Type.Equals(Gaze_LevitationTypes.LEVITATE_START))
             {
                 IOToLevitate = Gaze_Utils.GetIOFromGameObject(e.ObjectToLevitate);
@@ -536,6 +564,15 @@ namespace Gaze
                 targetLocation.transform.position = IOToLevitate.transform.position;
                 UpdateBeamControlPoints();
                 Gaze_Teleporter.IsTeleportAllowed = false;
+                snappedByDragAndDrop = false;
+
+                currentDragAndDropManager = IOToLevitate.GetComponent<Gaze_DragAndDropManager>();
+
+                if (currentDragAndDropManager.IsSnapped)
+                {
+                    snappedByDragAndDrop = true;
+                    snappedTolerance = Vector3.Distance(attachPoint.transform.position, IOToLevitate.transform.position);
+                }
             }
             else if (e.Type.Equals(Gaze_LevitationTypes.LEVITATE_STOP))
             {
@@ -562,7 +599,6 @@ namespace Gaze
                     hitPosition = e.HitPosition;
 
                     // Ensure 1 dynamic levitation point on the manager.
-
                     Destroy(DynamicLevitationPoint);
                     DynamicLevitationPoint = new GameObject();
                     //DynamicLevitationPoint = GameObject.CreatePrimitive(PrimitiveType.Sphere);
@@ -577,29 +613,41 @@ namespace Gaze
             }
         }
 
+
         private void OnDragAndDropEvent(Gaze_DragAndDropEventArgs e)
         {
+            if (IOToLevitate == null)
+                return;
+
             Gaze_DragAndDropManager dndManager = Gaze_Utils.ConvertIntoGameObject(e.DropObject).GetComponent<Gaze_DragAndDropManager>();
 
-            if (objectToLevitate != dndManager.gameObject)
+            if (IOToLevitate.gameObject != dndManager.gameObject)
                 return;
+
+            // Check if the position control is in drag and drop
+            if (e.State.Equals(Gaze_DragAndDropStates.DROPREADY))
+            {
+                if (IOToLevitate.DnD_snapBeforeDrop)
+                {
+                    snappedByDragAndDrop = true;
+                    currentDragAndDropManager = dndManager;
+                    snappedTolerance = Vector3.Distance(attachPoint.transform.position, IOToLevitate.transform.position);
+                }
+            }
+            else if (e.State.Equals(Gaze_DragAndDropStates.DROPREADYCANCELED))
+            {
+                if (IOToLevitate.DnD_snapBeforeDrop)
+                    snappedByDragAndDrop = false;
+            }
 
             if (e.State.Equals(Gaze_DragAndDropStates.DROPREADY) && !dropReady)
             {
                 dropReady = !dropReady;
                 if (updateBeamColorRoutine != null)
                     StopCoroutine(updateBeamColorRoutine);
+
                 updateBeamColorRoutine = UpdateBeamFeedback(true);
                 StartCoroutine(updateBeamColorRoutine);
-
-                if (objectToLevitate.GetComponent<Gaze_InteractiveObject>().DnD_snapBeforeDrop)
-                {
-                    ResetBeamColor();
-
-                    // Trying to hide everything 
-                    beam.enabled = false;
-                    attachPoint.GetComponent<Renderer>().enabled = false;
-                }
 
             }
             else if (e.State.Equals(Gaze_DragAndDropStates.DROPREADYCANCELED) && dropReady)
@@ -620,14 +668,12 @@ namespace Gaze
             }
         }
 
-
         public void ResetBeamColor()
         {
             beam.startColor = dropOffStartColor;
             beam.endColor = dropOffEndColor;
             attachPoint.GetComponent<Renderer>().material.color = dropOffEndColor;
         }
-
 
         #region GearVR Controller
         private void OnPadRightTouchDownEvent(Gaze_InputEventArgs e)

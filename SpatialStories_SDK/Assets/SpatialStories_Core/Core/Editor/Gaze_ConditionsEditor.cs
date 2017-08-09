@@ -282,7 +282,7 @@ namespace Gaze
 
         private void UpdateProximitiesList(GameObject g)
         {
-            Gaze_InteractiveObject proximity = g.GetComponentInChildren<Gaze_Proximity>().GetComponentInParent<Gaze_InteractiveObject>();
+            Gaze_InteractiveObject proximity = g.GetComponentInChildrenBFS<Gaze_Proximity>().GetComponentInParent<Gaze_InteractiveObject>();
             hierarchyProximities.Add(proximity);
         }
 

@@ -18,7 +18,7 @@ namespace Gaze
         /// <summary>
         /// How many seconds the object will resist far of the point before dropping it.
         /// </summary>
-        const float DEFAULT_TIME_UNTIL_DETACH = 1f;
+        const float DEFAULT_TIME_UNTIL_DETACH = 5f;
 
         private float actualTimeUntilDetach = DEFAULT_TIME_UNTIL_DETACH;
 
@@ -182,12 +182,20 @@ namespace Gaze
         {
             Gaze_InputManager.OnControllerGrabEvent += OnControllerGrabEvent;
             Gaze_EventManager.OnTeleportEvent += OnTeleportEvent;
+            Gaze_EventManager.OnDragAndDropEvent += OnDragAndDropEvent;
         }
 
         public void UnsubscribeToEvents()
         {
             Gaze_InputManager.OnControllerGrabEvent -= OnControllerGrabEvent;
             Gaze_EventManager.OnTeleportEvent -= OnTeleportEvent;
+            Gaze_EventManager.OnDragAndDropEvent -= OnDragAndDropEvent;
+        }
+
+        public void OnDragAndDropEvent(Gaze_DragAndDropEventArgs _e)
+        {
+            if (!Gaze_Utils.GetIOFromObject(_e.DropObject).GetInstanceID().Equals(owner.GetInstanceID()))
+                return;
         }
 
         public void Update()
@@ -248,46 +256,82 @@ namespace Gaze
         private void FollowPhysicPoint(Transform _transformToFollow, Transform _followOriginTransform = null)
         {
             Quaternion rotationDelta;
-            Vector3 positionDelta;
-            Vector3 axis;
             Vector3 desiredPosition;
 
-            float angle;
-            float velocityMagic = VELOCITY_CONST / (Time.fixedDeltaTime / EXPECTED_DELTA_TIME);
-            float angularVelocityMagic = ANGULAR_VELOCITY_CONST / (Time.fixedDeltaTime / EXPECTED_DELTA_TIME);
-
+            // This is used for levitating and object
             if (_followOriginTransform != null)
             {
-                rotationDelta = _transformToFollow.transform.rotation *
-                                Quaternion.Inverse(_followOriginTransform.transform.rotation);
-                desiredPosition = _transformToFollow.transform.position - _followOriginTransform.transform.position;
-                positionDelta = desiredPosition;
+                rotationDelta = CalcRotationDelta(_transformToFollow.transform.rotation, _followOriginTransform.transform.rotation);
+                desiredPosition = CalcDesiredPosition(_transformToFollow.transform.position, _followOriginTransform.transform.position);
             }
+            // This is used when the object is snappable
             else if (owner.SnapOnGrab && owner.GrabPositionnerCollider == null)
             {
-                rotationDelta = _transformToFollow.transform.rotation *
-                                Quaternion.Inverse(GetSnapPointForHand(GrabbingManager.isLeftHand).transform.rotation);
-                desiredPosition = _transformToFollow.transform.position -
-                                  GetSnapPointForHand(GrabbingManager.isLeftHand).transform.position;
-                positionDelta = desiredPosition;
+                rotationDelta = CalcRotationDelta(_transformToFollow.transform.rotation, GetSnapPointForHand(GrabbingManager.isLeftHand).transform.rotation);
+                desiredPosition = CalcDesiredPosition(_transformToFollow.transform.position, GetSnapPointForHand(GrabbingManager.isLeftHand).transform.position);
             }
+            // This is for manipulabe objects
             else if (owner.GrabPositionnerCollider != null)
             {
-                rotationDelta = _transformToFollow.transform.rotation *
-                                Quaternion.Inverse(owner.GrabPositionnerCollider.transform.rotation);
-                desiredPosition = _transformToFollow.transform.position -
-                                  owner.GrabPositionnerCollider.transform.position;
-                positionDelta = desiredPosition;
+                rotationDelta = CalcRotationDelta(_transformToFollow.transform.rotation, owner.GrabPositionnerCollider.transform.rotation);
+                desiredPosition = CalcDesiredPosition(_transformToFollow.transform.position, owner.GrabPositionnerCollider.transform.position);
             }
+            // This shouldn't be called
             else
             {
-                rotationDelta = _transformToFollow.transform.rotation *
-                                Quaternion.Inverse(DefaultHandle.transform.rotation);
-                desiredPosition = _transformToFollow.transform.position -
-                                  DefaultHandle.transform.position;
-                positionDelta = desiredPosition;
+                rotationDelta = CalcRotationDelta(_transformToFollow.transform.rotation, DefaultHandle.transform.rotation);
+                desiredPosition = CalcDesiredPosition(_transformToFollow.transform.position, DefaultHandle.transform.position);
             }
 
+            UpdateObjectAngularVelocity(rotationDelta);
+            UpdateObjectVelocity(desiredPosition);
+            UpdatePositionHistory(_transformToFollow);
+            CheckIfDetachNeeded(_transformToFollow, _followOriginTransform);
+        }
+
+        public Quaternion CalcRotationDelta(Quaternion _rotationToFollow, Quaternion _rotationOffset)
+        {
+            return _rotationToFollow * Quaternion.Inverse(_rotationOffset);
+        }
+
+        public Vector3 CalcDesiredPosition(Vector3 _positionToFollow, Vector3 _offset)
+        {
+            return _positionToFollow - _offset;
+        }
+
+        public void UpdateObjectVelocity(Vector3 positionDelta)
+        {
+            float velocityMagic = VELOCITY_CONST / (Time.fixedDeltaTime / EXPECTED_DELTA_TIME);
+
+            Vector3 velocityTarget = (positionDelta * velocityMagic) * Time.fixedDeltaTime;
+            if (float.IsNaN(velocityTarget.x) == false)
+            {
+                rigidBody.velocity = Vector3.MoveTowards(rigidBody.velocity, velocityTarget, MAX_VELOCITY_CHANGE);
+            }
+        }
+
+        public void UpdatePositionHistory(Transform _transformToFollow)
+        {
+            if (PositionHistory != null)
+            {
+                angularVelocityTrackingIndex++;
+
+                if (angularVelocityTrackingIndex >= AngularVelocityHistory.Length)
+                    angularVelocityTrackingIndex = 0;
+
+                AngularVelocityHistory[angularVelocityTrackingIndex] = rigidBody.angularVelocity;
+
+                if (PositionHistory.Count > SAMPLES)
+                    PositionHistory.RemoveAt(PositionHistory.Count() - 1);
+                PositionHistory.Insert(0, _transformToFollow.transform.position);
+            }
+        }
+
+        public void UpdateObjectAngularVelocity(Quaternion rotationDelta)
+        {
+            float angle;
+            Vector3 axis;
+            float angularVelocityMagic = ANGULAR_VELOCITY_CONST / (Time.fixedDeltaTime / EXPECTED_DELTA_TIME);
             rotationDelta.ToAngleAxis(out angle, out axis);
 
             if (angle > 180)
@@ -303,89 +347,64 @@ namespace Gaze
                         MAX_ANGULAR_VELOCITY_CHANGE);
                 }
             }
+        }
 
-            Vector3 velocityTarget = (positionDelta * velocityMagic) * Time.fixedDeltaTime;
-            if (float.IsNaN(velocityTarget.x) == false)
-            {
-                rigidBody.velocity = Vector3.MoveTowards(rigidBody.velocity, velocityTarget, MAX_VELOCITY_CHANGE);
-            }
 
-            if (PositionHistory != null)
-            {
-                angularVelocityTrackingIndex++;
-
-                if (angularVelocityTrackingIndex >= AngularVelocityHistory.Length)
-                    angularVelocityTrackingIndex = 0;
-
-                AngularVelocityHistory[angularVelocityTrackingIndex] = rigidBody.angularVelocity;
-
-                if (PositionHistory.Count > SAMPLES)
-                    PositionHistory.RemoveAt(PositionHistory.Count() - 1);
-                PositionHistory.Insert(0, _transformToFollow.transform.position);
-            }
-
+        public void CheckIfDetachNeeded(Transform _transformToFollow, Transform _followOriginTransform = null)
+        {
             if (owner.ManipulationMode != Gaze_ManipulationModes.LEVITATE)
             {
                 if (owner.SnapOnGrab)
                 {
                     if (owner.GrabPositionnerCollider == null)
                     {
-                        if (Vector3.Distance(controllerGrabLocation.position,
-                                GetSnapPointForHand(GrabbingManager.isLeftHand).transform.position) >
-                            actualDetachDistance)
+                        if (IsDetachNeeded(controllerGrabLocation.position, GetSnapPointForHand(GrabbingManager.isLeftHand).transform.position))
                         {
-                            remainingTimeUntilDetach -= Time.fixedDeltaTime;
-                            if (remainingTimeUntilDetach <= 0)
-                                StopGrabbing(true);
+                            UpdateDetachState();
                         }
                     }
                     else
                     {
-                        if (!owner.SnapOnGrab &&
-                            Vector3.Distance(controllerGrabLocation.position,
-                                owner.GrabPositionnerCollider.transform.position) > actualDetachDistance)
+                        if (!owner.SnapOnGrab && IsDetachNeeded(controllerGrabLocation.position, owner.GrabPositionnerCollider.transform.position))
                         {
-                            remainingTimeUntilDetach -= Time.fixedDeltaTime;
-                            if (remainingTimeUntilDetach <= 0)
-                                StopGrabbing(true);
+                            UpdateDetachState();
                         }
                     }
                 }
-                else if (owner.GrabPositionnerCollider != null && (!owner.SnapOnGrab &&
-                                                                   Vector3.Distance(controllerGrabLocation.position,
-                                                                       owner.GrabPositionnerCollider.transform.position) > actualDetachDistance))
+                else if (owner.GrabPositionnerCollider != null && (!owner.SnapOnGrab && IsDetachNeeded(controllerGrabLocation.position, owner.GrabPositionnerCollider.transform.position)))
                 {
-                    remainingTimeUntilDetach -= Time.fixedDeltaTime;
-                    if (remainingTimeUntilDetach <= 0)
-                        StopGrabbing(true);
+                    UpdateDetachState();
                 }
-                else if (owner.GrabPositionnerCollider == null && Vector3.Distance(controllerGrabLocation.position,
-                             DefaultHandle.transform.position) > actualDetachDistance)
+                else if (owner.GrabPositionnerCollider == null && IsDetachNeeded(controllerGrabLocation.position, DefaultHandle.transform.position))
                 {
-                    remainingTimeUntilDetach -= Time.fixedDeltaTime;
-                    if (remainingTimeUntilDetach <= 0)
-                        StopGrabbing(true);
+                    UpdateDetachState();
                 }
                 else
                     remainingTimeUntilDetach = actualTimeUntilDetach;
             }
             else
             {
-                Transform desiredPos = _followOriginTransform == null
-                    ? defaultHandle.transform
-                    : _followOriginTransform;
-                if (Vector3.Distance(desiredPos.transform.position, _transformToFollow.transform.position) >
-                    actualDetachDistance)
+                Transform desiredPos = _followOriginTransform == null ? defaultHandle.transform : _followOriginTransform;
+                if (IsDetachNeeded(desiredPos.transform.position, _transformToFollow.transform.position))
                 {
-                    remainingTimeUntilDetach -= Time.fixedDeltaTime;
-                    if (remainingTimeUntilDetach <= 0)
-                        StopGrabbing(true);
+                    UpdateDetachState();
                 }
                 else
                     remainingTimeUntilDetach = actualTimeUntilDetach;
             }
         }
 
+        public bool IsDetachNeeded(Vector3 _desiredPosition, Vector3 _currentPosition)
+        {
+            return Vector3.Distance(_desiredPosition, _currentPosition) > actualDetachDistance;
+        }
+
+        public void UpdateDetachState()
+        {
+            remainingTimeUntilDetach -= Time.fixedDeltaTime;
+            if (remainingTimeUntilDetach <= 0)
+                StopGrabbing(true);
+        }
 
         /// <summary>
         /// Fires the grab stop event in order interrupt the grabbing of an object
@@ -704,8 +723,13 @@ namespace Gaze
             rigidBody.useGravity = false;
             rigidBody.maxAngularVelocity = 100;
 
-            SetDistanceTolerance(DEFAULT_DETACH_DISTANCE);
-            SetTimeTolerance(DEFAULT_TIME_UNTIL_DETACH);
+            if (owner.ManipulationMode != Gaze_ManipulationModes.LEVITATE)
+            {
+                SetDistanceTolerance(DEFAULT_DETACH_DISTANCE);
+                SetTimeTolerance(DEFAULT_TIME_UNTIL_DETACH);
+            }
+
+            remainingTimeUntilDetach = actualTimeUntilDetach;
 
             rigidBody.drag = 0;
             rigidBody.angularDrag = 0.05f;
@@ -726,6 +750,7 @@ namespace Gaze
             isCenterOfMassAlreadyCorrected = false;
 
             IsBeingReleasedBecauseOfDistance = false;
+
         }
 
         bool isCenterOfMassAlreadyCorrected = false;

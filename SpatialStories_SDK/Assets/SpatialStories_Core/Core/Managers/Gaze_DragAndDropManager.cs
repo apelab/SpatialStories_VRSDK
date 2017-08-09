@@ -35,6 +35,7 @@ namespace Gaze
         private bool wasAligned;
         [Gaze_ShowOnly]
         private bool m_Snapped;
+        public bool IsSnapped { get { return m_Snapped; } }
 
         private Gaze_HandController[] grabbingControllers = new Gaze_HandController[2];
 
@@ -159,15 +160,16 @@ namespace Gaze
 
         private void Drop()
         {
-
             isCurrentlyDropped = true;
             // parent to target object
             //transform.SetParent(currentDragAndDropCondition.TargetObject.transform);
             transform.SetParent(targetTransform.transform);
-
             Snap(interactiveObject.DnD_TimeToSnap);
 
             Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(this, gameObject, targetTransform.gameObject, Gaze_DragAndDropStates.DROP));
+
+            if (IO.DnD_attached)
+                IO.EnableManipulationMode(Gaze_ManipulationModes.NONE);
         }
 
         private void PickUp()
@@ -180,6 +182,31 @@ namespace Gaze
 
             //Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(gameObject, targetTransform.gameObject, Gaze_DragAndDropStates.PICKUP));
             Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(this, gameObject, targetTransform.gameObject, Gaze_DragAndDropStates.PICKUP));
+        }
+
+        public bool IsInDistance(Vector3 _position, float _tolerance = 0f)
+        {
+            bool inDistance = false;
+            for (int i = 0; i < interactiveObject.DnD_Targets.Count; i++)
+            {
+                // if target doesn't exist anymore, remove it !
+                if (interactiveObject.DnD_Targets[i] == null)
+                {
+                    interactiveObject.DnD_Targets.RemoveAt(i);
+                }
+                else
+                {
+                    // compare distance between me (the drop object) and the drop target
+                    if (Vector3.Distance(_position, interactiveObject.DnD_Targets[i].transform.position) <= interactiveObject.DnD_minDistance + _tolerance)
+                    {
+                        // store the target in proximity's transform
+                        targetTransform = interactiveObject.DnD_Targets[i].transform;
+                        inDistance = true;
+                        break;
+                    }
+                }
+            }
+            return inDistance;
         }
 
         private bool IsObjectAlignedWithItsTarget()
@@ -199,27 +226,7 @@ namespace Gaze
                 return false;
 
             // for each drop target in the list
-            bool isWithinDistance = false;
-
-            for (int i = 0; i < targetCount; i++)
-            {
-                // if target doesn't exist anymore, remove it !
-                if (interactiveObject.DnD_Targets[i] == null)
-                {
-                    interactiveObject.DnD_Targets.RemoveAt(i);
-                }
-                else
-                {
-                    // compare distance between me (the drop object) and the drop target
-                    if (Vector3.Distance(transform.position, interactiveObject.DnD_Targets[i].transform.position) <= interactiveObject.DnD_minDistance)
-                    {
-                        // store the target in proximity's transform
-                        targetTransform = interactiveObject.DnD_Targets[i].transform;
-                        isWithinDistance = true;
-                        break;
-                    }
-                }
-            }
+            bool isWithinDistance = IsInDistance(transform.position);
 
             // exit if none of the targets are aligned
             if (!isWithinDistance)
@@ -282,12 +289,6 @@ namespace Gaze
                 transform.rotation = targetTransform.transform.rotation;
                 Gaze_GravityManager.ChangeGravityState(GetComponent<Gaze_InteractiveObject>(), Gaze_GravityRequestType.DEACTIVATE_AND_ATTACH);
                 Gaze_GravityManager.ChangeGravityState(GetComponent<Gaze_InteractiveObject>(), Gaze_GravityRequestType.LOCK);
-                if (interactiveObject.DnD_attached)
-                {
-                    IO.EnableManipulationMode(Gaze_ManipulationModes.NONE);
-                    if (IO.GrabLogic.GrabbingManager != null)
-                        IO.GrabLogic.GrabbingManager.TryDetach();
-                }
             }
             else
             {
@@ -315,14 +316,6 @@ namespace Gaze
 
             transform.position = targetTransform.position;
             transform.rotation = targetTransform.transform.rotation;
-
-            if (interactiveObject.DnD_attached)
-            {
-                IO.EnableManipulationMode(Gaze_ManipulationModes.NONE);
-                if (IO.GrabLogic.GrabbingManager != null)
-                    IO.GrabLogic.GrabbingManager.TryDetach();
-            }
-
         }
 
         private float QuadEaseOut(float time, float startVal, float changeInVal, float duration)
