@@ -31,6 +31,7 @@ public class Gaze_SceneInventory : MonoBehaviour
     private void OnIODestroyed(Gaze_IODestroyEventArgs _args)
     {
         InteractiveObjects.Remove(_args.IO.gameObject);
+        InteractiveObjectsCount -= 1;
     }
 
     void Start()
