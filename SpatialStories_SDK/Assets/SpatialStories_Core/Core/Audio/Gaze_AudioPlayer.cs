@@ -209,6 +209,8 @@ namespace Gaze
 
         public int setParameters(AudioSource targetaudioSource, Gaze_AudioPlayList audioClips, Gaze_Actions.LOOP_MODES[] loop, Gaze_Actions.AUDIO_SEQUENCE[] sequence, bool[] fadeInBetween, float volumeMin, float volumeMax, bool duckingEnabled, float fadeSpeed, float fadeInTime, float fadeOutTime, float fadeOutDeactTime, bool fadeInEnabled, bool fadeOutEnabled, bool fadeOutDeactEnabled, AnimationCurve fadeInCurve, AnimationCurve fadeOutCurve, AnimationCurve fadeOutDeactCurve, bool[] activeTriggerStatesAudio, bool forceStop, bool allowMultiple, int maxConcurrentSound, bool randomizePitch, float minPitch, float maxPitch, bool[] loopOnLast)
         {
+            audioSource = gameObject.GetComponent<AudioSource>();
+            audios.Add(new Gaze_AudioSource(audioSource));
             audiosActions.Add(new Gaze_AudioAction(targetaudioSource, audioClips, loop, sequence, fadeInBetween, volumeMin, volumeMax, duckingEnabled, fadeSpeed, fadeInTime, fadeOutTime, fadeOutDeactTime, fadeInEnabled, fadeOutEnabled, fadeOutDeactEnabled, fadeInCurve, fadeOutCurve, fadeOutDeactCurve, activeTriggerStatesAudio, forceStop, allowMultiple, randomizePitch, minPitch, maxPitch, maxConcurrentSound, loopOnLast));
             int key = audiosActions.Count - 1;
 
@@ -219,9 +221,7 @@ namespace Gaze
 
         void Awake()
         {
-            audioSource = gameObject.GetComponent<AudioSource>();
             audios = new List<Gaze_AudioSource>();
-            audios.Add(new Gaze_AudioSource(audioSource));
         }
 
         void Update()
