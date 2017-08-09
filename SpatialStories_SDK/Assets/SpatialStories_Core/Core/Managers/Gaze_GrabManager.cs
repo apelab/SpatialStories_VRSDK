@@ -119,10 +119,7 @@ public class Gaze_GrabManager : MonoBehaviour
         Gaze_EventManager.OnGrabEvent += OnGrabEvent;
         Gaze_InputManager.OnControllerCollisionEvent += OnControllerCollisionEvent;
         Gaze_InputManager.OnControllerGrabEvent += OnControllerGrabEvent;
-        Gaze_InputManager.OnHandRightDownEvent += OnHandRightDownEvent;
-        Gaze_InputManager.OnHandRightUpEvent += OnHandRightUpEvent;
-        Gaze_InputManager.OnHandLeftDownEvent += OnHandLeftDownEvent;
-        Gaze_InputManager.OnHandLeftUpEvent += OnHandLeftUpEvent;
+
         Gaze_HandsReplacer.OnHandsReplaced += OnHandsReplaced;
         Gaze_EventManager.OnIODestroyed += OnIODestroyed;
 
