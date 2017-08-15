@@ -128,7 +128,6 @@ namespace Gaze
 
         private void DropReady()
         {
-
             if (interactiveObject.DnD_snapBeforeDrop)
             {
                 Snap(interactiveObject.DnD_TimeToSnap);
@@ -164,7 +163,10 @@ namespace Gaze
             // parent to target object
             //transform.SetParent(currentDragAndDropCondition.TargetObject.transform);
             transform.SetParent(targetTransform.transform);
-            Snap(interactiveObject.DnD_TimeToSnap);
+
+            // Don't snap if not necesary
+            if (IO.DnD_SnapOnDrop)
+                Snap(interactiveObject.DnD_TimeToSnap);
 
             Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(this, gameObject, targetTransform.gameObject, Gaze_DragAndDropStates.DROP));
 
@@ -272,7 +274,8 @@ namespace Gaze
                 if (m_Snapped)
                 {
                     // resnap
-                    Snap();
+                    if (IO.DnD_SnapOnDrop)
+                        Snap();
                 }
                 return true;
             }
@@ -283,6 +286,8 @@ namespace Gaze
 
         private void Snap(float timeToSnap = 0f)
         {
+
+
             if (timeToSnap == 0)
             {
                 transform.position = targetTransform.position;

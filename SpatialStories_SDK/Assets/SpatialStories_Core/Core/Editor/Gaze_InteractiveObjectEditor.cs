@@ -84,7 +84,8 @@ namespace Gaze
             {
                 for (int i = 0; i < Gaze_SceneInventory.Instance.InteractiveObjectsCount; i++)
                 {
-                    dnd_dropTargetsNames.Add(Gaze_SceneInventory.Instance.InteractiveObjects[i].gameObject.name);
+                    if (Gaze_SceneInventory.Instance.InteractiveObjects[i] != null)
+                        dnd_dropTargetsNames.Add(Gaze_SceneInventory.Instance.InteractiveObjects[i].gameObject.name);
                 }
             }
         }
@@ -170,13 +171,25 @@ namespace Gaze
                 gaze_InteractiveObjectScript.DnD_minDistance = EditorGUILayout.FloatField("Min Distance To Validate", gaze_InteractiveObjectScript.DnD_minDistance);
                 GUILayout.EndHorizontal();
 
+
                 EditorGUILayout.BeginHorizontal();
                 gaze_InteractiveObjectScript.DnD_attached = EditorGUILayout.ToggleLeft("Attached", gaze_InteractiveObjectScript.DnD_attached);
                 EditorGUILayout.EndHorizontal();
 
                 EditorGUILayout.BeginHorizontal();
-                gaze_InteractiveObjectScript.DnD_snapBeforeDrop = EditorGUILayout.ToggleLeft("Snap Before Drop", gaze_InteractiveObjectScript.DnD_snapBeforeDrop);
+                gaze_InteractiveObjectScript.DnD_SnapOnDrop = EditorGUILayout.ToggleLeft(new GUIContent("Snap On Drop", "If false the object won't try to match the ghost position on drop"), gaze_InteractiveObjectScript.DnD_SnapOnDrop);
                 EditorGUILayout.EndHorizontal();
+
+                if (gaze_InteractiveObjectScript.DnD_SnapOnDrop)
+                {
+                    EditorGUILayout.BeginHorizontal();
+                    gaze_InteractiveObjectScript.DnD_snapBeforeDrop = EditorGUILayout.ToggleLeft("Snap Before Drop", gaze_InteractiveObjectScript.DnD_snapBeforeDrop);
+                    EditorGUILayout.EndHorizontal();
+                }
+                else
+                    gaze_InteractiveObjectScript.DnD_snapBeforeDrop = false;
+
+
 
                 EditorGUILayout.BeginHorizontal();
                 gaze_InteractiveObjectScript.DnD_TimeToSnap = EditorGUILayout.FloatField("Time To Snap", gaze_InteractiveObjectScript.DnD_TimeToSnap);

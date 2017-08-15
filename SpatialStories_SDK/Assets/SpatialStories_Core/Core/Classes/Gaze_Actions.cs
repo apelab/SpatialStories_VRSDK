@@ -70,6 +70,7 @@ namespace Gaze
         public string[] animatorTriggers = new string[Enum<TriggerEventsAndStates>.Count];
         public bool[] loopOnLast = new bool[Enum<TriggerEventsAndStates>.Count];
 
+
         public Gaze_AnimationPlaylist animationClip = new Gaze_AnimationPlaylist();
 
         public LOOP_MODES[] loopAnim = new LOOP_MODES[Enum<TriggerEventsAndStates>.Count];
@@ -161,12 +162,14 @@ namespace Gaze
                     targetAudioSource.gameObject.AddComponent<Gaze_AudioPlayer>();
                 }
 
+
                 gazeAudioPlayer = targetAudioSource.GetComponent<Gaze_AudioPlayer>();
 
                 if (ActionAudio == ACTIVABLE_OPTION.ACTIVATE)
                 {
                     Audio_PlayList_Key = gazeAudioPlayer.setParameters(targetAudioSource, audioClips, loopAudio, audio_sequence, fadeInBetween, audioVolumeMin, audioVolumeMax, duckingEnabled, fadeSpeed, fadeInTime, fadeOutTime, fadeOutDeactTime, fadeInEnabled, fadeOutEnabled, fadeOutDeactEnabled, fadeInCurve, fadeOutCurve, fadeOutDeactCurve, activeTriggerStatesAudio, audio_ForceStop, audio_AllowMultiple, audio_MaxConcurrentSound, audio_randomizePitch, audio_minPitch, audio_maxPitch, audioLoopOnLast);
                 }
+
             }
 
             if (ActionAnimation == ANIMATION_OPTION.CLIP)
@@ -436,14 +439,13 @@ namespace Gaze
             {
                 case ACTIVABLE_OPTION.ACTIVATE:
                     GetIO().DnD_attached = true;
-                    GetIO().ChangeDnDAttach(false);
+                    GetIO().ChangeDnDAttach(true);
                     break;
                 case ACTIVABLE_OPTION.DEACTIVATE:
                     GetIO().DnD_attached = false;
-                    GetIO().ChangeDnDAttach(true);
+                    GetIO().ChangeDnDAttach(false);
                     break;
             }
-
         }
 
         /// <summary>
@@ -458,7 +460,9 @@ namespace Gaze
             if (ActionAudio == ACTIVABLE_OPTION.ACTIVATE)
             {
                 if (activeTriggerStatesAudio[0])
+                {
                     gazeAudioPlayer.playAudio(Audio_PlayList_Key, 0);
+                }
             }
             else //Stop the current audio.
             {
