@@ -250,7 +250,7 @@ namespace Gaze
             #region CLIP           
             #region AnimationTriggers
             if (actionsScript.ActionAnimation == Gaze_Actions.ANIMATION_OPTION.CLIP)
-            {                
+            {
                 for (int i = 0; i < Gaze_HashIDs.TriggerEventsAndStates.Length; i++)
                 {
                     actionsScript.activeTriggerStatesAnim[i] = EditorGUILayout.ToggleLeft(Gaze_HashIDs.TriggerEventsAndStates[i], actionsScript.activeTriggerStatesAnim[i]);
@@ -325,7 +325,7 @@ namespace Gaze
 
         private void ShowGrabModeOption()
         {
-            actionsScript.ModifyGrabMode = (Gaze_Actions.ALTERABLE_OPTION)EditorGUILayout.EnumPopup("Grab Mode", actionsScript.ModifyGrabMode);
+            actionsScript.ModifyGrabMode = (Gaze_Actions.ALTERABLE_OPTION)EditorGUILayout.EnumPopup("Manipulation Mode", actionsScript.ModifyGrabMode);
             if (actionsScript.ModifyGrabMode == Gaze_Actions.ALTERABLE_OPTION.MODIFY)
             {
                 EditorGUILayout.BeginHorizontal();
@@ -337,7 +337,7 @@ namespace Gaze
 
         private void ShowGrabDistanceOption()
         {
-            actionsScript.ModifyGrabDistance = (Gaze_Actions.ALTERABLE_OPTION)EditorGUILayout.EnumPopup("Grab Distance", actionsScript.ModifyGrabDistance);
+            actionsScript.ModifyGrabDistance = (Gaze_Actions.ALTERABLE_OPTION)EditorGUILayout.EnumPopup("Manipulation Distance", actionsScript.ModifyGrabDistance);
             if (actionsScript.ModifyGrabDistance == Gaze_Actions.ALTERABLE_OPTION.MODIFY)
             {
                 EditorGUILayout.BeginHorizontal();
@@ -350,7 +350,7 @@ namespace Gaze
 
         private void ShowGrabOption()
         {
-            actionsScript.ActionGrab = (Gaze_Actions.ACTIVABLE_OPTION)EditorGUILayout.EnumPopup("Grab Ability", actionsScript.ActionGrab);
+            actionsScript.ActionGrab = (Gaze_Actions.ACTIVABLE_OPTION)EditorGUILayout.EnumPopup("Manipulation Ability", actionsScript.ActionGrab);
         }
 
         private void ShowVisualsOption()
