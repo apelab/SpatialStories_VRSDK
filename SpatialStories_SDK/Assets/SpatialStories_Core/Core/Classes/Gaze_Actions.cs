@@ -376,7 +376,7 @@ namespace Gaze
             if (ModifyGrabMode == ALTERABLE_OPTION.NOTHING)
                 return;
 
-            if (grabModeIndex == (int)Gaze_GrabMode.ATTRACT)
+            if (grabModeIndex == (int)Gaze_GrabMode.GRAB)
             {
                 GetIO().ManipulationModeIndex = (int)Gaze_ManipulationModes.GRAB;
             }
