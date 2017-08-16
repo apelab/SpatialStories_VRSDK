@@ -625,6 +625,7 @@ MonoBehaviour:
   audio_minPitch: 0
   audio_maxPitch: 2
   audio_MaxConcurrentSound: 8
+  audio_stopOthers: 0
   IO: {fileID: 2035804516}
   triggerNotification: 0
 --- !u!114 &35163323
@@ -786,6 +787,7 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  DnD_SnapOnDrop: 1
   IsDragAndDropEnabled: 1
   DnD_minDistance: 0.5
   DnD_angleThreshold: 1
@@ -1171,6 +1173,7 @@ MonoBehaviour:
   audio_minPitch: 0
   audio_maxPitch: 2
   audio_MaxConcurrentSound: 8
+  audio_stopOthers: 0
   IO: {fileID: 395267835}
   triggerNotification: 0
 --- !u!114 &83164574
@@ -1573,6 +1576,7 @@ MonoBehaviour:
   audio_minPitch: 0
   audio_maxPitch: 2
   audio_MaxConcurrentSound: 8
+  audio_stopOthers: 0
   IO: {fileID: 395267835}
   triggerNotification: 0
 --- !u!114 &109370839
@@ -2280,6 +2284,7 @@ MonoBehaviour:
   audio_minPitch: 0
   audio_maxPitch: 2
   audio_MaxConcurrentSound: 8
+  audio_stopOthers: 0
   IO: {fileID: 1238075913}
   triggerNotification: 0
 --- !u!114 &197951409
@@ -3064,6 +3069,7 @@ MonoBehaviour:
   audio_minPitch: 0
   audio_maxPitch: 2
   audio_MaxConcurrentSound: 8
+  audio_stopOthers: 0
   IO: {fileID: 2076184233}
   triggerNotification: 0
 --- !u!114 &264405588
@@ -3626,6 +3632,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1112762468138664, guid: db3d3100b4f923c4ebe2987faf1cde76, type: 2}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: db3d3100b4f923c4ebe2987faf1cde76, type: 2}
   m_IsPrefabParent: 0
@@ -3825,6 +3835,7 @@ MonoBehaviour:
   audio_minPitch: 0
   audio_maxPitch: 2
   audio_MaxConcurrentSound: 8
+  audio_stopOthers: 0
   IO: {fileID: 842713444}
   triggerNotification: 0
 --- !u!114 &316538409
@@ -4251,6 +4262,7 @@ MonoBehaviour:
   audio_minPitch: 0
   audio_maxPitch: 2
   audio_MaxConcurrentSound: 8
+  audio_stopOthers: 0
   IO: {fileID: 1807666372}
   triggerNotification: 0
 --- !u!114 &391062822
@@ -4438,6 +4450,7 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  DnD_SnapOnDrop: 1
   IsDragAndDropEnabled: 0
   DnD_minDistance: 1
   DnD_angleThreshold: 1
@@ -5067,6 +5080,7 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  DnD_SnapOnDrop: 1
   IsDragAndDropEnabled: 0
   DnD_minDistance: 1
   DnD_angleThreshold: 1
@@ -5213,6 +5227,7 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  DnD_SnapOnDrop: 1
   IsDragAndDropEnabled: 0
   DnD_minDistance: 1
   DnD_angleThreshold: 1
@@ -5545,10 +5560,11 @@ MonoBehaviour:
   fadeSpeed: 0.005
   audio_ForceStop: 0
   audio_AllowMultiple: 0
-  audio_randomizePitch: 0
-  audio_minPitch: 0
-  audio_maxPitch: 2
+  audio_randomizePitch: 1
+  audio_minPitch: 0.9
+  audio_maxPitch: 1.2
   audio_MaxConcurrentSound: 8
+  audio_stopOthers: 0
   IO: {fileID: 1093382241}
   triggerNotification: 0
 --- !u!114 &548864140
@@ -6093,10 +6109,11 @@ MonoBehaviour:
   fadeSpeed: 0.005
   audio_ForceStop: 0
   audio_AllowMultiple: 0
-  audio_randomizePitch: 0
-  audio_minPitch: 0
-  audio_maxPitch: 2
+  audio_randomizePitch: 1
+  audio_minPitch: 0.9
+  audio_maxPitch: 1.2
   audio_MaxConcurrentSound: 8
+  audio_stopOthers: 0
   IO: {fileID: 1344357258}
   triggerNotification: 0
 --- !u!114 &573260103
@@ -6485,6 +6502,7 @@ MonoBehaviour:
   audio_minPitch: 0
   audio_maxPitch: 2
   audio_MaxConcurrentSound: 8
+  audio_stopOthers: 0
   IO: {fileID: 1819552607}
   triggerNotification: 0
 --- !u!114 &600373831
@@ -6871,10 +6889,11 @@ MonoBehaviour:
   fadeSpeed: 0.005
   audio_ForceStop: 0
   audio_AllowMultiple: 0
-  audio_randomizePitch: 0
-  audio_minPitch: 0
-  audio_maxPitch: 2
+  audio_randomizePitch: 1
+  audio_minPitch: 0.9
+  audio_maxPitch: 1.2
   audio_MaxConcurrentSound: 8
+  audio_stopOthers: 0
   IO: {fileID: 52376362}
   triggerNotification: 0
 --- !u!114 &625708553
@@ -7672,6 +7691,7 @@ MonoBehaviour:
   audio_minPitch: 0
   audio_maxPitch: 2
   audio_MaxConcurrentSound: 8
+  audio_stopOthers: 0
   IO: {fileID: 1238075913}
   triggerNotification: 0
 --- !u!114 &717575042
@@ -7978,6 +7998,7 @@ MonoBehaviour:
   audio_minPitch: 0
   audio_maxPitch: 2
   audio_MaxConcurrentSound: 8
+  audio_stopOthers: 0
   IO: {fileID: 498702968}
   triggerNotification: 0
 --- !u!114 &729022263
@@ -8953,6 +8974,7 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  DnD_SnapOnDrop: 1
   IsDragAndDropEnabled: 0
   DnD_minDistance: 1
   DnD_angleThreshold: 1
@@ -10078,6 +10100,7 @@ MonoBehaviour:
   audio_minPitch: 0
   audio_maxPitch: 2
   audio_MaxConcurrentSound: 8
+  audio_stopOthers: 0
   IO: {fileID: 1807666372}
   triggerNotification: 0
 --- !u!114 &1002010011
@@ -10494,6 +10517,7 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  DnD_SnapOnDrop: 1
   IsDragAndDropEnabled: 1
   DnD_minDistance: 0.5
   DnD_angleThreshold: 1
@@ -11378,6 +11402,7 @@ MonoBehaviour:
   audio_minPitch: 0
   audio_maxPitch: 2
   audio_MaxConcurrentSound: 8
+  audio_stopOthers: 0
   IO: {fileID: 1238075913}
   triggerNotification: 0
 --- !u!114 &1168859522
@@ -12099,6 +12124,7 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  DnD_SnapOnDrop: 1
   IsDragAndDropEnabled: 0
   DnD_minDistance: 1
   DnD_angleThreshold: 1
@@ -13016,6 +13042,7 @@ MonoBehaviour:
   audio_minPitch: 0
   audio_maxPitch: 2
   audio_MaxConcurrentSound: 8
+  audio_stopOthers: 0
   IO: {fileID: 1807666372}
   triggerNotification: 0
 --- !u!114 &1288824571
@@ -13361,6 +13388,7 @@ MonoBehaviour:
   audio_minPitch: 0
   audio_maxPitch: 2
   audio_MaxConcurrentSound: 8
+  audio_stopOthers: 0
   IO: {fileID: 491998478}
   triggerNotification: 0
 --- !u!114 &1322136378
@@ -13620,6 +13648,7 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  DnD_SnapOnDrop: 1
   IsDragAndDropEnabled: 1
   DnD_minDistance: 0.5
   DnD_angleThreshold: 39.9
@@ -14157,6 +14186,7 @@ MonoBehaviour:
   audio_minPitch: 0
   audio_maxPitch: 2
   audio_MaxConcurrentSound: 8
+  audio_stopOthers: 0
   IO: {fileID: 2076184233}
   triggerNotification: 0
 --- !u!114 &1355049418
@@ -15159,6 +15189,7 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  DnD_SnapOnDrop: 1
   IsDragAndDropEnabled: 1
   DnD_minDistance: 0.5
   DnD_angleThreshold: 1
@@ -15708,10 +15739,11 @@ MonoBehaviour:
   fadeSpeed: 0.005
   audio_ForceStop: 0
   audio_AllowMultiple: 0
-  audio_randomizePitch: 0
-  audio_minPitch: 0
-  audio_maxPitch: 2
+  audio_randomizePitch: 1
+  audio_minPitch: 0.9
+  audio_maxPitch: 1.2
   audio_MaxConcurrentSound: 8
+  audio_stopOthers: 0
   IO: {fileID: 1569850756}
   triggerNotification: 0
 --- !u!114 &1660618343
@@ -16237,6 +16269,7 @@ MonoBehaviour:
   audio_minPitch: 0
   audio_maxPitch: 2
   audio_MaxConcurrentSound: 8
+  audio_stopOthers: 0
   IO: {fileID: 395267835}
   triggerNotification: 0
 --- !u!114 &1690163737
@@ -17013,6 +17046,7 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  DnD_SnapOnDrop: 1
   IsDragAndDropEnabled: 0
   DnD_minDistance: 1
   DnD_angleThreshold: 1
@@ -17197,7 +17231,7 @@ MonoBehaviour:
   inputThreshold: 0.5
   teleportLayer:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 256
   transition: 0
   fadeMat: {fileID: 0}
   fadeDuration: 0.5
@@ -17279,6 +17313,7 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  DnD_SnapOnDrop: 1
   IsDragAndDropEnabled: 0
   DnD_minDistance: 1
   DnD_angleThreshold: 1
@@ -17919,6 +17954,7 @@ MonoBehaviour:
   audio_minPitch: 0
   audio_maxPitch: 2
   audio_MaxConcurrentSound: 8
+  audio_stopOthers: 0
   IO: {fileID: 842713444}
   triggerNotification: 0
 --- !u!114 &1861627540
@@ -18618,6 +18654,7 @@ MonoBehaviour:
   audio_minPitch: 0
   audio_maxPitch: 2
   audio_MaxConcurrentSound: 8
+  audio_stopOthers: 0
   IO: {fileID: 491998478}
   triggerNotification: 0
 --- !u!114 &1916939597
@@ -19233,7 +19270,7 @@ MonoBehaviour:
   inputThreshold: 0.5
   teleportLayer:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 256
   transition: 0
   fadeMat: {fileID: 0}
   fadeDuration: 0.5
@@ -19315,6 +19352,7 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  DnD_SnapOnDrop: 1
   IsDragAndDropEnabled: 0
   DnD_minDistance: 1
   DnD_angleThreshold: 1
@@ -19406,6 +19444,7 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  DnD_SnapOnDrop: 1
   IsDragAndDropEnabled: 0
   DnD_minDistance: 1
   DnD_angleThreshold: 1
@@ -19788,6 +19827,7 @@ MonoBehaviour:
   audio_minPitch: 0
   audio_maxPitch: 2
   audio_MaxConcurrentSound: 8
+  audio_stopOthers: 0
   IO: {fileID: 491998478}
   triggerNotification: 0
 --- !u!114 &2086618001
