@@ -148,6 +148,9 @@ namespace Gaze
         private Gaze_GravityState initialGravityState;
 
         public Gaze_Transform InitialTransform { get { return initialTransform; } }
+
+        public bool DnD_SnapOnDrop = true;
+
         private Gaze_Transform initialTransform;
 
         public bool IsDragAndDropEnabled = false;
