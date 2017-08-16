@@ -83,6 +83,8 @@ namespace Gaze
                 #region AudioClips
                 if (actionsScript.ActionAudio == Gaze_Actions.ACTIVABLE_OPTION.ACTIVATE)
                 {
+                    actionsScript.audio_stopOthers = EditorGUILayout.ToggleLeft("Stop Other Audios", actionsScript.audio_stopOthers);
+
                     actionsScript.audio_ForceStop = EditorGUILayout.ToggleLeft("Immediate play", actionsScript.audio_ForceStop);
                     if (!actionsScript.audio_ForceStop)
                     {

@@ -109,6 +109,7 @@ namespace Gaze
         public float audio_minPitch = 0f;
         public float audio_maxPitch = 2f;
         public int audio_MaxConcurrentSound = 8;
+        public bool audio_stopOthers = false;
         public Gaze_InteractiveObject IO;
 
         private Gaze_AudioPlayer gazeAudioPlayer;
@@ -167,7 +168,11 @@ namespace Gaze
 
                 if (ActionAudio == ACTIVABLE_OPTION.ACTIVATE)
                 {
-                    Audio_PlayList_Key = gazeAudioPlayer.setParameters(targetAudioSource, audioClips, loopAudio, audio_sequence, fadeInBetween, audioVolumeMin, audioVolumeMax, duckingEnabled, fadeSpeed, fadeInTime, fadeOutTime, fadeOutDeactTime, fadeInEnabled, fadeOutEnabled, fadeOutDeactEnabled, fadeInCurve, fadeOutCurve, fadeOutDeactCurve, activeTriggerStatesAudio, audio_ForceStop, audio_AllowMultiple, audio_MaxConcurrentSound, audio_randomizePitch, audio_minPitch, audio_maxPitch, audioLoopOnLast);
+                    Audio_PlayList_Key = gazeAudioPlayer.setParameters(targetAudioSource, audioClips, loopAudio, audio_sequence, fadeInBetween, audioVolumeMin, audioVolumeMax, duckingEnabled, fadeSpeed, fadeInTime, fadeOutTime, fadeInEnabled, fadeOutEnabled, fadeInCurve, fadeOutCurve, activeTriggerStatesAudio, audio_ForceStop, audio_AllowMultiple, audio_MaxConcurrentSound, audio_randomizePitch, audio_minPitch, audio_maxPitch, audioLoopOnLast, audio_stopOthers);
+                }
+                else if (ActionAudio == ACTIVABLE_OPTION.DEACTIVATE && fadeOutDeactEnabled)
+                {
+                    gazeAudioPlayer.setFadeOutDeactivate(fadeOutDeactTime, fadeOutDeactCurve);
                 }
 
             }
