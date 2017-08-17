@@ -26,21 +26,7 @@ namespace Gaze
     public class Gaze_DragAndDropManager : MonoBehaviour
     {
         #region public Members
-        public float m_MinDistance = 1f;
         // in unity units
-        public float angleThreshold = 1f;
-        // 0 is perpendicular, 1 is same direction
-        public bool respectXAxis = false;
-        public bool respectXAxisMirrored = false;
-        public bool respectYAxis = false;
-        public bool respectYAxisMirrored = false;
-        public bool respectZAxis = false;
-        public bool respectZAxisMirrored = false;
-        public bool m_SnapBeforeDrop = true;
-
-        // snaps only if attached on drop
-        public float m_TimeToSnap = 0.5f;
-
         [Gaze_ShowOnly]
         private bool m_Grabbed, isLevitating;
         [Gaze_ShowOnly]
@@ -49,22 +35,24 @@ namespace Gaze
         private bool wasAligned;
         [Gaze_ShowOnly]
         private bool m_Snapped;
+        public bool IsSnapped { get { return m_Snapped; } }
 
         private Gaze_HandController[] grabbingControllers = new Gaze_HandController[2];
-        private bool m_attachOnDrop = true;
-        private bool m_SnapOnDrop = true;
 
         private Vector3 m_StartGrabLocalPosition;
         private Quaternion m_StartGrabLocalRotation;
 
-        [SerializeField]
-        private Gaze_DragAndDropCondition currentDragAndDropCondition;
         private bool isCurrentlyAligned = false;
         private Gaze_InteractiveObject IO;
         private Coroutine m_SnapCoroutine;
         private Gaze_InteractiveObject interactiveObject;
+        private Gaze_Manipulation IO_Manipulation;
+        private Gaze_HandHover IO_HandHover;
+        private bool isCurrentlyDropped = false;
 
         private Transform targetTransform;
+
+        private Gaze_ManipulationModes lastManipulationMode;
         #endregion
 
         void OnEnable()
@@ -91,13 +79,14 @@ namespace Gaze
         void Start()
         {
             IO = GetComponent<Gaze_InteractiveObject>();
+            IO_HandHover = IO.GetComponentInChildren<Gaze_HandHover>();
+            IO_Manipulation = IO.GetComponentInChildren<Gaze_Manipulation>();
             grabbingControllers = new Gaze_HandController[2];
         }
 
         void Update()
         {
-
-            if (!m_Grabbed && !isLevitating)
+            if ((!m_Grabbed && !isLevitating) || !interactiveObject.IsDragAndDropEnabled)
                 return;
 
             isCurrentlyAligned = IsObjectAlignedWithItsTarget();
@@ -114,8 +103,7 @@ namespace Gaze
                 else
                 {
                     Remove();
-                    //Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(gameObject, currentDragAndDropCondition.TargetObject.gameObject, Gaze_DragAndDropStates.DROPREADYCANCELED));
-                    Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(gameObject, targetTransform.gameObject, Gaze_DragAndDropStates.DROPREADYCANCELED));
+                    Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(this, gameObject, targetTransform.gameObject, Gaze_DragAndDropStates.DROPREADYCANCELED));
                 }
 
                 // update flags
@@ -140,82 +128,87 @@ namespace Gaze
 
         private void DropReady()
         {
-            if (m_attachOnDrop)
+            if (interactiveObject.DnD_snapBeforeDrop)
             {
-                Gaze_GravityManager.ChangeGravityState(GetComponent<Gaze_InteractiveObject>(), Gaze_GravityRequestType.DEACTIVATE_AND_ATTACH);
-                Gaze_GravityManager.ChangeGravityState(GetComponent<Gaze_InteractiveObject>(), Gaze_GravityRequestType.LOCK);
-            }
-
-            if (m_SnapBeforeDrop)
-            {
-                Snap(m_TimeToSnap);
+                Snap(interactiveObject.DnD_TimeToSnap);
                 m_Snapped = true;
             }
 
-            //Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(gameObject, currentDragAndDropCondition.TargetObject.gameObject, Gaze_DragAndDropStates.DROPREADY));
-            Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(gameObject, targetTransform.gameObject, Gaze_DragAndDropStates.DROPREADY));
+            //Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(gameObject, targetTransform.gameObject, Gaze_DragAndDropStates.DROPREADY));
+            Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(this, gameObject, targetTransform.gameObject, Gaze_DragAndDropStates.DROPREADY));
         }
 
         private void Remove()
         {
-            if (m_SnapBeforeDrop)
+            isCurrentlyDropped = false;
+            if (interactiveObject.DnD_snapBeforeDrop)
             {
                 UnSnap();
                 m_Snapped = false;
             }
-            //Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(gameObject, currentDragAndDropCondition.TargetObject.gameObject, Gaze_DragAndDropStates.REMOVE));
-            Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(gameObject, targetTransform.gameObject, Gaze_DragAndDropStates.REMOVE));
+            //Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(gameObject, targetTransform.gameObject, Gaze_DragAndDropStates.REMOVE));
+            Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(this, gameObject, targetTransform.gameObject, Gaze_DragAndDropStates.REMOVE));
 
             if (IO.ActualGravityState == Gaze_GravityState.LOCKED)
             {
                 Gaze_GravityManager.ChangeGravityState(IO, Gaze_GravityRequestType.UNLOCK);
-                if (!IO.IsBeingGrabbed)
+                if (!IO.GrabLogic.IsBeingGrabbed)
                     Gaze_GravityManager.ChangeGravityState(IO, Gaze_GravityRequestType.ACTIVATE_AND_DETACH);
             }
         }
 
         private void Drop()
         {
-            if (m_attachOnDrop)
-            {
-                // parent to target object
-                //transform.SetParent(currentDragAndDropCondition.TargetObject.transform);
-                transform.SetParent(targetTransform.transform);
-                Gaze_InteractiveObject IO = GetComponent<Gaze_InteractiveObject>();
+            isCurrentlyDropped = true;
+            // parent to target object
+            //transform.SetParent(currentDragAndDropCondition.TargetObject.transform);
+            transform.SetParent(targetTransform.transform);
 
-                if (currentDragAndDropCondition != null && currentDragAndDropCondition.attached)
-                {
-                    Gaze_Manipulation manipulation = IO.GetComponent<Gaze_Manipulation>();
-                    Gaze_HandHover handHover = IO.GetComponentInChildren<Gaze_HandHover>();
+            // Don't snap if not necesary
+            if (IO.DnD_SnapOnDrop)
+                Snap(interactiveObject.DnD_TimeToSnap);
 
-                    if (manipulation != null)
-                        IO.GetComponentInChildren<Gaze_Manipulation>().gameObject.SetActive(false);
-                    if (handHover != null)
-                        IO.GetComponentInChildren<Gaze_HandHover>().gameObject.SetActive(false);
+            Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(this, gameObject, targetTransform.gameObject, Gaze_DragAndDropStates.DROP));
 
-                    IO.IsManipulable = false;
-                    IO.SetManipulationMode(false, true);
-                }
-
-                if (m_SnapOnDrop)
-                {
-                    Snap(m_TimeToSnap);
-                }
-            }
-
-            Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(gameObject, targetTransform.gameObject, Gaze_DragAndDropStates.DROP));
+            if (IO.DnD_attached)
+                IO.EnableManipulationMode(Gaze_ManipulationModes.NONE);
         }
 
         private void PickUp()
         {
-            if (m_SnapBeforeDrop)
+            if (interactiveObject.DnD_snapBeforeDrop)
             {
                 Snap();
                 m_Snapped = true;
             }
 
-            //Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(gameObject, currentDragAndDropCondition.TargetObject.gameObject, Gaze_DragAndDropStates.PICKUP));
-            Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(gameObject, targetTransform.gameObject, Gaze_DragAndDropStates.PICKUP));
+            //Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(gameObject, targetTransform.gameObject, Gaze_DragAndDropStates.PICKUP));
+            Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(this, gameObject, targetTransform.gameObject, Gaze_DragAndDropStates.PICKUP));
+        }
+
+        public bool IsInDistance(Vector3 _position, float _tolerance = 0f)
+        {
+            bool inDistance = false;
+            for (int i = 0; i < interactiveObject.DnD_Targets.Count; i++)
+            {
+                // if target doesn't exist anymore, remove it !
+                if (interactiveObject.DnD_Targets[i] == null)
+                {
+                    interactiveObject.DnD_Targets.RemoveAt(i);
+                }
+                else
+                {
+                    // compare distance between me (the drop object) and the drop target
+                    if (Vector3.Distance(_position, interactiveObject.DnD_Targets[i].transform.position) <= interactiveObject.DnD_minDistance + _tolerance)
+                    {
+                        // store the target in proximity's transform
+                        targetTransform = interactiveObject.DnD_Targets[i].transform;
+                        inDistance = true;
+                        break;
+                    }
+                }
+            }
+            return inDistance;
         }
 
         private bool IsObjectAlignedWithItsTarget()
@@ -223,6 +216,9 @@ namespace Gaze
             // if already snapped, unsnap it
             if (m_Snapped)
                 UnSnap();
+
+            if (interactiveObject.DnD_Targets == null)
+                return false;
 
             // get the list size of drop targets for this manager
             int targetCount = interactiveObject.DnD_Targets.Count;
@@ -232,19 +228,7 @@ namespace Gaze
                 return false;
 
             // for each drop target in the list
-            bool isWithinDistance = false;
-
-            for (int i = 0; i < targetCount; i++)
-            {
-                // compare distance between me (the drop object) and the drop target
-                if (Vector3.Distance(transform.position, interactiveObject.DnD_Targets[i].transform.position) <= m_MinDistance)
-                {
-                    // store the target in proximity's transform
-                    targetTransform = interactiveObject.DnD_Targets[i].transform;
-                    isWithinDistance = true;
-                    break;
-                }
-            }
+            bool isWithinDistance = IsInDistance(transform.position);
 
             // exit if none of the targets are aligned
             if (!isWithinDistance)
@@ -252,39 +236,36 @@ namespace Gaze
 
             // calculation of dot products 
             float[] validArray = { 1, 1 };
-            //float[] xDotProducts = { Vector3.Dot(transform.up, currentDragAndDropCondition.TargetObject.transform.up), Vector3.Dot(transform.forward, currentDragAndDropCondition.TargetObject.transform.forward) };
-            //float[] yDotProducts = { Vector3.Dot(transform.right, currentDragAndDropCondition.TargetObject.transform.right), Vector3.Dot(transform.forward, currentDragAndDropCondition.TargetObject.transform.forward) };
-            //float[] zDotProducts = { Vector3.Dot(transform.right, currentDragAndDropCondition.TargetObject.transform.right), Vector3.Dot(transform.up, currentDragAndDropCondition.TargetObject.transform.up) };
             float[] xDotProducts = { Vector3.Dot(transform.up, targetTransform.up), Vector3.Dot(transform.forward, targetTransform.forward) };
             float[] yDotProducts = { Vector3.Dot(transform.right, targetTransform.right), Vector3.Dot(transform.forward, targetTransform.forward) };
             float[] zDotProducts = { Vector3.Dot(transform.right, targetTransform.right), Vector3.Dot(transform.up, targetTransform.up) };
 
             // is respectAxis checked?
-            float[] xAxisSimilarity = respectXAxis ? xDotProducts : validArray;
-            if (respectXAxisMirrored)
+            float[] xAxisSimilarity = interactiveObject.DnD_respectXAxis ? xDotProducts : validArray;
+            if (interactiveObject.DnD_respectXAxisMirrored)
             {
                 xAxisSimilarity[0] = Mathf.Abs(xAxisSimilarity[0]);
                 xAxisSimilarity[1] = Mathf.Abs(xAxisSimilarity[1]);
             }
 
-            float[] yAxisSimilarity = respectYAxis ? yDotProducts : validArray;
-            if (respectYAxisMirrored)
+            float[] yAxisSimilarity = interactiveObject.DnD_respectYAxis ? yDotProducts : validArray;
+            if (interactiveObject.DnD_respectYAxisMirrored)
             {
                 yAxisSimilarity[0] = Mathf.Abs(yAxisSimilarity[0]);
                 yAxisSimilarity[1] = Mathf.Abs(yAxisSimilarity[1]);
             }
 
-            float[] zAxisSimilarity = respectZAxis ? zDotProducts : validArray;
-            if (respectZAxisMirrored)
+            float[] zAxisSimilarity = interactiveObject.DnD_respectZAxis ? zDotProducts : validArray;
+            if (interactiveObject.DnD_respectZAxisMirrored)
             {
                 zAxisSimilarity[0] = Mathf.Abs(zAxisSimilarity[0]);
                 zAxisSimilarity[1] = Mathf.Abs(zAxisSimilarity[1]);
             }
 
             // check if rotations are valid
-            bool xValidRotation = xAxisSimilarity[0] > (angleThreshold / 100) || xAxisSimilarity[1] > (angleThreshold / 100);
-            bool yValidRotation = yAxisSimilarity[0] > (angleThreshold / 100) || yAxisSimilarity[1] > (angleThreshold / 100);
-            bool zValidRotation = zAxisSimilarity[0] > (angleThreshold / 100) || zAxisSimilarity[1] > (angleThreshold / 100);
+            bool xValidRotation = xAxisSimilarity[0] > (interactiveObject.DnD_angleThreshold / 100) || xAxisSimilarity[1] > (interactiveObject.DnD_angleThreshold / 100);
+            bool yValidRotation = yAxisSimilarity[0] > (interactiveObject.DnD_angleThreshold / 100) || yAxisSimilarity[1] > (interactiveObject.DnD_angleThreshold / 100);
+            bool zValidRotation = zAxisSimilarity[0] > (interactiveObject.DnD_angleThreshold / 100) || zAxisSimilarity[1] > (interactiveObject.DnD_angleThreshold / 100);
             bool validRotation = xValidRotation && yValidRotation && zValidRotation;
 
 
@@ -293,7 +274,8 @@ namespace Gaze
                 if (m_Snapped)
                 {
                     // resnap
-                    Snap();
+                    if (IO.DnD_SnapOnDrop)
+                        Snap();
                 }
                 return true;
             }
@@ -304,12 +286,14 @@ namespace Gaze
 
         private void Snap(float timeToSnap = 0f)
         {
+
+
             if (timeToSnap == 0)
             {
-                //transform.position = currentDragAndDropCondition.TargetObject.transform.position;
-                // transform.rotation = currentDragAndDropCondition.TargetObject.transform.rotation;
                 transform.position = targetTransform.position;
                 transform.rotation = targetTransform.transform.rotation;
+                Gaze_GravityManager.ChangeGravityState(GetComponent<Gaze_InteractiveObject>(), Gaze_GravityRequestType.DEACTIVATE_AND_ATTACH);
+                Gaze_GravityManager.ChangeGravityState(GetComponent<Gaze_InteractiveObject>(), Gaze_GravityRequestType.LOCK);
             }
             else
             {
@@ -322,16 +306,21 @@ namespace Gaze
             float time = 0f;
             Vector3 startPos = transform.position;
             Quaternion startRot = transform.rotation;
+
+            Gaze_GravityManager.ChangeGravityState(GetComponent<Gaze_InteractiveObject>(), Gaze_GravityRequestType.DEACTIVATE_AND_ATTACH);
+            Gaze_GravityManager.ChangeGravityState(GetComponent<Gaze_InteractiveObject>(), Gaze_GravityRequestType.LOCK);
+
             while (time < timeToSnap)
             {
                 float eased = QuadEaseOut(time, 0f, 1f, timeToSnap);
-                //transform.position = Vector3.Lerp(startPos, currentDragAndDropCondition.TargetObject.transform.position, eased);
-                //transform.rotation = Quaternion.Lerp(startRot, currentDragAndDropCondition.TargetObject.transform.rotation, eased);
                 transform.position = Vector3.Lerp(startPos, targetTransform.position, eased);
                 transform.rotation = Quaternion.Lerp(startRot, targetTransform.rotation, eased);
                 time += Time.deltaTime;
                 yield return null;
             }
+
+            transform.position = targetTransform.position;
+            transform.rotation = targetTransform.transform.rotation;
         }
 
         private float QuadEaseOut(float time, float startVal, float changeInVal, float duration)
@@ -347,8 +336,9 @@ namespace Gaze
                 StopCoroutine(m_SnapCoroutine);
                 m_SnapCoroutine = null;
             }
-            transform.localPosition = m_StartGrabLocalPosition;
-            transform.localRotation = m_StartGrabLocalRotation;
+
+            //transform.localPosition = m_StartGrabLocalPosition;
+            //transform.localRotation = m_StartGrabLocalRotation;
         }
 
         private void Grab(GameObject _controller)
@@ -474,6 +464,18 @@ namespace Gaze
                 {
                     Unlevitate();
                 }
+            }
+        }
+
+        public void ChangeAttach(bool attach)
+        {
+            if (isCurrentlyDropped)
+            {
+                if (!attach)
+                    IO.EnableManipulationMode(lastManipulationMode);
+                else
+                    IO.EnableManipulationMode(Gaze_ManipulationModes.NONE);
+
             }
         }
     }

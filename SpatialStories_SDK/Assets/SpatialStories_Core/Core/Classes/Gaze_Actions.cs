@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,12 +8,17 @@ namespace Gaze
     [ExecuteInEditMode]
     public class Gaze_Actions : Gaze_AbstractBehaviour
     {
+        private Gaze_Interaction gazeInteraction;
         public Gaze_InteractiveObject rootIO;
 
         public bool isActive = true;
 
         public enum ACTIVABLE_OPTION { NOTHING, ACTIVATE, DEACTIVATE }
+        public enum LOOP_MODES { None, Single, Playlist, PlaylistOnce }
         public enum ALTERABLE_OPTION { NOTHING, MODIFY }
+        public enum AUDIO_SEQUENCE { InOrder, Random }
+        public enum ANIMATION_OPTION { NOTHING, MECANIM, CLIP, DEACTIVATE }
+        public enum ANIMATION_LOOP { Loop, PingPong }
 
         public bool ActionReset;
         public ACTIVABLE_OPTION ActionVisuals;
@@ -23,11 +27,10 @@ namespace Gaze
         public ACTIVABLE_OPTION ActionGravity;
         public ACTIVABLE_OPTION ActionAudio;
         public ACTIVABLE_OPTION ActionColliders;
+        public ACTIVABLE_OPTION ActionDragAndDrop;
+        public ANIMATION_OPTION ActionAnimation;
 
         public bool DestroyOnTrigger;
-
-
-
 
         // grab and touch distances
         public ALTERABLE_OPTION ModifyGrabDistance = ALTERABLE_OPTION.NOTHING;
@@ -35,6 +38,25 @@ namespace Gaze
         public ALTERABLE_OPTION ModifyGrabMode = ALTERABLE_OPTION.NOTHING;
         public float grabDistance, touchDistance;
         public int grabModeIndex = 0;
+
+        // Drag and drop
+        public ALTERABLE_OPTION ModifyDragAndDrop = ALTERABLE_OPTION.NOTHING;
+        public ALTERABLE_OPTION ModifyDragAndDropTargets = ALTERABLE_OPTION.NOTHING;
+        public ALTERABLE_OPTION ModifyDnDMinDistance = ALTERABLE_OPTION.NOTHING;
+        public ACTIVABLE_OPTION ModifyDnDSnapBeforeDrop = ACTIVABLE_OPTION.NOTHING;
+        public ACTIVABLE_OPTION ModifyDnDAttached = ACTIVABLE_OPTION.NOTHING;
+        public ALTERABLE_OPTION ModifyDnDRespectAxis = ALTERABLE_OPTION.NOTHING;
+        public float dnDMinDistance;
+        public bool dnDSnapBeforeDrop;
+        public bool dnDRespectXAxis;
+        public bool dnDRespectYAxis;
+        public bool dnDRespectZAxis;
+        public bool dnDRespectXAxisMirror;
+        public bool dnDRespectYAxisMirror;
+        public bool dnDRespectZAxisMirror;
+        public ALTERABLE_OPTION ModifyDnDAngleThreshold = ALTERABLE_OPTION.NOTHING;
+        public float dnDAngleThreshold;
+        public List<GameObject> DnD_Targets = new List<GameObject>();
 
         // Visuals
         public Gaze_InteractiveObjectVisuals visualsScript;
@@ -46,26 +68,57 @@ namespace Gaze
         public Animator targetAnimator;
         public bool[] activeTriggerStatesAnim = new bool[Enum<TriggerEventsAndStates>.Count];
         public string[] animatorTriggers = new string[Enum<TriggerEventsAndStates>.Count];
+        public bool[] loopOnLast = new bool[Enum<TriggerEventsAndStates>.Count];
+
+
+        public Gaze_AnimationPlaylist animationClip = new Gaze_AnimationPlaylist();
+
+        public LOOP_MODES[] loopAnim = new LOOP_MODES[Enum<TriggerEventsAndStates>.Count];
+        public ANIMATION_LOOP[] loopAnimType = new ANIMATION_LOOP[Enum<TriggerEventsAndStates>.Count];
+        public AUDIO_SEQUENCE[] animationSequence = new AUDIO_SEQUENCE[Enum<TriggerEventsAndStates>.Count];
 
         // Audio
         public AudioSource targetAudioSource;
         public bool[] activeTriggerStatesAudio = new bool[Enum<TriggerEventsAndStates>.Count];
-        public AudioClip[] audioClips = new AudioClip[Enum<TriggerEventsAndStates>.Count];
-        public bool[] loopAudio = new bool[Enum<TriggerEventsAndStates>.Count];
+
+        [SerializeField]
+        public Gaze_AudioPlayList audioClips = new Gaze_AudioPlayList();
+        public LOOP_MODES[] loopAudio = new LOOP_MODES[Enum<TriggerEventsAndStates>.Count];
+        public AUDIO_SEQUENCE[] audio_sequence = new AUDIO_SEQUENCE[Enum<TriggerEventsAndStates>.Count];
+        public bool[] fadeInBetween = new bool[Enum<TriggerEventsAndStates>.Count];
+        public Gaze_AudioPlayList audioClipsNew = new Gaze_AudioPlayList();
+        public LOOP_MODES[] loopAudioNew = new LOOP_MODES[Enum<TriggerEventsAndStates>.Count];
+        public bool[] audioLoopOnLast = new bool[Enum<TriggerEventsAndStates>.Count];
+
         public bool duckingEnabled = true;
+        public float fadeInTime = 1f;
+        public float fadeOutTime = 1f;
+        public float fadeOutDeactTime = 1f;
+        public AnimationCurve fadeInCurve = AnimationCurve.Linear(0f, 0f, 1f, 1f);
+        public AnimationCurve fadeOutDeactCurve = AnimationCurve.Linear(0f, 1f, 1f, 0f);
+        public AnimationCurve fadeOutCurve = AnimationCurve.Linear(0f, 1f, 1f, 0f);
+        public bool fadeInEnabled = false;
+        public bool fadeOutEnabled = false;
+        public bool fadeOutDeactEnabled = false;
         public float audioVolumeMin = .2f;
         public float audioVolumeMax = 1f;
         public float fadeSpeed = .005f;
-        private Coroutine raiseAudioVolume;
-        private Coroutine lowerAudioVolume;
-
+        public bool audio_ForceStop = false;
+        public bool audio_AllowMultiple = false;
+        public bool audio_randomizePitch = false;
+        public float audio_minPitch = 0f;
+        public float audio_maxPitch = 2f;
+        public int audio_MaxConcurrentSound = 8;
+        public bool audio_stopOthers = false;
         public Gaze_InteractiveObject IO;
 
-        private Gaze_Interaction gazeInteraction;
+        private Gaze_AudioPlayer gazeAudioPlayer;
+        private int Audio_PlayList_Key;
+        private int Animation_PlayList_Key;
+        private Gaze_AnimationPlayer gazeAnimationPlayer;
 
         // Notification
         public bool triggerNotification;
-
         private void Awake()
         {
             gazeInteraction = GetComponent<Gaze_Interaction>();
@@ -81,6 +134,12 @@ namespace Gaze
             IO = GetIO();
             visualsScript = IO.GetComponentInChildren<Gaze_InteractiveObjectVisuals>();
             //Gaze_EventManager.OnGazeEvent += OnGazeEvent;
+
+            if (loopAudio.Length < 5)
+            {
+                loopAudio = new LOOP_MODES[5];
+            }
+
         }
 
         public override void OnDisable()
@@ -97,15 +156,52 @@ namespace Gaze
 
             SetCustomActionsDelay();
 
-            if (ActionAudio == ACTIVABLE_OPTION.ACTIVATE && targetAudioSource != null)
+            if (ActionAudio != ACTIVABLE_OPTION.NOTHING && targetAudioSource != null)
             {
-                targetAudioSource.volume = duckingEnabled ? audioVolumeMin : audioVolumeMax;
+                if (targetAudioSource.GetComponent<Gaze_AudioPlayer>() == null)
+                {
+                    targetAudioSource.gameObject.AddComponent<Gaze_AudioPlayer>();
+                }
+
+
+                gazeAudioPlayer = targetAudioSource.GetComponent<Gaze_AudioPlayer>();
+
+                if (ActionAudio == ACTIVABLE_OPTION.ACTIVATE)
+                {
+                    Audio_PlayList_Key = gazeAudioPlayer.setParameters(targetAudioSource, audioClips, loopAudio, audio_sequence, fadeInBetween, audioVolumeMin, audioVolumeMax, duckingEnabled, fadeSpeed, fadeInTime, fadeOutTime, fadeInEnabled, fadeOutEnabled, fadeInCurve, fadeOutCurve, activeTriggerStatesAudio, audio_ForceStop, audio_AllowMultiple, audio_MaxConcurrentSound, audio_randomizePitch, audio_minPitch, audio_maxPitch, audioLoopOnLast, audio_stopOthers);
+                }
+                else if (ActionAudio == ACTIVABLE_OPTION.DEACTIVATE && fadeOutDeactEnabled)
+                {
+                    gazeAudioPlayer.setFadeOutDeactivate(fadeOutDeactTime, fadeOutDeactCurve);
+                }
+
+            }
+
+            if (ActionAnimation == ANIMATION_OPTION.CLIP)
+            {
+                if (targetAnimator.GetComponent<Gaze_AnimationPlayer>() == null)
+                {
+                    targetAnimator.gameObject.AddComponent<Gaze_AnimationPlayer>();
+                }
+
+                gazeAnimationPlayer = targetAnimator.GetComponent<Gaze_AnimationPlayer>();
+                gazeAnimationPlayer.hideFlags = HideFlags.HideInInspector;
+                Animation_PlayList_Key = gazeAnimationPlayer.setParameters(targetAnimator, animationClip, activeTriggerStatesAnim, loopAnimType, loopAnim, animationSequence, loopOnLast);
             }
 
             if (!gazeInteraction.HasConditions)
             {
                 OnTrigger();
             }
+        }
+
+        public bool DontHaveAudioLoop()
+        {
+            foreach (LOOP_MODES loop in loopAudioNew)
+            {
+                if (loop != LOOP_MODES.Single) return true;
+            }
+            return false;
         }
 
         private void SetCustomActionsDelay()
@@ -125,55 +221,14 @@ namespace Gaze
 
         private void PlayAnim(int i)
         {
-            if (triggerAnimation)
+            if (ActionAnimation == ANIMATION_OPTION.MECANIM)
             {
+                targetAnimator.enabled = true;
                 targetAnimator.SetTrigger(animatorTriggers[i]);
             }
-        }
-
-        private void PlayAudio(int i)
-        {
-            if (ActionAudio == ACTIVABLE_OPTION.ACTIVATE)
+            else if (ActionAnimation == ANIMATION_OPTION.CLIP)
             {
-                targetAudioSource.clip = audioClips[i];
-                targetAudioSource.loop = loopAudio[i];
-                targetAudioSource.Play();
-            }
-        }
-
-        private IEnumerator LowerAudioVolume()
-        {
-            while (targetAudioSource.volume > audioVolumeMin)
-            {
-                if (targetAudioSource.volume - fadeSpeed > audioVolumeMin)
-                {
-                    targetAudioSource.volume -= fadeSpeed;
-                }
-                else
-                {
-                    targetAudioSource.volume = audioVolumeMin;
-                }
-                yield return new WaitForEndOfFrame();
-            }
-        }
-
-        private IEnumerator RaiseAudioVolume()
-        {
-            if (targetAudioSource != null)
-            {
-                while (targetAudioSource.volume < audioVolumeMax)
-                {
-
-                    if (targetAudioSource.volume + fadeSpeed < audioVolumeMax)
-                    {
-                        targetAudioSource.volume += fadeSpeed;
-                    }
-                    else
-                    {
-                        targetAudioSource.volume = audioVolumeMax;
-                    }
-                    yield return new WaitForEndOfFrame();
-                }
+                gazeAnimationPlayer.PlayAnim(Animation_PlayList_Key, i);
             }
         }
 
@@ -181,6 +236,10 @@ namespace Gaze
         {
             if (ActionReset)
             {
+                // Reset transform
+                //if (GetIO().GrabLogic.IsBeingGrabbed && GetIO().GrabLogic.GrabbingManager != null)
+                //    GetIO().GrabLogic.GrabbingManager.TryDetach();
+
                 // Reset transform
                 GetIO().transform.position = GetIO().InitialTransform.position;
                 GetIO().transform.rotation = GetIO().InitialTransform.rotation;
@@ -218,10 +277,10 @@ namespace Gaze
             }
             else if (ActionGrab == ACTIVABLE_OPTION.DEACTIVATE)
             {
-                if (IO.GrabbingManager != null)
-                    IO.GrabbingManager.TryDetach();
-
-                IO.DisableManipulationMode(Gaze_ManipulationModes.GRAB);
+                if (IO.ManipulationMode == Gaze_ManipulationModes.GRAB)
+                    IO.DisableManipulationMode(Gaze_ManipulationModes.GRAB);
+                else if (IO.ManipulationMode == Gaze_ManipulationModes.LEVITATE)
+                    IO.DisableManipulationMode(Gaze_ManipulationModes.LEVITATE);
             }
         }
 
@@ -304,7 +363,6 @@ namespace Gaze
                 selectedRenderers.Remove(r);
         }
 
-
         /// <summary>
         /// Enables or disables visuals according with the user preferences.
         /// </summary>
@@ -326,7 +384,7 @@ namespace Gaze
             if (ModifyGrabMode == ALTERABLE_OPTION.NOTHING)
                 return;
 
-            if (grabModeIndex == (int)Gaze_GrabMode.ATTRACT)
+            if (grabModeIndex == (int)Gaze_GrabMode.GRAB)
             {
                 GetIO().ManipulationModeIndex = (int)Gaze_ManipulationModes.GRAB;
             }
@@ -336,6 +394,64 @@ namespace Gaze
             }
         }
 
+        private void HandleDragAndDrop()
+        {
+            // exit if no action is required
+            if (ModifyDragAndDrop == Gaze_Actions.ALTERABLE_OPTION.NOTHING)
+                return;
+
+            // change values according to Actions required
+            switch (ActionDragAndDrop)
+            {
+                case ACTIVABLE_OPTION.ACTIVATE:
+                    GetIO().IsDragAndDropEnabled = true;
+                    break;
+                case ACTIVABLE_OPTION.DEACTIVATE:
+                    GetIO().IsDragAndDropEnabled = false;
+                    break;
+            }
+
+            if (ModifyDnDMinDistance == Gaze_Actions.ALTERABLE_OPTION.MODIFY)
+                GetIO().DnD_minDistance = dnDMinDistance;
+
+            if (ModifyDragAndDropTargets == Gaze_Actions.ALTERABLE_OPTION.MODIFY)
+                GetIO().DnD_Targets = DnD_Targets;
+
+            if (ModifyDnDRespectAxis == Gaze_Actions.ALTERABLE_OPTION.MODIFY)
+            {
+                GetIO().DnD_respectXAxis = dnDRespectXAxis;
+                GetIO().DnD_respectYAxis = dnDRespectYAxis;
+                GetIO().DnD_respectZAxis = dnDRespectZAxis;
+                GetIO().DnD_respectXAxisMirrored = dnDRespectXAxisMirror;
+                GetIO().DnD_respectYAxisMirrored = dnDRespectYAxisMirror;
+                GetIO().DnD_respectZAxisMirrored = dnDRespectZAxisMirror;
+            }
+
+            if (ModifyDnDAngleThreshold == Gaze_Actions.ALTERABLE_OPTION.MODIFY)
+                GetIO().DnD_angleThreshold = dnDAngleThreshold;
+
+            switch (ModifyDnDSnapBeforeDrop)
+            {
+                case ACTIVABLE_OPTION.ACTIVATE:
+                    GetIO().DnD_snapBeforeDrop = true;
+                    break;
+                case ACTIVABLE_OPTION.DEACTIVATE:
+                    GetIO().DnD_snapBeforeDrop = false;
+                    break;
+            }
+
+            switch (ModifyDnDAttached)
+            {
+                case ACTIVABLE_OPTION.ACTIVATE:
+                    GetIO().DnD_attached = true;
+                    GetIO().ChangeDnDAttach(true);
+                    break;
+                case ACTIVABLE_OPTION.DEACTIVATE:
+                    GetIO().DnD_attached = false;
+                    GetIO().ChangeDnDAttach(false);
+                    break;
+            }
+        }
 
         /// <summary>
         /// Enables or disables audio acording with the user preferences
@@ -348,18 +464,15 @@ namespace Gaze
             // If we want to activate audio just do it.
             if (ActionAudio == ACTIVABLE_OPTION.ACTIVATE)
             {
-                if (activeTriggerStatesAudio.Length > 0 && activeTriggerStatesAudio[0])
+                if (activeTriggerStatesAudio[0])
                 {
-                    PlayAudio(0);
+                    gazeAudioPlayer.playAudio(Audio_PlayList_Key, 0);
                 }
-
             }
             else //Stop the current audio.
             {
-                if (targetAudioSource != null && targetAudioSource.isPlaying)
-                {
-                    targetAudioSource.Stop();
-                }
+                gazeAudioPlayer.stopAudio();
+
             }
         }
 
@@ -368,7 +481,20 @@ namespace Gaze
         /// </summary>
         private void HandleAnimation()
         {
-            if (activeTriggerStatesAnim.Length > 0 && activeTriggerStatesAnim[0])
+            if (ActionAnimation == ANIMATION_OPTION.DEACTIVATE)
+            {
+                if (targetAnimator != null)
+                {
+                    if (targetAnimator.GetComponent<Gaze_AnimationPlayer>() != null)
+                    {
+                        targetAnimator.GetComponent<Gaze_AnimationPlayer>().Stop();
+                    }
+
+                    targetAnimator.enabled = false;
+                }
+
+            }
+            else if (activeTriggerStatesAnim.Length > 0 && activeTriggerStatesAnim[0])
             {
                 PlayAnim(0);
             }
@@ -399,6 +525,7 @@ namespace Gaze
             HandleTouch();
             HandleColliders();
             HandleGrabMode();
+            HandleDragAndDrop();
         }
 
         // Actions executed when OnReload, OnBefore, OnActive or OnAfter
@@ -406,15 +533,19 @@ namespace Gaze
         {
             if (activeTriggerStatesAnim.Length > _animIndex && activeTriggerStatesAnim[_animIndex])
             {
-                PlayAnim(1);
+                PlayAnim(_animIndex);
             }
 
             if (activeTriggerStatesAudio.Length > _animIndex && activeTriggerStatesAudio[_animIndex])
             {
-                PlayAudio(_animIndex);
+                gazeAudioPlayer.playAudio(Audio_PlayList_Key, _animIndex);
             }
-        }
+            else if (activeTriggerStatesAudio.Length > _animIndex && _animIndex >= 3 && ActionAudio == ACTIVABLE_OPTION.ACTIVATE)
+            {
+                gazeAudioPlayer.stopTrack(_animIndex - 1);
+            }
 
+        }
 
         #region implemented abstract members of Gaze_AbstractBehaviour
         protected override void OnTrigger()
@@ -425,13 +556,10 @@ namespace Gaze
             ActionLogic();
         }
 
-
         protected override void OnReload()
         {
             TimeFrameLogic(1);
         }
-
-
 
         protected override void OnBefore()
         {
@@ -448,28 +576,5 @@ namespace Gaze
             TimeFrameLogic(4);
         }
         #endregion
-
-
-        // TODO (Arthur): see if commenting this method causes any problem in production.
-        // Commented because eventual source of bugs with the delay routine.
-        /*
-        private void OnGazeEvent(Gaze_GazeEventArgs e)
-        {
-            // if sender is the gazable collider GameObject
-            if (e.Sender != null && gazable.gazeColliderIO != null && ((GameObject)e.Sender).Equals(gazable.gazeColliderIO.gameObject) && duckingEnabled && ActionAudio == Gaze_Actions.ACTIVABLE_OPTION.ACTIVATE)
-            {
-                StopAllCoroutines();
-                if (e.IsGazed)
-                {
-                    raiseAudioVolume = StartCoroutine(RaiseAudioVolume());
-                }
-                else
-                {
-                    lowerAudioVolume = StartCoroutine(LowerAudioVolume());
-                }
-            }
-        }
-        */
-
     }
 }

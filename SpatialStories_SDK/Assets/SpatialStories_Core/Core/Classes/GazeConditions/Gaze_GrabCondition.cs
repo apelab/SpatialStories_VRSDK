@@ -18,7 +18,9 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using UnityEngine;
 using UnityEngine.VR;
 
@@ -40,6 +42,7 @@ namespace Gaze
 
         public override void ToEditorGUI()
         {
+#if UNITY_EDITOR
             EditorGUILayout.BeginHorizontal();
             if (IsValid)
             {
@@ -52,6 +55,7 @@ namespace Gaze
                 RenderNonSatisfiedLabel("False");
             }
             EditorGUILayout.EndHorizontal();
+#endif
         }
 
         protected override void CustomDispose()
@@ -122,19 +126,16 @@ namespace Gaze
                     bool isGrabbingControllerInMap = IsGrabbingControllerInMap(dicoVRNode);
 
                     return isGrabbingControllerInMap && isGrabbingControllerStateValid && grabbedObjectValid;
-                    break;
 
                 //  the LEFT hand
                 case (int)Gaze_HandsEnum.LEFT:
                     grabLeftValid = IsGrabbingControllerInMap(dicoVRNode) && IsGrabbingControllerStateValid(e.IsGrabbing, Gaze_HandsEnum.LEFT, eventVRNode) && grabbedObjectValid;
                     return grabLeftValid;
-                    break;
 
                 //  the RIGHT hand
                 case (int)Gaze_HandsEnum.RIGHT:
                     grabRightValid = IsGrabbingControllerInMap(dicoVRNode) && IsGrabbingControllerStateValid(e.IsGrabbing, Gaze_HandsEnum.RIGHT, eventVRNode) && grabbedObjectValid;
                     return grabRightValid;
-                    break;
             }
 
             return false;

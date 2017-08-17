@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -177,6 +177,7 @@ SpriteRenderer:
   m_Size: {x: 0.41, y: 0.71}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
 --- !u!1 &5474930
 GameObject:
   m_ObjectHideFlags: 0
@@ -224,6 +225,7 @@ MonoBehaviour:
   requireAllDeactivators: 0
   proximityMap:
     proximityEntryList: []
+    proximityEntryGroupList: []
     proximityStateIndex: 0
   grabMap:
     grabEntryList: []
@@ -269,6 +271,12 @@ MonoBehaviour:
     AreDependenciesSatisfied: 1
   requireAllInputs: 0
   customConditionsEnabled: 0
+  dragAndDropEnabled: 0
+  dndEventValidator: 0
+  dndAnyTarget: 1
+  dndTargetModesIndex: 0
+  dndAttached: 0
+  dndTargets: []
   requireAllProximities: 0
   touchMap:
     TouchEnitry:
@@ -277,6 +285,8 @@ MonoBehaviour:
     touchHandsIndex: 2
     touchActionIndex: 0
   gazeEnabled: 0
+  gazeStateIndex: 0
+  gazeIn: 0
   touchEnabled: 1
   ActivateOnDependencyMap:
     dependencies: []
@@ -285,8 +295,16 @@ MonoBehaviour:
     dependencies: []
     AreDependenciesSatisfied: 0
   gazeColliderIO: {fileID: 0}
+  handHoverEnabled: 0
+  handHoverIO: {fileID: 0}
+  hoverHandIndex: 0
+  hoverHand: 0
+  hoverStateIndex: 0
+  hoverIn: 0
   ReloadDependencies: 0
   isActive: 1
+  proximityGroupIndex: 0
+  rigCombinations: []
 --- !u!114 &5474933
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -298,6 +316,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fe86aa1e2e51304b81a3f6820a3abdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDelayed: 0
+  delayTime: 0
+  isDelayRandom: 0
+  delayRange:
+  - 0
+  - 0
+  multipleActionsInTime: 0
   rootIO: {fileID: 0}
   isActive: 1
   ActionReset: 0
@@ -307,22 +332,34 @@ MonoBehaviour:
   ActionGravity: 0
   ActionAudio: 1
   ActionColliders: 0
+  ActionDragAndDrop: 0
+  ActionAnimation: 0
   DestroyOnTrigger: 0
-  isDelayed: 0
-  delayTime: 0
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  multipleActionsInTime: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
   ModifyGrabMode: 0
   grabDistance: 0
   touchDistance: 0
   grabModeIndex: 0
-  visualsScript: {fileID: 0}
+  ModifyDragAndDrop: 0
+  ModifyDragAndDropTargets: 0
+  ModifyDnDMinDistance: 0
+  ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDRespectAxis: 0
+  dnDMinDistance: 0
+  dnDSnapBeforeDrop: 0
+  dnDRespectXAxis: 0
+  dnDRespectYAxis: 0
+  dnDRespectZAxis: 0
+  dnDRespectXAxisMirror: 0
+  dnDRespectYAxisMirror: 0
+  dnDRespectZAxisMirror: 0
+  ModifyDnDAngleThreshold: 0
+  dnDAngleThreshold: 0
+  DnD_Targets: []
+  visualsScript: {fileID: 1954175109}
   AlterAllVisuals: 1
+  selectedRenderers: 
   triggerAnimation: 0
   targetAnimator: {fileID: 0}
   activeTriggerStatesAnim: 0000000000
@@ -332,19 +369,105 @@ MonoBehaviour:
   - 
   - 
   - 
+  animationClip:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  targetAnimationSource: {fileID: 0}
+  loopAnim: 0000000000000000000000000000000000000000
+  loopAnimType: 0000000000000000000000000000000000000000
+  animationSequence: 0000000000000000000000000000000000000000
   targetAudioSource: {fileID: 1558625359}
   activeTriggerStatesAudio: 0100000000
   audioClips:
-  - {fileID: 8300000, guid: fbb50aaa9c1d75b4e95e490a4ba1b347, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  loopAudio: 0000000000
+    ClipEntries00:
+    - {fileID: 8300000, guid: fbb50aaa9c1d75b4e95e490a4ba1b347, type: 3}
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudio: 0000000000000000000000000000000000000000
+  audio_sequence: 0000000000000000000000000000000000000000
+  fadeInBetween: 0000000000
+  audioClipsNew:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudioNew: 0000000000000000000000000000000000000000
   duckingEnabled: 1
+  fadeInTime: 1
+  fadeOutTime: 1
+  fadeOutDeactTime: 1
+  fadeInCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutDeactCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeInEnabled: 0
+  fadeOutEnabled: 0
+  fadeOutDeactEnabled: 0
   audioVolumeMin: 0.2
   audioVolumeMax: 1
   fadeSpeed: 0.005
+  audio_ForceStop: 0
+  audio_AllowMultiple: 0
+  audio_randomizePitch: 0
+  audio_minPitch: 0
+  audio_maxPitch: 2
+  audio_MaxConcurrentSound: 8
   IO: {fileID: 1545334720}
   triggerNotification: 0
 --- !u!114 &5474934
@@ -425,6 +548,19 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  IsDragAndDropEnabled: 0
+  DnD_minDistance: 1
+  DnD_angleThreshold: 1
+  DnD_respectXAxis: 0
+  DnD_respectXAxisMirrored: 0
+  DnD_respectYAxis: 0
+  DnD_respectYAxisMirrored: 0
+  DnD_respectZAxis: 0
+  DnD_respectZAxisMirrored: 0
+  DnD_snapBeforeDrop: 1
+  DnD_TimeToSnap: 0.5
+  DnD_attached: 0
+  DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
 --- !u!54 &11713479
@@ -559,6 +695,7 @@ MonoBehaviour:
   requireAllDeactivators: 0
   proximityMap:
     proximityEntryList: []
+    proximityEntryGroupList: []
     proximityStateIndex: 0
   grabMap:
     grabEntryList: []
@@ -604,6 +741,12 @@ MonoBehaviour:
     AreDependenciesSatisfied: 1
   requireAllInputs: 0
   customConditionsEnabled: 0
+  dragAndDropEnabled: 0
+  dndEventValidator: 0
+  dndAnyTarget: 1
+  dndTargetModesIndex: 0
+  dndAttached: 0
+  dndTargets: []
   requireAllProximities: 0
   touchMap:
     TouchEnitry:
@@ -612,6 +755,8 @@ MonoBehaviour:
     touchHandsIndex: 2
     touchActionIndex: 0
   gazeEnabled: 0
+  gazeStateIndex: 0
+  gazeIn: 0
   touchEnabled: 1
   ActivateOnDependencyMap:
     dependencies: []
@@ -620,8 +765,16 @@ MonoBehaviour:
     dependencies: []
     AreDependenciesSatisfied: 0
   gazeColliderIO: {fileID: 0}
+  handHoverEnabled: 0
+  handHoverIO: {fileID: 0}
+  hoverHandIndex: 0
+  hoverHand: 0
+  hoverStateIndex: 0
+  hoverIn: 0
   ReloadDependencies: 0
   isActive: 1
+  proximityGroupIndex: 0
+  rigCombinations: []
 --- !u!114 &14148462
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -633,6 +786,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fe86aa1e2e51304b81a3f6820a3abdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDelayed: 0
+  delayTime: 0
+  isDelayRandom: 0
+  delayRange:
+  - 0
+  - 0
+  multipleActionsInTime: 0
   rootIO: {fileID: 0}
   isActive: 1
   ActionReset: 0
@@ -642,22 +802,34 @@ MonoBehaviour:
   ActionGravity: 0
   ActionAudio: 1
   ActionColliders: 0
+  ActionDragAndDrop: 0
+  ActionAnimation: 0
   DestroyOnTrigger: 0
-  isDelayed: 0
-  delayTime: 0
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  multipleActionsInTime: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
   ModifyGrabMode: 0
   grabDistance: 0
   touchDistance: 0
   grabModeIndex: 0
-  visualsScript: {fileID: 0}
+  ModifyDragAndDrop: 0
+  ModifyDragAndDropTargets: 0
+  ModifyDnDMinDistance: 0
+  ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDRespectAxis: 0
+  dnDMinDistance: 0
+  dnDSnapBeforeDrop: 0
+  dnDRespectXAxis: 0
+  dnDRespectYAxis: 0
+  dnDRespectZAxis: 0
+  dnDRespectXAxisMirror: 0
+  dnDRespectYAxisMirror: 0
+  dnDRespectZAxisMirror: 0
+  ModifyDnDAngleThreshold: 0
+  dnDAngleThreshold: 0
+  DnD_Targets: []
+  visualsScript: {fileID: 1892404060}
   AlterAllVisuals: 1
+  selectedRenderers: 
   triggerAnimation: 0
   targetAnimator: {fileID: 0}
   activeTriggerStatesAnim: 0000000000
@@ -667,19 +839,105 @@ MonoBehaviour:
   - 
   - 
   - 
+  animationClip:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  targetAnimationSource: {fileID: 0}
+  loopAnim: 0000000000000000000000000000000000000000
+  loopAnimType: 0000000000000000000000000000000000000000
+  animationSequence: 0000000000000000000000000000000000000000
   targetAudioSource: {fileID: 2030361554}
   activeTriggerStatesAudio: 0100000000
   audioClips:
-  - {fileID: 8300000, guid: fbb50aaa9c1d75b4e95e490a4ba1b347, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  loopAudio: 0000000000
+    ClipEntries00:
+    - {fileID: 8300000, guid: fbb50aaa9c1d75b4e95e490a4ba1b347, type: 3}
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudio: 0000000000000000000000000000000000000000
+  audio_sequence: 0000000000000000000000000000000000000000
+  fadeInBetween: 0000000000
+  audioClipsNew:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudioNew: 0000000000000000000000000000000000000000
   duckingEnabled: 1
+  fadeInTime: 1
+  fadeOutTime: 1
+  fadeOutDeactTime: 1
+  fadeInCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutDeactCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeInEnabled: 0
+  fadeOutEnabled: 0
+  fadeOutDeactEnabled: 0
   audioVolumeMin: 0.2
   audioVolumeMax: 1
   fadeSpeed: 0.005
+  audio_ForceStop: 0
+  audio_AllowMultiple: 0
+  audio_randomizePitch: 0
+  audio_minPitch: 0
+  audio_maxPitch: 2
+  audio_MaxConcurrentSound: 8
   IO: {fileID: 1786773450}
   triggerNotification: 0
 --- !u!114 &14148463
@@ -760,6 +1018,19 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  IsDragAndDropEnabled: 0
+  DnD_minDistance: 1
+  DnD_angleThreshold: 1
+  DnD_respectXAxis: 0
+  DnD_respectXAxisMirrored: 0
+  DnD_respectYAxis: 0
+  DnD_respectYAxisMirrored: 0
+  DnD_respectZAxis: 0
+  DnD_respectZAxisMirrored: 0
+  DnD_snapBeforeDrop: 1
+  DnD_TimeToSnap: 0.5
+  DnD_attached: 0
+  DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
 --- !u!54 &23520967
@@ -962,6 +1233,7 @@ SpriteRenderer:
   m_Size: {x: 0.42, y: 0.72}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
 --- !u!1 &50999553
 GameObject:
   m_ObjectHideFlags: 0
@@ -1202,6 +1474,7 @@ SpriteRenderer:
   m_Size: {x: 0.36, y: 0.73}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
 --- !u!1 &65744877
 GameObject:
   m_ObjectHideFlags: 0
@@ -1410,6 +1683,7 @@ SpriteRenderer:
   m_Size: {x: 23.62, y: 23.62}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
 --- !u!1 &92226923
 GameObject:
   m_ObjectHideFlags: 0
@@ -1571,6 +1845,19 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  IsDragAndDropEnabled: 0
+  DnD_minDistance: 1
+  DnD_angleThreshold: 1
+  DnD_respectXAxis: 0
+  DnD_respectXAxisMirrored: 0
+  DnD_respectYAxis: 0
+  DnD_respectYAxisMirrored: 0
+  DnD_respectZAxis: 0
+  DnD_respectZAxisMirrored: 0
+  DnD_snapBeforeDrop: 1
+  DnD_TimeToSnap: 0.5
+  DnD_attached: 0
+  DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
 --- !u!54 &95102696
@@ -1789,7 +2076,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3978acaf2eedc8f4889c42ba095690a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedRenderers: 
 --- !u!1 &106022475
 GameObject:
   m_ObjectHideFlags: 0
@@ -2135,7 +2421,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3978acaf2eedc8f4889c42ba095690a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedRenderers: 
 --- !u!1 &133433073
 GameObject:
   m_ObjectHideFlags: 0
@@ -2212,6 +2497,7 @@ MonoBehaviour:
   requireAllDeactivators: 0
   proximityMap:
     proximityEntryList: []
+    proximityEntryGroupList: []
     proximityStateIndex: 0
   grabMap:
     grabEntryList: []
@@ -2257,6 +2543,12 @@ MonoBehaviour:
     AreDependenciesSatisfied: 1
   requireAllInputs: 0
   customConditionsEnabled: 0
+  dragAndDropEnabled: 0
+  dndEventValidator: 0
+  dndAnyTarget: 1
+  dndTargetModesIndex: 0
+  dndAttached: 0
+  dndTargets: []
   requireAllProximities: 0
   touchMap:
     TouchEnitry:
@@ -2265,6 +2557,8 @@ MonoBehaviour:
     touchHandsIndex: 2
     touchActionIndex: 0
   gazeEnabled: 0
+  gazeStateIndex: 0
+  gazeIn: 0
   touchEnabled: 1
   ActivateOnDependencyMap:
     dependencies: []
@@ -2273,8 +2567,16 @@ MonoBehaviour:
     dependencies: []
     AreDependenciesSatisfied: 0
   gazeColliderIO: {fileID: 0}
+  handHoverEnabled: 0
+  handHoverIO: {fileID: 0}
+  hoverHandIndex: 0
+  hoverHand: 0
+  hoverStateIndex: 0
+  hoverIn: 0
   ReloadDependencies: 0
   isActive: 1
+  proximityGroupIndex: 0
+  rigCombinations: []
 --- !u!114 &137584360
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2286,6 +2588,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fe86aa1e2e51304b81a3f6820a3abdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDelayed: 0
+  delayTime: 0
+  isDelayRandom: 0
+  delayRange:
+  - 0
+  - 0
+  multipleActionsInTime: 0
   rootIO: {fileID: 0}
   isActive: 1
   ActionReset: 0
@@ -2295,22 +2604,34 @@ MonoBehaviour:
   ActionGravity: 0
   ActionAudio: 1
   ActionColliders: 0
+  ActionDragAndDrop: 0
+  ActionAnimation: 1
   DestroyOnTrigger: 0
-  isDelayed: 0
-  delayTime: 0
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  multipleActionsInTime: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
   ModifyGrabMode: 0
   grabDistance: 0
   touchDistance: 0
   grabModeIndex: 0
-  visualsScript: {fileID: 0}
+  ModifyDragAndDrop: 0
+  ModifyDragAndDropTargets: 0
+  ModifyDnDMinDistance: 0
+  ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDRespectAxis: 0
+  dnDMinDistance: 0
+  dnDSnapBeforeDrop: 0
+  dnDRespectXAxis: 0
+  dnDRespectYAxis: 0
+  dnDRespectZAxis: 0
+  dnDRespectXAxisMirror: 0
+  dnDRespectYAxisMirror: 0
+  dnDRespectZAxisMirror: 0
+  ModifyDnDAngleThreshold: 0
+  dnDAngleThreshold: 0
+  DnD_Targets: []
+  visualsScript: {fileID: 404396101}
   AlterAllVisuals: 1
+  selectedRenderers: 
   triggerAnimation: 1
   targetAnimator: {fileID: 1676403309}
   activeTriggerStatesAnim: 0100000000
@@ -2320,19 +2641,105 @@ MonoBehaviour:
   - 
   - 
   - 
+  animationClip:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  targetAnimationSource: {fileID: 0}
+  loopAnim: 0000000000000000000000000000000000000000
+  loopAnimType: 0000000000000000000000000000000000000000
+  animationSequence: 0000000000000000000000000000000000000000
   targetAudioSource: {fileID: 1708684750}
   activeTriggerStatesAudio: 0100000000
   audioClips:
-  - {fileID: 8300000, guid: ef4697f9d826bc9488f9516a1da27dc2, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  loopAudio: 0000000000
+    ClipEntries00:
+    - {fileID: 8300000, guid: ef4697f9d826bc9488f9516a1da27dc2, type: 3}
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudio: 0000000000000000000000000000000000000000
+  audio_sequence: 0000000000000000000000000000000000000000
+  fadeInBetween: 0000000000
+  audioClipsNew:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudioNew: 0000000000000000000000000000000000000000
   duckingEnabled: 1
+  fadeInTime: 1
+  fadeOutTime: 1
+  fadeOutDeactTime: 1
+  fadeInCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutDeactCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeInEnabled: 0
+  fadeOutEnabled: 0
+  fadeOutDeactEnabled: 0
   audioVolumeMin: 0.2
   audioVolumeMax: 1
   fadeSpeed: 0.005
+  audio_ForceStop: 0
+  audio_AllowMultiple: 0
+  audio_randomizePitch: 0
+  audio_minPitch: 0
+  audio_maxPitch: 2
+  audio_MaxConcurrentSound: 8
   IO: {fileID: 1494579587}
   triggerNotification: 0
 --- !u!114 &137584361
@@ -2574,6 +2981,7 @@ SpriteRenderer:
   m_Size: {x: 40.96, y: 40.96}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
 --- !u!4 &203175255
 Transform:
   m_ObjectHideFlags: 0
@@ -2669,6 +3077,19 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  IsDragAndDropEnabled: 0
+  DnD_minDistance: 1
+  DnD_angleThreshold: 1
+  DnD_respectXAxis: 0
+  DnD_respectXAxisMirrored: 0
+  DnD_respectYAxis: 0
+  DnD_respectYAxisMirrored: 0
+  DnD_respectZAxis: 0
+  DnD_respectZAxisMirrored: 0
+  DnD_snapBeforeDrop: 1
+  DnD_TimeToSnap: 0.5
+  DnD_attached: 0
+  DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
 --- !u!54 &209289157
@@ -3169,7 +3590,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3978acaf2eedc8f4889c42ba095690a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedRenderers: 
 --- !u!4 &246552860 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4649303213654666, guid: db3d3100b4f923c4ebe2987faf1cde76,
@@ -3331,6 +3751,7 @@ MonoBehaviour:
   requireAllDeactivators: 0
   proximityMap:
     proximityEntryList: []
+    proximityEntryGroupList: []
     proximityStateIndex: 0
   grabMap:
     grabEntryList: []
@@ -3376,6 +3797,12 @@ MonoBehaviour:
     AreDependenciesSatisfied: 1
   requireAllInputs: 0
   customConditionsEnabled: 0
+  dragAndDropEnabled: 0
+  dndEventValidator: 0
+  dndAnyTarget: 1
+  dndTargetModesIndex: 0
+  dndAttached: 0
+  dndTargets: []
   requireAllProximities: 0
   touchMap:
     TouchEnitry:
@@ -3384,6 +3811,8 @@ MonoBehaviour:
     touchHandsIndex: 2
     touchActionIndex: 0
   gazeEnabled: 0
+  gazeStateIndex: 0
+  gazeIn: 0
   touchEnabled: 1
   ActivateOnDependencyMap:
     dependencies: []
@@ -3392,8 +3821,16 @@ MonoBehaviour:
     dependencies: []
     AreDependenciesSatisfied: 0
   gazeColliderIO: {fileID: 0}
+  handHoverEnabled: 0
+  handHoverIO: {fileID: 0}
+  hoverHandIndex: 0
+  hoverHand: 0
+  hoverStateIndex: 0
+  hoverIn: 0
   ReloadDependencies: 0
   isActive: 1
+  proximityGroupIndex: 0
+  rigCombinations: []
 --- !u!114 &251152705
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3405,6 +3842,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fe86aa1e2e51304b81a3f6820a3abdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDelayed: 0
+  delayTime: 0
+  isDelayRandom: 0
+  delayRange:
+  - 0
+  - 0
+  multipleActionsInTime: 0
   rootIO: {fileID: 0}
   isActive: 1
   ActionReset: 0
@@ -3414,22 +3858,34 @@ MonoBehaviour:
   ActionGravity: 0
   ActionAudio: 1
   ActionColliders: 0
+  ActionDragAndDrop: 0
+  ActionAnimation: 1
   DestroyOnTrigger: 0
-  isDelayed: 0
-  delayTime: 0
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  multipleActionsInTime: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
   ModifyGrabMode: 0
   grabDistance: 0
   touchDistance: 0
   grabModeIndex: 0
-  visualsScript: {fileID: 0}
+  ModifyDragAndDrop: 0
+  ModifyDragAndDropTargets: 0
+  ModifyDnDMinDistance: 0
+  ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDRespectAxis: 0
+  dnDMinDistance: 0
+  dnDSnapBeforeDrop: 0
+  dnDRespectXAxis: 0
+  dnDRespectYAxis: 0
+  dnDRespectZAxis: 0
+  dnDRespectXAxisMirror: 0
+  dnDRespectYAxisMirror: 0
+  dnDRespectZAxisMirror: 0
+  ModifyDnDAngleThreshold: 0
+  dnDAngleThreshold: 0
+  DnD_Targets: []
+  visualsScript: {fileID: 1690486950}
   AlterAllVisuals: 1
+  selectedRenderers: 
   triggerAnimation: 1
   targetAnimator: {fileID: 1043558840}
   activeTriggerStatesAnim: 0100000000
@@ -3439,19 +3895,105 @@ MonoBehaviour:
   - 
   - 
   - 
+  animationClip:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  targetAnimationSource: {fileID: 0}
+  loopAnim: 0000000000000000000000000000000000000000
+  loopAnimType: 0000000000000000000000000000000000000000
+  animationSequence: 0000000000000000000000000000000000000000
   targetAudioSource: {fileID: 1757703012}
   activeTriggerStatesAudio: 0100000000
   audioClips:
-  - {fileID: 8300000, guid: ef4697f9d826bc9488f9516a1da27dc2, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  loopAudio: 0000000000
+    ClipEntries00:
+    - {fileID: 8300000, guid: ef4697f9d826bc9488f9516a1da27dc2, type: 3}
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudio: 0000000000000000000000000000000000000000
+  audio_sequence: 0000000000000000000000000000000000000000
+  fadeInBetween: 0000000000
+  audioClipsNew:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudioNew: 0000000000000000000000000000000000000000
   duckingEnabled: 1
+  fadeInTime: 1
+  fadeOutTime: 1
+  fadeOutDeactTime: 1
+  fadeInCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutDeactCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeInEnabled: 0
+  fadeOutEnabled: 0
+  fadeOutDeactEnabled: 0
   audioVolumeMin: 0.2
   audioVolumeMax: 1
   fadeSpeed: 0.005
+  audio_ForceStop: 0
+  audio_AllowMultiple: 0
+  audio_randomizePitch: 0
+  audio_minPitch: 0
+  audio_maxPitch: 2
+  audio_MaxConcurrentSound: 8
   IO: {fileID: 265403904}
   triggerNotification: 0
 --- !u!114 &251152706
@@ -3532,6 +4074,19 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  IsDragAndDropEnabled: 0
+  DnD_minDistance: 1
+  DnD_angleThreshold: 1
+  DnD_respectXAxis: 0
+  DnD_respectXAxisMirrored: 0
+  DnD_respectYAxis: 0
+  DnD_respectYAxisMirrored: 0
+  DnD_respectZAxis: 0
+  DnD_respectZAxisMirrored: 0
+  DnD_snapBeforeDrop: 1
+  DnD_TimeToSnap: 0.5
+  DnD_attached: 0
+  DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
 --- !u!54 &265403905
@@ -4373,6 +4928,7 @@ GameObject:
   m_Component:
   - component: {fileID: 357946658}
   - component: {fileID: 357946659}
+  - component: {fileID: 357946660}
   m_Layer: 0
   m_Name: AudioSource
   m_TagString: Untagged
@@ -4473,6 +5029,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &357946660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 357946657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8170862739ecdb04392511ce00051beb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &358077585
 GameObject:
   m_ObjectHideFlags: 0
@@ -4514,7 +5081,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3978acaf2eedc8f4889c42ba095690a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedRenderers: 
 --- !u!1 &359054769
 GameObject:
   m_ObjectHideFlags: 0
@@ -4577,6 +5143,7 @@ GameObject:
   m_Component:
   - component: {fileID: 360790625}
   - component: {fileID: 360790626}
+  - component: {fileID: 360790627}
   m_Layer: 0
   m_Name: AudioSource
   m_TagString: Untagged
@@ -4677,6 +5244,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &360790627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 360790624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8170862739ecdb04392511ce00051beb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &361456239
 GameObject:
   m_ObjectHideFlags: 0
@@ -4803,6 +5381,7 @@ GameObject:
   m_Component:
   - component: {fileID: 363784788}
   - component: {fileID: 363784789}
+  - component: {fileID: 363784790}
   m_Layer: 0
   m_Name: AudioSource
   m_TagString: Untagged
@@ -4903,6 +5482,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &363784790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 363784787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8170862739ecdb04392511ce00051beb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &365934386
 GameObject:
   m_ObjectHideFlags: 0
@@ -5317,6 +5907,7 @@ SpriteRenderer:
   m_Size: {x: 0.51, y: 0.8}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
 --- !u!1 &379375508
 GameObject:
   m_ObjectHideFlags: 0
@@ -5386,6 +5977,7 @@ SpriteRenderer:
   m_Size: {x: 0.48, y: 0.87}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
 --- !u!1 &381416428
 GameObject:
   m_ObjectHideFlags: 0
@@ -5596,7 +6188,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3978acaf2eedc8f4889c42ba095690a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedRenderers: 
 --- !u!1 &412685970
 GameObject:
   m_ObjectHideFlags: 0
@@ -5606,6 +6197,7 @@ GameObject:
   m_Component:
   - component: {fileID: 412685971}
   - component: {fileID: 412685972}
+  - component: {fileID: 412685973}
   m_Layer: 0
   m_Name: AudioSource
   m_TagString: Untagged
@@ -5706,6 +6298,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &412685973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 412685970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8170862739ecdb04392511ce00051beb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &417152981
 GameObject:
   m_ObjectHideFlags: 0
@@ -5940,7 +6543,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3978acaf2eedc8f4889c42ba095690a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedRenderers: 
 --- !u!1 &427697710
 GameObject:
   m_ObjectHideFlags: 0
@@ -6042,6 +6644,7 @@ MonoBehaviour:
   requireAllDeactivators: 0
   proximityMap:
     proximityEntryList: []
+    proximityEntryGroupList: []
     proximityStateIndex: 0
   grabMap:
     grabEntryList: []
@@ -6087,6 +6690,12 @@ MonoBehaviour:
     AreDependenciesSatisfied: 1
   requireAllInputs: 0
   customConditionsEnabled: 0
+  dragAndDropEnabled: 0
+  dndEventValidator: 0
+  dndAnyTarget: 1
+  dndTargetModesIndex: 0
+  dndAttached: 0
+  dndTargets: []
   requireAllProximities: 0
   touchMap:
     TouchEnitry:
@@ -6095,6 +6704,8 @@ MonoBehaviour:
     touchHandsIndex: 2
     touchActionIndex: 0
   gazeEnabled: 0
+  gazeStateIndex: 0
+  gazeIn: 0
   touchEnabled: 1
   ActivateOnDependencyMap:
     dependencies: []
@@ -6103,8 +6714,16 @@ MonoBehaviour:
     dependencies: []
     AreDependenciesSatisfied: 0
   gazeColliderIO: {fileID: 0}
+  handHoverEnabled: 0
+  handHoverIO: {fileID: 0}
+  hoverHandIndex: 0
+  hoverHand: 0
+  hoverStateIndex: 0
+  hoverIn: 0
   ReloadDependencies: 0
   isActive: 1
+  proximityGroupIndex: 0
+  rigCombinations: []
 --- !u!114 &430762507
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6116,6 +6735,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fe86aa1e2e51304b81a3f6820a3abdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDelayed: 0
+  delayTime: 0
+  isDelayRandom: 0
+  delayRange:
+  - 0
+  - 0
+  multipleActionsInTime: 0
   rootIO: {fileID: 0}
   isActive: 1
   ActionReset: 0
@@ -6125,22 +6751,34 @@ MonoBehaviour:
   ActionGravity: 0
   ActionAudio: 1
   ActionColliders: 0
+  ActionDragAndDrop: 0
+  ActionAnimation: 0
   DestroyOnTrigger: 0
-  isDelayed: 0
-  delayTime: 0
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  multipleActionsInTime: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
   ModifyGrabMode: 0
   grabDistance: 0
   touchDistance: 0
   grabModeIndex: 0
-  visualsScript: {fileID: 0}
+  ModifyDragAndDrop: 0
+  ModifyDragAndDropTargets: 0
+  ModifyDnDMinDistance: 0
+  ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDRespectAxis: 0
+  dnDMinDistance: 0
+  dnDSnapBeforeDrop: 0
+  dnDRespectXAxis: 0
+  dnDRespectYAxis: 0
+  dnDRespectZAxis: 0
+  dnDRespectXAxisMirror: 0
+  dnDRespectYAxisMirror: 0
+  dnDRespectZAxisMirror: 0
+  ModifyDnDAngleThreshold: 0
+  dnDAngleThreshold: 0
+  DnD_Targets: []
+  visualsScript: {fileID: 640627425}
   AlterAllVisuals: 1
+  selectedRenderers: 
   triggerAnimation: 0
   targetAnimator: {fileID: 0}
   activeTriggerStatesAnim: 0000000000
@@ -6150,19 +6788,105 @@ MonoBehaviour:
   - 
   - 
   - 
+  animationClip:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  targetAnimationSource: {fileID: 0}
+  loopAnim: 0000000000000000000000000000000000000000
+  loopAnimType: 0000000000000000000000000000000000000000
+  animationSequence: 0000000000000000000000000000000000000000
   targetAudioSource: {fileID: 1576307399}
   activeTriggerStatesAudio: 0100000000
   audioClips:
-  - {fileID: 8300000, guid: fbb50aaa9c1d75b4e95e490a4ba1b347, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  loopAudio: 0000000000
+    ClipEntries00:
+    - {fileID: 8300000, guid: fbb50aaa9c1d75b4e95e490a4ba1b347, type: 3}
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudio: 0000000000000000000000000000000000000000
+  audio_sequence: 0000000000000000000000000000000000000000
+  fadeInBetween: 0000000000
+  audioClipsNew:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudioNew: 0000000000000000000000000000000000000000
   duckingEnabled: 1
+  fadeInTime: 1
+  fadeOutTime: 1
+  fadeOutDeactTime: 1
+  fadeInCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutDeactCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeInEnabled: 0
+  fadeOutEnabled: 0
+  fadeOutDeactEnabled: 0
   audioVolumeMin: 0.2
   audioVolumeMax: 1
   fadeSpeed: 0.005
+  audio_ForceStop: 0
+  audio_AllowMultiple: 0
+  audio_randomizePitch: 0
+  audio_minPitch: 0
+  audio_maxPitch: 2
+  audio_MaxConcurrentSound: 8
   IO: {fileID: 840797907}
   triggerNotification: 0
 --- !u!114 &430762508
@@ -6243,6 +6967,19 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  IsDragAndDropEnabled: 0
+  DnD_minDistance: 1
+  DnD_angleThreshold: 1
+  DnD_respectXAxis: 0
+  DnD_respectXAxisMirrored: 0
+  DnD_respectYAxis: 0
+  DnD_respectYAxisMirrored: 0
+  DnD_respectZAxis: 0
+  DnD_respectZAxisMirrored: 0
+  DnD_snapBeforeDrop: 1
+  DnD_TimeToSnap: 0.5
+  DnD_attached: 0
+  DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
 --- !u!54 &432596387
@@ -6567,6 +7304,7 @@ MonoBehaviour:
   requireAllDeactivators: 0
   proximityMap:
     proximityEntryList: []
+    proximityEntryGroupList: []
     proximityStateIndex: 0
   grabMap:
     grabEntryList: []
@@ -6612,6 +7350,12 @@ MonoBehaviour:
     AreDependenciesSatisfied: 1
   requireAllInputs: 0
   customConditionsEnabled: 0
+  dragAndDropEnabled: 0
+  dndEventValidator: 0
+  dndAnyTarget: 1
+  dndTargetModesIndex: 0
+  dndAttached: 0
+  dndTargets: []
   requireAllProximities: 0
   touchMap:
     TouchEnitry:
@@ -6620,6 +7364,8 @@ MonoBehaviour:
     touchHandsIndex: 2
     touchActionIndex: 0
   gazeEnabled: 0
+  gazeStateIndex: 0
+  gazeIn: 0
   touchEnabled: 1
   ActivateOnDependencyMap:
     dependencies: []
@@ -6628,8 +7374,16 @@ MonoBehaviour:
     dependencies: []
     AreDependenciesSatisfied: 0
   gazeColliderIO: {fileID: 0}
+  handHoverEnabled: 0
+  handHoverIO: {fileID: 0}
+  hoverHandIndex: 0
+  hoverHand: 0
+  hoverStateIndex: 0
+  hoverIn: 0
   ReloadDependencies: 0
   isActive: 1
+  proximityGroupIndex: 0
+  rigCombinations: []
 --- !u!114 &448346066
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6641,6 +7395,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fe86aa1e2e51304b81a3f6820a3abdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDelayed: 0
+  delayTime: 0
+  isDelayRandom: 0
+  delayRange:
+  - 0
+  - 0
+  multipleActionsInTime: 0
   rootIO: {fileID: 0}
   isActive: 1
   ActionReset: 0
@@ -6650,22 +7411,34 @@ MonoBehaviour:
   ActionGravity: 0
   ActionAudio: 1
   ActionColliders: 0
+  ActionDragAndDrop: 0
+  ActionAnimation: 0
   DestroyOnTrigger: 0
-  isDelayed: 0
-  delayTime: 0
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  multipleActionsInTime: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
   ModifyGrabMode: 0
   grabDistance: 0
   touchDistance: 0
   grabModeIndex: 0
-  visualsScript: {fileID: 0}
+  ModifyDragAndDrop: 0
+  ModifyDragAndDropTargets: 0
+  ModifyDnDMinDistance: 0
+  ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDRespectAxis: 0
+  dnDMinDistance: 0
+  dnDSnapBeforeDrop: 0
+  dnDRespectXAxis: 0
+  dnDRespectYAxis: 0
+  dnDRespectZAxis: 0
+  dnDRespectXAxisMirror: 0
+  dnDRespectYAxisMirror: 0
+  dnDRespectZAxisMirror: 0
+  ModifyDnDAngleThreshold: 0
+  dnDAngleThreshold: 0
+  DnD_Targets: []
+  visualsScript: {fileID: 358077587}
   AlterAllVisuals: 1
+  selectedRenderers: 
   triggerAnimation: 0
   targetAnimator: {fileID: 0}
   activeTriggerStatesAnim: 0000000000
@@ -6675,19 +7448,105 @@ MonoBehaviour:
   - 
   - 
   - 
+  animationClip:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  targetAnimationSource: {fileID: 0}
+  loopAnim: 0000000000000000000000000000000000000000
+  loopAnimType: 0000000000000000000000000000000000000000
+  animationSequence: 0000000000000000000000000000000000000000
   targetAudioSource: {fileID: 1499825487}
   activeTriggerStatesAudio: 0100000000
   audioClips:
-  - {fileID: 8300000, guid: fbb50aaa9c1d75b4e95e490a4ba1b347, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  loopAudio: 0000000000
+    ClipEntries00:
+    - {fileID: 8300000, guid: fbb50aaa9c1d75b4e95e490a4ba1b347, type: 3}
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudio: 0000000000000000000000000000000000000000
+  audio_sequence: 0000000000000000000000000000000000000000
+  fadeInBetween: 0000000000
+  audioClipsNew:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudioNew: 0000000000000000000000000000000000000000
   duckingEnabled: 1
+  fadeInTime: 1
+  fadeOutTime: 1
+  fadeOutDeactTime: 1
+  fadeInCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutDeactCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeInEnabled: 0
+  fadeOutEnabled: 0
+  fadeOutDeactEnabled: 0
   audioVolumeMin: 0.2
   audioVolumeMax: 1
   fadeSpeed: 0.005
+  audio_ForceStop: 0
+  audio_AllowMultiple: 0
+  audio_randomizePitch: 0
+  audio_minPitch: 0
+  audio_maxPitch: 2
+  audio_MaxConcurrentSound: 8
   IO: {fileID: 1192139945}
   triggerNotification: 0
 --- !u!1 &448688981
@@ -6759,6 +7618,7 @@ SpriteRenderer:
   m_Size: {x: 0.31, y: 0.8}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
 --- !u!1 &457449566
 GameObject:
   m_ObjectHideFlags: 0
@@ -6923,6 +7783,7 @@ MonoBehaviour:
   requireAllDeactivators: 0
   proximityMap:
     proximityEntryList: []
+    proximityEntryGroupList: []
     proximityStateIndex: 0
   grabMap:
     grabEntryList: []
@@ -6968,6 +7829,12 @@ MonoBehaviour:
     AreDependenciesSatisfied: 1
   requireAllInputs: 0
   customConditionsEnabled: 0
+  dragAndDropEnabled: 0
+  dndEventValidator: 0
+  dndAnyTarget: 1
+  dndTargetModesIndex: 0
+  dndAttached: 0
+  dndTargets: []
   requireAllProximities: 0
   touchMap:
     TouchEnitry:
@@ -6976,6 +7843,8 @@ MonoBehaviour:
     touchHandsIndex: 2
     touchActionIndex: 0
   gazeEnabled: 0
+  gazeStateIndex: 0
+  gazeIn: 0
   touchEnabled: 1
   ActivateOnDependencyMap:
     dependencies: []
@@ -6984,8 +7853,16 @@ MonoBehaviour:
     dependencies: []
     AreDependenciesSatisfied: 0
   gazeColliderIO: {fileID: 0}
+  handHoverEnabled: 0
+  handHoverIO: {fileID: 0}
+  hoverHandIndex: 0
+  hoverHand: 0
+  hoverStateIndex: 0
+  hoverIn: 0
   ReloadDependencies: 0
   isActive: 1
+  proximityGroupIndex: 0
+  rigCombinations: []
 --- !u!114 &459323535
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6997,6 +7874,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fe86aa1e2e51304b81a3f6820a3abdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDelayed: 0
+  delayTime: 0
+  isDelayRandom: 0
+  delayRange:
+  - 0
+  - 0
+  multipleActionsInTime: 0
   rootIO: {fileID: 0}
   isActive: 1
   ActionReset: 0
@@ -7006,22 +7890,34 @@ MonoBehaviour:
   ActionGravity: 0
   ActionAudio: 1
   ActionColliders: 0
+  ActionDragAndDrop: 0
+  ActionAnimation: 1
   DestroyOnTrigger: 0
-  isDelayed: 0
-  delayTime: 0
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  multipleActionsInTime: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
   ModifyGrabMode: 0
   grabDistance: 0
   touchDistance: 0
   grabModeIndex: 0
-  visualsScript: {fileID: 0}
+  ModifyDragAndDrop: 0
+  ModifyDragAndDropTargets: 0
+  ModifyDnDMinDistance: 0
+  ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDRespectAxis: 0
+  dnDMinDistance: 0
+  dnDSnapBeforeDrop: 0
+  dnDRespectXAxis: 0
+  dnDRespectYAxis: 0
+  dnDRespectZAxis: 0
+  dnDRespectXAxisMirror: 0
+  dnDRespectYAxisMirror: 0
+  dnDRespectZAxisMirror: 0
+  ModifyDnDAngleThreshold: 0
+  dnDAngleThreshold: 0
+  DnD_Targets: []
+  visualsScript: {fileID: 1680198069}
   AlterAllVisuals: 1
+  selectedRenderers: 
   triggerAnimation: 1
   targetAnimator: {fileID: 1764498682}
   activeTriggerStatesAnim: 0100000000
@@ -7031,19 +7927,105 @@ MonoBehaviour:
   - 
   - 
   - 
+  animationClip:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  targetAnimationSource: {fileID: 0}
+  loopAnim: 0000000000000000000000000000000000000000
+  loopAnimType: 0000000000000000000000000000000000000000
+  animationSequence: 0000000000000000000000000000000000000000
   targetAudioSource: {fileID: 838748128}
   activeTriggerStatesAudio: 0100000000
   audioClips:
-  - {fileID: 8300000, guid: ef4697f9d826bc9488f9516a1da27dc2, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  loopAudio: 0000000000
+    ClipEntries00:
+    - {fileID: 8300000, guid: ef4697f9d826bc9488f9516a1da27dc2, type: 3}
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudio: 0000000000000000000000000000000000000000
+  audio_sequence: 0000000000000000000000000000000000000000
+  fadeInBetween: 0000000000
+  audioClipsNew:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudioNew: 0000000000000000000000000000000000000000
   duckingEnabled: 1
+  fadeInTime: 1
+  fadeOutTime: 1
+  fadeOutDeactTime: 1
+  fadeInCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutDeactCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeInEnabled: 0
+  fadeOutEnabled: 0
+  fadeOutDeactEnabled: 0
   audioVolumeMin: 0.2
   audioVolumeMax: 1
   fadeSpeed: 0.005
+  audio_ForceStop: 0
+  audio_AllowMultiple: 0
+  audio_randomizePitch: 0
+  audio_minPitch: 0
+  audio_maxPitch: 2
+  audio_MaxConcurrentSound: 8
   IO: {fileID: 1529593773}
   triggerNotification: 0
 --- !u!114 &459323536
@@ -7457,6 +8439,7 @@ MonoBehaviour:
   requireAllDeactivators: 0
   proximityMap:
     proximityEntryList: []
+    proximityEntryGroupList: []
     proximityStateIndex: 0
   grabMap:
     grabEntryList: []
@@ -7502,6 +8485,12 @@ MonoBehaviour:
     AreDependenciesSatisfied: 1
   requireAllInputs: 0
   customConditionsEnabled: 0
+  dragAndDropEnabled: 0
+  dndEventValidator: 0
+  dndAnyTarget: 1
+  dndTargetModesIndex: 0
+  dndAttached: 0
+  dndTargets: []
   requireAllProximities: 0
   touchMap:
     TouchEnitry:
@@ -7510,6 +8499,8 @@ MonoBehaviour:
     touchHandsIndex: 2
     touchActionIndex: 0
   gazeEnabled: 0
+  gazeStateIndex: 0
+  gazeIn: 0
   touchEnabled: 1
   ActivateOnDependencyMap:
     dependencies: []
@@ -7518,8 +8509,16 @@ MonoBehaviour:
     dependencies: []
     AreDependenciesSatisfied: 0
   gazeColliderIO: {fileID: 0}
+  handHoverEnabled: 0
+  handHoverIO: {fileID: 0}
+  hoverHandIndex: 0
+  hoverHand: 0
+  hoverStateIndex: 0
+  hoverIn: 0
   ReloadDependencies: 0
   isActive: 1
+  proximityGroupIndex: 0
+  rigCombinations: []
 --- !u!114 &490905096
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7531,6 +8530,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fe86aa1e2e51304b81a3f6820a3abdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDelayed: 0
+  delayTime: 0
+  isDelayRandom: 0
+  delayRange:
+  - 0
+  - 0
+  multipleActionsInTime: 0
   rootIO: {fileID: 0}
   isActive: 1
   ActionReset: 0
@@ -7540,22 +8546,34 @@ MonoBehaviour:
   ActionGravity: 0
   ActionAudio: 1
   ActionColliders: 0
+  ActionDragAndDrop: 0
+  ActionAnimation: 1
   DestroyOnTrigger: 0
-  isDelayed: 0
-  delayTime: 0
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  multipleActionsInTime: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
   ModifyGrabMode: 0
   grabDistance: 0
   touchDistance: 0
   grabModeIndex: 0
-  visualsScript: {fileID: 0}
+  ModifyDragAndDrop: 0
+  ModifyDragAndDropTargets: 0
+  ModifyDnDMinDistance: 0
+  ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDRespectAxis: 0
+  dnDMinDistance: 0
+  dnDSnapBeforeDrop: 0
+  dnDRespectXAxis: 0
+  dnDRespectYAxis: 0
+  dnDRespectZAxis: 0
+  dnDRespectXAxisMirror: 0
+  dnDRespectYAxisMirror: 0
+  dnDRespectZAxisMirror: 0
+  ModifyDnDAngleThreshold: 0
+  dnDAngleThreshold: 0
+  DnD_Targets: []
+  visualsScript: {fileID: 979071421}
   AlterAllVisuals: 1
+  selectedRenderers: 
   triggerAnimation: 1
   targetAnimator: {fileID: 1620732591}
   activeTriggerStatesAnim: 0100000000
@@ -7565,19 +8583,105 @@ MonoBehaviour:
   - 
   - 
   - 
+  animationClip:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  targetAnimationSource: {fileID: 0}
+  loopAnim: 0000000000000000000000000000000000000000
+  loopAnimType: 0000000000000000000000000000000000000000
+  animationSequence: 0000000000000000000000000000000000000000
   targetAudioSource: {fileID: 1019089740}
   activeTriggerStatesAudio: 0100000000
   audioClips:
-  - {fileID: 8300000, guid: ef4697f9d826bc9488f9516a1da27dc2, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  loopAudio: 0000000000
+    ClipEntries00:
+    - {fileID: 8300000, guid: ef4697f9d826bc9488f9516a1da27dc2, type: 3}
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudio: 0000000000000000000000000000000000000000
+  audio_sequence: 0000000000000000000000000000000000000000
+  fadeInBetween: 0000000000
+  audioClipsNew:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudioNew: 0000000000000000000000000000000000000000
   duckingEnabled: 1
+  fadeInTime: 1
+  fadeOutTime: 1
+  fadeOutDeactTime: 1
+  fadeInCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutDeactCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeInEnabled: 0
+  fadeOutEnabled: 0
+  fadeOutDeactEnabled: 0
   audioVolumeMin: 0.2
   audioVolumeMax: 1
   fadeSpeed: 0.005
+  audio_ForceStop: 0
+  audio_AllowMultiple: 0
+  audio_randomizePitch: 0
+  audio_minPitch: 0
+  audio_maxPitch: 2
+  audio_MaxConcurrentSound: 8
   IO: {fileID: 2041476791}
   triggerNotification: 0
 --- !u!114 &490905097
@@ -7722,6 +8826,7 @@ MonoBehaviour:
   requireAllDeactivators: 0
   proximityMap:
     proximityEntryList: []
+    proximityEntryGroupList: []
     proximityStateIndex: 0
   grabMap:
     grabEntryList: []
@@ -7767,6 +8872,12 @@ MonoBehaviour:
     AreDependenciesSatisfied: 1
   requireAllInputs: 0
   customConditionsEnabled: 0
+  dragAndDropEnabled: 0
+  dndEventValidator: 0
+  dndAnyTarget: 1
+  dndTargetModesIndex: 0
+  dndAttached: 0
+  dndTargets: []
   requireAllProximities: 0
   touchMap:
     TouchEnitry:
@@ -7775,6 +8886,8 @@ MonoBehaviour:
     touchHandsIndex: 0
     touchActionIndex: 0
   gazeEnabled: 0
+  gazeStateIndex: 0
+  gazeIn: 0
   touchEnabled: 0
   ActivateOnDependencyMap:
     dependencies: []
@@ -7783,8 +8896,16 @@ MonoBehaviour:
     dependencies: []
     AreDependenciesSatisfied: 0
   gazeColliderIO: {fileID: 0}
+  handHoverEnabled: 0
+  handHoverIO: {fileID: 0}
+  hoverHandIndex: 0
+  hoverHand: 0
+  hoverStateIndex: 0
+  hoverIn: 0
   ReloadDependencies: 0
   isActive: 0
+  proximityGroupIndex: 0
+  rigCombinations: []
 --- !u!114 &500922244
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7796,6 +8917,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fe86aa1e2e51304b81a3f6820a3abdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDelayed: 0
+  delayTime: 0
+  isDelayRandom: 0
+  delayRange:
+  - 0
+  - 0
+  multipleActionsInTime: 0
   rootIO: {fileID: 0}
   isActive: 0
   ActionReset: 0
@@ -7805,22 +8933,34 @@ MonoBehaviour:
   ActionGravity: 0
   ActionAudio: 0
   ActionColliders: 0
+  ActionDragAndDrop: 0
+  ActionAnimation: 0
   DestroyOnTrigger: 0
-  isDelayed: 0
-  delayTime: 0
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  multipleActionsInTime: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
   ModifyGrabMode: 0
   grabDistance: 0
   touchDistance: 0
   grabModeIndex: 0
-  visualsScript: {fileID: 0}
+  ModifyDragAndDrop: 0
+  ModifyDragAndDropTargets: 0
+  ModifyDnDMinDistance: 0
+  ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDRespectAxis: 0
+  dnDMinDistance: 0
+  dnDSnapBeforeDrop: 0
+  dnDRespectXAxis: 0
+  dnDRespectYAxis: 0
+  dnDRespectZAxis: 0
+  dnDRespectXAxisMirror: 0
+  dnDRespectYAxisMirror: 0
+  dnDRespectZAxisMirror: 0
+  ModifyDnDAngleThreshold: 0
+  dnDAngleThreshold: 0
+  DnD_Targets: []
+  visualsScript: {fileID: 102845429}
   AlterAllVisuals: 1
+  selectedRenderers: 
   triggerAnimation: 0
   targetAnimator: {fileID: 0}
   activeTriggerStatesAnim: 0000000000
@@ -7830,19 +8970,104 @@ MonoBehaviour:
   - 
   - 
   - 
+  animationClip:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  targetAnimationSource: {fileID: 0}
+  loopAnim: 0000000000000000000000000000000000000000
+  loopAnimType: 0000000000000000000000000000000000000000
+  animationSequence: 0000000000000000000000000000000000000000
   targetAudioSource: {fileID: 0}
   activeTriggerStatesAudio: 0000000000
   audioClips:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  loopAudio: 0000000000
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudio: 0000000000000000000000000000000000000000
+  audio_sequence: 0000000000000000000000000000000000000000
+  fadeInBetween: 0000000000
+  audioClipsNew:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudioNew: 0000000000000000000000000000000000000000
   duckingEnabled: 1
+  fadeInTime: 1
+  fadeOutTime: 1
+  fadeOutDeactTime: 1
+  fadeInCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutDeactCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeInEnabled: 0
+  fadeOutEnabled: 0
+  fadeOutDeactEnabled: 0
   audioVolumeMin: 0.2
   audioVolumeMax: 1
   fadeSpeed: 0.005
+  audio_ForceStop: 0
+  audio_AllowMultiple: 0
+  audio_randomizePitch: 0
+  audio_minPitch: 0
+  audio_maxPitch: 2
+  audio_MaxConcurrentSound: 8
   IO: {fileID: 1207362573}
   triggerNotification: 0
 --- !u!114 &500922245
@@ -7981,7 +9206,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3978acaf2eedc8f4889c42ba095690a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedRenderers: 
 --- !u!1 &519467005
 GameObject:
   m_ObjectHideFlags: 0
@@ -8368,6 +9592,7 @@ MonoBehaviour:
   requireAllDeactivators: 0
   proximityMap:
     proximityEntryList: []
+    proximityEntryGroupList: []
     proximityStateIndex: 0
   grabMap:
     grabEntryList: []
@@ -8413,6 +9638,12 @@ MonoBehaviour:
     AreDependenciesSatisfied: 1
   requireAllInputs: 0
   customConditionsEnabled: 0
+  dragAndDropEnabled: 0
+  dndEventValidator: 0
+  dndAnyTarget: 1
+  dndTargetModesIndex: 0
+  dndAttached: 0
+  dndTargets: []
   requireAllProximities: 0
   touchMap:
     TouchEnitry:
@@ -8421,6 +9652,8 @@ MonoBehaviour:
     touchHandsIndex: 2
     touchActionIndex: 0
   gazeEnabled: 0
+  gazeStateIndex: 0
+  gazeIn: 0
   touchEnabled: 1
   ActivateOnDependencyMap:
     dependencies: []
@@ -8429,8 +9662,16 @@ MonoBehaviour:
     dependencies: []
     AreDependenciesSatisfied: 0
   gazeColliderIO: {fileID: 0}
+  handHoverEnabled: 0
+  handHoverIO: {fileID: 0}
+  hoverHandIndex: 0
+  hoverHand: 0
+  hoverStateIndex: 0
+  hoverIn: 0
   ReloadDependencies: 0
   isActive: 1
+  proximityGroupIndex: 0
+  rigCombinations: []
 --- !u!114 &555906863
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8442,6 +9683,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fe86aa1e2e51304b81a3f6820a3abdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDelayed: 0
+  delayTime: 0
+  isDelayRandom: 0
+  delayRange:
+  - 0
+  - 0
+  multipleActionsInTime: 0
   rootIO: {fileID: 0}
   isActive: 1
   ActionReset: 0
@@ -8451,22 +9699,34 @@ MonoBehaviour:
   ActionGravity: 0
   ActionAudio: 1
   ActionColliders: 0
+  ActionDragAndDrop: 0
+  ActionAnimation: 1
   DestroyOnTrigger: 0
-  isDelayed: 0
-  delayTime: 0
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  multipleActionsInTime: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
   ModifyGrabMode: 0
   grabDistance: 0
   touchDistance: 0
   grabModeIndex: 0
-  visualsScript: {fileID: 0}
+  ModifyDragAndDrop: 0
+  ModifyDragAndDropTargets: 0
+  ModifyDnDMinDistance: 0
+  ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDRespectAxis: 0
+  dnDMinDistance: 0
+  dnDSnapBeforeDrop: 0
+  dnDRespectXAxis: 0
+  dnDRespectYAxis: 0
+  dnDRespectZAxis: 0
+  dnDRespectXAxisMirror: 0
+  dnDRespectYAxisMirror: 0
+  dnDRespectZAxisMirror: 0
+  ModifyDnDAngleThreshold: 0
+  dnDAngleThreshold: 0
+  DnD_Targets: []
+  visualsScript: {fileID: 245979017}
   AlterAllVisuals: 1
+  selectedRenderers: 
   triggerAnimation: 1
   targetAnimator: {fileID: 782946770}
   activeTriggerStatesAnim: 0100000000
@@ -8476,19 +9736,105 @@ MonoBehaviour:
   - 
   - 
   - 
+  animationClip:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  targetAnimationSource: {fileID: 0}
+  loopAnim: 0000000000000000000000000000000000000000
+  loopAnimType: 0000000000000000000000000000000000000000
+  animationSequence: 0000000000000000000000000000000000000000
   targetAudioSource: {fileID: 360790626}
   activeTriggerStatesAudio: 0100000000
   audioClips:
-  - {fileID: 8300000, guid: ef4697f9d826bc9488f9516a1da27dc2, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  loopAudio: 0000000000
+    ClipEntries00:
+    - {fileID: 8300000, guid: ef4697f9d826bc9488f9516a1da27dc2, type: 3}
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudio: 0000000000000000000000000000000000000000
+  audio_sequence: 0000000000000000000000000000000000000000
+  fadeInBetween: 0000000000
+  audioClipsNew:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudioNew: 0000000000000000000000000000000000000000
   duckingEnabled: 1
+  fadeInTime: 1
+  fadeOutTime: 1
+  fadeOutDeactTime: 1
+  fadeInCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutDeactCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeInEnabled: 0
+  fadeOutEnabled: 0
+  fadeOutDeactEnabled: 0
   audioVolumeMin: 0.2
   audioVolumeMax: 1
   fadeSpeed: 0.005
+  audio_ForceStop: 0
+  audio_AllowMultiple: 0
+  audio_randomizePitch: 0
+  audio_minPitch: 0
+  audio_maxPitch: 2
+  audio_MaxConcurrentSound: 8
   IO: {fileID: 95102695}
   triggerNotification: 0
 --- !u!114 &555906864
@@ -8573,6 +9919,7 @@ SpriteRenderer:
   m_Size: {x: 0.43, y: 0.76}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
 --- !u!1 &563140409
 GameObject:
   m_ObjectHideFlags: 0
@@ -8583,6 +9930,7 @@ GameObject:
   - component: {fileID: 563140412}
   - component: {fileID: 563140411}
   - component: {fileID: 563140410}
+  - component: {fileID: 563140413}
   m_Layer: 0
   m_Name: Camera (IO)
   m_TagString: MainCamera
@@ -8630,7 +9978,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 563140409}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1.8, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -8640,6 +9988,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &563140413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 563140409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58d4e2d162e9e4047a2a5939860c8413, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  viveHeigth: 0
 --- !u!1 &568930030
 GameObject:
   m_ObjectHideFlags: 0
@@ -8681,7 +10041,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3978acaf2eedc8f4889c42ba095690a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedRenderers: 
 --- !u!1 &574037768
 GameObject:
   m_ObjectHideFlags: 0
@@ -9056,6 +10415,19 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  IsDragAndDropEnabled: 0
+  DnD_minDistance: 1
+  DnD_angleThreshold: 1
+  DnD_respectXAxis: 0
+  DnD_respectXAxisMirrored: 0
+  DnD_respectYAxis: 0
+  DnD_respectYAxisMirrored: 0
+  DnD_respectZAxis: 0
+  DnD_respectZAxisMirrored: 0
+  DnD_snapBeforeDrop: 1
+  DnD_TimeToSnap: 0.5
+  DnD_attached: 0
+  DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
 --- !u!4 &599314965
@@ -9273,6 +10645,7 @@ SpriteRenderer:
   m_Size: {x: 0.51, y: 0.74}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
 --- !u!1 &636911044
 GameObject:
   m_ObjectHideFlags: 0
@@ -9397,7 +10770,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3978acaf2eedc8f4889c42ba095690a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedRenderers: 
 --- !u!1 &651539420
 GameObject:
   m_ObjectHideFlags: 0
@@ -9552,6 +10924,7 @@ MonoBehaviour:
   requireAllDeactivators: 0
   proximityMap:
     proximityEntryList: []
+    proximityEntryGroupList: []
     proximityStateIndex: 0
   grabMap:
     grabEntryList: []
@@ -9597,6 +10970,12 @@ MonoBehaviour:
     AreDependenciesSatisfied: 1
   requireAllInputs: 0
   customConditionsEnabled: 0
+  dragAndDropEnabled: 0
+  dndEventValidator: 0
+  dndAnyTarget: 1
+  dndTargetModesIndex: 0
+  dndAttached: 0
+  dndTargets: []
   requireAllProximities: 0
   touchMap:
     TouchEnitry:
@@ -9605,6 +10984,8 @@ MonoBehaviour:
     touchHandsIndex: 2
     touchActionIndex: 0
   gazeEnabled: 0
+  gazeStateIndex: 0
+  gazeIn: 0
   touchEnabled: 1
   ActivateOnDependencyMap:
     dependencies: []
@@ -9613,8 +10994,16 @@ MonoBehaviour:
     dependencies: []
     AreDependenciesSatisfied: 0
   gazeColliderIO: {fileID: 0}
+  handHoverEnabled: 0
+  handHoverIO: {fileID: 0}
+  hoverHandIndex: 0
+  hoverHand: 0
+  hoverStateIndex: 0
+  hoverIn: 0
   ReloadDependencies: 0
   isActive: 1
+  proximityGroupIndex: 0
+  rigCombinations: []
 --- !u!114 &655545618
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9626,6 +11015,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fe86aa1e2e51304b81a3f6820a3abdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDelayed: 0
+  delayTime: 0
+  isDelayRandom: 0
+  delayRange:
+  - 0
+  - 0
+  multipleActionsInTime: 0
   rootIO: {fileID: 0}
   isActive: 1
   ActionReset: 0
@@ -9635,22 +11031,34 @@ MonoBehaviour:
   ActionGravity: 0
   ActionAudio: 1
   ActionColliders: 0
+  ActionDragAndDrop: 0
+  ActionAnimation: 1
   DestroyOnTrigger: 0
-  isDelayed: 0
-  delayTime: 0
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  multipleActionsInTime: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
   ModifyGrabMode: 0
   grabDistance: 0
   touchDistance: 0
   grabModeIndex: 0
-  visualsScript: {fileID: 0}
+  ModifyDragAndDrop: 0
+  ModifyDragAndDropTargets: 0
+  ModifyDnDMinDistance: 0
+  ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDRespectAxis: 0
+  dnDMinDistance: 0
+  dnDSnapBeforeDrop: 0
+  dnDRespectXAxis: 0
+  dnDRespectYAxis: 0
+  dnDRespectZAxis: 0
+  dnDRespectXAxisMirror: 0
+  dnDRespectYAxisMirror: 0
+  dnDRespectZAxisMirror: 0
+  ModifyDnDAngleThreshold: 0
+  dnDAngleThreshold: 0
+  DnD_Targets: []
+  visualsScript: {fileID: 1384963594}
   AlterAllVisuals: 1
+  selectedRenderers: 
   triggerAnimation: 1
   targetAnimator: {fileID: 381416430}
   activeTriggerStatesAnim: 0100000000
@@ -9660,19 +11068,105 @@ MonoBehaviour:
   - 
   - 
   - 
+  animationClip:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  targetAnimationSource: {fileID: 0}
+  loopAnim: 0000000000000000000000000000000000000000
+  loopAnimType: 0000000000000000000000000000000000000000
+  animationSequence: 0000000000000000000000000000000000000000
   targetAudioSource: {fileID: 1098534074}
   activeTriggerStatesAudio: 0100000000
   audioClips:
-  - {fileID: 8300000, guid: ef4697f9d826bc9488f9516a1da27dc2, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  loopAudio: 0000000000
+    ClipEntries00:
+    - {fileID: 8300000, guid: ef4697f9d826bc9488f9516a1da27dc2, type: 3}
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudio: 0000000000000000000000000000000000000000
+  audio_sequence: 0000000000000000000000000000000000000000
+  fadeInBetween: 0000000000
+  audioClipsNew:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudioNew: 0000000000000000000000000000000000000000
   duckingEnabled: 1
+  fadeInTime: 1
+  fadeOutTime: 1
+  fadeOutDeactTime: 1
+  fadeInCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutDeactCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeInEnabled: 0
+  fadeOutEnabled: 0
+  fadeOutDeactEnabled: 0
   audioVolumeMin: 0.2
   audioVolumeMax: 1
   fadeSpeed: 0.005
+  audio_ForceStop: 0
+  audio_AllowMultiple: 0
+  audio_randomizePitch: 0
+  audio_minPitch: 0
+  audio_maxPitch: 2
+  audio_MaxConcurrentSound: 8
   IO: {fileID: 1869712414}
   triggerNotification: 0
 --- !u!114 &655545619
@@ -10061,7 +11555,12 @@ MonoBehaviour:
   requireAllActivators: 0
   requireAllDeactivators: 0
   proximityMap:
-    proximityEntryList: []
+    proximityEntryList:
+    - dependentGameObject: {fileID: 707185884}
+    proximityEntryGroupList:
+    - proximityEntries:
+      - dependentGameObject: {fileID: 23520966}
+      - dependentGameObject: {fileID: 1207362573}
     proximityStateIndex: 0
   grabMap:
     grabEntryList: []
@@ -10107,6 +11606,12 @@ MonoBehaviour:
     AreDependenciesSatisfied: 1
   requireAllInputs: 0
   customConditionsEnabled: 0
+  dragAndDropEnabled: 0
+  dndEventValidator: 0
+  dndAnyTarget: 1
+  dndTargetModesIndex: 0
+  dndAttached: 0
+  dndTargets: []
   requireAllProximities: 0
   touchMap:
     TouchEnitry:
@@ -10115,6 +11620,8 @@ MonoBehaviour:
     touchHandsIndex: 2
     touchActionIndex: 0
   gazeEnabled: 0
+  gazeStateIndex: 0
+  gazeIn: 0
   touchEnabled: 1
   ActivateOnDependencyMap:
     dependencies: []
@@ -10123,8 +11630,20 @@ MonoBehaviour:
     dependencies: []
     AreDependenciesSatisfied: 0
   gazeColliderIO: {fileID: 0}
+  handHoverEnabled: 0
+  handHoverIO: {fileID: 0}
+  hoverHandIndex: 0
+  hoverHand: 0
+  hoverStateIndex: 0
+  hoverIn: 0
   ReloadDependencies: 0
   isActive: 1
+  proximityGroupIndex: 0
+  rigCombinations:
+  - '  ||  Head (IO)  ||  Left Hand (IO)  ||  '
+  - '  ||  Head (IO)  ||  Right Hand (IO)  ||  '
+  - '  ||  Left Hand (IO)  ||  Right Hand (IO)  ||  '
+  - '  ||  Head (IO)  ||  Left Hand (IO)  ||  Right Hand (IO)  ||  '
 --- !u!114 &697361051
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10136,6 +11655,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fe86aa1e2e51304b81a3f6820a3abdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDelayed: 0
+  delayTime: 0
+  isDelayRandom: 0
+  delayRange:
+  - 0
+  - 0
+  multipleActionsInTime: 0
   rootIO: {fileID: 0}
   isActive: 1
   ActionReset: 0
@@ -10145,22 +11671,34 @@ MonoBehaviour:
   ActionGravity: 0
   ActionAudio: 1
   ActionColliders: 0
+  ActionDragAndDrop: 0
+  ActionAnimation: 0
   DestroyOnTrigger: 0
-  isDelayed: 0
-  delayTime: 0
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  multipleActionsInTime: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
   ModifyGrabMode: 0
   grabDistance: 0
   touchDistance: 0
   grabModeIndex: 0
-  visualsScript: {fileID: 0}
+  ModifyDragAndDrop: 0
+  ModifyDragAndDropTargets: 0
+  ModifyDnDMinDistance: 0
+  ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDRespectAxis: 0
+  dnDMinDistance: 0
+  dnDSnapBeforeDrop: 0
+  dnDRespectXAxis: 0
+  dnDRespectYAxis: 0
+  dnDRespectZAxis: 0
+  dnDRespectXAxisMirror: 0
+  dnDRespectYAxisMirror: 0
+  dnDRespectZAxisMirror: 0
+  ModifyDnDAngleThreshold: 0
+  dnDAngleThreshold: 0
+  DnD_Targets: []
+  visualsScript: {fileID: 934054831}
   AlterAllVisuals: 1
+  selectedRenderers: 
   triggerAnimation: 0
   targetAnimator: {fileID: 0}
   activeTriggerStatesAnim: 0000000000
@@ -10170,19 +11708,105 @@ MonoBehaviour:
   - 
   - 
   - 
+  animationClip:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  targetAnimationSource: {fileID: 0}
+  loopAnim: 0000000000000000000000000000000000000000
+  loopAnimType: 0000000000000000000000000000000000000000
+  animationSequence: 0000000000000000000000000000000000000000
   targetAudioSource: {fileID: 2047023872}
   activeTriggerStatesAudio: 0100000000
   audioClips:
-  - {fileID: 8300000, guid: fbb50aaa9c1d75b4e95e490a4ba1b347, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  loopAudio: 0000000000
+    ClipEntries00:
+    - {fileID: 8300000, guid: fbb50aaa9c1d75b4e95e490a4ba1b347, type: 3}
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudio: 0000000000000000000000000000000000000000
+  audio_sequence: 0000000000000000000000000000000000000000
+  fadeInBetween: 0000000000
+  audioClipsNew:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudioNew: 0000000000000000000000000000000000000000
   duckingEnabled: 1
+  fadeInTime: 1
+  fadeOutTime: 1
+  fadeOutDeactTime: 1
+  fadeInCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutDeactCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeInEnabled: 0
+  fadeOutEnabled: 0
+  fadeOutDeactEnabled: 0
   audioVolumeMin: 0.2
   audioVolumeMax: 1
   fadeSpeed: 0.005
+  audio_ForceStop: 0
+  audio_AllowMultiple: 0
+  audio_randomizePitch: 0
+  audio_minPitch: 0
+  audio_maxPitch: 2
+  audio_MaxConcurrentSound: 8
   IO: {fileID: 707185884}
   triggerNotification: 0
 --- !u!114 &697361052
@@ -10263,6 +11887,19 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  IsDragAndDropEnabled: 0
+  DnD_minDistance: 1
+  DnD_angleThreshold: 1
+  DnD_respectXAxis: 0
+  DnD_respectXAxisMirrored: 0
+  DnD_respectYAxis: 0
+  DnD_respectYAxisMirrored: 0
+  DnD_respectZAxis: 0
+  DnD_respectZAxisMirrored: 0
+  DnD_snapBeforeDrop: 1
+  DnD_TimeToSnap: 0.5
+  DnD_attached: 0
+  DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
 --- !u!54 &701394354
@@ -10390,6 +12027,19 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  IsDragAndDropEnabled: 0
+  DnD_minDistance: 1
+  DnD_angleThreshold: 1
+  DnD_respectXAxis: 0
+  DnD_respectXAxisMirrored: 0
+  DnD_respectYAxis: 0
+  DnD_respectYAxisMirrored: 0
+  DnD_respectZAxis: 0
+  DnD_respectZAxisMirrored: 0
+  DnD_snapBeforeDrop: 1
+  DnD_TimeToSnap: 0.5
+  DnD_attached: 0
+  DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
 --- !u!54 &707185885
@@ -10990,7 +12640,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3978acaf2eedc8f4889c42ba095690a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedRenderers: 
 --- !u!1 &720907881
 GameObject:
   m_ObjectHideFlags: 0
@@ -11091,6 +12740,7 @@ MonoBehaviour:
   requireAllDeactivators: 0
   proximityMap:
     proximityEntryList: []
+    proximityEntryGroupList: []
     proximityStateIndex: 0
   grabMap:
     grabEntryList: []
@@ -11136,6 +12786,12 @@ MonoBehaviour:
     AreDependenciesSatisfied: 1
   requireAllInputs: 0
   customConditionsEnabled: 0
+  dragAndDropEnabled: 0
+  dndEventValidator: 0
+  dndAnyTarget: 1
+  dndTargetModesIndex: 0
+  dndAttached: 0
+  dndTargets: []
   requireAllProximities: 0
   touchMap:
     TouchEnitry:
@@ -11144,6 +12800,8 @@ MonoBehaviour:
     touchHandsIndex: 2
     touchActionIndex: 0
   gazeEnabled: 0
+  gazeStateIndex: 0
+  gazeIn: 0
   touchEnabled: 1
   ActivateOnDependencyMap:
     dependencies: []
@@ -11152,8 +12810,16 @@ MonoBehaviour:
     dependencies: []
     AreDependenciesSatisfied: 0
   gazeColliderIO: {fileID: 0}
+  handHoverEnabled: 0
+  handHoverIO: {fileID: 0}
+  hoverHandIndex: 0
+  hoverHand: 0
+  hoverStateIndex: 0
+  hoverIn: 0
   ReloadDependencies: 0
   isActive: 1
+  proximityGroupIndex: 0
+  rigCombinations: []
 --- !u!114 &723141964
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11165,6 +12831,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fe86aa1e2e51304b81a3f6820a3abdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDelayed: 0
+  delayTime: 0
+  isDelayRandom: 0
+  delayRange:
+  - 0
+  - 0
+  multipleActionsInTime: 0
   rootIO: {fileID: 0}
   isActive: 1
   ActionReset: 0
@@ -11174,22 +12847,34 @@ MonoBehaviour:
   ActionGravity: 0
   ActionAudio: 1
   ActionColliders: 0
+  ActionDragAndDrop: 0
+  ActionAnimation: 0
   DestroyOnTrigger: 0
-  isDelayed: 0
-  delayTime: 0
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  multipleActionsInTime: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
   ModifyGrabMode: 0
   grabDistance: 0
   touchDistance: 0
   grabModeIndex: 0
-  visualsScript: {fileID: 0}
+  ModifyDragAndDrop: 0
+  ModifyDragAndDropTargets: 0
+  ModifyDnDMinDistance: 0
+  ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDRespectAxis: 0
+  dnDMinDistance: 0
+  dnDSnapBeforeDrop: 0
+  dnDRespectXAxis: 0
+  dnDRespectYAxis: 0
+  dnDRespectZAxis: 0
+  dnDRespectXAxisMirror: 0
+  dnDRespectYAxisMirror: 0
+  dnDRespectZAxisMirror: 0
+  ModifyDnDAngleThreshold: 0
+  dnDAngleThreshold: 0
+  DnD_Targets: []
+  visualsScript: {fileID: 518236006}
   AlterAllVisuals: 1
+  selectedRenderers: 
   triggerAnimation: 0
   targetAnimator: {fileID: 0}
   activeTriggerStatesAnim: 0000000000
@@ -11199,19 +12884,105 @@ MonoBehaviour:
   - 
   - 
   - 
+  animationClip:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  targetAnimationSource: {fileID: 0}
+  loopAnim: 0000000000000000000000000000000000000000
+  loopAnimType: 0000000000000000000000000000000000000000
+  animationSequence: 0000000000000000000000000000000000000000
   targetAudioSource: {fileID: 1145075912}
   activeTriggerStatesAudio: 0100000000
   audioClips:
-  - {fileID: 8300000, guid: fbb50aaa9c1d75b4e95e490a4ba1b347, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  loopAudio: 0000000000
+    ClipEntries00:
+    - {fileID: 8300000, guid: fbb50aaa9c1d75b4e95e490a4ba1b347, type: 3}
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudio: 0000000000000000000000000000000000000000
+  audio_sequence: 0000000000000000000000000000000000000000
+  fadeInBetween: 0000000000
+  audioClipsNew:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudioNew: 0000000000000000000000000000000000000000
   duckingEnabled: 1
+  fadeInTime: 1
+  fadeOutTime: 1
+  fadeOutDeactTime: 1
+  fadeInCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutDeactCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeInEnabled: 0
+  fadeOutEnabled: 0
+  fadeOutDeactEnabled: 0
   audioVolumeMin: 0.2
   audioVolumeMax: 1
   fadeSpeed: 0.005
+  audio_ForceStop: 0
+  audio_AllowMultiple: 0
+  audio_randomizePitch: 0
+  audio_minPitch: 0
+  audio_maxPitch: 2
+  audio_MaxConcurrentSound: 8
   IO: {fileID: 1172919667}
   triggerNotification: 0
 --- !u!114 &723141965
@@ -11613,7 +13384,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3978acaf2eedc8f4889c42ba095690a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedRenderers: 
 --- !u!1 &775217023
 GameObject:
   m_ObjectHideFlags: 0
@@ -11798,6 +13568,7 @@ GameObject:
   m_Component:
   - component: {fileID: 806444272}
   - component: {fileID: 806444273}
+  - component: {fileID: 806444274}
   m_Layer: 0
   m_Name: AudioSource
   m_TagString: Untagged
@@ -11898,6 +13669,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &806444274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 806444271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8170862739ecdb04392511ce00051beb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &810772390
 GameObject:
   m_ObjectHideFlags: 0
@@ -11967,6 +13749,7 @@ SpriteRenderer:
   m_Size: {x: 0.42, y: 0.85}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
 --- !u!1 &811236362
 GameObject:
   m_ObjectHideFlags: 0
@@ -12281,6 +14064,7 @@ GameObject:
   m_Component:
   - component: {fileID: 838748127}
   - component: {fileID: 838748128}
+  - component: {fileID: 838748129}
   m_Layer: 0
   m_Name: AudioSource
   m_TagString: Untagged
@@ -12381,6 +14165,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &838748129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 838748126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8170862739ecdb04392511ce00051beb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &840797905
 GameObject:
   m_ObjectHideFlags: 0
@@ -12446,6 +14241,19 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  IsDragAndDropEnabled: 0
+  DnD_minDistance: 1
+  DnD_angleThreshold: 1
+  DnD_respectXAxis: 0
+  DnD_respectXAxisMirrored: 0
+  DnD_respectYAxis: 0
+  DnD_respectYAxisMirrored: 0
+  DnD_respectZAxis: 0
+  DnD_respectZAxisMirrored: 0
+  DnD_snapBeforeDrop: 1
+  DnD_TimeToSnap: 0.5
+  DnD_attached: 0
+  DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
 --- !u!54 &840797908
@@ -12853,11 +14661,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a11d97df356699943aab990d9fcca9f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dependent: 0
+  dependent: 1
   requireAllActivators: 0
   requireAllDeactivators: 0
   proximityMap:
     proximityEntryList: []
+    proximityEntryGroupList: []
     proximityStateIndex: 0
   grabMap:
     grabEntryList: []
@@ -12865,7 +14674,7 @@ MonoBehaviour:
     grabStateLeftIndex: 0
     grabStateRightIndex: 0
   customConditions: []
-  triggerStateIndex: 1
+  triggerStateIndex: 0
   delayDuration: 0
   delayed: 0
   isDelayRandom: 0
@@ -12903,6 +14712,12 @@ MonoBehaviour:
     AreDependenciesSatisfied: 1
   requireAllInputs: 0
   customConditionsEnabled: 0
+  dragAndDropEnabled: 0
+  dndEventValidator: 0
+  dndAnyTarget: 1
+  dndTargetModesIndex: 0
+  dndAttached: 0
+  dndTargets: []
   requireAllProximities: 0
   touchMap:
     TouchEnitry:
@@ -12911,16 +14726,30 @@ MonoBehaviour:
     touchHandsIndex: 2
     touchActionIndex: 0
   gazeEnabled: 0
+  gazeStateIndex: 0
+  gazeIn: 0
   touchEnabled: 1
   ActivateOnDependencyMap:
-    dependencies: []
-    AreDependenciesSatisfied: 1
+    dependencies:
+    - IsValid: 0
+      dependentGameObject: {fileID: 697361048}
+      triggerStateIndex: 3
+      onTrigger: 1
+    AreDependenciesSatisfied: 0
   DeactivateOnDependencyMap:
     dependencies: []
     AreDependenciesSatisfied: 0
   gazeColliderIO: {fileID: 0}
+  handHoverEnabled: 0
+  handHoverIO: {fileID: 0}
+  hoverHandIndex: 0
+  hoverHand: 0
+  hoverStateIndex: 0
+  hoverIn: 0
   ReloadDependencies: 0
   isActive: 1
+  proximityGroupIndex: 0
+  rigCombinations: []
 --- !u!114 &878935360
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12932,6 +14761,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fe86aa1e2e51304b81a3f6820a3abdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDelayed: 0
+  delayTime: 0
+  isDelayRandom: 0
+  delayRange:
+  - 0
+  - 0
+  multipleActionsInTime: 0
   rootIO: {fileID: 0}
   isActive: 1
   ActionReset: 0
@@ -12941,22 +14777,34 @@ MonoBehaviour:
   ActionGravity: 0
   ActionAudio: 1
   ActionColliders: 0
+  ActionDragAndDrop: 0
+  ActionAnimation: 1
   DestroyOnTrigger: 0
-  isDelayed: 0
-  delayTime: 0
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  multipleActionsInTime: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
   ModifyGrabMode: 0
   grabDistance: 0
   touchDistance: 0
   grabModeIndex: 0
-  visualsScript: {fileID: 0}
+  ModifyDragAndDrop: 0
+  ModifyDragAndDropTargets: 0
+  ModifyDnDMinDistance: 0
+  ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDRespectAxis: 0
+  dnDMinDistance: 0
+  dnDSnapBeforeDrop: 0
+  dnDRespectXAxis: 0
+  dnDRespectYAxis: 0
+  dnDRespectZAxis: 0
+  dnDRespectXAxisMirror: 0
+  dnDRespectYAxisMirror: 0
+  dnDRespectZAxisMirror: 0
+  ModifyDnDAngleThreshold: 0
+  dnDAngleThreshold: 0
+  DnD_Targets: []
+  visualsScript: {fileID: 1596706291}
   AlterAllVisuals: 1
+  selectedRenderers: 
   triggerAnimation: 1
   targetAnimator: {fileID: 1363838229}
   activeTriggerStatesAnim: 0100000000
@@ -12966,19 +14814,105 @@ MonoBehaviour:
   - 
   - 
   - 
+  animationClip:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  targetAnimationSource: {fileID: 0}
+  loopAnim: 0000000000000000000000000000000000000000
+  loopAnimType: 0000000000000000000000000000000000000000
+  animationSequence: 0000000000000000000000000000000000000000
   targetAudioSource: {fileID: 2099561290}
   activeTriggerStatesAudio: 0100000000
   audioClips:
-  - {fileID: 8300000, guid: ef4697f9d826bc9488f9516a1da27dc2, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  loopAudio: 0000000000
+    ClipEntries00:
+    - {fileID: 8300000, guid: ef4697f9d826bc9488f9516a1da27dc2, type: 3}
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudio: 0000000000000000000000000000000000000000
+  audio_sequence: 0000000000000000000000000000000000000000
+  fadeInBetween: 0000000000
+  audioClipsNew:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudioNew: 0000000000000000000000000000000000000000
   duckingEnabled: 1
+  fadeInTime: 1
+  fadeOutTime: 1
+  fadeOutDeactTime: 1
+  fadeInCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutDeactCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeInEnabled: 0
+  fadeOutEnabled: 0
+  fadeOutDeactEnabled: 0
   audioVolumeMin: 0.2
   audioVolumeMax: 1
   fadeSpeed: 0.005
+  audio_ForceStop: 0
+  audio_AllowMultiple: 0
+  audio_randomizePitch: 0
+  audio_minPitch: 0
+  audio_maxPitch: 2
+  audio_MaxConcurrentSound: 8
   IO: {fileID: 2022748950}
   triggerNotification: 0
 --- !u!114 &878935361
@@ -13324,6 +15258,7 @@ SpriteRenderer:
   m_Size: {x: 0.44, y: 0.73}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
 --- !u!1 &931551810
 GameObject:
   m_ObjectHideFlags: 0
@@ -13371,6 +15306,7 @@ MonoBehaviour:
   requireAllDeactivators: 0
   proximityMap:
     proximityEntryList: []
+    proximityEntryGroupList: []
     proximityStateIndex: 0
   grabMap:
     grabEntryList: []
@@ -13416,6 +15352,12 @@ MonoBehaviour:
     AreDependenciesSatisfied: 1
   requireAllInputs: 0
   customConditionsEnabled: 0
+  dragAndDropEnabled: 0
+  dndEventValidator: 0
+  dndAnyTarget: 1
+  dndTargetModesIndex: 0
+  dndAttached: 0
+  dndTargets: []
   requireAllProximities: 0
   touchMap:
     TouchEnitry:
@@ -13424,6 +15366,8 @@ MonoBehaviour:
     touchHandsIndex: 2
     touchActionIndex: 0
   gazeEnabled: 0
+  gazeStateIndex: 0
+  gazeIn: 0
   touchEnabled: 1
   ActivateOnDependencyMap:
     dependencies: []
@@ -13432,8 +15376,16 @@ MonoBehaviour:
     dependencies: []
     AreDependenciesSatisfied: 0
   gazeColliderIO: {fileID: 0}
+  handHoverEnabled: 0
+  handHoverIO: {fileID: 0}
+  hoverHandIndex: 0
+  hoverHand: 0
+  hoverStateIndex: 0
+  hoverIn: 0
   ReloadDependencies: 0
   isActive: 1
+  proximityGroupIndex: 0
+  rigCombinations: []
 --- !u!114 &931551813
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13445,6 +15397,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fe86aa1e2e51304b81a3f6820a3abdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDelayed: 0
+  delayTime: 0
+  isDelayRandom: 0
+  delayRange:
+  - 0
+  - 0
+  multipleActionsInTime: 0
   rootIO: {fileID: 0}
   isActive: 1
   ActionReset: 0
@@ -13454,22 +15413,34 @@ MonoBehaviour:
   ActionGravity: 0
   ActionAudio: 1
   ActionColliders: 0
+  ActionDragAndDrop: 0
+  ActionAnimation: 0
   DestroyOnTrigger: 0
-  isDelayed: 0
-  delayTime: 0
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  multipleActionsInTime: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
   ModifyGrabMode: 0
   grabDistance: 0
   touchDistance: 0
   grabModeIndex: 0
-  visualsScript: {fileID: 0}
+  ModifyDragAndDrop: 0
+  ModifyDragAndDropTargets: 0
+  ModifyDnDMinDistance: 0
+  ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDRespectAxis: 0
+  dnDMinDistance: 0
+  dnDSnapBeforeDrop: 0
+  dnDRespectXAxis: 0
+  dnDRespectYAxis: 0
+  dnDRespectZAxis: 0
+  dnDRespectXAxisMirror: 0
+  dnDRespectYAxisMirror: 0
+  dnDRespectZAxisMirror: 0
+  ModifyDnDAngleThreshold: 0
+  dnDAngleThreshold: 0
+  DnD_Targets: []
+  visualsScript: {fileID: 1664076383}
   AlterAllVisuals: 1
+  selectedRenderers: 
   triggerAnimation: 0
   targetAnimator: {fileID: 0}
   activeTriggerStatesAnim: 0000000000
@@ -13479,19 +15450,105 @@ MonoBehaviour:
   - 
   - 
   - 
+  animationClip:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  targetAnimationSource: {fileID: 0}
+  loopAnim: 0000000000000000000000000000000000000000
+  loopAnimType: 0000000000000000000000000000000000000000
+  animationSequence: 0000000000000000000000000000000000000000
   targetAudioSource: {fileID: 1186075185}
   activeTriggerStatesAudio: 0100000000
   audioClips:
-  - {fileID: 8300000, guid: fbb50aaa9c1d75b4e95e490a4ba1b347, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  loopAudio: 0000000000
+    ClipEntries00:
+    - {fileID: 8300000, guid: fbb50aaa9c1d75b4e95e490a4ba1b347, type: 3}
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudio: 0000000000000000000000000000000000000000
+  audio_sequence: 0000000000000000000000000000000000000000
+  fadeInBetween: 0000000000
+  audioClipsNew:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudioNew: 0000000000000000000000000000000000000000
   duckingEnabled: 1
+  fadeInTime: 1
+  fadeOutTime: 1
+  fadeOutDeactTime: 1
+  fadeInCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutDeactCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeInEnabled: 0
+  fadeOutEnabled: 0
+  fadeOutDeactEnabled: 0
   audioVolumeMin: 0.2
   audioVolumeMax: 1
   fadeSpeed: 0.005
+  audio_ForceStop: 0
+  audio_AllowMultiple: 0
+  audio_randomizePitch: 0
+  audio_minPitch: 0
+  audio_maxPitch: 2
+  audio_MaxConcurrentSound: 8
   IO: {fileID: 1075105210}
   triggerNotification: 0
 --- !u!114 &931551814
@@ -13548,7 +15605,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3978acaf2eedc8f4889c42ba095690a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedRenderers: 
 --- !u!1 &934387267
 GameObject:
   m_ObjectHideFlags: 0
@@ -13813,6 +15869,7 @@ MonoBehaviour:
   requireAllDeactivators: 0
   proximityMap:
     proximityEntryList: []
+    proximityEntryGroupList: []
     proximityStateIndex: 0
   grabMap:
     grabEntryList: []
@@ -13858,6 +15915,12 @@ MonoBehaviour:
     AreDependenciesSatisfied: 1
   requireAllInputs: 0
   customConditionsEnabled: 0
+  dragAndDropEnabled: 0
+  dndEventValidator: 0
+  dndAnyTarget: 1
+  dndTargetModesIndex: 0
+  dndAttached: 0
+  dndTargets: []
   requireAllProximities: 0
   touchMap:
     TouchEnitry:
@@ -13866,6 +15929,8 @@ MonoBehaviour:
     touchHandsIndex: 2
     touchActionIndex: 0
   gazeEnabled: 0
+  gazeStateIndex: 0
+  gazeIn: 0
   touchEnabled: 1
   ActivateOnDependencyMap:
     dependencies: []
@@ -13874,8 +15939,16 @@ MonoBehaviour:
     dependencies: []
     AreDependenciesSatisfied: 0
   gazeColliderIO: {fileID: 0}
+  handHoverEnabled: 0
+  handHoverIO: {fileID: 0}
+  hoverHandIndex: 0
+  hoverHand: 0
+  hoverStateIndex: 0
+  hoverIn: 0
   ReloadDependencies: 0
   isActive: 1
+  proximityGroupIndex: 0
+  rigCombinations: []
 --- !u!114 &955454202
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13887,6 +15960,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fe86aa1e2e51304b81a3f6820a3abdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDelayed: 0
+  delayTime: 0
+  isDelayRandom: 0
+  delayRange:
+  - 0
+  - 0
+  multipleActionsInTime: 0
   rootIO: {fileID: 0}
   isActive: 1
   ActionReset: 0
@@ -13896,22 +15976,34 @@ MonoBehaviour:
   ActionGravity: 0
   ActionAudio: 1
   ActionColliders: 0
+  ActionDragAndDrop: 0
+  ActionAnimation: 1
   DestroyOnTrigger: 0
-  isDelayed: 0
-  delayTime: 0
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  multipleActionsInTime: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
   ModifyGrabMode: 0
   grabDistance: 0
   touchDistance: 0
   grabModeIndex: 0
-  visualsScript: {fileID: 0}
+  ModifyDragAndDrop: 0
+  ModifyDragAndDropTargets: 0
+  ModifyDnDMinDistance: 0
+  ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDRespectAxis: 0
+  dnDMinDistance: 0
+  dnDSnapBeforeDrop: 0
+  dnDRespectXAxis: 0
+  dnDRespectYAxis: 0
+  dnDRespectZAxis: 0
+  dnDRespectXAxisMirror: 0
+  dnDRespectYAxisMirror: 0
+  dnDRespectZAxisMirror: 0
+  ModifyDnDAngleThreshold: 0
+  dnDAngleThreshold: 0
+  DnD_Targets: []
+  visualsScript: {fileID: 2046096092}
   AlterAllVisuals: 1
+  selectedRenderers: 
   triggerAnimation: 1
   targetAnimator: {fileID: 2013616550}
   activeTriggerStatesAnim: 0100000000
@@ -13921,19 +16013,105 @@ MonoBehaviour:
   - 
   - 
   - 
+  animationClip:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  targetAnimationSource: {fileID: 0}
+  loopAnim: 0000000000000000000000000000000000000000
+  loopAnimType: 0000000000000000000000000000000000000000
+  animationSequence: 0000000000000000000000000000000000000000
   targetAudioSource: {fileID: 1406045807}
   activeTriggerStatesAudio: 0100000000
   audioClips:
-  - {fileID: 8300000, guid: ef4697f9d826bc9488f9516a1da27dc2, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  loopAudio: 0000000000
+    ClipEntries00:
+    - {fileID: 8300000, guid: ef4697f9d826bc9488f9516a1da27dc2, type: 3}
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudio: 0000000000000000000000000000000000000000
+  audio_sequence: 0000000000000000000000000000000000000000
+  fadeInBetween: 0000000000
+  audioClipsNew:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudioNew: 0000000000000000000000000000000000000000
   duckingEnabled: 1
+  fadeInTime: 1
+  fadeOutTime: 1
+  fadeOutDeactTime: 1
+  fadeInCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutDeactCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeInEnabled: 0
+  fadeOutEnabled: 0
+  fadeOutDeactEnabled: 0
   audioVolumeMin: 0.2
   audioVolumeMax: 1
   fadeSpeed: 0.005
+  audio_ForceStop: 0
+  audio_AllowMultiple: 0
+  audio_randomizePitch: 0
+  audio_minPitch: 0
+  audio_maxPitch: 2
+  audio_MaxConcurrentSound: 8
   IO: {fileID: 1644322804}
   triggerNotification: 0
 --- !u!114 &955454203
@@ -14019,7 +16197,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3978acaf2eedc8f4889c42ba095690a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedRenderers: 
 --- !u!1 &985371091
 GameObject:
   m_ObjectHideFlags: 0
@@ -14425,6 +16602,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1019089739}
   - component: {fileID: 1019089740}
+  - component: {fileID: 1019089741}
   m_Layer: 0
   m_Name: AudioSource
   m_TagString: Untagged
@@ -14525,6 +16703,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &1019089741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1019089738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8170862739ecdb04392511ce00051beb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1019264799
 GameObject:
   m_ObjectHideFlags: 0
@@ -15175,6 +17364,19 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  IsDragAndDropEnabled: 0
+  DnD_minDistance: 1
+  DnD_angleThreshold: 1
+  DnD_respectXAxis: 0
+  DnD_respectXAxisMirrored: 0
+  DnD_respectYAxis: 0
+  DnD_respectYAxisMirrored: 0
+  DnD_respectZAxis: 0
+  DnD_respectZAxisMirrored: 0
+  DnD_snapBeforeDrop: 1
+  DnD_TimeToSnap: 0.5
+  DnD_attached: 0
+  DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
 --- !u!54 &1075105211
@@ -15391,6 +17593,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1098534073}
   - component: {fileID: 1098534074}
+  - component: {fileID: 1098534075}
   m_Layer: 0
   m_Name: AudioSource
   m_TagString: Untagged
@@ -15491,6 +17694,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &1098534075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1098534072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8170862739ecdb04392511ce00051beb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1102082716
 GameObject:
   m_ObjectHideFlags: 0
@@ -15648,6 +17862,7 @@ SpriteRenderer:
   m_Size: {x: 23.62, y: 23.62}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
 --- !u!1 &1134135708
 GameObject:
   m_ObjectHideFlags: 0
@@ -15809,6 +18024,7 @@ MonoBehaviour:
   requireAllDeactivators: 0
   proximityMap:
     proximityEntryList: []
+    proximityEntryGroupList: []
     proximityStateIndex: 0
   grabMap:
     grabEntryList: []
@@ -15854,6 +18070,12 @@ MonoBehaviour:
     AreDependenciesSatisfied: 1
   requireAllInputs: 0
   customConditionsEnabled: 0
+  dragAndDropEnabled: 0
+  dndEventValidator: 0
+  dndAnyTarget: 1
+  dndTargetModesIndex: 0
+  dndAttached: 0
+  dndTargets: []
   requireAllProximities: 0
   touchMap:
     TouchEnitry:
@@ -15862,6 +18084,8 @@ MonoBehaviour:
     touchHandsIndex: 2
     touchActionIndex: 0
   gazeEnabled: 0
+  gazeStateIndex: 0
+  gazeIn: 0
   touchEnabled: 1
   ActivateOnDependencyMap:
     dependencies: []
@@ -15870,8 +18094,16 @@ MonoBehaviour:
     dependencies: []
     AreDependenciesSatisfied: 0
   gazeColliderIO: {fileID: 0}
+  handHoverEnabled: 0
+  handHoverIO: {fileID: 0}
+  hoverHandIndex: 0
+  hoverHand: 0
+  hoverStateIndex: 0
+  hoverIn: 0
   ReloadDependencies: 0
   isActive: 1
+  proximityGroupIndex: 0
+  rigCombinations: []
 --- !u!114 &1135725515
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15883,6 +18115,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fe86aa1e2e51304b81a3f6820a3abdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDelayed: 0
+  delayTime: 0
+  isDelayRandom: 0
+  delayRange:
+  - 0
+  - 0
+  multipleActionsInTime: 0
   rootIO: {fileID: 0}
   isActive: 1
   ActionReset: 0
@@ -15892,22 +18131,34 @@ MonoBehaviour:
   ActionGravity: 0
   ActionAudio: 1
   ActionColliders: 0
+  ActionDragAndDrop: 0
+  ActionAnimation: 1
   DestroyOnTrigger: 0
-  isDelayed: 0
-  delayTime: 0
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  multipleActionsInTime: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
   ModifyGrabMode: 0
   grabDistance: 0
   touchDistance: 0
   grabModeIndex: 0
-  visualsScript: {fileID: 0}
+  ModifyDragAndDrop: 0
+  ModifyDragAndDropTargets: 0
+  ModifyDnDMinDistance: 0
+  ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDRespectAxis: 0
+  dnDMinDistance: 0
+  dnDSnapBeforeDrop: 0
+  dnDRespectXAxis: 0
+  dnDRespectYAxis: 0
+  dnDRespectZAxis: 0
+  dnDRespectXAxisMirror: 0
+  dnDRespectYAxisMirror: 0
+  dnDRespectZAxisMirror: 0
+  ModifyDnDAngleThreshold: 0
+  dnDAngleThreshold: 0
+  DnD_Targets: []
+  visualsScript: {fileID: 767987316}
   AlterAllVisuals: 1
+  selectedRenderers: 
   triggerAnimation: 1
   targetAnimator: {fileID: 670017301}
   activeTriggerStatesAnim: 0100000000
@@ -15917,19 +18168,105 @@ MonoBehaviour:
   - 
   - 
   - 
+  animationClip:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  targetAnimationSource: {fileID: 0}
+  loopAnim: 0000000000000000000000000000000000000000
+  loopAnimType: 0000000000000000000000000000000000000000
+  animationSequence: 0000000000000000000000000000000000000000
   targetAudioSource: {fileID: 363784789}
   activeTriggerStatesAudio: 0100000000
   audioClips:
-  - {fileID: 8300000, guid: ef4697f9d826bc9488f9516a1da27dc2, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  loopAudio: 0000000000
+    ClipEntries00:
+    - {fileID: 8300000, guid: ef4697f9d826bc9488f9516a1da27dc2, type: 3}
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudio: 0000000000000000000000000000000000000000
+  audio_sequence: 0000000000000000000000000000000000000000
+  fadeInBetween: 0000000000
+  audioClipsNew:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudioNew: 0000000000000000000000000000000000000000
   duckingEnabled: 1
+  fadeInTime: 1
+  fadeOutTime: 1
+  fadeOutDeactTime: 1
+  fadeInCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutDeactCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeInEnabled: 0
+  fadeOutEnabled: 0
+  fadeOutDeactEnabled: 0
   audioVolumeMin: 0.2
   audioVolumeMax: 1
   fadeSpeed: 0.005
+  audio_ForceStop: 0
+  audio_AllowMultiple: 0
+  audio_randomizePitch: 0
+  audio_minPitch: 0
+  audio_maxPitch: 2
+  audio_MaxConcurrentSound: 8
   IO: {fileID: 209289156}
   triggerNotification: 0
 --- !u!114 &1135725516
@@ -15997,6 +18334,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1145075911}
   - component: {fileID: 1145075912}
+  - component: {fileID: 1145075913}
   m_Layer: 0
   m_Name: AudioSource
   m_TagString: Untagged
@@ -16097,6 +18435,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &1145075913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1145075910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8170862739ecdb04392511ce00051beb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1152171464
 GameObject:
   m_ObjectHideFlags: 0
@@ -16216,6 +18565,19 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  IsDragAndDropEnabled: 0
+  DnD_minDistance: 1
+  DnD_angleThreshold: 1
+  DnD_respectXAxis: 0
+  DnD_respectXAxisMirrored: 0
+  DnD_respectYAxis: 0
+  DnD_respectYAxisMirrored: 0
+  DnD_respectZAxis: 0
+  DnD_respectZAxisMirrored: 0
+  DnD_snapBeforeDrop: 1
+  DnD_TimeToSnap: 0.5
+  DnD_attached: 0
+  DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
 --- !u!54 &1172919668
@@ -16259,6 +18621,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1186075184}
   - component: {fileID: 1186075185}
+  - component: {fileID: 1186075186}
   m_Layer: 0
   m_Name: AudioSource
   m_TagString: Untagged
@@ -16359,6 +18722,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &1186075186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1186075183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8170862739ecdb04392511ce00051beb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1191702360
 GameObject:
   m_ObjectHideFlags: 0
@@ -16489,6 +18863,19 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  IsDragAndDropEnabled: 0
+  DnD_minDistance: 1
+  DnD_angleThreshold: 1
+  DnD_respectXAxis: 0
+  DnD_respectXAxisMirrored: 0
+  DnD_respectYAxis: 0
+  DnD_respectYAxisMirrored: 0
+  DnD_respectZAxis: 0
+  DnD_respectZAxisMirrored: 0
+  DnD_snapBeforeDrop: 1
+  DnD_TimeToSnap: 0.5
+  DnD_attached: 0
+  DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
 --- !u!54 &1192139946
@@ -16618,6 +19005,19 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  IsDragAndDropEnabled: 0
+  DnD_minDistance: 1
+  DnD_angleThreshold: 1
+  DnD_respectXAxis: 0
+  DnD_respectXAxisMirrored: 0
+  DnD_respectYAxis: 0
+  DnD_respectYAxisMirrored: 0
+  DnD_respectZAxis: 0
+  DnD_respectZAxisMirrored: 0
+  DnD_snapBeforeDrop: 1
+  DnD_TimeToSnap: 0.5
+  DnD_attached: 0
+  DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
 --- !u!54 &1207362574
@@ -17321,6 +19721,7 @@ MonoBehaviour:
   requireAllDeactivators: 0
   proximityMap:
     proximityEntryList: []
+    proximityEntryGroupList: []
     proximityStateIndex: 0
   grabMap:
     grabEntryList: []
@@ -17366,6 +19767,12 @@ MonoBehaviour:
     AreDependenciesSatisfied: 1
   requireAllInputs: 0
   customConditionsEnabled: 0
+  dragAndDropEnabled: 0
+  dndEventValidator: 0
+  dndAnyTarget: 1
+  dndTargetModesIndex: 0
+  dndAttached: 0
+  dndTargets: []
   requireAllProximities: 0
   touchMap:
     TouchEnitry:
@@ -17374,6 +19781,8 @@ MonoBehaviour:
     touchHandsIndex: 0
     touchActionIndex: 0
   gazeEnabled: 1
+  gazeStateIndex: 0
+  gazeIn: 1
   touchEnabled: 0
   ActivateOnDependencyMap:
     dependencies: []
@@ -17382,8 +19791,16 @@ MonoBehaviour:
     dependencies: []
     AreDependenciesSatisfied: 0
   gazeColliderIO: {fileID: 599314964}
+  handHoverEnabled: 0
+  handHoverIO: {fileID: 0}
+  hoverHandIndex: 0
+  hoverHand: 0
+  hoverStateIndex: 0
+  hoverIn: 0
   ReloadDependencies: 0
   isActive: 1
+  proximityGroupIndex: 0
+  rigCombinations: []
 --- !u!114 &1282630974
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17395,6 +19812,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fe86aa1e2e51304b81a3f6820a3abdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDelayed: 0
+  delayTime: 0
+  isDelayRandom: 0
+  delayRange:
+  - 0
+  - 0
+  multipleActionsInTime: 0
   rootIO: {fileID: 0}
   isActive: 1
   ActionReset: 0
@@ -17404,22 +19828,34 @@ MonoBehaviour:
   ActionGravity: 0
   ActionAudio: 0
   ActionColliders: 0
+  ActionDragAndDrop: 0
+  ActionAnimation: 1
   DestroyOnTrigger: 0
-  isDelayed: 0
-  delayTime: 0
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  multipleActionsInTime: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
   ModifyGrabMode: 0
   grabDistance: 0
   touchDistance: 0
   grabModeIndex: 0
-  visualsScript: {fileID: 0}
+  ModifyDragAndDrop: 0
+  ModifyDragAndDropTargets: 0
+  ModifyDnDMinDistance: 0
+  ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDRespectAxis: 0
+  dnDMinDistance: 0
+  dnDSnapBeforeDrop: 0
+  dnDRespectXAxis: 0
+  dnDRespectYAxis: 0
+  dnDRespectZAxis: 0
+  dnDRespectXAxisMirror: 0
+  dnDRespectYAxisMirror: 0
+  dnDRespectZAxisMirror: 0
+  ModifyDnDAngleThreshold: 0
+  dnDAngleThreshold: 0
+  DnD_Targets: []
+  visualsScript: {fileID: 720845717}
   AlterAllVisuals: 1
+  selectedRenderers: 
   triggerAnimation: 1
   targetAnimator: {fileID: 203175256}
   activeTriggerStatesAnim: 0100000000
@@ -17429,19 +19865,104 @@ MonoBehaviour:
   - 
   - 
   - 
+  animationClip:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  targetAnimationSource: {fileID: 0}
+  loopAnim: 0000000000000000000000000000000000000000
+  loopAnimType: 0000000000000000000000000000000000000000
+  animationSequence: 0000000000000000000000000000000000000000
   targetAudioSource: {fileID: 0}
   activeTriggerStatesAudio: 0000000000
   audioClips:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  loopAudio: 0000000000
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudio: 0000000000000000000000000000000000000000
+  audio_sequence: 0000000000000000000000000000000000000000
+  fadeInBetween: 0000000000
+  audioClipsNew:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudioNew: 0000000000000000000000000000000000000000
   duckingEnabled: 1
+  fadeInTime: 1
+  fadeOutTime: 1
+  fadeOutDeactTime: 1
+  fadeInCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutDeactCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeInEnabled: 0
+  fadeOutEnabled: 0
+  fadeOutDeactEnabled: 0
   audioVolumeMin: 0.2
   audioVolumeMax: 1
   fadeSpeed: 0.005
+  audio_ForceStop: 0
+  audio_AllowMultiple: 0
+  audio_randomizePitch: 0
+  audio_minPitch: 0
+  audio_maxPitch: 2
+  audio_MaxConcurrentSound: 8
   IO: {fileID: 599314964}
   triggerNotification: 0
 --- !u!114 &1282630975
@@ -17526,6 +20047,7 @@ SpriteRenderer:
   m_Size: {x: 23.62, y: 23.62}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
 --- !u!1 &1297215831
 GameObject:
   m_ObjectHideFlags: 0
@@ -18010,6 +20532,7 @@ MonoBehaviour:
   requireAllDeactivators: 0
   proximityMap:
     proximityEntryList: []
+    proximityEntryGroupList: []
     proximityStateIndex: 0
   grabMap:
     grabEntryList: []
@@ -18055,6 +20578,12 @@ MonoBehaviour:
     AreDependenciesSatisfied: 1
   requireAllInputs: 0
   customConditionsEnabled: 0
+  dragAndDropEnabled: 0
+  dndEventValidator: 0
+  dndAnyTarget: 1
+  dndTargetModesIndex: 0
+  dndAttached: 0
+  dndTargets: []
   requireAllProximities: 0
   touchMap:
     TouchEnitry:
@@ -18063,6 +20592,8 @@ MonoBehaviour:
     touchHandsIndex: 2
     touchActionIndex: 0
   gazeEnabled: 0
+  gazeStateIndex: 0
+  gazeIn: 0
   touchEnabled: 1
   ActivateOnDependencyMap:
     dependencies: []
@@ -18071,8 +20602,16 @@ MonoBehaviour:
     dependencies: []
     AreDependenciesSatisfied: 0
   gazeColliderIO: {fileID: 0}
+  handHoverEnabled: 0
+  handHoverIO: {fileID: 0}
+  hoverHandIndex: 0
+  hoverHand: 0
+  hoverStateIndex: 0
+  hoverIn: 0
   ReloadDependencies: 0
   isActive: 1
+  proximityGroupIndex: 0
+  rigCombinations: []
 --- !u!114 &1334242935
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18084,6 +20623,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fe86aa1e2e51304b81a3f6820a3abdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDelayed: 0
+  delayTime: 0
+  isDelayRandom: 0
+  delayRange:
+  - 0
+  - 0
+  multipleActionsInTime: 0
   rootIO: {fileID: 0}
   isActive: 1
   ActionReset: 0
@@ -18093,22 +20639,34 @@ MonoBehaviour:
   ActionGravity: 0
   ActionAudio: 1
   ActionColliders: 0
+  ActionDragAndDrop: 0
+  ActionAnimation: 1
   DestroyOnTrigger: 0
-  isDelayed: 0
-  delayTime: 0
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  multipleActionsInTime: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
   ModifyGrabMode: 0
   grabDistance: 0
   touchDistance: 0
   grabModeIndex: 0
-  visualsScript: {fileID: 0}
+  ModifyDragAndDrop: 0
+  ModifyDragAndDropTargets: 0
+  ModifyDnDMinDistance: 0
+  ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDRespectAxis: 0
+  dnDMinDistance: 0
+  dnDSnapBeforeDrop: 0
+  dnDRespectXAxis: 0
+  dnDRespectYAxis: 0
+  dnDRespectZAxis: 0
+  dnDRespectXAxisMirror: 0
+  dnDRespectYAxisMirror: 0
+  dnDRespectZAxisMirror: 0
+  ModifyDnDAngleThreshold: 0
+  dnDAngleThreshold: 0
+  DnD_Targets: []
+  visualsScript: {fileID: 2032427925}
   AlterAllVisuals: 1
+  selectedRenderers: 
   triggerAnimation: 1
   targetAnimator: {fileID: 2104883108}
   activeTriggerStatesAnim: 0100000000
@@ -18118,19 +20676,105 @@ MonoBehaviour:
   - 
   - 
   - 
+  animationClip:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  targetAnimationSource: {fileID: 0}
+  loopAnim: 0000000000000000000000000000000000000000
+  loopAnimType: 0000000000000000000000000000000000000000
+  animationSequence: 0000000000000000000000000000000000000000
   targetAudioSource: {fileID: 2035662260}
   activeTriggerStatesAudio: 0100000000
   audioClips:
-  - {fileID: 8300000, guid: ef4697f9d826bc9488f9516a1da27dc2, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  loopAudio: 0000000000
+    ClipEntries00:
+    - {fileID: 8300000, guid: ef4697f9d826bc9488f9516a1da27dc2, type: 3}
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudio: 0000000000000000000000000000000000000000
+  audio_sequence: 0000000000000000000000000000000000000000
+  fadeInBetween: 0000000000
+  audioClipsNew:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudioNew: 0000000000000000000000000000000000000000
   duckingEnabled: 1
+  fadeInTime: 1
+  fadeOutTime: 1
+  fadeOutDeactTime: 1
+  fadeInCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutDeactCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeInEnabled: 0
+  fadeOutEnabled: 0
+  fadeOutDeactEnabled: 0
   audioVolumeMin: 0.2
   audioVolumeMax: 1
   fadeSpeed: 0.005
+  audio_ForceStop: 0
+  audio_AllowMultiple: 0
+  audio_randomizePitch: 0
+  audio_minPitch: 0
+  audio_maxPitch: 2
+  audio_MaxConcurrentSound: 8
   IO: {fileID: 432596386}
   triggerNotification: 0
 --- !u!114 &1334242936
@@ -18222,6 +20866,7 @@ MonoBehaviour:
   requireAllDeactivators: 0
   proximityMap:
     proximityEntryList: []
+    proximityEntryGroupList: []
     proximityStateIndex: 0
   grabMap:
     grabEntryList: []
@@ -18267,6 +20912,12 @@ MonoBehaviour:
     AreDependenciesSatisfied: 1
   requireAllInputs: 0
   customConditionsEnabled: 0
+  dragAndDropEnabled: 0
+  dndEventValidator: 0
+  dndAnyTarget: 1
+  dndTargetModesIndex: 0
+  dndAttached: 0
+  dndTargets: []
   requireAllProximities: 0
   touchMap:
     TouchEnitry:
@@ -18275,6 +20926,8 @@ MonoBehaviour:
     touchHandsIndex: 2
     touchActionIndex: 0
   gazeEnabled: 0
+  gazeStateIndex: 0
+  gazeIn: 0
   touchEnabled: 1
   ActivateOnDependencyMap:
     dependencies: []
@@ -18283,8 +20936,16 @@ MonoBehaviour:
     dependencies: []
     AreDependenciesSatisfied: 0
   gazeColliderIO: {fileID: 0}
+  handHoverEnabled: 0
+  handHoverIO: {fileID: 0}
+  hoverHandIndex: 0
+  hoverHand: 0
+  hoverStateIndex: 0
+  hoverIn: 0
   ReloadDependencies: 0
   isActive: 1
+  proximityGroupIndex: 0
+  rigCombinations: []
 --- !u!114 &1347421755
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18296,6 +20957,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fe86aa1e2e51304b81a3f6820a3abdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDelayed: 0
+  delayTime: 0
+  isDelayRandom: 0
+  delayRange:
+  - 0
+  - 0
+  multipleActionsInTime: 0
   rootIO: {fileID: 0}
   isActive: 1
   ActionReset: 0
@@ -18305,22 +20973,34 @@ MonoBehaviour:
   ActionGravity: 0
   ActionAudio: 1
   ActionColliders: 0
+  ActionDragAndDrop: 0
+  ActionAnimation: 1
   DestroyOnTrigger: 0
-  isDelayed: 0
-  delayTime: 0
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  multipleActionsInTime: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
   ModifyGrabMode: 0
   grabDistance: 0
   touchDistance: 0
   grabModeIndex: 0
-  visualsScript: {fileID: 0}
+  ModifyDragAndDrop: 0
+  ModifyDragAndDropTargets: 0
+  ModifyDnDMinDistance: 0
+  ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDRespectAxis: 0
+  dnDMinDistance: 0
+  dnDSnapBeforeDrop: 0
+  dnDRespectXAxis: 0
+  dnDRespectYAxis: 0
+  dnDRespectZAxis: 0
+  dnDRespectXAxisMirror: 0
+  dnDRespectYAxisMirror: 0
+  dnDRespectZAxisMirror: 0
+  ModifyDnDAngleThreshold: 0
+  dnDAngleThreshold: 0
+  DnD_Targets: []
+  visualsScript: {fileID: 2108043167}
   AlterAllVisuals: 1
+  selectedRenderers: 
   triggerAnimation: 1
   targetAnimator: {fileID: 934387269}
   activeTriggerStatesAnim: 0100000000
@@ -18330,19 +21010,105 @@ MonoBehaviour:
   - 
   - 
   - 
+  animationClip:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  targetAnimationSource: {fileID: 0}
+  loopAnim: 0000000000000000000000000000000000000000
+  loopAnimType: 0000000000000000000000000000000000000000
+  animationSequence: 0000000000000000000000000000000000000000
   targetAudioSource: {fileID: 412685972}
   activeTriggerStatesAudio: 0100000000
   audioClips:
-  - {fileID: 8300000, guid: ef4697f9d826bc9488f9516a1da27dc2, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  loopAudio: 0000000000
+    ClipEntries00:
+    - {fileID: 8300000, guid: ef4697f9d826bc9488f9516a1da27dc2, type: 3}
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudio: 0000000000000000000000000000000000000000
+  audio_sequence: 0000000000000000000000000000000000000000
+  fadeInBetween: 0000000000
+  audioClipsNew:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudioNew: 0000000000000000000000000000000000000000
   duckingEnabled: 1
+  fadeInTime: 1
+  fadeOutTime: 1
+  fadeOutDeactTime: 1
+  fadeInCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutDeactCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeInEnabled: 0
+  fadeOutEnabled: 0
+  fadeOutDeactEnabled: 0
   audioVolumeMin: 0.2
   audioVolumeMax: 1
   fadeSpeed: 0.005
+  audio_ForceStop: 0
+  audio_AllowMultiple: 0
+  audio_randomizePitch: 0
+  audio_minPitch: 0
+  audio_maxPitch: 2
+  audio_MaxConcurrentSound: 8
   IO: {fileID: 701394353}
   triggerNotification: 0
 --- !u!114 &1347421756
@@ -18644,6 +21410,19 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  IsDragAndDropEnabled: 0
+  DnD_minDistance: 1
+  DnD_angleThreshold: 1
+  DnD_respectXAxis: 0
+  DnD_respectXAxisMirrored: 0
+  DnD_respectYAxis: 0
+  DnD_respectYAxisMirrored: 0
+  DnD_respectZAxis: 0
+  DnD_respectZAxisMirrored: 0
+  DnD_snapBeforeDrop: 1
+  DnD_TimeToSnap: 0.5
+  DnD_attached: 0
+  DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
 --- !u!54 &1365200424
@@ -18777,6 +21556,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fe86aa1e2e51304b81a3f6820a3abdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDelayed: 0
+  delayTime: 0
+  isDelayRandom: 0
+  delayRange:
+  - 0
+  - 0
+  multipleActionsInTime: 0
   rootIO: {fileID: 0}
   isActive: 0
   ActionReset: 0
@@ -18786,22 +21572,34 @@ MonoBehaviour:
   ActionGravity: 0
   ActionAudio: 0
   ActionColliders: 0
+  ActionDragAndDrop: 0
+  ActionAnimation: 0
   DestroyOnTrigger: 0
-  isDelayed: 0
-  delayTime: 0
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  multipleActionsInTime: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
   ModifyGrabMode: 0
   grabDistance: 0
   touchDistance: 0
   grabModeIndex: 0
-  visualsScript: {fileID: 0}
+  ModifyDragAndDrop: 0
+  ModifyDragAndDropTargets: 0
+  ModifyDnDMinDistance: 0
+  ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDRespectAxis: 0
+  dnDMinDistance: 0
+  dnDSnapBeforeDrop: 0
+  dnDRespectXAxis: 0
+  dnDRespectYAxis: 0
+  dnDRespectZAxis: 0
+  dnDRespectXAxisMirror: 0
+  dnDRespectYAxisMirror: 0
+  dnDRespectZAxisMirror: 0
+  ModifyDnDAngleThreshold: 0
+  dnDAngleThreshold: 0
+  DnD_Targets: []
+  visualsScript: {fileID: 132945480}
   AlterAllVisuals: 1
+  selectedRenderers: 
   triggerAnimation: 0
   targetAnimator: {fileID: 0}
   activeTriggerStatesAnim: 0000000000
@@ -18811,19 +21609,104 @@ MonoBehaviour:
   - 
   - 
   - 
+  animationClip:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  targetAnimationSource: {fileID: 0}
+  loopAnim: 0000000000000000000000000000000000000000
+  loopAnimType: 0000000000000000000000000000000000000000
+  animationSequence: 0000000000000000000000000000000000000000
   targetAudioSource: {fileID: 0}
   activeTriggerStatesAudio: 0000000000
   audioClips:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  loopAudio: 0000000000
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudio: 0000000000000000000000000000000000000000
+  audio_sequence: 0000000000000000000000000000000000000000
+  fadeInBetween: 0000000000
+  audioClipsNew:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudioNew: 0000000000000000000000000000000000000000
   duckingEnabled: 1
+  fadeInTime: 1
+  fadeOutTime: 1
+  fadeOutDeactTime: 1
+  fadeInCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutDeactCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeInEnabled: 0
+  fadeOutEnabled: 0
+  fadeOutDeactEnabled: 0
   audioVolumeMin: 0.2
   audioVolumeMax: 1
   fadeSpeed: 0.005
+  audio_ForceStop: 0
+  audio_AllowMultiple: 0
+  audio_randomizePitch: 0
+  audio_minPitch: 0
+  audio_maxPitch: 2
+  audio_MaxConcurrentSound: 8
   IO: {fileID: 23520966}
   triggerNotification: 0
 --- !u!114 &1376072338
@@ -18842,6 +21725,7 @@ MonoBehaviour:
   requireAllDeactivators: 0
   proximityMap:
     proximityEntryList: []
+    proximityEntryGroupList: []
     proximityStateIndex: 0
   grabMap:
     grabEntryList:
@@ -18889,6 +21773,12 @@ MonoBehaviour:
     AreDependenciesSatisfied: 1
   requireAllInputs: 0
   customConditionsEnabled: 0
+  dragAndDropEnabled: 0
+  dndEventValidator: 0
+  dndAnyTarget: 1
+  dndTargetModesIndex: 0
+  dndAttached: 0
+  dndTargets: []
   requireAllProximities: 0
   touchMap:
     TouchEnitry:
@@ -18897,6 +21787,8 @@ MonoBehaviour:
     touchHandsIndex: 0
     touchActionIndex: 0
   gazeEnabled: 0
+  gazeStateIndex: 0
+  gazeIn: 0
   touchEnabled: 0
   ActivateOnDependencyMap:
     dependencies: []
@@ -18905,8 +21797,16 @@ MonoBehaviour:
     dependencies: []
     AreDependenciesSatisfied: 0
   gazeColliderIO: {fileID: 23520966}
+  handHoverEnabled: 0
+  handHoverIO: {fileID: 0}
+  hoverHandIndex: 0
+  hoverHand: 0
+  hoverStateIndex: 0
+  hoverIn: 0
   ReloadDependencies: 0
   isActive: 0
+  proximityGroupIndex: 0
+  rigCombinations: []
 --- !u!114 &1376072339
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19064,6 +21964,7 @@ SpriteRenderer:
   m_Size: {x: 7.2, y: 7.2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
 --- !u!4 &1381945598
 Transform:
   m_ObjectHideFlags: 0
@@ -19202,7 +22103,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3978acaf2eedc8f4889c42ba095690a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedRenderers: 
 --- !u!1 &1385782368
 GameObject:
   m_ObjectHideFlags: 0
@@ -19300,6 +22200,7 @@ SpriteRenderer:
   m_Size: {x: 23.62, y: 23.62}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
 --- !u!1 &1400202889
 GameObject:
   m_ObjectHideFlags: 0
@@ -19341,6 +22242,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1406045806}
   - component: {fileID: 1406045807}
+  - component: {fileID: 1406045808}
   m_Layer: 0
   m_Name: AudioSource
   m_TagString: Untagged
@@ -19441,6 +22343,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &1406045808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1406045805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8170862739ecdb04392511ce00051beb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1413240393
 GameObject:
   m_ObjectHideFlags: 0
@@ -19875,6 +22788,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fe86aa1e2e51304b81a3f6820a3abdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDelayed: 0
+  delayTime: 0
+  isDelayRandom: 0
+  delayRange:
+  - 0
+  - 0
+  multipleActionsInTime: 0
   rootIO: {fileID: 0}
   isActive: 0
   ActionReset: 0
@@ -19884,22 +22804,34 @@ MonoBehaviour:
   ActionGravity: 0
   ActionAudio: 0
   ActionColliders: 0
+  ActionDragAndDrop: 0
+  ActionAnimation: 0
   DestroyOnTrigger: 0
-  isDelayed: 0
-  delayTime: 0
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  multipleActionsInTime: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
   ModifyGrabMode: 0
   grabDistance: 0
   touchDistance: 0
   grabModeIndex: 0
-  visualsScript: {fileID: 0}
+  ModifyDragAndDrop: 0
+  ModifyDragAndDropTargets: 0
+  ModifyDnDMinDistance: 0
+  ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDRespectAxis: 0
+  dnDMinDistance: 0
+  dnDSnapBeforeDrop: 0
+  dnDRespectXAxis: 0
+  dnDRespectYAxis: 0
+  dnDRespectZAxis: 0
+  dnDRespectXAxisMirror: 0
+  dnDRespectYAxisMirror: 0
+  dnDRespectZAxisMirror: 0
+  ModifyDnDAngleThreshold: 0
+  dnDAngleThreshold: 0
+  DnD_Targets: []
+  visualsScript: {fileID: 1673190543}
   AlterAllVisuals: 1
+  selectedRenderers: 
   triggerAnimation: 0
   targetAnimator: {fileID: 0}
   activeTriggerStatesAnim: 0000000000
@@ -19909,19 +22841,104 @@ MonoBehaviour:
   - 
   - 
   - 
+  animationClip:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  targetAnimationSource: {fileID: 0}
+  loopAnim: 0000000000000000000000000000000000000000
+  loopAnimType: 0000000000000000000000000000000000000000
+  animationSequence: 0000000000000000000000000000000000000000
   targetAudioSource: {fileID: 0}
   activeTriggerStatesAudio: 0000000000
   audioClips:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  loopAudio: 0000000000
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudio: 0000000000000000000000000000000000000000
+  audio_sequence: 0000000000000000000000000000000000000000
+  fadeInBetween: 0000000000
+  audioClipsNew:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudioNew: 0000000000000000000000000000000000000000
   duckingEnabled: 1
+  fadeInTime: 1
+  fadeOutTime: 1
+  fadeOutDeactTime: 1
+  fadeInCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutDeactCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeInEnabled: 0
+  fadeOutEnabled: 0
+  fadeOutDeactEnabled: 0
   audioVolumeMin: 0.2
   audioVolumeMax: 1
   fadeSpeed: 0.005
+  audio_ForceStop: 0
+  audio_AllowMultiple: 0
+  audio_randomizePitch: 0
+  audio_minPitch: 0
+  audio_maxPitch: 2
+  audio_MaxConcurrentSound: 8
   IO: {fileID: 1965450881}
   triggerNotification: 0
 --- !u!114 &1465706259
@@ -19940,6 +22957,7 @@ MonoBehaviour:
   requireAllDeactivators: 0
   proximityMap:
     proximityEntryList: []
+    proximityEntryGroupList: []
     proximityStateIndex: 0
   grabMap:
     grabEntryList: []
@@ -19985,6 +23003,12 @@ MonoBehaviour:
     AreDependenciesSatisfied: 1
   requireAllInputs: 0
   customConditionsEnabled: 0
+  dragAndDropEnabled: 0
+  dndEventValidator: 0
+  dndAnyTarget: 1
+  dndTargetModesIndex: 0
+  dndAttached: 0
+  dndTargets: []
   requireAllProximities: 0
   touchMap:
     TouchEnitry:
@@ -19993,6 +23017,8 @@ MonoBehaviour:
     touchHandsIndex: 0
     touchActionIndex: 0
   gazeEnabled: 0
+  gazeStateIndex: 0
+  gazeIn: 0
   touchEnabled: 0
   ActivateOnDependencyMap:
     dependencies: []
@@ -20001,8 +23027,16 @@ MonoBehaviour:
     dependencies: []
     AreDependenciesSatisfied: 0
   gazeColliderIO: {fileID: 0}
+  handHoverEnabled: 0
+  handHoverIO: {fileID: 0}
+  hoverHandIndex: 0
+  hoverHand: 0
+  hoverStateIndex: 0
+  hoverIn: 0
   ReloadDependencies: 0
   isActive: 0
+  proximityGroupIndex: 0
+  rigCombinations: []
 --- !u!114 &1465706260
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20245,6 +23279,7 @@ MonoBehaviour:
   requireAllDeactivators: 0
   proximityMap:
     proximityEntryList: []
+    proximityEntryGroupList: []
     proximityStateIndex: 0
   grabMap:
     grabEntryList: []
@@ -20290,6 +23325,12 @@ MonoBehaviour:
     AreDependenciesSatisfied: 1
   requireAllInputs: 0
   customConditionsEnabled: 0
+  dragAndDropEnabled: 0
+  dndEventValidator: 0
+  dndAnyTarget: 1
+  dndTargetModesIndex: 0
+  dndAttached: 0
+  dndTargets: []
   requireAllProximities: 0
   touchMap:
     TouchEnitry:
@@ -20298,6 +23339,8 @@ MonoBehaviour:
     touchHandsIndex: 2
     touchActionIndex: 0
   gazeEnabled: 0
+  gazeStateIndex: 0
+  gazeIn: 0
   touchEnabled: 1
   ActivateOnDependencyMap:
     dependencies: []
@@ -20306,8 +23349,16 @@ MonoBehaviour:
     dependencies: []
     AreDependenciesSatisfied: 0
   gazeColliderIO: {fileID: 0}
+  handHoverEnabled: 0
+  handHoverIO: {fileID: 0}
+  hoverHandIndex: 0
+  hoverHand: 0
+  hoverStateIndex: 0
+  hoverIn: 0
   ReloadDependencies: 0
   isActive: 1
+  proximityGroupIndex: 0
+  rigCombinations: []
 --- !u!114 &1486066051
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20319,6 +23370,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fe86aa1e2e51304b81a3f6820a3abdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDelayed: 0
+  delayTime: 0
+  isDelayRandom: 0
+  delayRange:
+  - 0
+  - 0
+  multipleActionsInTime: 0
   rootIO: {fileID: 0}
   isActive: 1
   ActionReset: 0
@@ -20328,22 +23386,34 @@ MonoBehaviour:
   ActionGravity: 0
   ActionAudio: 1
   ActionColliders: 0
+  ActionDragAndDrop: 0
+  ActionAnimation: 1
   DestroyOnTrigger: 0
-  isDelayed: 0
-  delayTime: 0
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  multipleActionsInTime: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
   ModifyGrabMode: 0
   grabDistance: 0
   touchDistance: 0
   grabModeIndex: 0
-  visualsScript: {fileID: 0}
+  ModifyDragAndDrop: 0
+  ModifyDragAndDropTargets: 0
+  ModifyDnDMinDistance: 0
+  ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDRespectAxis: 0
+  dnDMinDistance: 0
+  dnDSnapBeforeDrop: 0
+  dnDRespectXAxis: 0
+  dnDRespectYAxis: 0
+  dnDRespectZAxis: 0
+  dnDRespectXAxisMirror: 0
+  dnDRespectYAxisMirror: 0
+  dnDRespectZAxisMirror: 0
+  ModifyDnDAngleThreshold: 0
+  dnDAngleThreshold: 0
+  DnD_Targets: []
+  visualsScript: {fileID: 568930032}
   AlterAllVisuals: 1
+  selectedRenderers: 
   triggerAnimation: 1
   targetAnimator: {fileID: 816930683}
   activeTriggerStatesAnim: 0100000000
@@ -20353,19 +23423,105 @@ MonoBehaviour:
   - 
   - 
   - 
+  animationClip:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  targetAnimationSource: {fileID: 0}
+  loopAnim: 0000000000000000000000000000000000000000
+  loopAnimType: 0000000000000000000000000000000000000000
+  animationSequence: 0000000000000000000000000000000000000000
   targetAudioSource: {fileID: 357946659}
   activeTriggerStatesAudio: 0100000000
   audioClips:
-  - {fileID: 8300000, guid: ef4697f9d826bc9488f9516a1da27dc2, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  loopAudio: 0000000000
+    ClipEntries00:
+    - {fileID: 8300000, guid: ef4697f9d826bc9488f9516a1da27dc2, type: 3}
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudio: 0000000000000000000000000000000000000000
+  audio_sequence: 0000000000000000000000000000000000000000
+  fadeInBetween: 0000000000
+  audioClipsNew:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudioNew: 0000000000000000000000000000000000000000
   duckingEnabled: 1
+  fadeInTime: 1
+  fadeOutTime: 1
+  fadeOutDeactTime: 1
+  fadeInCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutDeactCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeInEnabled: 0
+  fadeOutEnabled: 0
+  fadeOutDeactEnabled: 0
   audioVolumeMin: 0.2
   audioVolumeMax: 1
   fadeSpeed: 0.005
+  audio_ForceStop: 0
+  audio_AllowMultiple: 0
+  audio_randomizePitch: 0
+  audio_minPitch: 0
+  audio_maxPitch: 2
+  audio_MaxConcurrentSound: 8
   IO: {fileID: 11713478}
   triggerNotification: 0
 --- !u!114 &1486066052
@@ -20616,6 +23772,19 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  IsDragAndDropEnabled: 0
+  DnD_minDistance: 1
+  DnD_angleThreshold: 1
+  DnD_respectXAxis: 0
+  DnD_respectXAxisMirrored: 0
+  DnD_respectYAxis: 0
+  DnD_respectYAxisMirrored: 0
+  DnD_respectZAxis: 0
+  DnD_respectZAxisMirrored: 0
+  DnD_snapBeforeDrop: 1
+  DnD_TimeToSnap: 0.5
+  DnD_attached: 0
+  DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
 --- !u!54 &1494579588
@@ -20748,6 +23917,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1499825486}
   - component: {fileID: 1499825487}
+  - component: {fileID: 1499825488}
   m_Layer: 0
   m_Name: AudioSource
   m_TagString: Untagged
@@ -20848,6 +24018,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &1499825488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1499825485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8170862739ecdb04392511ce00051beb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1509140400
 GameObject:
   m_ObjectHideFlags: 0
@@ -21085,6 +24266,19 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  IsDragAndDropEnabled: 0
+  DnD_minDistance: 1
+  DnD_angleThreshold: 1
+  DnD_respectXAxis: 0
+  DnD_respectXAxisMirrored: 0
+  DnD_respectYAxis: 0
+  DnD_respectYAxisMirrored: 0
+  DnD_respectZAxis: 0
+  DnD_respectZAxisMirrored: 0
+  DnD_snapBeforeDrop: 1
+  DnD_TimeToSnap: 0.5
+  DnD_attached: 0
+  DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
 --- !u!54 &1529593774
@@ -21128,6 +24322,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1530491749}
   - component: {fileID: 1530491750}
+  - component: {fileID: 1530491751}
   m_Layer: 0
   m_Name: AudioSource
   m_TagString: Untagged
@@ -21228,6 +24423,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &1530491751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1530491748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8170862739ecdb04392511ce00051beb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1540510850
 GameObject:
   m_ObjectHideFlags: 0
@@ -21458,6 +24664,19 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  IsDragAndDropEnabled: 0
+  DnD_minDistance: 1
+  DnD_angleThreshold: 1
+  DnD_respectXAxis: 0
+  DnD_respectXAxisMirrored: 0
+  DnD_respectYAxis: 0
+  DnD_respectYAxisMirrored: 0
+  DnD_respectZAxis: 0
+  DnD_respectZAxisMirrored: 0
+  DnD_snapBeforeDrop: 1
+  DnD_TimeToSnap: 0.5
+  DnD_attached: 0
+  DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
 --- !u!54 &1545334721
@@ -21501,6 +24720,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1558625358}
   - component: {fileID: 1558625359}
+  - component: {fileID: 1558625360}
   m_Layer: 0
   m_Name: AudioSource
   m_TagString: Untagged
@@ -21601,6 +24821,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &1558625360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1558625357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8170862739ecdb04392511ce00051beb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1562504372
 GameObject:
   m_ObjectHideFlags: 0
@@ -21709,6 +24940,19 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  IsDragAndDropEnabled: 0
+  DnD_minDistance: 1
+  DnD_angleThreshold: 1
+  DnD_respectXAxis: 0
+  DnD_respectXAxisMirrored: 0
+  DnD_respectYAxis: 0
+  DnD_respectYAxisMirrored: 0
+  DnD_respectZAxis: 0
+  DnD_respectZAxisMirrored: 0
+  DnD_snapBeforeDrop: 1
+  DnD_TimeToSnap: 0.5
+  DnD_attached: 0
+  DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
 --- !u!54 &1562860379
@@ -21784,7 +25028,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3978acaf2eedc8f4889c42ba095690a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedRenderers: 
 --- !u!1 &1563228970
 GameObject:
   m_ObjectHideFlags: 0
@@ -22006,6 +25249,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1576307398}
   - component: {fileID: 1576307399}
+  - component: {fileID: 1576307400}
   m_Layer: 0
   m_Name: AudioSource
   m_TagString: Untagged
@@ -22106,6 +25350,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &1576307400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1576307397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8170862739ecdb04392511ce00051beb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1583173012
 GameObject:
   m_ObjectHideFlags: 0
@@ -22495,7 +25750,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3978acaf2eedc8f4889c42ba095690a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedRenderers: 
 --- !u!1 &1606364042
 GameObject:
   m_ObjectHideFlags: 0
@@ -22768,6 +26022,7 @@ SpriteRenderer:
   m_Size: {x: 0.44, y: 0.82}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
 --- !u!1 &1639904648
 GameObject:
   m_ObjectHideFlags: 0
@@ -22889,6 +26144,19 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  IsDragAndDropEnabled: 0
+  DnD_minDistance: 1
+  DnD_angleThreshold: 1
+  DnD_respectXAxis: 0
+  DnD_respectXAxisMirrored: 0
+  DnD_respectYAxis: 0
+  DnD_respectYAxisMirrored: 0
+  DnD_respectZAxis: 0
+  DnD_respectZAxisMirrored: 0
+  DnD_snapBeforeDrop: 1
+  DnD_TimeToSnap: 0.5
+  DnD_attached: 0
+  DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
 --- !u!54 &1644322805
@@ -22999,6 +26267,7 @@ MonoBehaviour:
   requireAllDeactivators: 0
   proximityMap:
     proximityEntryList: []
+    proximityEntryGroupList: []
     proximityStateIndex: 0
   grabMap:
     grabEntryList: []
@@ -23044,6 +26313,12 @@ MonoBehaviour:
     AreDependenciesSatisfied: 1
   requireAllInputs: 0
   customConditionsEnabled: 0
+  dragAndDropEnabled: 0
+  dndEventValidator: 0
+  dndAnyTarget: 1
+  dndTargetModesIndex: 0
+  dndAttached: 0
+  dndTargets: []
   requireAllProximities: 0
   touchMap:
     TouchEnitry:
@@ -23052,6 +26327,8 @@ MonoBehaviour:
     touchHandsIndex: 0
     touchActionIndex: 0
   gazeEnabled: 1
+  gazeStateIndex: 0
+  gazeIn: 1
   touchEnabled: 0
   ActivateOnDependencyMap:
     dependencies:
@@ -23064,8 +26341,16 @@ MonoBehaviour:
     dependencies: []
     AreDependenciesSatisfied: 0
   gazeColliderIO: {fileID: 599314964}
+  handHoverEnabled: 0
+  handHoverIO: {fileID: 0}
+  hoverHandIndex: 0
+  hoverHand: 0
+  hoverStateIndex: 0
+  hoverIn: 0
   ReloadDependencies: 0
   isActive: 1
+  proximityGroupIndex: 0
+  rigCombinations: []
 --- !u!114 &1647979949
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23077,6 +26362,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fe86aa1e2e51304b81a3f6820a3abdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDelayed: 1
+  delayTime: 2
+  isDelayRandom: 0
+  delayRange:
+  - 0
+  - 0
+  multipleActionsInTime: 0
   rootIO: {fileID: 0}
   isActive: 1
   ActionReset: 0
@@ -23086,22 +26378,34 @@ MonoBehaviour:
   ActionGravity: 0
   ActionAudio: 0
   ActionColliders: 0
+  ActionDragAndDrop: 0
+  ActionAnimation: 0
   DestroyOnTrigger: 1
-  isDelayed: 1
-  delayTime: 2
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  multipleActionsInTime: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
   ModifyGrabMode: 0
   grabDistance: 0
   touchDistance: 0
   grabModeIndex: 0
-  visualsScript: {fileID: 0}
+  ModifyDragAndDrop: 0
+  ModifyDragAndDropTargets: 0
+  ModifyDnDMinDistance: 0
+  ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDRespectAxis: 0
+  dnDMinDistance: 0
+  dnDSnapBeforeDrop: 0
+  dnDRespectXAxis: 0
+  dnDRespectYAxis: 0
+  dnDRespectZAxis: 0
+  dnDRespectXAxisMirror: 0
+  dnDRespectYAxisMirror: 0
+  dnDRespectZAxisMirror: 0
+  ModifyDnDAngleThreshold: 0
+  dnDAngleThreshold: 0
+  DnD_Targets: []
+  visualsScript: {fileID: 720845717}
   AlterAllVisuals: 1
+  selectedRenderers: 
   triggerAnimation: 0
   targetAnimator: {fileID: 0}
   activeTriggerStatesAnim: 0100000000
@@ -23111,19 +26415,104 @@ MonoBehaviour:
   - 
   - 
   - 
+  animationClip:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  targetAnimationSource: {fileID: 0}
+  loopAnim: 0000000000000000000000000000000000000000
+  loopAnimType: 0000000000000000000000000000000000000000
+  animationSequence: 0000000000000000000000000000000000000000
   targetAudioSource: {fileID: 0}
   activeTriggerStatesAudio: 0000000000
   audioClips:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  loopAudio: 0000000000
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudio: 0000000000000000000000000000000000000000
+  audio_sequence: 0000000000000000000000000000000000000000
+  fadeInBetween: 0000000000
+  audioClipsNew:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudioNew: 0000000000000000000000000000000000000000
   duckingEnabled: 1
+  fadeInTime: 1
+  fadeOutTime: 1
+  fadeOutDeactTime: 1
+  fadeInCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutDeactCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeInEnabled: 0
+  fadeOutEnabled: 0
+  fadeOutDeactEnabled: 0
   audioVolumeMin: 0.2
   audioVolumeMax: 1
   fadeSpeed: 0.005
+  audio_ForceStop: 0
+  audio_AllowMultiple: 0
+  audio_randomizePitch: 0
+  audio_minPitch: 0
+  audio_maxPitch: 2
+  audio_MaxConcurrentSound: 8
   IO: {fileID: 599314964}
   triggerNotification: 0
 --- !u!114 &1647979950
@@ -23252,7 +26641,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3978acaf2eedc8f4889c42ba095690a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedRenderers: 
 --- !u!1 &1666141277
 GameObject:
   m_ObjectHideFlags: 0
@@ -23342,7 +26730,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3978acaf2eedc8f4889c42ba095690a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedRenderers: 
 --- !u!1 &1673226894
 GameObject:
   m_ObjectHideFlags: 0
@@ -23390,6 +26777,7 @@ MonoBehaviour:
   requireAllDeactivators: 0
   proximityMap:
     proximityEntryList: []
+    proximityEntryGroupList: []
     proximityStateIndex: 0
   grabMap:
     grabEntryList: []
@@ -23435,6 +26823,12 @@ MonoBehaviour:
     AreDependenciesSatisfied: 1
   requireAllInputs: 0
   customConditionsEnabled: 0
+  dragAndDropEnabled: 0
+  dndEventValidator: 0
+  dndAnyTarget: 1
+  dndTargetModesIndex: 0
+  dndAttached: 0
+  dndTargets: []
   requireAllProximities: 0
   touchMap:
     TouchEnitry:
@@ -23443,6 +26837,8 @@ MonoBehaviour:
     touchHandsIndex: 2
     touchActionIndex: 0
   gazeEnabled: 0
+  gazeStateIndex: 0
+  gazeIn: 0
   touchEnabled: 1
   ActivateOnDependencyMap:
     dependencies: []
@@ -23451,8 +26847,16 @@ MonoBehaviour:
     dependencies: []
     AreDependenciesSatisfied: 0
   gazeColliderIO: {fileID: 0}
+  handHoverEnabled: 0
+  handHoverIO: {fileID: 0}
+  hoverHandIndex: 0
+  hoverHand: 0
+  hoverStateIndex: 0
+  hoverIn: 0
   ReloadDependencies: 0
   isActive: 1
+  proximityGroupIndex: 0
+  rigCombinations: []
 --- !u!114 &1673226897
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23464,6 +26868,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fe86aa1e2e51304b81a3f6820a3abdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDelayed: 0
+  delayTime: 0
+  isDelayRandom: 0
+  delayRange:
+  - 0
+  - 0
+  multipleActionsInTime: 0
   rootIO: {fileID: 0}
   isActive: 1
   ActionReset: 0
@@ -23473,22 +26884,34 @@ MonoBehaviour:
   ActionGravity: 0
   ActionAudio: 1
   ActionColliders: 0
+  ActionDragAndDrop: 0
+  ActionAnimation: 1
   DestroyOnTrigger: 0
-  isDelayed: 0
-  delayTime: 0
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  multipleActionsInTime: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
   ModifyGrabMode: 0
   grabDistance: 0
   touchDistance: 0
   grabModeIndex: 0
-  visualsScript: {fileID: 0}
+  ModifyDragAndDrop: 0
+  ModifyDragAndDropTargets: 0
+  ModifyDnDMinDistance: 0
+  ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDRespectAxis: 0
+  dnDMinDistance: 0
+  dnDSnapBeforeDrop: 0
+  dnDRespectXAxis: 0
+  dnDRespectYAxis: 0
+  dnDRespectZAxis: 0
+  dnDRespectXAxisMirror: 0
+  dnDRespectYAxisMirror: 0
+  dnDRespectZAxisMirror: 0
+  ModifyDnDAngleThreshold: 0
+  dnDAngleThreshold: 0
+  DnD_Targets: []
+  visualsScript: {fileID: 1563064746}
   AlterAllVisuals: 1
+  selectedRenderers: 
   triggerAnimation: 1
   targetAnimator: {fileID: 2038304133}
   activeTriggerStatesAnim: 0100000000
@@ -23498,19 +26921,105 @@ MonoBehaviour:
   - 
   - 
   - 
+  animationClip:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  targetAnimationSource: {fileID: 0}
+  loopAnim: 0000000000000000000000000000000000000000
+  loopAnimType: 0000000000000000000000000000000000000000
+  animationSequence: 0000000000000000000000000000000000000000
   targetAudioSource: {fileID: 806444273}
   activeTriggerStatesAudio: 0100000000
   audioClips:
-  - {fileID: 8300000, guid: ef4697f9d826bc9488f9516a1da27dc2, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  loopAudio: 0000000000
+    ClipEntries00:
+    - {fileID: 8300000, guid: ef4697f9d826bc9488f9516a1da27dc2, type: 3}
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudio: 0000000000000000000000000000000000000000
+  audio_sequence: 0000000000000000000000000000000000000000
+  fadeInBetween: 0000000000
+  audioClipsNew:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudioNew: 0000000000000000000000000000000000000000
   duckingEnabled: 1
+  fadeInTime: 1
+  fadeOutTime: 1
+  fadeOutDeactTime: 1
+  fadeInCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutDeactCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeInEnabled: 0
+  fadeOutEnabled: 0
+  fadeOutDeactEnabled: 0
   audioVolumeMin: 0.2
   audioVolumeMax: 1
   fadeSpeed: 0.005
+  audio_ForceStop: 0
+  audio_AllowMultiple: 0
+  audio_randomizePitch: 0
+  audio_minPitch: 0
+  audio_maxPitch: 2
+  audio_MaxConcurrentSound: 8
   IO: {fileID: 1562860378}
   triggerNotification: 0
 --- !u!114 &1673226898
@@ -23646,7 +27155,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3978acaf2eedc8f4889c42ba095690a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedRenderers: 
 --- !u!1 &1690486948
 GameObject:
   m_ObjectHideFlags: 0
@@ -23688,7 +27196,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3978acaf2eedc8f4889c42ba095690a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedRenderers: 
 --- !u!1 &1699821562
 GameObject:
   m_ObjectHideFlags: 0
@@ -23785,6 +27292,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1708684749}
   - component: {fileID: 1708684750}
+  - component: {fileID: 1708684751}
   m_Layer: 0
   m_Name: AudioSource
   m_TagString: Untagged
@@ -23885,6 +27393,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &1708684751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1708684748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8170862739ecdb04392511ce00051beb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1726592465
 GameObject:
   m_ObjectHideFlags: 0
@@ -24275,6 +27794,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1757703011}
   - component: {fileID: 1757703012}
+  - component: {fileID: 1757703013}
   m_Layer: 0
   m_Name: AudioSource
   m_TagString: Untagged
@@ -24375,6 +27895,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &1757703013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1757703010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8170862739ecdb04392511ce00051beb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1760983998
 GameObject:
   m_ObjectHideFlags: 0
@@ -24764,6 +28295,19 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  IsDragAndDropEnabled: 0
+  DnD_minDistance: 1
+  DnD_angleThreshold: 1
+  DnD_respectXAxis: 0
+  DnD_respectXAxisMirrored: 0
+  DnD_respectYAxis: 0
+  DnD_respectYAxisMirrored: 0
+  DnD_respectZAxis: 0
+  DnD_respectZAxisMirrored: 0
+  DnD_snapBeforeDrop: 1
+  DnD_TimeToSnap: 0.5
+  DnD_attached: 0
+  DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
 --- !u!54 &1786773451
@@ -24867,6 +28411,7 @@ SpriteRenderer:
   m_Size: {x: 0.45, y: 0.76}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
 --- !u!1 &1789819972
 GameObject:
   m_ObjectHideFlags: 0
@@ -25194,6 +28739,7 @@ MonoBehaviour:
   requireAllDeactivators: 0
   proximityMap:
     proximityEntryList: []
+    proximityEntryGroupList: []
     proximityStateIndex: 0
   grabMap:
     grabEntryList: []
@@ -25239,6 +28785,12 @@ MonoBehaviour:
     AreDependenciesSatisfied: 1
   requireAllInputs: 0
   customConditionsEnabled: 0
+  dragAndDropEnabled: 0
+  dndEventValidator: 0
+  dndAnyTarget: 1
+  dndTargetModesIndex: 0
+  dndAttached: 0
+  dndTargets: []
   requireAllProximities: 0
   touchMap:
     TouchEnitry:
@@ -25247,6 +28799,8 @@ MonoBehaviour:
     touchHandsIndex: 2
     touchActionIndex: 0
   gazeEnabled: 0
+  gazeStateIndex: 0
+  gazeIn: 0
   touchEnabled: 1
   ActivateOnDependencyMap:
     dependencies: []
@@ -25255,8 +28809,16 @@ MonoBehaviour:
     dependencies: []
     AreDependenciesSatisfied: 0
   gazeColliderIO: {fileID: 0}
+  handHoverEnabled: 0
+  handHoverIO: {fileID: 0}
+  hoverHandIndex: 0
+  hoverHand: 0
+  hoverStateIndex: 0
+  hoverIn: 0
   ReloadDependencies: 0
   isActive: 1
+  proximityGroupIndex: 0
+  rigCombinations: []
 --- !u!114 &1806009875
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25268,6 +28830,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fe86aa1e2e51304b81a3f6820a3abdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDelayed: 0
+  delayTime: 0
+  isDelayRandom: 0
+  delayRange:
+  - 0
+  - 0
+  multipleActionsInTime: 0
   rootIO: {fileID: 0}
   isActive: 1
   ActionReset: 0
@@ -25277,22 +28846,34 @@ MonoBehaviour:
   ActionGravity: 0
   ActionAudio: 1
   ActionColliders: 0
+  ActionDragAndDrop: 0
+  ActionAnimation: 1
   DestroyOnTrigger: 0
-  isDelayed: 0
-  delayTime: 0
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  multipleActionsInTime: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
   ModifyGrabMode: 0
   grabDistance: 0
   touchDistance: 0
   grabModeIndex: 0
-  visualsScript: {fileID: 0}
+  ModifyDragAndDrop: 0
+  ModifyDragAndDropTargets: 0
+  ModifyDnDMinDistance: 0
+  ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDRespectAxis: 0
+  dnDMinDistance: 0
+  dnDSnapBeforeDrop: 0
+  dnDRespectXAxis: 0
+  dnDRespectYAxis: 0
+  dnDRespectZAxis: 0
+  dnDRespectXAxisMirror: 0
+  dnDRespectYAxisMirror: 0
+  dnDRespectZAxisMirror: 0
+  ModifyDnDAngleThreshold: 0
+  dnDAngleThreshold: 0
+  DnD_Targets: []
+  visualsScript: {fileID: 426486728}
   AlterAllVisuals: 1
+  selectedRenderers: 
   triggerAnimation: 1
   targetAnimator: {fileID: 2092926765}
   activeTriggerStatesAnim: 0100000000
@@ -25302,19 +28883,105 @@ MonoBehaviour:
   - 
   - 
   - 
+  animationClip:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  targetAnimationSource: {fileID: 0}
+  loopAnim: 0000000000000000000000000000000000000000
+  loopAnimType: 0000000000000000000000000000000000000000
+  animationSequence: 0000000000000000000000000000000000000000
   targetAudioSource: {fileID: 1530491750}
   activeTriggerStatesAudio: 0100000000
   audioClips:
-  - {fileID: 8300000, guid: ef4697f9d826bc9488f9516a1da27dc2, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  loopAudio: 0000000000
+    ClipEntries00:
+    - {fileID: 8300000, guid: ef4697f9d826bc9488f9516a1da27dc2, type: 3}
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudio: 0000000000000000000000000000000000000000
+  audio_sequence: 0000000000000000000000000000000000000000
+  fadeInBetween: 0000000000
+  audioClipsNew:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudioNew: 0000000000000000000000000000000000000000
   duckingEnabled: 1
+  fadeInTime: 1
+  fadeOutTime: 1
+  fadeOutDeactTime: 1
+  fadeInCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutDeactCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeInEnabled: 0
+  fadeOutEnabled: 0
+  fadeOutDeactEnabled: 0
   audioVolumeMin: 0.2
   audioVolumeMax: 1
   fadeSpeed: 0.005
+  audio_ForceStop: 0
+  audio_AllowMultiple: 0
+  audio_randomizePitch: 0
+  audio_minPitch: 0
+  audio_maxPitch: 2
+  audio_MaxConcurrentSound: 8
   IO: {fileID: 1365200423}
   triggerNotification: 0
 --- !u!114 &1806009876
@@ -25775,6 +29442,19 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  IsDragAndDropEnabled: 0
+  DnD_minDistance: 1
+  DnD_angleThreshold: 1
+  DnD_respectXAxis: 0
+  DnD_respectXAxisMirrored: 0
+  DnD_respectYAxis: 0
+  DnD_respectYAxisMirrored: 0
+  DnD_respectZAxis: 0
+  DnD_respectZAxisMirrored: 0
+  DnD_snapBeforeDrop: 1
+  DnD_TimeToSnap: 0.5
+  DnD_attached: 0
+  DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
 --- !u!54 &1869712415
@@ -25974,7 +29654,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3978acaf2eedc8f4889c42ba095690a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedRenderers: 
 --- !u!1 &1896318342
 GameObject:
   m_ObjectHideFlags: 0
@@ -26361,7 +30040,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3978acaf2eedc8f4889c42ba095690a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedRenderers: 
 --- !u!1 &1957929026
 GameObject:
   m_ObjectHideFlags: 0
@@ -26618,6 +30296,19 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  IsDragAndDropEnabled: 0
+  DnD_minDistance: 1
+  DnD_angleThreshold: 1
+  DnD_respectXAxis: 0
+  DnD_respectXAxisMirrored: 0
+  DnD_respectYAxis: 0
+  DnD_respectYAxisMirrored: 0
+  DnD_respectZAxis: 0
+  DnD_respectZAxisMirrored: 0
+  DnD_snapBeforeDrop: 1
+  DnD_TimeToSnap: 0.5
+  DnD_attached: 0
+  DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
 --- !u!95 &1965450882
@@ -27275,6 +30966,19 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  IsDragAndDropEnabled: 0
+  DnD_minDistance: 1
+  DnD_angleThreshold: 1
+  DnD_respectXAxis: 0
+  DnD_respectXAxisMirrored: 0
+  DnD_respectYAxis: 0
+  DnD_respectYAxisMirrored: 0
+  DnD_respectZAxis: 0
+  DnD_respectZAxisMirrored: 0
+  DnD_snapBeforeDrop: 1
+  DnD_TimeToSnap: 0.5
+  DnD_attached: 0
+  DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
 --- !u!54 &2022748951
@@ -27389,6 +31093,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2030361553}
   - component: {fileID: 2030361554}
+  - component: {fileID: 2030361555}
   m_Layer: 0
   m_Name: AudioSource
   m_TagString: Untagged
@@ -27489,6 +31194,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &2030361555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2030361552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8170862739ecdb04392511ce00051beb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2032427923
 GameObject:
   m_ObjectHideFlags: 0
@@ -27530,7 +31246,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3978acaf2eedc8f4889c42ba095690a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedRenderers: 
 --- !u!1 &2035662258
 GameObject:
   m_ObjectHideFlags: 0
@@ -27540,6 +31255,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2035662259}
   - component: {fileID: 2035662260}
+  - component: {fileID: 2035662261}
   m_Layer: 0
   m_Name: AudioSource
   m_TagString: Untagged
@@ -27640,6 +31356,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &2035662261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2035662258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8170862739ecdb04392511ce00051beb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2036673988
 GameObject:
   m_ObjectHideFlags: 0
@@ -27709,6 +31436,7 @@ SpriteRenderer:
   m_Size: {x: 0.1, y: 0.76}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
 --- !u!1 &2038304131
 GameObject:
   m_ObjectHideFlags: 0
@@ -27824,6 +31552,19 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  IsDragAndDropEnabled: 0
+  DnD_minDistance: 1
+  DnD_angleThreshold: 1
+  DnD_respectXAxis: 0
+  DnD_respectXAxisMirrored: 0
+  DnD_respectYAxis: 0
+  DnD_respectYAxisMirrored: 0
+  DnD_respectZAxis: 0
+  DnD_respectZAxisMirrored: 0
+  DnD_snapBeforeDrop: 1
+  DnD_TimeToSnap: 0.5
+  DnD_attached: 0
+  DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
 --- !u!54 &2041476792
@@ -27942,7 +31683,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3978acaf2eedc8f4889c42ba095690a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedRenderers: 
 --- !u!1 &2047023870
 GameObject:
   m_ObjectHideFlags: 0
@@ -27952,6 +31692,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2047023871}
   - component: {fileID: 2047023872}
+  - component: {fileID: 2047023873}
   m_Layer: 0
   m_Name: AudioSource
   m_TagString: Untagged
@@ -28052,6 +31793,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &2047023873
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2047023870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8170862739ecdb04392511ce00051beb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2048556882
 GameObject:
   m_ObjectHideFlags: 0
@@ -28121,6 +31873,7 @@ SpriteRenderer:
   m_Size: {x: 23.62, y: 23.62}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
 --- !u!1 &2052835752
 GameObject:
   m_ObjectHideFlags: 0
@@ -28277,6 +32030,7 @@ SpriteRenderer:
   m_Size: {x: 3.38, y: 2.51}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
 --- !u!4 &2053197581
 Transform:
   m_ObjectHideFlags: 0
@@ -28448,6 +32202,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2099561289}
   - component: {fileID: 2099561290}
+  - component: {fileID: 2099561291}
   m_Layer: 0
   m_Name: AudioSource
   m_TagString: Untagged
@@ -28548,6 +32303,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &2099561291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2099561288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8170862739ecdb04392511ce00051beb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2104883106
 GameObject:
   m_ObjectHideFlags: 0
@@ -28668,7 +32434,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3978acaf2eedc8f4889c42ba095690a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedRenderers: 
 --- !u!1 &2111603093
 GameObject:
   m_ObjectHideFlags: 0
@@ -28738,6 +32503,7 @@ SpriteRenderer:
   m_Size: {x: 0.14, y: 0.74}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
 --- !u!1 &2113359066
 GameObject:
   m_ObjectHideFlags: 0
@@ -29103,6 +32869,7 @@ SpriteRenderer:
   m_Size: {x: 23.62, y: 23.62}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
 --- !u!1 &2134802279
 GameObject:
   m_ObjectHideFlags: 0
@@ -29172,6 +32939,7 @@ SpriteRenderer:
   m_Size: {x: 23.62, y: 23.62}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
 --- !u!1 &2143115337
 GameObject:
   m_ObjectHideFlags: 0

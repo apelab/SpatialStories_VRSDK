@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using UnityEngine;
 
 namespace Gaze
@@ -13,11 +15,6 @@ namespace Gaze
     /// </summary>
     public static class Gaze_InputParser
     {
-
-
-
-
-
         /// <summary>
         /// In a YAML file looks for the keyword that points the origin of all the inputs.
         /// </summary>
@@ -47,7 +44,6 @@ namespace Gaze
             return objects;
         }
 
-
         /// <summary>
         /// Converts all the lines from the output of GroupLinesInObjects method into 
         /// Gaze_InputConfig.
@@ -72,6 +68,7 @@ namespace Gaze
             return LinesToInputConfigList(GroupLinesInObjects(_path));
         }
 
+#if UNITY_EDITOR
         /// <summary>
         /// Deserializes the InputManager.asset and returns a list of Gaze_InputConfigs
         /// </summary>
@@ -115,5 +112,7 @@ namespace Gaze
 
             return true;
         }
+#endif
+
     }
 }

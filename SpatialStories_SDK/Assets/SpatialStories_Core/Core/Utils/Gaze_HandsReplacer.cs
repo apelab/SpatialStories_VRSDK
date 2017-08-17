@@ -55,8 +55,8 @@ namespace Gaze
         private void ReplaceHand()
         {
             // tell the manager we detach this object (to parent it manually so the grab manager won't be able to detach it once hand's released)
-            if (IO.GrabbingManager != null)
-                IO.GrabbingManager.TryDetach();
+            if (IO.GrabLogic.GrabbingManager != null)
+                IO.GrabLogic.GrabbingManager.TryDetach();
 
             // Ensure that we are not parented anymore
             IO.transform.SetParent(null);

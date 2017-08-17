@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using UnityEngine;
 
 namespace Gaze
@@ -35,6 +37,7 @@ namespace Gaze
 
         public override void ToEditorGUI()
         {
+#if UNITY_EDITOR
             EditorGUILayout.BeginHorizontal();
             if (IsValid)
             {
@@ -69,6 +72,7 @@ namespace Gaze
                 RenderNonSatisfiedLabel("---");
             }
             EditorGUILayout.Space();
+#endif
         }
 
         private void OnProximityEvent(Gaze_ProximityEventArgs e)

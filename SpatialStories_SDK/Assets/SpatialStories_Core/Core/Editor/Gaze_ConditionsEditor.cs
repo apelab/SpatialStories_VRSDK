@@ -30,9 +30,7 @@ namespace Gaze
     public class Gaze_ConditionsEditor : Gaze_Editor
     {
         #region Members
-
         private Gaze_Conditions targetConditions;
-        private string[] focusLossModes;
         private string[] reloadModes;
         private string[] autoTriggerModes;
 
@@ -47,21 +45,13 @@ namespace Gaze
 
         // Reflection members
         private List<Collider> hierarchyGazeColliders;
-
         private List<Collider> hierarchyHandHoverColliders;
-
         private Dictionary<Collider, string> interactiveObjectsDico;
-
         private List<Gaze_AbstractConditions> hierarchyCustomConditions;
         private List<string> hierarchyCustomConditionsNames;
-        private string[] customConditionActionEnum;
         private string[] dndEventValidatorEnum;
         private string[] dndTargetsModes;
         private List<string> dndTargetsNames;
-
-        private int selectedGroupIndex = 0;
-
-
         #endregion
 
         void OnEnable()
@@ -82,15 +72,11 @@ namespace Gaze
             hierarchyProximities = new List<Gaze_InteractiveObject>();
             hierarchyHandHoverColliders = new List<Collider>();
             dndTargetsNames = new List<string>();
-            focusLossModes = Enum.GetNames(typeof(Gaze_FocusLossMode));
             reloadModes = Enum.GetNames(typeof(Gaze_ReloadMode));
             autoTriggerModes = Enum.GetNames(typeof(Gaze_AutoTriggerMode));
-
             hierarchyCustomConditions = new List<Gaze_AbstractConditions>();
             hierarchyCustomConditionsNames = new List<string>();
-            customConditionActionEnum = Enum.GetNames(typeof(Gaze_CustomConditionActionEnum));
             dndEventValidatorEnum = Enum.GetNames(typeof(Gaze_DragAndDropStates));
-            //dndEventValidatorEnum = Enum.GetNames(typeof(apelab_DnDStatesEditorEnum));
             dndTargetsModes = Enum.GetNames(typeof(apelab_DnDTargetsModes));
             FetchDnDTargets();
             FetchInputsList();
@@ -99,14 +85,17 @@ namespace Gaze
         private void FetchDnDTargets()
         {
             dndTargetsNames.Clear();
+
             // get names of targets IOs in the Gaze_InteractiveObject's editor list
             int targetsCount = targetConditions.RootIO.DnD_Targets.Count();
             if (targetsCount > 0)
             {
                 for (int i = 0; i < targetsCount; i++)
                 {
-                    dndTargetsNames.Add(targetConditions.RootIO.DnD_Targets[i].ToString());
-                    //Debug.Log("conditions target index [" + i + "] " + Gaze_SceneInventory.Instance.InteractiveObjects[targetConditions.RootIO.DnD_TargetsIndexes[i]]);
+                    if (targetConditions.RootIO.DnD_Targets[i] == null)
+                        targetConditions.RootIO.DnD_Targets.RemoveAt(i);
+                    else
+                        dndTargetsNames.Add(targetConditions.RootIO.DnD_Targets[i].ToString());
                 }
             }
         }
@@ -137,7 +126,6 @@ namespace Gaze
                     DisplayInputsCondition();
                     DisplayTeleportCondition();
                     DisplayDragAndDropCondition();
-
                     EditorGUILayout.Space();
                     #endregion
 
@@ -248,7 +236,6 @@ namespace Gaze
             targetConditions.customConditions.Clear();
             hierarchyHandHoverColliders.Clear();
 
-            // rebuild them
             hierarchyIOsScripts = (FindObjectsOfType(typeof(Gaze_InteractiveObject)) as Gaze_InteractiveObject[]).ToList();
             for (int i = 0; i < hierarchyIOsScripts.Count; i++)
             {
@@ -270,7 +257,6 @@ namespace Gaze
             // Sort the hierarchy list
             List<Gaze_Interaction> SortedList = interactions.OrderBy(o => o.name).ToList();
             interactions = SortedList.ToArray();
-
 
             for (int i = 0; i < interactions.Length; i++)
             {
@@ -296,7 +282,7 @@ namespace Gaze
 
         private void UpdateProximitiesList(GameObject g)
         {
-            Gaze_InteractiveObject proximity = g.GetComponentInChildren<Gaze_Proximity>().GetComponentInParent<Gaze_InteractiveObject>();
+            Gaze_InteractiveObject proximity = g.GetComponentInChildrenBFS<Gaze_Proximity>().GetComponentInParent<Gaze_InteractiveObject>();
             hierarchyProximities.Add(proximity);
         }
 
@@ -338,8 +324,6 @@ namespace Gaze
 
         private void DisplayProximityList()
         {
-            Debug.Log(targetConditions.proximityGroupIndex);
-
             EditorGUILayout.BeginHorizontal();
             targetConditions.proximityEnabled = EditorGUILayout.ToggleLeft("Proximity", targetConditions.proximityEnabled);
             EditorGUILayout.EndHorizontal();
@@ -356,7 +340,6 @@ namespace Gaze
                     EditorGUILayout.BeginHorizontal();
                     EditorGUILayout.HelpBox("No other Interactive Object found.", MessageType.Warning);
                     EditorGUILayout.EndHorizontal();
-
                 }
                 else
                 {
@@ -374,7 +357,6 @@ namespace Gaze
                             }
                         }
                     }
-
                     EditorGUILayout.EndHorizontal();
 
                     // update the list of all possible rig groups
@@ -385,10 +367,9 @@ namespace Gaze
                         // display 'add rig group' button
                         if (GUILayout.Button("Add Rig Group"))
                         {
-                            Gaze_ProximityEntryGroup d = targetConditions.proximityMap.AddProximityEntryGroup(targetConditions);
+                            targetConditions.proximityMap.AddProximityEntryGroup(targetConditions);
                         }
                     }
-
 
                     // This is a HOTFIX for solving editor problems that appear when user deletes every element of rig except one and there is a proximity rig group set up somewhere
                     // will need to be changed if custom proximity groups (other than rig group) are implemented
@@ -396,7 +377,6 @@ namespace Gaze
                     {
                         if (targetConditions.proximityMap.proximityEntryGroupList.Count > 0)
                             targetConditions.proximityMap.proximityEntryGroupList.Clear();
-
                     }
                     else
                     {
@@ -405,10 +385,7 @@ namespace Gaze
                             EditorGUILayout.BeginHorizontal();
 
                             // Display the popup with all possible combinations
-
-                            selectedGroupIndex = EditorGUILayout.Popup(selectedGroupIndex, targetConditions.rigCombinations.ToArray());
-                            if (selectedGroupIndex != targetConditions.proximityGroupIndex)
-                                targetConditions.proximityGroupIndex = selectedGroupIndex;
+                            targetConditions.proximityGroupIndex = EditorGUILayout.Popup(targetConditions.proximityGroupIndex, targetConditions.rigCombinations.ToArray());
 
                             targetConditions.proximityMap.proximityEntryGroupList[i].proximityEntries.Clear();
                             for (int j = 0; j < targetConditions.proximityRigGroups[targetConditions.proximityGroupIndex].Count; j++)
@@ -423,7 +400,6 @@ namespace Gaze
                             EditorGUILayout.EndHorizontal();
                         }
                     }
-
 
                     for (int i = 0; i < targetConditions.proximityMap.proximityEntryList.Count; i++)
                     {
@@ -440,14 +416,12 @@ namespace Gaze
                         if (proximityObject != null)
                             targetConditions.proximityMap.proximityEntryList[i].dependentGameObject = (Gaze_InteractiveObject)proximityObject;
 
-
                         if (GUILayout.Button("-"))
                         {
                             targetConditions.proximityMap.DeleteProximityEntry(targetConditions.proximityMap.proximityEntryList[i]);
                         }
                         EditorGUILayout.EndHorizontal();
                     }
-
 
                     if (targetConditions.proximityMap.proximityEntryList.Count + targetConditions.proximityMap.proximityEntryGroupList.Count < 2)
                     {
@@ -479,7 +453,6 @@ namespace Gaze
                             {
                                 targetConditions.proximityMap.DeleteProximityEntry(d);
                             }
-
                         }
                         EditorGUILayout.EndHorizontal();
                     }
@@ -844,7 +817,7 @@ namespace Gaze
                 Gaze_Dependency d = targetConditions.DeactivateOnDependencyMap.Add(targetConditions);
                 EditorGUILayout.BeginHorizontal();
                 d.dependentGameObject = hierarchyInteractions[EditorGUILayout.Popup(0, hierarchyInteractionsNames.ToArray())];
-                d.triggerStateIndex = d.triggerStateIndex = (int)DependencyTriggerEventsAndStates.Triggered;
+                d.triggerStateIndex = (int)DependencyTriggerEventsAndStates.Triggered;
                 if (GUILayout.Button("-"))
                 {
                     targetConditions.DeactivateOnDependencyMap.Delete(d);
@@ -957,7 +930,6 @@ namespace Gaze
             targetConditions.ReloadDependencies = EditorGUILayout.ToggleLeft("Reload Dependencies", targetConditions.ReloadDependencies);
         }
 
-
         private void DisplayReloadDelayBlock()
         {
             EditorGUILayout.LabelField("Delay");
@@ -1000,7 +972,6 @@ namespace Gaze
             GUILayout.EndVertical();
         }
 
-
         private void DisplayConditionsBlock()
         {
             targetConditions.gazeEnabled = EditorGUILayout.ToggleLeft("Gaze", targetConditions.gazeEnabled);
@@ -1009,7 +980,7 @@ namespace Gaze
             {
                 if (hierarchyGazeColliders.Count > 0)
                 {
-                    GUILayout.BeginHorizontal();
+                    EditorGUILayout.BeginHorizontal();
 
                     // Set the state (in or out) 
                     targetConditions.gazeStateIndex = EditorGUILayout.Popup(targetConditions.gazeStateIndex, Enum.GetNames(typeof(Gaze_HoverStates)));
@@ -1031,9 +1002,8 @@ namespace Gaze
                         targetConditions.gazeColliderIO = (Gaze_InteractiveObject)gazeObject;
                     }
 
-                    GUILayout.EndHorizontal();
+                    EditorGUILayout.EndHorizontal();
                 }
-
             }
             EditorGUILayout.Space();
         }
@@ -1088,13 +1058,22 @@ namespace Gaze
             FetchDnDTargets();
             if (targetConditions.dragAndDropEnabled)
             {
-                EditorGUILayout.BeginHorizontal();
-                targetConditions.dndEventValidator = EditorGUILayout.Popup("Valid When", targetConditions.dndEventValidator, dndEventValidatorEnum);
-                EditorGUILayout.EndHorizontal();
-                targetConditions.dndTargetModesIndex = EditorGUILayout.Popup("On Target(s)", targetConditions.dndTargetModesIndex, dndTargetsModes);
+                if (!targetConditions.RootIO.IsDragAndDropEnabled || targetConditions.RootIO.DnD_Targets == null || targetConditions.RootIO.DnD_Targets.Count < 1)
+                {
+                    EditorGUILayout.BeginHorizontal();
+                    targetConditions.dndEventValidator = EditorGUILayout.Popup("Valid When", targetConditions.dndEventValidator, dndEventValidatorEnum);
+                    EditorGUILayout.EndHorizontal();
+                }
+                else
+                {
+                    EditorGUILayout.BeginHorizontal();
+                    targetConditions.dndEventValidator = EditorGUILayout.Popup("Valid When", targetConditions.dndEventValidator, dndEventValidatorEnum);
+                    EditorGUILayout.EndHorizontal();
+                    targetConditions.dndTargetModesIndex = EditorGUILayout.Popup("On Target(s)", targetConditions.dndTargetModesIndex, dndTargetsModes);
 
-                if (targetConditions.dndTargetModesIndex.Equals((int)apelab_DnDTargetsModes.CUSTOM))
-                    DisplayDnDTargetsChoices();
+                    if (targetConditions.dndTargetModesIndex.Equals((int)apelab_DnDTargetsModes.CUSTOM))
+                        DisplayDnDTargetsChoices();
+                }
             }
         }
 
@@ -1118,6 +1097,7 @@ namespace Gaze
                     // display the entry
                     EditorGUILayout.BeginHorizontal();
                     int index = targetConditions.RootIO.DnD_Targets.IndexOf(targetConditions.dndTargets[i]);
+                    index = Math.Max(index, 0);
                     targetConditions.dndTargets[i] = targetConditions.RootIO.DnD_Targets[EditorGUILayout.Popup(index, dndTargetsNames.ToArray())];
 
                     // and a '-' button to remove it if needed

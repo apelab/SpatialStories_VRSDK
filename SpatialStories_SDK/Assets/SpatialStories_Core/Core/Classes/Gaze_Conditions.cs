@@ -715,6 +715,12 @@ namespace Gaze
             {
                 canBeTriggered = true;
             }
+
+            for (int i = 0; i < customConditions.Count; i++)
+            {
+                customConditions[i].ValidateCustomCondition(false);
+            }
+
         }
 
         /// <summary>
@@ -848,7 +854,6 @@ namespace Gaze
             return true;
         }
 
-
         private void OnTriggerEvent(Gaze_TriggerEventArgs e)
         {
             if (e.Sender != null)
@@ -885,7 +890,6 @@ namespace Gaze
         {
             customConditionsDico[(int)e.Sender] = e.IsValid;
         }
-
 
         private void SetDelayRandom()
         {
@@ -991,7 +995,6 @@ namespace Gaze
         {
             get
             {
-                Gaze_GazeCondition gazeCondition = GetConditionOfType<Gaze_GazeCondition>();
                 return IsConditionOfTypeValid<Gaze_GazeCondition>();
             }
         }

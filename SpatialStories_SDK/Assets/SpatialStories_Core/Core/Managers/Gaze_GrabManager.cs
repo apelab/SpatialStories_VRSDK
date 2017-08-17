@@ -52,28 +52,16 @@ public class Gaze_GrabManager : MonoBehaviour
 
     private Gaze_InteractiveObject closerIO;
     public Transform grabPosition;
-    private Rigidbody controllerRB;
-    private Vector3 lastPosition;
-    private Vector3 lastRotation;
-    private short positionsIndex = 0;
-    private short samples = 10;
-    private Vector3[] positions;
-    private Vector3[] angularVelocities;
-    private Vector3 velocity;
-    private Vector3 angularVelocity;
     private bool isGrabbing = false;
     private Transform controllerSnapTransform;
     private LineRenderer laserPointer;
     private RaycastHit[] hits;
     public List<GameObject> hitsIOs;
-    private Transform handPivot;
     private bool isTriggerPressed = false;
     private List<GameObject> objectsInProximity = new List<GameObject>();
     private GameObject distantGrabOrigin;
     private List<GameObject> raycastIOs;
     private Gaze_TouchDistanceMode searchDistanceState;
-    private const float MAX_THROW_VELOCITY = 5;
-    private const float MAX_DELTA_X = 0.1f;
     private float closerDistance = 0;
     private Vector3 hitPosition;
     private bool intersectsWithInteractiveIO;
@@ -127,13 +115,11 @@ public class Gaze_GrabManager : MonoBehaviour
 
     void OnEnable()
     {
+        Gaze_InputManager.OnControlerSetup += OnControllerSetup;
         Gaze_EventManager.OnGrabEvent += OnGrabEvent;
         Gaze_InputManager.OnControllerCollisionEvent += OnControllerCollisionEvent;
         Gaze_InputManager.OnControllerGrabEvent += OnControllerGrabEvent;
-        Gaze_InputManager.OnHandRightDownEvent += OnHandRightDownEvent;
-        Gaze_InputManager.OnHandRightUpEvent += OnHandRightUpEvent;
-        Gaze_InputManager.OnHandLeftDownEvent += OnHandLeftDownEvent;
-        Gaze_InputManager.OnHandLeftUpEvent += OnHandLeftUpEvent;
+
         Gaze_HandsReplacer.OnHandsReplaced += OnHandsReplaced;
         Gaze_EventManager.OnIODestroyed += OnIODestroyed;
 
@@ -147,21 +133,58 @@ public class Gaze_GrabManager : MonoBehaviour
 
 
 
+    private bool setupDone = false;
+    void OnControllerSetup(Gaze_Controllers _controller)
+    {
+        if (setupDone)
+            return;
+
+        if (_controller != Gaze_Controllers.HTC_VIVE)
+        {
+            Gaze_InputManager.OnHandRightDownEvent += OnHandRightDownEvent;
+            Gaze_InputManager.OnHandRightUpEvent += OnHandRightUpEvent;
+            Gaze_InputManager.OnHandLeftDownEvent += OnHandLeftDownEvent;
+            Gaze_InputManager.OnHandLeftUpEvent += OnHandLeftUpEvent;
+        }
+        else
+        {
+            Gaze_InputManager.OnIndexRightDownEvent += OnHandRightDownEvent;
+            Gaze_InputManager.OnIndexRightUpEvent += OnHandRightUpEvent;
+            Gaze_InputManager.OnIndexLeftDownEvent += OnHandLeftDownEvent;
+            Gaze_InputManager.OnIndexLeftUpEvent += OnHandLeftUpEvent;
+        }
+        setupDone = true;
+    }
+
     void OnDisable()
     {
+        Gaze_InputManager.OnControlerSetup -= OnControllerSetup;
         Gaze_EventManager.OnGrabEvent -= OnGrabEvent;
         Gaze_InputManager.OnControllerCollisionEvent -= OnControllerCollisionEvent;
+
         Gaze_InputManager.OnControllerGrabEvent -= OnControllerGrabEvent;
-        Gaze_InputManager.OnHandRightDownEvent -= OnHandRightDownEvent;
-        Gaze_InputManager.OnHandRightUpEvent -= OnHandRightUpEvent;
-        Gaze_InputManager.OnHandLeftDownEvent -= OnHandLeftDownEvent;
-        Gaze_InputManager.OnHandLeftUpEvent -= OnHandLeftUpEvent;
-        Gaze_HandsReplacer.OnHandsReplaced -= OnHandsReplaced;
         Gaze_EventManager.OnIODestroyed -= OnIODestroyed;
+        Gaze_HandsReplacer.OnHandsReplaced -= OnHandsReplaced;
+
+        if (Gaze_InputManager.PluggedControllerType != Gaze_Controllers.HTC_VIVE)
+        {
+            Gaze_InputManager.OnHandRightDownEvent -= OnHandRightDownEvent;
+            Gaze_InputManager.OnHandRightUpEvent -= OnHandRightUpEvent;
+            Gaze_InputManager.OnHandLeftDownEvent -= OnHandLeftDownEvent;
+            Gaze_InputManager.OnHandLeftUpEvent -= OnHandLeftUpEvent;
+        }
+        else
+        {
+            Gaze_InputManager.OnIndexRightEvent -= OnHandRightDownEvent;
+            Gaze_InputManager.OnIndexRightUpEvent -= OnHandRightUpEvent;
+            Gaze_InputManager.OnIndexLeftEvent -= OnHandLeftDownEvent;
+            Gaze_InputManager.OnIndexLeftUpEvent -= OnHandLeftUpEvent;
+        }
 
         // Remove this grab manager from the list
         GrabManagers.Remove(this);
     }
+
 
     /// <summary>
     /// If this game object gets destroyed we need to remove this reference from the list
@@ -174,9 +197,6 @@ public class Gaze_GrabManager : MonoBehaviour
     void Start()
     {
         distantGrabOrigin = GetComponentInChildren<Gaze_DistantGrabPointer>().gameObject;
-        positions = new Vector3[samples];
-        angularVelocities = new Vector3[samples];
-        controllerRB = GetComponentInParent<Gaze_InteractiveObject>().GetComponentInChildren<Gaze_Proximity>().GetComponent<Rigidbody>();
         if (displayGrabPointer)
         {
             if (GetComponent<LineRenderer>() == null)
@@ -187,7 +207,6 @@ public class Gaze_GrabManager : MonoBehaviour
             laserPointer.startWidth = laserStartWidth;
             laserPointer.endWidth = laserEndWidth;
             laserPointer.positionCount = 2;
-            handPivot = GetComponentInParent<Gaze_InteractiveObject>().GetComponentInChildren<Gaze_Proximity>().transform;
             laserPointer.material = laserMaterial;
         }
 
@@ -241,18 +260,12 @@ public class Gaze_GrabManager : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        UpdateGrabState();
-    }
-
     private void FixedUpdate()
     {
         //Debug.Log(interactableIO +" isTriggerPressed = "+isTriggerPressed);
         if (grabState == GRAB_STATE.EMPTY || grabState == GRAB_STATE.SEARCHING)
             FindValidDistantObject();
-        //else
-        //    ClearLaserPointer();
+        UpdateGrabState();
     }
 
     /// <summary>
@@ -319,7 +332,6 @@ public class Gaze_GrabManager : MonoBehaviour
             case GRAB_STATE.GRABBED:
                 if (debug)
                     Debug.Log("GRABBED");
-                UpdateVelocities();
                 break;
 
             case GRAB_STATE.EMPTY:
@@ -374,15 +386,15 @@ public class Gaze_GrabManager : MonoBehaviour
 
                 if (interactableIO.IsGrabEnabled)
                 {
-                    if (interactableIO.IsBeingGrabbed)
+                    if (interactableIO.GrabLogic.IsBeingGrabbed)
                     {
-                        interactableIO.SetManipulationMode(true);
+                        interactableIO.GrabLogic.SetManipulationMode(true);
                     }
 
-                    if (interactableIO.GrabModeIndex.Equals((int)Gaze_GrabMode.ATTRACT))
+                    if (interactableIO.GrabModeIndex.Equals((int)Gaze_GrabMode.GRAB))
                     {
-                        Gaze_GravityManager.ChangeGravityState(interactableIO, Gaze_GravityRequestType.DEACTIVATE_AND_ATTACH);
                         grabState = GRAB_STATE.ATTRACTING;
+                        interactableIO.GrabLogic.GrabbingManager = this;
                     }
                     else if (interactableIO.GrabModeIndex.Equals((int)Gaze_GrabMode.LEVITATE))
                     {
@@ -391,13 +403,13 @@ public class Gaze_GrabManager : MonoBehaviour
 
                         KeyValuePair<VRNode, GameObject> dico = new KeyValuePair<VRNode, GameObject>(isLeftHand ? VRNode.LeftHand : VRNode.RightHand, interactableIO.gameObject);
                         Gaze_InputManager.FireControllerGrabEvent(new Gaze_ControllerGrabEventArgs(this, dico, true, hitPosition));
-
-                        // analytics
-                        analyticsDico.Clear();
-                        analyticsDico.Add("Grabbed Object", interactableIO.name);
-                        analyticsDico.Add("Is Left Hand", isLeftHand);
-                        Analytics.CustomEvent("Grab", analyticsDico);
                     }
+
+                    // analytics
+                    analyticsDico.Clear();
+                    analyticsDico.Add("Grabbed Object", interactableIO.name);
+                    analyticsDico.Add("Is Left Hand", isLeftHand);
+                    Analytics.CustomEvent("Grab", analyticsDico);
                 }
 
                 if (interactableIO.IsTouchEnabled)
@@ -414,26 +426,20 @@ public class Gaze_GrabManager : MonoBehaviour
             // get the IO being collided with
             interactableIO = objectsInProximity.ElementAt(0).GetComponent<Gaze_InteractiveObject>();
 
-            if (interactableIO.IsManipulable && !interactableIO.IsBeingManipulated)
+            if (interactableIO.IsManipulable && !interactableIO.GrabLogic.IsBeingManipulated)
             {
-                interactableIO.SetManipulationMode(true);
+                interactableIO.GrabLogic.SetManipulationMode(true);
             }
 
             // if the grabbed object is being manipulated
-            if (interactableIO.IsBeingManipulated)
+            if (interactableIO.GrabLogic.GrabbingManager != null)
             {
-                // get the hand manipulating
-                Gaze_GrabManager grManager = GetGrabbingHand();
-
-                // If the other hand is taking this object we need to remove it from this hand 
-                if (grManager != null && grManager.grabbedObject == grabbedObject)
-                {
-                    grManager.grabbedObject = null;
-                    grManager.grabState = GRAB_STATE.EMPTY;
-                }
+                interactableIO.GrabLogic.GrabbingManager.grabbedObject = null;
+                interactableIO.GrabLogic.GrabbingManager.grabState = GRAB_STATE.EMPTY;
+                interactableIO.GrabLogic.GrabbingManager.TryDetach();
 
                 // Set the grab point where the controller actually is in order to avoid weird jumps
-                interactableIO.SetGrabPoint(controllerSnapTransform.position);
+                interactableIO.GrabLogic.AddDynamicGrabPositioner(controllerSnapTransform.position, this);
 
                 // change the state to grabbing.
                 grabState = GRAB_STATE.GRABBING;
@@ -448,15 +454,14 @@ public class Gaze_GrabManager : MonoBehaviour
                 }
                 else if (interactableIO.IsGrabEnabled)
                 {
-                    if (interactableIO.GrabModeIndex.Equals((int)Gaze_GrabMode.ATTRACT))
+                    if (interactableIO.GrabModeIndex.Equals((int)Gaze_GrabMode.GRAB))
                     {
                         grabState = GRAB_STATE.GRABBING;
                     }
                     else if (interactableIO.GrabModeIndex.Equals((int)Gaze_GrabMode.LEVITATE))
                     {
-                        grabState = GRAB_STATE.GRABBED;
-                        KeyValuePair<VRNode, GameObject> dico = new KeyValuePair<VRNode, GameObject>(isLeftHand ? VRNode.LeftHand : VRNode.RightHand, interactableIO.gameObject);
-                        Gaze_InputManager.FireControllerGrabEvent(new Gaze_ControllerGrabEventArgs(this, dico, true));
+                        Vector3 offset = interactableIO.transform.position - interactableIO.transform.GetComponentInChildren<Gaze_Manipulation>().GetComponent<Collider>().bounds.center;
+                        interactableIO.transform.position = distantGrabOrigin.transform.position + (0.3f * distantGrabOrigin.transform.forward) + offset;
 
                         // analytics
                         analyticsDico.Clear();
@@ -489,7 +494,7 @@ public class Gaze_GrabManager : MonoBehaviour
         {
             // If the object doesn't need to be attracted we can change the state to grabbing.
             grabState = GRAB_STATE.GRABBING;
-            interactableIO.transform.position = controllerSnapTransform.position - interactableIO.GetGrabPoint();
+            interactableIO.transform.position = controllerSnapTransform.position - interactableIO.GrabLogic.GetGrabPoint();
         }
     }
 
@@ -500,7 +505,72 @@ public class Gaze_GrabManager : MonoBehaviour
     {
         ClearLaserPointer();
         TryAttach();
+
         grabState = GRAB_STATE.GRABBED;
+    }
+
+    private void TryAttach()
+    {
+
+        if (interactableIO == null)
+            return;
+
+        // get the snap location from the controller
+        Transform controllerSnapLocation = gameObject.GetComponentInChildren<Gaze_GrabPositionController>().transform;
+
+        // snap in position if needed
+        if (interactableIO.GrabPositionnerCollider != null)
+        {
+            // get the snap location from the IO
+            Transform grabbedObjectPositionnerTransform = interactableIO.GrabPositionnerCollider.transform;
+
+            // get the delta vector between object and hand grab location
+            Vector3 delta = controllerSnapLocation.position - grabbedObjectPositionnerTransform.position;
+
+            // add the delta to the IO
+            interactableIO.transform.position = interactableIO.transform.position + delta;
+
+            // parent grabbed object to the hand
+            interactableIO.transform.SetParent(controllerSnapLocation, true);
+        }
+        else
+        {
+            // store hand grab positionner rotation
+            Quaternion originalHandGrabPositionRotation = controllerSnapLocation.rotation;
+
+            // rotate hand grab positionner like grabbed object's grab location's rotation
+            Quaternion rotation = interactableIO.GrabLogic.DefaultHandle.transform.rotation;
+
+            controllerSnapLocation.rotation = rotation;
+
+            // get the delta vector between object and hand grab location
+            Vector3 delta = controllerSnapLocation.position - interactableIO.GrabLogic.DefaultHandle.transform.position;
+
+            // add the delta to the IO
+            interactableIO.transform.position = interactableIO.transform.position + delta;
+
+
+            // parent grabbed object to the hand
+            interactableIO.transform.SetParent(controllerSnapLocation, true);
+
+
+            // restore original hand grab positionner's rotation (this will rotate the grabbed object to)
+            controllerSnapLocation.rotation = originalHandGrabPositionRotation;
+        }
+
+
+        interactableIO.transform.SetParent(null);
+
+        if (interactableIO == null)
+            return;
+
+        grabbedObject = interactableIO.gameObject;
+
+        // notify
+        KeyValuePair<VRNode, GameObject> grabbedObjects = new KeyValuePair<VRNode, GameObject>(isLeftHand ? VRNode.LeftHand : VRNode.RightHand, grabbedObject);
+        isGrabbing = true;
+
+        Gaze_InputManager.FireControllerGrabEvent(new Gaze_ControllerGrabEventArgs(this, grabbedObjects, isGrabbing));
     }
 
     private void ClearLaserPointer()
@@ -525,7 +595,7 @@ public class Gaze_GrabManager : MonoBehaviour
             grabState = GRAB_STATE.SEARCHING;
             return;
         }
-        interactableIO.transform.position = Vector3.MoveTowards(interactableIO.transform.position, controllerSnapTransform.position - interactableIO.GetGrabPoint(), interactableIO.AttractionSpeed * Time.deltaTime);
+        interactableIO.transform.position = Vector3.MoveTowards(interactableIO.transform.position, controllerSnapTransform.position - interactableIO.GrabLogic.GetGrabPoint(), interactableIO.AttractionSpeed * Time.deltaTime);
     }
 
     /// <summary>
@@ -534,18 +604,9 @@ public class Gaze_GrabManager : MonoBehaviour
     /// <returns></returns>
     private bool IsAttactionNeeded()
     {
-        return Vector3.Distance(interactableIO.transform.position, controllerSnapTransform.position - interactableIO.GetGrabPoint()) > 0.1f;
+        return Vector3.Distance(interactableIO.transform.position, controllerSnapTransform.position - interactableIO.GrabLogic.GetGrabPoint()) > 0.1f;
     }
 
-    /// <summary>
-    /// Returns the position where an object has to be in order to consider itself as 
-    /// grabbed
-    /// </summary>
-    /// <returns></returns>
-    private Vector3 CalcObjectGrabPosition()
-    {
-        return controllerSnapTransform.position - interactableIO.GetGrabPoint();
-    }
 
     /// <summary>
     /// Trows a raycast forward in order to find an object to grab
@@ -569,11 +630,6 @@ public class Gaze_GrabManager : MonoBehaviour
             {
                 gaze_ControllerPointingEventArgs.IsPointed = false;
                 Gaze_EventManager.FireControllerPointingEvent(gaze_ControllerPointingEventArgs);
-
-                // analytics
-                analyticsDico["GrabbedObject"] = raycastIOs[i].name;
-                analyticsDico["IsLeftHand"] = isLeftHand;
-                Analytics.CustomEvent("ControllerPointing", analyticsDico);
             }
 
             // clear the list
@@ -598,6 +654,10 @@ public class Gaze_GrabManager : MonoBehaviour
                     // populate the list of IOs hit
                     hitsIOs.Add(interactiveObject.gameObject);
 
+                    // Add a dynamic grab position points to objects that doesn't need to snap.
+                    if (!interactiveObject.SnapOnGrab && !interactiveObject.GrabLogic.IsBeingGrabbed)
+                        interactiveObject.GrabLogic.AddDynamicGrabPositioner(hits[i].point, this);
+
                     // if pointed object is not in the list
                     if (!raycastIOs.Contains(interactiveObject.gameObject))
                     {
@@ -606,41 +666,33 @@ public class Gaze_GrabManager : MonoBehaviour
                         gaze_ControllerPointingEventArgs.Dico = new KeyValuePair<VRNode, GameObject>(isLeftHand ? VRNode.LeftHand : VRNode.RightHand, interactiveObject.gameObject);
                         gaze_ControllerPointingEventArgs.IsPointed = true;
                         Gaze_EventManager.FireControllerPointingEvent(gaze_ControllerPointingEventArgs);
-
-                        // analytics
-                        analyticsDico["GrabbedObject"] = interactiveObject.name;
-                        analyticsDico["IsLeftHand"] = isLeftHand;
-                        Analytics.CustomEvent("ControllerPointing", analyticsDico);
                     }
 
-                    if (interactiveObject != null)
+                    if (!interactiveObject.GrabLogic.IsBeingGrabbed && interactiveObject.IsGrabEnabled && interactiveObject.GrabModeIndex.Equals((int)Gaze_GrabMode.GRAB) && hits[i].distance < interactiveObject.GrabDistance)
                     {
-                        if (!interactiveObject.IsBeingGrabbed && interactiveObject.IsGrabEnabled && interactiveObject.GrabModeIndex.Equals((int)Gaze_GrabMode.ATTRACT) && hits[i].distance < interactiveObject.GrabDistance)
-                        {
-                            closerIO = interactiveObject;
-                            closerDistance = hits[i].distance;
-                            break;
-                        }
-                        if (interactiveObject.IsTouchEnabled && hits[i].distance < interactiveObject.TouchDistance)
-                        {
-                            closerIO = interactiveObject;
-                            closerDistance = hits[i].distance;
-                            break;
-                        }
-                        if (interactiveObject.IsGrabEnabled && interactiveObject.GrabModeIndex.Equals((int)Gaze_GrabMode.LEVITATE) && hits[i].distance < interactiveObject.GrabDistance)
-                        {
-                            // update the hit position until we grab something
-                            if (grabState != GRAB_STATE.GRABBED)
-                                hitPosition = hits[i].point;
-
-                            closerIO = interactiveObject;
-                            closerDistance = hits[i].distance;
-                            break;
-                        }
-
-                        // Get the visual ray length
-                        visualRayLength = interactiveObject.IsGrabEnabled && interactiveObject.GrabModeIndex.Equals((int)Gaze_GrabMode.ATTRACT) && visualRayLength > hits[i].distance ? hits[i].distance : visualRayLength;
+                        closerIO = interactiveObject;
+                        closerDistance = hits[i].distance;
+                        break;
                     }
+                    if (interactiveObject.IsTouchEnabled && hits[i].distance < interactiveObject.TouchDistance)
+                    {
+                        closerIO = interactiveObject;
+                        closerDistance = hits[i].distance;
+                        break;
+                    }
+                    if (interactiveObject.IsGrabEnabled && interactiveObject.GrabModeIndex.Equals((int)Gaze_GrabMode.LEVITATE) && hits[i].distance < interactiveObject.GrabDistance)
+                    {
+                        // update the hit position until we grab something
+                        if (grabState != GRAB_STATE.GRABBED)
+                            hitPosition = hits[i].point;
+
+                        closerIO = interactiveObject;
+                        closerDistance = hits[i].distance;
+                        break;
+                    }
+
+                    // Get the visual ray length
+                    visualRayLength = interactiveObject.IsGrabEnabled && interactiveObject.GrabModeIndex.Equals((int)Gaze_GrabMode.GRAB) && visualRayLength > hits[i].distance ? hits[i].distance : visualRayLength;
                 }
             }
 
@@ -652,6 +704,12 @@ public class Gaze_GrabManager : MonoBehaviour
                     // notify
                     gaze_ControllerPointingEventArgs.Dico = new KeyValuePair<VRNode, GameObject>(isLeftHand ? VRNode.LeftHand : VRNode.RightHand, raycastIOs[i]);
                     gaze_ControllerPointingEventArgs.IsPointed = false;
+
+                    // analytics
+                    analyticsDico["GrabbedObject"] = raycastIOs[i].name;
+                    analyticsDico["IsLeftHand"] = isLeftHand;
+                    Analytics.CustomEvent("ControllerPointing", analyticsDico);
+
                     Gaze_EventManager.FireControllerPointingEvent(gaze_ControllerPointingEventArgs);
 
                     // remove it
@@ -663,10 +721,10 @@ public class Gaze_GrabManager : MonoBehaviour
         ShowDistantGrabFeedbacks(distantGrabOrigin.transform.position, distantGrabOrigin.transform.forward, visualRayLength, closerIO != null);
     }
 
-    void ShowDistantGrabFeedbacks(Vector3 targetPosition, Vector3 direction, float length, bool inRange)
+    void ShowDistantGrabFeedbacks(Vector3 _targetPosition, Vector3 _direction, float _length, bool _inRange)
     {
         if (closerIO != null)
-            length = closerDistance;
+            _length = closerDistance;
 
         intersectsWithInteractiveIO = true;
 
@@ -674,132 +732,79 @@ public class Gaze_GrabManager : MonoBehaviour
             return;
 
         // This will check if the raycast intersecs with a valid grabbable object
-        if (length == float.MaxValue)
+        if (Math.Abs(_length - float.MaxValue) < 0.01f)
         {
-            length = DefaultDistantGrabRayLength;
+            _length = DefaultDistantGrabRayLength;
             intersectsWithInteractiveIO = false;
         }
 
-        Vector3 endPosition = targetPosition + (length * direction);
+        Vector3 endPosition = _targetPosition + (_length * _direction);
 
-        ShowDistantGrabLaser(targetPosition, endPosition, direction, length, intersectsWithInteractiveIO, inRange);
-        ShowDistantGrabPointer(intersectsWithInteractiveIO, endPosition, inRange);
+        ShowDistantGrabLaser(_targetPosition, endPosition, _direction, intersectsWithInteractiveIO, _inRange);
+        ShowDistantGrabPointer(intersectsWithInteractiveIO, endPosition, _inRange);
     }
 
-    private void ShowDistantGrabLaser(Vector3 targetPosition, Vector3 endPosition, Vector3 direction, float length, bool intersectsWithIO, bool iOInRange)
+    private void ShowDistantGrabLaser(Vector3 _targetPosition, Vector3 _endPosition, Vector3 _direction, bool _intersectsWithIo, bool _iOInRange)
     {
         if (!displayGrabPointer)
             return;
 
 
         //laserPointer.enabled = true;
-        laserPointer.SetPosition(0, targetPosition);
-        laserPointer.SetPosition(1, endPosition);
+        laserPointer.SetPosition(0, _targetPosition);
+        laserPointer.SetPosition(1, _endPosition);
         Color actualColor;
 
-        if (iOInRange)
+        if (_iOInRange)
             actualColor = InteractableInRangeDistantGrabColor;
-        else if (intersectsWithIO)
+        else if (_intersectsWithIo)
             actualColor = InteractableDistantGrabColor;
         else
             actualColor = NotInteractableDistantGrabColor;
 
         laserPointer.startColor = actualColor;
         laserPointer.endColor = actualColor;
-        gaze_LaserEventArgs.StartPosition = targetPosition;
-        gaze_LaserEventArgs.EndPosition = endPosition;
+        gaze_LaserEventArgs.StartPosition = _targetPosition;
+        gaze_LaserEventArgs.EndPosition = _endPosition;
         gaze_LaserEventArgs.LaserHits = hits;
         Gaze_EventManager.FireLaserEvent(gaze_LaserEventArgs);
     }
 
-    private void ShowDistantGrabPointer(bool intersectsWithGrabbableIO, Vector3 endPosition, bool IOInRange)
+    private void ShowDistantGrabPointer(bool _intersectsWithGrabbableIo, Vector3 _endPosition, bool _ioInRange)
     {
         // Add the object at the end of the ray if needed
         if (NotInteractableDistantGrabFeedback != null)
         {
             // Disable or enable the object
-            NotInteractableDistantGrabFeedback.SetActive(!intersectsWithGrabbableIO);
+            NotInteractableDistantGrabFeedback.SetActive(!_intersectsWithGrabbableIo);
 
             // Move the feedback object to the end of the ray
-            if (!intersectsWithGrabbableIO)
-                NotInteractableDistantGrabFeedback.transform.position = endPosition;
+            if (!_intersectsWithGrabbableIo)
+                NotInteractableDistantGrabFeedback.transform.position = _endPosition;
         }
 
         // Add the object at the end of the ray if needed
         if (InteractableDistantGrabFeedback != null)
         {
             // Disable or enable the object
-            InteractableDistantGrabFeedback.SetActive(intersectsWithGrabbableIO);
+            InteractableDistantGrabFeedback.SetActive(_intersectsWithGrabbableIo);
 
             // Change the pointer color in order to distinguish if the object is in range or not.
             if (intrctvDstntGrbFdbckSprRndrr)
-                intrctvDstntGrbFdbckSprRndrr.color = IOInRange ? InteractableInRangeDistantGrabColor : InteractableDistantGrabColor;
+                intrctvDstntGrbFdbckSprRndrr.color = _ioInRange ? InteractableInRangeDistantGrabColor : InteractableDistantGrabColor;
 
             // Move the feedback object to the end of the ray
-            if (intersectsWithGrabbableIO)
-                InteractableDistantGrabFeedback.transform.position = endPosition;
+            if (_intersectsWithGrabbableIo)
+                InteractableDistantGrabFeedback.transform.position = _endPosition;
 
         }
 
     }
 
-    private void TryAttach()
-    {
-        if (interactableIO == null)
-            return;
-
-        // snap in position if needed
-        if (interactableIO.SnapOnGrab && interactableIO.GetComponentInChildren<Gaze_SnapPosition>() != null && !interactableIO.IsBeingManipulated)
-        {
-            // get the snap location from the IO
-            Transform grabbedObjectPositionnerTransform = isLeftHand ? interactableIO.LeftHandSnapPoint : interactableIO.RightHandSnapPoint;
-
-            // get the snap location from the controller
-            Transform controllerSnapLocation = gameObject.GetComponentInChildren<Gaze_GrabPositionController>().transform;
-
-            // store hand grab positionner rotation
-            Quaternion originalHandGrabPositionRotation = controllerSnapLocation.rotation;
 
 
-            controllerSnapLocation.rotation = grabbedObjectPositionnerTransform.rotation;
 
-            // get the delta vector between object and hand grab location
-            Vector3 delta = controllerSnapLocation.position - grabbedObjectPositionnerTransform.position;
-
-            // add the delta to the IO
-            interactableIO.transform.position = interactableIO.transform.position + delta;
-
-
-            // parent grabbed object to the hand
-            interactableIO.transform.SetParent(controllerSnapLocation, true);
-
-
-            // restore original hand grab positionner's rotation (this will rotate the grabbed object to)
-            controllerSnapLocation.rotation = originalHandGrabPositionRotation;
-
-        }
-        else
-        {
-            interactableIO.transform.SetParent(this.gameObject.transform);
-        }
-
-        grabbedObject = interactableIO.gameObject;
-
-        interactableIO.RootMotion = grabPosition;
-
-        // notify
-        KeyValuePair<VRNode, GameObject> grabbedObjects = new KeyValuePair<VRNode, GameObject>(isLeftHand ? VRNode.LeftHand : VRNode.RightHand, grabbedObject);
-        isGrabbing = true;
-
-        // tell the Proximity script of this grabbed object it's being grabbed (for collisions testing on TryDetach)
-        //grabbedObject.GetComponentInChildren<Gaze_Proximity>().IsGrabbed = true;
-
-        Gaze_GravityManager.ChangeGravityState(interactableIO, Gaze_GravityRequestType.DEACTIVATE_AND_ATTACH);
-
-        Gaze_InputManager.FireControllerGrabEvent(new Gaze_ControllerGrabEventArgs(this, grabbedObjects, isGrabbing));
-    }
-
-    public void TryDetach(bool removeParent = true)
+    public void TryDetach()
     {
         if (grabbedObject != null)
         {
@@ -807,28 +812,16 @@ public class Gaze_GrabManager : MonoBehaviour
                 return;
 
             GameObject grabbedObj = grabbedObject;
+            grabbedObj.transform.SetParent(null);
 
-            if (removeParent)
-            {
-                grabbedObj.transform.SetParent(null);
 
-                Gaze_GravityManager.ChangeGravityState(interactableIO, Gaze_GravityRequestType.RETURN_TO_DEFAULT);
+            if (grabbedObj.GetComponent<Gaze_Catchable>() != null && grabbedObj.GetComponent<Gaze_Catchable>().vibrates)
+                Gaze_InputManager.instance.HapticFeedback(false);
 
-                if (grabState != GRAB_STATE.ATTRACTING)
-                    ThrowObject(grabbedObj);
+            KeyValuePair<VRNode, GameObject> dico = new KeyValuePair<VRNode, GameObject>(isLeftHand ? VRNode.LeftHand : VRNode.RightHand, grabbedObj);
+            isGrabbing = false;
 
-                if (grabbedObj.GetComponent<Gaze_Catchable>() != null && grabbedObj.GetComponent<Gaze_Catchable>().vibrates)
-                    Gaze_InputManager.instance.HapticFeedback(false);
-
-                KeyValuePair<VRNode, GameObject> dico = new KeyValuePair<VRNode, GameObject>(isLeftHand ? VRNode.LeftHand : VRNode.RightHand, grabbedObj);
-                isGrabbing = false;
-
-                if (grabbedObject.GetComponentInParent<Gaze_InteractiveObject>())
-                    grabbedObject.GetComponentInParent<Gaze_InteractiveObject>().RootMotion = null;
-
-                Gaze_InputManager.FireControllerGrabEvent(new Gaze_ControllerGrabEventArgs(this, dico, isGrabbing));
-            }
-
+            Gaze_InputManager.FireControllerGrabEvent(new Gaze_ControllerGrabEventArgs(this, dico, isGrabbing));
         }
 
         ClearGrabbingVariables();
@@ -838,10 +831,6 @@ public class Gaze_GrabManager : MonoBehaviour
 
     private void ClearGrabbingVariables()
     {
-        // tell the Proximity script of this grabbed object it's being grabbed (for collisions testing on TryDetach)
-        //if (grabbedObject)
-        //    grabbedObject.GetComponentInChildren<Gaze_Proximity>().IsGrabbed = false;
-
         grabbedObject = null;
         interactableIO = null;
         isGrabbing = false;
@@ -862,112 +851,6 @@ public class Gaze_GrabManager : MonoBehaviour
         objectsInProximity.Insert(0, _gameObject);
     }
 
-    private void UpdateVelocities()
-    {
-        positions[positionsIndex % samples] = transform.position;
-        positionsIndex++;
-    }
-
-
-
-    private static Vector3[] SortCicularList(Vector3[] _circularList, int currentIndex)
-    {
-        Vector3[] sortedList = new Vector3[_circularList.Length];
-        _circularList.SubArray(currentIndex, _circularList.Length - currentIndex).CopyTo(sortedList, 0);
-        _circularList.SubArray(0, currentIndex).CopyTo(sortedList, _circularList.Length - currentIndex);
-        return sortedList;
-    }
-
-
-    private float GetMeanAcceleration()
-    {
-
-        float timeBetweenFrames = Time.deltaTime;
-
-        // Sort the circular list in order to easilly work with it
-        Vector3[] sortedList = SortCicularList(positions, positionsIndex % samples);
-        Array.Reverse(sortedList);
-
-        List<float> velocities = new List<float>();
-        for (int i = 0; i < positions.Length - 1; i++)
-        {
-            if (positions[i + 1] == Vector3.zero)
-                continue;
-            velocities.Add(Vector3.Distance(sortedList[i], sortedList[i + 1]) / Mathf.Pow(timeBetweenFrames, 2));
-        }
-
-        try
-        {
-            if (velocities.Count > 0)
-            {
-                return velocities.Average();
-            }
-
-            return 0;
-        }
-        catch (Exception ex)
-        {
-            return 0;
-        }
-    }
-
-    /// <summary>
-    /// Clears the grabbed object positions array
-    /// </summary>
-    private void ClearPositionsArray()
-    {
-        positionsIndex = 0;
-        for (int i = 0; i < positions.Length; i++)
-            positions[i] = Vector3.zero;
-    }
-
-
-    private const float MIKES_MAGIC_NUMBER_FOR_GEARVR = 3f;
-
-    private void ThrowObject(GameObject _object)
-    {
-        Rigidbody rb = _object.GetComponent<Rigidbody>();
-
-        if (rb != null)
-        {
-            Gaze_GravityManager.ChangeGravityState(interactableIO, Gaze_GravityRequestType.RETURN_TO_DEFAULT);
-
-            // get the current index (beware it's been incremented in the updated)
-            short currentIndex = (short)(positionsIndex == 0 ? samples - 1 : (positionsIndex - 1) % samples);
-
-            // get next value in the array (which is the oldest sample)
-            short oldestIndex = (short)((currentIndex + 1) % samples);
-
-
-            float v = GetMeanAcceleration();
-
-            // This works fine with GearVr controllers
-            Vector3 direction = transform.forward;
-
-            // Calc the direction if needed
-            if (Gaze_InputManager.instance.trackPosition)
-                direction = (positions[currentIndex] - positions[oldestIndex]).normalized;
-            else
-            {
-                direction = transform.forward;
-                v *= MIKES_MAGIC_NUMBER_FOR_GEARVR;
-
-                // Limit the velocity of the trow
-                if (v > MAX_THROW_VELOCITY)
-                    v = MAX_THROW_VELOCITY;
-            }
-
-
-            // Add a velocity to the object in the current directio
-            Vector3 Vv = direction * v;
-
-            // Add an inpulse based on velocity
-            rb.AddForce(Vv.x, Vv.y, Vv.z, ForceMode.Acceleration);
-
-            ClearPositionsArray();
-        }
-    }
-
     private void UpdateProximityList(Gaze_InteractiveObject collidingIO, Gaze_ControllerCollisionEventArgs e)
     {
         //if (e.CollisionType.Equals(Gaze_CollisionTypes.COLLIDER_ENTER) || e.CollisionType.Equals(Gaze_CollisionTypes.COLLIDER_STAY))
@@ -980,7 +863,7 @@ public class Gaze_GrabManager : MonoBehaviour
                     AddNewObjectInProximity(collidingIO.gameObject);
                 }
 
-                if (isTriggerPressed && interactableIO && interactableIO.IsGrabEnabled && interactableIO.GrabModeIndex.Equals((int)Gaze_GrabMode.ATTRACT))
+                if (isTriggerPressed && interactableIO && interactableIO.IsGrabEnabled && interactableIO.GrabModeIndex.Equals((int)Gaze_GrabMode.GRAB))
                 {
                     interactableIO = objectsInProximity.ElementAt(0).GetComponent<Gaze_InteractiveObject>();
                     grabState = GRAB_STATE.GRABBING;
@@ -998,7 +881,6 @@ public class Gaze_GrabManager : MonoBehaviour
         yield return new WaitForSeconds(_time);
         TryDetach();
         interactableIO = _objectToTake;
-        Gaze_GravityManager.ChangeGravityState(_objectToTake, Gaze_GravityRequestType.DEACTIVATE_AND_ATTACH);
         grabState = GRAB_STATE.ATTRACTING;
     }
 
@@ -1025,7 +907,6 @@ public class Gaze_GrabManager : MonoBehaviour
     /// </summary>
     public void DisableGrabManager()
     {
-        Debug.Log("1");
         TryDetach();
         grabState = GRAB_STATE.BLOCKED;
     }
@@ -1117,11 +998,8 @@ public class Gaze_GrabManager : MonoBehaviour
     {
         if (e.VrNode.Equals(VRNode.RightHand) && !isLeftHand)
         {
-            if (e.InputType.Equals(Gaze_InputTypes.HAND_RIGHT_DOWN))
-            {
-                grabState = GRAB_STATE.SEARCHING;
-                isTriggerPressed = true;
-            }
+            grabState = GRAB_STATE.SEARCHING;
+            isTriggerPressed = true;
         }
     }
 
@@ -1129,16 +1007,14 @@ public class Gaze_GrabManager : MonoBehaviour
     {
         if (e.VrNode.Equals(VRNode.RightHand) && !isLeftHand)
         {
-            if (e.InputType.Equals(Gaze_InputTypes.HAND_RIGHT_UP))
+            if (interactableIO != null)
             {
-                if (interactableIO)
-                {
-                    Gaze_EventManager.FireControllerPointingEvent(new Gaze_ControllerPointingEventArgs(this.gameObject, new KeyValuePair<VRNode, GameObject>(isLeftHand ? VRNode.LeftHand : VRNode.RightHand, interactableIO.gameObject), false));
-                    TriggerReleased(interactableIO.gameObject);
-                    ResetGrabStateAfterHandUp();
-                }
-                grabState = GRAB_STATE.EMPTY;
+                Gaze_EventManager.FireControllerPointingEvent(new Gaze_ControllerPointingEventArgs(this.gameObject, new KeyValuePair<VRNode, GameObject>(isLeftHand ? VRNode.LeftHand : VRNode.RightHand, interactableIO.gameObject), false));
+                TriggerReleased(interactableIO.gameObject);
+                ResetGrabStateAfterHandUp();
             }
+            grabState = GRAB_STATE.EMPTY;
+
         }
     }
 
@@ -1146,11 +1022,8 @@ public class Gaze_GrabManager : MonoBehaviour
     {
         if (e.VrNode.Equals(VRNode.LeftHand) && isLeftHand)
         {
-            if (e.InputType.Equals(Gaze_InputTypes.HAND_LEFT_DOWN))
-            {
-                grabState = GRAB_STATE.SEARCHING;
-                isTriggerPressed = true;
-            }
+            grabState = GRAB_STATE.SEARCHING;
+            isTriggerPressed = true;
         }
     }
 
@@ -1158,18 +1031,15 @@ public class Gaze_GrabManager : MonoBehaviour
     {
         if (e.VrNode.Equals(VRNode.LeftHand) && isLeftHand)
         {
-            if (e.InputType.Equals(Gaze_InputTypes.HAND_LEFT_UP))
+            if (interactableIO != null)
             {
-                if (interactableIO)
-                {
-                    Dictionary<VRNode, GameObject> dico = new Dictionary<VRNode, GameObject>();
-                    dico.Add(isLeftHand ? VRNode.LeftHand : VRNode.RightHand, interactableIO.gameObject);
-                    Gaze_EventManager.FireControllerPointingEvent(new Gaze_ControllerPointingEventArgs(this.gameObject, new KeyValuePair<VRNode, GameObject>(isLeftHand ? VRNode.LeftHand : VRNode.RightHand, interactableIO.gameObject), false));
-                    TriggerReleased(interactableIO.gameObject);
-                    ResetGrabStateAfterHandUp();
-                }
-                grabState = GRAB_STATE.EMPTY;
+                Dictionary<VRNode, GameObject> dico = new Dictionary<VRNode, GameObject>();
+                dico.Add(isLeftHand ? VRNode.LeftHand : VRNode.RightHand, interactableIO.gameObject);
+                Gaze_EventManager.FireControllerPointingEvent(new Gaze_ControllerPointingEventArgs(this.gameObject, new KeyValuePair<VRNode, GameObject>(isLeftHand ? VRNode.LeftHand : VRNode.RightHand, interactableIO.gameObject), false));
+                TriggerReleased(interactableIO.gameObject);
+                ResetGrabStateAfterHandUp();
             }
+            grabState = GRAB_STATE.EMPTY;
         }
     }
 
@@ -1184,13 +1054,9 @@ public class Gaze_GrabManager : MonoBehaviour
 
         // If we where attracting we need to to add graviy again to the IO
         if (interactableIO != null)
-        {
             dico = new KeyValuePair<VRNode, GameObject>(isLeftHand ? VRNode.LeftHand : VRNode.RightHand, interactableIO.gameObject);
-        }
         else
-        {
             dico = new KeyValuePair<VRNode, GameObject>(isLeftHand ? VRNode.LeftHand : VRNode.RightHand, null);
-        }
 
         Gaze_InputManager.FireControllerGrabEvent(new Gaze_ControllerGrabEventArgs(this, dico, false));
         Gaze_GravityManager.ChangeGravityState(interactableIO, Gaze_GravityRequestType.RETURN_TO_DEFAULT);
@@ -1229,15 +1095,33 @@ public class Gaze_GrabManager : MonoBehaviour
     /// 'Other' is either the Proximity for Interactive Objects or the object itself.
     /// 'Sender' is always the controller triggering the event
     /// </summary>
-    /// <param name="e">E.</param>
-    private void OnControllerCollisionEvent(Gaze_ControllerCollisionEventArgs e)
+    /// <param name="_e">E.</param>
+    /// <summary>
+    /// Calls on controller collision event.
+    /// Grabbed objects have to be Interactive Object ('Gaze objects')
+    /// 'Other' is either the Proximity for Interactive Objects or the object itself.
+    /// 'Sender' is always the controller triggering the event
+    /// </summary>
+    /// <param name="_e">E.</param>
+    private void OnControllerCollisionEvent(Gaze_ControllerCollisionEventArgs _e)
     {
-        GameObject collidingObject = Gaze_Utils.ConvertIntoGameObject(e.Other);
 
-        if (collidingObject.GetComponent<Gaze_Manipulation>() == null)
+        // If the grab manager is not this one we dont care
+        if (_e.GrabManger != this)
             return;
 
-        Gaze_InteractiveObject IO = collidingObject.GetComponentInParent<Gaze_InteractiveObject>();
+        GameObject colObject = Gaze_Utils.ConvertIntoGameObject(_e.Other);
+
+        if (colObject.GetComponent<Gaze_Manipulation>() == null)
+            return;
+
+        Gaze_InteractiveObject IO = colObject.GetComponentInParent<Gaze_InteractiveObject>();
+
+        if (IO.ManipulationMode == Gaze_ManipulationModes.NONE)
+            return;
+
+        if (IO.GrabLogic.GrabbingManager != null && IO.ManipulationMode == Gaze_ManipulationModes.LEVITATE)
+            return;
 
         // Discart hands
         if (IO.GetComponentInChildren<Gaze_HandController>())
@@ -1247,25 +1131,27 @@ public class Gaze_GrabManager : MonoBehaviour
         if (IO.GetComponent<Gaze_Head>() != null)
             return;
 
-        if (IO.ManipulationMode != Gaze_ManipulationModes.GRAB)
-            return;
-
         // Check if the colliding object has a gaze handle in order to avoid noise.
-        collidingObject = (GameObject)e.Other;
+        colObject = (GameObject)_e.Other;
 
         // exit if the sender is not this Controller
-        GameObject senderController = ((GameObject)e.Sender).GetComponentInParent<Gaze_InteractiveObject>().GetComponentInChildren<Gaze_HandController>().gameObject;
+        GameObject senderController = ((GameObject)_e.Sender).GetComponentInParent<Gaze_InteractiveObject>().GetComponentInChildren<Gaze_HandController>().gameObject;
         if (senderController != this.gameObject)
             return;
 
         // if colliding object is a Gaze_InteractiveObject
-        Gaze_InteractiveObject collidingIO = ((GameObject)e.Other).GetComponentInParent<Gaze_InteractiveObject>();
-        if (collidingIO != null)
+        Gaze_InteractiveObject collidingIo = ((GameObject)_e.Other).GetComponentInParent<Gaze_InteractiveObject>();
+
+        // If its the object that we are already taking its not necessary to process
+        if (collidingIo.GrabLogic.IsBeingGrabbed && collidingIo.GrabLogic.GrabbingManager == this)
+            return;
+
+        if (collidingIo != null)
         {
             // if it's catchable, touchable, levitable OR if it's manipulated and we're colliding with the manipulable collider
-            if (collidingIO.IsGrabEnabled || collidingIO.IsTouchEnabled || (collidingIO.IsBeingManipulated && collidingIO.ManipulableHandle.Equals(e.Other.GetComponent<Collider>())))
+            if (collidingIo.IsGrabEnabled || collidingIo.IsTouchEnabled || (collidingIo.GrabLogic.IsBeingManipulated && collidingIo.ManipulableHandle.Equals(_e.Other.GetComponent<Collider>())))
             {
-                UpdateProximityList(collidingIO, e);
+                UpdateProximityList(collidingIo, _e);
             }
         }
     }

@@ -6,7 +6,7 @@ namespace Gaze
     {
         public Gaze_GenericTeleport(Gaze_Teleporter _teleporter) : base(_teleporter)
         {
-
+            Debug.Log("Oculus on!");
         }
 
         public override void Setup()
@@ -43,9 +43,8 @@ namespace Gaze
                 teleporter.CalculateArc();
         }
 
-        private void OnStickLeftAxisEvent(Gaze_InputEventArgs e)
+        protected void OnStickLeftAxisEvent(Gaze_InputEventArgs e)
         {
-
             teleporter.axisValue = e.AxisValue.magnitude;
 
             //If the teleport is not allowed we need to deactivate it and return

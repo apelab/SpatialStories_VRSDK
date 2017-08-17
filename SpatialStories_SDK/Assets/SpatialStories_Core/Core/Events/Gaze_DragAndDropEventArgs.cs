@@ -31,20 +31,35 @@ namespace Gaze
         public object Sender { get { return sender; } }
 
         /// <summary>
-        /// The Drop Target
+        /// The object dropped on a target
         /// </summary>
-        private object targetObject;
+        private object dropObject;
 
-        public object TargetObject { get { return targetObject; } }
+        public object DropObject { get { return dropObject; } }
+
+        /// <summary>
+        /// The target an object is dropped on
+        /// </summary>
+        private object dropTarget;
+
+        public object DropTarget { get { return dropTarget; } }
 
         private Gaze_DragAndDropStates state;
 
         public Gaze_DragAndDropStates State { get { return state; } }
 
-        public Gaze_DragAndDropEventArgs(object _sender, object _targetObject, Gaze_DragAndDropStates _state)
+        //public Gaze_DragAndDropEventArgs(object _sender, object _targetObject, Gaze_DragAndDropStates _state)
+        //{
+        //    sender = _sender;
+        //    dropTarget = _targetObject;
+        //    state = _state;
+        //}
+
+        public Gaze_DragAndDropEventArgs(object _sender, object _dropObject, object _dropTarget, Gaze_DragAndDropStates _state)
         {
             sender = _sender;
-            targetObject = _targetObject;
+            dropObject = _dropObject;
+            dropTarget = _dropTarget;
             state = _state;
         }
     }

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Text.RegularExpressions;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 
 namespace Gaze
 {
@@ -56,6 +58,7 @@ namespace Gaze
             }
         }
 
+#if UNITY_EDITOR
         /// <summary>
         /// Creates an input config from a binary object
         /// </summary>
@@ -82,6 +85,7 @@ namespace Gaze
             invert = GetPropertyFromSerialized<float>(Gaze_InputConfigConstants.NAME_INVERT, _inputConfig);
             joyNum = GetPropertyFromSerialized<float>(Gaze_InputConfigConstants.NAME_JOY_NUM, _inputConfig);
         }
+#endif
 
         /// <summary>
         /// Gets a parameter of a line and modifies the attribute passed as a parameter.
@@ -101,6 +105,8 @@ namespace Gaze
             return false;
         }
 
+
+#if UNITY_EDITOR
         /// <summary>
         /// Gets a property of a serialized object and returns its value or a default one
         /// </summary>
@@ -126,7 +132,7 @@ namespace Gaze
                 return _nullValue;
             }
         }
+#endif
 
     }
 }
-

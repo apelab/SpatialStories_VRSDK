@@ -4007,6 +4007,7 @@ MonoBehaviour:
   requireAllDeactivators: 0
   proximityMap:
     proximityEntryList: []
+    proximityEntryGroupList: []
     proximityStateIndex: 0
   grabMap:
     grabEntryList:
@@ -4086,6 +4087,8 @@ MonoBehaviour:
   hoverIn: 0
   ReloadDependencies: 0
   isActive: 0
+  proximityGroupIndex: 0
+  rigCombinations: []
 --- !u!114 &114059806136862798
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4291,6 +4294,7 @@ MonoBehaviour:
   ActionGravity: 0
   ActionAudio: 0
   ActionColliders: 0
+  ActionDragAndDrop: 0
   DestroyOnTrigger: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
@@ -4298,6 +4302,22 @@ MonoBehaviour:
   grabDistance: 0
   touchDistance: 0
   grabModeIndex: 0
+  ModifyDragAndDrop: 0
+  ModifyDragAndDropTargets: 0
+  ModifyDnDMinDistance: 0
+  ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDRespectAxis: 0
+  dnDMinDistance: 0
+  dnDSnapBeforeDrop: 0
+  dnDRespectXAxis: 0
+  dnDRespectYAxis: 0
+  dnDRespectZAxis: 0
+  dnDRespectXAxisMirror: 0
+  dnDRespectYAxisMirror: 0
+  dnDRespectZAxisMirror: 0
+  ModifyDnDAngleThreshold: 0
+  dnDAngleThreshold: 0
+  DnD_Targets: []
   visualsScript: {fileID: 0}
   AlterAllVisuals: 1
   selectedRenderers: 
@@ -4372,6 +4392,7 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
+  DnD_IsTarget: 0
   DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
@@ -4487,6 +4508,7 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
+  DnD_IsTarget: 0
   DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
@@ -4506,6 +4528,7 @@ MonoBehaviour:
   requireAllDeactivators: 0
   proximityMap:
     proximityEntryList: []
+    proximityEntryGroupList: []
     proximityStateIndex: 0
   grabMap:
     grabEntryList: []
@@ -4583,6 +4606,8 @@ MonoBehaviour:
   hoverIn: 0
   ReloadDependencies: 0
   isActive: 0
+  proximityGroupIndex: 0
+  rigCombinations: []
 --- !u!114 &114573144645241684
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4610,6 +4635,7 @@ MonoBehaviour:
   ActionGravity: 0
   ActionAudio: 0
   ActionColliders: 0
+  ActionDragAndDrop: 0
   DestroyOnTrigger: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
@@ -4617,6 +4643,22 @@ MonoBehaviour:
   grabDistance: 0
   touchDistance: 0
   grabModeIndex: 0
+  ModifyDragAndDrop: 0
+  ModifyDragAndDropTargets: 0
+  ModifyDnDMinDistance: 0
+  ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDRespectAxis: 0
+  dnDMinDistance: 0
+  dnDSnapBeforeDrop: 0
+  dnDRespectXAxis: 0
+  dnDRespectYAxis: 0
+  dnDRespectZAxis: 0
+  dnDRespectXAxisMirror: 0
+  dnDRespectYAxisMirror: 0
+  dnDRespectZAxisMirror: 0
+  ModifyDnDAngleThreshold: 0
+  dnDAngleThreshold: 0
+  DnD_Targets: []
   visualsScript: {fileID: 0}
   AlterAllVisuals: 1
   selectedRenderers: 
@@ -4761,6 +4803,7 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
+  DnD_IsTarget: 0
   DnD_Targets: []
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
@@ -4970,6 +5013,7 @@ MonoBehaviour:
   ActionGravity: 0
   ActionAudio: 0
   ActionColliders: 0
+  ActionDragAndDrop: 0
   DestroyOnTrigger: 0
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
@@ -4977,6 +5021,22 @@ MonoBehaviour:
   grabDistance: 0
   touchDistance: 0
   grabModeIndex: 0
+  ModifyDragAndDrop: 0
+  ModifyDragAndDropTargets: 0
+  ModifyDnDMinDistance: 0
+  ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDRespectAxis: 0
+  dnDMinDistance: 0
+  dnDSnapBeforeDrop: 0
+  dnDRespectXAxis: 0
+  dnDRespectYAxis: 0
+  dnDRespectZAxis: 0
+  dnDRespectXAxisMirror: 0
+  dnDRespectYAxisMirror: 0
+  dnDRespectZAxisMirror: 0
+  ModifyDnDAngleThreshold: 0
+  dnDAngleThreshold: 0
+  DnD_Targets: []
   visualsScript: {fileID: 0}
   AlterAllVisuals: 1
   selectedRenderers: 
@@ -5033,6 +5093,7 @@ MonoBehaviour:
   requireAllDeactivators: 0
   proximityMap:
     proximityEntryList: []
+    proximityEntryGroupList: []
     proximityStateIndex: 0
   grabMap:
     grabEntryList: []
@@ -5110,6 +5171,8 @@ MonoBehaviour:
   hoverIn: 0
   ReloadDependencies: 0
   isActive: 0
+  proximityGroupIndex: 0
+  rigCombinations: []
 --- !u!120 &120167720715539006
 LineRenderer:
   m_ObjectHideFlags: 1
@@ -5465,3 +5528,4 @@ SpriteRenderer:
   m_Size: {x: 3.38, y: 2.51}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1

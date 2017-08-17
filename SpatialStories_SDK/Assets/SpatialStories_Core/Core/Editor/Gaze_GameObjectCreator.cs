@@ -46,7 +46,7 @@ namespace Gaze
             // store the original parent for re-attach later on
             Transform goParent = go.transform.parent;
 
-            Undo.SetTransformParent(go.transform, root.transform.FindChild("Visuals"), "Convert");
+            Undo.SetTransformParent(go.transform, root.transform.Find("Visuals"), "Convert");
 
             // re-attach to the original parent
             root.transform.parent = goParent;
@@ -111,7 +111,7 @@ namespace Gaze
             message.gameObject.SetActive(false);
             message.transform.localPosition = new Vector3(0, 0, 0.75f);
 
-            go.GetComponent<Camera>().near = 0.01f;
+            go.GetComponent<Camera>().nearClipPlane = 0.01f;
 
             // Return the game object
             return go;

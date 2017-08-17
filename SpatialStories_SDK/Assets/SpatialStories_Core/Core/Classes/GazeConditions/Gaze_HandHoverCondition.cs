@@ -1,4 +1,6 @@
-﻿using UnityEditor;
+﻿#if UNITY_EDITOR
+using UnityEditor;
+#endif
 using UnityEngine;
 
 namespace Gaze
@@ -19,7 +21,6 @@ namespace Gaze
         {
             return IsValid;
         }
-
 
         protected override void CustomSetup()
         {
@@ -73,11 +74,10 @@ namespace Gaze
             }
         }
 
-
         public override void ToEditorGUI()
         {
+#if UNITY_EDITOR
             EditorGUILayout.BeginHorizontal();
-
 
             if (gazeConditionsScript.hoverIn)
             {
@@ -86,15 +86,12 @@ namespace Gaze
                     RenderSatisfiedLabel("Hand Hover:");
                     RenderSatisfiedLabel("Hovered");
                 }
-
                 else
                 {
                     RenderNonSatisfiedLabel("Hand Hover:");
                     RenderNonSatisfiedLabel("UnHovered");
                 }
-
             }
-
             else
             {
                 if (validToEditorGUI)
@@ -110,9 +107,8 @@ namespace Gaze
                 }
             }
 
-
             EditorGUILayout.EndHorizontal();
+#endif
         }
     }
 }
-

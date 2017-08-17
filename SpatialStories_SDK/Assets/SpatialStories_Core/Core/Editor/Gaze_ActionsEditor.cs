@@ -1,5 +1,3 @@
-
-
 using System;
 using System.Collections.Generic;
 using UnityEditor;
@@ -12,44 +10,43 @@ namespace Gaze
     [CustomEditor(typeof(Gaze_Actions))]
     public class Gaze_ActionsEditor : Gaze_Editor
     {
-        private Gaze_InteractiveObject rootIO;
-
         private Gaze_Actions actionsScript;
         private List<Animator> hierarchyAnimators;
         private List<string> hierarchyAnimatorNames;
         private List<AudioSource> hierarchyAudioSources;
         private List<string> hierarchyAudioSourceNames;
         private List<string> selectedAnimatorTriggers;
+
         private string[] grabModes;
         private string[] allVisuals;
         private List<Renderer> allRenderers;
 
+        private List<string> selectedAnimatorStatesNames;
+        private List<AnimationClip> selectedAnimatorStates;
+
         void OnEnable()
         {
             actionsScript = (Gaze_Actions)target;
-            rootIO = actionsScript.GetComponentInParent<Gaze_InteractiveObject>();
 
-            //actionsScript.isActive = true;
-
-            EditorApplication.update += onEditorApplicationUpdate;
+            EditorApplication.update += OnEditorApplicationUpdate;
 
             hierarchyAnimators = new List<Animator>();
             hierarchyAnimatorNames = new List<string>();
             hierarchyAudioSources = new List<AudioSource>();
             hierarchyAudioSourceNames = new List<string>();
+            selectedAnimatorStatesNames = new List<string>();
+            selectedAnimatorStates = new List<AnimationClip>();
             selectedAnimatorTriggers = new List<string>();
 
             grabModes = Enum.GetNames(typeof(Gaze_GrabMode));
 
-            findAnimatorsInHierarchy();
+            FindAnimatorsInHierarchy();
             FindAudioSourcesInHierarchy();
         }
 
         void OnDisable()
         {
-            EditorApplication.update -= onEditorApplicationUpdate;
-
-            //actionsScript.isActive = false;
+            EditorApplication.update -= OnEditorApplicationUpdate;
         }
 
         public void ShowAudioOptions()
@@ -86,20 +83,101 @@ namespace Gaze
                 #region AudioClips
                 if (actionsScript.ActionAudio == Gaze_Actions.ACTIVABLE_OPTION.ACTIVATE)
                 {
+                    actionsScript.audio_stopOthers = EditorGUILayout.ToggleLeft("Stop Other Audios", actionsScript.audio_stopOthers);
+
+                    actionsScript.audio_ForceStop = EditorGUILayout.ToggleLeft("Immediate play", actionsScript.audio_ForceStop);
+                    if (!actionsScript.audio_ForceStop)
+                    {
+                        actionsScript.audio_AllowMultiple = EditorGUILayout.ToggleLeft("Cumulate audios", actionsScript.audio_AllowMultiple);
+
+                        if (actionsScript.audio_AllowMultiple)
+                        {
+                            actionsScript.audio_MaxConcurrentSound = EditorGUILayout.IntField("Max concurrent audios", actionsScript.audio_MaxConcurrentSound);
+                        }
+                    }
+
+                    EditorGUILayout.Space();
+
+                    actionsScript.audio_randomizePitch = EditorGUILayout.ToggleLeft("Randomize pitch", actionsScript.audio_randomizePitch);
+                    if (actionsScript.audio_randomizePitch)
+                    {
+                        actionsScript.audio_minPitch = EditorGUILayout.FloatField("Min pitch", actionsScript.audio_minPitch, GUILayout.Width(300));
+                        Gaze_Utils.EnsureFieldIsPositiveOrZero(ref actionsScript.audio_minPitch);
+                        actionsScript.audio_maxPitch = EditorGUILayout.FloatField("Max pitch", actionsScript.audio_maxPitch, GUILayout.Width(300));
+                        Gaze_Utils.EnsureFieldIsPositiveOrZero(ref actionsScript.audio_maxPitch);
+                    }
+
+                    EditorGUILayout.Space();
+
                     for (int i = 0; i < Gaze_HashIDs.TriggerEventsAndStates.Length; i++)
                     {
                         actionsScript.activeTriggerStatesAudio[i] = EditorGUILayout.ToggleLeft(Gaze_HashIDs.TriggerEventsAndStates[i], actionsScript.activeTriggerStatesAudio[i]);
 
                         if (actionsScript.activeTriggerStatesAudio[i])
                         {
-                            displayAudioBlock(i);
+                            DisplayAudioBlock(i);
                         }
                     }
                 }
                 #endregion onAfter 
-
-                if (actionsScript.ActionAudio == Gaze_Actions.ACTIVABLE_OPTION.ACTIVATE)
+                if (actionsScript.ActionAudio == Gaze_Actions.ACTIVABLE_OPTION.DEACTIVATE)
                 {
+                    #region Fade Out
+                    EditorGUILayout.Space();
+                    GUILayout.BeginHorizontal();
+                    actionsScript.fadeOutDeactEnabled = EditorGUILayout.ToggleLeft("Fade Out", actionsScript.fadeOutDeactEnabled);
+
+                    if (actionsScript.fadeOutDeactEnabled)
+                    {
+                        actionsScript.fadeOutDeactTime = EditorGUILayout.FloatField("", actionsScript.fadeOutDeactTime, GUILayout.Width(200));
+                        Gaze_Utils.EnsureFieldIsPositiveOrZero(ref actionsScript.fadeOutDeactTime);
+                        EditorGUILayout.LabelField("[s]");
+                        GUILayout.EndHorizontal();
+                        GUILayout.BeginHorizontal();
+
+                        actionsScript.fadeOutDeactCurve = EditorGUILayout.CurveField(actionsScript.fadeOutDeactCurve, Color.green, new Rect(0, 0, actionsScript.fadeOutDeactTime, 1), GUILayout.Width(400));
+
+                    }
+                    GUILayout.EndHorizontal();
+                    #endregion
+
+                }
+                else if (actionsScript.ActionAudio == Gaze_Actions.ACTIVABLE_OPTION.ACTIVATE)
+                {
+                    #region Fade In
+                    EditorGUILayout.Space();
+                    GUILayout.BeginHorizontal();
+                    actionsScript.fadeInEnabled = EditorGUILayout.ToggleLeft("Fade In", actionsScript.fadeInEnabled);
+                    if (actionsScript.fadeInEnabled)
+                    {
+                        actionsScript.fadeInTime = EditorGUILayout.FloatField("", actionsScript.fadeInTime, GUILayout.Width(100));
+                        Gaze_Utils.EnsureFieldIsPositiveOrZero(ref actionsScript.fadeInTime);
+                        EditorGUILayout.LabelField("[s]");
+                        GUILayout.EndHorizontal();
+                        GUILayout.BeginHorizontal();
+
+                        actionsScript.fadeInCurve = EditorGUILayout.CurveField(actionsScript.fadeInCurve, Color.green, new Rect(0, 0, actionsScript.fadeInTime, 1), GUILayout.Width(400));
+                    }
+                    GUILayout.EndHorizontal();
+                    if (actionsScript.DontHaveAudioLoop())
+                    {
+                        GUILayout.BeginHorizontal();
+                        actionsScript.fadeOutEnabled = EditorGUILayout.ToggleLeft("Fade Out", actionsScript.fadeOutEnabled);
+                        if (actionsScript.fadeOutEnabled)
+                        {
+                            actionsScript.fadeOutTime = EditorGUILayout.FloatField("", actionsScript.fadeOutTime, GUILayout.Width(100));
+                            Gaze_Utils.EnsureFieldIsPositiveOrZero(ref actionsScript.fadeOutTime);
+                            EditorGUILayout.LabelField("[s]");
+                            GUILayout.EndHorizontal();
+                            GUILayout.BeginHorizontal();
+
+                            actionsScript.fadeOutCurve = EditorGUILayout.CurveField(actionsScript.fadeOutCurve, Color.green, new Rect(0, 0, actionsScript.fadeOutTime, 1), GUILayout.Width(400));
+
+                        }
+                        GUILayout.EndHorizontal();
+                    }
+                    #endregion
+
                     #region Ducking
                     if (actionsScript.ActionAudio == Gaze_Actions.ACTIVABLE_OPTION.ACTIVATE)
                     {
@@ -107,11 +185,11 @@ namespace Gaze
                         actionsScript.duckingEnabled = EditorGUILayout.ToggleLeft("Ducking", actionsScript.duckingEnabled);
                         if (actionsScript.duckingEnabled)
                         {
-                            displayAudioDuckingBlock();
+                            DisplayAudioDuckingBlock();
                         }
                         else
                         {
-                            displayAudioVolume();
+                            DisplayAudioVolume();
                         }
                     }
                     #endregion
@@ -122,11 +200,12 @@ namespace Gaze
         public void ShowAnimationOptions()
         {
             #region Animations
-            actionsScript.triggerAnimation = EditorGUILayout.ToggleLeft("Animation", actionsScript.triggerAnimation);
+            actionsScript.ActionAnimation = (Gaze_Actions.ANIMATION_OPTION)EditorGUILayout.EnumPopup("Animation", actionsScript.ActionAnimation);
             #endregion Animations
 
+            #region MECANIM
             #region Animator
-            if (actionsScript.triggerAnimation)
+            if (actionsScript.ActionAnimation != Gaze_Actions.ANIMATION_OPTION.NOTHING)
             {
                 EditorGUILayout.BeginHorizontal();
                 if (hierarchyAnimators.Count > 0)
@@ -150,7 +229,7 @@ namespace Gaze
             #endregion Animator
 
             #region AnimationTriggers
-            if (actionsScript.triggerAnimation)
+            if (actionsScript.ActionAnimation == Gaze_Actions.ANIMATION_OPTION.MECANIM)
             {
                 for (int i = 0; i < Gaze_HashIDs.TriggerEventsAndStates.Length; i++)
                 {
@@ -159,13 +238,32 @@ namespace Gaze
 
                     if (actionsScript.activeTriggerStatesAnim[i])
                     {
-                        displayAnimBlock(i);
+                        DisplayAnimBlock(i);
                     }
                     EditorGUILayout.EndHorizontal();
                 }
                 EditorGUILayout.Space();
             }
             #endregion AnimationTriggers
+            #endregion MECANIM
+
+            #region CLIP           
+            #region AnimationTriggers
+            if (actionsScript.ActionAnimation == Gaze_Actions.ANIMATION_OPTION.CLIP)
+            {
+                for (int i = 0; i < Gaze_HashIDs.TriggerEventsAndStates.Length; i++)
+                {
+                    actionsScript.activeTriggerStatesAnim[i] = EditorGUILayout.ToggleLeft(Gaze_HashIDs.TriggerEventsAndStates[i], actionsScript.activeTriggerStatesAnim[i]);
+
+                    if (actionsScript.activeTriggerStatesAnim[i])
+                    {
+                        DisplayAnimBlock(i);
+                    }
+                }
+                EditorGUILayout.Space();
+            }
+            #endregion AnimationTriggers
+            #endregion CLIP
         }
 
         public override void Gaze_OnInspectorGUI()
@@ -181,13 +279,15 @@ namespace Gaze
                     if (actionsScript && !actionsScript.DestroyOnTrigger)
                     {
                         ShowVisualsOption();
-                        ShowCollidersOption();
                         ShowGrabOption();
                         ShowGrabDistanceOption();
                         ShowGrabModeOption();
                         ShowTouchAbilityOption();
                         ShowTouchDistanceOption();
-                        actionsScript.ActionGravity = (Gaze_Actions.ACTIVABLE_OPTION)EditorGUILayout.EnumPopup("Gravity", actionsScript.ActionGravity);
+                        ShowDragAndDropOptions();
+
+                        ShowCollidersOption();
+                        ShowGravityOption();
                         ShowAudioOptions();
                         ShowAnimationOptions();
                     }
@@ -203,6 +303,8 @@ namespace Gaze
             base.EndChangeComparision();
             EditorUtility.SetDirty(actionsScript);
         }
+
+
 
         private void ShowTouchDistanceOption()
         {
@@ -223,7 +325,7 @@ namespace Gaze
 
         private void ShowGrabModeOption()
         {
-            actionsScript.ModifyGrabMode = (Gaze_Actions.ALTERABLE_OPTION)EditorGUILayout.EnumPopup("Grab Mode", actionsScript.ModifyGrabMode);
+            actionsScript.ModifyGrabMode = (Gaze_Actions.ALTERABLE_OPTION)EditorGUILayout.EnumPopup("Manipulation Mode", actionsScript.ModifyGrabMode);
             if (actionsScript.ModifyGrabMode == Gaze_Actions.ALTERABLE_OPTION.MODIFY)
             {
                 EditorGUILayout.BeginHorizontal();
@@ -235,7 +337,7 @@ namespace Gaze
 
         private void ShowGrabDistanceOption()
         {
-            actionsScript.ModifyGrabDistance = (Gaze_Actions.ALTERABLE_OPTION)EditorGUILayout.EnumPopup("Grab Distance", actionsScript.ModifyGrabDistance);
+            actionsScript.ModifyGrabDistance = (Gaze_Actions.ALTERABLE_OPTION)EditorGUILayout.EnumPopup("Manipulation Distance", actionsScript.ModifyGrabDistance);
             if (actionsScript.ModifyGrabDistance == Gaze_Actions.ALTERABLE_OPTION.MODIFY)
             {
                 EditorGUILayout.BeginHorizontal();
@@ -248,7 +350,7 @@ namespace Gaze
 
         private void ShowGrabOption()
         {
-            actionsScript.ActionGrab = (Gaze_Actions.ACTIVABLE_OPTION)EditorGUILayout.EnumPopup("Grab Ability", actionsScript.ActionGrab);
+            actionsScript.ActionGrab = (Gaze_Actions.ACTIVABLE_OPTION)EditorGUILayout.EnumPopup("Manipulation Ability", actionsScript.ActionGrab);
         }
 
         private void ShowVisualsOption()
@@ -320,16 +422,6 @@ namespace Gaze
         private void ShowCollidersOption()
         {
             actionsScript.ActionColliders = (Gaze_Actions.ACTIVABLE_OPTION)EditorGUILayout.EnumPopup("Colliders", actionsScript.ActionColliders);
-            if (actionsScript.ActionColliders == Gaze_Actions.ACTIVABLE_OPTION.DEACTIVATE)
-            {
-                if (actionsScript.GetIO().IsAffectedByGravity() && actionsScript.ActionGravity != Gaze_Actions.ACTIVABLE_OPTION.DEACTIVATE)
-                {
-                    // This avoids the false positive problem created by the fact that the obejct is already attached by the dnd manager. 
-                    Gaze_DragAndDropCondition dndCondition = actionsScript.GetComponent<Gaze_DragAndDropCondition>();
-                    if (dndCondition == null || !dndCondition.attached)
-                        EditorGUILayout.HelpBox("Object will fall off the map (deactivate gravity to prevent it).", MessageType.Warning);
-                }
-            }
         }
 
         /// <summary>
@@ -399,31 +491,269 @@ namespace Gaze
             }
         }
 
-        private void displayAnimBlock(int i)
+        private void ShowDragAndDropOptions()
         {
-            if (actionsScript.triggerAnimation && FindAnimatorTriggers())
+            actionsScript.ModifyDragAndDrop = (Gaze_Actions.ALTERABLE_OPTION)EditorGUILayout.EnumPopup("Drag And Drop", actionsScript.ModifyDragAndDrop);
+            if (actionsScript.ModifyDragAndDrop == Gaze_Actions.ALTERABLE_OPTION.MODIFY)
             {
-                if (!selectedAnimatorTriggers.Contains(actionsScript.animatorTriggers[i]))
+                EditorGUILayout.BeginHorizontal();
+                actionsScript.ActionDragAndDrop = (Gaze_Actions.ACTIVABLE_OPTION)EditorGUILayout.EnumPopup(actionsScript.ActionDragAndDrop);
+                EditorGUILayout.EndHorizontal();
+
+                EditorGUILayout.BeginHorizontal();
+                actionsScript.ModifyDnDMinDistance = (Gaze_Actions.ALTERABLE_OPTION)EditorGUILayout.EnumPopup("Min Distance", actionsScript.ModifyDnDMinDistance);
+                EditorGUILayout.EndHorizontal();
+                if (actionsScript.ModifyDnDMinDistance == Gaze_Actions.ALTERABLE_OPTION.MODIFY)
                 {
-                    actionsScript.animatorTriggers[i] = selectedAnimatorTriggers[0];
+                    EditorGUILayout.BeginHorizontal();
+                    actionsScript.dnDMinDistance = EditorGUILayout.FloatField("", actionsScript.dnDMinDistance);
+                    Gaze_Utils.EnsureFieldIsPositiveOrZero(ref actionsScript.dnDMinDistance);
+                    EditorGUILayout.EndHorizontal();
                 }
 
-                actionsScript.animatorTriggers[i] = selectedAnimatorTriggers[EditorGUILayout.Popup(selectedAnimatorTriggers.IndexOf(actionsScript.animatorTriggers[i]), selectedAnimatorTriggers.ToArray())];
+                EditorGUILayout.BeginHorizontal();
+                actionsScript.ModifyDnDSnapBeforeDrop = (Gaze_Actions.ACTIVABLE_OPTION)EditorGUILayout.EnumPopup("Snap Before Drop", actionsScript.ModifyDnDSnapBeforeDrop);
+                EditorGUILayout.EndHorizontal();
+
+                EditorGUILayout.BeginHorizontal();
+                actionsScript.ModifyDnDAttached = (Gaze_Actions.ACTIVABLE_OPTION)EditorGUILayout.EnumPopup("Attached", actionsScript.ModifyDnDAttached);
+                EditorGUILayout.EndHorizontal();
+
+                DisplayDnDAxisConstraints();
+
+
+                EditorGUILayout.BeginHorizontal();
+                actionsScript.ModifyDnDAngleThreshold = (Gaze_Actions.ALTERABLE_OPTION)EditorGUILayout.EnumPopup("Angle Threshold", actionsScript.ModifyDnDAngleThreshold);
+                EditorGUILayout.EndHorizontal();
+                if (actionsScript.ModifyDnDAngleThreshold == Gaze_Actions.ALTERABLE_OPTION.MODIFY)
+                {
+                    EditorGUILayout.BeginHorizontal();
+                    actionsScript.dnDAngleThreshold = EditorGUILayout.FloatField("", actionsScript.dnDAngleThreshold);
+                    Gaze_Utils.EnsureFieldIsPositiveOrZero(ref actionsScript.dnDAngleThreshold);
+                    EditorGUILayout.EndHorizontal();
+                }
+
+
+                DisplayDnDTargets();
+
+                EditorGUILayout.Space();
             }
         }
 
-        private void displayAudioBlock(int i)
+        private void DisplayDnDTargets()
         {
-            if (actionsScript.ActionAudio == Gaze_Actions.ACTIVABLE_OPTION.ACTIVATE && hierarchyAudioSources.Count > 0)
+            /*
+            EditorGUILayout.BeginHorizontal();
+            actionsScript.ModifyDragAndDropTargets = (Gaze_Actions.ALTERABLE_OPTION)EditorGUILayout.EnumPopup("Targets", actionsScript.ModifyDragAndDropTargets);
+            EditorGUILayout.EndHorizontal();
+            if (actionsScript.ModifyDragAndDropTargets == Gaze_Actions.ALTERABLE_OPTION.MODIFY)
+            {
+                for (int i = 0; i < actionsScript.DnD_Targets.Count; i++)
+                    EditorGUILayout.BeginHorizontal();
+                actionsScript.DnD_Targets = EditorGUILayout.FloatField("", actionsScript.dnDMinDistance);
+                EditorGUILayout.EndHorizontal();
+            }
+            */
+        }
+
+        private void DisplayDnDAxisConstraints()
+        {
+            EditorGUILayout.BeginHorizontal();
+            actionsScript.ModifyDnDRespectAxis = (Gaze_Actions.ALTERABLE_OPTION)EditorGUILayout.EnumPopup("Respect Axis", actionsScript.ModifyDnDRespectAxis);
+            EditorGUILayout.EndHorizontal();
+            if (actionsScript.ModifyDnDRespectAxis == Gaze_Actions.ALTERABLE_OPTION.MODIFY)
             {
                 EditorGUILayout.BeginHorizontal();
-                actionsScript.audioClips[i] = (AudioClip)EditorGUILayout.ObjectField("", actionsScript.audioClips[i], typeof(AudioClip), false);
-                actionsScript.loopAudio[i] = EditorGUILayout.ToggleLeft("Loop", actionsScript.loopAudio[i]);
+                actionsScript.dnDRespectXAxis = EditorGUILayout.ToggleLeft("Respect X Axis", actionsScript.dnDRespectXAxis);
+                if (actionsScript.dnDRespectXAxis)
+                    actionsScript.dnDRespectXAxisMirror = EditorGUILayout.ToggleLeft("Mirrored", actionsScript.dnDRespectXAxisMirror);
+                EditorGUILayout.EndHorizontal();
+
+                EditorGUILayout.BeginHorizontal();
+                actionsScript.dnDRespectYAxis = EditorGUILayout.ToggleLeft("Respect Y Axis", actionsScript.dnDRespectYAxis);
+                if (actionsScript.dnDRespectYAxis)
+                    actionsScript.dnDRespectYAxisMirror = EditorGUILayout.ToggleLeft("Mirrored", actionsScript.dnDRespectYAxisMirror);
+                EditorGUILayout.EndHorizontal();
+
+                EditorGUILayout.BeginHorizontal();
+                actionsScript.dnDRespectZAxis = EditorGUILayout.ToggleLeft("Respect Z Axis", actionsScript.dnDRespectZAxis);
+                if (actionsScript.dnDRespectZAxis)
+                    actionsScript.dnDRespectZAxisMirror = EditorGUILayout.ToggleLeft("Mirrored", actionsScript.dnDRespectZAxisMirror);
                 EditorGUILayout.EndHorizontal();
             }
         }
 
-        private void displayAudioDuckingBlock()
+
+        private void DisplayAnimBlock(int k)
+        {
+            if (actionsScript.ActionAnimation == Gaze_Actions.ANIMATION_OPTION.MECANIM && FindAnimatorTriggers())
+            {
+                if (!selectedAnimatorTriggers.Contains(actionsScript.animatorTriggers[k]))
+                {
+                    actionsScript.animatorTriggers[k] = selectedAnimatorTriggers[0];
+                }
+
+                actionsScript.animatorTriggers[k] = selectedAnimatorTriggers[EditorGUILayout.Popup(selectedAnimatorTriggers.IndexOf(actionsScript.animatorTriggers[k]), selectedAnimatorTriggers.ToArray())];
+            }
+            else if (actionsScript.ActionAnimation == Gaze_Actions.ANIMATION_OPTION.CLIP)
+            {
+                // help message if no aniamtion are found
+                if (!FindAnimatorStates())
+                {
+                    EditorGUILayout.BeginHorizontal();
+                    EditorGUILayout.HelpBox("There are no animation in your animator", MessageType.Warning);
+                    EditorGUILayout.EndHorizontal();
+                }
+                else
+                {
+                    if (actionsScript.animationClip.Count(k) < 1)
+                    {
+                        AnimationClip d = actionsScript.animationClip.Add(k);
+                        d = selectedAnimatorStates[0];
+                    }
+                    else
+                    {
+                        EditorGUILayout.BeginHorizontal();
+                        int index = EditorGUILayout.Popup(selectedAnimatorStates.IndexOf(actionsScript.animationClip.Get(k, 0)), selectedAnimatorStatesNames.ToArray());
+                        index = Mathf.Max(index, 0);
+                        actionsScript.animationClip.Set(k, 0, selectedAnimatorStates[index]);
+                        EditorGUILayout.EndHorizontal();
+
+                        // update inputs list in Gaze_Interactions (Gaze_Interactions may have been removed in the hierarchy)
+                        for (int i = 1; i < actionsScript.animationClip.Count(k); i++)
+                        {
+                            if (!selectedAnimatorStates.Contains(actionsScript.animationClip.Get(k, i)))
+                            {
+                                actionsScript.animationClip.Set(k, i, selectedAnimatorStates[0]);
+                            }
+
+                            // display the entry
+                            EditorGUILayout.BeginHorizontal();
+                            AnimationClip clip = selectedAnimatorStates[EditorGUILayout.Popup(selectedAnimatorStates.IndexOf(actionsScript.animationClip.Get(k, i)), selectedAnimatorStatesNames.ToArray())];
+                            actionsScript.animationClip.Set(k, i, clip);
+
+                            // and a '-' button to remove it if needed
+                            if (GUILayout.Button("-", GUILayout.Width(100)))
+                            {
+                                actionsScript.animationClip.Remove(k, i);
+                            }
+
+                            EditorGUILayout.EndHorizontal();
+                        }
+                    }
+
+                    // display 'add' button
+                    if (GUILayout.Button("+", GUILayout.Width(400)))
+                    {
+                        AnimationClip d = actionsScript.animationClip.Add(k);
+
+                        EditorGUILayout.BeginHorizontal();
+
+                        if (GUILayout.Button("-"))
+                        {
+                            actionsScript.animationClip.Remove(k, d);
+
+                        }
+                        EditorGUILayout.EndHorizontal();
+                    }
+
+                    EditorGUILayout.BeginHorizontal();
+                    actionsScript.loopAnim[k] = (Gaze_Actions.LOOP_MODES)EditorGUILayout.EnumPopup("Loop", actionsScript.loopAnim[k]);
+
+                    if (actionsScript.loopAnim[k] == Gaze_Actions.LOOP_MODES.Single)
+                    {
+                        actionsScript.loopAnimType[k] = (Gaze_Actions.ANIMATION_LOOP)EditorGUILayout.EnumPopup("", actionsScript.loopAnimType[k]);
+                    }
+                    EditorGUILayout.EndHorizontal();
+
+                    if (actionsScript.animationClip.Count(k) > 1 && actionsScript.loopAnim[k] != Gaze_Actions.LOOP_MODES.PlaylistOnce)
+                    {
+                        actionsScript.animationSequence[k] = (Gaze_Actions.AUDIO_SEQUENCE)EditorGUILayout.EnumPopup("Sequence", actionsScript.animationSequence[k]);
+                    }
+
+                    if (actionsScript.loopAnim[k] == Gaze_Actions.LOOP_MODES.PlaylistOnce)
+                    {
+                        EditorGUILayout.BeginHorizontal();
+                        actionsScript.loopOnLast[k] = EditorGUILayout.ToggleLeft("Loop on last", actionsScript.loopOnLast[k]);
+                        if (actionsScript.loopOnLast[k])
+                        {
+                            actionsScript.loopAnimType[k] = (Gaze_Actions.ANIMATION_LOOP)EditorGUILayout.EnumPopup("", actionsScript.loopAnimType[k]);
+                        }
+                        EditorGUILayout.EndHorizontal();
+                    }
+                }
+            }
+        }
+
+        private void DisplayAudioBlock(int k)
+        {
+            // help message if no input is specified
+            if (actionsScript.audioClips.Count(k) < 1)
+            {
+                AudioClip d = actionsScript.audioClips.Add(k);
+            }
+            else
+            {
+
+                EditorGUILayout.BeginHorizontal();
+                actionsScript.audioClips.Set(k, 0, (AudioClip)EditorGUILayout.ObjectField("", actionsScript.audioClips.Get(k, 0), typeof(AudioClip), false, GUILayout.Width(300)));
+                EditorGUILayout.EndHorizontal();
+
+                // update inputs list in Gaze_Interactions (Gaze_Interactions may have been removed in the hierarchy)
+                for (int i = 1; i < actionsScript.audioClips.Count(k); i++)
+                {
+                    // display the entry
+                    EditorGUILayout.BeginHorizontal();
+                    actionsScript.audioClips.Set(k, i, (AudioClip)EditorGUILayout.ObjectField("", actionsScript.audioClips.Get(k, i), typeof(AudioClip), false, GUILayout.Width(300)));
+
+                    // and a '-' button to remove it if needed
+                    if (GUILayout.Button("-", GUILayout.Width(100)))
+                        actionsScript.audioClips.Remove(k, i);
+
+                    EditorGUILayout.EndHorizontal();
+                }
+            }
+
+            // display 'add' button
+            if (GUILayout.Button("+", GUILayout.Width(400)))
+            {
+                AudioClip d = actionsScript.audioClips.Add(k);
+
+                EditorGUILayout.BeginHorizontal();
+
+                if (GUILayout.Button("-"))
+                {
+                    actionsScript.audioClips.Remove(k, d);
+
+                    // TODO @apelab remove event subscription
+
+
+                }
+                EditorGUILayout.EndHorizontal();
+            }
+
+            EditorGUILayout.BeginHorizontal();
+            actionsScript.loopAudio[k] = (Gaze_Actions.LOOP_MODES)EditorGUILayout.EnumPopup("Loop", actionsScript.loopAudio[k]);
+
+            if (actionsScript.audioClips.Count(k) > 1 && actionsScript.loopAudio[k] == Gaze_Actions.LOOP_MODES.Playlist)
+            {
+                actionsScript.fadeInBetween[k] = EditorGUILayout.ToggleLeft("Fade in between", actionsScript.fadeInBetween[k]);
+
+            }
+            EditorGUILayout.EndHorizontal();
+
+            if (actionsScript.audioClips.Count(k) > 1 && actionsScript.loopAudio[k] != Gaze_Actions.LOOP_MODES.PlaylistOnce)
+            {
+                actionsScript.audio_sequence[k] = (Gaze_Actions.AUDIO_SEQUENCE)EditorGUILayout.EnumPopup("Sequence", actionsScript.audio_sequence[k]);
+            }
+
+            if (actionsScript.loopAudio[k] == Gaze_Actions.LOOP_MODES.PlaylistOnce)
+            {
+                actionsScript.audioLoopOnLast[k] = EditorGUILayout.ToggleLeft("Loop on last", actionsScript.audioLoopOnLast[k]);
+            }
+        }
+
+        private void DisplayAudioDuckingBlock()
         {
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.LabelField("Volume Min.");
@@ -441,7 +771,7 @@ namespace Gaze
             EditorGUILayout.EndHorizontal();
         }
 
-        private void displayAudioVolume()
+        private void DisplayAudioVolume()
         {
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.LabelField("Volume");
@@ -449,17 +779,17 @@ namespace Gaze
             EditorGUILayout.EndHorizontal();
         }
 
-        private void onEditorApplicationUpdate()
+        private void OnEditorApplicationUpdate()
         {
             if (target == null)
                 return;
 
-            findAnimatorsInHierarchy();
+            FindAnimatorsInHierarchy();
             FindAnimatorTriggers();
             FindAudioSourcesInHierarchy();
         }
 
-        private void findAnimatorsInHierarchy()
+        private void FindAnimatorsInHierarchy()
         {
             Animator[] ac = actionsScript.GetComponentInParent<Gaze_InteractiveObject>().GetComponentsInChildren<Animator>();
 
@@ -509,6 +839,25 @@ namespace Gaze
             // TODO no triggers found when Animator view changes
 
             return selectedAnimatorTriggers.Count > 0;
+        }
+
+        private bool FindAnimatorStates()
+        {
+            selectedAnimatorStates.Clear();
+
+            if (actionsScript.targetAnimator != null && actionsScript.targetAnimator.isInitialized)
+            {
+                for (int i = 0; i < actionsScript.targetAnimator.runtimeAnimatorController.animationClips.Length; i++)
+                {
+                    AnimationClip p = actionsScript.targetAnimator.runtimeAnimatorController.animationClips[i];
+
+                    selectedAnimatorStates.Add(p);
+                    selectedAnimatorStatesNames.Add(p.name);
+
+                }
+            }
+
+            return selectedAnimatorStates.Count > 0;
         }
     }
 }

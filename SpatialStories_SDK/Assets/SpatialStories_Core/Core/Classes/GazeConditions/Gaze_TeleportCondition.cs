@@ -18,7 +18,9 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 
 namespace Gaze
 {
@@ -43,6 +45,7 @@ namespace Gaze
 
         public override void ToEditorGUI()
         {
+#if UNITY_EDITOR
             EditorGUILayout.BeginHorizontal();
             if (IsValid)
             {
@@ -55,6 +58,7 @@ namespace Gaze
                 RenderNonSatisfiedLabel("False");
             }
             EditorGUILayout.EndHorizontal();
+#endif
         }
 
         private void ValidateGrab(Gaze_TeleportEventArgs e)

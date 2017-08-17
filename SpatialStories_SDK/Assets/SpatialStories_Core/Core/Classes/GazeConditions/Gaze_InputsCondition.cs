@@ -18,14 +18,15 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 
 namespace Gaze
 {
     public class Gaze_InputsCondition : Gaze_AbstractCondition
     {
         private int entriesCount;
-        private bool requireAllValidated = false;
 
         public Gaze_InputsCondition(Gaze_Conditions _gazeConditionsScript) : base(_gazeConditionsScript) { }
 
@@ -66,7 +67,6 @@ namespace Gaze
             #endregion inputs subscription
 
             entriesCount = gazeConditionsScript.InputsMap.InputsEntries.Count;
-            requireAllValidated = false;
         }
 
         public override bool IsValidated()
@@ -113,6 +113,7 @@ namespace Gaze
 
         public override void ToEditorGUI()
         {
+#if UNITY_EDITOR
             for (int i = 0; i < entriesCount; i++)
             {
                 EditorGUILayout.BeginHorizontal();
@@ -128,6 +129,7 @@ namespace Gaze
                 }
                 EditorGUILayout.EndHorizontal();
             }
+#endif
         }
 
         private void ValidateInputs(Gaze_InputEventArgs e)

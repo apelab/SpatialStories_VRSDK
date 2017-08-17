@@ -111,7 +111,7 @@ public class Gaze_Teleporter : MonoBehaviour
         switch (actualController)
         {
             case Gaze_Controllers.HTC_VIVE:
-                actualTeleportLogic = new Gaze_GenericTeleport(this);
+                actualTeleportLogic = new Gaze_ViveTeleport(this);
                 break;
             case Gaze_Controllers.OCULUS_RIFT:
                 actualTeleportLogic = new Gaze_GenericTeleport(this);
@@ -125,14 +125,6 @@ public class Gaze_Teleporter : MonoBehaviour
 
         if (actualTeleportLogic != null)
             actualTeleportLogic.Setup();
-
-        if (Gaze_InputManager.PluggedControllerType == Gaze_Controllers.HTC_VIVE)
-        {
-            Gaze_InputManager manager = GetComponentInParent<Gaze_InputManager>();
-            Vector3 position = manager.transform.position;
-            manager.transform.position = new Vector3(position.x, 0, position.z);
-        }
-
     }
 
     void OnEnable()
@@ -209,12 +201,10 @@ public class Gaze_Teleporter : MonoBehaviour
 
     void Update()
     {
-        //AlterColliders(false);
-        if (teleportActive)
+        if (teleportActive || actualTeleportLogic is Gaze_ViveTeleport)
         {
             actualTeleportLogic.Update();
         }
-        //AlterColliders(true);
     }
 
 
@@ -577,6 +567,14 @@ public class Gaze_Teleporter : MonoBehaviour
             gaze_TeleportEventArgs.Mode = Gaze_TeleportMode.TELEPORT;
             Gaze_EventManager.FireTeleportEvent(gaze_TeleportEventArgs);
         }
+    }
+
+    public void MoveToGyro()
+    {
+        if (OrientOnTeleport)
+            RotateCamera();
+
+        MoveToTarget(gyroInstance.transform.position);
     }
 
     /*

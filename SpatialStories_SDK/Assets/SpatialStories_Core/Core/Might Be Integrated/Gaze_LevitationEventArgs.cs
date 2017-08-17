@@ -24,25 +24,16 @@ namespace Gaze
 {
     public class Gaze_LevitationEventArgs : EventArgs
     {
-        private object sender;
-
-        public object Sender { get { return sender; } }
-
-        private GameObject objectToLevitate;
-
-        public GameObject ObjectToLevitate { get { return objectToLevitate; } }
-
-        private Gaze_LevitationTypes type;
-
-        public Gaze_LevitationTypes Type { get { return type; } }
-
-        public Gaze_HandsEnum Hand { get; private set; }
+        public object Sender;
+        public GameObject ObjectToLevitate;
+        public Gaze_LevitationTypes Type;
+        public Gaze_HandsEnum Hand;
 
         public Gaze_LevitationEventArgs(object _sender, GameObject _objectToLevitate, Gaze_LevitationTypes _type, Gaze_HandsEnum actualHand)
         {
-            sender = _sender;
-            objectToLevitate = _objectToLevitate;
-            type = _type;
+            Sender = _sender;
+            ObjectToLevitate = _objectToLevitate;
+            Type = _type;
             Hand = actualHand;
         }
     }

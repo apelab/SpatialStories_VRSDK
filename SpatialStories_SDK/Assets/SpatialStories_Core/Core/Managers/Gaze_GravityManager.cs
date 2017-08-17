@@ -11,7 +11,7 @@ namespace Gaze
         /// <summary>
         /// If set to true the gravity manager will begin to log gravity inconcistencies
         /// </summary>
-        public const bool SHOW_GRAVITY_WARNINGS = false;
+        public static bool SHOW_GRAVITY_WARNINGS = false;
 
         public static void ChangeGravityState(Gaze_InteractiveObject _IO, Gaze_GravityRequestType operation)
         {

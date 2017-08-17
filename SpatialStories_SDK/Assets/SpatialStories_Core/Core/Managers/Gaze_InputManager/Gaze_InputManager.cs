@@ -31,6 +31,7 @@ public class Gaze_InputManager : MonoBehaviour
 {
     #region members
 
+
     public static Gaze_Controllers PluggedControllerType = Gaze_Controllers.NOT_DETERMINED;
 
     [ReadOnly]
@@ -212,10 +213,6 @@ public class Gaze_InputManager : MonoBehaviour
     private bool controllersConnected;
     // the names of the connected controllers (HTC, Oculus Touch...)
     private string[] controllersNames;
-    // flag to know whether oculus or HTC controllers are used
-    private bool oculusControllersUsed = true;
-    private VRNode? leftHand = VRNode.LeftHand;
-    private VRNode? rightHand = VRNode.RightHand;
     private bool isHandRightDown = false, isHandLeftDown = false;
     private bool isIndexLeftDown = false, isIndexRightDown = false;
     private Vector2 axisValueLeft, axisValueRight;
@@ -255,8 +252,6 @@ public class Gaze_InputManager : MonoBehaviour
         }
         remove { setupEvent -= value; }
     }
-    private Gaze_InputEventArgs gaze_InputEventArgs;
-
     #endregion
 
     void Awake()
@@ -291,8 +286,6 @@ public class Gaze_InputManager : MonoBehaviour
         // CPU / GPU Throttling
         OVRPlugin.cpuLevel = 3;
         OVRPlugin.gpuLevel = 3;
-
-        gaze_InputEventArgs = new Gaze_InputEventArgs(this.gameObject);
     }
 
     void OnEnable()
@@ -310,9 +303,9 @@ public class Gaze_InputManager : MonoBehaviour
     private void IdentifyInputType()
     {
         // Check if GearVR_Controller is conected if dont just add the generic controller
-        if (OVRInput.IsControllerConnected(OVRInput.Controller.RTrackedRemote))
+        if (OVRInput.IsControllerConnected(OVRInput.Controller.RTrackedRemote) || OVRInput.IsControllerConnected(OVRInput.Controller.LTrackedRemote))
         {
-            SpecialInputLogic = new Gaze_GearVR_InputLogic();
+            SpecialInputLogic = new Gaze_GearVR_InputLogic(this);
             PluggedControllerType = Gaze_Controllers.GEARVR_CONTROLLER;
         }
         else
@@ -331,8 +324,8 @@ public class Gaze_InputManager : MonoBehaviour
 
         if (setupEvent != null)
         {
-            setupEvent(PluggedControllerType);
             CurrentController = PluggedControllerType;
+            setupEvent(PluggedControllerType);
         }
     }
 
@@ -397,14 +390,16 @@ public class Gaze_InputManager : MonoBehaviour
             rightHandIO.SetActive(false);
     }
 
-    Transform FixesLeftPosition;
-    Transform FixedRightPosition;
+    public Transform FixedLeftPosition;
+    public Transform FixedRightPosition;
+    public Vector3 OriginalRightHandFixedPosition;
 
     // if position tracking is disabled, parent the controllers to the camera
     private void ParentControllersToCamera()
     {
-        FixesLeftPosition = GetComponentInChildren<Gaze_PlayerTorso>().transform.FindChild("LeftHandFixedPosition").transform;
-        FixedRightPosition = GetComponentInChildren<Gaze_PlayerTorso>().transform.FindChild("RightHandFixedPosition").transform;
+        FixedLeftPosition = GetComponentInChildren<Gaze_PlayerTorso>().transform.Find("LeftHandFixedPosition").transform;
+        FixedRightPosition = GetComponentInChildren<Gaze_PlayerTorso>().transform.Find("RightHandFixedPosition").transform;
+        OriginalRightHandFixedPosition = FixedRightPosition.localPosition;
         leftHandIO.transform.localPosition = Vector3.zero;
         rightHandIO.transform.localPosition = Vector3.zero;
         localHandsHeigth = transform.position.y - GetComponentInChildren<Gaze_PlayerTorso>().transform.position.y;
@@ -413,26 +408,29 @@ public class Gaze_InputManager : MonoBehaviour
 
     private void SetPosition()
     {
-        leftHandIO.transform.localPosition = InputTracking.GetLocalPosition(VRNode.LeftHand);
-        rightHandIO.transform.localPosition = InputTracking.GetLocalPosition(VRNode.RightHand);
+        if (SpecialInputLogic == null)
+        {
+            leftHandIO.transform.localPosition = InputTracking.GetLocalPosition(VRNode.LeftHand);
+            rightHandIO.transform.localPosition = InputTracking.GetLocalPosition(VRNode.RightHand);
+        }
+        else
+            SpecialInputLogic.SetPosition(rightHandIO, leftHandIO);
     }
 
     private void SetOrientation()
     {
-        leftHandIO.transform.localRotation = InputTracking.GetLocalRotation(VRNode.LeftHand);
-        rightHandIO.transform.localRotation = InputTracking.GetLocalRotation(VRNode.RightHand);
-
-        // take camera rotation into account if tracking position is disabled
-        if (!trackPosition)
+        if (SpecialInputLogic == null)
         {
-            //leftHandIO.transform.localEulerAngles -= Camera.main.transform.localEulerAngles;
-            //rightHandIO.transform.localEulerAngles -= Camera.main.transform.localEulerAngles;
+            leftHandIO.transform.localRotation = InputTracking.GetLocalRotation(VRNode.LeftHand);
+            rightHandIO.transform.localRotation = InputTracking.GetLocalRotation(VRNode.RightHand);
         }
+        else
+            SpecialInputLogic.SetOrientation(rightHandIO, leftHandIO);
     }
 
     private void FixedPositionLogic()
     {
-        leftHandIO.transform.position = FixesLeftPosition.position;
+        leftHandIO.transform.position = FixedLeftPosition.position;
         rightHandIO.transform.position = FixedRightPosition.position;
 
         leftHandIO.transform.position = new Vector3(leftHandIO.transform.position.x, transform.position.y - localHandsHeigth, leftHandIO.transform.position.z);
@@ -476,7 +474,6 @@ public class Gaze_InputManager : MonoBehaviour
 
                     // stop pulse
                     m_hapticsChannelL.Clear();
-
                 }
                 else
                 {
@@ -541,7 +538,6 @@ public class Gaze_InputManager : MonoBehaviour
 
     private void CheckControllers()
     {
-        oculusControllersUsed = false;
         controllersConnected = false;
 
         string[] names = Input.GetJoystickNames();
@@ -550,13 +546,11 @@ public class Gaze_InputManager : MonoBehaviour
         {
             if (names[i].Contains("Oculus"))
             {
-                oculusControllersUsed = true;
                 controllersConnected = true;
                 break;
             }
             else if (names[i].Contains("OpenVR"))
             {
-                oculusControllersUsed = false;
                 controllersConnected = true;
                 break;
             }
@@ -570,12 +564,12 @@ public class Gaze_InputManager : MonoBehaviour
 
         if (!controllersConnected)
         {
-            if (!UnpluggedControllerMessage.active)
+            if (!UnpluggedControllerMessage.activeSelf)
                 UnpluggedControllerMessage.SetActive(true);
         }
         else
         {
-            if (UnpluggedControllerMessage.active)
+            if (UnpluggedControllerMessage.activeSelf)
                 UnpluggedControllerMessage.SetActive(false);
         }
     }
@@ -791,7 +785,7 @@ public class Gaze_InputManager : MonoBehaviour
                 Debug.Log(Gaze_InputConstants.APELAB_INPUT_INDEX_RIGHT + " Down" + Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_INDEX_RIGHT));
             isIndexRightDown = true;
             if (OnIndexRightDownEvent != null)
-                OnIndexRightDownEvent(new Gaze_InputEventArgs(this.gameObject, VRNode.LeftHand, Gaze_InputTypes.INDEX_RIGHT_DOWN, Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_INDEX_RIGHT)));
+                OnIndexRightDownEvent(new Gaze_InputEventArgs(this.gameObject, VRNode.RightHand, Gaze_InputTypes.INDEX_RIGHT_DOWN, Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_INDEX_RIGHT)));
 
             //HACK: This is done for the Samsung VR controller
             if (OVRInput.IsControllerConnected(OVRInput.Controller.RTrackedRemote))
@@ -804,7 +798,7 @@ public class Gaze_InputManager : MonoBehaviour
                 Debug.Log(Gaze_InputConstants.APELAB_INPUT_INDEX_RIGHT + " Up" + Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_INDEX_RIGHT));
             isIndexRightDown = false;
             if (OnIndexRightUpEvent != null)
-                OnIndexRightUpEvent(new Gaze_InputEventArgs(this.gameObject, VRNode.LeftHand, Gaze_InputTypes.INDEX_RIGHT_UP, Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_INDEX_RIGHT)));
+                OnIndexRightUpEvent(new Gaze_InputEventArgs(this.gameObject, VRNode.RightHand, Gaze_InputTypes.INDEX_RIGHT_UP, Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_INDEX_RIGHT)));
 
             //HACK: This is done for the Samsung VR controller
             if (OVRInput.IsControllerConnected(OVRInput.Controller.RTrackedRemote))

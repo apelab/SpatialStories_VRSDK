@@ -24,6 +24,8 @@ namespace Gaze
         GAZED,
         UNGAZED,
         LEVITATE_START,
-        LEVITATE_STOP
+        LEVITATE_STOP,
+        PUSH,
+        PULL
     }
 }
