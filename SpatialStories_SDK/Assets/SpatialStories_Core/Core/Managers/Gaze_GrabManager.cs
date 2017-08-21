@@ -391,7 +391,7 @@ public class Gaze_GrabManager : MonoBehaviour
                         interactableIO.GrabLogic.SetManipulationMode(true);
                     }
 
-                    if (interactableIO.GrabModeIndex.Equals((int)Gaze_GrabMode.ATTRACT))
+                    if (interactableIO.GrabModeIndex.Equals((int)Gaze_GrabMode.GRAB))
                     {
                         grabState = GRAB_STATE.ATTRACTING;
                         interactableIO.GrabLogic.GrabbingManager = this;
@@ -454,7 +454,7 @@ public class Gaze_GrabManager : MonoBehaviour
                 }
                 else if (interactableIO.IsGrabEnabled)
                 {
-                    if (interactableIO.GrabModeIndex.Equals((int)Gaze_GrabMode.ATTRACT))
+                    if (interactableIO.GrabModeIndex.Equals((int)Gaze_GrabMode.GRAB))
                     {
                         grabState = GRAB_STATE.GRABBING;
                     }
@@ -668,7 +668,7 @@ public class Gaze_GrabManager : MonoBehaviour
                         Gaze_EventManager.FireControllerPointingEvent(gaze_ControllerPointingEventArgs);
                     }
 
-                    if (!interactiveObject.GrabLogic.IsBeingGrabbed && interactiveObject.IsGrabEnabled && interactiveObject.GrabModeIndex.Equals((int)Gaze_GrabMode.ATTRACT) && hits[i].distance < interactiveObject.GrabDistance)
+                    if (!interactiveObject.GrabLogic.IsBeingGrabbed && interactiveObject.IsGrabEnabled && interactiveObject.GrabModeIndex.Equals((int)Gaze_GrabMode.GRAB) && hits[i].distance < interactiveObject.GrabDistance)
                     {
                         closerIO = interactiveObject;
                         closerDistance = hits[i].distance;
@@ -692,7 +692,7 @@ public class Gaze_GrabManager : MonoBehaviour
                     }
 
                     // Get the visual ray length
-                    visualRayLength = interactiveObject.IsGrabEnabled && interactiveObject.GrabModeIndex.Equals((int)Gaze_GrabMode.ATTRACT) && visualRayLength > hits[i].distance ? hits[i].distance : visualRayLength;
+                    visualRayLength = interactiveObject.IsGrabEnabled && interactiveObject.GrabModeIndex.Equals((int)Gaze_GrabMode.GRAB) && visualRayLength > hits[i].distance ? hits[i].distance : visualRayLength;
                 }
             }
 
@@ -863,7 +863,7 @@ public class Gaze_GrabManager : MonoBehaviour
                     AddNewObjectInProximity(collidingIO.gameObject);
                 }
 
-                if (isTriggerPressed && interactableIO && interactableIO.IsGrabEnabled && interactableIO.GrabModeIndex.Equals((int)Gaze_GrabMode.ATTRACT))
+                if (isTriggerPressed && interactableIO && interactableIO.IsGrabEnabled && interactableIO.GrabModeIndex.Equals((int)Gaze_GrabMode.GRAB))
                 {
                     interactableIO = objectsInProximity.ElementAt(0).GetComponent<Gaze_InteractiveObject>();
                     grabState = GRAB_STATE.GRABBING;

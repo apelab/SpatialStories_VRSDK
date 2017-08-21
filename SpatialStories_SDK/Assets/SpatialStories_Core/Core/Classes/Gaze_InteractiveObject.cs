@@ -69,7 +69,7 @@ namespace Gaze
             get
             {
                 if (ManipulationMode == Gaze_ManipulationModes.GRAB)
-                    return (int)Gaze_GrabMode.ATTRACT;
+                    return (int)Gaze_GrabMode.GRAB;
                 else if (ManipulationMode == Gaze_ManipulationModes.LEVITATE)
                     return (int)Gaze_GrabMode.LEVITATE;
                 else
