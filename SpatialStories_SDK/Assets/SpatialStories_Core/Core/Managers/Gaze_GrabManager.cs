@@ -278,7 +278,7 @@ public class Gaze_GrabManager : MonoBehaviour
     /// </summary>
     public void UpdateProximityList()
     {
-        Collider myProximity = GetComponentInParent<Gaze_InteractiveObject>().GetComponentInChildren<Gaze_Proximity>().GetComponent<Collider>();
+        Collider myProximity = GetComponentInParent<Gaze_InteractiveObject>().gameObject.GetComponentInChildrenBFS<Gaze_Proximity>().GetComponent<Collider>();
 
         for (int i = objectsInProximity.Count - 1; i >= 0; i--)
         {
@@ -291,7 +291,7 @@ public class Gaze_GrabManager : MonoBehaviour
             }
             Gaze_InteractiveObject io = go.GetComponent<Gaze_InteractiveObject>();
 
-            if (!io.GetComponentInChildren<Gaze_Proximity>().GetComponent<Collider>().bounds.Intersects(myProximity.bounds))
+            if (!io.gameObject.GetComponentInChildrenBFS<Gaze_Proximity>().GetComponent<Collider>().bounds.Intersects(myProximity.bounds))
             {
                 objectsInProximity.RemoveAt(i);
                 continue;
@@ -1163,9 +1163,14 @@ public class Gaze_GrabManager : MonoBehaviour
     /// <param name="args"></param>
     private void OnIODestroyed(Gaze_IODestroyEventArgs args)
     {
-        raycastIOs.Remove(args.IO.gameObject);
-        hitsIOs.Remove(args.IO.gameObject);
-        objectsInProximity.Remove(args.IO.gameObject);
+        if (raycastIOs != null)
+            raycastIOs.Remove(args.IO.gameObject);
+
+        if (hitsIOs != null)
+            hitsIOs.Remove(args.IO.gameObject);
+
+        if (objectsInProximity != null)
+            objectsInProximity.Remove(args.IO.gameObject);
 
         if (grabbedObject == args.IO.gameObject)
             grabbedObject = null;

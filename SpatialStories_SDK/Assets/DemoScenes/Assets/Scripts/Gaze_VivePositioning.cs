@@ -10,13 +10,23 @@ public class Gaze_VivePositioning : MonoBehaviour
         Gaze_InputManager.OnControlerSetup += OnControlerSetup;
     }
 
+    private void OnDisable()
+    {
+        Gaze_InputManager.OnControlerSetup -= OnControlerSetup;
+    }
+
     void OnControlerSetup(Gaze_Controllers _type)
     {
         if (_type == Gaze_Controllers.HTC_VIVE)
+        {
             transform.position = new Vector3(transform.position.x, viveHeigth, transform.position.z);
+            Gaze_Teleporter.playerHeightBeforeTeleport = viveHeigth;
+        }
+        else
+        {
+            Gaze_InputManager.OnControlerSetup -= OnControlerSetup;
+            Destroy(this);
+        }
 
-        Gaze_InputManager.OnControlerSetup -= OnControlerSetup;
-        Gaze_Teleporter.playerHeightBeforeTeleport = viveHeigth;
-        Destroy(this);
     }
 }
