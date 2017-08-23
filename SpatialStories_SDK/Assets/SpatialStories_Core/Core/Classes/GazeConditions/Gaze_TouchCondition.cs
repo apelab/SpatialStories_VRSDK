@@ -77,6 +77,9 @@ namespace Gaze
         /// <returns></returns>
         private bool ValidateTouchConditions()
         {
+            if (gazeConditionsScript.triggerStateIndex == (int)Gaze_TriggerState.BEFORE)
+                return false;
+
             bool isTouchedObjectValid = IsTouchObjectValid(TouchedObject, gazeConditionsScript.touchMap.touchHandsIndex);
             bool isTouchControllerValid = IsTouchControllerValid(eventHand);
             bool isTouchActionValid = IsTouchActionValid(eventHand, IsValid);
