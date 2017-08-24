@@ -90,6 +90,7 @@ public class Gaze_Teleporter : MonoBehaviour
     internal GameObject cameraRigIO, cam;
     internal Vector3 gyroLocalEulerAngles;
     internal float axisValue;
+    internal Transform teleportOrigin;
 
     internal Gaze_TeleportLogic actualTeleportLogic = null;
 
@@ -197,6 +198,8 @@ public class Gaze_Teleporter : MonoBehaviour
 
         CameraColliders = cameraRigIO.GetComponentsInChildren<Collider>();
         gaze_TeleportEventArgs = new Gaze_TeleportEventArgs(this);
+
+        teleportOrigin = GetComponentInChildren<Gaze_GrabPositionController>().transform;
     }
 
     void Update()
@@ -266,7 +269,7 @@ public class Gaze_Teleporter : MonoBehaviour
             if (go.layer == teleportLayer)
                 allTeleportZones.Add(go);
         }
-
+    
         if (allTeleportZones.Count == 0)
             return heightToreturn;
 
@@ -312,7 +315,6 @@ public class Gaze_Teleporter : MonoBehaviour
         // Set the rotation of the camera rig correctly
         cameraRigIO.transform.forward = gyroInstance.transform.forward;
         cameraRigIO.transform.rotation = Quaternion.Euler(cameraRigIO.transform.rotation.eulerAngles - new Vector3(0, cam.transform.localRotation.eulerAngles.y, 0));
-
     }
 
     internal void CalculateArc()
@@ -329,8 +331,7 @@ public class Gaze_Teleporter : MonoBehaviour
 
         //	Variables need for curve
         Quaternion currentRotation = transform.rotation;
-        Vector3 currentPosition;
-        currentPosition = transform.position;
+        Vector3 currentPosition = teleportOrigin.transform.position;
         Vector3 lastPostion;
         positions1.Add(currentPosition);
 

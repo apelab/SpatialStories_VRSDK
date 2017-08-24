@@ -56,32 +56,24 @@ namespace Gaze
             return root;
         }
 
-        /// <summary>
-        /// Converts a Standard Camera into a SpatialStories one.
-        /// </summary>
-        /// <returns>The Gazable Root.</returns>
-        /// <param name="go">The reference GameObject</param>
-        public static GameObject ConvertInteractiveCamera(GameObject go)
+        public static GameObject CovertCameraUsingPrefab(GameObject _go, string _prefabName)
         {
-            //			if (!go.GetComponent<Gaze_CameraCollider> ())
-            //				go.AddComponent<Gaze_CameraCollider> ();
+            if (!_go.GetComponent<Gaze_CameraRaycaster>())
+                _go.AddComponent<Gaze_CameraRaycaster>();
 
-            if (!go.GetComponent<Gaze_CameraRaycaster>())
-                go.AddComponent<Gaze_CameraRaycaster>();
-
-            if (!go.GetComponent<Gaze_MouseLookController>())
-                go.AddComponent<Gaze_MouseLookController>();
+            if (!_go.GetComponent<Gaze_MouseLookController>())
+                _go.AddComponent<Gaze_MouseLookController>();
 
 
             // Load the interactivce camera
-            GameObject InteractiveCamera = Instantiate(Resources.Load("Camera (IO)") as GameObject, go.transform.position, go.transform.rotation);
+            GameObject InteractiveCamera = Instantiate(Resources.Load(_prefabName) as GameObject, _go.transform.position, _go.transform.rotation);
 
-            InteractiveCamera.name = "Camera (IO)";
+            InteractiveCamera.name = _prefabName;
 
             // Get the camera in children
             Camera cam = InteractiveCamera.GetComponentInChildren<Camera>();
 
-            go.GetComponent<Camera>().tag = "MainCamera";
+            _go.GetComponent<Camera>().tag = "MainCamera";
 
             // Get the visuals game object
             Transform cameraParent = cam.transform.parent;
@@ -90,20 +82,20 @@ namespace Gaze
             GameObject.DestroyImmediate(cam.gameObject);
 
             // Add the components that we need.
-            if (!go.GetComponent<Gaze_CameraRaycaster>())
-                go.AddComponent<Gaze_CameraRaycaster>();
+            if (!_go.GetComponent<Gaze_CameraRaycaster>())
+                _go.AddComponent<Gaze_CameraRaycaster>();
 
-            if (!go.GetComponent<Gaze_MouseLookController>())
-                go.AddComponent<Gaze_MouseLookController>();
+            if (!_go.GetComponent<Gaze_MouseLookController>())
+                _go.AddComponent<Gaze_MouseLookController>();
 
-            if (!go.GetComponent<Gaze_Camera>())
-                go.AddComponent<Gaze_Camera>();
+            if (!_go.GetComponent<Gaze_Camera>())
+                _go.AddComponent<Gaze_Camera>();
 
-            if (!go.GetComponent<OVRManager>())
-                go.AddComponent<OVRManager>();
+            if (!_go.GetComponent<OVRManager>())
+                _go.AddComponent<OVRManager>();
 
             // Add the camera to the visuals of the interactive camera.
-            go.transform.SetParent(cameraParent);
+            _go.transform.SetParent(cameraParent);
 
             // Add the controller disconnected message
             Gaze_ControllerDisconnectedMessage message = InteractiveCamera.GetComponentInChildren<Gaze_ControllerDisconnectedMessage>();
@@ -111,10 +103,38 @@ namespace Gaze
             message.gameObject.SetActive(false);
             message.transform.localPosition = new Vector3(0, 0, 0.75f);
 
-            go.GetComponent<Camera>().nearClipPlane = 0.01f;
+            _go.GetComponent<Camera>().nearClipPlane = 0.01f;
 
             // Return the game object
-            return go;
+            return _go;
+        }
+
+        /// <summary>
+        /// Converts a Standard Camera into a SpatialStories one.
+        /// </summary>
+        /// <returns>The Gazable Root.</returns>
+        /// <param name="go">The reference GameObject</param>
+        public static GameObject ConvertInteractiveCamera(GameObject go)
+        {
+            return CovertCameraUsingPrefab(go, "Camera (IO)");
+        }
+
+        public static GameObject CreateGearVrInteractiveCamera()
+        {
+            GameObject cam = new GameObject();
+            cam.AddComponent<Camera>();
+            ConvertGearVrInteractiveCamera(cam);
+            return cam as GameObject;
+        }
+
+        /// <summary>
+        /// Converts a Standard Camera into a Gear Vr one.
+        /// </summary>
+        /// <returns>The Gazable Root.</returns>
+        /// <param name="go">The reference GameObject</param>
+        public static GameObject ConvertGearVrInteractiveCamera(GameObject go)
+        {
+            return CovertCameraUsingPrefab(go, "GearVrCamera (IO)");
         }
 
         /// <summary>
@@ -147,6 +167,13 @@ namespace Gaze
                 ConvertInteractiveCamera(Selection.activeGameObject);
         }
 
+        [MenuItem("GameObject/Spatial Stories/Mobile/Convert into GearVr interactive camera", false, 10)]
+        public static void GameObjectToGearVrCamera(MenuCommand menuCommand)
+        {
+            if (Selection.activeGameObject != null && Selection.activeGameObject.GetComponent<Camera>() != null)
+                ConvertGearVrInteractiveCamera(Selection.activeGameObject);
+        }
+
         #endregion
 
         #region Contextual Menu
@@ -163,13 +190,19 @@ namespace Gaze
             ParentAndUndo(CreateInteractiveCamera());
         }
 
+        [MenuItem("Spatial Stories/Create/Mobile/GearVr Interactive Camera")]
+        public static void GearVrCameraCreation()
+        {
+            ParentAndUndo(CreateGearVrInteractiveCamera());
+        }
+
         [MenuItem("Spatial Stories/Convert/Into interactive Object")]
         public static void MenuConvertInteractiveObject()
         {
             Selection.activeGameObject = ConvertInteractiveObject(Selection.activeGameObject);
         }
 
-        [MenuItem("Spatial Stories/Convert/Into interactive Object", true)]
+        [MenuItem("Spatia lStories/Convert/Into interactive Object", true)]
         public static bool ValidateGameobjectSelection()
         {
             return Selection.activeGameObject != null;

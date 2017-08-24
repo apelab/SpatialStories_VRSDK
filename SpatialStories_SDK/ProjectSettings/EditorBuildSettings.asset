@@ -6,5 +6,26 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/DemoScenes/Mobile/Mobile_DemoTouch.unity
+    guid: f176aff26cdf57349816f0292e57eb5d
+  - enabled: 0
+    path: Assets/DemoScenes/Mobile/Mobile_DemoProximity.unity
+    guid: e3a7679563e2ce946afe01cc515a29d3
+  - enabled: 0
+    path: Assets/DemoScenes/Mobile/Mobile_DemoManipulation.unity
+    guid: 0381bd223437d2f4eaf74cee6e8e2c37
+  - enabled: 0
+    path: Assets/DemoScenes/Mobile/Mobile_DemoDependencies.unity
+    guid: 9ddf55c5b07653e4e93def5574ff6dca
+  - enabled: 0
+    path: Assets/DemoScenes/Mobile/Mobile_DemoGaze.unity
+    guid: 52a900452522729458b632f519259cef
+  - enabled: 0
+    path: Assets/DemoScenes/DemoDragAndDrop.unity
+    guid: 49a3fbe036142204baab033130a84521
+  - enabled: 0
+    path: Assets/GearVr.unity
+    guid: 12e638cc4aa9c2841b89f92d052100cc
+  - enabled: 0
     path: Assets/DemoScenes/DemoManipulation.unity
     guid: 2b31157793d1bb5438c0919f00909d15
