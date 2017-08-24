@@ -144,7 +144,7 @@ namespace Gaze
 
         public void PlayAnim(int key, int track)
         {
-            if (!animations[key].isPlaying)
+            //if (!animations[key].isPlaying)
             {
                 nextClip(key, track);
 
@@ -158,7 +158,6 @@ namespace Gaze
                 if (animations[key].playlistLoop[track] == Gaze_Actions.LOOP_MODES.Single)
                 {
                     animations[key].looping = true;
-                    animations[key].animator.Play(animations[key].animationClip.Get(track, animations[key].clipIndex).name);
 
                 }
                 else if (animations[key].playlistLoop[track] == Gaze_Actions.LOOP_MODES.Playlist)
@@ -173,11 +172,10 @@ namespace Gaze
                 else
                 {
                     animations[key].looping = false;
-                    animations[key].animator.Play(animations[key].animationClip.Get(track, animations[key].clipIndex).name);
                 }
-
+                Debug.Log("play " + key);
                 animations[key].clipIndex %= animations[key].animationClip.Count(track);
-                animations[key].animator.Play(animations[key].animationClip.Get(track, animations[key].clipIndex).name, 0, 0);
+                animations[key].animator.CrossFade(animations[key].animationClip.Get(track, animations[key].clipIndex).name, 0.5f);
             }
         }
 
