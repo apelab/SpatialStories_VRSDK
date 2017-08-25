@@ -42,7 +42,7 @@ RenderSettings:
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 9
+  serializedVersion: 11
   m_GIWorkflowMode: 0
   m_GISettings:
     serializedVersion: 2
@@ -54,7 +54,7 @@ LightmapSettings:
     m_EnableBakedLightmaps: 1
     m_EnableRealtimeLightmaps: 1
   m_LightmapEditorSettings:
-    serializedVersion: 8
+    serializedVersion: 9
     m_Resolution: 2
     m_BakeResolution: 40
     m_TextureWidth: 1024
@@ -71,7 +71,7 @@ LightmapSettings:
     m_FinalGatherFiltering: 1
     m_FinalGatherRayCount: 256
     m_ReflectionCompression: 2
-    m_MixedBakeMode: 3
+    m_MixedBakeMode: 2
     m_BakeBackend: 0
     m_PVRSampling: 1
     m_PVRDirectSampleCount: 32
@@ -87,7 +87,7 @@ LightmapSettings:
     m_PVRFilteringAtrousNormalSigma: 1
     m_PVRFilteringAtrousPositionSigma: 1
   m_LightingDataAsset: {fileID: 0}
-  m_ShadowMaskMode: 2
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -178,6 +178,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
 --- !u!1 &5474930
 GameObject:
   m_ObjectHideFlags: 0
@@ -345,6 +346,7 @@ MonoBehaviour:
   ModifyDragAndDropTargets: 0
   ModifyDnDMinDistance: 0
   ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDAttached: 0
   ModifyDnDRespectAxis: 0
   dnDMinDistance: 0
   dnDSnapBeforeDrop: 0
@@ -369,13 +371,13 @@ MonoBehaviour:
   - 
   - 
   - 
+  loopOnLast: 0000000000
   animationClip:
     ClipEntries00: []
     ClipEntries01: []
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  targetAnimationSource: {fileID: 0}
   loopAnim: 0000000000000000000000000000000000000000
   loopAnimType: 0000000000000000000000000000000000000000
   animationSequence: 0000000000000000000000000000000000000000
@@ -398,6 +400,7 @@ MonoBehaviour:
     ClipEntries03: []
     ClipEntries04: []
   loopAudioNew: 0000000000000000000000000000000000000000
+  audioLoopOnLast: 0000000000
   duckingEnabled: 1
   fadeInTime: 1
   fadeOutTime: 1
@@ -468,6 +471,7 @@ MonoBehaviour:
   audio_minPitch: 0
   audio_maxPitch: 2
   audio_MaxConcurrentSound: 8
+  audio_stopOthers: 0
   IO: {fileID: 1545334720}
   triggerNotification: 0
 --- !u!114 &5474934
@@ -541,6 +545,7 @@ MonoBehaviour:
   ManipulableHandle: {fileID: 0}
   HasGrabPositionner: 0
   GrabPositionnerCollider: {fileID: 0}
+  GrabPositioner: {fileID: 0}
   VibratesOnGrab: 0
   GrabDistance: 30
   TouchDistance: 100
@@ -548,6 +553,7 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  DnD_SnapOnDrop: 1
   IsDragAndDropEnabled: 0
   DnD_minDistance: 1
   DnD_angleThreshold: 1
@@ -815,6 +821,7 @@ MonoBehaviour:
   ModifyDragAndDropTargets: 0
   ModifyDnDMinDistance: 0
   ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDAttached: 0
   ModifyDnDRespectAxis: 0
   dnDMinDistance: 0
   dnDSnapBeforeDrop: 0
@@ -839,13 +846,13 @@ MonoBehaviour:
   - 
   - 
   - 
+  loopOnLast: 0000000000
   animationClip:
     ClipEntries00: []
     ClipEntries01: []
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  targetAnimationSource: {fileID: 0}
   loopAnim: 0000000000000000000000000000000000000000
   loopAnimType: 0000000000000000000000000000000000000000
   animationSequence: 0000000000000000000000000000000000000000
@@ -868,6 +875,7 @@ MonoBehaviour:
     ClipEntries03: []
     ClipEntries04: []
   loopAudioNew: 0000000000000000000000000000000000000000
+  audioLoopOnLast: 0000000000
   duckingEnabled: 1
   fadeInTime: 1
   fadeOutTime: 1
@@ -938,6 +946,7 @@ MonoBehaviour:
   audio_minPitch: 0
   audio_maxPitch: 2
   audio_MaxConcurrentSound: 8
+  audio_stopOthers: 0
   IO: {fileID: 1786773450}
   triggerNotification: 0
 --- !u!114 &14148463
@@ -1011,6 +1020,7 @@ MonoBehaviour:
   ManipulableHandle: {fileID: 0}
   HasGrabPositionner: 0
   GrabPositionnerCollider: {fileID: 0}
+  GrabPositioner: {fileID: 0}
   VibratesOnGrab: 0
   GrabDistance: 0
   TouchDistance: 0
@@ -1018,6 +1028,7 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  DnD_SnapOnDrop: 1
   IsDragAndDropEnabled: 0
   DnD_minDistance: 1
   DnD_angleThreshold: 1
@@ -1234,6 +1245,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
 --- !u!1 &50999553
 GameObject:
   m_ObjectHideFlags: 0
@@ -1475,6 +1487,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
 --- !u!1 &65744877
 GameObject:
   m_ObjectHideFlags: 0
@@ -1684,6 +1697,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
 --- !u!1 &92226923
 GameObject:
   m_ObjectHideFlags: 0
@@ -1838,6 +1852,7 @@ MonoBehaviour:
   ManipulableHandle: {fileID: 0}
   HasGrabPositionner: 0
   GrabPositionnerCollider: {fileID: 0}
+  GrabPositioner: {fileID: 0}
   VibratesOnGrab: 0
   GrabDistance: 30
   TouchDistance: 100
@@ -1845,6 +1860,7 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  DnD_SnapOnDrop: 1
   IsDragAndDropEnabled: 0
   DnD_minDistance: 1
   DnD_angleThreshold: 1
@@ -2617,6 +2633,7 @@ MonoBehaviour:
   ModifyDragAndDropTargets: 0
   ModifyDnDMinDistance: 0
   ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDAttached: 0
   ModifyDnDRespectAxis: 0
   dnDMinDistance: 0
   dnDSnapBeforeDrop: 0
@@ -2641,13 +2658,13 @@ MonoBehaviour:
   - 
   - 
   - 
+  loopOnLast: 0000000000
   animationClip:
     ClipEntries00: []
     ClipEntries01: []
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  targetAnimationSource: {fileID: 0}
   loopAnim: 0000000000000000000000000000000000000000
   loopAnimType: 0000000000000000000000000000000000000000
   animationSequence: 0000000000000000000000000000000000000000
@@ -2670,6 +2687,7 @@ MonoBehaviour:
     ClipEntries03: []
     ClipEntries04: []
   loopAudioNew: 0000000000000000000000000000000000000000
+  audioLoopOnLast: 0000000000
   duckingEnabled: 1
   fadeInTime: 1
   fadeOutTime: 1
@@ -2740,6 +2758,7 @@ MonoBehaviour:
   audio_minPitch: 0
   audio_maxPitch: 2
   audio_MaxConcurrentSound: 8
+  audio_stopOthers: 0
   IO: {fileID: 1494579587}
   triggerNotification: 0
 --- !u!114 &137584361
@@ -2982,6 +3001,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
 --- !u!4 &203175255
 Transform:
   m_ObjectHideFlags: 0
@@ -3070,6 +3090,7 @@ MonoBehaviour:
   ManipulableHandle: {fileID: 0}
   HasGrabPositionner: 0
   GrabPositionnerCollider: {fileID: 0}
+  GrabPositioner: {fileID: 0}
   VibratesOnGrab: 0
   GrabDistance: 30
   TouchDistance: 100
@@ -3077,6 +3098,7 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  DnD_SnapOnDrop: 1
   IsDragAndDropEnabled: 0
   DnD_minDistance: 1
   DnD_angleThreshold: 1
@@ -3871,6 +3893,7 @@ MonoBehaviour:
   ModifyDragAndDropTargets: 0
   ModifyDnDMinDistance: 0
   ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDAttached: 0
   ModifyDnDRespectAxis: 0
   dnDMinDistance: 0
   dnDSnapBeforeDrop: 0
@@ -3895,13 +3918,13 @@ MonoBehaviour:
   - 
   - 
   - 
+  loopOnLast: 0000000000
   animationClip:
     ClipEntries00: []
     ClipEntries01: []
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  targetAnimationSource: {fileID: 0}
   loopAnim: 0000000000000000000000000000000000000000
   loopAnimType: 0000000000000000000000000000000000000000
   animationSequence: 0000000000000000000000000000000000000000
@@ -3924,6 +3947,7 @@ MonoBehaviour:
     ClipEntries03: []
     ClipEntries04: []
   loopAudioNew: 0000000000000000000000000000000000000000
+  audioLoopOnLast: 0000000000
   duckingEnabled: 1
   fadeInTime: 1
   fadeOutTime: 1
@@ -3994,6 +4018,7 @@ MonoBehaviour:
   audio_minPitch: 0
   audio_maxPitch: 2
   audio_MaxConcurrentSound: 8
+  audio_stopOthers: 0
   IO: {fileID: 265403904}
   triggerNotification: 0
 --- !u!114 &251152706
@@ -4067,6 +4092,7 @@ MonoBehaviour:
   ManipulableHandle: {fileID: 0}
   HasGrabPositionner: 0
   GrabPositionnerCollider: {fileID: 0}
+  GrabPositioner: {fileID: 0}
   VibratesOnGrab: 0
   GrabDistance: 30
   TouchDistance: 100
@@ -4074,6 +4100,7 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  DnD_SnapOnDrop: 1
   IsDragAndDropEnabled: 0
   DnD_minDistance: 1
   DnD_angleThreshold: 1
@@ -5908,6 +5935,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
 --- !u!1 &379375508
 GameObject:
   m_ObjectHideFlags: 0
@@ -5978,6 +6006,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
 --- !u!1 &381416428
 GameObject:
   m_ObjectHideFlags: 0
@@ -6462,6 +6491,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   colliderSize: 0.15
+  grabManager: {fileID: 0}
 --- !u!114 &425396666
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6764,6 +6794,7 @@ MonoBehaviour:
   ModifyDragAndDropTargets: 0
   ModifyDnDMinDistance: 0
   ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDAttached: 0
   ModifyDnDRespectAxis: 0
   dnDMinDistance: 0
   dnDSnapBeforeDrop: 0
@@ -6788,13 +6819,13 @@ MonoBehaviour:
   - 
   - 
   - 
+  loopOnLast: 0000000000
   animationClip:
     ClipEntries00: []
     ClipEntries01: []
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  targetAnimationSource: {fileID: 0}
   loopAnim: 0000000000000000000000000000000000000000
   loopAnimType: 0000000000000000000000000000000000000000
   animationSequence: 0000000000000000000000000000000000000000
@@ -6817,6 +6848,7 @@ MonoBehaviour:
     ClipEntries03: []
     ClipEntries04: []
   loopAudioNew: 0000000000000000000000000000000000000000
+  audioLoopOnLast: 0000000000
   duckingEnabled: 1
   fadeInTime: 1
   fadeOutTime: 1
@@ -6887,6 +6919,7 @@ MonoBehaviour:
   audio_minPitch: 0
   audio_maxPitch: 2
   audio_MaxConcurrentSound: 8
+  audio_stopOthers: 0
   IO: {fileID: 840797907}
   triggerNotification: 0
 --- !u!114 &430762508
@@ -6960,6 +6993,7 @@ MonoBehaviour:
   ManipulableHandle: {fileID: 0}
   HasGrabPositionner: 0
   GrabPositionnerCollider: {fileID: 0}
+  GrabPositioner: {fileID: 0}
   VibratesOnGrab: 0
   GrabDistance: 30
   TouchDistance: 100
@@ -6967,6 +7001,7 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  DnD_SnapOnDrop: 1
   IsDragAndDropEnabled: 0
   DnD_minDistance: 1
   DnD_angleThreshold: 1
@@ -7424,6 +7459,7 @@ MonoBehaviour:
   ModifyDragAndDropTargets: 0
   ModifyDnDMinDistance: 0
   ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDAttached: 0
   ModifyDnDRespectAxis: 0
   dnDMinDistance: 0
   dnDSnapBeforeDrop: 0
@@ -7448,13 +7484,13 @@ MonoBehaviour:
   - 
   - 
   - 
+  loopOnLast: 0000000000
   animationClip:
     ClipEntries00: []
     ClipEntries01: []
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  targetAnimationSource: {fileID: 0}
   loopAnim: 0000000000000000000000000000000000000000
   loopAnimType: 0000000000000000000000000000000000000000
   animationSequence: 0000000000000000000000000000000000000000
@@ -7477,6 +7513,7 @@ MonoBehaviour:
     ClipEntries03: []
     ClipEntries04: []
   loopAudioNew: 0000000000000000000000000000000000000000
+  audioLoopOnLast: 0000000000
   duckingEnabled: 1
   fadeInTime: 1
   fadeOutTime: 1
@@ -7547,6 +7584,7 @@ MonoBehaviour:
   audio_minPitch: 0
   audio_maxPitch: 2
   audio_MaxConcurrentSound: 8
+  audio_stopOthers: 0
   IO: {fileID: 1192139945}
   triggerNotification: 0
 --- !u!1 &448688981
@@ -7619,6 +7657,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
 --- !u!1 &457449566
 GameObject:
   m_ObjectHideFlags: 0
@@ -7903,6 +7942,7 @@ MonoBehaviour:
   ModifyDragAndDropTargets: 0
   ModifyDnDMinDistance: 0
   ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDAttached: 0
   ModifyDnDRespectAxis: 0
   dnDMinDistance: 0
   dnDSnapBeforeDrop: 0
@@ -7927,13 +7967,13 @@ MonoBehaviour:
   - 
   - 
   - 
+  loopOnLast: 0000000000
   animationClip:
     ClipEntries00: []
     ClipEntries01: []
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  targetAnimationSource: {fileID: 0}
   loopAnim: 0000000000000000000000000000000000000000
   loopAnimType: 0000000000000000000000000000000000000000
   animationSequence: 0000000000000000000000000000000000000000
@@ -7956,6 +7996,7 @@ MonoBehaviour:
     ClipEntries03: []
     ClipEntries04: []
   loopAudioNew: 0000000000000000000000000000000000000000
+  audioLoopOnLast: 0000000000
   duckingEnabled: 1
   fadeInTime: 1
   fadeOutTime: 1
@@ -8026,6 +8067,7 @@ MonoBehaviour:
   audio_minPitch: 0
   audio_maxPitch: 2
   audio_MaxConcurrentSound: 8
+  audio_stopOthers: 0
   IO: {fileID: 1529593773}
   triggerNotification: 0
 --- !u!114 &459323536
@@ -8559,6 +8601,7 @@ MonoBehaviour:
   ModifyDragAndDropTargets: 0
   ModifyDnDMinDistance: 0
   ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDAttached: 0
   ModifyDnDRespectAxis: 0
   dnDMinDistance: 0
   dnDSnapBeforeDrop: 0
@@ -8583,13 +8626,13 @@ MonoBehaviour:
   - 
   - 
   - 
+  loopOnLast: 0000000000
   animationClip:
     ClipEntries00: []
     ClipEntries01: []
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  targetAnimationSource: {fileID: 0}
   loopAnim: 0000000000000000000000000000000000000000
   loopAnimType: 0000000000000000000000000000000000000000
   animationSequence: 0000000000000000000000000000000000000000
@@ -8612,6 +8655,7 @@ MonoBehaviour:
     ClipEntries03: []
     ClipEntries04: []
   loopAudioNew: 0000000000000000000000000000000000000000
+  audioLoopOnLast: 0000000000
   duckingEnabled: 1
   fadeInTime: 1
   fadeOutTime: 1
@@ -8682,6 +8726,7 @@ MonoBehaviour:
   audio_minPitch: 0
   audio_maxPitch: 2
   audio_MaxConcurrentSound: 8
+  audio_stopOthers: 0
   IO: {fileID: 2041476791}
   triggerNotification: 0
 --- !u!114 &490905097
@@ -8946,6 +8991,7 @@ MonoBehaviour:
   ModifyDragAndDropTargets: 0
   ModifyDnDMinDistance: 0
   ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDAttached: 0
   ModifyDnDRespectAxis: 0
   dnDMinDistance: 0
   dnDSnapBeforeDrop: 0
@@ -8970,18 +9016,18 @@ MonoBehaviour:
   - 
   - 
   - 
+  loopOnLast: 0000000000
   animationClip:
     ClipEntries00: []
     ClipEntries01: []
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  targetAnimationSource: {fileID: 0}
   loopAnim: 0000000000000000000000000000000000000000
   loopAnimType: 0000000000000000000000000000000000000000
   animationSequence: 0000000000000000000000000000000000000000
   targetAudioSource: {fileID: 0}
-  activeTriggerStatesAudio: 0000000000
+  activeTriggerStatesAudio: 0100000000
   audioClips:
     ClipEntries00: []
     ClipEntries01: []
@@ -8998,6 +9044,7 @@ MonoBehaviour:
     ClipEntries03: []
     ClipEntries04: []
   loopAudioNew: 0000000000000000000000000000000000000000
+  audioLoopOnLast: 0000000000
   duckingEnabled: 1
   fadeInTime: 1
   fadeOutTime: 1
@@ -9068,6 +9115,7 @@ MonoBehaviour:
   audio_minPitch: 0
   audio_maxPitch: 2
   audio_MaxConcurrentSound: 8
+  audio_stopOthers: 0
   IO: {fileID: 1207362573}
   triggerNotification: 0
 --- !u!114 &500922245
@@ -9712,6 +9760,7 @@ MonoBehaviour:
   ModifyDragAndDropTargets: 0
   ModifyDnDMinDistance: 0
   ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDAttached: 0
   ModifyDnDRespectAxis: 0
   dnDMinDistance: 0
   dnDSnapBeforeDrop: 0
@@ -9736,13 +9785,13 @@ MonoBehaviour:
   - 
   - 
   - 
+  loopOnLast: 0000000000
   animationClip:
     ClipEntries00: []
     ClipEntries01: []
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  targetAnimationSource: {fileID: 0}
   loopAnim: 0000000000000000000000000000000000000000
   loopAnimType: 0000000000000000000000000000000000000000
   animationSequence: 0000000000000000000000000000000000000000
@@ -9765,6 +9814,7 @@ MonoBehaviour:
     ClipEntries03: []
     ClipEntries04: []
   loopAudioNew: 0000000000000000000000000000000000000000
+  audioLoopOnLast: 0000000000
   duckingEnabled: 1
   fadeInTime: 1
   fadeOutTime: 1
@@ -9835,6 +9885,7 @@ MonoBehaviour:
   audio_minPitch: 0
   audio_maxPitch: 2
   audio_MaxConcurrentSound: 8
+  audio_stopOthers: 0
   IO: {fileID: 95102695}
   triggerNotification: 0
 --- !u!114 &555906864
@@ -9920,6 +9971,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
 --- !u!1 &563140409
 GameObject:
   m_ObjectHideFlags: 0
@@ -9972,6 +10024,9 @@ MonoBehaviour:
   padTouchDirectionThreshold: 0.5
   debug: 0
   UnpluggedControllerMessage: {fileID: 2053197578}
+  FixedLeftPosition: {fileID: 0}
+  FixedRightPosition: {fileID: 0}
+  OriginalRightHandFixedPosition: {x: 0, y: 0, z: 0}
 --- !u!4 &563140412
 Transform:
   m_ObjectHideFlags: 0
@@ -10408,6 +10463,7 @@ MonoBehaviour:
   ManipulableHandle: {fileID: 0}
   HasGrabPositionner: 0
   GrabPositionnerCollider: {fileID: 0}
+  GrabPositioner: {fileID: 0}
   VibratesOnGrab: 0
   GrabDistance: 30
   TouchDistance: 0
@@ -10415,6 +10471,7 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  DnD_SnapOnDrop: 1
   IsDragAndDropEnabled: 0
   DnD_minDistance: 1
   DnD_angleThreshold: 1
@@ -10646,6 +10703,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
 --- !u!1 &636911044
 GameObject:
   m_ObjectHideFlags: 0
@@ -11044,6 +11102,7 @@ MonoBehaviour:
   ModifyDragAndDropTargets: 0
   ModifyDnDMinDistance: 0
   ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDAttached: 0
   ModifyDnDRespectAxis: 0
   dnDMinDistance: 0
   dnDSnapBeforeDrop: 0
@@ -11068,13 +11127,13 @@ MonoBehaviour:
   - 
   - 
   - 
+  loopOnLast: 0000000000
   animationClip:
     ClipEntries00: []
     ClipEntries01: []
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  targetAnimationSource: {fileID: 0}
   loopAnim: 0000000000000000000000000000000000000000
   loopAnimType: 0000000000000000000000000000000000000000
   animationSequence: 0000000000000000000000000000000000000000
@@ -11097,6 +11156,7 @@ MonoBehaviour:
     ClipEntries03: []
     ClipEntries04: []
   loopAudioNew: 0000000000000000000000000000000000000000
+  audioLoopOnLast: 0000000000
   duckingEnabled: 1
   fadeInTime: 1
   fadeOutTime: 1
@@ -11167,6 +11227,7 @@ MonoBehaviour:
   audio_minPitch: 0
   audio_maxPitch: 2
   audio_MaxConcurrentSound: 8
+  audio_stopOthers: 0
   IO: {fileID: 1869712414}
   triggerNotification: 0
 --- !u!114 &655545619
@@ -11684,6 +11745,7 @@ MonoBehaviour:
   ModifyDragAndDropTargets: 0
   ModifyDnDMinDistance: 0
   ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDAttached: 0
   ModifyDnDRespectAxis: 0
   dnDMinDistance: 0
   dnDSnapBeforeDrop: 0
@@ -11708,13 +11770,13 @@ MonoBehaviour:
   - 
   - 
   - 
+  loopOnLast: 0000000000
   animationClip:
     ClipEntries00: []
     ClipEntries01: []
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  targetAnimationSource: {fileID: 0}
   loopAnim: 0000000000000000000000000000000000000000
   loopAnimType: 0000000000000000000000000000000000000000
   animationSequence: 0000000000000000000000000000000000000000
@@ -11737,6 +11799,7 @@ MonoBehaviour:
     ClipEntries03: []
     ClipEntries04: []
   loopAudioNew: 0000000000000000000000000000000000000000
+  audioLoopOnLast: 0000000000
   duckingEnabled: 1
   fadeInTime: 1
   fadeOutTime: 1
@@ -11807,6 +11870,7 @@ MonoBehaviour:
   audio_minPitch: 0
   audio_maxPitch: 2
   audio_MaxConcurrentSound: 8
+  audio_stopOthers: 0
   IO: {fileID: 707185884}
   triggerNotification: 0
 --- !u!114 &697361052
@@ -11880,6 +11944,7 @@ MonoBehaviour:
   ManipulableHandle: {fileID: 0}
   HasGrabPositionner: 0
   GrabPositionnerCollider: {fileID: 0}
+  GrabPositioner: {fileID: 0}
   VibratesOnGrab: 0
   GrabDistance: 30
   TouchDistance: 100
@@ -11887,6 +11952,7 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  DnD_SnapOnDrop: 1
   IsDragAndDropEnabled: 0
   DnD_minDistance: 1
   DnD_angleThreshold: 1
@@ -12020,6 +12086,7 @@ MonoBehaviour:
   ManipulableHandle: {fileID: 0}
   HasGrabPositionner: 0
   GrabPositionnerCollider: {fileID: 0}
+  GrabPositioner: {fileID: 0}
   VibratesOnGrab: 0
   GrabDistance: 30
   TouchDistance: 0.25
@@ -12027,6 +12094,7 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  DnD_SnapOnDrop: 1
   IsDragAndDropEnabled: 0
   DnD_minDistance: 1
   DnD_angleThreshold: 1
@@ -12265,6 +12333,7 @@ LineRenderer:
     numCapVertices: 0
     alignment: 0
     textureMode: 0
+    generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
 --- !u!114 &709152737
@@ -12860,6 +12929,7 @@ MonoBehaviour:
   ModifyDragAndDropTargets: 0
   ModifyDnDMinDistance: 0
   ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDAttached: 0
   ModifyDnDRespectAxis: 0
   dnDMinDistance: 0
   dnDSnapBeforeDrop: 0
@@ -12884,13 +12954,13 @@ MonoBehaviour:
   - 
   - 
   - 
+  loopOnLast: 0000000000
   animationClip:
     ClipEntries00: []
     ClipEntries01: []
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  targetAnimationSource: {fileID: 0}
   loopAnim: 0000000000000000000000000000000000000000
   loopAnimType: 0000000000000000000000000000000000000000
   animationSequence: 0000000000000000000000000000000000000000
@@ -12913,6 +12983,7 @@ MonoBehaviour:
     ClipEntries03: []
     ClipEntries04: []
   loopAudioNew: 0000000000000000000000000000000000000000
+  audioLoopOnLast: 0000000000
   duckingEnabled: 1
   fadeInTime: 1
   fadeOutTime: 1
@@ -12983,6 +13054,7 @@ MonoBehaviour:
   audio_minPitch: 0
   audio_maxPitch: 2
   audio_MaxConcurrentSound: 8
+  audio_stopOthers: 0
   IO: {fileID: 1172919667}
   triggerNotification: 0
 --- !u!114 &723141965
@@ -13750,6 +13822,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
 --- !u!1 &811236362
 GameObject:
   m_ObjectHideFlags: 0
@@ -14234,6 +14307,7 @@ MonoBehaviour:
   ManipulableHandle: {fileID: 0}
   HasGrabPositionner: 0
   GrabPositionnerCollider: {fileID: 0}
+  GrabPositioner: {fileID: 0}
   VibratesOnGrab: 0
   GrabDistance: 30
   TouchDistance: 0.25
@@ -14241,6 +14315,7 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  DnD_SnapOnDrop: 1
   IsDragAndDropEnabled: 0
   DnD_minDistance: 1
   DnD_angleThreshold: 1
@@ -14790,6 +14865,7 @@ MonoBehaviour:
   ModifyDragAndDropTargets: 0
   ModifyDnDMinDistance: 0
   ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDAttached: 0
   ModifyDnDRespectAxis: 0
   dnDMinDistance: 0
   dnDSnapBeforeDrop: 0
@@ -14814,13 +14890,13 @@ MonoBehaviour:
   - 
   - 
   - 
+  loopOnLast: 0000000000
   animationClip:
     ClipEntries00: []
     ClipEntries01: []
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  targetAnimationSource: {fileID: 0}
   loopAnim: 0000000000000000000000000000000000000000
   loopAnimType: 0000000000000000000000000000000000000000
   animationSequence: 0000000000000000000000000000000000000000
@@ -14843,6 +14919,7 @@ MonoBehaviour:
     ClipEntries03: []
     ClipEntries04: []
   loopAudioNew: 0000000000000000000000000000000000000000
+  audioLoopOnLast: 0000000000
   duckingEnabled: 1
   fadeInTime: 1
   fadeOutTime: 1
@@ -14913,6 +14990,7 @@ MonoBehaviour:
   audio_minPitch: 0
   audio_maxPitch: 2
   audio_MaxConcurrentSound: 8
+  audio_stopOthers: 0
   IO: {fileID: 2022748950}
   triggerNotification: 0
 --- !u!114 &878935361
@@ -15259,6 +15337,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
 --- !u!1 &931551810
 GameObject:
   m_ObjectHideFlags: 0
@@ -15426,6 +15505,7 @@ MonoBehaviour:
   ModifyDragAndDropTargets: 0
   ModifyDnDMinDistance: 0
   ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDAttached: 0
   ModifyDnDRespectAxis: 0
   dnDMinDistance: 0
   dnDSnapBeforeDrop: 0
@@ -15450,13 +15530,13 @@ MonoBehaviour:
   - 
   - 
   - 
+  loopOnLast: 0000000000
   animationClip:
     ClipEntries00: []
     ClipEntries01: []
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  targetAnimationSource: {fileID: 0}
   loopAnim: 0000000000000000000000000000000000000000
   loopAnimType: 0000000000000000000000000000000000000000
   animationSequence: 0000000000000000000000000000000000000000
@@ -15479,6 +15559,7 @@ MonoBehaviour:
     ClipEntries03: []
     ClipEntries04: []
   loopAudioNew: 0000000000000000000000000000000000000000
+  audioLoopOnLast: 0000000000
   duckingEnabled: 1
   fadeInTime: 1
   fadeOutTime: 1
@@ -15549,6 +15630,7 @@ MonoBehaviour:
   audio_minPitch: 0
   audio_maxPitch: 2
   audio_MaxConcurrentSound: 8
+  audio_stopOthers: 0
   IO: {fileID: 1075105210}
   triggerNotification: 0
 --- !u!114 &931551814
@@ -15699,6 +15781,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   colliderSize: 0.15
+  grabManager: {fileID: 0}
 --- !u!114 &943240986
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15989,6 +16072,7 @@ MonoBehaviour:
   ModifyDragAndDropTargets: 0
   ModifyDnDMinDistance: 0
   ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDAttached: 0
   ModifyDnDRespectAxis: 0
   dnDMinDistance: 0
   dnDSnapBeforeDrop: 0
@@ -16013,13 +16097,13 @@ MonoBehaviour:
   - 
   - 
   - 
+  loopOnLast: 0000000000
   animationClip:
     ClipEntries00: []
     ClipEntries01: []
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  targetAnimationSource: {fileID: 0}
   loopAnim: 0000000000000000000000000000000000000000
   loopAnimType: 0000000000000000000000000000000000000000
   animationSequence: 0000000000000000000000000000000000000000
@@ -16042,6 +16126,7 @@ MonoBehaviour:
     ClipEntries03: []
     ClipEntries04: []
   loopAudioNew: 0000000000000000000000000000000000000000
+  audioLoopOnLast: 0000000000
   duckingEnabled: 1
   fadeInTime: 1
   fadeOutTime: 1
@@ -16112,6 +16197,7 @@ MonoBehaviour:
   audio_minPitch: 0
   audio_maxPitch: 2
   audio_MaxConcurrentSound: 8
+  audio_stopOthers: 0
   IO: {fileID: 1644322804}
   triggerNotification: 0
 --- !u!114 &955454203
@@ -17357,6 +17443,7 @@ MonoBehaviour:
   ManipulableHandle: {fileID: 0}
   HasGrabPositionner: 0
   GrabPositionnerCollider: {fileID: 0}
+  GrabPositioner: {fileID: 0}
   VibratesOnGrab: 0
   GrabDistance: 30
   TouchDistance: 0.25
@@ -17364,6 +17451,7 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  DnD_SnapOnDrop: 1
   IsDragAndDropEnabled: 0
   DnD_minDistance: 1
   DnD_angleThreshold: 1
@@ -17863,6 +17951,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
 --- !u!1 &1134135708
 GameObject:
   m_ObjectHideFlags: 0
@@ -18144,6 +18233,7 @@ MonoBehaviour:
   ModifyDragAndDropTargets: 0
   ModifyDnDMinDistance: 0
   ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDAttached: 0
   ModifyDnDRespectAxis: 0
   dnDMinDistance: 0
   dnDSnapBeforeDrop: 0
@@ -18168,13 +18258,13 @@ MonoBehaviour:
   - 
   - 
   - 
+  loopOnLast: 0000000000
   animationClip:
     ClipEntries00: []
     ClipEntries01: []
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  targetAnimationSource: {fileID: 0}
   loopAnim: 0000000000000000000000000000000000000000
   loopAnimType: 0000000000000000000000000000000000000000
   animationSequence: 0000000000000000000000000000000000000000
@@ -18197,6 +18287,7 @@ MonoBehaviour:
     ClipEntries03: []
     ClipEntries04: []
   loopAudioNew: 0000000000000000000000000000000000000000
+  audioLoopOnLast: 0000000000
   duckingEnabled: 1
   fadeInTime: 1
   fadeOutTime: 1
@@ -18267,6 +18358,7 @@ MonoBehaviour:
   audio_minPitch: 0
   audio_maxPitch: 2
   audio_MaxConcurrentSound: 8
+  audio_stopOthers: 0
   IO: {fileID: 209289156}
   triggerNotification: 0
 --- !u!114 &1135725516
@@ -18558,6 +18650,7 @@ MonoBehaviour:
   ManipulableHandle: {fileID: 0}
   HasGrabPositionner: 0
   GrabPositionnerCollider: {fileID: 0}
+  GrabPositioner: {fileID: 0}
   VibratesOnGrab: 0
   GrabDistance: 30
   TouchDistance: 0.25
@@ -18565,6 +18658,7 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  DnD_SnapOnDrop: 1
   IsDragAndDropEnabled: 0
   DnD_minDistance: 1
   DnD_angleThreshold: 1
@@ -18781,6 +18875,20 @@ Light:
   m_Lightmapping: 4
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
+  m_FalloffTable:
+    m_Table[0]: 0
+    m_Table[1]: 0
+    m_Table[2]: 0
+    m_Table[3]: 0
+    m_Table[4]: 0
+    m_Table[5]: 0
+    m_Table[6]: 0
+    m_Table[7]: 0
+    m_Table[8]: 0
+    m_Table[9]: 0
+    m_Table[10]: 0
+    m_Table[11]: 0
+    m_Table[12]: 0
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
@@ -18856,6 +18964,7 @@ MonoBehaviour:
   ManipulableHandle: {fileID: 0}
   HasGrabPositionner: 0
   GrabPositionnerCollider: {fileID: 0}
+  GrabPositioner: {fileID: 0}
   VibratesOnGrab: 0
   GrabDistance: 30
   TouchDistance: 0.25
@@ -18863,6 +18972,7 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  DnD_SnapOnDrop: 1
   IsDragAndDropEnabled: 0
   DnD_minDistance: 1
   DnD_angleThreshold: 1
@@ -18998,6 +19108,7 @@ MonoBehaviour:
   ManipulableHandle: {fileID: 0}
   HasGrabPositionner: 0
   GrabPositionnerCollider: {fileID: 0}
+  GrabPositioner: {fileID: 0}
   VibratesOnGrab: 0
   GrabDistance: 0
   TouchDistance: 0
@@ -19005,6 +19116,7 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  DnD_SnapOnDrop: 1
   IsDragAndDropEnabled: 0
   DnD_minDistance: 1
   DnD_angleThreshold: 1
@@ -19046,12 +19158,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20b848e8484b4a14e882b701411fb0b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DetachDistance: 0.5
+  DetachTime: 3
   chargeDuration: 0.1
   attractionForce: 3
   levitatingObjectAttractingSpeed: 5
   closestDistance: 1
   beamSplineSmoothness: 0.1
   beamSoundClip: {fileID: 0}
+  audioFXVolume: 1
   beamNumberOfControlPoints: 5
   beamWidth: 0.005
   beamVerticalOffsetPosition: 0.02
@@ -19841,6 +19956,7 @@ MonoBehaviour:
   ModifyDragAndDropTargets: 0
   ModifyDnDMinDistance: 0
   ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDAttached: 0
   ModifyDnDRespectAxis: 0
   dnDMinDistance: 0
   dnDSnapBeforeDrop: 0
@@ -19865,18 +19981,18 @@ MonoBehaviour:
   - 
   - 
   - 
+  loopOnLast: 0000000000
   animationClip:
     ClipEntries00: []
     ClipEntries01: []
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  targetAnimationSource: {fileID: 0}
   loopAnim: 0000000000000000000000000000000000000000
   loopAnimType: 0000000000000000000000000000000000000000
   animationSequence: 0000000000000000000000000000000000000000
   targetAudioSource: {fileID: 0}
-  activeTriggerStatesAudio: 0000000000
+  activeTriggerStatesAudio: 0100000000
   audioClips:
     ClipEntries00: []
     ClipEntries01: []
@@ -19893,6 +20009,7 @@ MonoBehaviour:
     ClipEntries03: []
     ClipEntries04: []
   loopAudioNew: 0000000000000000000000000000000000000000
+  audioLoopOnLast: 0000000000
   duckingEnabled: 1
   fadeInTime: 1
   fadeOutTime: 1
@@ -19963,6 +20080,7 @@ MonoBehaviour:
   audio_minPitch: 0
   audio_maxPitch: 2
   audio_MaxConcurrentSound: 8
+  audio_stopOthers: 0
   IO: {fileID: 599314964}
   triggerNotification: 0
 --- !u!114 &1282630975
@@ -20048,6 +20166,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
 --- !u!1 &1297215831
 GameObject:
   m_ObjectHideFlags: 0
@@ -20652,6 +20771,7 @@ MonoBehaviour:
   ModifyDragAndDropTargets: 0
   ModifyDnDMinDistance: 0
   ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDAttached: 0
   ModifyDnDRespectAxis: 0
   dnDMinDistance: 0
   dnDSnapBeforeDrop: 0
@@ -20676,13 +20796,13 @@ MonoBehaviour:
   - 
   - 
   - 
+  loopOnLast: 0000000000
   animationClip:
     ClipEntries00: []
     ClipEntries01: []
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  targetAnimationSource: {fileID: 0}
   loopAnim: 0000000000000000000000000000000000000000
   loopAnimType: 0000000000000000000000000000000000000000
   animationSequence: 0000000000000000000000000000000000000000
@@ -20705,6 +20825,7 @@ MonoBehaviour:
     ClipEntries03: []
     ClipEntries04: []
   loopAudioNew: 0000000000000000000000000000000000000000
+  audioLoopOnLast: 0000000000
   duckingEnabled: 1
   fadeInTime: 1
   fadeOutTime: 1
@@ -20775,6 +20896,7 @@ MonoBehaviour:
   audio_minPitch: 0
   audio_maxPitch: 2
   audio_MaxConcurrentSound: 8
+  audio_stopOthers: 0
   IO: {fileID: 432596386}
   triggerNotification: 0
 --- !u!114 &1334242936
@@ -20986,6 +21108,7 @@ MonoBehaviour:
   ModifyDragAndDropTargets: 0
   ModifyDnDMinDistance: 0
   ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDAttached: 0
   ModifyDnDRespectAxis: 0
   dnDMinDistance: 0
   dnDSnapBeforeDrop: 0
@@ -21010,13 +21133,13 @@ MonoBehaviour:
   - 
   - 
   - 
+  loopOnLast: 0000000000
   animationClip:
     ClipEntries00: []
     ClipEntries01: []
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  targetAnimationSource: {fileID: 0}
   loopAnim: 0000000000000000000000000000000000000000
   loopAnimType: 0000000000000000000000000000000000000000
   animationSequence: 0000000000000000000000000000000000000000
@@ -21039,6 +21162,7 @@ MonoBehaviour:
     ClipEntries03: []
     ClipEntries04: []
   loopAudioNew: 0000000000000000000000000000000000000000
+  audioLoopOnLast: 0000000000
   duckingEnabled: 1
   fadeInTime: 1
   fadeOutTime: 1
@@ -21109,6 +21233,7 @@ MonoBehaviour:
   audio_minPitch: 0
   audio_maxPitch: 2
   audio_MaxConcurrentSound: 8
+  audio_stopOthers: 0
   IO: {fileID: 701394353}
   triggerNotification: 0
 --- !u!114 &1347421756
@@ -21403,6 +21528,7 @@ MonoBehaviour:
   ManipulableHandle: {fileID: 0}
   HasGrabPositionner: 0
   GrabPositionnerCollider: {fileID: 0}
+  GrabPositioner: {fileID: 0}
   VibratesOnGrab: 0
   GrabDistance: 30
   TouchDistance: 100
@@ -21410,6 +21536,7 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  DnD_SnapOnDrop: 1
   IsDragAndDropEnabled: 0
   DnD_minDistance: 1
   DnD_angleThreshold: 1
@@ -21585,6 +21712,7 @@ MonoBehaviour:
   ModifyDragAndDropTargets: 0
   ModifyDnDMinDistance: 0
   ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDAttached: 0
   ModifyDnDRespectAxis: 0
   dnDMinDistance: 0
   dnDSnapBeforeDrop: 0
@@ -21609,18 +21737,18 @@ MonoBehaviour:
   - 
   - 
   - 
+  loopOnLast: 0000000000
   animationClip:
     ClipEntries00: []
     ClipEntries01: []
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  targetAnimationSource: {fileID: 0}
   loopAnim: 0000000000000000000000000000000000000000
   loopAnimType: 0000000000000000000000000000000000000000
   animationSequence: 0000000000000000000000000000000000000000
   targetAudioSource: {fileID: 0}
-  activeTriggerStatesAudio: 0000000000
+  activeTriggerStatesAudio: 0100000000
   audioClips:
     ClipEntries00: []
     ClipEntries01: []
@@ -21637,6 +21765,7 @@ MonoBehaviour:
     ClipEntries03: []
     ClipEntries04: []
   loopAudioNew: 0000000000000000000000000000000000000000
+  audioLoopOnLast: 0000000000
   duckingEnabled: 1
   fadeInTime: 1
   fadeOutTime: 1
@@ -21707,6 +21836,7 @@ MonoBehaviour:
   audio_minPitch: 0
   audio_maxPitch: 2
   audio_MaxConcurrentSound: 8
+  audio_stopOthers: 0
   IO: {fileID: 23520966}
   triggerNotification: 0
 --- !u!114 &1376072338
@@ -21965,6 +22095,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
 --- !u!4 &1381945598
 Transform:
   m_ObjectHideFlags: 0
@@ -22201,6 +22332,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
 --- !u!1 &1400202889
 GameObject:
   m_ObjectHideFlags: 0
@@ -22817,6 +22949,7 @@ MonoBehaviour:
   ModifyDragAndDropTargets: 0
   ModifyDnDMinDistance: 0
   ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDAttached: 0
   ModifyDnDRespectAxis: 0
   dnDMinDistance: 0
   dnDSnapBeforeDrop: 0
@@ -22841,18 +22974,18 @@ MonoBehaviour:
   - 
   - 
   - 
+  loopOnLast: 0000000000
   animationClip:
     ClipEntries00: []
     ClipEntries01: []
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  targetAnimationSource: {fileID: 0}
   loopAnim: 0000000000000000000000000000000000000000
   loopAnimType: 0000000000000000000000000000000000000000
   animationSequence: 0000000000000000000000000000000000000000
   targetAudioSource: {fileID: 0}
-  activeTriggerStatesAudio: 0000000000
+  activeTriggerStatesAudio: 0100000000
   audioClips:
     ClipEntries00: []
     ClipEntries01: []
@@ -22869,6 +23002,7 @@ MonoBehaviour:
     ClipEntries03: []
     ClipEntries04: []
   loopAudioNew: 0000000000000000000000000000000000000000
+  audioLoopOnLast: 0000000000
   duckingEnabled: 1
   fadeInTime: 1
   fadeOutTime: 1
@@ -22939,6 +23073,7 @@ MonoBehaviour:
   audio_minPitch: 0
   audio_maxPitch: 2
   audio_MaxConcurrentSound: 8
+  audio_stopOthers: 0
   IO: {fileID: 1965450881}
   triggerNotification: 0
 --- !u!114 &1465706259
@@ -23399,6 +23534,7 @@ MonoBehaviour:
   ModifyDragAndDropTargets: 0
   ModifyDnDMinDistance: 0
   ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDAttached: 0
   ModifyDnDRespectAxis: 0
   dnDMinDistance: 0
   dnDSnapBeforeDrop: 0
@@ -23423,13 +23559,13 @@ MonoBehaviour:
   - 
   - 
   - 
+  loopOnLast: 0000000000
   animationClip:
     ClipEntries00: []
     ClipEntries01: []
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  targetAnimationSource: {fileID: 0}
   loopAnim: 0000000000000000000000000000000000000000
   loopAnimType: 0000000000000000000000000000000000000000
   animationSequence: 0000000000000000000000000000000000000000
@@ -23452,6 +23588,7 @@ MonoBehaviour:
     ClipEntries03: []
     ClipEntries04: []
   loopAudioNew: 0000000000000000000000000000000000000000
+  audioLoopOnLast: 0000000000
   duckingEnabled: 1
   fadeInTime: 1
   fadeOutTime: 1
@@ -23522,6 +23659,7 @@ MonoBehaviour:
   audio_minPitch: 0
   audio_maxPitch: 2
   audio_MaxConcurrentSound: 8
+  audio_stopOthers: 0
   IO: {fileID: 11713478}
   triggerNotification: 0
 --- !u!114 &1486066052
@@ -23765,6 +23903,7 @@ MonoBehaviour:
   ManipulableHandle: {fileID: 0}
   HasGrabPositionner: 0
   GrabPositionnerCollider: {fileID: 0}
+  GrabPositioner: {fileID: 0}
   VibratesOnGrab: 0
   GrabDistance: 30
   TouchDistance: 100
@@ -23772,6 +23911,7 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  DnD_SnapOnDrop: 1
   IsDragAndDropEnabled: 0
   DnD_minDistance: 1
   DnD_angleThreshold: 1
@@ -24259,6 +24399,7 @@ MonoBehaviour:
   ManipulableHandle: {fileID: 0}
   HasGrabPositionner: 0
   GrabPositionnerCollider: {fileID: 0}
+  GrabPositioner: {fileID: 0}
   VibratesOnGrab: 0
   GrabDistance: 30
   TouchDistance: 100
@@ -24266,6 +24407,7 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  DnD_SnapOnDrop: 1
   IsDragAndDropEnabled: 0
   DnD_minDistance: 1
   DnD_angleThreshold: 1
@@ -24657,6 +24799,7 @@ MonoBehaviour:
   ManipulableHandle: {fileID: 0}
   HasGrabPositionner: 0
   GrabPositionnerCollider: {fileID: 0}
+  GrabPositioner: {fileID: 0}
   VibratesOnGrab: 0
   GrabDistance: 30
   TouchDistance: 0.25
@@ -24664,6 +24807,7 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  DnD_SnapOnDrop: 1
   IsDragAndDropEnabled: 0
   DnD_minDistance: 1
   DnD_angleThreshold: 1
@@ -24933,6 +25077,7 @@ MonoBehaviour:
   ManipulableHandle: {fileID: 0}
   HasGrabPositionner: 0
   GrabPositionnerCollider: {fileID: 0}
+  GrabPositioner: {fileID: 0}
   VibratesOnGrab: 0
   GrabDistance: 30
   TouchDistance: 100
@@ -24940,6 +25085,7 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  DnD_SnapOnDrop: 1
   IsDragAndDropEnabled: 0
   DnD_minDistance: 1
   DnD_angleThreshold: 1
@@ -26023,6 +26169,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
 --- !u!1 &1639904648
 GameObject:
   m_ObjectHideFlags: 0
@@ -26137,6 +26284,7 @@ MonoBehaviour:
   ManipulableHandle: {fileID: 0}
   HasGrabPositionner: 0
   GrabPositionnerCollider: {fileID: 0}
+  GrabPositioner: {fileID: 0}
   VibratesOnGrab: 0
   GrabDistance: 30
   TouchDistance: 100
@@ -26144,6 +26292,7 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  DnD_SnapOnDrop: 1
   IsDragAndDropEnabled: 0
   DnD_minDistance: 1
   DnD_angleThreshold: 1
@@ -26391,6 +26540,7 @@ MonoBehaviour:
   ModifyDragAndDropTargets: 0
   ModifyDnDMinDistance: 0
   ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDAttached: 0
   ModifyDnDRespectAxis: 0
   dnDMinDistance: 0
   dnDSnapBeforeDrop: 0
@@ -26415,18 +26565,18 @@ MonoBehaviour:
   - 
   - 
   - 
+  loopOnLast: 0000000000
   animationClip:
     ClipEntries00: []
     ClipEntries01: []
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  targetAnimationSource: {fileID: 0}
   loopAnim: 0000000000000000000000000000000000000000
   loopAnimType: 0000000000000000000000000000000000000000
   animationSequence: 0000000000000000000000000000000000000000
   targetAudioSource: {fileID: 0}
-  activeTriggerStatesAudio: 0000000000
+  activeTriggerStatesAudio: 0100000000
   audioClips:
     ClipEntries00: []
     ClipEntries01: []
@@ -26443,6 +26593,7 @@ MonoBehaviour:
     ClipEntries03: []
     ClipEntries04: []
   loopAudioNew: 0000000000000000000000000000000000000000
+  audioLoopOnLast: 0000000000
   duckingEnabled: 1
   fadeInTime: 1
   fadeOutTime: 1
@@ -26513,6 +26664,7 @@ MonoBehaviour:
   audio_minPitch: 0
   audio_maxPitch: 2
   audio_MaxConcurrentSound: 8
+  audio_stopOthers: 0
   IO: {fileID: 599314964}
   triggerNotification: 0
 --- !u!114 &1647979950
@@ -26897,6 +27049,7 @@ MonoBehaviour:
   ModifyDragAndDropTargets: 0
   ModifyDnDMinDistance: 0
   ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDAttached: 0
   ModifyDnDRespectAxis: 0
   dnDMinDistance: 0
   dnDSnapBeforeDrop: 0
@@ -26921,13 +27074,13 @@ MonoBehaviour:
   - 
   - 
   - 
+  loopOnLast: 0000000000
   animationClip:
     ClipEntries00: []
     ClipEntries01: []
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  targetAnimationSource: {fileID: 0}
   loopAnim: 0000000000000000000000000000000000000000
   loopAnimType: 0000000000000000000000000000000000000000
   animationSequence: 0000000000000000000000000000000000000000
@@ -26950,6 +27103,7 @@ MonoBehaviour:
     ClipEntries03: []
     ClipEntries04: []
   loopAudioNew: 0000000000000000000000000000000000000000
+  audioLoopOnLast: 0000000000
   duckingEnabled: 1
   fadeInTime: 1
   fadeOutTime: 1
@@ -27020,6 +27174,7 @@ MonoBehaviour:
   audio_minPitch: 0
   audio_maxPitch: 2
   audio_MaxConcurrentSound: 8
+  audio_stopOthers: 0
   IO: {fileID: 1562860378}
   triggerNotification: 0
 --- !u!114 &1673226898
@@ -28288,6 +28443,7 @@ MonoBehaviour:
   ManipulableHandle: {fileID: 0}
   HasGrabPositionner: 0
   GrabPositionnerCollider: {fileID: 0}
+  GrabPositioner: {fileID: 0}
   VibratesOnGrab: 0
   GrabDistance: 30
   TouchDistance: 0.25
@@ -28295,6 +28451,7 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  DnD_SnapOnDrop: 1
   IsDragAndDropEnabled: 0
   DnD_minDistance: 1
   DnD_angleThreshold: 1
@@ -28412,6 +28569,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
 --- !u!1 &1789819972
 GameObject:
   m_ObjectHideFlags: 0
@@ -28859,6 +29017,7 @@ MonoBehaviour:
   ModifyDragAndDropTargets: 0
   ModifyDnDMinDistance: 0
   ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDAttached: 0
   ModifyDnDRespectAxis: 0
   dnDMinDistance: 0
   dnDSnapBeforeDrop: 0
@@ -28883,13 +29042,13 @@ MonoBehaviour:
   - 
   - 
   - 
+  loopOnLast: 0000000000
   animationClip:
     ClipEntries00: []
     ClipEntries01: []
     ClipEntries02: []
     ClipEntries03: []
     ClipEntries04: []
-  targetAnimationSource: {fileID: 0}
   loopAnim: 0000000000000000000000000000000000000000
   loopAnimType: 0000000000000000000000000000000000000000
   animationSequence: 0000000000000000000000000000000000000000
@@ -28912,6 +29071,7 @@ MonoBehaviour:
     ClipEntries03: []
     ClipEntries04: []
   loopAudioNew: 0000000000000000000000000000000000000000
+  audioLoopOnLast: 0000000000
   duckingEnabled: 1
   fadeInTime: 1
   fadeOutTime: 1
@@ -28982,6 +29142,7 @@ MonoBehaviour:
   audio_minPitch: 0
   audio_maxPitch: 2
   audio_MaxConcurrentSound: 8
+  audio_stopOthers: 0
   IO: {fileID: 1365200423}
   triggerNotification: 0
 --- !u!114 &1806009876
@@ -29435,6 +29596,7 @@ MonoBehaviour:
   ManipulableHandle: {fileID: 0}
   HasGrabPositionner: 0
   GrabPositionnerCollider: {fileID: 0}
+  GrabPositioner: {fileID: 0}
   VibratesOnGrab: 0
   GrabDistance: 30
   TouchDistance: 100
@@ -29442,6 +29604,7 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  DnD_SnapOnDrop: 1
   IsDragAndDropEnabled: 0
   DnD_minDistance: 1
   DnD_angleThreshold: 1
@@ -30214,12 +30377,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20b848e8484b4a14e882b701411fb0b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DetachDistance: 0.5
+  DetachTime: 3
   chargeDuration: 0.1
   attractionForce: 3
   levitatingObjectAttractingSpeed: 5
   closestDistance: 1
   beamSplineSmoothness: 0.1
   beamSoundClip: {fileID: 0}
+  audioFXVolume: 1
   beamNumberOfControlPoints: 5
   beamWidth: 0.005
   beamVerticalOffsetPosition: 0.02
@@ -30289,6 +30455,7 @@ MonoBehaviour:
   ManipulableHandle: {fileID: 0}
   HasGrabPositionner: 0
   GrabPositionnerCollider: {fileID: 0}
+  GrabPositioner: {fileID: 0}
   VibratesOnGrab: 0
   GrabDistance: 0
   TouchDistance: 0
@@ -30296,6 +30463,7 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  DnD_SnapOnDrop: 1
   IsDragAndDropEnabled: 0
   DnD_minDistance: 1
   DnD_angleThreshold: 1
@@ -30959,6 +31127,7 @@ MonoBehaviour:
   ManipulableHandle: {fileID: 0}
   HasGrabPositionner: 0
   GrabPositionnerCollider: {fileID: 0}
+  GrabPositioner: {fileID: 0}
   VibratesOnGrab: 0
   GrabDistance: 30
   TouchDistance: 100
@@ -30966,6 +31135,7 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  DnD_SnapOnDrop: 1
   IsDragAndDropEnabled: 0
   DnD_minDistance: 1
   DnD_angleThreshold: 1
@@ -31437,6 +31607,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
 --- !u!1 &2038304131
 GameObject:
   m_ObjectHideFlags: 0
@@ -31545,6 +31716,7 @@ MonoBehaviour:
   ManipulableHandle: {fileID: 0}
   HasGrabPositionner: 0
   GrabPositionnerCollider: {fileID: 0}
+  GrabPositioner: {fileID: 0}
   VibratesOnGrab: 0
   GrabDistance: 30
   TouchDistance: 100
@@ -31552,6 +31724,7 @@ MonoBehaviour:
   IsManipulable: 1
   SnapOnGrab: 0
   RootMotion: {fileID: 0}
+  DnD_SnapOnDrop: 1
   IsDragAndDropEnabled: 0
   DnD_minDistance: 1
   DnD_angleThreshold: 1
@@ -31874,6 +32047,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
 --- !u!1 &2052835752
 GameObject:
   m_ObjectHideFlags: 0
@@ -32031,6 +32205,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
 --- !u!4 &2053197581
 Transform:
   m_ObjectHideFlags: 0
@@ -32504,6 +32679,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
 --- !u!1 &2113359066
 GameObject:
   m_ObjectHideFlags: 0
@@ -32650,6 +32826,7 @@ LineRenderer:
     numCapVertices: 0
     alignment: 0
     textureMode: 0
+    generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
 --- !u!114 &2116490651
@@ -32870,6 +33047,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
 --- !u!1 &2134802279
 GameObject:
   m_ObjectHideFlags: 0
@@ -32940,6 +33118,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
 --- !u!1 &2143115337
 GameObject:
   m_ObjectHideFlags: 0

@@ -27,6 +27,8 @@ namespace Gaze
     [CustomEditor(typeof(Gaze_Interaction))]
     public class Gaze_InteractionEditor : Editor
     {
+
+
         // logo image
         Texture logo;
         Rect logoRect;
@@ -57,10 +59,13 @@ namespace Gaze
             serializedObject.Update();
 
             #region Logo
+
+            EditorGUILayout.Space();
             GUILayout.BeginHorizontal();
-            GUI.Label(logoRect, logo);
             GUILayout.Label(logo);
             GUILayout.EndHorizontal();
+            GUILayout.Label("V.0.2.b5", EditorStyles.boldLabel);
+
             #endregion
 
             if (!Application.isPlaying)
@@ -68,8 +73,8 @@ namespace Gaze
                 bool lastHasActions = HasActions.boolValue;
                 bool LastHasConditions = HasConditions.boolValue;
 
-                HasActions.boolValue = EditorGUILayout.ToggleLeft("Actions", HasActions.boolValue);
-                HasConditions.boolValue = EditorGUILayout.ToggleLeft("Conditions", HasConditions.boolValue);
+                HasActions.boolValue = true;
+                HasConditions.boolValue = true;
 
                 if (lastHasActions != HasActions.boolValue)
                 {
@@ -211,8 +216,8 @@ namespace Gaze
             #region Logo
             logo = (Texture)Resources.Load("SpatialStorires_Logo_256", typeof(Texture));
             logoRect = new Rect();
-            logoRect.x = 10;
-            logoRect.y = 10;
+            logoRect.width = logo.width;
+            logoRect.height = logo.height;
             #endregion
         }
     }

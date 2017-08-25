@@ -10,19 +10,21 @@ namespace Gaze
     [CustomEditor(typeof(Gaze_Actions))]
     public class Gaze_ActionsEditor : Gaze_Editor
     {
+
+
         private Gaze_Actions actionsScript;
         private List<Animator> hierarchyAnimators;
         private List<string> hierarchyAnimatorNames;
         private List<AudioSource> hierarchyAudioSources;
         private List<string> hierarchyAudioSourceNames;
         private List<string> selectedAnimatorTriggers;
+        private List<string> selectedAnimatorStatesNames;
+        private List<AnimationClip> selectedAnimatorStates;
+
 
         private string[] grabModes;
         private string[] allVisuals;
         private List<Renderer> allRenderers;
-
-        private List<string> selectedAnimatorStatesNames;
-        private List<AnimationClip> selectedAnimatorStates;
 
         void OnEnable()
         {
@@ -34,9 +36,9 @@ namespace Gaze
             hierarchyAnimatorNames = new List<string>();
             hierarchyAudioSources = new List<AudioSource>();
             hierarchyAudioSourceNames = new List<string>();
+            selectedAnimatorTriggers = new List<string>();
             selectedAnimatorStatesNames = new List<string>();
             selectedAnimatorStates = new List<AnimationClip>();
-            selectedAnimatorTriggers = new List<string>();
 
             grabModes = Enum.GetNames(typeof(Gaze_GrabMode));
 
@@ -49,19 +51,21 @@ namespace Gaze
             EditorApplication.update -= OnEditorApplicationUpdate;
         }
 
+        bool ShowOtherAudioOptions = false;
         public void ShowAudioOptions()
         {
             #region AudioSource
 
-            actionsScript.ActionAudio = (Gaze_Actions.ACTIVABLE_OPTION)EditorGUILayout.EnumPopup("Audio", actionsScript.ActionAudio);
+            actionsScript.ActionAudio = (Gaze_Actions.ACTIVABLE_OPTION)EditorGUILayout.EnumPopup(new GUIContent("Audio", "Launch a sound using this action."), actionsScript.ActionAudio);
 
             if (actionsScript.ActionAudio != Gaze_Actions.ACTIVABLE_OPTION.NOTHING)
             {
                 EditorGUILayout.BeginVertical();
                 if (hierarchyAudioSources.Count > 0)
                 {
+                    Gaze_EditorUtils.DrawSectionTitle("Audio Setup");
                     EditorGUILayout.BeginHorizontal();
-                    EditorGUILayout.LabelField("Audio Source");
+                    EditorGUILayout.LabelField(new GUIContent("Audio Source", "Select the audiosource you want to use to play your audio if you have many on your IO"));
 
                     if (!hierarchyAudioSources.Contains(actionsScript.targetAudioSource))
                     {
@@ -83,22 +87,37 @@ namespace Gaze
                 #region AudioClips
                 if (actionsScript.ActionAudio == Gaze_Actions.ACTIVABLE_OPTION.ACTIVATE)
                 {
-                    actionsScript.audio_stopOthers = EditorGUILayout.ToggleLeft("Stop Other Audios", actionsScript.audio_stopOthers);
+                    actionsScript.activeTriggerStatesAudio[0] = EditorGUILayout.ToggleLeft(Gaze_HashIDs.TriggerEventsAndStates[0], actionsScript.activeTriggerStatesAudio[0]);
 
-                    actionsScript.audio_ForceStop = EditorGUILayout.ToggleLeft("Immediate play", actionsScript.audio_ForceStop);
-                    if (!actionsScript.audio_ForceStop)
+                    if (actionsScript.activeTriggerStatesAudio[0])
                     {
-                        actionsScript.audio_AllowMultiple = EditorGUILayout.ToggleLeft("Cumulate audios", actionsScript.audio_AllowMultiple);
+                        DisplayAudioBlock(0);
+                    }
 
-                        if (actionsScript.audio_AllowMultiple)
+                    EditorGUI.indentLevel++;
+                    ShowOtherAudioOptions = EditorGUILayout.Foldout(ShowOtherAudioOptions, "More Options:");
+
+                    if (ShowOtherAudioOptions)
+                    {
+                        for (int i = 1; i < Gaze_HashIDs.TriggerEventsAndStates.Length; i++)
                         {
-                            actionsScript.audio_MaxConcurrentSound = EditorGUILayout.IntField("Max concurrent audios", actionsScript.audio_MaxConcurrentSound);
+                            actionsScript.activeTriggerStatesAudio[i] = EditorGUILayout.ToggleLeft(new GUIContent(Gaze_HashIDs.TriggerEventsAndStates[i], AudioTriggerEvensAndStatesHints[i]), actionsScript.activeTriggerStatesAudio[i]);
+                            if (actionsScript.activeTriggerStatesAudio[i])
+                            {
+                                DisplayAudioBlock(i);
+                            }
                         }
                     }
 
+                    EditorGUI.indentLevel--;
                     EditorGUILayout.Space();
 
-                    actionsScript.audio_randomizePitch = EditorGUILayout.ToggleLeft("Randomize pitch", actionsScript.audio_randomizePitch);
+                    Gaze_EditorUtils.DrawSectionTitle("Audio Parameters");
+
+                    actionsScript.audio_stopOthers = EditorGUILayout.ToggleLeft(new GUIContent("Stop Other Audios", "Stops any others audios launched by this IO only"), actionsScript.audio_stopOthers);
+
+                    // Randomize Pitch
+                    actionsScript.audio_randomizePitch = EditorGUILayout.ToggleLeft(new GUIContent("Randomize pitch", "Change the pitch of this interaction only"), actionsScript.audio_randomizePitch);
                     if (actionsScript.audio_randomizePitch)
                     {
                         actionsScript.audio_minPitch = EditorGUILayout.FloatField("Min pitch", actionsScript.audio_minPitch, GUILayout.Width(300));
@@ -106,46 +125,12 @@ namespace Gaze
                         actionsScript.audio_maxPitch = EditorGUILayout.FloatField("Max pitch", actionsScript.audio_maxPitch, GUILayout.Width(300));
                         Gaze_Utils.EnsureFieldIsPositiveOrZero(ref actionsScript.audio_maxPitch);
                     }
+                    // End of Randomize Pitch
 
-                    EditorGUILayout.Space();
+                    #endregion onAfter 
 
-                    for (int i = 0; i < Gaze_HashIDs.TriggerEventsAndStates.Length; i++)
-                    {
-                        actionsScript.activeTriggerStatesAudio[i] = EditorGUILayout.ToggleLeft(Gaze_HashIDs.TriggerEventsAndStates[i], actionsScript.activeTriggerStatesAudio[i]);
 
-                        if (actionsScript.activeTriggerStatesAudio[i])
-                        {
-                            DisplayAudioBlock(i);
-                        }
-                    }
-                }
-                #endregion onAfter 
-                if (actionsScript.ActionAudio == Gaze_Actions.ACTIVABLE_OPTION.DEACTIVATE)
-                {
-                    #region Fade Out
-                    EditorGUILayout.Space();
-                    GUILayout.BeginHorizontal();
-                    actionsScript.fadeOutDeactEnabled = EditorGUILayout.ToggleLeft("Fade Out", actionsScript.fadeOutDeactEnabled);
-
-                    if (actionsScript.fadeOutDeactEnabled)
-                    {
-                        actionsScript.fadeOutDeactTime = EditorGUILayout.FloatField("", actionsScript.fadeOutDeactTime, GUILayout.Width(200));
-                        Gaze_Utils.EnsureFieldIsPositiveOrZero(ref actionsScript.fadeOutDeactTime);
-                        EditorGUILayout.LabelField("[s]");
-                        GUILayout.EndHorizontal();
-                        GUILayout.BeginHorizontal();
-
-                        actionsScript.fadeOutDeactCurve = EditorGUILayout.CurveField(actionsScript.fadeOutDeactCurve, Color.green, new Rect(0, 0, actionsScript.fadeOutDeactTime, 1), GUILayout.Width(400));
-
-                    }
-                    GUILayout.EndHorizontal();
-                    #endregion
-
-                }
-                else if (actionsScript.ActionAudio == Gaze_Actions.ACTIVABLE_OPTION.ACTIVATE)
-                {
                     #region Fade In
-                    EditorGUILayout.Space();
                     GUILayout.BeginHorizontal();
                     actionsScript.fadeInEnabled = EditorGUILayout.ToggleLeft("Fade In", actionsScript.fadeInEnabled);
                     if (actionsScript.fadeInEnabled)
@@ -175,32 +160,72 @@ namespace Gaze
 
                         }
                         GUILayout.EndHorizontal();
+
+                        #endregion
+
+                        #region Ducking
+                        if (actionsScript.ActionAudio == Gaze_Actions.ACTIVABLE_OPTION.ACTIVATE)
+                        {
+                            actionsScript.duckingEnabled = EditorGUILayout.ToggleLeft(new GUIContent("Ducking", "The volume rises when this IO is Gazed"), actionsScript.duckingEnabled);
+                            if (actionsScript.duckingEnabled)
+                            {
+                                DisplayAudioDuckingBlock();
+                            }
+                            else
+                            {
+                                DisplayAudioVolume();
+                            }
+                        }
+                        #endregion
                     }
+
+                    EditorGUILayout.Space();
+                    Gaze_EditorUtils.DrawSectionTitle("Audio Reload Parameters");
+                    Gaze_EditorUtils.DrawEditorHint("By default audios will wait until the last one is finished when reloaded");
+                    EditorGUILayout.Space();
+
+                    actionsScript.audio_ForceStop = EditorGUILayout.ToggleLeft(new GUIContent("Immediate play", "Stops others audios launched with this interaction when reloaded."), actionsScript.audio_ForceStop);
+                    if (!actionsScript.audio_ForceStop)
+                    {
+                        actionsScript.audio_AllowMultiple = EditorGUILayout.ToggleLeft(new GUIContent("Cumulate audios", "Cumulates audios launched with this interaction when reloaded."), actionsScript.audio_AllowMultiple);
+
+                        if (actionsScript.audio_AllowMultiple)
+                        {
+                            actionsScript.audio_MaxConcurrentSound = EditorGUILayout.IntField("Max concurrent audios", actionsScript.audio_MaxConcurrentSound);
+                        }
+                    }
+
+                }
+
+                if (actionsScript.ActionAudio == Gaze_Actions.ACTIVABLE_OPTION.DEACTIVATE)
+                {
+                    #region Fade Out
+                    GUILayout.BeginHorizontal();
+                    actionsScript.fadeOutDeactEnabled = EditorGUILayout.ToggleLeft("Fade Out", actionsScript.fadeOutDeactEnabled);
+
+                    if (actionsScript.fadeOutDeactEnabled)
+                    {
+                        actionsScript.fadeOutDeactTime = EditorGUILayout.FloatField("", actionsScript.fadeOutDeactTime, GUILayout.Width(200));
+                        Gaze_Utils.EnsureFieldIsPositiveOrZero(ref actionsScript.fadeOutDeactTime);
+                        EditorGUILayout.LabelField("[s]");
+                        GUILayout.EndHorizontal();
+                        GUILayout.BeginHorizontal();
+
+                        actionsScript.fadeOutDeactCurve = EditorGUILayout.CurveField(actionsScript.fadeOutDeactCurve, Color.green, new Rect(0, 0, actionsScript.fadeOutDeactTime, 1), GUILayout.Width(400));
+
+                    }
+                    GUILayout.EndHorizontal();
                     #endregion
 
-                    #region Ducking
-                    if (actionsScript.ActionAudio == Gaze_Actions.ACTIVABLE_OPTION.ACTIVATE)
-                    {
-                        EditorGUILayout.Space();
-                        actionsScript.duckingEnabled = EditorGUILayout.ToggleLeft("Ducking", actionsScript.duckingEnabled);
-                        if (actionsScript.duckingEnabled)
-                        {
-                            DisplayAudioDuckingBlock();
-                        }
-                        else
-                        {
-                            DisplayAudioVolume();
-                        }
-                    }
-                    #endregion
                 }
             }
         }
 
+        bool isOtherAnimationTriggerOptionsOpen = false;
         public void ShowAnimationOptions()
         {
             #region Animations
-            actionsScript.ActionAnimation = (Gaze_Actions.ANIMATION_OPTION)EditorGUILayout.EnumPopup("Animation", actionsScript.ActionAnimation);
+            actionsScript.ActionAnimation = (Gaze_Actions.ANIMATION_OPTION)EditorGUILayout.EnumPopup(new GUIContent("Animation", "Launch animations directly from your Visual or Unity animations."), actionsScript.ActionAnimation);
             #endregion Animations
 
             #region MECANIM
@@ -211,7 +236,7 @@ namespace Gaze
                 if (hierarchyAnimators.Count > 0)
                 {
 
-                    EditorGUILayout.LabelField("Animator");
+                    EditorGUILayout.LabelField(new GUIContent("Animator", "Lists all the animators available in your IO"));
 
                     if (!hierarchyAnimators.Contains(actionsScript.targetAnimator))
                     {
@@ -222,7 +247,7 @@ namespace Gaze
                 }
                 else
                 {
-                    EditorGUILayout.HelpBox("No animators found.", MessageType.Warning);
+                    EditorGUILayout.HelpBox("No animator found in the structure of your IO.", MessageType.Warning);
                 }
                 EditorGUILayout.EndHorizontal();
             }
@@ -231,17 +256,34 @@ namespace Gaze
             #region AnimationTriggers
             if (actionsScript.ActionAnimation == Gaze_Actions.ANIMATION_OPTION.MECANIM)
             {
-                for (int i = 0; i < Gaze_HashIDs.TriggerEventsAndStates.Length; i++)
-                {
-                    EditorGUILayout.BeginHorizontal();
-                    actionsScript.activeTriggerStatesAnim[i] = EditorGUILayout.ToggleLeft(Gaze_HashIDs.TriggerEventsAndStates[i], actionsScript.activeTriggerStatesAnim[i]);
+                EditorGUILayout.BeginHorizontal();
+                actionsScript.activeTriggerStatesAnim[0] = EditorGUILayout.ToggleLeft(Gaze_HashIDs.TriggerEventsAndStates[0], actionsScript.activeTriggerStatesAnim[0]);
 
-                    if (actionsScript.activeTriggerStatesAnim[i])
-                    {
-                        DisplayAnimBlock(i);
-                    }
-                    EditorGUILayout.EndHorizontal();
+                if (actionsScript.activeTriggerStatesAnim[0])
+                {
+                    DisplayAnimBlock(0);
                 }
+                EditorGUILayout.EndHorizontal();
+
+                isOtherAnimationTriggerOptionsOpen = EditorGUILayout.Foldout(isOtherAnimationTriggerOptionsOpen, "Other Trigger Options");
+                if (isOtherAnimationTriggerOptionsOpen)
+                {
+                    EditorGUI.indentLevel++;
+                    for (int i = 1; i < Gaze_HashIDs.TriggerEventsAndStates.Length; i++)
+                    {
+                        EditorGUILayout.BeginHorizontal();
+                        actionsScript.activeTriggerStatesAnim[i] = EditorGUILayout.ToggleLeft(Gaze_HashIDs.TriggerEventsAndStates[i], actionsScript.activeTriggerStatesAnim[i]);
+
+                        if (actionsScript.activeTriggerStatesAnim[i])
+                        {
+                            DisplayAnimBlock(i);
+                        }
+                        EditorGUILayout.EndHorizontal();
+                    }
+                    EditorGUI.indentLevel--;
+                }
+
+
                 EditorGUILayout.Space();
             }
             #endregion AnimationTriggers
@@ -251,13 +293,26 @@ namespace Gaze
             #region AnimationTriggers
             if (actionsScript.ActionAnimation == Gaze_Actions.ANIMATION_OPTION.CLIP)
             {
-                for (int i = 0; i < Gaze_HashIDs.TriggerEventsAndStates.Length; i++)
-                {
-                    actionsScript.activeTriggerStatesAnim[i] = EditorGUILayout.ToggleLeft(Gaze_HashIDs.TriggerEventsAndStates[i], actionsScript.activeTriggerStatesAnim[i]);
 
-                    if (actionsScript.activeTriggerStatesAnim[i])
+                actionsScript.activeTriggerStatesAnim[0] = EditorGUILayout.ToggleLeft(Gaze_HashIDs.TriggerEventsAndStates[0], actionsScript.activeTriggerStatesAnim[0]);
+
+                if (actionsScript.activeTriggerStatesAnim[0])
+                {
+                    DisplayAnimBlock(0);
+                }
+
+                isOtherAnimationTriggerOptionsOpen = EditorGUILayout.Foldout(isOtherAnimationTriggerOptionsOpen, "Other Trigger Options");
+                if (isOtherAnimationTriggerOptionsOpen)
+                {
+                    EditorGUI.indentLevel++;
+                    for (int i = 1; i < Gaze_HashIDs.TriggerEventsAndStates.Length; i++)
                     {
-                        DisplayAnimBlock(i);
+                        actionsScript.activeTriggerStatesAnim[i] = EditorGUILayout.ToggleLeft(Gaze_HashIDs.TriggerEventsAndStates[i], actionsScript.activeTriggerStatesAnim[i]);
+
+                        if (actionsScript.activeTriggerStatesAnim[i])
+                        {
+                            DisplayAnimBlock(i);
+                        }
                     }
                 }
                 EditorGUILayout.Space();
@@ -276,9 +331,18 @@ namespace Gaze
                 if (!Application.isPlaying)
                 {
                     EditorGUILayout.Space();
+                    Gaze_EditorUtils.DrawSectionTitle("DELAY");
+                    ShowDelayBlock();
+
+                    EditorGUILayout.Space();
+
                     if (actionsScript && !actionsScript.DestroyOnTrigger)
                     {
-                        ShowVisualsOption();
+                        EditorGUILayout.Space();
+                        Gaze_EditorUtils.DrawSectionTitle("ACTIONS");
+                        Gaze_EditorUtils.DrawEditorHint("Actions will be fired once all conditions are met.");
+
+                        Gaze_EditorUtils.DrawSectionTitle("Manipulation");
                         ShowGrabOption();
                         ShowGrabDistanceOption();
                         ShowGrabModeOption();
@@ -286,16 +350,26 @@ namespace Gaze
                         ShowTouchDistanceOption();
                         ShowDragAndDropOptions();
 
+                        EditorGUILayout.Space();
+                        Gaze_EditorUtils.DrawSectionTitle("Object");
+                        ShowVisualsOption();
                         ShowCollidersOption();
                         ShowGravityOption();
-                        ShowAudioOptions();
-                        ShowAnimationOptions();
                     }
                     actionsScript.DestroyOnTrigger = EditorGUILayout.ToggleLeft("Destroy", actionsScript.DestroyOnTrigger);
 
+                    if (actionsScript && !actionsScript.DestroyOnTrigger)
+                    {
+                        EditorGUILayout.Space();
+
+                        EditorGUILayout.Space();
+                        Gaze_EditorUtils.DrawSectionTitle("Animation & Audio");
+                        ShowAudioOptions();
+                        ShowAnimationOptions();
+                    }
+
                     EditorGUILayout.Space();
-                    EditorGUILayout.LabelField("Delay", EditorStyles.boldLabel);
-                    ShowDelayBlock();
+
                 }
             }
 
@@ -304,11 +378,9 @@ namespace Gaze
             EditorUtility.SetDirty(actionsScript);
         }
 
-
-
         private void ShowTouchDistanceOption()
         {
-            actionsScript.ModifyTouchDistance = (Gaze_Actions.ALTERABLE_OPTION)EditorGUILayout.EnumPopup("Touch Distance", actionsScript.ModifyTouchDistance);
+            actionsScript.ModifyTouchDistance = (Gaze_Actions.ALTERABLE_OPTION)EditorGUILayout.EnumPopup(new GUIContent("Touch Distance", "Modify the touch distance of this IO at runtime."), actionsScript.ModifyTouchDistance);
             if (actionsScript.ModifyTouchDistance == Gaze_Actions.ALTERABLE_OPTION.MODIFY)
             {
                 EditorGUILayout.BeginHorizontal();
@@ -320,12 +392,12 @@ namespace Gaze
 
         private void ShowTouchAbilityOption()
         {
-            actionsScript.ActionTouch = (Gaze_Actions.ACTIVABLE_OPTION)EditorGUILayout.EnumPopup("Touch Ability", actionsScript.ActionTouch);
+            actionsScript.ActionTouch = (Gaze_Actions.ACTIVABLE_OPTION)EditorGUILayout.EnumPopup(new GUIContent("Touch Ability", "Activate or deactivate the touch ability of this IO at runtime."), actionsScript.ActionTouch);
         }
 
         private void ShowGrabModeOption()
         {
-            actionsScript.ModifyGrabMode = (Gaze_Actions.ALTERABLE_OPTION)EditorGUILayout.EnumPopup("Manipulation Mode", actionsScript.ModifyGrabMode);
+            actionsScript.ModifyGrabMode = (Gaze_Actions.ALTERABLE_OPTION)EditorGUILayout.EnumPopup(new GUIContent("Manipulation Mode", "Change the way your IO is being manipulated at runtime."), actionsScript.ModifyGrabMode);
             if (actionsScript.ModifyGrabMode == Gaze_Actions.ALTERABLE_OPTION.MODIFY)
             {
                 EditorGUILayout.BeginHorizontal();
@@ -337,7 +409,7 @@ namespace Gaze
 
         private void ShowGrabDistanceOption()
         {
-            actionsScript.ModifyGrabDistance = (Gaze_Actions.ALTERABLE_OPTION)EditorGUILayout.EnumPopup("Manipulation Distance", actionsScript.ModifyGrabDistance);
+            actionsScript.ModifyGrabDistance = (Gaze_Actions.ALTERABLE_OPTION)EditorGUILayout.EnumPopup(new GUIContent("Manipulation Distance", "Modify Grab & Levitation distances of this IO at runtime."), actionsScript.ModifyGrabDistance);
             if (actionsScript.ModifyGrabDistance == Gaze_Actions.ALTERABLE_OPTION.MODIFY)
             {
                 EditorGUILayout.BeginHorizontal();
@@ -355,7 +427,7 @@ namespace Gaze
 
         private void ShowVisualsOption()
         {
-            actionsScript.ActionVisuals = (Gaze_Actions.ACTIVABLE_OPTION)EditorGUILayout.EnumPopup("Visuals", actionsScript.ActionVisuals);
+            actionsScript.ActionVisuals = (Gaze_Actions.ACTIVABLE_OPTION)EditorGUILayout.EnumPopup(new GUIContent("Visuals", "Activate or deactivate one are all visuals of this IO at runtime."), actionsScript.ActionVisuals);
 
             if (actionsScript.ActionVisuals == Gaze_Actions.ACTIVABLE_OPTION.NOTHING)
                 return;
@@ -421,15 +493,16 @@ namespace Gaze
 
         private void ShowCollidersOption()
         {
-            actionsScript.ActionColliders = (Gaze_Actions.ACTIVABLE_OPTION)EditorGUILayout.EnumPopup("Colliders", actionsScript.ActionColliders);
+            actionsScript.ActionColliders = (Gaze_Actions.ACTIVABLE_OPTION)EditorGUILayout.EnumPopup(new GUIContent("Colliders", "Deactivate or Activate all colliders of an IO."), actionsScript.ActionColliders);
         }
+
 
         /// <summary>
         /// Shows the alter gravity option and warns the user if he desn't have a rigidbody
         /// </summary>
         private void ShowGravityOption()
         {
-            actionsScript.ActionGravity = (Gaze_Actions.ACTIVABLE_OPTION)EditorGUILayout.EnumPopup("Gravity:", actionsScript.ActionGravity);
+            actionsScript.ActionGravity = (Gaze_Actions.ACTIVABLE_OPTION)EditorGUILayout.EnumPopup(new GUIContent("Gravity:", "Deactivate or Activate gravity of this IO. "), actionsScript.ActionGravity);
 
             // Warn the user if he is trying to change the gravity of an IO that does not have a rigibody on the root
             if (actionsScript.ActionGravity != Gaze_Actions.ACTIVABLE_OPTION.NOTHING)
@@ -448,8 +521,10 @@ namespace Gaze
 
         private void ShowDelayBlock()
         {
+
             actionsScript.isDelayed = EditorGUILayout.ToggleLeft("Delayed", actionsScript.isDelayed);
 
+            EditorGUI.indentLevel++;
             if (actionsScript.isDelayed)
             {
                 if (!actionsScript.isDelayRandom)
@@ -489,11 +564,12 @@ namespace Gaze
                 actionsScript.multipleActionsInTime = EditorGUILayout.ToggleLeft("Fire All Interactions Recorded During Delay", actionsScript.multipleActionsInTime);
                 GUILayout.EndHorizontal();
             }
+            EditorGUI.indentLevel--;
         }
 
         private void ShowDragAndDropOptions()
         {
-            actionsScript.ModifyDragAndDrop = (Gaze_Actions.ALTERABLE_OPTION)EditorGUILayout.EnumPopup("Drag And Drop", actionsScript.ModifyDragAndDrop);
+            actionsScript.ModifyDragAndDrop = (Gaze_Actions.ALTERABLE_OPTION)EditorGUILayout.EnumPopup(new GUIContent("Drag And Drop", "Activate, Deactivate and Modify all parameters of the Drag & Drop of this IO at runtime. "), actionsScript.ModifyDragAndDrop);
             if (actionsScript.ModifyDragAndDrop == Gaze_Actions.ALTERABLE_OPTION.MODIFY)
             {
                 EditorGUILayout.BeginHorizontal();
@@ -582,7 +658,6 @@ namespace Gaze
                 EditorGUILayout.EndHorizontal();
             }
         }
-
 
         private void DisplayAnimBlock(int k)
         {
@@ -755,6 +830,7 @@ namespace Gaze
 
         private void DisplayAudioDuckingBlock()
         {
+            EditorGUI.indentLevel++;
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.LabelField("Volume Min.");
             actionsScript.audioVolumeMin = EditorGUILayout.Slider(actionsScript.audioVolumeMin, 0, 1);
@@ -769,6 +845,7 @@ namespace Gaze
             EditorGUILayout.LabelField("Fader Speed");
             actionsScript.fadeSpeed = EditorGUILayout.Slider(actionsScript.fadeSpeed, 0, 1);
             EditorGUILayout.EndHorizontal();
+            EditorGUI.indentLevel--;
         }
 
         private void DisplayAudioVolume()
@@ -786,6 +863,7 @@ namespace Gaze
 
             FindAnimatorsInHierarchy();
             FindAnimatorTriggers();
+            FindAnimatorStates();
             FindAudioSourcesInHierarchy();
         }
 
@@ -829,14 +907,12 @@ namespace Gaze
                 for (int i = 0; i < actionsScript.targetAnimator.parameters.Length; i++)
                 {
                     AnimatorControllerParameter p = actionsScript.targetAnimator.parameters[i];
-                    // TODO integrate other types of parameters ?
                     if (p.type == AnimatorControllerParameterType.Trigger)
                     {
                         selectedAnimatorTriggers.Add(p.name);
                     }
                 }
             }
-            // TODO no triggers found when Animator view changes
 
             return selectedAnimatorTriggers.Count > 0;
         }
@@ -859,5 +935,14 @@ namespace Gaze
 
             return selectedAnimatorStates.Count > 0;
         }
+
+        public static string[] AudioTriggerEvensAndStatesHints =
+        {
+            "",
+            "Choose the clips you want to launch when the interaction is reloaded",
+            "",
+            "Choose the clips you want to launch when the interaction in it's Active ",
+            "Choose the clips you want to launch when the interaction in it's After State"
+        };
     }
 }

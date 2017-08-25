@@ -153,21 +153,21 @@ namespace Gaze
 
         #region Main Menu
 
-        [MenuItem("GameObject/Spatial Stories/Convert into interactive object", false, 10)]
+        [MenuItem("GameObject/SpatialStories/Convert into interactive object", false, 10)]
         public static void GameObjectConvertIntoObject(MenuCommand menuCommand)
         {
             if (Selection.activeGameObject != null)
                 ConvertInteractiveObject(Selection.activeGameObject);
         }
 
-        [MenuItem("GameObject/Spatial Stories/Convert into interactive camera", false, 10)]
+        [MenuItem("GameObject/SpatialStories/Convert into interactive camera", false, 10)]
         public static void GameObjectConvertIntoCamera(MenuCommand menuCommand)
         {
             if (Selection.activeGameObject != null && Selection.activeGameObject.GetComponent<Camera>() != null)
                 ConvertInteractiveCamera(Selection.activeGameObject);
         }
 
-        [MenuItem("GameObject/Spatial Stories/Mobile/Convert into GearVr interactive camera", false, 10)]
+        [MenuItem("GameObject/SpatialStories/Convert into GearVr interactive camera", false, 10)]
         public static void GameObjectToGearVrCamera(MenuCommand menuCommand)
         {
             if (Selection.activeGameObject != null && Selection.activeGameObject.GetComponent<Camera>() != null)
@@ -178,46 +178,46 @@ namespace Gaze
 
         #region Contextual Menu
 
-        [MenuItem("Spatial Stories/Create/Interactive Object")]
+        [MenuItem("SpatialStories/Create/Interactive Object")]
         public static void MenuCreateInteractiveObject()
         {
             ParentAndUndo(CreateInteractiveObject());
         }
 
-        [MenuItem("Spatial Stories/Create/Interactive Camera")]
+        [MenuItem("SpatialStories/Create/Interactive Camera")]
         public static void MenuCreateInteractiveCamera()
         {
             ParentAndUndo(CreateInteractiveCamera());
         }
 
-        [MenuItem("Spatial Stories/Create/Mobile/GearVr Interactive Camera")]
-        public static void GearVrCameraCreation()
-        {
-            ParentAndUndo(CreateGearVrInteractiveCamera());
-        }
-
-        [MenuItem("Spatial Stories/Convert/Into interactive Object")]
+        [MenuItem("SpatialStories/Convert/Into Interactive Object")]
         public static void MenuConvertInteractiveObject()
         {
             Selection.activeGameObject = ConvertInteractiveObject(Selection.activeGameObject);
         }
 
-        [MenuItem("Spatia lStories/Convert/Into interactive Object", true)]
+        [MenuItem("SpatialStories/Convert/Into Interactive Object", true)]
         public static bool ValidateGameobjectSelection()
         {
             return Selection.activeGameObject != null;
         }
 
-        [MenuItem("Spatial Stories/Convert/Into interactive Camera")]
+        [MenuItem("SpatialStories/Convert/Into Interactive Camera")]
         public static void MenuConvertInteractiveCamera()
         {
             Selection.activeGameObject = ConvertInteractiveCamera(Selection.activeGameObject);
         }
 
-        [MenuItem("Spatial Stories/Convert/Into interactive Camera", true)]
+        [MenuItem("SpatialStories/Convert/into Interactive Camera", true)]
         public static bool ValidateCameraSelection()
         {
             return Selection.activeGameObject != null && Selection.activeGameObject.GetComponent<Camera>() != null;
+        }
+
+        [MenuItem("SpatialStories/Create/GearVr Interactive Camera")]
+        public static void GearVrCameraCreation()
+        {
+            ParentAndUndo(CreateGearVrInteractiveCamera());
         }
         #endregion
     }

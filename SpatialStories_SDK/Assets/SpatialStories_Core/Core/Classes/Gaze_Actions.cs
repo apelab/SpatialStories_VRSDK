@@ -121,6 +121,7 @@ namespace Gaze
         public bool triggerNotification;
         private void Awake()
         {
+            activeTriggerStatesAudio[0] = true;
             gazeInteraction = GetComponent<Gaze_Interaction>();
             if (gazeInteraction == null)
             {

@@ -53,10 +53,12 @@ namespace Gaze
 
             logo = (Texture)Resources.Load("SpatialStorires_Logo_256", typeof(Texture));
             logoRect = new Rect();
-            logoRect.x = 10;
-            logoRect.y = 10;
+            logoRect.x = 4;
+            logoRect.y = 4;
+            logoRect.width = 200;
             dnd_dropTargetsNames = new List<string>();
             dnd_targetMaterial = Resources.Load("DnD_TargetMaterial", typeof(Material)) as Material;
+
         }
 
         public override void Gaze_OnInspectorGUI()
@@ -64,7 +66,11 @@ namespace Gaze
             base.BeginChangeComparision();
 
             UpdateDropTargetsNames();
+            EditorGUILayout.Space();
             DisplayLogo();
+            EditorGUILayout.Space();
+            Gaze_EditorUtils.DrawSectionTitle("Interactive Object Setup");
+            EditorGUILayout.Space();
             DisplayManipulationMode();
             DisplayTouchDistance();
             DisplayGrabDistance();
@@ -93,14 +99,14 @@ namespace Gaze
         private void DisplayLogo()
         {
             GUILayout.BeginHorizontal();
-            GUI.Label(logoRect, logo);
             GUILayout.Label(logo);
             GUILayout.EndHorizontal();
+            GUILayout.Label("V.0.2.b5", EditorStyles.boldLabel);
         }
 
         private void DisplayManipulationMode()
         {
-            gaze_InteractiveObjectScript.ManipulationModeIndex = EditorGUILayout.Popup("Manipulation Modes", gaze_InteractiveObjectScript.ManipulationModeIndex, manipulationModes);
+            gaze_InteractiveObjectScript.ManipulationModeIndex = Gaze_EditorUtils.Gaze_HintPopup("Manipulation Modes", gaze_InteractiveObjectScript.ManipulationModeIndex, manipulationModes, "Define if your IO should be grabbed or levitable, or touched", 116);
         }
 
         private void DisplayTouchDistance()
@@ -109,7 +115,7 @@ namespace Gaze
                 return;
 
             GUILayout.BeginHorizontal();
-            gaze_InteractiveObjectScript.TouchDistance = EditorGUILayout.FloatField("Touch Distance", gaze_InteractiveObjectScript.TouchDistance);
+            gaze_InteractiveObjectScript.TouchDistance = EditorGUILayout.FloatField(new GUIContent("Touch Distance"), gaze_InteractiveObjectScript.TouchDistance);
             Gaze_Utils.EnsureFieldIsPositiveOrZero(ref gaze_InteractiveObjectScript.TouchDistance);
             GUILayout.EndHorizontal();
         }
@@ -128,7 +134,7 @@ namespace Gaze
             Gaze_Utils.EnsureFieldIsPositiveOrZero(ref gaze_InteractiveObjectScript.GrabDistance);
             Gaze_Utils.EnsureFieldIsPositiveOrZero(ref gaze_InteractiveObjectScript.AttractionSpeed);
             GUILayout.BeginHorizontal();
-            gaze_InteractiveObjectScript.SnapOnGrab = EditorGUILayout.Toggle("Snap On Grab", gaze_InteractiveObjectScript.SnapOnGrab);
+            gaze_InteractiveObjectScript.SnapOnGrab = EditorGUILayout.Toggle(new GUIContent("Snap On Grab", "Make the IO snap into a specific position. Uses the Snap Left or Snap Right positions"), gaze_InteractiveObjectScript.SnapOnGrab);
             if (gaze_InteractiveObjectScript.SnapOnGrab)
             {
                 gaze_InteractiveObjectScript.IsManipulable = EditorGUILayout.Toggle("Is Manipulable", gaze_InteractiveObjectScript.IsManipulable);
@@ -156,7 +162,7 @@ namespace Gaze
             EditorGUILayout.Space();
             EditorGUILayout.LabelField("Drag And Drop", EditorStyles.boldLabel);
             GUILayout.BeginHorizontal();
-            gaze_InteractiveObjectScript.IsDragAndDropEnabled = EditorGUILayout.ToggleLeft("Enable Drag And Drop", gaze_InteractiveObjectScript.IsDragAndDropEnabled);
+            gaze_InteractiveObjectScript.IsDragAndDropEnabled = EditorGUILayout.ToggleLeft(new GUIContent("Enable Drag And Drop", "Enable Drag and Drop if you want your IO to be snapped in a particular target."), gaze_InteractiveObjectScript.IsDragAndDropEnabled);
             EditorGUILayout.EndHorizontal();
 
             if (gaze_InteractiveObjectScript.IsDragAndDropEnabled)
@@ -173,17 +179,17 @@ namespace Gaze
 
 
                 EditorGUILayout.BeginHorizontal();
-                gaze_InteractiveObjectScript.DnD_attached = EditorGUILayout.ToggleLeft("Attached", gaze_InteractiveObjectScript.DnD_attached);
+                gaze_InteractiveObjectScript.DnD_attached = EditorGUILayout.ToggleLeft(new GUIContent("Attached", "The IO can not be taken off its target after being released"), gaze_InteractiveObjectScript.DnD_attached);
                 EditorGUILayout.EndHorizontal();
 
                 EditorGUILayout.BeginHorizontal();
-                gaze_InteractiveObjectScript.DnD_SnapOnDrop = EditorGUILayout.ToggleLeft(new GUIContent("Snap On Drop", "If false the object won't try to match the ghost position on drop"), gaze_InteractiveObjectScript.DnD_SnapOnDrop);
+                gaze_InteractiveObjectScript.DnD_SnapOnDrop = EditorGUILayout.ToggleLeft(new GUIContent("Snap On Drop", "The IO will snap in place when released"), gaze_InteractiveObjectScript.DnD_SnapOnDrop);
                 EditorGUILayout.EndHorizontal();
 
                 if (gaze_InteractiveObjectScript.DnD_SnapOnDrop)
                 {
                     EditorGUILayout.BeginHorizontal();
-                    gaze_InteractiveObjectScript.DnD_snapBeforeDrop = EditorGUILayout.ToggleLeft("Snap Before Drop", gaze_InteractiveObjectScript.DnD_snapBeforeDrop);
+                    gaze_InteractiveObjectScript.DnD_snapBeforeDrop = EditorGUILayout.ToggleLeft(new GUIContent("Snap Before Drop", "The IO will snap in place if already in the right position (before releasing it)"), gaze_InteractiveObjectScript.DnD_snapBeforeDrop);
                     EditorGUILayout.EndHorizontal();
                 }
                 else
@@ -192,7 +198,7 @@ namespace Gaze
 
 
                 EditorGUILayout.BeginHorizontal();
-                gaze_InteractiveObjectScript.DnD_TimeToSnap = EditorGUILayout.FloatField("Time To Snap", gaze_InteractiveObjectScript.DnD_TimeToSnap);
+                gaze_InteractiveObjectScript.DnD_TimeToSnap = EditorGUILayout.FloatField(new GUIContent("Time To Snap", "The time it takes for the object to snap"), gaze_InteractiveObjectScript.DnD_TimeToSnap);
                 EditorGUILayout.EndHorizontal();
 
                 DisplayTargetGenerator();
@@ -202,7 +208,7 @@ namespace Gaze
         private void DisplayTargetGenerator()
         {
             EditorGUILayout.BeginHorizontal();
-            dnd_targetsToGenerate = EditorGUILayout.IntField("Generate Targets", dnd_targetsToGenerate);
+            dnd_targetsToGenerate = EditorGUILayout.IntField(new GUIContent("Generate Targets", "Generates a pre-configured target with a blue transparent visual."), dnd_targetsToGenerate);
             if (GUILayout.Button("GO"))
             {
                 GenerateDnDTargets();
@@ -244,9 +250,9 @@ namespace Gaze
 
         private void DisplayTargets()
         {
-            GUILayout.BeginHorizontal();
-            EditorGUILayout.LabelField("Drop Targets");
-            GUILayout.EndHorizontal();
+            EditorGUILayout.BeginHorizontal();
+            EditorGUILayout.LabelField(new GUIContent("Drop Targets", " Use existing IO’s in the scene or create an automatic target below for your IO."));
+            EditorGUILayout.EndHorizontal();
 
             // help message if no target is specified
             if (gaze_InteractiveObjectScript.DnD_Targets == null || gaze_InteractiveObjectScript.DnD_Targets.Count < 1)
