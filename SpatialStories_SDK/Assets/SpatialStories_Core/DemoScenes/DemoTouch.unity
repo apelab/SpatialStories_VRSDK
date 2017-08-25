@@ -22928,7 +22928,7 @@ MonoBehaviour:
   - 0
   multipleActionsInTime: 0
   rootIO: {fileID: 0}
-  isActive: 0
+  isActive: 1
   ActionReset: 0
   ActionVisuals: 0
   ActionGrab: 0
@@ -22984,7 +22984,7 @@ MonoBehaviour:
   loopAnim: 0000000000000000000000000000000000000000
   loopAnimType: 0000000000000000000000000000000000000000
   animationSequence: 0000000000000000000000000000000000000000
-  targetAudioSource: {fileID: 0}
+  targetAudioSource: {fileID: 250350032}
   activeTriggerStatesAudio: 0100000000
   audioClips:
     ClipEntries00: []
@@ -23169,7 +23169,7 @@ MonoBehaviour:
   hoverStateIndex: 0
   hoverIn: 0
   ReloadDependencies: 0
-  isActive: 0
+  isActive: 1
   proximityGroupIndex: 0
   rigCombinations: []
 --- !u!114 &1465706260
@@ -23183,8 +23183,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c5e5d36d57be5841bfb50b6dbe7c062, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HasActions: 0
-  HasConditions: 0
+  HasActions: 1
+  HasConditions: 1
 --- !u!1 &1466286410
 GameObject:
   m_ObjectHideFlags: 0

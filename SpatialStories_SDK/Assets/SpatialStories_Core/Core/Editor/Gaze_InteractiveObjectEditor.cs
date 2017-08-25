@@ -101,9 +101,9 @@ namespace Gaze
             GUILayout.BeginHorizontal();
             GUILayout.Label(logo);
             GUILayout.EndHorizontal();
-            GUILayout.Label("V.0.2.b5", EditorStyles.boldLabel);
+            GUILayout.Label("V.0.2b6", EditorStyles.boldLabel);
         }
-
+        
         private void DisplayManipulationMode()
         {
             gaze_InteractiveObjectScript.ManipulationModeIndex = Gaze_EditorUtils.Gaze_HintPopup("Manipulation Modes", gaze_InteractiveObjectScript.ManipulationModeIndex, manipulationModes, "Define if your IO should be grabbed or levitable, or touched", 116);

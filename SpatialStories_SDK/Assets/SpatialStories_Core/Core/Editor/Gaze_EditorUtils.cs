@@ -33,7 +33,7 @@ namespace Gaze
         {
             StoreLastStyles();
             EditorStyles.label.fontStyle = FontStyle.Italic;
-            EditorStyles.label.fontSize = 11;
+            EditorStyles.label.fontSize = 8;
             EditorGUILayout.LabelField(_hint);
             RestoreLastStyles();
             EditorGUILayout.Space();

@@ -678,12 +678,12 @@ namespace Gaze
         #region GearVR Controller
         private void OnPadRightTouchDownEvent(Gaze_InputEventArgs e)
         {
-            levitationState = Gaze_LevitationStates.PUSH;
+            levitationState = Gaze_InputManager.instance.CurrentController == Gaze_Controllers.GEARVR_CONTROLLER ? Gaze_LevitationStates.PULL : Gaze_LevitationStates.PUSH;
         }
 
         private void OnPadRightTouchUpEvent(Gaze_InputEventArgs e)
         {
-            levitationState = Gaze_LevitationStates.PULL;
+            levitationState = Gaze_InputManager.instance.CurrentController == Gaze_Controllers.GEARVR_CONTROLLER ? Gaze_LevitationStates.PUSH : Gaze_LevitationStates.PULL;
         }
 
         private void OnRightTouchpadEvent(Gaze_InputEventArgs e)

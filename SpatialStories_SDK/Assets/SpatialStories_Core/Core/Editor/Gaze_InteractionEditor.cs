@@ -64,7 +64,7 @@ namespace Gaze
             GUILayout.BeginHorizontal();
             GUILayout.Label(logo);
             GUILayout.EndHorizontal();
-            GUILayout.Label("V.0.2.b5", EditorStyles.boldLabel);
+            GUILayout.Label("V.0.2b6", EditorStyles.boldLabel);
 
             #endregion
 
