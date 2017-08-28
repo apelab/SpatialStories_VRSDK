@@ -119,7 +119,7 @@ namespace Gaze
                     UpdateInteractiveObjectsList();
 
                     Gaze_EditorUtils.DrawSectionTitle("DEPENDENCIES");
-
+                    
                     Gaze_EditorUtils.DrawEditorHint("Use this to create chain reactions with any other interactions in the scene.");
                     #region Dependency
                     // set boolean value accordingly in Trigger settings
@@ -149,7 +149,8 @@ namespace Gaze
 
                     #region Custom Conditions
                     Gaze_EditorUtils.DrawSectionTitle("CUSTOM CONDITIONS");
-                    Gaze_EditorUtils.DrawEditorHint("Use this to write your custom script and use it as a condition. See user manual for detailed structure.");
+                    Gaze_EditorUtils.DrawEditorHint("Use this to write your custom script and use it as a condition.", false);
+                    Gaze_EditorUtils.DrawEditorHint("See user manual for detailed structure.");
                     targetConditions.customConditionsEnabled = EditorGUILayout.ToggleLeft("Custom Conditions", targetConditions.customConditionsEnabled);
                     if (targetConditions.customConditionsEnabled)
                     {
@@ -208,9 +209,9 @@ namespace Gaze
                     #region Reload
                     // toggle button
                     Gaze_EditorUtils.DrawSectionTitle("RELOAD");
-
+                    
                     // set boolean value accordingly in Trigger settings
-                    targetConditions.reload = EditorGUILayout.ToggleLeft(new GUIContent("Reload", "Allows you to reload the conditions of an interaction (does not reload dependencies)."), targetConditions.reload);
+                    targetConditions.reload = EditorGUILayout.ToggleLeft(new GUIContent("Reload", "Allows you to reload the conditions of an interaction (does not reload dependencies)." ), targetConditions.reload);
 
                     if (targetConditions.reload)
                     {
@@ -292,7 +293,7 @@ namespace Gaze
         private void UpdateProximitiesList(GameObject g)
         {
             Gaze_Proximity prox = g.GetComponentInChildrenBFS<Gaze_Proximity>();
-            if (prox != null)
+            if(prox != null)
             {
                 Gaze_InteractiveObject proximity = Gaze_Utils.GetIOFromGameObject(prox.gameObject);
                 hierarchyProximities.Add(proximity);

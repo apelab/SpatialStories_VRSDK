@@ -101,7 +101,7 @@ namespace Gaze
             GUILayout.BeginHorizontal();
             GUILayout.Label(logo);
             GUILayout.EndHorizontal();
-            GUILayout.Label("V.0.2b6", EditorStyles.boldLabel);
+            GUILayout.Label(SpatialStories_Version.VERSION, EditorStyles.boldLabel);
         }
         
         private void DisplayManipulationMode()

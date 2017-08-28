@@ -29,14 +29,15 @@ namespace Gaze
             RestoreLastStyles();
         }
 
-        public static void DrawEditorHint(string _hint)
+        public static void DrawEditorHint(string _hint, bool _spaceAfterHint = true)
         {
             StoreLastStyles();
             EditorStyles.label.fontStyle = FontStyle.Italic;
-            EditorStyles.label.fontSize = 8;
+            EditorStyles.label.fontSize = 9;
             EditorGUILayout.LabelField(_hint);
             RestoreLastStyles();
-            EditorGUILayout.Space();
+            if(_spaceAfterHint)
+                EditorGUILayout.Space();
         }
 
         public static int Gaze_HintPopup(string _title, int _currentPopupIndex, string[] _options, string _hint, int _labelWidth)
