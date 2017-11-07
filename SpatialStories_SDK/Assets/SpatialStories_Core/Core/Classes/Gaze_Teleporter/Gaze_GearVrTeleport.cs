@@ -6,7 +6,6 @@ namespace Gaze
     {
         public Gaze_GearVrTeleport(Gaze_Teleporter _teleporter) : base(_teleporter)
         {
-
         }
 
         public override void Setup()
@@ -28,9 +27,6 @@ namespace Gaze
 
         private void OnButtonAEvent(Gaze_InputEventArgs e)
         {
-            if (e.InputType != Gaze_InputTypes.A_BUTTON)
-                return;
-
             //If the teleport is not allowed we need to deactivate it and return
             if (!Gaze_Teleporter.IsTeleportAllowed)
             {
@@ -43,8 +39,9 @@ namespace Gaze
 
             if (teleporter._goodSpot)
             {
-                teleporter.gyroInstance.SetActive(true);
-
+                if (teleporter.gyroInstance == null)
+                    teleporter.InstanciateGyroPrefab();
+                
                 if (teleporter.OrientOnTeleport)
                 {
                     teleporter.angle = Mathf.Atan2(Gaze_GearVR_InputLogic.SamsungGearVR_TouchpadPos.x, Gaze_GearVR_InputLogic.SamsungGearVR_TouchpadPos.y) * Mathf.Rad2Deg;
@@ -53,9 +50,9 @@ namespace Gaze
                     teleporter.angle += teleporter.transform.eulerAngles.y;
                 }
                 else
+                {
                     teleporter.angle = teleporter.cam.transform.eulerAngles.y;
-
-
+                }
             }
             else
                 teleporter.gyroInstance.SetActive(false);
@@ -63,16 +60,11 @@ namespace Gaze
 
         private void OnButtonAUpEvent(Gaze_InputEventArgs e)
         {
-            if (e.InputType != Gaze_InputTypes.A_BUTTON_UP)
-                return;
-
             if (teleporter._goodSpot)
             {
                 teleporter.Teleport();
             }
-
             teleporter.DisableTeleport();
         }
-
     }
 }

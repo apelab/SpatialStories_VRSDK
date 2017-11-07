@@ -93,7 +93,6 @@ namespace Gaze
 
             if (teleporter._goodSpot)
             {
-                teleporter.gyroInstance.SetActive(true);
 
                 if (teleporter.OrientOnTeleport)
                 {

@@ -208,6 +208,8 @@ namespace Gaze
         private float fadeOutDeactTime;
         private AnimationCurve fadeOutDeactCurve;
 
+        public bool NeedsToUpdate = false;
+
         public int setParameters(AudioSource targetaudioSource, Gaze_AudioPlayList audioClips, Gaze_Actions.LOOP_MODES[] loop, Gaze_Actions.AUDIO_SEQUENCE[] sequence, bool[] fadeInBetween, float volumeMin, float volumeMax, bool duckingEnabled, float fadeSpeed, float fadeInTime, float fadeOutTime, bool fadeInEnabled, bool fadeOutEnabled, AnimationCurve fadeInCurve, AnimationCurve fadeOutCurve, bool[] activeTriggerStatesAudio, bool forceStop, bool allowMultiple, int maxConcurrentSound, bool randomizePitch, float minPitch, float maxPitch, bool[] loopOnLast, bool stopOthers)
         {
             audioSource = gameObject.GetComponent<AudioSource>();
@@ -235,6 +237,9 @@ namespace Gaze
 
         void Update()
         {
+            if (!NeedsToUpdate)
+                return;
+
             for (int i = 0; i < audios.Count; i++)
             {
                 int key_ = audios[i].key;
@@ -404,6 +409,12 @@ namespace Gaze
             else
             {
                 audios[i].clipIndex++;
+            }
+
+            if (audiosActions[key_].clips.Count(audios[i].track) == 0)
+            {
+                Debug.LogWarning(GetComponentInParent<Gaze_InteractiveObject>() + " has no audio clip to play !");
+                return;
             }
 
             audios[i].clipIndex %= audiosActions[key_].clips.Count(audios[i].track);

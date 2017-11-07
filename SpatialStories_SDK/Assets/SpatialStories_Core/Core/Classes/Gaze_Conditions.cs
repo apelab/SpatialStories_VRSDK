@@ -30,6 +30,30 @@ namespace Gaze
     public class Gaze_Conditions : MonoBehaviour
     {
         #region OwnEvents
+
+        /// <summary>
+        /// Fired when a Trigger changes states.
+        /// </summary>
+        public delegate void TriggerStateHandler(Gaze_TriggerStateEventArgs e);
+        public event TriggerStateHandler OnTriggerStateEvent;
+        public void FireTriggerStateEvent(Gaze_TriggerStateEventArgs e)
+        {
+            if (OnTriggerStateEvent != null)
+                OnTriggerStateEvent(e);
+        }
+
+        /// <summary>
+        /// Fired when a Trigger is triggered.
+        /// </summary>
+        public delegate void TriggerHandler(Gaze_TriggerEventArgs e);
+        public event TriggerHandler OnTriggerEvent;
+        public void FireTriggerEvent(Gaze_TriggerEventArgs e)
+        {
+            if (OnTriggerEvent != null)
+                OnTriggerEvent(e);
+        }
+
+
         public delegate void OnReloadHandler(bool _reloadDependencies);
         public event OnReloadHandler OnReload;
         public void FireOnReloadEvent(bool _reloadDependencies)
@@ -70,7 +94,7 @@ namespace Gaze
         /// <summary>
         /// index of this gazable's current trigger status
         /// </summary>
-        public int triggerStateIndex;
+        public int triggerStateIndex = (int)Gaze_TriggerState.BEFORE;
 
         /// <summary>
         /// This trigger must wait 'waitTime' before being in active mode.
@@ -125,7 +149,7 @@ namespace Gaze
         /// <summary>
         /// True if the trigger can be triggered (is loaded), false if it has been triggered and has not be reloaded
         /// </summary>
-        public bool canBeTriggered;
+        public bool canBeTriggered = false;
 
         /// <summary>
         /// The number of times the trigger has been triggered
@@ -200,9 +224,9 @@ namespace Gaze
         /// <summary>
         /// True if focus time is reached, else FALSE
         /// </summary>
-        private bool focusComplete;
+        private bool runningFocusComplete;
 
-        public bool FocusComplete { get { return focusComplete; } }
+        public bool FocusComplete { get { return runningFocusComplete; } }
 
         /// <summary>
         /// The amount of time the object has been focused.
@@ -335,13 +359,19 @@ namespace Gaze
         [SerializeField]
         public List<List<Gaze_InteractiveObject>> proximityRigGroups = new List<List<Gaze_InteractiveObject>>();
 
+        bool AreAllCustomConditionsValid = false;
 
         #endregion
 
+        static long assignedTurns = 0;
+        long turnIndex = 0;
+
         private void Awake()
         {
+            triggerStateIndex = (int)Gaze_TriggerState.BEFORE;
             if (Application.isPlaying)
                 SetupConditionsToCheck();
+
         }
 
         private void SetupConditionsToCheck()
@@ -349,7 +379,7 @@ namespace Gaze
             activeConditions.Clear();
 
             if (gazeEnabled)
-                activeConditions.Add(new Gaze_GazeCondition(this, gazeColliderIO.GetComponentInChildren<Gaze_Gaze>().GetComponent<Collider>()));
+                activeConditions.Add(new Gaze_GazeCondition(this, gazeColliderIO.gameObject.GetComponentInChildrenBFS<Gaze_Gaze>().GetComponent<Collider>()));
 
             if (proximityEnabled)
                 activeConditions.Add(new Gaze_ProximityCondition(this));
@@ -371,8 +401,14 @@ namespace Gaze
 
             if (handHoverEnabled)
                 activeConditions.Add(new Gaze_HandHoverCondition(this, handHoverIO));
+
+            assignedTurns++;
+
+            // We will compute the conditions in 4 frames 
+            turnIndex = assignedTurns % 4 + 1;
         }
 
+        bool alreadyDisabled = false;
         void OnEnable()
         {
             rootIO = GetComponentInParent<Gaze_InteractiveObject>();
@@ -386,8 +422,29 @@ namespace Gaze
                 foreach (Gaze_AbstractCondition conditions in allConditions)
                     conditions.Enable();
 
-                Gaze_EventManager.OnTriggerStateEvent += OnTriggerStateEvent;
-                Gaze_EventManager.OnTriggerEvent += OnTriggerEvent;
+                // Do the appripuate subscriptions
+                if (dependent)
+                {
+                    foreach (Gaze_Dependency dep in ActivateOnDependencyMap.dependencies)
+                    {
+                        //try
+                        //{
+                        dep.DependentConditions.OnTriggerStateEvent += OnTriggerStateEventMethod;
+                        dep.DependentConditions.OnTriggerEvent += OnTriggerEventMethod;
+                        //}
+                        //catch (NullReferenceException ex)
+                        //{
+                        //    Debug.Log("sss");
+                        //}
+                    }
+
+                    foreach (Gaze_Dependency dep in DeactivateOnDependencyMap.dependencies)
+                    {
+                        dep.DependentConditions.OnTriggerStateEvent += OnTriggerStateEventMethod;
+                        dep.DependentConditions.OnTriggerEvent += OnTriggerEventMethod;
+                    }
+                }
+
                 Gaze_EventManager.OnCustomConditionEvent += OnCustomConditionEvent;
                 Gaze_EventManager.OnIODestroyed += OnIODestroyed;
 
@@ -398,6 +455,7 @@ namespace Gaze
                         customConditionsDico.Add(condition.GetInstanceID(), false);
                     }
                 }
+                alreadyDisabled = false;
             }
         }
 
@@ -411,10 +469,25 @@ namespace Gaze
                 foreach (Gaze_AbstractCondition conditions in allConditions)
                     conditions.Disable();
 
-                Gaze_EventManager.OnTriggerStateEvent -= OnTriggerStateEvent;
-                Gaze_EventManager.OnTriggerEvent -= OnTriggerEvent;
+                foreach (Gaze_Dependency dep in ActivateOnDependencyMap.dependencies)
+                {
+                    if (dep.DependentConditions == null)
+                        continue;
+                    dep.DependentConditions.OnTriggerStateEvent -= OnTriggerStateEventMethod;
+                    dep.DependentConditions.OnTriggerEvent -= OnTriggerEventMethod;
+                }
+
+                foreach (Gaze_Dependency dep in DeactivateOnDependencyMap.dependencies)
+                {
+                    if (dep.DependentConditions == null)
+                        continue;
+                    dep.DependentConditions.OnTriggerStateEvent -= OnTriggerStateEventMethod;
+                    dep.DependentConditions.OnTriggerEvent -= OnTriggerEventMethod;
+                }
+
                 Gaze_EventManager.OnCustomConditionEvent -= OnCustomConditionEvent;
                 Gaze_EventManager.OnIODestroyed -= OnIODestroyed;
+                alreadyDisabled = true;
             }
         }
 
@@ -423,19 +496,14 @@ namespace Gaze
             SetDelayRandom();
             SetExpireRandom();
             focusInProgress = false;
-            focusComplete = focusDuration <= 0 ? true : false;
+            runningFocusComplete = focusDuration <= 0 ? true : false;
             ActivateOnDependencyMap.AreDependenciesSatisfied = dependent ? false : true;
             InputsMap.AreDependenciesSatisfied = inputsEnabled ? false : true;
             startTime = Time.time;
             reloadCount = 0;
 
-            // notify we're before the activity window time
-            SetTriggerState(Gaze_TriggerState.BEFORE, true);
-
-            Gaze_EventManager.FireTriggerEvent(new Gaze_TriggerEventArgs(gameObject, Time.time, false, false, -1, GetAutoTriggerMode(), GetReloadMode(), reloadMaxRepetitions));
-
             // check loss speed is valid if used
-            FocusLossSpeed = (GetFocusLossMode() == Gaze_FocusLossMode.FADE && FocusLossSpeed > 0) ? FocusLossSpeed : 1f;
+            FocusLossSpeed = (focusLossModeIndex == (int)Gaze_FocusLossMode.FADE && FocusLossSpeed > 0) ? FocusLossSpeed : 1f;
 
             CheckReloadParams();
 
@@ -444,6 +512,17 @@ namespace Gaze
 
         void Update()
         {
+#if UNITY_EDITOR
+            if (!Application.isPlaying)
+                return;
+#endif
+            if (alreadyDisabled)
+                return;
+
+
+            if (Time.frameCount % turnIndex != 0)
+                return;
+
             UpdateTimeFrameStatus();
 
             // if in the appropriate time frame (ACTIVE)
@@ -457,37 +536,46 @@ namespace Gaze
             }
         }
 
+
         private void HandleTrigger()
         {
+#if UNITY_EDITOR
             if (!Application.isPlaying)
                 return;
+#endif
 
             // Thats the only line of code that should be here after the ref
-            foreach (Gaze_AbstractCondition condition in activeConditions)
+            if (canBeTriggered)
             {
-                if (!condition.IsValidated())
-                    return;
+                Gaze_AbstractCondition condition = null;
+                for (int i = 0; i < activeConditions.Count; i++)
+                {
+                    condition = activeConditions[i];
+                    if (!condition.IsValidated())
+                    {
+                        ResetFocus();
+                        return;
+                    }
+                }
             }
 
             // stop function if custom conditions are not fulfilled
             if (customConditionsEnabled)
             {
-                if (!ValidateCustomConditions())
+                if (!AreAllCustomConditionsValid)
+                {
+                    ResetFocus();
                     return;
+                }
             }
 
             // if all interaction's conditions are met
             if (canBeTriggered && Time.time > nextReloadTime)
             {
-                var gazeFlag = (gazeEnabled && GetConditionOfType<Gaze_GazeCondition>().IsValidated()) || !gazeEnabled;
-
-                var proximitiesValidated = GetConditionOfType<Gaze_ProximityCondition>() == null ||
-                    GetConditionOfType<Gaze_ProximityCondition>().IsValidated();
-
-                if (gazeFlag && proximitiesValidated)
-                    UpdateFocus();
-                else
-                    ResetFocus();
+                if (IsFocusComplete())
+                {
+                    ValidateCondition();
+                }
             }
         }
 
@@ -499,18 +587,16 @@ namespace Gaze
                 if (Time.time > nextReloadTime && reloadScheduled)
                 {
                     Reload();
-
                     // notify manager
-                    Gaze_EventManager.FireTriggerEvent(new Gaze_TriggerEventArgs(gameObject, Time.time, false, true, reloadCount, GetAutoTriggerMode(), GetReloadMode(), reloadMaxRepetitions));
+                    FireTriggerEvent(new Gaze_TriggerEventArgs(gameObject, Time.time, false, true, reloadCount, GetAutoTriggerMode(), GetReloadMode(), reloadMaxRepetitions));
                 }
             }
         }
 
-
-        private void UpdateFocus()
+        private bool IsFocusComplete()
         {
             // if focus is not complete
-            if (!focusComplete || focusDuration <= 0f)
+            if (!runningFocusComplete || focusDuration <= 0f)
             {
                 // set the flag
                 focusInProgress = true;
@@ -521,22 +607,34 @@ namespace Gaze
                 // set focused flag if focus time overpassed
                 if (focusTotalTime >= focusDuration)
                 {
-                    focusComplete = true;
-                    focusInProgress = false;
-                    canBeTriggered = false;
-                    TriggerCount++;
-
-                    // notify manager
-                    Gaze_EventManager.FireTriggerEvent(new Gaze_TriggerEventArgs(gameObject, Time.time, true, false, TriggerCount, GetAutoTriggerMode(), GetReloadMode(), reloadMaxRepetitions));
-                    //Debug.Log(name + " Is triggered!!!");
-
-                    // check if reload needed
-                    if (reload)
-                    {
-                        ScheduleAutoReload();
-                    }
-                    return;
+                    runningFocusComplete = true;
+                    return true;
                 }
+
+                return false;
+            }
+
+            return false;
+        }
+
+        public void ValidateCondition()
+        {
+            //Debug.Log("Trigger Fired: " + name + " in IO: " + RootIO.name);
+            focusInProgress = false;
+            canBeTriggered = false;
+            TriggerCount++;
+
+            // notify manager
+            FireTriggerEvent(new Gaze_TriggerEventArgs(gameObject, Time.time, true, false, TriggerCount, GetAutoTriggerMode(), GetReloadMode(), reloadMaxRepetitions));
+
+            // check if reload needed
+            if (reload)
+            {
+                ScheduleAutoReload();
+            }
+            else
+            {
+                OnDisable();
             }
         }
 
@@ -545,12 +643,12 @@ namespace Gaze
             // set the flag
             focusInProgress = false;
 
-            if (GetFocusLossMode().Equals(Gaze_FocusLossMode.INSTANT))
+            if (focusLossModeIndex == (int)Gaze_FocusLossMode.INSTANT)
             {
                 // reset if INSTANT loss mode
                 focusTotalTime = 0f;
             }
-            else if (GetFocusLossMode().Equals(Gaze_FocusLossMode.FADE))
+            else if (focusLossModeIndex == (int)Gaze_FocusLossMode.FADE)
             {
                 // decrease if FADE loss mode
                 focusTotalTime = Mathf.Max(0, focusTotalTime - Time.deltaTime * FocusLossSpeed);
@@ -559,14 +657,12 @@ namespace Gaze
 
         private void UpdateTimeFrameStatus()
         {
-
             // while we were not in the time frame
-            if (triggerStateIndex != (int)Gaze_TriggerState.ACTIVE)
+            if (triggerStateIndex == (int)Gaze_TriggerState.BEFORE)
             {
                 // check if we're now in the time frame
                 IsWithinTimeFrame();
             }
-            // while we were in the time frame but not after
             else
             {
                 // check if we're now after the time frame
@@ -580,6 +676,14 @@ namespace Gaze
         /// <returns><c>true</c>, if current time is within absolute defined time, <c>false</c> otherwise.</returns>
         private bool IsWithinTimeFrame()
         {
+            if (DeactivateOnDependencyMap.AreDependenciesSatisfied)
+            {
+                // notify manager
+                SetTriggerState(Gaze_TriggerState.AFTER);
+                canBeTriggered = false;
+                return true;
+            }
+
             if (ActivateOnDependencyMap.AreDependenciesSatisfied)
             {
                 // if time is beyond the specified wait time
@@ -597,7 +701,7 @@ namespace Gaze
                         {
                             TriggerCount++;
                             canBeTriggered = false;
-                            Gaze_EventManager.FireTriggerEvent(new Gaze_TriggerEventArgs(gameObject, Time.time, true, false, TriggerCount, GetAutoTriggerMode(), GetReloadMode(), reloadMaxRepetitions));
+                            FireTriggerEvent(new Gaze_TriggerEventArgs(gameObject, Time.time, true, false, TriggerCount, GetAutoTriggerMode(), GetReloadMode(), reloadMaxRepetitions));
 
                             // check if reload needed
                             if (reload)
@@ -618,6 +722,14 @@ namespace Gaze
         /// <returns><c>true</c>, if current time is after defined time frame, <c>false</c> otherwise.</returns>
         private bool IsAfterTimeFrame()
         {
+            if (DeactivateOnDependencyMap.AreDependenciesSatisfied)
+            {
+                // notify manager
+                SetTriggerState(Gaze_TriggerState.AFTER);
+                canBeTriggered = false;
+                return true;
+            }
+
             // if it expires
             if (expires)
             {
@@ -627,13 +739,11 @@ namespace Gaze
                 // check if we're over the time limit
                 if (Time.time >= startTime + delayDuration + activeDuration)
                 {
-
                     // trigger if auto-trigger is set to END
-                    // FIX GAZE-193 GazeSDK_v0.5.6 : and if canBeTriggered
                     if (GetAutoTriggerMode().Equals(Gaze_AutoTriggerMode.END) && canBeTriggered)
                     {
                         TriggerCount++;
-                        Gaze_EventManager.FireTriggerEvent(new Gaze_TriggerEventArgs(gameObject, Time.time, true, false, TriggerCount, GetAutoTriggerMode(), GetReloadMode(), reloadMaxRepetitions));
+                        FireTriggerEvent(new Gaze_TriggerEventArgs(gameObject, Time.time, true, false, TriggerCount, GetAutoTriggerMode(), GetReloadMode(), reloadMaxRepetitions));
                     }
 
                     canBeTriggered = false;
@@ -645,16 +755,6 @@ namespace Gaze
                 }
             }
 
-            // if deactivated by dependencies
-            if (!ActivateOnDependencyMap.AreDependenciesSatisfied)
-            {
-                canBeTriggered = false;
-
-                // notify manager
-                SetTriggerState(Gaze_TriggerState.AFTER);
-
-                return true;
-            }
             return false;
         }
 
@@ -695,7 +795,7 @@ namespace Gaze
             if (focusDuration > 0f)
             {
                 focusTotalTime = 0;
-                focusComplete = false;
+                runningFocusComplete = false;
             }
 
             // Update reload pending flag
@@ -707,7 +807,6 @@ namespace Gaze
             // If we have dependencies we need to set the trigger state to before.
             if (ActivateOnDependencyMap.dependencies.Count > 0)
             {
-
                 SetTriggerState(Gaze_TriggerState.BEFORE);
                 canBeTriggered = false;
             }
@@ -735,17 +834,12 @@ namespace Gaze
             if (!reload)
             {
                 // handle invalid use of Reload function
-                throw new InvalidOperationException("Invalid function call, Reload must be enabled.");
+                throw new InvalidOperationException(name + ": Invalid function call, Reload must be enabled.");
             }
 
             reloadDelay = _delay;
             CheckReloadParams();
             ScheduleReload();
-        }
-
-        private Gaze_FocusLossMode GetFocusLossMode()
-        {
-            return (Gaze_FocusLossMode)focusLossModeIndex;
         }
 
         private Gaze_ReloadMode GetReloadMode()
@@ -771,7 +865,7 @@ namespace Gaze
                 triggerStateIndex = (int)state;
 
                 // notify manager
-                Gaze_EventManager.FireTriggerStateEvent(new Gaze_TriggerStateEventArgs(gameObject, state));
+                FireTriggerStateEvent(new Gaze_TriggerStateEventArgs(gameObject, state));
             }
         }
 
@@ -795,17 +889,16 @@ namespace Gaze
                 }
             }
 
-            if (!DeactivateOnDependencyMap.isEmpty())
+            if (!DeactivateOnDependencyMap.isEmpty() && !DeactivateOnDependencyMap.isEmpty())
             {
                 Gaze_Dependency deactivator = DeactivateOnDependencyMap.Get(sender);
 
                 if (deactivator != null)
                 {
                     ValidateDependency(deactivator, triggerStateIndex);
-
                     if (ValidateDependencyMap(DeactivateOnDependencyMap, requireAllDeactivators))
                     {
-                        ActivateOnDependencyMap.AreDependenciesSatisfied = false;
+                        DeactivateOnDependencyMap.AreDependenciesSatisfied = true;
                     }
                 }
             }
@@ -829,32 +922,24 @@ namespace Gaze
         {
             bool validated = requireAll;
 
-            foreach (Gaze_Dependency d in dependencies.dependencies)
+            for (int i = 0; i < dependencies.dependencies.Count; i++)
             {
                 if (requireAll)
                 {
-                    validated &= d.IsValidated();
+                    validated &= dependencies.dependencies[i].IsValidated();
                 }
                 else
                 {
-                    validated |= d.IsValidated();
+                    if (dependencies.dependencies[i].IsValidated())
+                        return true;
+                    //validated |= dependencies.dependencies[i].IsValidated();
                 }
             }
 
             return validated;
         }
 
-        private bool ValidateCustomConditions()
-        {
-            foreach (Gaze_AbstractConditions cond in customConditions)
-            {
-                if (cond.IsValid == false)
-                    return false;
-            }
-            return true;
-        }
-
-        private void OnTriggerEvent(Gaze_TriggerEventArgs e)
+        private void OnTriggerEventMethod(Gaze_TriggerEventArgs e)
         {
             if (e.Sender != null)
             {
@@ -870,7 +955,7 @@ namespace Gaze
             }
         }
 
-        private void OnTriggerStateEvent(Gaze_TriggerStateEventArgs e)
+        private void OnTriggerStateEventMethod(Gaze_TriggerStateEventArgs e)
         {
             if (e.Sender != null)
             {
@@ -886,9 +971,20 @@ namespace Gaze
             }
         }
 
+        private bool ValidateCustomConditions()
+        {
+            foreach (Gaze_AbstractConditions cond in customConditions)
+            {
+                if (cond.IsValid == false)
+                    return false;
+            }
+            return true;
+        }
+
         private void OnCustomConditionEvent(Gaze_CustomConditionEventArgs e)
         {
             customConditionsDico[(int)e.Sender] = e.IsValid;
+            AreAllCustomConditionsValid = ValidateCustomConditions();
         }
 
         private void SetDelayRandom()
@@ -915,6 +1011,28 @@ namespace Gaze
             {
                 UpdateRigSets(Gaze_Proximity.HierarchyRigProximities);
                 proximityGroupIndex = 0;
+            }
+
+            if (!alreadyDisabled)
+            {
+                foreach (Gaze_Dependency dep in ActivateOnDependencyMap.dependencies)
+                {
+
+                    if (dep.DependentConditions != null && dep.DependentConditions.RootIO != null && dep.DependentConditions.RootIO.gameObject.GetInstanceID().Equals(e.IO.GetInstanceID()))
+                    {
+                        dep.DependentConditions.OnTriggerStateEvent -= OnTriggerStateEventMethod;
+                        dep.DependentConditions.OnTriggerEvent -= OnTriggerEventMethod;
+                    }
+                }
+
+                foreach (Gaze_Dependency dep in DeactivateOnDependencyMap.dependencies)
+                {
+                    if (dep.DependentConditions != null && dep.DependentConditions.RootIO != null && dep.DependentConditions.RootIO.gameObject.GetInstanceID().Equals(e.IO.GetInstanceID()))
+                    {
+                        dep.DependentConditions.OnTriggerStateEvent -= OnTriggerStateEventMethod;
+                        dep.DependentConditions.OnTriggerEvent -= OnTriggerEventMethod;
+                    }
+                }
             }
         }
 

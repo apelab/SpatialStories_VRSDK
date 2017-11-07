@@ -52,7 +52,9 @@ namespace Gaze
         public void AddCollidingObject(Gaze_InteractiveObject g)
         {
             if (!collidingObjects.Contains(g))
+            {
                 collidingObjects.Add(g);
+            }
         }
 
         public void RemoveCollidingObject(Gaze_InteractiveObject g)
@@ -80,7 +82,7 @@ namespace Gaze
         {
             if (collidingObjects == null)
                 return;
-            Debug.Log("Entry " + dependentGameObject.transform.parent.name + " is colliding with :");
+            Debug.Log("Entry " + dependentGameObject + " is colliding with :");
             foreach (Gaze_InteractiveObject item in collidingObjects)
             {
                 Debug.Log(item.name);

@@ -33,6 +33,7 @@ namespace Gaze
         private Gaze_Conditions targetConditions;
         private string[] reloadModes;
         private string[] autoTriggerModes;
+        private string[] focusLossModes;
 
         // hierarchy lists
         private List<Gaze_InteractiveObject> hierarchyIOsScripts;
@@ -52,6 +53,7 @@ namespace Gaze
         private string[] dndEventValidatorEnum;
         private string[] dndTargetsModes;
         private List<string> dndTargetsNames;
+        private Gaze_SceneInventory sceneInventory;
         #endregion
 
         void OnEnable()
@@ -63,6 +65,7 @@ namespace Gaze
         {
             targetConditions = (Gaze_Conditions)target;
 
+            focusLossModes = Enum.GetNames(typeof(Gaze_FocusLossMode));
             hierarchyIOsScripts = new List<Gaze_InteractiveObject>();
             hierarchyIOsNames = new List<string>();
             hierarchyIOs = new List<GameObject>();
@@ -80,6 +83,7 @@ namespace Gaze
             dndTargetsModes = Enum.GetNames(typeof(apelab_DnDTargetsModes));
             FetchDnDTargets();
             FetchInputsList();
+            sceneInventory = UnityEngine.Object.FindObjectOfType<Gaze_SceneInventory>(); 
         }
 
         private void FetchDnDTargets()
@@ -137,8 +141,10 @@ namespace Gaze
 
                     Gaze_EditorUtils.DrawSectionTitle("CONDITIONS");
                     DisplayConditionsBlock();
-                    DisplayHandHoverBlock();
                     DisplayProximityList();
+                  
+
+                    DisplayHandHoverBlock();
                     DisplayTouchCondition();
                     DisplayGrabCondition();
                     DisplayInputsCondition();
@@ -162,6 +168,8 @@ namespace Gaze
                     #region Warning
                     //DisplayWarning();
                     #endregion
+
+                    DisplayDuration();
 
                     #region Delayed ActiveWindow
                     Gaze_EditorUtils.DrawSectionTitle("TIMEFRAME");
@@ -226,6 +234,28 @@ namespace Gaze
             // save changes
             base.EndChangeComparision();
             EditorUtility.SetDirty(targetConditions);
+        }
+
+        private void DisplayDuration()
+        {
+            // DURATION
+            Gaze_EditorUtils.DrawSectionTitle("Duration");
+            Gaze_EditorUtils.DrawEditorHint("How much time conditions needs to remain validated.");
+            Gaze_EditorUtils.DrawEditorHint("(Usefull for conditions not instantaneous like gaze, proximity or hand hover.)");
+            EditorGUI.indentLevel++;
+            GUILayout.BeginHorizontal();
+            targetConditions.focusDuration = EditorGUILayout.FloatField("Duration [s]", targetConditions.focusDuration);
+            GUILayout.EndHorizontal();
+            GUILayout.BeginHorizontal();
+            targetConditions.focusLossModeIndex = EditorGUILayout.Popup("Loss Mode", targetConditions.focusLossModeIndex, focusLossModes);
+            if (targetConditions.focusLossModeIndex.Equals((int)Gaze_FocusLossMode.FADE))
+            {
+                targetConditions.FocusLossSpeed = EditorGUILayout.FloatField("Speed Factor", targetConditions.FocusLossSpeed);
+            }
+            GUILayout.EndHorizontal();
+            EditorGUILayout.Space();
+            EditorGUI.indentLevel--;
+            // END OF DURATION
         }
 
         /// <summary>
@@ -1017,6 +1047,7 @@ namespace Gaze
                     }
 
                     EditorGUILayout.EndHorizontal();
+
                 }
             }
             EditorGUILayout.Space();
@@ -1126,13 +1157,13 @@ namespace Gaze
             if (GUILayout.Button("+"))
             {
                 // by default, add the first IO in hierarchy
-                targetConditions.dndTargets.Add(Gaze_SceneInventory.Instance.InteractiveObjects[0]);
+                targetConditions.dndTargets.Add(sceneInventory.InteractiveObjects[0]);
 
                 EditorGUILayout.BeginHorizontal();
 
                 if (GUILayout.Button("-"))
                 {
-                    targetConditions.dndTargets.Remove(Gaze_SceneInventory.Instance.InteractiveObjects[0]);
+                    targetConditions.dndTargets.Remove(sceneInventory.InteractiveObjects[0]);
                 }
                 EditorGUILayout.EndHorizontal();
             }

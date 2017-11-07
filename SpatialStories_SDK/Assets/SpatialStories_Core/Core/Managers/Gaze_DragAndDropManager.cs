@@ -18,6 +18,7 @@
 // </copyright>
 //-----------------------------------------------------------------------
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VR;
 
@@ -55,11 +56,13 @@ namespace Gaze
         private Gaze_ManipulationModes lastManipulationMode;
         #endregion
 
+        /// <summary>
+        /// Stores all the ids of ocupped drag and drop targets
+        /// </summary>
+        public static HashSet<int> UsedDropTargets = new HashSet<int>();
+
         void OnEnable()
         {
-            // to know if the object has entered its DnD target or not
-            Gaze_EventManager.OnProximityEvent += OnProximityEvent;
-
             // to snap/unsnap by grabbing the object
             Gaze_InputManager.OnControllerGrabEvent += OnControllerGrabEvent;
 
@@ -72,7 +75,6 @@ namespace Gaze
         void OnDisable()
         {
             Gaze_EventManager.OnProximityEvent -= OnProximityEvent;
-            Gaze_InputManager.OnControllerGrabEvent -= OnControllerGrabEvent;
             Gaze_EventManager.OnLevitationEvent -= OnLevitationEvent;
         }
 
@@ -138,7 +140,7 @@ namespace Gaze
             Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(this, gameObject, targetTransform.gameObject, Gaze_DragAndDropStates.DROPREADY));
         }
 
-        private void Remove()
+        public void Remove()
         {
             isCurrentlyDropped = false;
             if (interactiveObject.DnD_snapBeforeDrop)
@@ -157,11 +159,49 @@ namespace Gaze
             }
         }
 
+        /// <summary>
+        /// This method will be called on every FireNewDragAndDropEvent in order to check
+        /// what is the current state of the drop targets, this will allow us to know if a
+        /// target is already occuped or not.
+        /// </summary>
+        /// <param name="e"></param>
+        public static void UpdateDropTargetsStates(Gaze_DragAndDropEventArgs e)
+        {
+            switch (e.State)
+            {
+                case Gaze_DragAndDropStates.DROP:
+                    UsedDropTargets.Add(((GameObject)e.DropTarget).GetInstanceID());
+                    break;
+                case Gaze_DragAndDropStates.REMOVE:
+                    UsedDropTargets.Remove(((GameObject)e.DropTarget).GetInstanceID());
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Check if a drop target is already used or not
+        /// </summary>
+        /// <param name="_dropTargetToCheck"></param>
+        /// <returns></returns>
+        public static bool IsDropTargetAlreadyUsed(GameObject _dropTargetToCheck)
+        {
+            return UsedDropTargets.Contains(_dropTargetToCheck.GetInstanceID());
+        }
+
+        private void OnLevelWasLoaded(int level)
+        {
+            if (UsedDropTargets == null)
+                UsedDropTargets = new HashSet<int>();
+            //If we are loading a new level just make sure that we don't have references to other levels
+            else if (UsedDropTargets != null && UsedDropTargets.Count > 0)
+                UsedDropTargets.Clear();
+        }
+
         private void Drop()
         {
             isCurrentlyDropped = true;
+
             // parent to target object
-            //transform.SetParent(currentDragAndDropCondition.TargetObject.transform);
             transform.SetParent(targetTransform.transform);
 
             // Don't snap if not necesary
@@ -169,7 +209,6 @@ namespace Gaze
                 Snap(interactiveObject.DnD_TimeToSnap);
 
             Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(this, gameObject, targetTransform.gameObject, Gaze_DragAndDropStates.DROP));
-
             if (IO.DnD_attached)
                 IO.EnableManipulationMode(Gaze_ManipulationModes.NONE);
         }
@@ -189,6 +228,7 @@ namespace Gaze
         public bool IsInDistance(Vector3 _position, float _tolerance = 0f)
         {
             bool inDistance = false;
+            float closestTargetInRangeDistance = float.MaxValue;
             for (int i = 0; i < interactiveObject.DnD_Targets.Count; i++)
             {
                 // if target doesn't exist anymore, remove it !
@@ -198,13 +238,32 @@ namespace Gaze
                 }
                 else
                 {
+                    float targetDistance = Vector3.Distance(_position, interactiveObject.DnD_Targets[i].transform.position);
                     // compare distance between me (the drop object) and the drop target
-                    if (Vector3.Distance(_position, interactiveObject.DnD_Targets[i].transform.position) <= interactiveObject.DnD_minDistance + _tolerance)
+                    if (targetDistance <= interactiveObject.DnD_minDistance + _tolerance)
                     {
-                        // store the target in proximity's transform
-                        targetTransform = interactiveObject.DnD_Targets[i].transform;
-                        inDistance = true;
-                        break;
+                        // store the target in proximity's transform if it's closer than any other target in range
+                        if (targetDistance < closestTargetInRangeDistance)
+                        {
+                            // Check if this object wants to be the only one in a target
+                            if (!IO.DnD_DropOnAlreadyOccupiedTargets)
+                            {
+                                // if the target is not used we can use it
+                                if (!Gaze_DragAndDropManager.IsDropTargetAlreadyUsed(interactiveObject.DnD_Targets[i].gameObject))
+                                {
+                                    targetTransform = interactiveObject.DnD_Targets[i].transform;
+                                    closestTargetInRangeDistance = targetDistance;
+                                    inDistance = true;
+                                }
+                            }
+                            else // If the object doesn't care about being in the same position of other targets no more checking is needed
+                            {
+                                targetTransform = interactiveObject.DnD_Targets[i].transform;
+                                closestTargetInRangeDistance = targetDistance;
+                                inDistance = true;
+                            }
+
+                        }
                     }
                 }
             }
@@ -286,8 +345,6 @@ namespace Gaze
 
         private void Snap(float timeToSnap = 0f)
         {
-
-
             if (timeToSnap == 0)
             {
                 transform.position = targetTransform.position;
@@ -303,6 +360,9 @@ namespace Gaze
 
         private IEnumerator SnapCoroutine(float timeToSnap)
         {
+            // Don't teleport if an object is snapping (This is a hack for placing objects on the head)
+            bool wasTeleportAllowed = Gaze_Teleporter.IsTeleportAllowed;
+            Gaze_Teleporter.IsTeleportAllowed = false;
             float time = 0f;
             Vector3 startPos = transform.position;
             Quaternion startRot = transform.rotation;
@@ -321,6 +381,9 @@ namespace Gaze
 
             transform.position = targetTransform.position;
             transform.rotation = targetTransform.transform.rotation;
+
+            if (wasTeleportAllowed)
+                Gaze_Teleporter.IsTeleportAllowed = true;
         }
 
         private float QuadEaseOut(float time, float startVal, float changeInVal, float duration)
@@ -337,11 +400,10 @@ namespace Gaze
                 m_SnapCoroutine = null;
             }
 
-            //transform.localPosition = m_StartGrabLocalPosition;
-            //transform.localRotation = m_StartGrabLocalRotation;
+            transform.SetParent(null);
         }
 
-        private void Grab(GameObject _controller)
+        public void Grab(GameObject _controller)
         {
             m_Grabbed = true;
 
@@ -440,6 +502,9 @@ namespace Gaze
             {
                 if (e.IsGrabbing)
                 {
+                    // to know if the object has entered its DnD target or not
+                    Gaze_EventManager.OnProximityEvent += OnProximityEvent;
+
                     if (e.ControllerObjectPair.Key.Equals(VRNode.LeftHand))
                         Grab(Gaze_InputManager.instance.LeftController);
                     else if (e.ControllerObjectPair.Key.Equals(VRNode.RightHand))
@@ -448,6 +513,7 @@ namespace Gaze
                 else
                 {
                     Ungrab();
+                    Gaze_EventManager.OnProximityEvent -= OnProximityEvent;
                 }
             }
         }
@@ -477,6 +543,17 @@ namespace Gaze
                     IO.EnableManipulationMode(Gaze_ManipulationModes.NONE);
 
             }
+        }
+
+        /// <summary>
+        /// Allows object to be dropped even if they are super far
+        /// </summary>
+        public void AutoDrop(Transform _target)
+        {
+            targetTransform = _target;
+            transform.position = targetTransform.position;
+            wasAligned = true;
+            Drop();
         }
     }
 }

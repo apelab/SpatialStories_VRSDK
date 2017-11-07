@@ -24,8 +24,6 @@ namespace Gaze
             public bool isPlaying = false;
 
             public bool reversing = false;
-
-            public float previousTime = 0;
         }
 
         private List<Gaze_Animation> animations = new List<Gaze_Animation>();
@@ -61,8 +59,12 @@ namespace Gaze
             return key;
         }
 
+        public bool ShouldUpdate = false;
         public void Update()
         {
+            if (!ShouldUpdate)
+                return;
+
             foreach (var anim in animations)
             {
                 if (anim.isPlaying)
@@ -86,7 +88,7 @@ namespace Gaze
                         }
 
                     }
-                    else if (anim.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.99 + anim.previousTime)
+                    else if (anim.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.99)
                     {
                         if (anim.looping)
                         {
@@ -146,12 +148,13 @@ namespace Gaze
 
         public void PlayAnim(int key, int track)
         {
+            ShouldUpdate = true;
             //if (!animations[key].isPlaying)
             {
                 nextClip(key, track);
+
                 animations[key].isPlaying = true;
                 animations[key].animator.enabled = true;
-
                 animations[key].trackPlaying = track;
                 animations[key].animator.speed = 1f;
                 animations[key].reversing = false;
@@ -176,8 +179,8 @@ namespace Gaze
                     animations[key].looping = false;
                 }
                 animations[key].clipIndex %= animations[key].animationClip.Count(track);
-                animations[key].animator.CrossFade(animations[key].animationClip.Get(track, animations[key].clipIndex).name, 0.5f);
-                animations[key].previousTime = (animations[key].animator.GetCurrentAnimatorStateInfo(0).normalizedTime);
+                // TODO @apelab crossfade on animation type CLIP
+                animations[key].animator.CrossFade(animations[key].animationClip.Get(track, animations[key].clipIndex).name, 0f);
             }
         }
 

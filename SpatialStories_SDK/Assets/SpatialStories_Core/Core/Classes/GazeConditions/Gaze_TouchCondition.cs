@@ -84,7 +84,6 @@ namespace Gaze
             bool isTouchControllerValid = IsTouchControllerValid(eventHand);
             bool isTouchActionValid = IsTouchActionValid(eventHand, IsValid);
             bool isTouchDistanceValid = IsTouchDistanceValid(DistanceMode, eventHand);
-
             bool valid = false;
 
             // if we've configured
@@ -109,7 +108,6 @@ namespace Gaze
                     valid = TouchRightValid;
                     break;
             }
-
             return valid;
         }
 

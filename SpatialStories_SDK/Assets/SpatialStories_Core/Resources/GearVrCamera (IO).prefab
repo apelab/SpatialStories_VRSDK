@@ -4772,27 +4772,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb7d934857afa904284ff7024514bef5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InteractiveObjectScripts:
-  - {fileID: 114725441422441274}
-  - {fileID: 114936347250051692}
-  - {fileID: 114179533522705990}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  InteractiveObjectScripts: []
   InteractiveObjects:
   - {fileID: 1201428936146942}
   - {fileID: 1204929771502924}
@@ -4814,7 +4794,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  InteractiveObjectsCount: 20
+  InteractiveObjectsCount: 0
 --- !u!114 &114178655439227284
 MonoBehaviour:
   m_ObjectHideFlags: 1

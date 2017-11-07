@@ -233,8 +233,8 @@ public class Gaze_InputManager : MonoBehaviour
     public delegate void OnSetupController(Gaze_Controllers controllerType);
     private static event OnSetupController setupEvent;
 
-
-
+    private float lastUpdateTime;
+    public float updateInterval = .2f;
 
     public Gaze_InputLogic SpecialInputLogic;
 
@@ -267,7 +267,13 @@ public class Gaze_InputManager : MonoBehaviour
         UnpluggedControllerMessage.SetActive(false);
 
         if (Application.isEditor)
+        {
+            // fix layers and physics matrix
+            Gaze_PhysicsChecker.CreateNecessaryLayersIfNeeded();
+
+            // fix input manager
             RepairInputManagerIfNeeded();
+        }
 
     }
 
@@ -300,8 +306,15 @@ public class Gaze_InputManager : MonoBehaviour
         OnStickLeftAxisEvent -= StickLeftAxisEvent;
     }
 
+    float rate = 10.0f;
+    float nextUpdate = 0;
     private void IdentifyInputType()
     {
+        if (nextUpdate > Time.deltaTime)
+            return;
+
+        nextUpdate = Time.time + rate;
+
         // Check if GearVR_Controller is conected if dont just add the generic controller
         if (OVRInput.IsControllerConnected(OVRInput.Controller.RTrackedRemote) || OVRInput.IsControllerConnected(OVRInput.Controller.LTrackedRemote))
         {
@@ -360,7 +373,13 @@ public class Gaze_InputManager : MonoBehaviour
 
     void FixedUpdate()
     {
-        CheckControllers();
+        if (Time.time > lastUpdateTime + updateInterval)
+        {
+            CheckControllers();
+
+            // update last time value
+            lastUpdateTime = Time.time;
+        }
 
         if (!trackPosition)
             FixedPositionLogic();
@@ -536,11 +555,12 @@ public class Gaze_InputManager : MonoBehaviour
         }
     }
 
+    string[] names;
     private void CheckControllers()
     {
         controllersConnected = false;
 
-        string[] names = Input.GetJoystickNames();
+        names = Input.GetJoystickNames();
 
         for (int i = 0; i < names.Length; i++)
         {

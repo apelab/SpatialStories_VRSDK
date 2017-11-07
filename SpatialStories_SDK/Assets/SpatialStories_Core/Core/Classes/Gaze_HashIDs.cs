@@ -46,5 +46,8 @@ namespace Gaze
         public static int ANIMATOR_PARAMETER_HANDCLOSED = Animator.StringToHash("handClosed");
         public static float THROW_SPEED = 2f;
         public static string LAYER_SOLID = "Custom Collision";
+        public static string LAYER_GAZE = "Gaze_Gaze";
+        public static string LAYER_PROXIMTY = "Gaze_Proximity";
+        public static string LAYER_HANDHOVER = "Gaze_HandHover";
     }
 }

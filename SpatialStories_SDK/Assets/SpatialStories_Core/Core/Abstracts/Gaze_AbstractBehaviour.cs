@@ -48,122 +48,129 @@ namespace Gaze
         protected int ReloadMaxRepetitions;
         // is the camera in the collider proximity zone
         protected bool isInProximity;
+
+
+        bool update = false;
+
         // is the proximity zone enabled
         //		protected bool proximityEnabled;
+
+
+        // Hack for BaL Simon to be able to trigger an action even if the condition is not true
+        public void ManualActionsTrigger()
+        {
+            update = true;
+            OnTrigger();
+        }
 
         public virtual void OnEnable()
         {
             gazable = GetComponent<Gaze_Conditions>();
-            Gaze_EventManager.OnTriggerStateEvent += onTriggerStateEvent;
-            Gaze_EventManager.OnTriggerEvent += onTriggerEvent;
-            Gaze_EventManager.OnProximityEvent += onProximityEvent;
+            gazable.OnTriggerStateEvent += onTriggerStateEvent;
+            gazable.OnTriggerEvent += onTriggerEvent;
         }
 
         public virtual void OnDisable()
         {
-            Gaze_EventManager.OnTriggerStateEvent -= onTriggerStateEvent;
-            Gaze_EventManager.OnTriggerEvent -= onTriggerEvent;
-            Gaze_EventManager.OnProximityEvent -= onProximityEvent;
+            gazable.OnTriggerStateEvent -= onTriggerStateEvent;
+            gazable.OnTriggerEvent -= onTriggerEvent;
         }
 
         void Update()
         {
+            if (!update)
+                return;
+
             for (int i = requests.Count - 1; i >= 0; i--)
             {
                 if (Time.time > requests[i].GetTime())
                 {
                     requests[i].CallHandler();
                     requests.RemoveAt(i);
-                }
-            }
-        }
 
-        /// <summary>
-        /// When the camea enters the proximity's collider zone
-        /// </summary>
-        /// <param name="e">The Gaze_ProximityEventArgs</param>
-        private void onProximityEvent(Gaze_ProximityEventArgs e)
-        {
-            if (gazable != null && e.Sender.Equals(gazable.Root))
-            {
-                isInProximity = e.IsInProximity;
+
+                    if (requests.Count == 0)
+                        update = false;
+                }
             }
         }
 
         private void onTriggerStateEvent(Gaze_TriggerStateEventArgs e)
         {
-            // if sender is the this Behaviour gameObject
-            if ((GameObject)e.Sender == gameObject)
+
+            triggerState = e.TriggerState;
+
+            switch (triggerState)
             {
-                triggerState = e.TriggerState;
+                case Gaze_TriggerState.BEFORE:
+                    if (isDelayed)
+                        HandleActionsInTime(() => OnBefore(), TriggerEventsAndStates.OnBefore);
+                    else
+                        OnBefore();
+                    break;
 
-                switch (triggerState)
-                {
-                    case Gaze_TriggerState.BEFORE:
-                        if (isDelayed)
-                            HandleActionsInTime(() => OnBefore(), TriggerEventsAndStates.OnBefore);
-                        else
-                            OnBefore();
-                        break;
+                case Gaze_TriggerState.ACTIVE:
+                    if (isDelayed)
+                        HandleActionsInTime(() => OnActive(), TriggerEventsAndStates.OnActive);
+                    else
+                        OnActive();
+                    break;
 
-                    case Gaze_TriggerState.ACTIVE:
-                        if (isDelayed)
-                            HandleActionsInTime(() => OnActive(), TriggerEventsAndStates.OnActive);
-                        else
-                            OnActive();
-                        break;
-
-                    case Gaze_TriggerState.AFTER:
-                        if (isDelayed)
-                            HandleActionsInTime(() => OnAfter(), TriggerEventsAndStates.OnAfter);
-                        else
-                            OnAfter();
-                        break;
-                }
+                case Gaze_TriggerState.AFTER:
+                    if (isDelayed)
+                        HandleActionsInTime(() => OnAfter(), TriggerEventsAndStates.OnAfter);
+                    else
+                        OnAfter();
+                    break;
             }
+            
         }
 
         private void onTriggerEvent(Gaze_TriggerEventArgs e)
         {
-            // if sender is the this Behaviour gameObject
-            if ((GameObject)e.Sender == gameObject)
+
+            if (e.IsTrigger)
             {
-                if (e.IsTrigger)
-                {
-                    // execute trigger 
-                    TriggerCount = e.Count;
-                    TimeLastTriggered = e.Time;
+                // execute trigger 
+                TriggerCount = e.Count;
+                TimeLastTriggered = e.Time;
 
-                    //check if the action should be delayed
-                    if (isDelayed)
-                        HandleActionsInTime(() => OnTrigger(), TriggerEventsAndStates.OnTrigger);
-                    else
-                        OnTrigger();
-                }
-                else if (e.IsReload)
+                //check if the action should be delayed
+                if (isDelayed)
                 {
-                    // execute reload
-                    ReloadCount = e.Count;
-                    TimeLastReloaded = e.Time;
-
-                    //check if the action should be delayed
-                    if (isDelayed)
-                        HandleActionsInTime(() => OnReload(), TriggerEventsAndStates.OnReload);
-                    else
-                        OnReload();
+                    HandleActionsInTime(() => OnTrigger(), TriggerEventsAndStates.OnTrigger);
                 }
                 else
                 {
-                    // initialize trigger
-                    autoTriggerMode = e.AutoTriggerMode;
-                    ReloadMode = e.ReloadMode;
-                    ReloadMaxRepetitions = e.ReloadMaxRepetitions;
+                    OnTrigger();
                 }
             }
+            else if (e.IsReload)
+            {
+                // execute reload
+                ReloadCount = e.Count;
+                TimeLastReloaded = e.Time;
+
+                //check if the action should be delayed
+                if (isDelayed)
+                    HandleActionsInTime(() => OnReload(), TriggerEventsAndStates.OnReload);
+                else
+                    OnReload();
+            }
+            else
+            {
+                // initialize trigger
+                autoTriggerMode = e.AutoTriggerMode;
+                ReloadMode = e.ReloadMode;
+                ReloadMaxRepetitions = e.ReloadMaxRepetitions;
+            }
+            
         }
 
         private void HandleActionsInTime(BehaviorHandler _handler, TriggerEventsAndStates _type)
         {
+            update = true;
+
             if (multipleActionsInTime)
                 requests.Add(new Request(Time.time + delayTime, _handler, _type));
             else
@@ -182,16 +189,16 @@ namespace Gaze
         /// </summary>
         protected abstract void OnTrigger();
 
-        protected abstract void OnReload();
+        protected virtual void OnReload() { }
 
         /// <summary>
         /// Implements here the actions to take on active, before and after states.
         /// </summary>
-        protected abstract void OnBefore();
+        protected virtual void OnBefore() { }
 
-        protected abstract void OnActive();
+        protected virtual void OnActive() { }
 
-        protected abstract void OnAfter();
+        protected virtual void OnAfter() { }
 
 
         private struct Request

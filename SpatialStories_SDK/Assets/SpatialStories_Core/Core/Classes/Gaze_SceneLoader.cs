@@ -19,11 +19,14 @@ namespace Gaze
         void Start()
         {
             levelManager = GameObject.FindObjectOfType<Gaze_LevelManager>();
+            if (levelManager == null)
+                levelManager = gameObject.AddComponent<Gaze_LevelManager>();
             levelManager.setNextLevelName(targetSceneName);
         }
 
         private void LoadSceneAsync(int i)
         {
+            
             if (triggerStateIndex == i)
             {
                 if (loadDelay > 0f)
@@ -54,6 +57,7 @@ namespace Gaze
 
         private IEnumerator LoadDelayedAsync()
         {
+            yield return new WaitForSeconds(1);
             loadOperation.allowSceneActivation = false;
             yield return new WaitForSeconds(loadDelay);
             loadOperation.allowSceneActivation = true;

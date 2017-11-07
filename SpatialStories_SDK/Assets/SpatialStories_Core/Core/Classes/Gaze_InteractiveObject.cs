@@ -69,7 +69,7 @@ namespace Gaze
             get
             {
                 if (ManipulationMode == Gaze_ManipulationModes.GRAB)
-                    return (int)Gaze_GrabMode.GRAB;
+                    return (int)Gaze_GrabMode.ATTRACT;
                 else if (ManipulationMode == Gaze_ManipulationModes.LEVITATE)
                     return (int)Gaze_GrabMode.LEVITATE;
                 else
@@ -166,6 +166,8 @@ namespace Gaze
         public bool DnD_respectZAxisMirrored = false;
         public bool DnD_snapBeforeDrop = true;
         public float DnD_TimeToSnap = 0.5f;
+        public bool DnD_DropOnAlreadyOccupiedTargets = false;
+
         /// <summary>
         /// If TRUE, once dropped, the object can't be grabbed again.
         /// </summary>
@@ -173,7 +175,18 @@ namespace Gaze
         //public bool DnD_IsTarget = false;
         public List<GameObject> DnD_Targets;
 
-        private Gaze_DragAndDropManager dragAndDropManager;
+        public Gaze_DragAndDropManager dragAndDropManager;
+
+        private Gaze_Proximity proximity;
+        public Gaze_Proximity Proximity
+        {
+            get
+            {
+                if (proximity == null)
+                    proximity = GetProximity();
+                return proximity;
+            }
+        }
         #endregion Members
 
         private void Awake()
@@ -220,6 +233,10 @@ namespace Gaze
             Gaze_EventManager.OnControllerPointingEvent -= OnControllerPointingEvent;
         }
 
+        private Gaze_Proximity GetProximity()
+        {
+            return gameObject.GetComponentInChildrenBFS<Gaze_Proximity>();
+        }
 
         /// <summary>
         /// Changes the sticky state of a game object

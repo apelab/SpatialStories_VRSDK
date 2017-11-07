@@ -17,10 +17,4 @@ public class Gaze_SnapPosition : MonoBehaviour
         Rotation = transform.localRotation;
         Position = transform.localPosition;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }

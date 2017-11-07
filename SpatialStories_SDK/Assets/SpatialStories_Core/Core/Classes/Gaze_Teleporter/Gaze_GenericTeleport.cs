@@ -4,14 +4,16 @@ namespace Gaze
 {
     public class Gaze_GenericTeleport : Gaze_TeleportLogic
     {
+        public bool isLeftHand;
+
         public Gaze_GenericTeleport(Gaze_Teleporter _teleporter) : base(_teleporter)
         {
-            Debug.Log("Oculus on!");
+            isLeftHand = teleporter.GetComponentInChildren<Gaze_HandController>().leftHand;
         }
 
         public override void Setup()
         {
-            if (teleporter.GetComponentInChildren<Gaze_HandController>().leftHand)
+            if (isLeftHand)
             {
                 Gaze_InputManager.OnStickLeftAxisEvent += OnStickLeftAxisEvent;
 
@@ -25,7 +27,7 @@ namespace Gaze
 
         public override void Dispose()
         {
-            if (teleporter.GetComponentInChildren<Gaze_HandController>().leftHand)
+            if (isLeftHand)
             {
                 Gaze_InputManager.OnStickLeftAxisEvent -= OnStickLeftAxisEvent;
 
@@ -43,6 +45,8 @@ namespace Gaze
                 teleporter.CalculateArc();
         }
 
+
+
         protected void OnStickLeftAxisEvent(Gaze_InputEventArgs e)
         {
             teleporter.axisValue = e.AxisValue.magnitude;
@@ -59,8 +63,9 @@ namespace Gaze
 
             if (teleporter._goodSpot)
             {
-                teleporter.gyroInstance.SetActive(true);
-
+                if (teleporter.gyroInstance == null)
+                    teleporter.InstanciateGyroPrefab();
+                
                 if (teleporter.OrientOnTeleport)
                 {
                     teleporter.angle = Mathf.Atan2(e.AxisValue.x, -e.AxisValue.y) * Mathf.Rad2Deg;

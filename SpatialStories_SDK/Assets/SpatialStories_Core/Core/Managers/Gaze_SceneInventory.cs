@@ -2,18 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [ExecuteInEditMode]
 public class Gaze_SceneInventory : MonoBehaviour
 {
-    public static Gaze_SceneInventory Instance { get; private set; }
     public List<Gaze_InteractiveObject> InteractiveObjectScripts;
     public List<GameObject> InteractiveObjects;
     public int InteractiveObjectsCount;
 
     public Gaze_SceneInventory()
     {
-        Instance = this;
         InteractiveObjectScripts = new List<Gaze_InteractiveObject>();
         InteractiveObjects = new List<GameObject>();
     }

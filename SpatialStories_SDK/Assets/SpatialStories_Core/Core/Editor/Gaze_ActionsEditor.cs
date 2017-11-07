@@ -902,7 +902,7 @@ namespace Gaze
         {
             selectedAnimatorTriggers.Clear();
 
-            if (actionsScript.targetAnimator != null && actionsScript.targetAnimator.isInitialized)
+            if (actionsScript.targetAnimator != null && actionsScript.targetAnimator.isInitialized && actionsScript.targetAnimator.isActiveAndEnabled)
             {
                 for (int i = 0; i < actionsScript.targetAnimator.parameters.Length; i++)
                 {

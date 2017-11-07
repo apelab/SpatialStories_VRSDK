@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 namespace Gaze
@@ -7,6 +8,39 @@ namespace Gaze
     {
         private static int lastFontsize;
         private static FontStyle lastFontStyle;
+        private static EditorBuildSettingsScene[] scenes;
+        private static List<string> sceneNames;
+
+        public static List<string> GetScenesFromBuildSettings()
+        {
+            // get all scenes
+            scenes = EditorBuildSettings.scenes;
+
+            // store name of the scenes
+            sceneNames = new List<string>();
+            for (int i = 0; i < scenes.Length; i++)
+            {
+                if (scenes[i].enabled)
+                    sceneNames.Add(GetSceneName(scenes[i]));
+            }
+
+            return sceneNames;
+        }
+
+        private static string GetSceneName(EditorBuildSettingsScene S)
+        {
+            string name = S.path.Substring(S.path.LastIndexOf('/') + 1);
+            return name.Substring(0, name.Length - 6);
+        }
+
+        public static void DisplayBuildSettingsSceneNames()
+        {
+            GetScenesFromBuildSettings();
+            for (int i = 0; i < sceneNames.Count; i++)
+            {
+                Debug.Log("Build settings scene : " + sceneNames[i]);
+            }
+        }
 
         public static void StoreLastStyles()
         {
@@ -36,7 +70,7 @@ namespace Gaze
             EditorStyles.label.fontSize = 9;
             EditorGUILayout.LabelField(_hint);
             RestoreLastStyles();
-            if(_spaceAfterHint)
+            if (_spaceAfterHint)
                 EditorGUILayout.Space();
         }
 

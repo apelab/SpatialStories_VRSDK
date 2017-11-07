@@ -90,7 +90,7 @@ namespace Gaze
         public LOOP_MODES[] loopAudioNew = new LOOP_MODES[Enum<TriggerEventsAndStates>.Count];
         public bool[] audioLoopOnLast = new bool[Enum<TriggerEventsAndStates>.Count];
 
-        public bool duckingEnabled = true;
+        public bool duckingEnabled = false;
         public float fadeInTime = 1f;
         public float fadeOutTime = 1f;
         public float fadeOutDeactTime = 1f;
@@ -184,7 +184,7 @@ namespace Gaze
                 {
                     targetAnimator.gameObject.AddComponent<Gaze_AnimationPlayer>();
                 }
-
+                
                 gazeAnimationPlayer = targetAnimator.GetComponent<Gaze_AnimationPlayer>();
                 gazeAnimationPlayer.hideFlags = HideFlags.HideInInspector;
                 Animation_PlayList_Key = gazeAnimationPlayer.setParameters(targetAnimator, animationClip, activeTriggerStatesAnim, loopAnimType, loopAnim, animationSequence, loopOnLast);
@@ -385,7 +385,7 @@ namespace Gaze
             if (ModifyGrabMode == ALTERABLE_OPTION.NOTHING)
                 return;
 
-            if (grabModeIndex == (int)Gaze_GrabMode.GRAB)
+            if (grabModeIndex == (int)Gaze_GrabMode.ATTRACT)
             {
                 GetIO().ManipulationModeIndex = (int)Gaze_ManipulationModes.GRAB;
             }
@@ -467,6 +467,7 @@ namespace Gaze
             {
                 if (activeTriggerStatesAudio[0])
                 {
+                    gazeAudioPlayer.NeedsToUpdate = true;
                     gazeAudioPlayer.playAudio(Audio_PlayList_Key, 0);
                 }
             }
@@ -493,7 +494,7 @@ namespace Gaze
 
                     targetAnimator.enabled = false;
                 }
-
+                                                
             }
             else if (activeTriggerStatesAnim.Length > 0 && activeTriggerStatesAnim[0])
             {
@@ -554,6 +555,7 @@ namespace Gaze
             // Check if the trigger should be fired
             if (!gazeInteraction.HasActions)
                 return;
+
             ActionLogic();
         }
 

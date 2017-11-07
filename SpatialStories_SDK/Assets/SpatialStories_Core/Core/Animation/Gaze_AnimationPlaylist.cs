@@ -82,7 +82,7 @@ public class Gaze_AnimationPlaylist : System.Object
 
     public void setLoop(int k, Gaze_Actions.LOOP_MODES mode, Gaze_Actions.ANIMATION_LOOP loop, bool loopOnLast)
     {
-        foreach (var a in Get(k))
+        foreach(var a in Get(k))
         {
             if (mode == Gaze_Actions.LOOP_MODES.Single)
             {

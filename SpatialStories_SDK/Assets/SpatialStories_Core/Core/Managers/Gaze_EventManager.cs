@@ -31,27 +31,6 @@ namespace Gaze
                 OnGazeEvent(e);
         }
 
-        /// <summary>
-        /// Fired when a Trigger changes states.
-        /// </summary>
-        public delegate void TriggerStateHandler(Gaze_TriggerStateEventArgs e);
-        public static event TriggerStateHandler OnTriggerStateEvent;
-        public static void FireTriggerStateEvent(Gaze_TriggerStateEventArgs e)
-        {
-            if (OnTriggerStateEvent != null)
-                OnTriggerStateEvent(e);
-        }
-
-        /// <summary>
-        /// Fired when a Trigger is triggered.
-        /// </summary>
-        public delegate void TriggerHandler(Gaze_TriggerEventArgs e);
-        public static event TriggerHandler OnTriggerEvent;
-        public static void FireTriggerEvent(Gaze_TriggerEventArgs e)
-        {
-            if (OnTriggerEvent != null)
-                OnTriggerEvent(e);
-        }
 
         /// <summary>
         /// Fired on Trigger's audio related event occurs.
@@ -151,6 +130,7 @@ namespace Gaze
         public static event DragAndDropEvent OnDragAndDropEvent;
         public static void FireDragAndDropEvent(Gaze_DragAndDropEventArgs e)
         {
+            Gaze_DragAndDropManager.UpdateDropTargetsStates(e);
             if (OnDragAndDropEvent != null)
                 OnDragAndDropEvent(e);
         }

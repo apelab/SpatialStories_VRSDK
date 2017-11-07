@@ -24,7 +24,11 @@ namespace Gaze
 {
     public abstract class Gaze_AbstractConditions : MonoBehaviour
     {
+#if UNITY_EDITOR
+        [HideInInspector]
+#endif
         public bool IsValid = false;
+
         public virtual void ValidateCustomCondition(bool _conditionValidated)
         {
             IsValid = _conditionValidated;

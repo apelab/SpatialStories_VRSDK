@@ -27,11 +27,19 @@ namespace Gaze
 
         private Gaze_InteractiveObject other;
 
-        public Gaze_InteractiveObject Other { get { return other; } }
+        public Gaze_InteractiveObject Other
+        {
+            get { return other; }
+            set { other = value; }
+        }
 
         private bool isInProximity;
 
-        public bool IsInProximity { get { return isInProximity; } }
+        public bool IsInProximity
+        {
+            get { return isInProximity; }
+            set { isInProximity = value; }
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Gaze_ProximityEventArgs"/> class.
@@ -44,6 +52,11 @@ namespace Gaze
             sender = _sender;
             other = _other;
             isInProximity = _isInProximity;
+        }
+
+        public Gaze_ProximityEventArgs(object _sender)
+        {
+            sender = _sender;
         }
     }
 }

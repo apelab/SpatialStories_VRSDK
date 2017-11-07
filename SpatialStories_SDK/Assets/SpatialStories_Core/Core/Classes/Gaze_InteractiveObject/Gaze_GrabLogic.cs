@@ -206,7 +206,8 @@ namespace Gaze
                 AddExternalVelocities();
             }
 
-            lastPosition = owner.transform.position;
+            if(isBeingManipulated)
+                lastPosition = owner.transform.position;
         }
 
         /// <summary>
@@ -261,7 +262,14 @@ namespace Gaze
             // This is used for levitating and object
             if (_followOriginTransform != null)
             {
-                rotationDelta = CalcRotationDelta(_transformToFollow.transform.rotation, _followOriginTransform.transform.rotation);
+                if (!owner.SnapOnGrab)
+                {
+                    rotationDelta = CalcRotationDelta(_transformToFollow.transform.rotation, _followOriginTransform.transform.rotation);
+                }
+                else
+                {
+                    rotationDelta = CalcRotationDelta(_transformToFollow.transform.rotation, Quaternion.Euler(_followOriginTransform.transform.rotation.eulerAngles + GetSnapPointForHand(GrabbingManager.isLeftHand).transform.localEulerAngles));
+                }
                 desiredPosition = CalcDesiredPosition(_transformToFollow.transform.position, _followOriginTransform.transform.position);
             }
             // This is used when the object is snappable
@@ -273,8 +281,8 @@ namespace Gaze
             // This is for manipulabe objects
             else if (owner.GrabPositionnerCollider != null)
             {
-                rotationDelta = CalcRotationDelta(_transformToFollow.transform.rotation, owner.GrabPositionnerCollider.transform.rotation);
-                desiredPosition = CalcDesiredPosition(_transformToFollow.transform.position, owner.GrabPositionnerCollider.transform.position);
+				rotationDelta = CalcRotationDelta(_transformToFollow.transform.rotation, owner.GrabPositionnerCollider.transform.rotation);
+				desiredPosition = CalcDesiredPosition(_transformToFollow.transform.position, owner.GrabPositionnerCollider.transform.position);
             }
             // This shouldn't be called
             else
@@ -432,6 +440,8 @@ namespace Gaze
             {
                 GameObject go = new GameObject("Dynamic Grab Point");
                 owner.GrabPositionnerCollider = go.AddComponent<BoxCollider>();
+                go.hideFlags = HideFlags.HideInHierarchy;
+                go.transform.localScale = new Vector3(0.01f, 0.01f, 0.01f);
                 owner.GrabPositionnerCollider.isTrigger = true;
                 go.transform.SetParent(owner.transform);
             }
@@ -520,7 +530,9 @@ namespace Gaze
             actualGrabPoint = null;
 
             if (owner.GrabPositionnerCollider != null)
-                owner.GrabPositionnerCollider = null;
+            {
+                GameObject.Destroy(owner.GrabPositionnerCollider.gameObject);
+            }
         }
 
         /// <summary>
@@ -707,7 +719,6 @@ namespace Gaze
         /// <param name="_e"></param>
         private void GrabObject(Gaze_ControllerGrabEventArgs _e)
         {
-            Debug.ClearDeveloperConsole();
             GrabbingManager = (Gaze_GrabManager)_e.Sender;
 
             if (owner.IsManipulable && !IsBeingManipulated)
@@ -718,6 +729,7 @@ namespace Gaze
 
             // This will serve the object as guide to know how to follow the controllers hand
             controllerGrabLocation = GrabbingManager.GetComponentInChildren<Gaze_GrabPositionController>().transform;
+            Gaze_GravityManager.ChangeGravityState(owner, Gaze_GravityRequestType.UNLOCK);
             Gaze_GravityManager.ChangeGravityState(owner, Gaze_GravityRequestType.ACTIVATE_AND_DETACH);
 
             rigidBody.useGravity = false;

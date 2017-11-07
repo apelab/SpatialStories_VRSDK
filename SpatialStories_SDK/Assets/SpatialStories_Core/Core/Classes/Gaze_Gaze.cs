@@ -15,7 +15,13 @@
 // <web>https://twitter.com/apelab_ch</web>
 // <web>http://www.apelab.ch</web>
 // <date>2014-06-01</date>
+using Gaze;
 using UnityEngine;
+
 public class Gaze_Gaze : MonoBehaviour
 {
+    void Start()
+    {
+        gameObject.layer = LayerMask.NameToLayer(Gaze_HashIDs.LAYER_GAZE);
+    }
 }
