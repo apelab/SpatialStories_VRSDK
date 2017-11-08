@@ -20,7 +20,7 @@ namespace Gaze
 
         private bool isTriggerPressed = false;
         private GameObject pointedObject;
-        private VRNode eventHand;
+        private UnityEngine.XR.XRNode eventHand;
 
         public Gaze_TouchCondition(Gaze_Conditions _gazeConditionsScript, Collider _gazeCollider) : base(_gazeConditionsScript)
         {
@@ -125,7 +125,7 @@ namespace Gaze
             return false;
         }
 
-        private bool IsTouchDistanceValid(Gaze_TouchDistanceMode _eventDistance, VRNode _eventHand)
+        private bool IsTouchDistanceValid(Gaze_TouchDistanceMode _eventDistance, UnityEngine.XR.XRNode _eventHand)
         {
             Gaze_HandsEnum mapHand = Gaze_HandsEnum.BOTH;
 
@@ -145,14 +145,14 @@ namespace Gaze
 
             if (mapHand.Equals(Gaze_HandsEnum.BOTH))
             {
-                if (_eventHand.Equals(VRNode.LeftHand))
+                if (_eventHand.Equals(UnityEngine.XR.XRNode.LeftHand))
                 {
                     // if both modes are allowed, we're sure this is valid      
                     TouchDistanceModeLeftValid = true;
                 }
 
                 // check right hand mode
-                if (_eventHand.Equals(VRNode.RightHand))
+                if (_eventHand.Equals(UnityEngine.XR.XRNode.RightHand))
                 {
                     // if both modes are allowed, we're sure this is valid
                     TouchDistanceModeRightValid = true;
@@ -222,7 +222,7 @@ namespace Gaze
             return _touchedObject.Equals(gazeConditionsScript.touchMap.TouchEnitry.interactiveObject);
         }
 
-        private bool IsTouchControllerValid(VRNode _touchingController)
+        private bool IsTouchControllerValid(UnityEngine.XR.XRNode _touchingController)
         {
             if (gazeConditionsScript.touchMap.touchHandsIndex != (int)Gaze_HandsEnum.BOTH)
             {
@@ -241,7 +241,7 @@ namespace Gaze
         /// <param name="_dicoVRNode"></param>
         /// <param name="_eventVRNode"></param>
         /// <returns></returns>
-        private bool IsTouchActionValid(VRNode _touchingController, bool _isTouching)
+        private bool IsTouchActionValid(UnityEngine.XR.XRNode _touchingController, bool _isTouching)
         {
             int eventActionIndex = 0;
 

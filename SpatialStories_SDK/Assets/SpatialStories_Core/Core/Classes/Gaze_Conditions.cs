@@ -343,7 +343,7 @@ namespace Gaze
         public bool handHoverEnabled;
         public Gaze_InteractiveObject handHoverIO;
         public int hoverHandIndex;
-        public UnityEngine.VR.VRNode hoverHand;
+        public UnityEngine.XR.XRNode hoverHand;
         public int hoverStateIndex;
         // is the hover condition set to in?
         public bool hoverIn;

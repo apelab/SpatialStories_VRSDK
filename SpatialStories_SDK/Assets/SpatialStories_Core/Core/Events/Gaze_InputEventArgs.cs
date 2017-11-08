@@ -24,9 +24,9 @@ public class Gaze_InputEventArgs
 
     public object Sender { get { return sender; } set { sender = value; } }
 
-    private VRNode? vrNode;
+    private UnityEngine.XR.XRNode? vrNode;
 
-    public VRNode? VrNode { get { return vrNode; } set { vrNode = value; } }
+    public UnityEngine.XR.XRNode? VrNode { get { return vrNode; } set { vrNode = value; } }
 
     private Gaze_InputTypes inputType;
 
@@ -51,17 +51,17 @@ public class Gaze_InputEventArgs
         this.inputType = _inputType;
     }
 
-    public Gaze_InputEventArgs(object _sender, VRNode _vrNode, Gaze_InputTypes _inputType) : this(_sender, _inputType)
+    public Gaze_InputEventArgs(object _sender, UnityEngine.XR.XRNode _vrNode, Gaze_InputTypes _inputType) : this(_sender, _inputType)
     {
         this.vrNode = _vrNode;
     }
 
-    public Gaze_InputEventArgs(object _sender, VRNode _vrNode, Gaze_InputTypes _inputType, float _inputValue) : this(_sender, _vrNode, _inputType)
+    public Gaze_InputEventArgs(object _sender, UnityEngine.XR.XRNode _vrNode, Gaze_InputTypes _inputType, float _inputValue) : this(_sender, _vrNode, _inputType)
     {
         this.inputValue = _inputValue;
     }
 
-    public Gaze_InputEventArgs(object _sender, VRNode _vrNode, Gaze_InputTypes _inputType, Vector2 _axisValue) : this(_sender, _vrNode, _inputType)
+    public Gaze_InputEventArgs(object _sender, UnityEngine.XR.XRNode _vrNode, Gaze_InputTypes _inputType, Vector2 _axisValue) : this(_sender, _vrNode, _inputType)
     {
         this.axisValue = _axisValue;
     }

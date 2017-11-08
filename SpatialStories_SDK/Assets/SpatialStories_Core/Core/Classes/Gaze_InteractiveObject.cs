@@ -509,7 +509,7 @@ namespace Gaze
         {
             if (e.Dico.Value.Equals(gameObject))
             {
-                if (e.KeyValue.Key == UnityEngine.VR.VRNode.LeftHand)
+                if (e.KeyValue.Key == UnityEngine.XR.XRNode.LeftHand)
                 {
                     IsPointedWithLeftHand = e.IsPointed;
                 }

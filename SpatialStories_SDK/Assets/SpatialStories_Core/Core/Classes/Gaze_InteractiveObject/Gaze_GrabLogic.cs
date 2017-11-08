@@ -424,8 +424,8 @@ namespace Gaze
                 IsBeingReleasedBecauseOfDistance = true;
             }
 
-            KeyValuePair<VRNode, GameObject> dico =
-                new KeyValuePair<VRNode, GameObject>(GrabbingManager.isLeftHand ? VRNode.LeftHand : VRNode.RightHand,
+            KeyValuePair<UnityEngine.XR.XRNode, GameObject> dico =
+                new KeyValuePair<UnityEngine.XR.XRNode, GameObject>(GrabbingManager.isLeftHand ? UnityEngine.XR.XRNode.LeftHand : UnityEngine.XR.XRNode.RightHand,
                     owner.gameObject);
             Gaze_InputManager.FireControllerGrabEvent(new Gaze_ControllerGrabEventArgs(GrabbingManager, dico, false));
         }

@@ -41,10 +41,10 @@ namespace Gaze
 
             // Queries the touchpad position of the GearVR Controller explicitly
             if (triggerPressedThisFrame)
-                Gaze_InputManager.FireOnHandRightDownEvent(new Gaze_InputEventArgs(this, VRNode.RightHand, Gaze_InputTypes.HAND_RIGHT_DOWN, Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_HAND_RIGHT)));
+                Gaze_InputManager.FireOnHandRightDownEvent(new Gaze_InputEventArgs(this, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.HAND_RIGHT_DOWN, Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_HAND_RIGHT)));
 
             if (triggerReleasedThisFrame)
-                Gaze_InputManager.FireOnHandRightUpEvent(new Gaze_InputEventArgs(this, VRNode.RightHand, Gaze_InputTypes.HAND_RIGHT_UP));
+                Gaze_InputManager.FireOnHandRightUpEvent(new Gaze_InputEventArgs(this, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.HAND_RIGHT_UP));
 
             if (touchpadPressed)
             {
@@ -73,7 +73,7 @@ namespace Gaze
             if (touchpadValue.x != touchpadX || touchpadValue.y != touchpadY)
             {
                 // notify touch event as a Generic Axis event
-                Gaze_InputManager.FireStickRightAxisEvent(new Gaze_InputEventArgs(this, VRNode.RightHand, Gaze_InputTypes.PAD_RIGHT_TOUCH, touchpadValue));
+                Gaze_InputManager.FireStickRightAxisEvent(new Gaze_InputEventArgs(this, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.PAD_RIGHT_TOUCH, touchpadValue));
 
                 // update values
                 touchpadX = touchpadValue.x;
@@ -85,7 +85,7 @@ namespace Gaze
             //detect when pad NEUTRAL and fire event with FireRightTouchpadEvent
             if (Time.time - lastTouchpadInputTime > touchpadNeutralTimeout)
             {
-                Gaze_InputManager.FireRightTouchpadEvent(new Gaze_InputEventArgs(this, VRNode.RightHand, Gaze_InputTypes.PAD_RIGHT_TOUCH, Vector2.zero));
+                Gaze_InputManager.FireRightTouchpadEvent(new Gaze_InputEventArgs(this, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.PAD_RIGHT_TOUCH, Vector2.zero));
             }
         }
 
@@ -125,7 +125,7 @@ namespace Gaze
 
         public override void SetPosition(GameObject _rightHand, GameObject _leftHand)
         {
-            _rightHand.transform.localPosition = handedRemote == OVRInput.Controller.RTrackedRemote ? InputTracking.GetLocalPosition(VRNode.RightHand) : InputTracking.GetLocalPosition(VRNode.LeftHand);
+            _rightHand.transform.localPosition = handedRemote == OVRInput.Controller.RTrackedRemote ? UnityEngine.XR.InputTracking.GetLocalPosition(UnityEngine.XR.XRNode.RightHand) : UnityEngine.XR.InputTracking.GetLocalPosition(UnityEngine.XR.XRNode.LeftHand);
         }
 
         // Hand position is only set in right hand object

@@ -48,7 +48,7 @@ public class Gaze_HandController : MonoBehaviour
 
     private void OnHandRightDownEvent(Gaze_InputEventArgs e)
     {
-        if (e.VrNode.Equals(VRNode.RightHand) && !leftHand)
+        if (e.VrNode.Equals(UnityEngine.XR.XRNode.RightHand) && !leftHand)
         {
             if (e.InputType.Equals(Gaze_InputTypes.HAND_RIGHT_DOWN) && animator != null && animator.runtimeAnimatorController != null)
                 animator.SetBool(Gaze_HashIDs.ANIMATOR_PARAMETER_HANDCLOSED, true);
@@ -57,7 +57,7 @@ public class Gaze_HandController : MonoBehaviour
 
     private void OnHandRightUpEvent(Gaze_InputEventArgs e)
     {
-        if (e.VrNode.Equals(VRNode.RightHand) && !leftHand)
+        if (e.VrNode.Equals(UnityEngine.XR.XRNode.RightHand) && !leftHand)
         {
             if (e.InputType.Equals(Gaze_InputTypes.HAND_RIGHT_UP) && animator != null && animator.runtimeAnimatorController != null)
                 animator.SetBool(Gaze_HashIDs.ANIMATOR_PARAMETER_HANDCLOSED, false);
@@ -66,7 +66,7 @@ public class Gaze_HandController : MonoBehaviour
 
     private void OnHandLeftDownEvent(Gaze_InputEventArgs e)
     {
-        if (e.VrNode.Equals(VRNode.LeftHand) && leftHand)
+        if (e.VrNode.Equals(UnityEngine.XR.XRNode.LeftHand) && leftHand)
         {
             if (e.InputType.Equals(Gaze_InputTypes.HAND_LEFT_DOWN) && animator != null)
                 animator.SetBool(Gaze_HashIDs.ANIMATOR_PARAMETER_HANDCLOSED, true);
@@ -75,7 +75,7 @@ public class Gaze_HandController : MonoBehaviour
 
     private void OnHandLeftUpEvent(Gaze_InputEventArgs e)
     {
-        if (e.VrNode.Equals(VRNode.LeftHand) && leftHand)
+        if (e.VrNode.Equals(UnityEngine.XR.XRNode.LeftHand) && leftHand)
         {
             if (e.InputType.Equals(Gaze_InputTypes.HAND_LEFT_UP) && animator != null)
                 animator.SetBool(Gaze_HashIDs.ANIMATOR_PARAMETER_HANDCLOSED, false);

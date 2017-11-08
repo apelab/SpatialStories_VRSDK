@@ -532,15 +532,15 @@ namespace Gaze
 
                 if (targetConditions.touchMap.touchHandsIndex.Equals((int)Gaze_HandsEnum.LEFT))
                 {
-                    targetConditions.touchMap.TouchEnitry.hand = VRNode.LeftHand;
+                    targetConditions.touchMap.TouchEnitry.hand = UnityEngine.XR.XRNode.LeftHand;
                 }
                 else if (targetConditions.touchMap.touchHandsIndex.Equals((int)Gaze_HandsEnum.RIGHT))
                 {
-                    targetConditions.touchMap.TouchEnitry.hand = VRNode.RightHand;
+                    targetConditions.touchMap.TouchEnitry.hand = UnityEngine.XR.XRNode.RightHand;
                 }
                 else // We store both in left
                 {
-                    targetConditions.touchMap.TouchEnitry.hand = VRNode.LeftHand;
+                    targetConditions.touchMap.TouchEnitry.hand = UnityEngine.XR.XRNode.LeftHand;
                 }
                 targetConditions.touchMap.touchActionIndex = EditorGUILayout.Popup(targetConditions.touchMap.touchActionIndex, Enum.GetNames(typeof(Gaze_TouchAction)));
 
@@ -603,18 +603,18 @@ namespace Gaze
                 {
                     targetConditions.grabMap.grabStateLeftIndex = EditorGUILayout.Popup(targetConditions.grabMap.grabStateLeftIndex, Enum.GetNames(typeof(Gaze_GrabStates)));
                     //Debug.Log("targetConditions.grabMap.grabStateLeftIndex =" + targetConditions.grabMap.grabStateLeftIndex);
-                    targetConditions.grabMap.grabEntryList[0].hand = VRNode.LeftHand;
+                    targetConditions.grabMap.grabEntryList[0].hand = UnityEngine.XR.XRNode.LeftHand;
                 }
                 else if (targetConditions.grabMap.grabHandsIndex.Equals((int)Gaze_HandsEnum.RIGHT))
                 {
                     targetConditions.grabMap.grabStateRightIndex = EditorGUILayout.Popup(targetConditions.grabMap.grabStateRightIndex, Enum.GetNames(typeof(Gaze_GrabStates)));
-                    targetConditions.grabMap.grabEntryList[0].hand = VRNode.RightHand;
+                    targetConditions.grabMap.grabEntryList[0].hand = UnityEngine.XR.XRNode.RightHand;
                 }
                 else
                 {
                     targetConditions.grabMap.grabStateLeftIndex = EditorGUILayout.Popup(targetConditions.grabMap.grabStateLeftIndex, Enum.GetNames(typeof(Gaze_GrabStates)));
                     //Debug.Log("targetConditions.grabMap.grabStateLeftIndex =" + targetConditions.grabMap.grabStateLeftIndex);
-                    targetConditions.grabMap.grabEntryList[0].hand = VRNode.LeftHand;
+                    targetConditions.grabMap.grabEntryList[0].hand = UnityEngine.XR.XRNode.LeftHand;
                 }
 
                 var grabObject = EditorGUILayout.ObjectField(targetConditions.grabMap.grabEntryList[0].interactiveObject, typeof(Gaze_InteractiveObject), true);
@@ -1066,9 +1066,9 @@ namespace Gaze
                     // Set the chosen hand
                     targetConditions.hoverHandIndex = EditorGUILayout.Popup(targetConditions.hoverHandIndex, Enum.GetNames(typeof(Gaze_HandsEnum)));
                     if (targetConditions.hoverHandIndex == ((int)Gaze_HandsEnum.LEFT))
-                        targetConditions.hoverHand = VRNode.LeftHand;
+                        targetConditions.hoverHand = UnityEngine.XR.XRNode.LeftHand;
                     if (targetConditions.hoverHandIndex == ((int)Gaze_HandsEnum.RIGHT))
-                        targetConditions.hoverHand = VRNode.RightHand;
+                        targetConditions.hoverHand = UnityEngine.XR.XRNode.RightHand;
 
 
                     // Set the state of the hover (In or Out)

@@ -329,10 +329,10 @@ public class Gaze_GrabManager : MonoBehaviour
         if (_interactableIO.IsTouchEnabled)
         {
             // set the dico members
-            VRNode vrNode = isLeftHand ? VRNode.LeftHand : VRNode.RightHand;
+            UnityEngine.XR.XRNode vrNode = isLeftHand ? UnityEngine.XR.XRNode.LeftHand : UnityEngine.XR.XRNode.RightHand;
 
             // fire the touch event
-            gaze_ControllerTouchEventArgs.Dico = new KeyValuePair<VRNode, GameObject>(vrNode, _interactableIO.gameObject);
+            gaze_ControllerTouchEventArgs.Dico = new KeyValuePair<UnityEngine.XR.XRNode, GameObject>(vrNode, _interactableIO.gameObject);
             gaze_ControllerTouchEventArgs.Mode = searchDistanceState;
             gaze_ControllerTouchEventArgs.IsTouching = true;
             gaze_ControllerTouchEventArgs.IsTriggerPressed = isTriggerPressed;
@@ -384,7 +384,7 @@ public class Gaze_GrabManager : MonoBehaviour
                         grabState = Gaze_GrabManagerState.GRABBED;
                         ClearLaserPointer();
 
-                        KeyValuePair<VRNode, GameObject> dico = new KeyValuePair<VRNode, GameObject>(isLeftHand ? VRNode.LeftHand : VRNode.RightHand, interactableIO.gameObject);
+                        KeyValuePair<UnityEngine.XR.XRNode, GameObject> dico = new KeyValuePair<UnityEngine.XR.XRNode, GameObject>(isLeftHand ? UnityEngine.XR.XRNode.LeftHand : UnityEngine.XR.XRNode.RightHand, interactableIO.gameObject);
                         Gaze_InputManager.FireControllerGrabEvent(new Gaze_ControllerGrabEventArgs(this, dico, true, hitPosition));
                     }
 
@@ -550,7 +550,7 @@ public class Gaze_GrabManager : MonoBehaviour
         grabbedObject = interactableIO.gameObject;
 
         // notify
-        KeyValuePair<VRNode, GameObject> grabbedObjects = new KeyValuePair<VRNode, GameObject>(isLeftHand ? VRNode.LeftHand : VRNode.RightHand, grabbedObject);
+        KeyValuePair<UnityEngine.XR.XRNode, GameObject> grabbedObjects = new KeyValuePair<UnityEngine.XR.XRNode, GameObject>(isLeftHand ? UnityEngine.XR.XRNode.LeftHand : UnityEngine.XR.XRNode.RightHand, grabbedObject);
         isGrabbing = true;
 
         Gaze_InputManager.FireControllerGrabEvent(new Gaze_ControllerGrabEventArgs(this, grabbedObjects, isGrabbing));
@@ -604,7 +604,7 @@ public class Gaze_GrabManager : MonoBehaviour
             if (grabbedObj.GetComponent<Gaze_Catchable>() != null && grabbedObj.GetComponent<Gaze_Catchable>().vibrates)
                 Gaze_InputManager.instance.HapticFeedback(false);
 
-            KeyValuePair<VRNode, GameObject> dico = new KeyValuePair<VRNode, GameObject>(isLeftHand ? VRNode.LeftHand : VRNode.RightHand, grabbedObj);
+            KeyValuePair<UnityEngine.XR.XRNode, GameObject> dico = new KeyValuePair<UnityEngine.XR.XRNode, GameObject>(isLeftHand ? UnityEngine.XR.XRNode.LeftHand : UnityEngine.XR.XRNode.RightHand, grabbedObj);
             isGrabbing = false;
 
             Gaze_InputManager.FireControllerGrabEvent(new Gaze_ControllerGrabEventArgs(this, dico, isGrabbing));
@@ -768,7 +768,7 @@ public class Gaze_GrabManager : MonoBehaviour
         if (e.IsGrabbing)
         {
             // if the other controller has grabbed an object (! before the isLeftHand)
-            if ((e.ControllerObjectPair.Key.Equals(VRNode.LeftHand) && !isLeftHand) || (e.ControllerObjectPair.Key.Equals(VRNode.RightHand) && isLeftHand))
+            if ((e.ControllerObjectPair.Key.Equals(UnityEngine.XR.XRNode.LeftHand) && !isLeftHand) || (e.ControllerObjectPair.Key.Equals(UnityEngine.XR.XRNode.RightHand) && isLeftHand))
             {
                 // and this object is the one I'm currently grabbing
                 if (e.ControllerObjectPair.Value == grabbedObject)
@@ -782,7 +782,7 @@ public class Gaze_GrabManager : MonoBehaviour
 
     private void OnHandRightDownEvent(Gaze_InputEventArgs e)
     {
-        if (e.VrNode.Equals(VRNode.RightHand) && !isLeftHand)
+        if (e.VrNode.Equals(UnityEngine.XR.XRNode.RightHand) && !isLeftHand)
         {
             grabState = Gaze_GrabManagerState.SEARCHING;
             isTriggerPressed = true;
@@ -791,11 +791,11 @@ public class Gaze_GrabManager : MonoBehaviour
 
     private void OnHandRightUpEvent(Gaze_InputEventArgs e)
     {
-        if (e.VrNode.Equals(VRNode.RightHand) && !isLeftHand)
+        if (e.VrNode.Equals(UnityEngine.XR.XRNode.RightHand) && !isLeftHand)
         {
             if (interactableIO != null)
             {
-                Gaze_EventManager.FireControllerPointingEvent(new Gaze_ControllerPointingEventArgs(this.gameObject, new KeyValuePair<VRNode, GameObject>(isLeftHand ? VRNode.LeftHand : VRNode.RightHand, interactableIO.gameObject), false));
+                Gaze_EventManager.FireControllerPointingEvent(new Gaze_ControllerPointingEventArgs(this.gameObject, new KeyValuePair<UnityEngine.XR.XRNode, GameObject>(isLeftHand ? UnityEngine.XR.XRNode.LeftHand : UnityEngine.XR.XRNode.RightHand, interactableIO.gameObject), false));
                 TriggerReleased(interactableIO.gameObject);
                 ResetGrabStateAfterHandUp();
             }
@@ -806,7 +806,7 @@ public class Gaze_GrabManager : MonoBehaviour
 
     private void OnHandLeftDownEvent(Gaze_InputEventArgs e)
     {
-        if (e.VrNode.Equals(VRNode.LeftHand) && isLeftHand)
+        if (e.VrNode.Equals(UnityEngine.XR.XRNode.LeftHand) && isLeftHand)
         {
             grabState = Gaze_GrabManagerState.SEARCHING;
             isTriggerPressed = true;
@@ -815,13 +815,13 @@ public class Gaze_GrabManager : MonoBehaviour
 
     private void OnHandLeftUpEvent(Gaze_InputEventArgs e)
     {
-        if (e.VrNode.Equals(VRNode.LeftHand) && isLeftHand)
+        if (e.VrNode.Equals(UnityEngine.XR.XRNode.LeftHand) && isLeftHand)
         {
             if (interactableIO != null)
             {
-                Dictionary<VRNode, GameObject> dico = new Dictionary<VRNode, GameObject>();
-                dico.Add(isLeftHand ? VRNode.LeftHand : VRNode.RightHand, interactableIO.gameObject);
-                Gaze_EventManager.FireControllerPointingEvent(new Gaze_ControllerPointingEventArgs(this.gameObject, new KeyValuePair<VRNode, GameObject>(isLeftHand ? VRNode.LeftHand : VRNode.RightHand, interactableIO.gameObject), false));
+                Dictionary<UnityEngine.XR.XRNode, GameObject> dico = new Dictionary<UnityEngine.XR.XRNode, GameObject>();
+                dico.Add(isLeftHand ? UnityEngine.XR.XRNode.LeftHand : UnityEngine.XR.XRNode.RightHand, interactableIO.gameObject);
+                Gaze_EventManager.FireControllerPointingEvent(new Gaze_ControllerPointingEventArgs(this.gameObject, new KeyValuePair<UnityEngine.XR.XRNode, GameObject>(isLeftHand ? UnityEngine.XR.XRNode.LeftHand : UnityEngine.XR.XRNode.RightHand, interactableIO.gameObject), false));
                 TriggerReleased(interactableIO.gameObject);
                 ResetGrabStateAfterHandUp();
             }
@@ -835,14 +835,14 @@ public class Gaze_GrabManager : MonoBehaviour
     /// </summary>
     private void ResetGrabStateAfterHandUp()
     {
-        KeyValuePair<VRNode, GameObject> dico;
+        KeyValuePair<UnityEngine.XR.XRNode, GameObject> dico;
         //Gaze_GravityManager.ChangeGravityState(interactableIO, Gaze_GravityRequestType.ACTIVATE_AND_DETACH);
 
         // If we where attracting we need to to add graviy again to the IO
         if (interactableIO != null)
-            dico = new KeyValuePair<VRNode, GameObject>(isLeftHand ? VRNode.LeftHand : VRNode.RightHand, interactableIO.gameObject);
+            dico = new KeyValuePair<UnityEngine.XR.XRNode, GameObject>(isLeftHand ? UnityEngine.XR.XRNode.LeftHand : UnityEngine.XR.XRNode.RightHand, interactableIO.gameObject);
         else
-            dico = new KeyValuePair<VRNode, GameObject>(isLeftHand ? VRNode.LeftHand : VRNode.RightHand, null);
+            dico = new KeyValuePair<UnityEngine.XR.XRNode, GameObject>(isLeftHand ? UnityEngine.XR.XRNode.LeftHand : UnityEngine.XR.XRNode.RightHand, null);
 
         Gaze_InputManager.FireControllerGrabEvent(new Gaze_ControllerGrabEventArgs(this, dico, false));
         Gaze_GravityManager.ChangeGravityState(interactableIO, Gaze_GravityRequestType.RETURN_TO_DEFAULT);

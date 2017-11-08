@@ -29,9 +29,9 @@ public class Gaze_ControllerTouchEventArgs : EventArgs
 
     public object Sender { get { return sender; } set { sender = value; } }
 
-    private KeyValuePair<VRNode, GameObject> dico;
+    private KeyValuePair<UnityEngine.XR.XRNode, GameObject> dico;
 
-    public KeyValuePair<VRNode, GameObject> Dico { get { return dico; } set { dico = value; } }
+    public KeyValuePair<UnityEngine.XR.XRNode, GameObject> Dico { get { return dico; } set { dico = value; } }
 
     private Gaze_TouchDistanceMode mode;
 
@@ -50,7 +50,7 @@ public class Gaze_ControllerTouchEventArgs : EventArgs
         sender = _sender;
     }
 
-    public Gaze_ControllerTouchEventArgs(object _sender, KeyValuePair<VRNode, GameObject> _dico, Gaze_TouchDistanceMode _eventDistanceMode, bool _isTouching, bool _isTriggerPressed)
+    public Gaze_ControllerTouchEventArgs(object _sender, KeyValuePair<UnityEngine.XR.XRNode, GameObject> _dico, Gaze_TouchDistanceMode _eventDistanceMode, bool _isTouching, bool _isTriggerPressed)
     {
         sender = _sender;
         dico = _dico;

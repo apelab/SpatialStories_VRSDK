@@ -28,13 +28,13 @@ namespace Gaze
 
         public object Sender { get { return sender; } set { sender = value; } }
 
-        private KeyValuePair<VRNode, GameObject> keyValue;
+        private KeyValuePair<UnityEngine.XR.XRNode, GameObject> keyValue;
 
-        public KeyValuePair<VRNode, GameObject> KeyValue { get { return keyValue; } set { keyValue = value; } }
+        public KeyValuePair<UnityEngine.XR.XRNode, GameObject> KeyValue { get { return keyValue; } set { keyValue = value; } }
 
-        private KeyValuePair<VRNode, GameObject> dico;
+        private KeyValuePair<UnityEngine.XR.XRNode, GameObject> dico;
 
-        public KeyValuePair<VRNode, GameObject> Dico { get { return dico; } set { dico = value; } }
+        public KeyValuePair<UnityEngine.XR.XRNode, GameObject> Dico { get { return dico; } set { dico = value; } }
 
         private bool isPointed;
 
@@ -46,7 +46,7 @@ namespace Gaze
         /// Arguments for animation events related.     
         /// </summary>
         /// <param name="_sender">Is the sender's object.</param>
-        public Gaze_ControllerPointingEventArgs(object _sender, KeyValuePair<VRNode, GameObject> _dico, bool _isPointed)
+        public Gaze_ControllerPointingEventArgs(object _sender, KeyValuePair<UnityEngine.XR.XRNode, GameObject> _dico, bool _isPointed)
         {
             sender = _sender;
             dico = _dico;

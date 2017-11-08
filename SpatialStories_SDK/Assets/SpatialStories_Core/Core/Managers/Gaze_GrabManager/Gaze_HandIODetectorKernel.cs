@@ -20,7 +20,7 @@ namespace Gaze
         private Gaze_GrabManager grabManager;
         private Gaze_HandIODetectorFeedback feedbackManager;
         private Gaze_ControllerPointingEventArgs gaze_ControllerPointingEventArgs;
-        private KeyValuePair<VRNode, GameObject> keyValue;
+        private KeyValuePair<UnityEngine.XR.XRNode, GameObject> keyValue;
 
         /// <summary>
         /// Used to raycast every frame when touching an IO or at the specified interval.
@@ -40,7 +40,7 @@ namespace Gaze
             grabManager.distantGrabOrigin = grabManager.gameObject.GetComponentInChildren<Gaze_DistantGrabPointer>().gameObject;
             gaze_ControllerPointingEventArgs = new Gaze_ControllerPointingEventArgs(grabManager.gameObject, keyValue, true);
             gaze_ControllerPointingEventArgs.Sender = grabManager.gameObject;
-            keyValue = new KeyValuePair<VRNode, GameObject>();
+            keyValue = new KeyValuePair<UnityEngine.XR.XRNode, GameObject>();
         }
 
         public void Update()
@@ -107,7 +107,7 @@ namespace Gaze
                         {
                             // notify the new pointed object
                             raycastIOs.Add(interactiveObject.gameObject);
-                            gaze_ControllerPointingEventArgs.Dico = new KeyValuePair<VRNode, GameObject>(grabManager.isLeftHand ? VRNode.LeftHand : VRNode.RightHand, interactiveObject.gameObject);
+                            gaze_ControllerPointingEventArgs.Dico = new KeyValuePair<UnityEngine.XR.XRNode, GameObject>(grabManager.isLeftHand ? UnityEngine.XR.XRNode.LeftHand : UnityEngine.XR.XRNode.RightHand, interactiveObject.gameObject);
                             gaze_ControllerPointingEventArgs.IsPointed = true;
                             Gaze_EventManager.FireControllerPointingEvent(gaze_ControllerPointingEventArgs);
                         }
@@ -146,7 +146,7 @@ namespace Gaze
                     if (!grabManager.HitsIos.Contains(raycastIOs[i]))
                     {
                         // notify
-                        gaze_ControllerPointingEventArgs.Dico = new KeyValuePair<VRNode, GameObject>(grabManager.isLeftHand ? VRNode.LeftHand : VRNode.RightHand, raycastIOs[i]);
+                        gaze_ControllerPointingEventArgs.Dico = new KeyValuePair<UnityEngine.XR.XRNode, GameObject>(grabManager.isLeftHand ? UnityEngine.XR.XRNode.LeftHand : UnityEngine.XR.XRNode.RightHand, raycastIOs[i]);
                         gaze_ControllerPointingEventArgs.IsPointed = false;
 
                         Gaze_EventManager.FireControllerPointingEvent(gaze_ControllerPointingEventArgs);

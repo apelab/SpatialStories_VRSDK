@@ -76,6 +76,8 @@ namespace Gaze
         {
             Gaze_EventManager.OnProximityEvent -= OnProximityEvent;
             Gaze_EventManager.OnLevitationEvent -= OnLevitationEvent;
+            // to snap/unsnap by grabbing the object
+            Gaze_InputManager.OnControllerGrabEvent -= OnControllerGrabEvent;
         }
 
         void Start()
@@ -505,9 +507,9 @@ namespace Gaze
                     // to know if the object has entered its DnD target or not
                     Gaze_EventManager.OnProximityEvent += OnProximityEvent;
 
-                    if (e.ControllerObjectPair.Key.Equals(VRNode.LeftHand))
+                    if (e.ControllerObjectPair.Key.Equals(UnityEngine.XR.XRNode.LeftHand))
                         Grab(Gaze_InputManager.instance.LeftController);
-                    else if (e.ControllerObjectPair.Key.Equals(VRNode.RightHand))
+                    else if (e.ControllerObjectPair.Key.Equals(UnityEngine.XR.XRNode.RightHand))
                         Grab(Gaze_InputManager.instance.RightController);
                 }
                 else

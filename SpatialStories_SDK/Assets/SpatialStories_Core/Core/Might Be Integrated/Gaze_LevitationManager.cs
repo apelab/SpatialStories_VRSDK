@@ -672,7 +672,7 @@ namespace Gaze
         private void OnControllerGrabEvent(Gaze_ControllerGrabEventArgs e)
         {
             // else, if the I'm the concerned controller
-            if ((e.ControllerObjectPair.Key.Equals(VRNode.LeftHand) && isLeftHand) || (e.ControllerObjectPair.Key.Equals(VRNode.RightHand) && !isLeftHand))
+            if ((e.ControllerObjectPair.Key.Equals(UnityEngine.XR.XRNode.LeftHand) && isLeftHand) || (e.ControllerObjectPair.Key.Equals(UnityEngine.XR.XRNode.RightHand) && !isLeftHand))
             {
                 // and this object is in LEVITATE mode
                 if (e.ControllerObjectPair.Value.GetComponent<Gaze_InteractiveObject>().ManipulationMode == Gaze_ManipulationModes.LEVITATE)
