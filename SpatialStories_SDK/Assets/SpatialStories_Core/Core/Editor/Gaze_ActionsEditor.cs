@@ -913,6 +913,14 @@ namespace Gaze
                     }
                 }
             }
+            else
+            {
+                // This fixes the problem that when a user modifes an animator he needs to play the game to see the animation triggers again
+                if (actionsScript.targetAnimator != null && !actionsScript.targetAnimator.isInitialized)
+                {
+                    actionsScript.targetAnimator.Rebind();
+                }
+            }
 
             return selectedAnimatorTriggers.Count > 0;
         }
