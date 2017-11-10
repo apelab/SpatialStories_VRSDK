@@ -41,7 +41,7 @@ namespace Gaze
 
         public override void Update()
         {
-            if (teleporter.axisValue > teleporter.inputThreshold)
+            if (teleporter.axisValue > teleporter.InptuThreshold)
                 teleporter.CalculateArc();
         }
 

@@ -153,6 +153,31 @@ namespace Gaze
 
         #region Main Menu
 
+        public static void AdjustColliders(GameObject _selectedGameObject)
+        {
+            Gaze_InteractiveObjectVisuals vis = _selectedGameObject.GetComponentInChildren<Gaze_InteractiveObjectVisuals>();
+            Transform t = vis.transform.GetChild(0);
+            BoxCollider collider = null;
+            if (t != null)
+            {
+                collider = t.gameObject.AddComponent<BoxCollider>();
+            }
+            BoxCollider[] colliders = _selectedGameObject.GetComponentsInChildren<BoxCollider>();
+            foreach (BoxCollider c in colliders)
+            {
+                c.center = collider.center;
+                c.size = collider.size;
+            }
+            GameObject.DestroyImmediate(collider);
+        }
+
+        [MenuItem("GameObject/Tools/AdjustColliders", false, 10)]
+        public static void AdjustCollidersOfObject(MenuCommand menuCommand)
+        {
+            if (Selection.activeGameObject != null)
+                AdjustColliders(Selection.activeGameObject);
+        }
+
         [MenuItem("GameObject/SpatialStories/Convert into interactive object", false, 10)]
         public static void GameObjectConvertIntoObject(MenuCommand menuCommand)
         {

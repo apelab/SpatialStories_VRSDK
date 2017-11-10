@@ -49,43 +49,31 @@ public class Gaze_Teleporter : MonoBehaviour
         }
     }
 
-    public enum Transition
-    {
-        INSTANT,
-        FADE,
-        DASH
-    }
 
-    public float ButtonHoldTimeToAppear = 0.2f;
-    public GameObject gyroPrefab;
+    public float HoldTimeToAppear = 0.2f;
+    public GameObject GyroPrefab;
     public bool OrientOnTeleport = true;
-    public float inputThreshold = .5f;
-    public LayerMask teleportLayer;
-    public float initialVelMagnitude = 10f;
-    public float timeStep = 0.1f;
-    public float maxDistance = 5f;
-    public float maxHeight = 10f;
-    public float teleportCooldown = 1.0f;
-    public float matScale = 5;
-    public Vector2 texMovementSpeed = new Vector2(-0.1f, 0);
-    public Color goodSpotCol = new Color(0, 0.6f, 1f, 0.2f);
-    public Color badSpotCol = new Color(0.8f, 0, 0, 0.2f);
-    public Color gyroColor = new Color(0, 0.6f, 1f, 0.2f);
-    public GameObject gyroUI;
-    public float arcLineWidth = 0.05f;
-    public Material arcMaterial;
+    public float InptuThreshold = .5f;
+    public LayerMask AllowedLayers;
+    public float MaxTeleportDistance = 5f;
+    public float MaxSlope = 10f;
+    public float Cooldown = 1.0f;
+    public float MatScale = 5;
+    public Color GoodDestinationColor = new Color(0, 0.6f, 1f, 0.2f);
+    public Color BadDestinationColor = new Color(0.8f, 0, 0, 0.2f);
+    public GameObject GyroUI;
+    public float LineWidth = 0.05f;
+    public Material LineMaterial;
 
-    public List<Transform> hotSpots;
-    public float hotSpotDistance = 1f;
+    public List<Transform> HotSpots;
+    public float MinHotspotDistance = 1f;
 
-    Vector3 finalHitLocation = new Vector3();
-    Vector3 finalHitNormal = new Vector3();
+    private Vector3 finalHitLocation = new Vector3();
+    private Vector3 finalHitNormal = new Vector3();
     internal GameObject gyroInstance;
     internal Vector3 gyroUIOriginalAngles;
     internal float angle;
     internal Transform lastParent;
-    internal MeshRenderer fadeQuad;
-    internal Color fadeColour;
     internal bool transitioning;
     internal LineRenderer _lineRenderer;
     internal Quaternion _roomRotation;
@@ -117,7 +105,7 @@ public class Gaze_Teleporter : MonoBehaviour
         }
     }
 
-    float timeHoldingButton = 0;
+    private float timeHoldingButton = 0;
 
     private Gaze_TeleportEventArgs gaze_TeleportEventArgs;
 
@@ -181,7 +169,7 @@ public class Gaze_Teleporter : MonoBehaviour
 
         InstanciateGyroPrefab();
 
-        gyroUIOriginalAngles = gyroPrefab.transform.eulerAngles;
+        gyroUIOriginalAngles = GyroPrefab.transform.eulerAngles;
 
         if (Camera.main == null)
         {
@@ -196,9 +184,9 @@ public class Gaze_Teleporter : MonoBehaviour
 
         cam = gazeCamera.gameObject;
         cameraRigIO = gazeCamera.GetComponentInParent<Gaze_InputManager>().gameObject;
-        gyroUI = gyroInstance.GetComponentInChildren<Gaze_GyroTarget>().gameObject;
+        GyroUI = gyroInstance.GetComponentInChildren<Gaze_GyroTarget>().gameObject;
 
-        lastTeleportTime = -teleportCooldown;
+        lastTeleportTime = -Cooldown;
 
         GameObject arcParentObject = new GameObject("ArcTeleporter");
         arcParentObject.transform.localScale = cameraRigIO.transform.localScale;
@@ -208,9 +196,9 @@ public class Gaze_Teleporter : MonoBehaviour
         _lineRenderer = arcLine1.AddComponent<LineRenderer>();
         GameObject arcLine2 = new GameObject("ArcLine2");
         arcLine2.transform.SetParent(arcParentObject.transform);
-        _lineRenderer.startWidth = arcLineWidth * cameraRigIO.transform.localScale.magnitude;
-        _lineRenderer.endWidth = arcLineWidth * cameraRigIO.transform.localScale.magnitude;
-        _lineRenderer.material = arcMaterial;
+        _lineRenderer.startWidth = LineWidth * cameraRigIO.transform.localScale.magnitude;
+        _lineRenderer.endWidth = LineWidth * cameraRigIO.transform.localScale.magnitude;
+        _lineRenderer.material = LineMaterial;
         _lineRenderer.SetPosition(0, Vector3.zero);
         _lineRenderer.SetPosition(1, Vector3.zero);
 
@@ -270,7 +258,7 @@ public class Gaze_Teleporter : MonoBehaviour
         if (gyroInstance != null)
             Destroy(gyroInstance);
 
-        gyroInstance = Instantiate(gyroPrefab);
+        gyroInstance = Instantiate(GyroPrefab);
 
         if (OrientOnTeleport)
             gyroInstance.transform.Find("GyroSprite").GetComponent<SpriteRenderer>().enabled = true;
@@ -316,7 +304,7 @@ public class Gaze_Teleporter : MonoBehaviour
         ray = new Ray(cameraRigIO.transform.position, Vector3.down);
 
         // raycast on chosen layers only
-        hits = Physics.RaycastAll(ray, 4f, teleportLayer.value);
+        hits = Physics.RaycastAll(ray, 4f, AllowedLayers.value);
         if (hits.Length <= 0)
             return GetDifferenceBetweenClosestPlaneAndPlayer();
         hits = SortArray(hits);
@@ -332,7 +320,7 @@ public class Gaze_Teleporter : MonoBehaviour
 
         foreach (GameObject go in allGameObjects)
         {
-            if (go.layer == teleportLayer)
+            if (go.layer == AllowedLayers)
                 allTeleportZones.Add(go);
         }
 
@@ -388,7 +376,7 @@ public class Gaze_Teleporter : MonoBehaviour
         timeHoldingButton += Time.deltaTime;
 
         // Ensure that we don't show teleport until the button hold time has passed
-        if (timeHoldingButton < ButtonHoldTimeToAppear)
+        if (timeHoldingButton < HoldTimeToAppear)
         {
             if (_lineRenderer.enabled)
                 _lineRenderer.enabled = false;
@@ -439,19 +427,19 @@ public class Gaze_Teleporter : MonoBehaviour
             //newRay.origin = currentPosition;
             //newRay.direction = currentPosition - lastPostion;
 
-            float length = (maxDistance * 0.01f) * cameraRigIO.transform.localScale.magnitude;
+            float length = (MaxTeleportDistance * 0.01f) * cameraRigIO.transform.localScale.magnitude;
             if (currentRotation == downQuat)
             {
                 //We have finished the arc and are facing down
                 //So were going to use the second line renderer and extend the normal length as a last effort to hit something
-                length = (maxDistance * matScale) * cameraRigIO.transform.localScale.magnitude;
+                length = (MaxTeleportDistance * MatScale) * cameraRigIO.transform.localScale.magnitude;
                 positions1.Add(currentPosition);
             }
 
             float raycastLength = length * 1.1f;
 
             //	Check if we hit something
-            bool hitSomething = Physics.Raycast(newRay, out hit, raycastLength, teleportLayer);
+            bool hitSomething = Physics.Raycast(newRay, out hit, raycastLength, AllowedLayers);
 
             // don't allow to teleport to negative normals (we don't want to be stuck under floors)
             if (hit.normal.y > 0)
@@ -495,8 +483,8 @@ public class Gaze_Teleporter : MonoBehaviour
             _lineRenderer.enabled = true;
             gyroInstance.SetActive(true);
 
-            _lineRenderer.startColor = goodSpotCol;
-            _lineRenderer.endColor = goodSpotCol;
+            _lineRenderer.startColor = GoodDestinationColor;
+            _lineRenderer.endColor = GoodDestinationColor;
 
 
             // If we need to redirect the line
@@ -522,8 +510,8 @@ public class Gaze_Teleporter : MonoBehaviour
         {
             gyroInstance.SetActive(false);
 
-            _lineRenderer.startColor = badSpotCol;
-            _lineRenderer.endColor = badSpotCol;
+            _lineRenderer.startColor = BadDestinationColor;
+            _lineRenderer.endColor = BadDestinationColor;
 
             _lineRenderer.positionCount = positions1.Count;
             _lineRenderer.SetPositions(positions1.ToArray());
@@ -532,11 +520,11 @@ public class Gaze_Teleporter : MonoBehaviour
 
     private bool CloseToHotSpot(Vector3 _hit)
     {
-        for (int i = 0; i < hotSpots.Count; i++)
+        for (int i = 0; i < HotSpots.Count; i++)
         {
-            if (Vector3.Distance(hotSpots[i].position, _hit) < hotSpotDistance)
+            if (Vector3.Distance(HotSpots[i].position, _hit) < MinHotspotDistance)
             {
-                finalHitLocation = hotSpots[i].position;
+                finalHitLocation = HotSpots[i].position;
                 return true;
             }
         }
@@ -564,7 +552,7 @@ public class Gaze_Teleporter : MonoBehaviour
         }
 
         //check if height delta is ok
-        if (Mathf.Abs(GetComponentInParent<Gaze_InputManager>().transform.position.y - _pos.y) > maxHeight)
+        if (Mathf.Abs(GetComponentInParent<Gaze_InputManager>().transform.position.y - _pos.y) > MaxSlope)
         {
             gaze_TeleportEventArgs.Mode = Gaze_TeleportMode.BAD_DESTINATION;
             CheckSpotChange();
@@ -613,10 +601,10 @@ public class Gaze_Teleporter : MonoBehaviour
 
     virtual public void Teleport(Vector3 _position, bool _checkIfGoodSpot = false, bool _byScript = false)
     {
-        if (!_byScript && timeHoldingButton < ButtonHoldTimeToAppear)
+        if (!_byScript && timeHoldingButton < HoldTimeToAppear)
             return;
 
-        if (transitioning || (Time.time - lastTeleportTime) < teleportCooldown)
+        if (transitioning || (Time.time - lastTeleportTime) < Cooldown)
             return;
 
         bool isGoodSpoot = _goodSpot;
@@ -627,7 +615,7 @@ public class Gaze_Teleporter : MonoBehaviour
             Ray newRay = new Ray(_position + Vector3.up, Vector3.down);
             RaycastHit hit;
             teleportActive = true;
-            bool hitSomething = Physics.Raycast(newRay, out hit, 2f, teleportLayer);
+            bool hitSomething = Physics.Raycast(newRay, out hit, 2f, AllowedLayers);
             if (hitSomething)
             {
                 isGoodSpoot = IsGoodSpot(_position);
@@ -661,7 +649,7 @@ public class Gaze_Teleporter : MonoBehaviour
 
     internal bool IsInputValid()
     {
-        return axisValue >= inputThreshold;
+        return axisValue >= InptuThreshold;
     }
 
     private void OnLevelWasLoaded(int level)
