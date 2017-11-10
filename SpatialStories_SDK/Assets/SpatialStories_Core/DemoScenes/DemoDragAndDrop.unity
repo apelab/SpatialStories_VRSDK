@@ -3348,7 +3348,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 285780264}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.09, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2035804515}
@@ -4716,7 +4716,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 443902042}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.09, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 35163320}
@@ -7520,7 +7520,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 715406516}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.09, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 902326267}
@@ -8581,7 +8581,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 767392083}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.09, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2035804515}
@@ -9426,7 +9426,7 @@ LineRenderer:
   m_SortingOrder: 0
   m_Positions:
   - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 1}
+  - {x: 0, y: 0, z: 0}
   m_Parameters:
     serializedVersion: 2
     widthMultiplier: 1
@@ -9513,7 +9513,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 906555861}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.09, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2035804515}
@@ -11947,7 +11947,7 @@ LineRenderer:
   m_SortingOrder: 0
   m_Positions:
   - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 1}
+  - {x: 0, y: 0, z: 0}
   m_Parameters:
     serializedVersion: 2
     widthMultiplier: 1
@@ -17291,28 +17291,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d1bf5f274029124898ba5975f1ca219, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ButtonHoldTimeToAppear: 0.2
-  gyroPrefab: {fileID: 1903499341379776, guid: 934a3c1822b00914ebc0ca1e4fa1a92b, type: 2}
+  HoldTimeToAppear: 0.2
+  GyroPrefab: {fileID: 1903499341379776, guid: 934a3c1822b00914ebc0ca1e4fa1a92b, type: 2}
   OrientOnTeleport: 1
-  inputThreshold: 0.5
-  teleportLayer:
+  InptuThreshold: 0.5
+  AllowedLayers:
     serializedVersion: 2
-    m_Bits: 256
-  initialVelMagnitude: 10
-  timeStep: 0.1
-  maxDistance: 5
-  maxHeight: 10
-  teleportCooldown: 1
-  matScale: 5
-  texMovementSpeed: {x: -0.1, y: 0}
-  goodSpotCol: {r: 0, g: 0.6, b: 1, a: 0.2}
-  badSpotCol: {r: 0.8, g: 0, b: 0, a: 0.2}
-  gyroColor: {r: 0, g: 0.6, b: 1, a: 0.2}
-  gyroUI: {fileID: 1903499341379776, guid: 934a3c1822b00914ebc0ca1e4fa1a92b, type: 2}
-  arcLineWidth: 0.05
-  arcMaterial: {fileID: 2100000, guid: 74b35de85a4816e4d8533b9b2c8a5f47, type: 2}
-  hotSpots: []
-  hotSpotDistance: 1
+    m_Bits: 4294967295
+  MaxTeleportDistance: 5
+  MaxSlope: 10
+  Cooldown: 1
+  MatScale: 5
+  GoodDestinationColor: {r: 0, g: 0.6, b: 1, a: 0.2}
+  BadDestinationColor: {r: 0.8, g: 0, b: 0, a: 0.2}
+  GyroUI: {fileID: 0}
+  LineWidth: 0.01
+  LineMaterial: {fileID: 2100000, guid: 74b35de85a4816e4d8533b9b2c8a5f47, type: 2}
+  HotSpots: []
+  MinHotspotDistance: 1
   debug: 0
 --- !u!95 &1819552605
 Animator:
@@ -17338,7 +17334,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1819552601}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.09, z: 0}
   m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
   m_Children:
   - {fileID: 917980640}
@@ -18174,7 +18170,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1884549971}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.09, z: 0}
   m_LocalScale: {x: 0.049781203, y: 0.049781203, z: 0.049781203}
   m_Children: []
   m_Father: {fileID: 2035804515}
@@ -18790,7 +18786,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1950329279}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.09, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2035804515}
@@ -19233,7 +19229,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2032721591}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.09, z: 0}
   m_LocalScale: {x: 0.049781203, y: 0.049781203, z: 0.049781203}
   m_Children: []
   m_Father: {fileID: 2035804515}
@@ -19337,28 +19333,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d1bf5f274029124898ba5975f1ca219, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ButtonHoldTimeToAppear: 0.2
-  gyroPrefab: {fileID: 1903499341379776, guid: 934a3c1822b00914ebc0ca1e4fa1a92b, type: 2}
+  HoldTimeToAppear: 0.2
+  GyroPrefab: {fileID: 1903499341379776, guid: 934a3c1822b00914ebc0ca1e4fa1a92b, type: 2}
   OrientOnTeleport: 1
-  inputThreshold: 0.5
-  teleportLayer:
+  InptuThreshold: 0.5
+  AllowedLayers:
     serializedVersion: 2
-    m_Bits: 256
-  initialVelMagnitude: 10
-  timeStep: 0.1
-  maxDistance: 5
-  maxHeight: 10
-  teleportCooldown: 1
-  matScale: 5
-  texMovementSpeed: {x: -0.1, y: 0}
-  goodSpotCol: {r: 0, g: 0.6, b: 1, a: 0.2}
-  badSpotCol: {r: 0.8, g: 0, b: 0, a: 0.2}
-  gyroColor: {r: 0, g: 0.6, b: 1, a: 0.2}
-  gyroUI: {fileID: 1903499341379776, guid: 934a3c1822b00914ebc0ca1e4fa1a92b, type: 2}
-  arcLineWidth: 0.05
-  arcMaterial: {fileID: 2100000, guid: 74b35de85a4816e4d8533b9b2c8a5f47, type: 2}
-  hotSpots: []
-  hotSpotDistance: 1
+    m_Bits: 4294967295
+  MaxTeleportDistance: 5
+  MaxSlope: 10
+  Cooldown: 1
+  MatScale: 5
+  GoodDestinationColor: {r: 0, g: 0.6, b: 1, a: 0.2}
+  BadDestinationColor: {r: 0.8, g: 0, b: 0, a: 0.2}
+  GyroUI: {fileID: 0}
+  LineWidth: 0.01
+  LineMaterial: {fileID: 2100000, guid: 74b35de85a4816e4d8533b9b2c8a5f47, type: 2}
+  HotSpots: []
+  MinHotspotDistance: 1
   debug: 0
 --- !u!95 &2035804514
 Animator:
@@ -19384,7 +19376,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2035804510}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.09, z: 0}
   m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
   m_Children:
   - {fileID: 443902043}

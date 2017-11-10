@@ -77,15 +77,17 @@ LightmapSettings:
     m_PVRDirectSampleCount: 32
     m_PVRSampleCount: 500
     m_PVRBounces: 2
-    m_PVRFiltering: 0
+    m_PVRFilterTypeDirect: 0
+    m_PVRFilterTypeIndirect: 0
+    m_PVRFilterTypeAO: 0
     m_PVRFilteringMode: 1
     m_PVRCulling: 1
     m_PVRFilteringGaussRadiusDirect: 1
     m_PVRFilteringGaussRadiusIndirect: 5
     m_PVRFilteringGaussRadiusAO: 2
-    m_PVRFilteringAtrousColorSigma: 1
-    m_PVRFilteringAtrousNormalSigma: 1
-    m_PVRFilteringAtrousPositionSigma: 1
+    m_PVRFilteringAtrousPositionSigmaDirect: 0.5
+    m_PVRFilteringAtrousPositionSigmaIndirect: 2
+    m_PVRFilteringAtrousPositionSigmaAO: 1
   m_LightingDataAsset: {fileID: 0}
   m_UseShadowmask: 1
 --- !u!196 &4
@@ -107,6 +109,8 @@ NavMeshSettings:
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
+    debug:
+      m_Flags: 0
   m_NavMeshData: {fileID: 0}
 --- !u!1 &628798
 GameObject:
@@ -229,8 +233,10 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
+  DnD_DropOnAlreadyOccupiedTargets: 0
   DnD_attached: 0
   DnD_Targets: []
+  dragAndDropManager: {fileID: 0}
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
 --- !u!54 &22504289
@@ -788,8 +794,10 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
+  DnD_DropOnAlreadyOccupiedTargets: 0
   DnD_attached: 0
   DnD_Targets: []
+  dragAndDropManager: {fileID: 0}
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
 --- !u!54 &86907242
@@ -850,6 +858,7 @@ SpriteRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -865,6 +874,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -1156,7 +1166,7 @@ MonoBehaviour:
     grabStateLeftIndex: 0
     grabStateRightIndex: 0
   customConditions: []
-  triggerStateIndex: 1
+  triggerStateIndex: 0
   delayDuration: 0
   delayed: 0
   isDelayRandom: 0
@@ -1304,7 +1314,7 @@ MonoBehaviour:
   loopAnimType: 0000000000000000000000000000000000000000
   animationSequence: 0000000000000000000000000000000000000000
   targetAudioSource: {fileID: 0}
-  activeTriggerStatesAudio: 0000000000
+  activeTriggerStatesAudio: 0100000000
   audioClips:
     ClipEntries00: []
     ClipEntries01: []
@@ -1751,7 +1761,7 @@ MonoBehaviour:
     grabStateLeftIndex: 0
     grabStateRightIndex: 0
   customConditions: []
-  triggerStateIndex: 1
+  triggerStateIndex: 0
   delayDuration: 0
   delayed: 0
   isDelayRandom: 0
@@ -1899,7 +1909,7 @@ MonoBehaviour:
   loopAnimType: 0000000000000000000000000000000000000000
   animationSequence: 0000000000000000000000000000000000000000
   targetAudioSource: {fileID: 0}
-  activeTriggerStatesAudio: 0000000000
+  activeTriggerStatesAudio: 0100000000
   audioClips:
     ClipEntries00: []
     ClipEntries01: []
@@ -2042,6 +2052,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -2057,6 +2068,7 @@ MeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -2083,7 +2095,7 @@ GameObject:
   - component: {fileID: 193337680}
   - component: {fileID: 193337679}
   - component: {fileID: 193337678}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Proximity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2154,7 +2166,7 @@ GameObject:
   - component: {fileID: 205990735}
   - component: {fileID: 205990734}
   - component: {fileID: 205990733}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Proximity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2353,8 +2365,10 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
+  DnD_DropOnAlreadyOccupiedTargets: 0
   DnD_attached: 0
   DnD_Targets: []
+  dragAndDropManager: {fileID: 0}
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
 --- !u!54 &217761378
@@ -2514,7 +2528,7 @@ GameObject:
   - component: {fileID: 239614910}
   - component: {fileID: 239614909}
   - component: {fileID: 239614908}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Proximity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2612,6 +2626,7 @@ SpriteRenderer:
   m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -2627,6 +2642,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -2685,7 +2701,7 @@ GameObject:
   - component: {fileID: 254463236}
   - component: {fileID: 254463235}
   - component: {fileID: 254463234}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Proximity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2783,6 +2799,7 @@ SpriteRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -2798,6 +2815,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -2894,8 +2912,10 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
+  DnD_DropOnAlreadyOccupiedTargets: 0
   DnD_attached: 0
   DnD_Targets: []
+  dragAndDropManager: {fileID: 0}
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
 --- !u!54 &264245639
@@ -3256,8 +3276,10 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
+  DnD_DropOnAlreadyOccupiedTargets: 0
   DnD_attached: 0
   DnD_Targets: []
+  dragAndDropManager: {fileID: 0}
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
 --- !u!4 &345870379
@@ -3534,6 +3556,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -3549,6 +3572,7 @@ MeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -3619,7 +3643,7 @@ MonoBehaviour:
     grabStateLeftIndex: 0
     grabStateRightIndex: 0
   customConditions: []
-  triggerStateIndex: 1
+  triggerStateIndex: 0
   delayDuration: 0
   delayed: 0
   isDelayRandom: 0
@@ -3767,7 +3791,7 @@ MonoBehaviour:
   loopAnimType: 0000000000000000000000000000000000000000
   animationSequence: 0000000000000000000000000000000000000000
   targetAudioSource: {fileID: 0}
-  activeTriggerStatesAudio: 0000000000
+  activeTriggerStatesAudio: 0100000000
   audioClips:
     ClipEntries00: []
     ClipEntries01: []
@@ -4147,6 +4171,7 @@ SpriteRenderer:
   m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -4162,6 +4187,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -4288,7 +4314,7 @@ MonoBehaviour:
     grabStateLeftIndex: 0
     grabStateRightIndex: 0
   customConditions: []
-  triggerStateIndex: 1
+  triggerStateIndex: 0
   delayDuration: 0
   delayed: 0
   isDelayRandom: 0
@@ -4436,7 +4462,7 @@ MonoBehaviour:
   loopAnimType: 0000000000000000000000000000000000000000
   animationSequence: 0000000000000000000000000000000000000000
   targetAudioSource: {fileID: 0}
-  activeTriggerStatesAudio: 0000000000
+  activeTriggerStatesAudio: 0100000000
   audioClips:
     ClipEntries00: []
     ClipEntries01: []
@@ -4661,8 +4687,10 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
+  DnD_DropOnAlreadyOccupiedTargets: 0
   DnD_attached: 0
   DnD_Targets: []
+  dragAndDropManager: {fileID: 0}
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
 --- !u!54 &474410878
@@ -4788,6 +4816,7 @@ SpriteRenderer:
   m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -4803,6 +4832,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -5062,6 +5092,7 @@ SkinnedMeshRenderer:
   m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -5077,6 +5108,7 @@ SkinnedMeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -5229,8 +5261,10 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
+  DnD_DropOnAlreadyOccupiedTargets: 0
   DnD_attached: 0
   DnD_Targets: []
+  dragAndDropManager: {fileID: 0}
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
 --- !u!54 &549426144
@@ -5955,6 +5989,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -5970,6 +6005,7 @@ MeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -6533,7 +6569,7 @@ GameObject:
   - component: {fileID: 681757230}
   - component: {fileID: 681757229}
   - component: {fileID: 681757228}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Proximity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6652,7 +6688,7 @@ GameObject:
   - component: {fileID: 685867757}
   - component: {fileID: 685867756}
   - component: {fileID: 685867755}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Proximity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7110,7 +7146,7 @@ GameObject:
   - component: {fileID: 745298617}
   - component: {fileID: 745298616}
   - component: {fileID: 745298615}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Proximity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7223,6 +7259,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -7238,6 +7275,7 @@ MeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -7305,6 +7343,7 @@ MonoBehaviour:
   chargeDuration: 0.1
   attractionForce: 3
   levitatingObjectAttractingSpeed: 5
+  TimePressingToReachMaxSpeed: 1
   closestDistance: 1
   beamSplineSmoothness: 0.1
   beamSoundClip: {fileID: 0}
@@ -7326,6 +7365,8 @@ MonoBehaviour:
   dropReadyFeedbackDuration: 0.3
   active: 1
   debug: 0
+  OriginParticlesPrefab: {fileID: 0}
+  EndPointPrefab: {fileID: 0}
 --- !u!114 &755873610
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7337,29 +7378,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d1bf5f274029124898ba5975f1ca219, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gyroPrefab: {fileID: 1903499341379776, guid: 934a3c1822b00914ebc0ca1e4fa1a92b, type: 2}
+  HoldTimeToAppear: 0.2
+  GyroPrefab: {fileID: 1903499341379776, guid: 934a3c1822b00914ebc0ca1e4fa1a92b, type: 2}
   OrientOnTeleport: 1
-  inputThreshold: 0.5
-  teleportLayer:
+  InptuThreshold: 0.5
+  AllowedLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  transition: 0
-  fadeMat: {fileID: 0}
-  fadeDuration: 0.5
-  gravity: 9
-  initialVelMagnitude: 10
-  timeStep: 0.1
-  maxDistance: 5
-  dashSpeed: 20
-  teleportCooldown: 1
-  matScale: 5
-  texMovementSpeed: {x: -0.1, y: 0}
-  goodSpotCol: {r: 0, g: 0.6, b: 1, a: 0.2}
-  badSpotCol: {r: 0.8, g: 0, b: 0, a: 0.2}
-  gyroColor: {r: 0, g: 0.6, b: 1, a: 0.2}
-  gyroUI: {fileID: 1903499341379776, guid: 934a3c1822b00914ebc0ca1e4fa1a92b, type: 2}
-  arcLineWidth: 0.05
-  arcMaterial: {fileID: 2100000, guid: 74b35de85a4816e4d8533b9b2c8a5f47, type: 2}
+  MaxTeleportDistance: 5
+  MaxSlope: 10
+  Cooldown: 1
+  MatScale: 5
+  GoodDestinationColor: {r: 0, g: 0.6, b: 1, a: 0.2}
+  BadDestinationColor: {r: 0.8, g: 0, b: 0, a: 0.2}
+  GyroUI: {fileID: 0}
+  LineWidth: 0.01
+  LineMaterial: {fileID: 2100000, guid: 74b35de85a4816e4d8533b9b2c8a5f47, type: 2}
+  HotSpots: []
+  MinHotspotDistance: 1
+  debug: 0
 --- !u!95 &755873611
 Animator:
   serializedVersion: 3
@@ -7436,8 +7473,10 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
+  DnD_DropOnAlreadyOccupiedTargets: 0
   DnD_attached: 0
   DnD_Targets: []
+  dragAndDropManager: {fileID: 0}
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
 --- !u!1 &762501094
@@ -7451,7 +7490,7 @@ GameObject:
   - component: {fileID: 762501098}
   - component: {fileID: 762501097}
   - component: {fileID: 762501096}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Proximity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7711,7 +7750,7 @@ MonoBehaviour:
     grabStateLeftIndex: 0
     grabStateRightIndex: 0
   customConditions: []
-  triggerStateIndex: 1
+  triggerStateIndex: 0
   delayDuration: 0
   delayed: 0
   isDelayRandom: 0
@@ -7859,7 +7898,7 @@ MonoBehaviour:
   loopAnimType: 0000000000000000000000000000000000000000
   animationSequence: 0000000000000000000000000000000000000000
   targetAudioSource: {fileID: 0}
-  activeTriggerStatesAudio: 0000000000
+  activeTriggerStatesAudio: 0100000000
   audioClips:
     ClipEntries00: []
     ClipEntries01: []
@@ -8259,7 +8298,7 @@ GameObject:
   - component: {fileID: 818103050}
   - component: {fileID: 818103049}
   - component: {fileID: 818103048}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Proximity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8565,8 +8604,10 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
+  DnD_DropOnAlreadyOccupiedTargets: 0
   DnD_attached: 0
   DnD_Targets: []
+  dragAndDropManager: {fileID: 0}
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
 --- !u!54 &858839174
@@ -8681,6 +8722,7 @@ MonoBehaviour:
   chargeDuration: 0.1
   attractionForce: 3
   levitatingObjectAttractingSpeed: 5
+  TimePressingToReachMaxSpeed: 1
   closestDistance: 1
   beamSplineSmoothness: 0.1
   beamSoundClip: {fileID: 0}
@@ -8702,6 +8744,8 @@ MonoBehaviour:
   dropReadyFeedbackDuration: 0.3
   active: 1
   debug: 0
+  OriginParticlesPrefab: {fileID: 0}
+  EndPointPrefab: {fileID: 0}
 --- !u!114 &865415512
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8713,29 +8757,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d1bf5f274029124898ba5975f1ca219, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gyroPrefab: {fileID: 1903499341379776, guid: 934a3c1822b00914ebc0ca1e4fa1a92b, type: 2}
+  HoldTimeToAppear: 0.2
+  GyroPrefab: {fileID: 1903499341379776, guid: 934a3c1822b00914ebc0ca1e4fa1a92b, type: 2}
   OrientOnTeleport: 1
-  inputThreshold: 0.5
-  teleportLayer:
+  InptuThreshold: 0.5
+  AllowedLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  transition: 0
-  fadeMat: {fileID: 0}
-  fadeDuration: 0.5
-  gravity: 9
-  initialVelMagnitude: 10
-  timeStep: 0.1
-  maxDistance: 5
-  dashSpeed: 20
-  teleportCooldown: 1
-  matScale: 5
-  texMovementSpeed: {x: -0.1, y: 0}
-  goodSpotCol: {r: 0, g: 0.6, b: 1, a: 0.2}
-  badSpotCol: {r: 0.8, g: 0, b: 0, a: 0.2}
-  gyroColor: {r: 0, g: 0.6, b: 1, a: 0.2}
-  gyroUI: {fileID: 1903499341379776, guid: 934a3c1822b00914ebc0ca1e4fa1a92b, type: 2}
-  arcLineWidth: 0.002
-  arcMaterial: {fileID: 2100000, guid: 74b35de85a4816e4d8533b9b2c8a5f47, type: 2}
+  MaxTeleportDistance: 5
+  MaxSlope: 10
+  Cooldown: 1
+  MatScale: 5
+  GoodDestinationColor: {r: 0, g: 0.6, b: 1, a: 0.2}
+  BadDestinationColor: {r: 0.8, g: 0, b: 0, a: 0.2}
+  GyroUI: {fileID: 0}
+  LineWidth: 0.01
+  LineMaterial: {fileID: 2100000, guid: 74b35de85a4816e4d8533b9b2c8a5f47, type: 2}
+  HotSpots: []
+  MinHotspotDistance: 1
+  debug: 0
 --- !u!95 &865415513
 Animator:
   serializedVersion: 3
@@ -8812,8 +8852,10 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
+  DnD_DropOnAlreadyOccupiedTargets: 0
   DnD_attached: 0
   DnD_Targets: []
+  dragAndDropManager: {fileID: 0}
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
 --- !u!1 &874376587
@@ -9032,8 +9074,10 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
+  DnD_DropOnAlreadyOccupiedTargets: 0
   DnD_attached: 0
   DnD_Targets: []
+  dragAndDropManager: {fileID: 0}
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
 --- !u!54 &903777293
@@ -9166,7 +9210,7 @@ MonoBehaviour:
     grabStateLeftIndex: 0
     grabStateRightIndex: 0
   customConditions: []
-  triggerStateIndex: 1
+  triggerStateIndex: 0
   delayDuration: 0
   delayed: 0
   isDelayRandom: 0
@@ -9314,7 +9358,7 @@ MonoBehaviour:
   loopAnimType: 0000000000000000000000000000000000000000
   animationSequence: 0000000000000000000000000000000000000000
   targetAudioSource: {fileID: 0}
-  activeTriggerStatesAudio: 0000000000
+  activeTriggerStatesAudio: 0100000000
   audioClips:
     ClipEntries00: []
     ClipEntries01: []
@@ -9646,6 +9690,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -9661,6 +9706,7 @@ MeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -9760,7 +9806,7 @@ MonoBehaviour:
     grabStateLeftIndex: 0
     grabStateRightIndex: 0
   customConditions: []
-  triggerStateIndex: 1
+  triggerStateIndex: 0
   delayDuration: 0
   delayed: 0
   isDelayRandom: 0
@@ -9908,7 +9954,7 @@ MonoBehaviour:
   loopAnimType: 0000000000000000000000000000000000000000
   animationSequence: 0000000000000000000000000000000000000000
   targetAudioSource: {fileID: 0}
-  activeTriggerStatesAudio: 0000000000
+  activeTriggerStatesAudio: 0100000000
   audioClips:
     ClipEntries00: []
     ClipEntries01: []
@@ -10052,7 +10098,7 @@ GameObject:
   - component: {fileID: 971165954}
   - component: {fileID: 971165953}
   - component: {fileID: 971165952}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Proximity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10208,6 +10254,7 @@ SpriteRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -10223,6 +10270,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -10296,7 +10344,7 @@ MonoBehaviour:
     grabStateLeftIndex: 0
     grabStateRightIndex: 0
   customConditions: []
-  triggerStateIndex: 1
+  triggerStateIndex: 0
   delayDuration: 0
   delayed: 0
   isDelayRandom: 0
@@ -10444,7 +10492,7 @@ MonoBehaviour:
   loopAnimType: 0000000000000000000000000000000000000000
   animationSequence: 0000000000000000000000000000000000000000
   targetAudioSource: {fileID: 0}
-  activeTriggerStatesAudio: 0000000000
+  activeTriggerStatesAudio: 0100000000
   audioClips:
     ClipEntries00: []
     ClipEntries01: []
@@ -10698,7 +10746,7 @@ GameObject:
   - component: {fileID: 1035335200}
   - component: {fileID: 1035335199}
   - component: {fileID: 1035335198}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Proximity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10974,6 +11022,7 @@ SkinnedMeshRenderer:
   m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -10989,6 +11038,7 @@ SkinnedMeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -11155,6 +11205,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8170862739ecdb04392511ce00051beb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  NeedsToUpdate: 0
 --- !u!1 &1089601424
 GameObject:
   m_ObjectHideFlags: 0
@@ -11248,6 +11299,7 @@ SpriteRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -11263,6 +11315,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -11486,6 +11539,7 @@ SpriteRenderer:
   m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -11501,6 +11555,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -11641,6 +11696,7 @@ SpriteRenderer:
   m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -11656,6 +11712,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -11685,7 +11742,7 @@ GameObject:
   - component: {fileID: 1123302701}
   - component: {fileID: 1123302700}
   - component: {fileID: 1123302699}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Proximity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12201,8 +12258,9 @@ MonoBehaviour:
   laserMaterial: {fileID: 2100000, guid: 7f2e8837045243d479fc5e62960598b3, type: 2}
   debug: 0
   interactableIO: {fileID: 0}
+  updateInterval: 0.2
   grabPosition: {fileID: 1543578993}
-  hitsIOs: []
+  HitsIos: []
   DefaultDistantGrabRayLength: 1.8
   InteractableDistantGrabFeedback: {fileID: 1503136186778810, guid: 587a0b201c007ef4ca1e4c5659614fb3,
     type: 2}
@@ -12220,6 +12278,7 @@ LineRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
   m_MotionVectors: 0
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
@@ -12235,6 +12294,7 @@ LineRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -12245,7 +12305,7 @@ LineRenderer:
   m_SortingOrder: 0
   m_Positions:
   - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 1}
+  - {x: 0, y: 0, z: 0}
   m_Parameters:
     serializedVersion: 2
     widthMultiplier: 1
@@ -12349,6 +12409,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -12364,6 +12425,7 @@ MeshRenderer:
   m_PreserveUVs: 1
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -12643,8 +12705,10 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
+  DnD_DropOnAlreadyOccupiedTargets: 0
   DnD_attached: 0
   DnD_Targets: []
+  dragAndDropManager: {fileID: 0}
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
 --- !u!1 &1256938981
@@ -12742,6 +12806,7 @@ SpriteRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -12757,6 +12822,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -12853,8 +12919,10 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
+  DnD_DropOnAlreadyOccupiedTargets: 0
   DnD_attached: 0
   DnD_Targets: []
+  dragAndDropManager: {fileID: 0}
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
 --- !u!54 &1273045697
@@ -13299,7 +13367,7 @@ MonoBehaviour:
   loopAnimType: 0000000000000000000000000000000000000000
   animationSequence: 0000000000000000000000000000000000000000
   targetAudioSource: {fileID: 0}
-  activeTriggerStatesAudio: 0000000000
+  activeTriggerStatesAudio: 0100000000
   audioClips:
     ClipEntries00: []
     ClipEntries01: []
@@ -13414,7 +13482,7 @@ MonoBehaviour:
     grabStateLeftIndex: 0
     grabStateRightIndex: 0
   customConditions: []
-  triggerStateIndex: 1
+  triggerStateIndex: 0
   delayDuration: 0
   delayed: 0
   isDelayRandom: 0
@@ -13662,20 +13730,6 @@ Light:
   m_Lightmapping: 4
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
-  m_FalloffTable:
-    m_Table[0]: 0
-    m_Table[1]: 0
-    m_Table[2]: 0
-    m_Table[3]: 0
-    m_Table[4]: 0
-    m_Table[5]: 0
-    m_Table[6]: 0
-    m_Table[7]: 0
-    m_Table[8]: 0
-    m_Table[9]: 0
-    m_Table[10]: 0
-    m_Table[11]: 0
-    m_Table[12]: 0
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
@@ -13857,7 +13911,7 @@ MonoBehaviour:
     grabStateLeftIndex: 0
     grabStateRightIndex: 0
   customConditions: []
-  triggerStateIndex: 1
+  triggerStateIndex: 0
   delayDuration: 0
   delayed: 0
   isDelayRandom: 0
@@ -14005,7 +14059,7 @@ MonoBehaviour:
   loopAnimType: 0000000000000000000000000000000000000000
   animationSequence: 0000000000000000000000000000000000000000
   targetAudioSource: {fileID: 0}
-  activeTriggerStatesAudio: 0000000000
+  activeTriggerStatesAudio: 0100000000
   audioClips:
     ClipEntries00: []
     ClipEntries01: []
@@ -14230,6 +14284,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -14245,6 +14300,7 @@ MeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -14399,7 +14455,7 @@ GameObject:
   - component: {fileID: 1417842712}
   - component: {fileID: 1417842711}
   - component: {fileID: 1417842710}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Proximity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14654,6 +14710,7 @@ LineRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
   m_MotionVectors: 0
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
@@ -14669,6 +14726,7 @@ LineRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -14679,7 +14737,7 @@ LineRenderer:
   m_SortingOrder: 0
   m_Positions:
   - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 1}
+  - {x: 0, y: 0, z: 0}
   m_Parameters:
     serializedVersion: 2
     widthMultiplier: 1
@@ -14752,8 +14810,9 @@ MonoBehaviour:
   laserMaterial: {fileID: 2100000, guid: 7f2e8837045243d479fc5e62960598b3, type: 2}
   debug: 0
   interactableIO: {fileID: 0}
+  updateInterval: 0.2
   grabPosition: {fileID: 1543578993}
-  hitsIOs: []
+  HitsIos: []
   DefaultDistantGrabRayLength: 1.8
   InteractableDistantGrabFeedback: {fileID: 1503136186778810, guid: 587a0b201c007ef4ca1e4c5659614fb3,
     type: 2}
@@ -14895,6 +14954,7 @@ SpriteRenderer:
   m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -14910,6 +14970,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -14967,6 +15028,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -14982,6 +15044,7 @@ MeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -15408,6 +15471,7 @@ SpriteRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -15423,6 +15487,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -15591,8 +15656,10 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
+  DnD_DropOnAlreadyOccupiedTargets: 0
   DnD_attached: 0
   DnD_Targets: []
+  dragAndDropManager: {fileID: 0}
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
 --- !u!54 &1530059387
@@ -15705,8 +15772,10 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
+  DnD_DropOnAlreadyOccupiedTargets: 0
   DnD_attached: 0
   DnD_Targets: []
+  dragAndDropManager: {fileID: 0}
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
 --- !u!54 &1533759096
@@ -15846,9 +15915,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InteractiveObjectScripts:
-  - {fileID: 865415515}
-  - {fileID: 755873613}
-  - {fileID: 1244773425}
   - {fileID: 22504288}
   - {fileID: 86907240}
   - {fileID: 217761376}
@@ -15856,8 +15922,11 @@ MonoBehaviour:
   - {fileID: 345870378}
   - {fileID: 474410877}
   - {fileID: 549426142}
+  - {fileID: 755873613}
   - {fileID: 858839172}
+  - {fileID: 865415515}
   - {fileID: 903777291}
+  - {fileID: 1244773425}
   - {fileID: 1273045696}
   - {fileID: 1530059386}
   - {fileID: 1533759095}
@@ -15868,9 +15937,6 @@ MonoBehaviour:
   - {fileID: 2044052188}
   - {fileID: 2111305143}
   InteractiveObjects:
-  - {fileID: 865415509}
-  - {fileID: 755873607}
-  - {fileID: 1244773420}
   - {fileID: 22504286}
   - {fileID: 86907238}
   - {fileID: 217761374}
@@ -15878,8 +15944,11 @@ MonoBehaviour:
   - {fileID: 345870375}
   - {fileID: 474410875}
   - {fileID: 549426140}
+  - {fileID: 755873607}
   - {fileID: 858839170}
+  - {fileID: 865415509}
   - {fileID: 903777289}
+  - {fileID: 1244773420}
   - {fileID: 1273045694}
   - {fileID: 1530059384}
   - {fileID: 1533759093}
@@ -15923,6 +15992,7 @@ MonoBehaviour:
   hapticAudioClipMax: {fileID: 8300000, guid: 3ed1c666e428a0d4581f4370d0e15cba, type: 3}
   padTouchDirectionThreshold: 0.5
   debug: 0
+  updateInterval: 0.2
   UnpluggedControllerMessage: {fileID: 1093226870}
   FixedLeftPosition: {fileID: 0}
   FixedRightPosition: {fileID: 0}
@@ -16119,6 +16189,7 @@ SpriteRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -16134,6 +16205,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -16588,6 +16660,7 @@ SpriteRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -16603,6 +16676,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -16730,7 +16804,7 @@ MonoBehaviour:
     grabStateLeftIndex: 0
     grabStateRightIndex: 0
   customConditions: []
-  triggerStateIndex: 1
+  triggerStateIndex: 0
   delayDuration: 0
   delayed: 0
   isDelayRandom: 0
@@ -16882,7 +16956,7 @@ MonoBehaviour:
   loopAnimType: 0000000000000000000000000000000000000000
   animationSequence: 0000000000000000000000000000000000000000
   targetAudioSource: {fileID: 0}
-  activeTriggerStatesAudio: 0000000000
+  activeTriggerStatesAudio: 0100000000
   audioClips:
     ClipEntries00: []
     ClipEntries01: []
@@ -17041,7 +17115,7 @@ MonoBehaviour:
     grabStateLeftIndex: 0
     grabStateRightIndex: 0
   customConditions: []
-  triggerStateIndex: 1
+  triggerStateIndex: 0
   delayDuration: 0
   delayed: 0
   isDelayRandom: 0
@@ -17189,7 +17263,7 @@ MonoBehaviour:
   loopAnimType: 0000000000000000000000000000000000000000
   animationSequence: 0000000000000000000000000000000000000000
   targetAudioSource: {fileID: 0}
-  activeTriggerStatesAudio: 0000000000
+  activeTriggerStatesAudio: 0100000000
   audioClips:
     ClipEntries00: []
     ClipEntries01: []
@@ -17684,7 +17758,7 @@ GameObject:
   - component: {fileID: 1685087471}
   - component: {fileID: 1685087470}
   - component: {fileID: 1685087469}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Proximity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17756,7 +17830,7 @@ GameObject:
   - component: {fileID: 1688690909}
   - component: {fileID: 1688690908}
   - component: {fileID: 1688690907}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Proximity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17955,7 +18029,7 @@ MonoBehaviour:
     grabStateLeftIndex: 0
     grabStateRightIndex: 0
   customConditions: []
-  triggerStateIndex: 1
+  triggerStateIndex: 0
   delayDuration: 0
   delayed: 0
   isDelayRandom: 0
@@ -18103,7 +18177,7 @@ MonoBehaviour:
   loopAnimType: 0000000000000000000000000000000000000000
   animationSequence: 0000000000000000000000000000000000000000
   targetAudioSource: {fileID: 0}
-  activeTriggerStatesAudio: 0000000000
+  activeTriggerStatesAudio: 0100000000
   audioClips:
     ClipEntries00: []
     ClipEntries01: []
@@ -18218,7 +18292,7 @@ GameObject:
   - component: {fileID: 1702289668}
   - component: {fileID: 1702289667}
   - component: {fileID: 1702289666}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Proximity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18358,6 +18432,7 @@ SpriteRenderer:
   m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -18373,6 +18448,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -18402,7 +18478,7 @@ GameObject:
   - component: {fileID: 1717789129}
   - component: {fileID: 1717789128}
   - component: {fileID: 1717789127}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Proximity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18622,8 +18698,10 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
+  DnD_DropOnAlreadyOccupiedTargets: 0
   DnD_attached: 0
   DnD_Targets: []
+  dragAndDropManager: {fileID: 0}
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
 --- !u!54 &1726659156
@@ -18958,7 +19036,7 @@ MonoBehaviour:
     grabStateLeftIndex: 0
     grabStateRightIndex: 0
   customConditions: []
-  triggerStateIndex: 1
+  triggerStateIndex: 0
   delayDuration: 0
   delayed: 0
   isDelayRandom: 0
@@ -19106,7 +19184,7 @@ MonoBehaviour:
   loopAnimType: 0000000000000000000000000000000000000000
   animationSequence: 0000000000000000000000000000000000000000
   targetAudioSource: {fileID: 0}
-  activeTriggerStatesAudio: 0000000000
+  activeTriggerStatesAudio: 0100000000
   audioClips:
     ClipEntries00: []
     ClipEntries01: []
@@ -19638,7 +19716,7 @@ MonoBehaviour:
     grabStateLeftIndex: 0
     grabStateRightIndex: 0
   customConditions: []
-  triggerStateIndex: 1
+  triggerStateIndex: 0
   delayDuration: 0
   delayed: 0
   isDelayRandom: 0
@@ -19786,7 +19864,7 @@ MonoBehaviour:
   loopAnimType: 0000000000000000000000000000000000000000
   animationSequence: 0000000000000000000000000000000000000000
   targetAudioSource: {fileID: 0}
-  activeTriggerStatesAudio: 0000000000
+  activeTriggerStatesAudio: 0100000000
   audioClips:
     ClipEntries00: []
     ClipEntries01: []
@@ -19945,7 +20023,7 @@ MonoBehaviour:
     grabStateLeftIndex: 0
     grabStateRightIndex: 0
   customConditions: []
-  triggerStateIndex: 1
+  triggerStateIndex: 0
   delayDuration: 0
   delayed: 0
   isDelayRandom: 0
@@ -20093,7 +20171,7 @@ MonoBehaviour:
   loopAnimType: 0000000000000000000000000000000000000000
   animationSequence: 0000000000000000000000000000000000000000
   targetAudioSource: {fileID: 0}
-  activeTriggerStatesAudio: 0000000000
+  activeTriggerStatesAudio: 0100000000
   audioClips:
     ClipEntries00: []
     ClipEntries01: []
@@ -20331,6 +20409,7 @@ SpriteRenderer:
   m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -20346,6 +20425,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -21074,7 +21154,7 @@ GameObject:
   - component: {fileID: 1859276780}
   - component: {fileID: 1859276779}
   - component: {fileID: 1859276778}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Proximity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21212,8 +21292,10 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
+  DnD_DropOnAlreadyOccupiedTargets: 0
   DnD_attached: 0
   DnD_Targets: []
+  dragAndDropManager: {fileID: 0}
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
 --- !u!54 &1860826627
@@ -21559,8 +21641,10 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
+  DnD_DropOnAlreadyOccupiedTargets: 0
   DnD_attached: 0
   DnD_Targets: []
+  dragAndDropManager: {fileID: 0}
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
 --- !u!54 &1867720267
@@ -22019,6 +22103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8170862739ecdb04392511ce00051beb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  NeedsToUpdate: 0
 --- !u!1 &1904361965
 GameObject:
   m_ObjectHideFlags: 0
@@ -22074,7 +22159,7 @@ MonoBehaviour:
     grabStateLeftIndex: 0
     grabStateRightIndex: 0
   customConditions: []
-  triggerStateIndex: 1
+  triggerStateIndex: 0
   delayDuration: 0
   delayed: 0
   isDelayRandom: 0
@@ -22222,7 +22307,7 @@ MonoBehaviour:
   loopAnimType: 0000000000000000000000000000000000000000
   animationSequence: 0000000000000000000000000000000000000000
   targetAudioSource: {fileID: 0}
-  activeTriggerStatesAudio: 0000000000
+  activeTriggerStatesAudio: 0100000000
   audioClips:
     ClipEntries00: []
     ClipEntries01: []
@@ -22394,7 +22479,7 @@ MonoBehaviour:
     grabStateLeftIndex: 0
     grabStateRightIndex: 0
   customConditions: []
-  triggerStateIndex: 1
+  triggerStateIndex: 0
   delayDuration: 0
   delayed: 0
   isDelayRandom: 0
@@ -22542,7 +22627,7 @@ MonoBehaviour:
   loopAnimType: 0000000000000000000000000000000000000000
   animationSequence: 0000000000000000000000000000000000000000
   targetAudioSource: {fileID: 0}
-  activeTriggerStatesAudio: 0000000000
+  activeTriggerStatesAudio: 0100000000
   audioClips:
     ClipEntries00: []
     ClipEntries01: []
@@ -22771,7 +22856,7 @@ MonoBehaviour:
     grabStateLeftIndex: 0
     grabStateRightIndex: 0
   customConditions: []
-  triggerStateIndex: 1
+  triggerStateIndex: 0
   delayDuration: 0
   delayed: 0
   isDelayRandom: 0
@@ -22919,7 +23004,7 @@ MonoBehaviour:
   loopAnimType: 0000000000000000000000000000000000000000
   animationSequence: 0000000000000000000000000000000000000000
   targetAudioSource: {fileID: 0}
-  activeTriggerStatesAudio: 0000000000
+  activeTriggerStatesAudio: 0100000000
   audioClips:
     ClipEntries00: []
     ClipEntries01: []
@@ -23063,7 +23148,7 @@ GameObject:
   - component: {fileID: 1918525777}
   - component: {fileID: 1918525776}
   - component: {fileID: 1918525775}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Proximity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23364,7 +23449,7 @@ GameObject:
   - component: {fileID: 1954765617}
   - component: {fileID: 1954765616}
   - component: {fileID: 1954765615}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Proximity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23657,6 +23742,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -23672,6 +23758,7 @@ MeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -23818,6 +23905,7 @@ SpriteRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -23833,6 +23921,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -23958,8 +24047,10 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
+  DnD_DropOnAlreadyOccupiedTargets: 0
   DnD_attached: 0
   DnD_Targets: []
+  dragAndDropManager: {fileID: 0}
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
 --- !u!54 &1992424136
@@ -24005,7 +24096,7 @@ GameObject:
   - component: {fileID: 1993172071}
   - component: {fileID: 1993172070}
   - component: {fileID: 1993172069}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Proximity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24335,7 +24426,7 @@ MonoBehaviour:
   loopAnimType: 0000000000000000000000000000000000000000
   animationSequence: 0000000000000000000000000000000000000000
   targetAudioSource: {fileID: 0}
-  activeTriggerStatesAudio: 0000000000
+  activeTriggerStatesAudio: 0100000000
   audioClips:
     ClipEntries00: []
     ClipEntries01: []
@@ -24452,7 +24543,7 @@ MonoBehaviour:
     grabStateLeftIndex: 0
     grabStateRightIndex: 0
   customConditions: []
-  triggerStateIndex: 1
+  triggerStateIndex: 0
   delayDuration: 0
   delayed: 0
   isDelayRandom: 0
@@ -24677,6 +24768,7 @@ SpriteRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -24692,6 +24784,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -24798,8 +24891,10 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
+  DnD_DropOnAlreadyOccupiedTargets: 0
   DnD_attached: 0
   DnD_Targets: []
+  dragAndDropManager: {fileID: 0}
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
 --- !u!4 &2044052189
@@ -25042,7 +25137,7 @@ MonoBehaviour:
     grabStateLeftIndex: 0
     grabStateRightIndex: 0
   customConditions: []
-  triggerStateIndex: 1
+  triggerStateIndex: 0
   delayDuration: 0
   delayed: 0
   isDelayRandom: 0
@@ -25190,7 +25285,7 @@ MonoBehaviour:
   loopAnimType: 0000000000000000000000000000000000000000
   animationSequence: 0000000000000000000000000000000000000000
   targetAudioSource: {fileID: 0}
-  activeTriggerStatesAudio: 0000000000
+  activeTriggerStatesAudio: 0100000000
   audioClips:
     ClipEntries00: []
     ClipEntries01: []
@@ -25451,7 +25546,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
-  m_StereoMirrorMode: 0
 --- !u!1 &2082712390
 GameObject:
   m_ObjectHideFlags: 0
@@ -25587,8 +25681,10 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
+  DnD_DropOnAlreadyOccupiedTargets: 0
   DnD_attached: 0
   DnD_Targets: []
+  dragAndDropManager: {fileID: 0}
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
 --- !u!54 &2111305144
