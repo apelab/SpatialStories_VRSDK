@@ -22,7 +22,7 @@ namespace Gaze
 
         public override void Update()
         {
-            teleporter.CalculateArc();
+            teleporter.ComputeParabola();
         }
 
         private void OnButtonAEvent(Gaze_InputEventArgs e)

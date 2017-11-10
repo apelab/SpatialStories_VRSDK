@@ -31,25 +31,15 @@ using UnityEngine;
 [assembly: InternalsVisibleTo("Gaze_TeleportLogic")]
 public class Gaze_Teleporter : MonoBehaviour
 {
-    #region Members declaration
+    private const int PARABOLA_PRECISION = 450;
 
-    /// <summary>
-    /// If this flag is set to false the user won't be able to teleport
-    /// </summary>
+    #region StaticMembers
     private static bool isteleportAllowed = true;
-    public static bool IsTeleportAllowed
-    {
-        get
-        {
-            return isteleportAllowed;
-        }
-        set
-        {
-            isteleportAllowed = value;
-        }
-    }
+    public static bool IsTeleportAllowed  { get { return isteleportAllowed; } set { isteleportAllowed = value; }}
+    internal static float playerHeightBeforeTeleport;
+    #endregion StaticMembers
 
-
+    #region PublicMembers
     public float HoldTimeToAppear = 0.2f;
     public GameObject GyroPrefab;
     public bool OrientOnTeleport = true;
@@ -67,61 +57,45 @@ public class Gaze_Teleporter : MonoBehaviour
 
     public List<Transform> HotSpots;
     public float MinHotspotDistance = 1f;
+    #endregion PublicMembers
 
-    private Vector3 finalHitLocation = new Vector3();
-    private Vector3 finalHitNormal = new Vector3();
+    #region InternalMembers
     internal GameObject gyroInstance;
     internal Vector3 gyroUIOriginalAngles;
     internal float angle;
     internal Transform lastParent;
     internal bool transitioning;
     internal LineRenderer _lineRenderer;
-    internal Quaternion _roomRotation;
-    internal Vector3 _roomPosition;
     internal Vector3 _destinationNormal;
-    internal Vector2 oldTrackpadAxis = Vector2.zero;
     internal float lastTeleportTime;
     internal bool _goodSpot;
     internal bool teleportActive;
     internal Ray ray;
     internal RaycastHit[] hits;
-    internal static float playerHeightBeforeTeleport;
     internal GameObject cameraRigIO, cam;
-    internal Vector3 gyroLocalEulerAngles;
     internal float axisValue;
     internal Transform teleportOrigin;
     internal Gaze_TeleportLogic actualTeleportLogic = null;
     internal Collider[] CameraColliders;
+    #endregion InternalMembers
 
-    public new bool enabled
-    {
-        set
-        {
-            base.enabled = value;
-        }
-        get
-        {
-            return base.enabled;
-        }
-    }
-
+    #region PrivateMembers
+    private Vector3 finalHitLocation = new Vector3();
+    private Vector3 finalHitNormal = new Vector3();
     private float timeHoldingButton = 0;
-
     private Gaze_TeleportEventArgs gaze_TeleportEventArgs;
-
     // stores the current TeleportMode while teleport is enables
     private Gaze_TeleportMode lastTeleportMode;
-    #endregion
+    #endregion PrivateMembers
+
 
     void Awake()
     {
-        // NOTE Hotfix to prevent BaL_PlatformMenu to disable the teleport
         IsTeleportAllowed = true;
     }
 
     void OnEnable()
     {
-
         Gaze_InputManager.OnControlerSetup += OnControlerSetup;
         Gaze_HandsReplacer.OnHandsReplaced += Gaze_HandsReplacer_OnHandsReplaced;
 
@@ -173,7 +147,6 @@ public class Gaze_Teleporter : MonoBehaviour
 
         if (Camera.main == null)
         {
-            Debug.LogError("No camera found !");
             enabled = false;
             return;
         }
@@ -188,14 +161,14 @@ public class Gaze_Teleporter : MonoBehaviour
 
         lastTeleportTime = -Cooldown;
 
-        GameObject arcParentObject = new GameObject("ArcTeleporter");
-        arcParentObject.transform.localScale = cameraRigIO.transform.localScale;
-        GameObject arcLine1 = new GameObject("ArcLine1");
+        GameObject lineParent = new GameObject("Line");
+        lineParent.transform.localScale = cameraRigIO.transform.localScale;
+        GameObject line1 = new GameObject("Line1");
 
-        arcLine1.transform.SetParent(arcParentObject.transform);
-        _lineRenderer = arcLine1.AddComponent<LineRenderer>();
-        GameObject arcLine2 = new GameObject("ArcLine2");
-        arcLine2.transform.SetParent(arcParentObject.transform);
+        line1.transform.SetParent(lineParent.transform);
+        _lineRenderer = line1.AddComponent<LineRenderer>();
+        GameObject line2 = new GameObject("Line2");
+        line2.transform.SetParent(lineParent.transform);
         _lineRenderer.startWidth = LineWidth * cameraRigIO.transform.localScale.magnitude;
         _lineRenderer.endWidth = LineWidth * cameraRigIO.transform.localScale.magnitude;
         _lineRenderer.material = LineMaterial;
@@ -266,10 +239,6 @@ public class Gaze_Teleporter : MonoBehaviour
             gyroInstance.transform.Find("GyroSpriteNoRotation").GetComponent<SpriteRenderer>().enabled = true;
     }
 
-    /// <summary>
-    /// Position the gyro UI at the tip of the teleport arc.
-    /// </summary>
-    /// <param name="hit">Hit.</param>
     private void Gyro(Vector3 _pos, Vector3 _normal)
     {
         gyroInstance.transform.position = _pos;
@@ -371,7 +340,7 @@ public class Gaze_Teleporter : MonoBehaviour
         cameraRigIO.transform.rotation = Quaternion.Euler(cameraRigIO.transform.rotation.eulerAngles - new Vector3(0, cam.transform.localRotation.eulerAngles.y, 0));
     }
 
-    internal void CalculateArc()
+    internal void ComputeParabola()
     {
         timeHoldingButton += Time.deltaTime;
 
@@ -410,28 +379,17 @@ public class Gaze_Teleporter : MonoBehaviour
         Vector3 downForward = new Vector3(transform.forward.x * 0.01f, -1, transform.forward.z * 0.01f);
         RaycastHit hit = new RaycastHit();
         finalHitLocation = new Vector3(float.MinValue, float.MinValue, float.MinValue);
-
-        //	Advance arc each iteration looking for a surface or until pointed staight down
-        //	Should never come close to 500 iterations but just as safety to avoid indefinite looping
-        int i = 0;
-        while (i < 500)
+        
+        for(int step = 0; step < PARABOLA_PRECISION; step++)
         {
-            i++;
+            Quaternion downRotation = Quaternion.LookRotation(downForward);
+            currentRotation = Quaternion.RotateTowards(currentRotation, downRotation, 1f);
 
-            //	Rotate the current rotation toward the downForward rotation
-            Quaternion downQuat = Quaternion.LookRotation(downForward);
-            currentRotation = Quaternion.RotateTowards(currentRotation, downQuat, 1f);
-
-            //	Make ray for new direction
             Ray newRay = new Ray(currentPosition, currentPosition - lastPostion);
-            //newRay.origin = currentPosition;
-            //newRay.direction = currentPosition - lastPostion;
 
             float length = (MaxTeleportDistance * 0.01f) * cameraRigIO.transform.localScale.magnitude;
-            if (currentRotation == downQuat)
+            if (currentRotation == downRotation)
             {
-                //We have finished the arc and are facing down
-                //So were going to use the second line renderer and extend the normal length as a last effort to hit something
                 length = (MaxTeleportDistance * MatScale) * cameraRigIO.transform.localScale.magnitude;
                 positions1.Add(currentPosition);
             }
@@ -455,7 +413,6 @@ public class Gaze_Teleporter : MonoBehaviour
 
                 _destinationNormal = finalHitNormal;
 
-                // add rotation at the tip of arc to orient camera when teleport occurs
                 Gyro(finalHitLocation, finalHitNormal);
 
                 break;
@@ -468,9 +425,8 @@ public class Gaze_Teleporter : MonoBehaviour
 
             totalDistance1 += length;
             positions1.Add(currentPosition);
-
-            //	If we're pointing down then we did the whole arc and down without hitting anything so we're done
-            if (currentRotation == downQuat)
+            
+            if (currentRotation == downRotation)
                 break;
         }
 
@@ -528,7 +484,6 @@ public class Gaze_Teleporter : MonoBehaviour
                 return true;
             }
         }
-
         return false;
     }
 

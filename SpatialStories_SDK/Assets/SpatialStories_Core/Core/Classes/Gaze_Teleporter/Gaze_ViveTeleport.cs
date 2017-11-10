@@ -70,7 +70,7 @@ namespace Gaze
             }
 
             if (touchpadDown)
-                teleporter.CalculateArc();
+                teleporter.ComputeParabola();
 
         }
 
