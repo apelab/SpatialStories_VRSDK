@@ -190,27 +190,10 @@ public class Gaze_InputManager : MonoBehaviour
 
     public bool ControllersConnected { get { return controllersConnected; } }
 
-    /*
-    //The max time allowed between double clicks
-    [SerializeField] private float m_DoubleClickTime = 0.3f;
-    //The width of a swipe
-    [SerializeField] private float m_SwipeWidth = 0.3f;
-        
-    // The screen position of the mouse when Fire1 is pressed.
-    private Vector2 m_MouseDownPosition;
-    // The screen position of the mouse when Fire1 is released.
-    private Vector2 m_MouseUpPosition;
-    // The time when Fire1 was last released.
-    private float m_LastMouseUpTime;
-    // The previous value of the horizontal axis used to detect keyboard swipes.
-    private float m_LastHorizontalValue;
-    // The previous value of the vertical axis used to detect keyboard swipes.
-    private float m_LastVerticalValue;
-    */
-
     private GameObject leftHandIO, rightHandIO;
     private AudioClip currentHapticAudioClip;
     private bool controllersConnected;
+    
     // the names of the connected controllers (HTC, Oculus Touch...)
     private string[] controllersNames;
     private bool isHandRightDown = false, isHandLeftDown = false;
@@ -226,9 +209,7 @@ public class Gaze_InputManager : MonoBehaviour
     private OVRHaptics.OVRHapticsChannel m_hapticsChannelR = null;
     private bool isHapticFeedbackActive = false;
     private GameObject[] hapticFeedbackControllers;
-
-
-
+    
     // Input type determination setup
     public delegate void OnSetupController(Gaze_Controllers controllerType);
     private static event OnSetupController setupEvent;
@@ -576,9 +557,6 @@ public class Gaze_InputManager : MonoBehaviour
             }
         }
 
-        // HACK: This works fine with the samsung gear vr but not with 
-        // Oculus or HTC vive, we need to find a better way to generalize that
-        // See task Gaze-477.
         if (SpecialInputLogic != null)
             controllersConnected = SpecialInputLogic.CheckIfControllerConnected();
 
@@ -831,7 +809,7 @@ public class Gaze_InputManager : MonoBehaviour
                 Debug.Log(Gaze_InputConstants.APELAB_INPUT_INDEX_LEFT + Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_INDEX_LEFT));
 
             if (OnIndexLeftEvent != null)
-                OnIndexLeftEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.LeftHand, Gaze_InputTypes.INDEX_RIGHT, Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_INDEX_LEFT)));
+                OnIndexLeftEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.LeftHand, Gaze_InputTypes.INDEX_LEFT, Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_INDEX_LEFT)));
         }
         if (!isIndexLeftDown && Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_INDEX_LEFT) > .8f)
         {

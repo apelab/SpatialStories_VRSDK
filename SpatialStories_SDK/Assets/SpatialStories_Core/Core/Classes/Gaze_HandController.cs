@@ -27,18 +27,44 @@ public class Gaze_HandController : MonoBehaviour
 
     void OnEnable()
     {
-        Gaze_InputManager.OnHandRightDownEvent += OnHandRightDownEvent;
-        Gaze_InputManager.OnHandRightUpEvent += OnHandRightUpEvent;
-        Gaze_InputManager.OnHandLeftDownEvent += OnHandLeftDownEvent;
-        Gaze_InputManager.OnHandLeftUpEvent += OnHandLeftUpEvent;
+        Gaze_InputManager.OnControlerSetup += OnControllerSetup;
+    }
+
+    void OnControllerSetup(Gaze_Controllers _controllerType)
+    {
+        if (_controllerType != Gaze_Controllers.HTC_VIVE)
+        {
+            Gaze_InputManager.OnHandRightDownEvent += OnHandRightDownEvent;
+            Gaze_InputManager.OnHandRightUpEvent += OnHandRightUpEvent;
+            Gaze_InputManager.OnHandLeftDownEvent += OnHandLeftDownEvent;
+            Gaze_InputManager.OnHandLeftUpEvent += OnHandLeftUpEvent;
+        }
+        else
+        {
+            Gaze_InputManager.OnIndexRightEvent += OnIndexRightEvent;
+            Gaze_InputManager.OnIndexRightUpEvent += OnIndexRightUpEvent;
+            Gaze_InputManager.OnIndexLeftEvent += OnIndexLeftEvent;
+            Gaze_InputManager.OnIndexLeftUpEvent += OnIndexLeftUpEvent;
+        }
     }
 
     void OnDisable()
     {
-        Gaze_InputManager.OnHandRightDownEvent -= OnHandRightDownEvent;
-        Gaze_InputManager.OnHandRightUpEvent -= OnHandRightUpEvent;
-        Gaze_InputManager.OnHandLeftDownEvent -= OnHandLeftDownEvent;
-        Gaze_InputManager.OnHandLeftUpEvent -= OnHandLeftUpEvent;
+        Gaze_InputManager.OnControlerSetup -= OnControllerSetup;
+        if (Gaze_InputManager.PluggedControllerType != Gaze_Controllers.HTC_VIVE)
+        {
+            Gaze_InputManager.OnHandRightDownEvent -= OnHandRightDownEvent;
+            Gaze_InputManager.OnHandRightUpEvent -= OnHandRightUpEvent;
+            Gaze_InputManager.OnHandLeftDownEvent -= OnHandLeftDownEvent;
+            Gaze_InputManager.OnHandLeftUpEvent -= OnHandLeftUpEvent;
+        }
+        else
+        {
+            Gaze_InputManager.OnIndexRightEvent -= OnIndexRightEvent;
+            Gaze_InputManager.OnIndexRightUpEvent -= OnIndexRightUpEvent;
+            Gaze_InputManager.OnIndexLeftEvent -= OnIndexLeftEvent;
+            Gaze_InputManager.OnIndexLeftUpEvent -= OnIndexLeftUpEvent;
+        }
     }
 
     void Start()
@@ -46,6 +72,46 @@ public class Gaze_HandController : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
     }
 
+    #region HTC_ANIMATIONS
+    private void OnIndexRightEvent(Gaze_InputEventArgs e)
+    {
+        if (e.VrNode.Equals(UnityEngine.XR.XRNode.RightHand) && !leftHand)
+        {
+            if (e.InputType.Equals(Gaze_InputTypes.INDEX_RIGHT) && animator != null && animator.runtimeAnimatorController != null)
+                animator.SetBool(Gaze_HashIDs.ANIMATOR_PARAMETER_HANDCLOSED, true);
+        }
+    }
+
+    private void OnIndexRightUpEvent(Gaze_InputEventArgs e)
+    {
+        if (e.VrNode.Equals(UnityEngine.XR.XRNode.RightHand) && !leftHand)
+        {
+            if (e.InputType.Equals(Gaze_InputTypes.INDEX_RIGHT_UP) && animator != null && animator.runtimeAnimatorController != null)
+                animator.SetBool(Gaze_HashIDs.ANIMATOR_PARAMETER_HANDCLOSED, false);
+        }
+    }
+
+    private void OnIndexLeftEvent(Gaze_InputEventArgs e)
+    {
+        if (e.VrNode.Equals(UnityEngine.XR.XRNode.LeftHand) && leftHand)
+        {
+            if (e.InputType.Equals(Gaze_InputTypes.INDEX_LEFT) && animator != null)
+                animator.SetBool(Gaze_HashIDs.ANIMATOR_PARAMETER_HANDCLOSED, true);
+        }
+    }
+
+    private void OnIndexLeftUpEvent(Gaze_InputEventArgs e)
+    {
+        if (e.VrNode.Equals(UnityEngine.XR.XRNode.LeftHand) && leftHand)
+        {
+            if (e.InputType.Equals(Gaze_InputTypes.INDEX_LEFT_UP) && animator != null)
+                animator.SetBool(Gaze_HashIDs.ANIMATOR_PARAMETER_HANDCLOSED, false);
+        }
+    }
+
+    #endregion
+
+#region OCULUS_ANIMATIONS
     private void OnHandRightDownEvent(Gaze_InputEventArgs e)
     {
         if (e.VrNode.Equals(UnityEngine.XR.XRNode.RightHand) && !leftHand)
@@ -81,4 +147,5 @@ public class Gaze_HandController : MonoBehaviour
                 animator.SetBool(Gaze_HashIDs.ANIMATOR_PARAMETER_HANDCLOSED, false);
         }
     }
+#endregion
 }

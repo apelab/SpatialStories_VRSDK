@@ -185,9 +185,17 @@ namespace Gaze
                 ConvertInteractiveObject(Selection.activeGameObject);
         }
 
-        [MenuItem("GameObject/SpatialStories/Convert into interactive camera", false, 10)]
+        [MenuItem("GameObject/SpatialStories/Convert into Oculus Rift camera", false, 10)]
         public static void GameObjectConvertIntoCamera(MenuCommand menuCommand)
         {
+            if (Selection.activeGameObject != null && Selection.activeGameObject.GetComponent<Camera>() != null)
+                ConvertInteractiveCamera(Selection.activeGameObject);
+        }
+
+        [MenuItem("GameObject/SpatialStories/Convert into HTC Vive camera", false, 10)]
+        public static void GameObjectConvertIntoHTCVive(MenuCommand menuCommand)
+        {
+            EditorUtility.DisplayDialog("HTC Vive tip", "Remember to place the camera at the same height than your scene's floor", "Understood");
             if (Selection.activeGameObject != null && Selection.activeGameObject.GetComponent<Camera>() != null)
                 ConvertInteractiveCamera(Selection.activeGameObject);
         }
