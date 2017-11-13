@@ -139,7 +139,8 @@ namespace Gaze
             gaze_InteractiveObjectScript.SnapOnGrab = EditorGUILayout.Toggle(new GUIContent("Snap On Grab", "Make the IO snap into a specific position. Uses the Snap Left or Snap Right positions"), gaze_InteractiveObjectScript.SnapOnGrab);
             if (gaze_InteractiveObjectScript.SnapOnGrab)
             {
-                gaze_InteractiveObjectScript.IsManipulable = EditorGUILayout.Toggle("Is Manipulable", gaze_InteractiveObjectScript.IsManipulable);
+                //gaze_InteractiveObjectScript.IsManipulable = EditorGUILayout.Toggle("Is Manipulable", gaze_InteractiveObjectScript.IsManipulable);
+                gaze_InteractiveObjectScript.IsManipulable = false;
             }
             else
             {

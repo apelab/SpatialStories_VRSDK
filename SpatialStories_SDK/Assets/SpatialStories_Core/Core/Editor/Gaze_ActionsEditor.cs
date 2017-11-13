@@ -52,6 +52,7 @@ namespace Gaze
         }
 
         bool ShowOtherAudioOptions = false;
+        bool hasBeenActivate = false;
         public void ShowAudioOptions()
         {
             #region AudioSource
@@ -87,6 +88,11 @@ namespace Gaze
                 #region AudioClips
                 if (actionsScript.ActionAudio == Gaze_Actions.ACTIVABLE_OPTION.ACTIVATE)
                 {
+                    if(!hasBeenActivate)
+                    {
+                        actionsScript.audio_AllowMultiple = true;
+                        hasBeenActivate = true;
+                    }
                     actionsScript.activeTriggerStatesAudio[0] = EditorGUILayout.ToggleLeft(Gaze_HashIDs.TriggerEventsAndStates[0], actionsScript.activeTriggerStatesAudio[0]);
 
                     if (actionsScript.activeTriggerStatesAudio[0])
@@ -113,9 +119,7 @@ namespace Gaze
                     EditorGUILayout.Space();
 
                     Gaze_EditorUtils.DrawSectionTitle("Audio Parameters");
-
-                    actionsScript.audio_stopOthers = EditorGUILayout.ToggleLeft(new GUIContent("Stop Other Audios", "Stops any others audios launched by this IO only"), actionsScript.audio_stopOthers);
-
+                    
                     // Randomize Pitch
                     actionsScript.audio_randomizePitch = EditorGUILayout.ToggleLeft(new GUIContent("Randomize pitch", "Change the pitch of this interaction only"), actionsScript.audio_randomizePitch);
                     if (actionsScript.audio_randomizePitch)
@@ -188,7 +192,8 @@ namespace Gaze
                     if (!actionsScript.audio_ForceStop)
                     {
                         actionsScript.audio_AllowMultiple = EditorGUILayout.ToggleLeft(new GUIContent("Cumulate audios", "Cumulates audios launched with this interaction when reloaded."), actionsScript.audio_AllowMultiple);
-
+                        actionsScript.audio_stopOthers = !actionsScript.audio_AllowMultiple;
+                        
                         if (actionsScript.audio_AllowMultiple)
                         {
                             actionsScript.audio_MaxConcurrentSound = EditorGUILayout.IntField("Max concurrent audios", actionsScript.audio_MaxConcurrentSound);

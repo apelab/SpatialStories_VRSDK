@@ -273,7 +273,7 @@ namespace Gaze
                 desiredPosition = CalcDesiredPosition(_transformToFollow.transform.position, _followOriginTransform.transform.position);
             }
             // This is used when the object is snappable
-            else if (owner.SnapOnGrab && owner.GrabPositionnerCollider == null)
+            else if (owner.SnapOnGrab && (!owner.GrabLogic.isBeingManipulated || owner.GrabPositionnerCollider == null))
             {
                 rotationDelta = CalcRotationDelta(_transformToFollow.transform.rotation, GetSnapPointForHand(GrabbingManager.isLeftHand).transform.rotation);
                 desiredPosition = CalcDesiredPosition(_transformToFollow.transform.position, GetSnapPointForHand(GrabbingManager.isLeftHand).transform.position);
@@ -799,7 +799,6 @@ namespace Gaze
         }
 
         private Transform leftSnapPoint, rigtSnapPoint;
-
         public Transform GetSnapPointForHand(bool _isLeftHand)
         {
             if ((leftSnapPoint == null && Gaze_InputManager.instance.LeftHandActive) ||
@@ -829,6 +828,7 @@ namespace Gaze
                     rigtSnapPoint = owner.transform;
                 }
             }
+            
             return _isLeftHand ? leftSnapPoint : rigtSnapPoint;
         }
 

@@ -104,7 +104,7 @@ namespace Gaze
         public float audioVolumeMax = 1f;
         public float fadeSpeed = .005f;
         public bool audio_ForceStop = false;
-        public bool audio_AllowMultiple = false;
+        public bool audio_AllowMultiple = true;
         public bool audio_randomizePitch = false;
         public float audio_minPitch = 0f;
         public float audio_maxPitch = 2f;
