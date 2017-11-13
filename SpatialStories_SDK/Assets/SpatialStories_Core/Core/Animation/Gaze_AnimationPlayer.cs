@@ -36,6 +36,15 @@ namespace Gaze
             int key = animations.Count - 1;
             animations[key].key = key;
 
+            for (int i = 0; i < playlistLoop.Length; i++)
+            {
+                Gaze_Actions.LOOP_MODES lm = playlistLoop[i];
+                if (lm == Gaze_Actions.LOOP_MODES.None)
+                {
+                    lm = Gaze_Actions.LOOP_MODES.Single;
+                }
+            }
+            
             for (int i = 0; i < activeTriggerStatesAnim.Length; i++)
             {
                 if (activeTriggerStatesAnim[i])
