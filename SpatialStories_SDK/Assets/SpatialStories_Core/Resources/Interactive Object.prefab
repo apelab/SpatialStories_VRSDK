@@ -87,8 +87,9 @@ GameObject:
   - component: {fileID: 114603972983054648}
   - component: {fileID: 114952040159104332}
   - component: {fileID: 114454149493778670}
+  - component: {fileID: 114495641966034794}
   m_Layer: 0
-  m_Name: Interaction
+  m_Name: Empty
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -105,7 +106,7 @@ GameObject:
   - component: {fileID: 65951399339019554}
   - component: {fileID: 54942743705170130}
   - component: {fileID: 114334997517604920}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Proximity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -294,7 +295,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1764208351781430}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.08, y: 0.74, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4299994533564222}
@@ -358,7 +359,7 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
@@ -561,8 +562,10 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
+  DnD_DropOnAlreadyOccupiedTargets: 0
   DnD_attached: 0
   DnD_Targets: []
+  dragAndDropManager: {fileID: 0}
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
 --- !u!114 &114334997517604920
@@ -680,7 +683,7 @@ MonoBehaviour:
   loopAnimType: 0000000000000000000000000000000000000000
   animationSequence: 0000000000000000000000000000000000000000
   targetAudioSource: {fileID: 0}
-  activeTriggerStatesAudio: 0000000000
+  activeTriggerStatesAudio: 0100000000
   audioClips:
     ClipEntries00: []
     ClipEntries01: []
@@ -771,6 +774,23 @@ MonoBehaviour:
   audio_stopOthers: 0
   IO: {fileID: 114211306805180274}
   triggerNotification: 0
+--- !u!114 &114495641966034794
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1176996264139158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4c4d6871c817b04c8ec6a2d3364ae35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Dependencies: []
+  IsActive: 0
+  Delay: 0
+  IsValid: 0
+  Reloadable: 0
+  ReloadDependencies: 0
 --- !u!114 &114532363057675406
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -844,7 +864,7 @@ MonoBehaviour:
     grabStateLeftIndex: 0
     grabStateRightIndex: 0
   customConditions: []
-  triggerStateIndex: 1
+  triggerStateIndex: 0
   delayDuration: 0
   delayed: 0
   isDelayRandom: 0
