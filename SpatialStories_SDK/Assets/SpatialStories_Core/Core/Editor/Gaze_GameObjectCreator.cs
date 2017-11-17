@@ -134,7 +134,27 @@ namespace Gaze
         /// <param name="go">The reference GameObject</param>
         public static GameObject ConvertGearVrInteractiveCamera(GameObject go)
         {
-            return CovertCameraUsingPrefab(go, "GearVrCamera (IO)");
+            return CovertCameraUsingPrefab(go, "Camera GearVR (IO)");
+        }
+
+        /// <summary>
+        /// Converts a Standard Camera into a Gear Vr one.
+        /// </summary>
+        /// <returns>The Gazable Root.</returns>
+        /// <param name="go">The reference GameObject</param>
+        public static GameObject ConvertOculusInteractiveCamera(GameObject go)
+        {
+            return CovertCameraUsingPrefab(go, "Camera Oculus (IO)");
+        }
+
+        /// <summary>
+        /// Converts a Standard Camera into a Gear Vr one.
+        /// </summary>
+        /// <returns>The Gazable Root.</returns>
+        /// <param name="go">The reference GameObject</param>
+        public static GameObject ConvertHTCInteractiveCamera(GameObject go)
+        {
+            return CovertCameraUsingPrefab(go, "Camera HTCVive (IO)");
         }
 
         /// <summary>
@@ -189,7 +209,7 @@ namespace Gaze
         public static void GameObjectConvertIntoCamera(MenuCommand menuCommand)
         {
             if (Selection.activeGameObject != null && Selection.activeGameObject.GetComponent<Camera>() != null)
-                ConvertInteractiveCamera(Selection.activeGameObject);
+                ConvertOculusInteractiveCamera(Selection.activeGameObject);
         }
 
         [MenuItem("GameObject/SpatialStories/Convert into HTC Vive camera", false, 10)]
@@ -197,7 +217,7 @@ namespace Gaze
         {
             EditorUtility.DisplayDialog("HTC Vive tip", "Remember to place the camera at the same height than your scene's floor", "Understood");
             if (Selection.activeGameObject != null && Selection.activeGameObject.GetComponent<Camera>() != null)
-                ConvertInteractiveCamera(Selection.activeGameObject);
+                ConvertHTCInteractiveCamera(Selection.activeGameObject);
         }
 
         [MenuItem("GameObject/SpatialStories/Convert into GearVr interactive camera", false, 10)]
