@@ -1,9 +1,7 @@
-﻿#if UNITY_EDITOR
-#endif
-
-
-using System;
+﻿using System;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using UnityEngine;
 
 namespace Gaze
@@ -36,10 +34,12 @@ namespace Gaze
 
         static void CreateLayer(string _name)
         {
+#if  UNITY_EDITOR
             if (EditorUtility.DisplayDialog("Missing Physics Layers", "Please add the {0},{1},{2} and {3} on the Edit > Project Settings > Tangs & Layers ", "Add them by hand"))
             {
                 EditorApplication.ExecuteMenuItem("Edit/Play");
             }
+#endif
         }
     }
 }
