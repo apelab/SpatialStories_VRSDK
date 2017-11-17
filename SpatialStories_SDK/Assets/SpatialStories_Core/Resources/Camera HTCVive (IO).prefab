@@ -1008,7 +1008,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1637684335187764}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.0384, y: 0, z: -0.0393}
+  m_LocalPosition: {x: 0, y: -0.0142, z: 0.0052}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4634128961298764}
@@ -1745,7 +1745,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1306357110303804}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.041, y: 0, z: -0.0393}
+  m_LocalPosition: {x: 0, y: -0.0142, z: 0.0052}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4200936204172538}
@@ -3075,40 +3075,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InteractiveObjectScripts:
-  - {fileID: 114366381998730324}
   - {fileID: 114788331516213372}
+  - {fileID: 114366381998730324}
   - {fileID: 114134813088610276}
   - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   InteractiveObjects:
-  - {fileID: 1846034397402828}
   - {fileID: 1778678553011596}
+  - {fileID: 1846034397402828}
   - {fileID: 1227046925733434}
   - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  InteractiveObjectsCount: 16
+  InteractiveObjectsCount: 4
 --- !u!114 &114134813088610276
 MonoBehaviour:
   m_ObjectHideFlags: 1
