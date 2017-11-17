@@ -1,13 +1,22 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Gaze;
 using UnityEngine;
-using Gaze;
 
+/// <summary>
+/// This action parents a transform to another transform.
+/// </summary>
 
 [AddComponentMenu("SpatialStories/Custom Actions/Parent")]
-public class CA_Parent : Gaze_AbstractBehaviour {
+public class CA_Parent : Gaze_AbstractBehaviour
+{
 
+    /// <summary>
+    /// The parent the child will be parented to.
+    /// </summary>
     public Transform Parent;
+
+    /// <summary>
+    /// The child to parent.
+    /// </summary>
     public Transform Child;
 
     [Tooltip("Do we need to teleport to the parent position after parenting is complete?")]
