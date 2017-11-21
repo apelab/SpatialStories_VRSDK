@@ -189,6 +189,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4757245398454852}
+  - component: {fileID: 114299070017491658}
   m_Layer: 0
   m_Name: Visuals
   m_TagString: Untagged
@@ -384,6 +385,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4837090436188700}
+  - component: {fileID: 114004377801271250}
   m_Layer: 0
   m_Name: Visuals
   m_TagString: Untagged
@@ -573,7 +575,7 @@ GameObject:
   - component: {fileID: 114159984578567070}
   - component: {fileID: 114467899467591352}
   m_Layer: 0
-  m_Name: Interaction
+  m_Name: Empty
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -651,6 +653,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4074143010482558}
+  - component: {fileID: 114314418883293386}
   m_Layer: 0
   m_Name: Visuals
   m_TagString: Untagged
@@ -724,10 +727,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4449340570769876}
   - component: {fileID: 114815244668088640}
-  - component: {fileID: 114342926150712202}
   - component: {fileID: 114327603991298662}
+  - component: {fileID: 114342926150712202}
   m_Layer: 0
-  m_Name: Interaction
+  m_Name: Empty
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -944,7 +947,7 @@ GameObject:
   - component: {fileID: 114586839374229918}
   - component: {fileID: 114815952275826732}
   m_Layer: 0
-  m_Name: Interaction
+  m_Name: Empty
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3050,6 +3053,17 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114004377801271250
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1215645861952568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3978acaf2eedc8f4889c42ba095690a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114012278467159228
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3320,7 +3334,7 @@ MonoBehaviour:
   hoverStateIndex: 0
   hoverIn: 0
   ReloadDependencies: 0
-  isActive: 0
+  isActive: 1
   proximityGroupIndex: 0
   rigCombinations: []
 --- !u!114 &114228548956286430
@@ -3335,6 +3349,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   leftHand: 1
+--- !u!114 &114299070017491658
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1123290127902606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3978acaf2eedc8f4889c42ba095690a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114314418883293386
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1598873804995002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3978acaf2eedc8f4889c42ba095690a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114327603991298662
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3428,7 +3464,7 @@ MonoBehaviour:
   hoverStateIndex: 0
   hoverIn: 0
   ReloadDependencies: 0
-  isActive: 0
+  isActive: 1
   proximityGroupIndex: 0
   rigCombinations: []
 --- !u!114 &114341555430673268
@@ -3482,7 +3518,7 @@ MonoBehaviour:
   - 0
   multipleActionsInTime: 0
   rootIO: {fileID: 0}
-  isActive: 0
+  isActive: 1
   ActionReset: 0
   ActionVisuals: 0
   ActionGrab: 0
@@ -3516,7 +3552,7 @@ MonoBehaviour:
   ModifyDnDAngleThreshold: 0
   dnDAngleThreshold: 0
   DnD_Targets: []
-  visualsScript: {fileID: 0}
+  visualsScript: {fileID: 114314418883293386}
   AlterAllVisuals: 1
   selectedRenderers: 
   triggerAnimation: 0
@@ -3701,8 +3737,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c5e5d36d57be5841bfb50b6dbe7c062, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HasActions: 0
-  HasConditions: 0
+  HasActions: 1
+  HasConditions: 1
 --- !u!114 &114436624627048282
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3746,7 +3782,7 @@ MonoBehaviour:
   - 0
   multipleActionsInTime: 0
   rootIO: {fileID: 0}
-  isActive: 0
+  isActive: 1
   ActionReset: 0
   ActionVisuals: 0
   ActionGrab: 0
@@ -3780,7 +3816,7 @@ MonoBehaviour:
   ModifyDnDAngleThreshold: 0
   dnDAngleThreshold: 0
   DnD_Targets: []
-  visualsScript: {fileID: 0}
+  visualsScript: {fileID: 114004377801271250}
   AlterAllVisuals: 1
   selectedRenderers: 
   triggerAnimation: 0
@@ -4075,7 +4111,7 @@ MonoBehaviour:
   hoverStateIndex: 0
   hoverIn: 0
   ReloadDependencies: 0
-  isActive: 0
+  isActive: 1
   proximityGroupIndex: 0
   rigCombinations: []
 --- !u!114 &114590611601113912
@@ -4295,8 +4331,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c5e5d36d57be5841bfb50b6dbe7c062, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HasActions: 0
-  HasConditions: 0
+  HasActions: 1
+  HasConditions: 1
 --- !u!114 &114815244668088640
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4308,8 +4344,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c5e5d36d57be5841bfb50b6dbe7c062, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HasActions: 0
-  HasConditions: 0
+  HasActions: 1
+  HasConditions: 1
 --- !u!114 &114815952275826732
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4329,7 +4365,7 @@ MonoBehaviour:
   - 0
   multipleActionsInTime: 0
   rootIO: {fileID: 0}
-  isActive: 0
+  isActive: 1
   ActionReset: 0
   ActionVisuals: 0
   ActionGrab: 0
@@ -4363,7 +4399,7 @@ MonoBehaviour:
   ModifyDnDAngleThreshold: 0
   dnDAngleThreshold: 0
   DnD_Targets: []
-  visualsScript: {fileID: 0}
+  visualsScript: {fileID: 114299070017491658}
   AlterAllVisuals: 1
   selectedRenderers: 
   triggerAnimation: 0
@@ -4501,40 +4537,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InteractiveObjectScripts:
-  - {fileID: 114950922817326080}
-  - {fileID: 114479569608670742}
   - {fileID: 114504351718264516}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 114479569608670742}
+  - {fileID: 114950922817326080}
   InteractiveObjects:
-  - {fileID: 1967967330099664}
-  - {fileID: 1485757321415148}
   - {fileID: 1072686319913912}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  InteractiveObjectsCount: 16
+  - {fileID: 1485757321415148}
+  - {fileID: 1967967330099664}
+  InteractiveObjectsCount: 3
 --- !u!114 &114950922817326080
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -62,18 +62,12 @@ namespace Gaze
         [HideInInspector]
         public Gaze_InteractiveObject IOScript;
 
-        private void Awake()
+        void Start()
         {
             // otherwise the event is fired too early
             IOScript = GetComponentInParent<Gaze_InteractiveObject>();
             proximityEventArgs = new Gaze_ProximityEventArgs(IOScript);
-            proximityLayerMask = LayerMask.NameToLayer(Gaze_HashIDs.LAYER_PROXIMTY);
-            // check if sdk layers existy
-            gameObject.layer = proximityLayerMask;
-        }
-
-        void Start()
-        {
+            gameObject.layer = LayerMask.NameToLayer(Gaze_HashIDs.LAYER_PROXIMTY);
             StartCoroutine(NotifyAtStart());
         }
 

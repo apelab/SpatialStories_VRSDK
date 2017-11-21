@@ -343,6 +343,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4653480211335432}
+  - component: {fileID: 114789842319249766}
   m_Layer: 0
   m_Name: Visuals
   m_TagString: Untagged
@@ -1532,6 +1533,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4375330520574614}
+  - component: {fileID: 114755461689305818}
   m_Layer: 0
   m_Name: Visuals
   m_TagString: Untagged
@@ -1750,6 +1752,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4624666222692770}
+  - component: {fileID: 114349533563234202}
   m_Layer: 0
   m_Name: Visuals
   m_TagString: Untagged
@@ -4365,22 +4368,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InteractiveObjectScripts:
-  - {fileID: 114485687126287418}
-  - {fileID: 114344136702934336}
   - {fileID: 114746924379506148}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 114344136702934336}
+  - {fileID: 114485687126287418}
   InteractiveObjects:
-  - {fileID: 1101354194073666}
-  - {fileID: 1494125986354430}
   - {fileID: 1683829259733712}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  InteractiveObjectsCount: 7
+  - {fileID: 1494125986354430}
+  - {fileID: 1101354194073666}
+  InteractiveObjectsCount: 3
 --- !u!114 &114243278959470296
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4478,7 +4473,7 @@ MonoBehaviour:
   ModifyDnDAngleThreshold: 0
   dnDAngleThreshold: 0
   DnD_Targets: []
-  visualsScript: {fileID: 0}
+  visualsScript: {fileID: 114755461689305818}
   AlterAllVisuals: 1
   selectedRenderers: 
   triggerAnimation: 0
@@ -4647,6 +4642,17 @@ MonoBehaviour:
   dragAndDropManager: {fileID: 0}
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
+--- !u!114 &114349533563234202
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1948770524810956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3978acaf2eedc8f4889c42ba095690a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114349680535224100
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4922,7 +4928,7 @@ MonoBehaviour:
   ModifyDnDAngleThreshold: 0
   dnDAngleThreshold: 0
   DnD_Targets: []
-  visualsScript: {fileID: 0}
+  visualsScript: {fileID: 114789842319249766}
   AlterAllVisuals: 1
   selectedRenderers: 
   triggerAnimation: 0
@@ -5167,6 +5173,17 @@ MonoBehaviour:
   dragAndDropManager: {fileID: 0}
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
+--- !u!114 &114755461689305818
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1834391702799630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3978acaf2eedc8f4889c42ba095690a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114762883065776206
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5207,6 +5224,17 @@ MonoBehaviour:
   debug: 0
   OriginParticlesPrefab: {fileID: 0}
   EndPointPrefab: {fileID: 0}
+--- !u!114 &114789842319249766
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1191474683951768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3978acaf2eedc8f4889c42ba095690a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114811842473503572
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5398,7 +5426,7 @@ MonoBehaviour:
   ModifyDnDAngleThreshold: 0
   dnDAngleThreshold: 0
   DnD_Targets: []
-  visualsScript: {fileID: 0}
+  visualsScript: {fileID: 114349533563234202}
   AlterAllVisuals: 1
   selectedRenderers: 
   triggerAnimation: 0

@@ -804,10 +804,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4717571233530624}
   - component: {fileID: 114577442929942994}
-  - component: {fileID: 114003528567653050}
   - component: {fileID: 114651910155915074}
+  - component: {fileID: 114003528567653050}
   m_Layer: 0
-  m_Name: Interaction
+  m_Name: Empty
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1238,6 +1238,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4872500013265184}
+  - component: {fileID: 114100568519752388}
   m_Layer: 0
   m_Name: Visuals
   m_TagString: Untagged
@@ -1299,6 +1300,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4053561288861200}
+  - component: {fileID: 114979946318456464}
   m_Layer: 0
   m_Name: Visuals
   m_TagString: Untagged
@@ -1460,7 +1462,7 @@ GameObject:
   - component: {fileID: 114855616485501224}
   - component: {fileID: 114733446606705730}
   m_Layer: 0
-  m_Name: Interaction
+  m_Name: Empty
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1489,6 +1491,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4013973849046262}
+  - component: {fileID: 114844616520815622}
   m_Layer: 0
   m_Name: Visuals
   m_TagString: Untagged
@@ -1709,7 +1712,7 @@ GameObject:
   - component: {fileID: 114550180267847778}
   - component: {fileID: 114813921347098042}
   m_Layer: 0
-  m_Name: Interaction
+  m_Name: Empty
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2653,7 +2656,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1906472926505236}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.65, z: -10}
+  m_LocalPosition: {x: 0, y: 1.7, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4885440773271658}
@@ -4591,7 +4594,7 @@ MonoBehaviour:
   - 0
   multipleActionsInTime: 0
   rootIO: {fileID: 0}
-  isActive: 0
+  isActive: 1
   ActionReset: 0
   ActionVisuals: 0
   ActionGrab: 0
@@ -4625,7 +4628,7 @@ MonoBehaviour:
   ModifyDnDAngleThreshold: 0
   dnDAngleThreshold: 0
   DnD_Targets: []
-  visualsScript: {fileID: 0}
+  visualsScript: {fileID: 114844616520815622}
   AlterAllVisuals: 1
   selectedRenderers: 
   triggerAnimation: 0
@@ -4789,28 +4792,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InteractiveObjectScripts:
-  - {fileID: 114936347250051692}
-  - {fileID: 114725441422441274}
   - {fileID: 114179533522705990}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 114725441422441274}
+  - {fileID: 114936347250051692}
   InteractiveObjects:
-  - {fileID: 1204929771502924}
-  - {fileID: 1201428936146942}
   - {fileID: 1143311842035354}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  InteractiveObjectsCount: 10
+  - {fileID: 1201428936146942}
+  - {fileID: 1204929771502924}
+  InteractiveObjectsCount: 3
+--- !u!114 &114100568519752388
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1619945660588128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3978acaf2eedc8f4889c42ba095690a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114178655439227284
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5058,8 +5058,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c5e5d36d57be5841bfb50b6dbe7c062, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HasActions: 0
-  HasConditions: 0
+  HasActions: 1
+  HasConditions: 1
 --- !u!114 &114485389921515070
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5234,7 +5234,7 @@ MonoBehaviour:
   hoverStateIndex: 0
   hoverIn: 0
   ReloadDependencies: 0
-  isActive: 0
+  isActive: 1
   proximityGroupIndex: 0
   rigCombinations: []
 --- !u!114 &114553056983559618
@@ -5259,8 +5259,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c5e5d36d57be5841bfb50b6dbe7c062, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HasActions: 0
-  HasConditions: 0
+  HasActions: 1
+  HasConditions: 1
 --- !u!114 &114604425091850544
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5409,7 +5409,7 @@ MonoBehaviour:
   hoverStateIndex: 0
   hoverIn: 0
   ReloadDependencies: 0
-  isActive: 0
+  isActive: 1
   proximityGroupIndex: 0
   rigCombinations: []
 --- !u!114 &114709958862320430
@@ -5488,7 +5488,7 @@ MonoBehaviour:
   - 0
   multipleActionsInTime: 0
   rootIO: {fileID: 0}
-  isActive: 0
+  isActive: 1
   ActionReset: 0
   ActionVisuals: 0
   ActionGrab: 0
@@ -5522,7 +5522,7 @@ MonoBehaviour:
   ModifyDnDAngleThreshold: 0
   dnDAngleThreshold: 0
   DnD_Targets: []
-  visualsScript: {fileID: 0}
+  visualsScript: {fileID: 114979946318456464}
   AlterAllVisuals: 1
   selectedRenderers: 
   triggerAnimation: 0
@@ -5678,7 +5678,7 @@ MonoBehaviour:
   - 0
   multipleActionsInTime: 0
   rootIO: {fileID: 0}
-  isActive: 0
+  isActive: 1
   ActionReset: 0
   ActionVisuals: 0
   ActionGrab: 0
@@ -5712,7 +5712,7 @@ MonoBehaviour:
   ModifyDnDAngleThreshold: 0
   dnDAngleThreshold: 0
   DnD_Targets: []
-  visualsScript: {fileID: 0}
+  visualsScript: {fileID: 114100568519752388}
   AlterAllVisuals: 1
   selectedRenderers: 
   triggerAnimation: 0
@@ -5856,6 +5856,17 @@ MonoBehaviour:
   HotSpots: []
   MinHotspotDistance: 1
   debug: 0
+--- !u!114 &114844616520815622
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1732628263389982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3978acaf2eedc8f4889c42ba095690a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114855616485501224
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5951,7 +5962,7 @@ MonoBehaviour:
   hoverStateIndex: 0
   hoverIn: 0
   ReloadDependencies: 0
-  isActive: 0
+  isActive: 1
   proximityGroupIndex: 0
   rigCombinations: []
 --- !u!114 &114875659874084214
@@ -6001,8 +6012,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c5e5d36d57be5841bfb50b6dbe7c062, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HasActions: 0
-  HasConditions: 0
+  HasActions: 1
+  HasConditions: 1
 --- !u!114 &114936347250051692
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6059,6 +6070,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   verticalOffset: -0.5
+--- !u!114 &114979946318456464
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1633937875189060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3978acaf2eedc8f4889c42ba095690a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114997270403962662
 MonoBehaviour:
   m_ObjectHideFlags: 1
