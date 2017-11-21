@@ -9,6 +9,7 @@ using UnityEditor;
 namespace SpatialStories
 {
     [Serializable]
+    [InitializeOnLoad]
     public class S_CollisionMatrix : Editor
     {
         #region Members
@@ -19,8 +20,7 @@ namespace SpatialStories
         /// <summary>
         /// Create needed layers and setup collision matrix
         /// </summary>
-        [InitializeOnLoadMethod]
-        public static void SetupCollisionMatrix()
+        static S_CollisionMatrix()
         {
             CreateLayerIfNeeded(Gaze_HashIDs.LAYER_HANDHOVER);
             CreateLayerIfNeeded(Gaze_HashIDs.LAYER_PROXIMTY);
@@ -107,25 +107,25 @@ namespace SpatialStories
                 Physics.IgnoreLayerCollision(i, LayerMask.NameToLayer(Gaze_HashIDs.LAYER_HANDHOVER), true);
                 Physics.IgnoreLayerCollision(i, LayerMask.NameToLayer(Gaze_HashIDs.LAYER_PROXIMTY), true);
                 Physics.IgnoreLayerCollision(i, LayerMask.NameToLayer(Gaze_HashIDs.LAYER_SOLID), true);
-                Physics.IgnoreLayerCollision(i, LayerMask.NameToLayer(Gaze_HashIDs.LAYER_TELEPORT), true);
+                Physics.IgnoreLayerCollision(i, LayerMask.NameToLayer(Gaze_HashIDs.LAYER_TELEPORT), false);
             }
 
             // ignore collisions between newly created layers
             Physics.IgnoreLayerCollision(LayerMask.NameToLayer(Gaze_HashIDs.LAYER_GAZE), LayerMask.NameToLayer(Gaze_HashIDs.LAYER_HANDHOVER), true);
             Physics.IgnoreLayerCollision(LayerMask.NameToLayer(Gaze_HashIDs.LAYER_GAZE), LayerMask.NameToLayer(Gaze_HashIDs.LAYER_PROXIMTY), true);
             Physics.IgnoreLayerCollision(LayerMask.NameToLayer(Gaze_HashIDs.LAYER_GAZE), LayerMask.NameToLayer(Gaze_HashIDs.LAYER_SOLID), true);
-            Physics.IgnoreLayerCollision(LayerMask.NameToLayer(Gaze_HashIDs.LAYER_GAZE), LayerMask.NameToLayer(Gaze_HashIDs.LAYER_TELEPORT), true);
+            Physics.IgnoreLayerCollision(LayerMask.NameToLayer(Gaze_HashIDs.LAYER_GAZE), LayerMask.NameToLayer(Gaze_HashIDs.LAYER_TELEPORT), false);
 
 
             Physics.IgnoreLayerCollision(LayerMask.NameToLayer(Gaze_HashIDs.LAYER_HANDHOVER), LayerMask.NameToLayer(Gaze_HashIDs.LAYER_PROXIMTY), true);
             Physics.IgnoreLayerCollision(LayerMask.NameToLayer(Gaze_HashIDs.LAYER_HANDHOVER), LayerMask.NameToLayer(Gaze_HashIDs.LAYER_SOLID), true);
-            Physics.IgnoreLayerCollision(LayerMask.NameToLayer(Gaze_HashIDs.LAYER_HANDHOVER), LayerMask.NameToLayer(Gaze_HashIDs.LAYER_TELEPORT), true);
+            Physics.IgnoreLayerCollision(LayerMask.NameToLayer(Gaze_HashIDs.LAYER_HANDHOVER), LayerMask.NameToLayer(Gaze_HashIDs.LAYER_TELEPORT), false);
 
 
             Physics.IgnoreLayerCollision(LayerMask.NameToLayer(Gaze_HashIDs.LAYER_PROXIMTY), LayerMask.NameToLayer(Gaze_HashIDs.LAYER_SOLID), true);
-            Physics.IgnoreLayerCollision(LayerMask.NameToLayer(Gaze_HashIDs.LAYER_PROXIMTY), LayerMask.NameToLayer(Gaze_HashIDs.LAYER_TELEPORT), true);
+            Physics.IgnoreLayerCollision(LayerMask.NameToLayer(Gaze_HashIDs.LAYER_PROXIMTY), LayerMask.NameToLayer(Gaze_HashIDs.LAYER_TELEPORT), false);
 
-            Physics.IgnoreLayerCollision(LayerMask.NameToLayer(Gaze_HashIDs.LAYER_TELEPORT), LayerMask.NameToLayer(Gaze_HashIDs.LAYER_SOLID), true);
+            Physics.IgnoreLayerCollision(LayerMask.NameToLayer(Gaze_HashIDs.LAYER_TELEPORT), LayerMask.NameToLayer(Gaze_HashIDs.LAYER_SOLID), false);
         }
     }
 }
