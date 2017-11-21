@@ -14,9 +14,6 @@ namespace SpatialStories
         #region Members
         private static StringBuilder popupText = new StringBuilder();
         private static bool layersHaveBeenCreated = false;
-        private static SerializedObject tagManager;
-        private static SerializedProperty layers;
-        private static int layersCount;
         #endregion
 
         /// <summary>
@@ -25,8 +22,6 @@ namespace SpatialStories
         [InitializeOnLoadMethod]
         public static void SetupCollisionMatrix()
         {
-            SetupMembers();
-
             CreateLayerIfNeeded(Gaze_HashIDs.LAYER_HANDHOVER);
             CreateLayerIfNeeded(Gaze_HashIDs.LAYER_PROXIMTY);
             CreateLayerIfNeeded(Gaze_HashIDs.LAYER_GAZE);
@@ -37,13 +32,6 @@ namespace SpatialStories
                 EditorUtility.DisplayDialog("New layers created !", popupText.ToString(), "Ok");
 
             SetupIgnoreCollisionMatrix();
-        }
-
-        private static void SetupMembers()
-        {
-            tagManager = new SerializedObject(AssetDatabase.LoadAllAssetsAtPath("ProjectSettings/TagManager.asset")[0]);
-            layers = tagManager.FindProperty("layers");
-            layersCount = layers.arraySize;
         }
 
         /// <summary>
