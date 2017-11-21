@@ -78,7 +78,6 @@ namespace Gaze
             ray = new Ray();
             gameObject.layer = LayerMask.NameToLayer(Gaze_HashIDs.LAYER_GAZE);
             gazeRaycastLayer = 1 << gameObject.layer;
-
         }
 
         private void findCamera()

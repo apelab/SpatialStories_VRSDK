@@ -18,8 +18,6 @@
 using Gaze;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.VR;
-
 
 public enum HapticForceMode
 {
@@ -193,7 +191,7 @@ public class Gaze_InputManager : MonoBehaviour
     private GameObject leftHandIO, rightHandIO;
     private AudioClip currentHapticAudioClip;
     private bool controllersConnected;
-    
+
     // the names of the connected controllers (HTC, Oculus Touch...)
     private string[] controllersNames;
     private bool isHandRightDown = false, isHandLeftDown = false;
@@ -209,7 +207,7 @@ public class Gaze_InputManager : MonoBehaviour
     private OVRHaptics.OVRHapticsChannel m_hapticsChannelR = null;
     private bool isHapticFeedbackActive = false;
     private GameObject[] hapticFeedbackControllers;
-    
+
     // Input type determination setup
     public delegate void OnSetupController(Gaze_Controllers controllerType);
     private static event OnSetupController setupEvent;
@@ -250,7 +248,8 @@ public class Gaze_InputManager : MonoBehaviour
         if (Application.isEditor)
         {
             // fix layers and physics matrix
-            Gaze_PhysicsChecker.CreateNecessaryLayersIfNeeded();
+            //Gaze_PhysicsChecker.CreateNecessaryLayersIfNeeded();
+            //S_CollisionMatrix.SetupCollisionMatrix();
 
             // fix input manager
             RepairInputManagerIfNeeded();

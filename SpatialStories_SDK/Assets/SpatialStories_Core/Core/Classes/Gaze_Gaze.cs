@@ -23,5 +23,6 @@ public class Gaze_Gaze : MonoBehaviour
     void Start()
     {
         gameObject.layer = LayerMask.NameToLayer(Gaze_HashIDs.LAYER_GAZE);
+        //gameObject.layer = LayerMask.GetMask(Gaze_HashIDs.LAYER_GAZE);
     }
 }

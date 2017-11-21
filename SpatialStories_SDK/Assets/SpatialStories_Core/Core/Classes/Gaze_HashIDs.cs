@@ -49,5 +49,6 @@ namespace Gaze
         public static string LAYER_GAZE = "Gaze_Gaze";
         public static string LAYER_PROXIMTY = "Gaze_Proximity";
         public static string LAYER_HANDHOVER = "Gaze_HandHover";
+        public static string LAYER_TELEPORT = "Teleport";
     }
 }
