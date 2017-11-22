@@ -1,29 +1,23 @@
 fileFormatVersion: 2
-guid: 8ab65f9a6eb8d4045b488cb7acaf253d
-timeCreated: 1511227570
+guid: 2deec12b422def84980d707416cbb24b
+timeCreated: 1511358237
 licenseType: Pro
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
-    100000: Table
+    100000: default
     100002: //RootNode
-    100004: TimelineHandle
-    400000: Table
+    400000: default
     400002: //RootNode
-    400004: TimelineHandle
-    2300000: Table
-    2300002: TimelineHandle
-    3300000: Table
-    3300002: TimelineHandle
-    4300000: Table
-    4300002: TimelineHandle
-    9500000: //RootNode
+    2300000: default
+    3300000: default
+    4300000: default
   externalObjects:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: lambert1
-    second: {fileID: 2100000, guid: fed61d739909b7f4ab258c270da5ee36, type: 2}
+      name: defaultMat
+    second: {fileID: 2100000, guid: 259a5aa3b45964f4bb06da8dcb3cdc0a, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -72,10 +66,10 @@ ModelImporter:
     secondaryUVPackMargin: 4
     useFileScale: 1
   tangentSpace:
-    normalSmoothAngle: 180
+    normalSmoothAngle: 60
     normalImportMode: 0
-    tangentImportMode: 0
-    normalCalculationMode: 3
+    tangentImportMode: 3
+    normalCalculationMode: 4
   importAnimation: 0
   copyAvatar: 0
   humanDescription:
@@ -95,7 +89,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 0
   humanoidOversampling: 1
   additionalBone: 0
   userData: 

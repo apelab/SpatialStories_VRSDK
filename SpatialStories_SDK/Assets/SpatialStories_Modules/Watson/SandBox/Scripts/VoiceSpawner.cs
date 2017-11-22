@@ -65,6 +65,7 @@ public class VoiceSpawner : Widget {
 
     private void OnSpeechInput(Data data)
     {
+		Debug.Log ("1");
         SpeechRecognitionEvent result = ((SpeechToTextData)data).Results;
 
         if (result != null && result.results.Length > 0)
