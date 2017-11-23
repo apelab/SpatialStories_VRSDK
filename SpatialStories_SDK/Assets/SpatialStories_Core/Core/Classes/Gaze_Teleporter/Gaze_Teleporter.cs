@@ -270,7 +270,7 @@ public class Gaze_Teleporter : MonoBehaviour
     public float GetPlayerHeight()
     {
         cameraRigIO = GetComponentInParent<Gaze_InputManager>().gameObject;
-        ray = new Ray(cameraRigIO.transform.position, Vector3.down);
+        ray = new Ray(cameraRigIO.transform.position + Vector3.up * 0.05f, Vector3.down);
 
         // raycast on chosen layers only
         hits = Physics.RaycastAll(ray, 4f, AllowedLayers.value);
