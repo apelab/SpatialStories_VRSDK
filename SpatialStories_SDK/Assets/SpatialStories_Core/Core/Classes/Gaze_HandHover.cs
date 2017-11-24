@@ -1,16 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Gaze;
 using UnityEngine;
 
-public class Gaze_HandHover : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+public class Gaze_HandHover : MonoBehaviour
+{
+    void Start()
+    {
+        gameObject.layer = LayerMask.NameToLayer(Gaze_HashIDs.LAYER_HANDHOVER);
+    }
 }

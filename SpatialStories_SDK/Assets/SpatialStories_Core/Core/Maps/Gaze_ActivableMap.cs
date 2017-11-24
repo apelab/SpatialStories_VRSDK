@@ -24,7 +24,7 @@ namespace Gaze
     public class Gaze_ActivableEntry
     {
         // hand associated
-        public VRNode hand;
+        public UnityEngine.XR.XRNode hand;
 
         /// <summary>
         /// The associated proximity collider.
@@ -56,7 +56,7 @@ namespace Gaze
         public Gaze_ActivableEntry AddActivableEntry()
         {
             TouchEnitry = new Gaze_ActivableEntry();
-            TouchEnitry.hand = VRNode.LeftHand;
+            TouchEnitry.hand = UnityEngine.XR.XRNode.LeftHand;
             return TouchEnitry;
         }
 

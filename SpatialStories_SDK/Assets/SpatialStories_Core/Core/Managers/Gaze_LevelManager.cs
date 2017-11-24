@@ -6,6 +6,7 @@ public class Gaze_LevelManager : MonoBehaviour
 {
     private static Gaze_LevelManager instance = null;
     public static string targetSceneName;
+    [HideInInspector]
     public string targetSceneNameInspector;
     private Gaze_SceneLoader sceneLoader;
 
@@ -27,14 +28,13 @@ public class Gaze_LevelManager : MonoBehaviour
         }
 
         instance = this;
-        DontDestroyOnLoad(this.gameObject);
+        //DontDestroyOnLoad(this.gameObject);
         sceneLoader = GameObject.FindObjectOfType<Gaze_SceneLoader>();
     }
 
     void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
-
     }
 
     void OnDisable()

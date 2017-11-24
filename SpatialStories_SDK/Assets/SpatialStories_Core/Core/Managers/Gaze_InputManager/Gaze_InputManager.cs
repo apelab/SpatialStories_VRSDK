@@ -18,8 +18,6 @@
 using Gaze;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.VR;
-
 
 public enum HapticForceMode
 {
@@ -190,27 +188,10 @@ public class Gaze_InputManager : MonoBehaviour
 
     public bool ControllersConnected { get { return controllersConnected; } }
 
-    /*
-    //The max time allowed between double clicks
-    [SerializeField] private float m_DoubleClickTime = 0.3f;
-    //The width of a swipe
-    [SerializeField] private float m_SwipeWidth = 0.3f;
-        
-    // The screen position of the mouse when Fire1 is pressed.
-    private Vector2 m_MouseDownPosition;
-    // The screen position of the mouse when Fire1 is released.
-    private Vector2 m_MouseUpPosition;
-    // The time when Fire1 was last released.
-    private float m_LastMouseUpTime;
-    // The previous value of the horizontal axis used to detect keyboard swipes.
-    private float m_LastHorizontalValue;
-    // The previous value of the vertical axis used to detect keyboard swipes.
-    private float m_LastVerticalValue;
-    */
-
     private GameObject leftHandIO, rightHandIO;
     private AudioClip currentHapticAudioClip;
     private bool controllersConnected;
+
     // the names of the connected controllers (HTC, Oculus Touch...)
     private string[] controllersNames;
     private bool isHandRightDown = false, isHandLeftDown = false;
@@ -227,14 +208,12 @@ public class Gaze_InputManager : MonoBehaviour
     private bool isHapticFeedbackActive = false;
     private GameObject[] hapticFeedbackControllers;
 
-
-
     // Input type determination setup
     public delegate void OnSetupController(Gaze_Controllers controllerType);
     private static event OnSetupController setupEvent;
 
-
-
+    private float lastUpdateTime;
+    public float updateInterval = .2f;
 
     public Gaze_InputLogic SpecialInputLogic;
 
@@ -267,7 +246,14 @@ public class Gaze_InputManager : MonoBehaviour
         UnpluggedControllerMessage.SetActive(false);
 
         if (Application.isEditor)
+        {
+            // fix layers and physics matrix
+            //Gaze_PhysicsChecker.CreateNecessaryLayersIfNeeded();
+            //S_CollisionMatrix.SetupCollisionMatrix();
+
+            // fix input manager
             RepairInputManagerIfNeeded();
+        }
 
     }
 
@@ -300,8 +286,15 @@ public class Gaze_InputManager : MonoBehaviour
         OnStickLeftAxisEvent -= StickLeftAxisEvent;
     }
 
+    float rate = 10.0f;
+    float nextUpdate = 0;
     private void IdentifyInputType()
     {
+        if (nextUpdate > Time.deltaTime)
+            return;
+
+        nextUpdate = Time.time + rate;
+
         // Check if GearVR_Controller is conected if dont just add the generic controller
         if (OVRInput.IsControllerConnected(OVRInput.Controller.RTrackedRemote) || OVRInput.IsControllerConnected(OVRInput.Controller.LTrackedRemote))
         {
@@ -360,7 +353,13 @@ public class Gaze_InputManager : MonoBehaviour
 
     void FixedUpdate()
     {
-        CheckControllers();
+        if (Time.time > lastUpdateTime + updateInterval)
+        {
+            CheckControllers();
+
+            // update last time value
+            lastUpdateTime = Time.time;
+        }
 
         if (!trackPosition)
             FixedPositionLogic();
@@ -410,8 +409,8 @@ public class Gaze_InputManager : MonoBehaviour
     {
         if (SpecialInputLogic == null)
         {
-            leftHandIO.transform.localPosition = InputTracking.GetLocalPosition(VRNode.LeftHand);
-            rightHandIO.transform.localPosition = InputTracking.GetLocalPosition(VRNode.RightHand);
+            leftHandIO.transform.localPosition = UnityEngine.XR.InputTracking.GetLocalPosition(UnityEngine.XR.XRNode.LeftHand);
+            rightHandIO.transform.localPosition = UnityEngine.XR.InputTracking.GetLocalPosition(UnityEngine.XR.XRNode.RightHand);
         }
         else
             SpecialInputLogic.SetPosition(rightHandIO, leftHandIO);
@@ -421,8 +420,8 @@ public class Gaze_InputManager : MonoBehaviour
     {
         if (SpecialInputLogic == null)
         {
-            leftHandIO.transform.localRotation = InputTracking.GetLocalRotation(VRNode.LeftHand);
-            rightHandIO.transform.localRotation = InputTracking.GetLocalRotation(VRNode.RightHand);
+            leftHandIO.transform.localRotation = UnityEngine.XR.InputTracking.GetLocalRotation(UnityEngine.XR.XRNode.LeftHand);
+            rightHandIO.transform.localRotation = UnityEngine.XR.InputTracking.GetLocalRotation(UnityEngine.XR.XRNode.RightHand);
         }
         else
             SpecialInputLogic.SetOrientation(rightHandIO, leftHandIO);
@@ -536,11 +535,12 @@ public class Gaze_InputManager : MonoBehaviour
         }
     }
 
+    string[] names;
     private void CheckControllers()
     {
         controllersConnected = false;
 
-        string[] names = Input.GetJoystickNames();
+        names = Input.GetJoystickNames();
 
         for (int i = 0; i < names.Length; i++)
         {
@@ -556,9 +556,6 @@ public class Gaze_InputManager : MonoBehaviour
             }
         }
 
-        // HACK: This works fine with the samsung gear vr but not with 
-        // Oculus or HTC vive, we need to find a better way to generalize that
-        // See task Gaze-477.
         if (SpecialInputLogic != null)
             controllersConnected = SpecialInputLogic.CheckIfControllerConnected();
 
@@ -692,7 +689,7 @@ public class Gaze_InputManager : MonoBehaviour
                 Debug.Log(Gaze_InputConstants.APELAB_INPUT_STICK_LEFT + " Down");
 
             if (OnStickLeftDownEvent != null)
-                OnStickLeftDownEvent(new Gaze_InputEventArgs(this.gameObject, VRNode.LeftHand, Gaze_InputTypes.STICK_LEFT_DOWN));
+                OnStickLeftDownEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.LeftHand, Gaze_InputTypes.STICK_LEFT_DOWN));
         }
         if (Input.GetButtonUp(Gaze_InputConstants.APELAB_INPUT_STICK_LEFT))
         {
@@ -700,7 +697,7 @@ public class Gaze_InputManager : MonoBehaviour
                 Debug.Log(Gaze_InputConstants.APELAB_INPUT_STICK_LEFT + " Up");
 
             if (OnStickLeftUpEvent != null)
-                OnStickLeftUpEvent(new Gaze_InputEventArgs(this.gameObject, VRNode.LeftHand, Gaze_InputTypes.STICK_LEFT_DOWN));
+                OnStickLeftUpEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.LeftHand, Gaze_InputTypes.STICK_LEFT_DOWN));
         }
 
         if (Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_STICK_LEFT_VERTICAL) != 0 || Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_STICK_LEFT_HORIZONTAL) != 0)
@@ -714,7 +711,7 @@ public class Gaze_InputManager : MonoBehaviour
             {
                 axisValueLeft.x = Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_STICK_LEFT_HORIZONTAL);
                 axisValueLeft.y = Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_STICK_LEFT_VERTICAL);
-                OnStickLeftAxisEvent(new Gaze_InputEventArgs(this.gameObject, VRNode.LeftHand, Gaze_InputTypes.STICK_LEFT, axisValueLeft));
+                OnStickLeftAxisEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.LeftHand, Gaze_InputTypes.STICK_LEFT, axisValueLeft));
             }
         }
         if (leftStickActive && (Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_STICK_LEFT_VERTICAL) == 0) && (Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_STICK_LEFT_HORIZONTAL) == 0))
@@ -725,7 +722,7 @@ public class Gaze_InputManager : MonoBehaviour
             leftStickActive = false;
 
             if (OnStickLeftAxisEvent != null)
-                OnStickLeftAxisEvent(new Gaze_InputEventArgs(this.gameObject, VRNode.LeftHand, Gaze_InputTypes.STICK_LEFT, Vector2.zero));
+                OnStickLeftAxisEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.LeftHand, Gaze_InputTypes.STICK_LEFT, Vector2.zero));
         }
 
         if (Input.GetButtonDown(Gaze_InputConstants.APELAB_INPUT_STICK_RIGHT))
@@ -734,7 +731,7 @@ public class Gaze_InputManager : MonoBehaviour
                 Debug.Log(Gaze_InputConstants.APELAB_INPUT_STICK_RIGHT + " Down");
 
             if (OnStickRightDownEvent != null)
-                OnStickRightDownEvent(new Gaze_InputEventArgs(this.gameObject, VRNode.RightHand, Gaze_InputTypes.STICK_RIGHT_DOWN));
+                OnStickRightDownEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.STICK_RIGHT_DOWN));
         }
         if (Input.GetButtonUp(Gaze_InputConstants.APELAB_INPUT_STICK_RIGHT))
         {
@@ -742,7 +739,7 @@ public class Gaze_InputManager : MonoBehaviour
                 Debug.Log(Gaze_InputConstants.APELAB_INPUT_STICK_RIGHT + " Up");
 
             if (OnStickRightUpEvent != null)
-                OnStickRightUpEvent(new Gaze_InputEventArgs(this.gameObject, VRNode.RightHand, Gaze_InputTypes.STICK_RIGHT_UP));
+                OnStickRightUpEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.STICK_RIGHT_UP));
         }
         if (Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_STICK_RIGHT_HORIZONTAL) != 0 || Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_STICK_RIGHT_VERTICAL) != 0)
         {
@@ -755,7 +752,7 @@ public class Gaze_InputManager : MonoBehaviour
             {
                 axisValueLeft.x = Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_STICK_RIGHT_HORIZONTAL);
                 axisValueLeft.y = Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_STICK_RIGHT_VERTICAL);
-                OnStickRightAxisEvent(new Gaze_InputEventArgs(this.gameObject, VRNode.RightHand, Gaze_InputTypes.STICK_RIGHT, axisValueLeft));
+                OnStickRightAxisEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.STICK_RIGHT, axisValueLeft));
             }
         }
         if (rightStickActive && (Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_STICK_RIGHT_VERTICAL) == 0) && (Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_STICK_RIGHT_HORIZONTAL) == 0))
@@ -766,7 +763,7 @@ public class Gaze_InputManager : MonoBehaviour
             rightStickActive = false;
 
             if (OnStickRightAxisEvent != null)
-                OnStickRightAxisEvent(new Gaze_InputEventArgs(this.gameObject, VRNode.RightHand, Gaze_InputTypes.STICK_RIGHT, Vector2.zero));
+                OnStickRightAxisEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.STICK_RIGHT, Vector2.zero));
         }
         #endregion
 
@@ -777,7 +774,7 @@ public class Gaze_InputManager : MonoBehaviour
                 Debug.Log(Gaze_InputConstants.APELAB_INPUT_INDEX_RIGHT + Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_INDEX_RIGHT));
 
             if (OnIndexRightEvent != null)
-                OnIndexRightEvent(new Gaze_InputEventArgs(this.gameObject, VRNode.RightHand, Gaze_InputTypes.INDEX_RIGHT, Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_INDEX_RIGHT)));
+                OnIndexRightEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.INDEX_RIGHT, Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_INDEX_RIGHT)));
         }
         if (!isIndexRightDown && Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_INDEX_RIGHT) > .8f)
         {
@@ -785,11 +782,11 @@ public class Gaze_InputManager : MonoBehaviour
                 Debug.Log(Gaze_InputConstants.APELAB_INPUT_INDEX_RIGHT + " Down" + Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_INDEX_RIGHT));
             isIndexRightDown = true;
             if (OnIndexRightDownEvent != null)
-                OnIndexRightDownEvent(new Gaze_InputEventArgs(this.gameObject, VRNode.RightHand, Gaze_InputTypes.INDEX_RIGHT_DOWN, Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_INDEX_RIGHT)));
+                OnIndexRightDownEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.INDEX_RIGHT_DOWN, Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_INDEX_RIGHT)));
 
             //HACK: This is done for the Samsung VR controller
             if (OVRInput.IsControllerConnected(OVRInput.Controller.RTrackedRemote))
-                OnHandRightDownEvent(new Gaze_InputEventArgs(this.gameObject, VRNode.RightHand, Gaze_InputTypes.HAND_RIGHT_DOWN, Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_INDEX_RIGHT)));
+                OnHandRightDownEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.HAND_RIGHT_DOWN, Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_INDEX_RIGHT)));
 
         }
         if (isIndexRightDown && Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_INDEX_RIGHT) <= .8f)
@@ -798,11 +795,11 @@ public class Gaze_InputManager : MonoBehaviour
                 Debug.Log(Gaze_InputConstants.APELAB_INPUT_INDEX_RIGHT + " Up" + Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_INDEX_RIGHT));
             isIndexRightDown = false;
             if (OnIndexRightUpEvent != null)
-                OnIndexRightUpEvent(new Gaze_InputEventArgs(this.gameObject, VRNode.RightHand, Gaze_InputTypes.INDEX_RIGHT_UP, Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_INDEX_RIGHT)));
+                OnIndexRightUpEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.INDEX_RIGHT_UP, Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_INDEX_RIGHT)));
 
             //HACK: This is done for the Samsung VR controller
             if (OVRInput.IsControllerConnected(OVRInput.Controller.RTrackedRemote))
-                OnHandRightDownEvent(new Gaze_InputEventArgs(this.gameObject, VRNode.RightHand, Gaze_InputTypes.HAND_RIGHT_UP, Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_INDEX_RIGHT)));
+                OnHandRightDownEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.HAND_RIGHT_UP, Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_INDEX_RIGHT)));
         }
 
         if (Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_INDEX_LEFT) != 0)
@@ -811,7 +808,7 @@ public class Gaze_InputManager : MonoBehaviour
                 Debug.Log(Gaze_InputConstants.APELAB_INPUT_INDEX_LEFT + Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_INDEX_LEFT));
 
             if (OnIndexLeftEvent != null)
-                OnIndexLeftEvent(new Gaze_InputEventArgs(this.gameObject, VRNode.LeftHand, Gaze_InputTypes.INDEX_RIGHT, Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_INDEX_LEFT)));
+                OnIndexLeftEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.LeftHand, Gaze_InputTypes.INDEX_LEFT, Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_INDEX_LEFT)));
         }
         if (!isIndexLeftDown && Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_INDEX_LEFT) > .8f)
         {
@@ -819,7 +816,7 @@ public class Gaze_InputManager : MonoBehaviour
                 Debug.Log(Gaze_InputConstants.APELAB_INPUT_INDEX_LEFT + " Down" + Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_INDEX_LEFT));
             isIndexLeftDown = true;
             if (OnIndexLeftDownEvent != null)
-                OnIndexLeftDownEvent(new Gaze_InputEventArgs(this.gameObject, VRNode.LeftHand, Gaze_InputTypes.INDEX_LEFT_DOWN, Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_INDEX_LEFT)));
+                OnIndexLeftDownEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.LeftHand, Gaze_InputTypes.INDEX_LEFT_DOWN, Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_INDEX_LEFT)));
         }
         if (isIndexLeftDown && Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_INDEX_LEFT) <= .8f)
         {
@@ -827,7 +824,7 @@ public class Gaze_InputManager : MonoBehaviour
                 Debug.Log(Gaze_InputConstants.APELAB_INPUT_INDEX_LEFT + " Up" + Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_INDEX_LEFT));
             isIndexLeftDown = false;
             if (OnIndexLeftUpEvent != null)
-                OnIndexLeftUpEvent(new Gaze_InputEventArgs(this.gameObject, VRNode.LeftHand, Gaze_InputTypes.INDEX_LEFT_UP, Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_INDEX_LEFT)));
+                OnIndexLeftUpEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.LeftHand, Gaze_InputTypes.INDEX_LEFT_UP, Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_INDEX_LEFT)));
         }
         #endregion
 
@@ -836,21 +833,21 @@ public class Gaze_InputManager : MonoBehaviour
         {
             if (debug)
                 Debug.Log(Gaze_InputConstants.APELAB_INPUT_HAND_RIGHT + Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_HAND_RIGHT));
-            FireOnHandRightEvent(new Gaze_InputEventArgs(this.gameObject, VRNode.RightHand, Gaze_InputTypes.HAND_RIGHT, Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_HAND_RIGHT)));
+            FireOnHandRightEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.HAND_RIGHT, Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_HAND_RIGHT)));
         }
         if (!isHandRightDown && Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_HAND_RIGHT) > TRIGGER_SENSIBILITY)
         {
             if (debug)
                 Debug.Log(Gaze_InputConstants.APELAB_INPUT_HAND_RIGHT + " DOWN");
             isHandRightDown = true;
-            FireOnHandRightDownEvent(new Gaze_InputEventArgs(this.gameObject, VRNode.RightHand, Gaze_InputTypes.HAND_RIGHT_DOWN));
+            FireOnHandRightDownEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.HAND_RIGHT_DOWN));
         }
         if (isHandRightDown && Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_HAND_RIGHT) <= TRIGGER_SENSIBILITY)
         {
             if (debug)
                 Debug.Log(Gaze_InputConstants.APELAB_INPUT_HAND_RIGHT + " UP");
             isHandRightDown = false;
-            FireOnHandRightUpEvent(new Gaze_InputEventArgs(this.gameObject, VRNode.RightHand, Gaze_InputTypes.HAND_RIGHT_UP));
+            FireOnHandRightUpEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.HAND_RIGHT_UP));
         }
 
         if (Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_HAND_LEFT) != 0)
@@ -858,7 +855,7 @@ public class Gaze_InputManager : MonoBehaviour
             if (debug)
                 Debug.Log(Gaze_InputConstants.APELAB_INPUT_HAND_LEFT + Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_HAND_LEFT));
             if (OnHandLeftEvent != null)
-                OnHandLeftEvent(new Gaze_InputEventArgs(this.gameObject, VRNode.LeftHand, Gaze_InputTypes.HAND_LEFT, Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_HAND_LEFT)));
+                OnHandLeftEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.LeftHand, Gaze_InputTypes.HAND_LEFT, Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_HAND_LEFT)));
         }
         if (!isHandLeftDown && Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_HAND_LEFT) > TRIGGER_SENSIBILITY)
         {
@@ -866,7 +863,7 @@ public class Gaze_InputManager : MonoBehaviour
                 Debug.Log(Gaze_InputConstants.APELAB_INPUT_HAND_LEFT + " DOWN");
             isHandLeftDown = true;
             if (OnHandLeftDownEvent != null)
-                OnHandLeftDownEvent(new Gaze_InputEventArgs(this.gameObject, VRNode.LeftHand, Gaze_InputTypes.HAND_LEFT_DOWN));
+                OnHandLeftDownEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.LeftHand, Gaze_InputTypes.HAND_LEFT_DOWN));
         }
         if (isHandLeftDown && Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_HAND_LEFT) <= TRIGGER_SENSIBILITY)
         {
@@ -874,7 +871,7 @@ public class Gaze_InputManager : MonoBehaviour
                 Debug.Log(Gaze_InputConstants.APELAB_INPUT_HAND_LEFT + " UP");
             isHandLeftDown = false;
             if (OnHandLeftUpEvent != null)
-                OnHandLeftUpEvent(new Gaze_InputEventArgs(this.gameObject, VRNode.LeftHand, Gaze_InputTypes.HAND_LEFT_UP));
+                OnHandLeftUpEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.LeftHand, Gaze_InputTypes.HAND_LEFT_UP));
         }
         #endregion
 
@@ -893,10 +890,10 @@ public class Gaze_InputManager : MonoBehaviour
                 Debug.Log("Right Touchpad touched Right");
 
             if (OnPadRightTouchRightEvent != null)
-                OnPadRightTouchRightEvent(new Gaze_InputEventArgs(this.gameObject, VRNode.RightHand, Gaze_InputTypes.PAD_RIGHT_TOUCH_RIGHT));
+                OnPadRightTouchRightEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.PAD_RIGHT_TOUCH_RIGHT));
 
             if (OnRightTouchpadEvent != null)
-                OnRightTouchpadEvent(new Gaze_InputEventArgs(this.gameObject, VRNode.RightHand, Gaze_InputTypes.PAD_RIGHT_TOUCH_RIGHT, e.AxisValue));
+                OnRightTouchpadEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.PAD_RIGHT_TOUCH_RIGHT, e.AxisValue));
         }
         else if (e.AxisValue.x < .1f)
         {
@@ -904,10 +901,10 @@ public class Gaze_InputManager : MonoBehaviour
                 Debug.Log("Right Touchpad touched Left");
 
             if (OnPadRightTouchLeftEvent != null)
-                OnPadRightTouchLeftEvent(new Gaze_InputEventArgs(this.gameObject, VRNode.RightHand, Gaze_InputTypes.PAD_RIGHT_TOUCH_LEFT));
+                OnPadRightTouchLeftEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.PAD_RIGHT_TOUCH_LEFT));
 
             if (OnRightTouchpadEvent != null)
-                OnRightTouchpadEvent(new Gaze_InputEventArgs(this.gameObject, VRNode.RightHand, Gaze_InputTypes.PAD_RIGHT_TOUCH_LEFT, e.AxisValue));
+                OnRightTouchpadEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.PAD_RIGHT_TOUCH_LEFT, e.AxisValue));
         }
 
         if (e.AxisValue.y > 0.1f)
@@ -916,10 +913,10 @@ public class Gaze_InputManager : MonoBehaviour
                 Debug.Log("Right Touchpad touched Down");
 
             if (OnPadRightTouchDownEvent != null)
-                OnPadRightTouchDownEvent(new Gaze_InputEventArgs(this.gameObject, VRNode.RightHand, Gaze_InputTypes.PAD_RIGHT_TOUCH_DOWN));
+                OnPadRightTouchDownEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.PAD_RIGHT_TOUCH_DOWN));
 
             if (OnRightTouchpadEvent != null)
-                OnRightTouchpadEvent(new Gaze_InputEventArgs(this.gameObject, VRNode.RightHand, Gaze_InputTypes.PAD_RIGHT_TOUCH_DOWN, e.AxisValue));
+                OnRightTouchpadEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.PAD_RIGHT_TOUCH_DOWN, e.AxisValue));
 
         }
         else if (e.AxisValue.y < .1f)
@@ -928,10 +925,10 @@ public class Gaze_InputManager : MonoBehaviour
                 Debug.Log("Right Touchpad touched Up");
 
             if (OnPadRightTouchUpEvent != null)
-                OnPadRightTouchUpEvent(new Gaze_InputEventArgs(this.gameObject, VRNode.RightHand, Gaze_InputTypes.PAD_RIGHT_TOUCH_UP));
+                OnPadRightTouchUpEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.PAD_RIGHT_TOUCH_UP));
 
             if (OnRightTouchpadEvent != null)
-                OnRightTouchpadEvent(new Gaze_InputEventArgs(this.gameObject, VRNode.RightHand, Gaze_InputTypes.PAD_RIGHT_TOUCH_UP, e.AxisValue));
+                OnRightTouchpadEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.PAD_RIGHT_TOUCH_UP, e.AxisValue));
         }
     }
 
@@ -947,10 +944,10 @@ public class Gaze_InputManager : MonoBehaviour
                 Debug.Log("Left Touchpad touched Right");
 
             if (OnPadLeftTouchRightEvent != null)
-                OnPadLeftTouchRightEvent(new Gaze_InputEventArgs(this.gameObject, VRNode.LeftHand, Gaze_InputTypes.PAD_LEFT_TOUCH_RIGHT));
+                OnPadLeftTouchRightEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.LeftHand, Gaze_InputTypes.PAD_LEFT_TOUCH_RIGHT));
 
             if (OnLeftTouchpadEvent != null)
-                OnLeftTouchpadEvent(new Gaze_InputEventArgs(this.gameObject, VRNode.RightHand, Gaze_InputTypes.PAD_LEFT_TOUCH_RIGHT, e.AxisValue));
+                OnLeftTouchpadEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.PAD_LEFT_TOUCH_RIGHT, e.AxisValue));
         }
         else if (e.AxisValue.x < .1f)
         {
@@ -958,10 +955,10 @@ public class Gaze_InputManager : MonoBehaviour
                 Debug.Log("Left Touchpad touched Left");
 
             if (OnPadLeftTouchLeftEvent != null)
-                OnPadLeftTouchLeftEvent(new Gaze_InputEventArgs(this.gameObject, VRNode.LeftHand, Gaze_InputTypes.PAD_LEFT_TOUCH_LEFT));
+                OnPadLeftTouchLeftEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.LeftHand, Gaze_InputTypes.PAD_LEFT_TOUCH_LEFT));
 
             if (OnLeftTouchpadEvent != null)
-                OnLeftTouchpadEvent(new Gaze_InputEventArgs(this.gameObject, VRNode.RightHand, Gaze_InputTypes.PAD_LEFT_TOUCH_LEFT, e.AxisValue));
+                OnLeftTouchpadEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.PAD_LEFT_TOUCH_LEFT, e.AxisValue));
         }
 
         if (e.AxisValue.y > 0.1f)
@@ -970,10 +967,10 @@ public class Gaze_InputManager : MonoBehaviour
                 Debug.Log("Left Touchpad touched Down");
 
             if (OnPadLeftTouchDownEvent != null)
-                OnPadLeftTouchDownEvent(new Gaze_InputEventArgs(this.gameObject, VRNode.LeftHand, Gaze_InputTypes.PAD_LEFT_TOUCH_DOWN));
+                OnPadLeftTouchDownEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.LeftHand, Gaze_InputTypes.PAD_LEFT_TOUCH_DOWN));
 
             if (OnLeftTouchpadEvent != null)
-                OnLeftTouchpadEvent(new Gaze_InputEventArgs(this.gameObject, VRNode.RightHand, Gaze_InputTypes.PAD_LEFT_TOUCH_DOWN, e.AxisValue));
+                OnLeftTouchpadEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.PAD_LEFT_TOUCH_DOWN, e.AxisValue));
 
         }
         else if (e.AxisValue.y < .1f)
@@ -982,10 +979,10 @@ public class Gaze_InputManager : MonoBehaviour
                 Debug.Log("Left Touchpad touched Up");
 
             if (OnPadLeftTouchUpEvent != null)
-                OnPadLeftTouchUpEvent(new Gaze_InputEventArgs(this.gameObject, VRNode.LeftHand, Gaze_InputTypes.PAD_LEFT_TOUCH_UP));
+                OnPadLeftTouchUpEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.LeftHand, Gaze_InputTypes.PAD_LEFT_TOUCH_UP));
 
             if (OnLeftTouchpadEvent != null)
-                OnLeftTouchpadEvent(new Gaze_InputEventArgs(this.gameObject, VRNode.RightHand, Gaze_InputTypes.PAD_LEFT_TOUCH_UP, e.AxisValue));
+                OnLeftTouchpadEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.PAD_LEFT_TOUCH_UP, e.AxisValue));
         }
     }
 

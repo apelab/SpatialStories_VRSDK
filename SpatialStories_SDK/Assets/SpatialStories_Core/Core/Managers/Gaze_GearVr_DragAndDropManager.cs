@@ -336,9 +336,9 @@ namespace Gaze
             {
                 if (e.IsGrabbing)
                 {
-                    if (e.ControllerObjectPair.Key.Equals(VRNode.LeftHand))
+                    if (e.ControllerObjectPair.Key.Equals(UnityEngine.XR.XRNode.LeftHand))
                         Grab(Gaze_InputManager.instance.LeftController);
-                    else if (e.ControllerObjectPair.Key.Equals(VRNode.RightHand))
+                    else if (e.ControllerObjectPair.Key.Equals(UnityEngine.XR.XRNode.RightHand))
                         Grab(Gaze_InputManager.instance.RightController);
                 }
                 else

@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Gaze
 {
+
     [CanEditMultipleObjects]
     public abstract class Gaze_Editor : Editor
     {

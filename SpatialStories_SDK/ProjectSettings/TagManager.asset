@@ -14,10 +14,10 @@ TagManager:
   - 
   - 
   - Teleport
-  - 
-  - 
-  - 
-  - 
+  - Gaze_HandHover
+  - Gaze_Proximity
+  - Gaze_Gaze
+  - Custom Collision
   - 
   - 
   - 

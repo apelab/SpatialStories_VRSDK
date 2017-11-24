@@ -53,7 +53,7 @@ namespace Gaze
         }
 
         internal void AlterSelectedVisuals(bool enable, List<int> selectedRenderers)
-        {
+        {//TODO: @ancestral (Maybe the renderers are not prepared)
             foreach (int r in selectedRenderers)
             {
                 allRenderers[r].enabled = enable;

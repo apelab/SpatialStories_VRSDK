@@ -70,7 +70,7 @@ namespace Gaze
             }
 
             if (touchpadDown)
-                teleporter.CalculateArc();
+                teleporter.ComputeParabola();
 
         }
 
@@ -93,7 +93,6 @@ namespace Gaze
 
             if (teleporter._goodSpot)
             {
-                teleporter.gyroInstance.SetActive(true);
 
                 if (teleporter.OrientOnTeleport)
                 {

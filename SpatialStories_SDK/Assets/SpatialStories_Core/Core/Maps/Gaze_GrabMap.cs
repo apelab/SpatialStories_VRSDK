@@ -25,7 +25,7 @@ namespace Gaze
     public class Gaze_GrabEntry
     {
         // hand associated
-        public VRNode hand;
+        public UnityEngine.XR.XRNode hand;
 
         /// <summary>
         /// The associated proximity collider.
@@ -59,7 +59,7 @@ namespace Gaze
         {
             Gaze_GrabEntry d = new Gaze_GrabEntry();
             grabEntryList.Add(d);
-            d.hand = VRNode.LeftHand;
+            d.hand = UnityEngine.XR.XRNode.LeftHand;
             return d;
         }
 

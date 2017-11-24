@@ -49,6 +49,8 @@ namespace Gaze
         private AnimationCurve zoomCurve;
         private Gaze_GazeEventArgs gaze_gazeEventArgs;
         private float lastUpdateTime;
+        private int gazeRaycastLayer;
+
 
         public virtual void OnEnable()
         {
@@ -74,6 +76,8 @@ namespace Gaze
             gaze_gazeEventArgs = new Gaze_GazeEventArgs();
             lastUpdateTime = Time.time;
             ray = new Ray();
+            gameObject.layer = LayerMask.NameToLayer(Gaze_HashIDs.LAYER_GAZE);
+            gazeRaycastLayer = 1 << gameObject.layer;
         }
 
         private void findCamera()
@@ -108,7 +112,7 @@ namespace Gaze
                 ray.origin = gazeCamera.transform.position;
                 ray.direction = gazeCamera.transform.forward;
                 hits.Clear();
-                hits.AddRange(Physics.RaycastAll(ray, rayLength));
+                hits.AddRange(Physics.RaycastAll(ray, rayLength, gazeRaycastLayer));
 
                 if (debugMode)
                     Debug.DrawRay(gazeCamera.transform.position, gazeCamera.transform.forward * rayLength, Color.red);
@@ -116,7 +120,6 @@ namespace Gaze
                 // if camera's ray hits something
                 if (hits != null && hits.Count > 0)
                 {
-
                     // construct new current gazed objects list
                     foreach (RaycastHit h in hits)
                     {
@@ -126,7 +129,6 @@ namespace Gaze
                         // if it wasn't in the previous gazed objects list
                         if (!previousGazedObjects.Contains(h.collider.gameObject))
                         {
-
                             // notify every listener with the new current gazed object
                             gaze_gazeEventArgs.Sender = h.collider.gameObject;
                             gaze_gazeEventArgs.IsGazed = true;

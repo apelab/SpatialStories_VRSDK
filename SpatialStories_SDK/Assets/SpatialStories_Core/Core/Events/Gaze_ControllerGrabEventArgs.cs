@@ -40,17 +40,17 @@ public class Gaze_ControllerGrabEventArgs : EventArgs
 
     public Vector3 HitPosition { get { return hitPosition; } }
 
-    private KeyValuePair<VRNode, GameObject> controllerObjectPair;
-    public KeyValuePair<VRNode, GameObject> ControllerObjectPair { get { return controllerObjectPair; } }
+    private KeyValuePair<UnityEngine.XR.XRNode, GameObject> controllerObjectPair;
+    public KeyValuePair<UnityEngine.XR.XRNode, GameObject> ControllerObjectPair { get { return controllerObjectPair; } }
 
-    public Gaze_ControllerGrabEventArgs(object _sender, KeyValuePair<VRNode, GameObject> _dico, bool _isGrabbing)
+    public Gaze_ControllerGrabEventArgs(object _sender, KeyValuePair<UnityEngine.XR.XRNode, GameObject> _dico, bool _isGrabbing)
     {
         sender = _sender;
         controllerObjectPair = _dico;
         isGrabbing = _isGrabbing;
     }
 
-    public Gaze_ControllerGrabEventArgs(object _sender, KeyValuePair<VRNode, GameObject> _dico, bool _isGrabbing, Vector3 _hitPosition)
+    public Gaze_ControllerGrabEventArgs(object _sender, KeyValuePair<UnityEngine.XR.XRNode, GameObject> _dico, bool _isGrabbing, Vector3 _hitPosition)
     {
         sender = _sender;
         controllerObjectPair = _dico;

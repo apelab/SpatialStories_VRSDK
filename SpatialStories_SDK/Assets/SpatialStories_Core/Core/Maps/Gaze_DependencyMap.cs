@@ -15,6 +15,7 @@
 // <web>https://twitter.com/apelab_ch</web>
 // <web>http://www.apelab.ch</web>
 // <date>2014-06-01</date>
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -39,9 +40,16 @@ namespace Gaze
         {
             foreach (Gaze_Dependency d in dependencies)
             {
-                if (d.dependentGameObject.Equals(o))
+                try
                 {
-                    return d;
+                    if (d.dependentGameObject.Equals(o))
+                    {
+                        return d;
+                    }
+                }
+                catch (NullReferenceException ex)
+                {
+                    continue;
                 }
             }
             return null;

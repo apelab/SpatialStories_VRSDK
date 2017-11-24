@@ -68,16 +68,16 @@ namespace Gaze
             Gaze_InputManager.OnControllerGrabEvent += OnControllerGrabEvent;
         }
 
-        private bool IsGrabbingControllerStateValid(bool _isGrabbing, Gaze_HandsEnum _mapHand, VRNode _dicoHand)
+        private bool IsGrabbingControllerStateValid(bool _isGrabbing, Gaze_HandsEnum _mapHand, UnityEngine.XR.XRNode _dicoHand)
         {
             if (_mapHand.Equals(Gaze_HandsEnum.BOTH))
             {
                 // check left hand state is ok
-                if (_dicoHand.Equals(VRNode.LeftHand))
+                if (_dicoHand.Equals(UnityEngine.XR.XRNode.LeftHand))
                     grabStateLeftValid = (_isGrabbing && gazeConditionsScript.grabMap.grabStateLeftIndex.Equals((int)Gaze_GrabStates.GRAB)) || (!_isGrabbing && gazeConditionsScript.grabMap.grabStateLeftIndex.Equals((int)Gaze_GrabStates.UNGRAB));
 
                 // check right hand state is ok
-                if (_dicoHand.Equals(VRNode.RightHand))
+                if (_dicoHand.Equals(UnityEngine.XR.XRNode.RightHand))
                     grabStateRightValid = (_isGrabbing && gazeConditionsScript.grabMap.grabStateRightIndex.Equals((int)Gaze_GrabStates.GRAB)) || (!_isGrabbing && gazeConditionsScript.grabMap.grabStateRightIndex.Equals((int)Gaze_GrabStates.UNGRAB));
 
                 return grabStateLeftValid || grabStateRightValid;
@@ -109,12 +109,12 @@ namespace Gaze
 
         private bool ValidateGrabController(Gaze_ControllerGrabEventArgs e)
         {
-            VRNode dicoVRNode = e.ControllerObjectPair.Key;
+            UnityEngine.XR.XRNode dicoVRNode = e.ControllerObjectPair.Key;
             GameObject grabbedObject = e.ControllerObjectPair.Value;
 
             // get the hand VRNode from the event
-            bool isGrabbingControllerLeft = e.ControllerObjectPair.Key == VRNode.LeftHand;
-            VRNode eventVRNode = isGrabbingControllerLeft ? VRNode.LeftHand : VRNode.RightHand;
+            bool isGrabbingControllerLeft = e.ControllerObjectPair.Key == UnityEngine.XR.XRNode.LeftHand;
+            UnityEngine.XR.XRNode eventVRNode = isGrabbingControllerLeft ? UnityEngine.XR.XRNode.LeftHand : UnityEngine.XR.XRNode.RightHand;
 
             bool grabbedObjectValid = IsGrabbingObjectValid(grabbedObject, gazeConditionsScript.grabMap.grabHandsIndex);
 
@@ -147,14 +147,14 @@ namespace Gaze
         }
 
 
-        private bool IsGrabbingControllerInMap(VRNode grabbingController)
+        private bool IsGrabbingControllerInMap(UnityEngine.XR.XRNode grabbingController)
         {
             for (int i = 0; i < gazeConditionsScript.grabMap.grabEntryList.Count; i++)
             {
                 if (gazeConditionsScript.grabMap.grabHandsIndex == (int)Gaze_HandsEnum.BOTH)
                 {
-                    if (gazeConditionsScript.grabMap.grabEntryList[i].hand.Equals(VRNode.RightHand) ||
-                        gazeConditionsScript.grabMap.grabEntryList[i].hand.Equals(VRNode.LeftHand))
+                    if (gazeConditionsScript.grabMap.grabEntryList[i].hand.Equals(UnityEngine.XR.XRNode.RightHand) ||
+                        gazeConditionsScript.grabMap.grabEntryList[i].hand.Equals(UnityEngine.XR.XRNode.LeftHand))
                         return true;
                 }
                 else

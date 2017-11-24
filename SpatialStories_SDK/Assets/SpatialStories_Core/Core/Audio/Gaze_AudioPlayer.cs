@@ -42,7 +42,6 @@ namespace Gaze
             public bool loopPlaylistOnce;
             public int track;
             public int clipIndex = -1;
-            public float timer;
             public float fadeTimer;
             public float fadeStartingVolume;
 
@@ -51,13 +50,22 @@ namespace Gaze
 
             public int key;
 
+            public float timer
+            {
+                get { return audioSource.time; }
+            }
+
+            public bool isPlaying
+            {
+                get { return audioSource.isPlaying; }
+            }
+
             public Gaze_AudioSource(AudioSource audioSource)
             {
                 this.audioState = AudioState.STOPPED;
                 this.nextAudioState = AudioState.STOPPED;
 
                 this.audioSource = audioSource;
-                this.timer = 0f;
                 this.fadeTimer = 0f;
                 this.fadeStartingVolume = 0f;
             }
@@ -70,11 +78,6 @@ namespace Gaze
             public void setNextState(AudioState newAudioState)
             {
                 nextAudioState = newAudioState;
-            }
-
-            public void setTimer(float time)
-            {
-                this.timer = time;
             }
 
             public void setFadeTimer(float time)
@@ -158,6 +161,7 @@ namespace Gaze
                         this.sequence[i] = sequence[i];
                         this.fadeInBetween[i] = fadeInBetween[i];
                         this.loopOnLast[i] = loopOnLast[i];
+                        this.lastClipIndex[i] = -1;
 
                     }
                 }
@@ -204,6 +208,8 @@ namespace Gaze
         private float fadeOutDeactTime;
         private AnimationCurve fadeOutDeactCurve;
 
+        public bool NeedsToUpdate = false;
+
         public int setParameters(AudioSource targetaudioSource, Gaze_AudioPlayList audioClips, Gaze_Actions.LOOP_MODES[] loop, Gaze_Actions.AUDIO_SEQUENCE[] sequence, bool[] fadeInBetween, float volumeMin, float volumeMax, bool duckingEnabled, float fadeSpeed, float fadeInTime, float fadeOutTime, bool fadeInEnabled, bool fadeOutEnabled, AnimationCurve fadeInCurve, AnimationCurve fadeOutCurve, bool[] activeTriggerStatesAudio, bool forceStop, bool allowMultiple, int maxConcurrentSound, bool randomizePitch, float minPitch, float maxPitch, bool[] loopOnLast, bool stopOthers)
         {
             audioSource = gameObject.GetComponent<AudioSource>();
@@ -231,6 +237,9 @@ namespace Gaze
 
         void Update()
         {
+            if (!NeedsToUpdate)
+                return;
+
             for (int i = 0; i < audios.Count; i++)
             {
                 int key_ = audios[i].key;
@@ -273,7 +282,7 @@ namespace Gaze
                                     startPlaying(audios.Count - 1);
                                 }
                             }
-                            else if (audios[i].timer <= 0 && !audios[i].loop)
+                            else if (!audios[i].isPlaying && !audios[i].loop)
                             {
                                 if (audios[i].loopPlaylist)
                                 {
@@ -285,26 +294,19 @@ namespace Gaze
                                     {
                                         startPlaying(i);
                                     }
-                                    else if (audiosActions[key_].loopOnLast[audios[i].track])
-                                    {
-                                        audios[i].loop = true;
-                                        audios[i].audioSource.loop = true;
-                                    }
                                 }
                                 else
                                 {
                                     audios[i].Stop();
                                     audiosActions[key_].nAudioPlaying--;
-
                                 }
                             }
-                            else if (audios[i].timer <= 0 && audios[i].audioSource.loop)
+                            else if (!audios[i].isPlaying && audios[i].audioSource.loop)
                             {
                                 if (audiosActions[key_].randomizePitch)
                                 {
                                     audios[i].audioSource.pitch = Random.Range(audiosActions[key_].minPitch, audiosActions[key_].maxPitch);
                                 }
-                                audios[i].setTimer(audios[i].audioSource.clip.length);
                             }
 
                             break;
@@ -328,19 +330,18 @@ namespace Gaze
                                     startPlaying(audios.Count - 1);
                                 }
                             }
-                            else if (audios[i].timer <= 0 && !audios[i].loop)
+                            else if (!audios[i].isPlaying && !audios[i].loop)
                             {
                                 audios[i].Stop();
                                 audiosActions[key_].nAudioPlaying--;
 
                             }
-                            else if (audios[i].timer <= 0 && audios[i].loop)
+                            else if (!audios[i].isPlaying && audios[i].loop)
                             {
                                 if (audiosActions[key_].randomizePitch)
                                 {
                                     audios[i].audioSource.pitch = Random.Range(audiosActions[key_].minPitch, audiosActions[key_].maxPitch);
                                 }
-                                audios[i].setTimer(audios[i].audioSource.clip.length);
                             }
                             else
                             {
@@ -371,8 +372,6 @@ namespace Gaze
                             break;
                         }
                 }
-
-                audios[i].setTimer(Mathf.Max(audios[i].timer - Time.deltaTime, 0f));
             }
             frame_count++;
 
@@ -405,11 +404,17 @@ namespace Gaze
 
             if (audiosActions[key_].sequence[audios[i].track] == Gaze_Actions.AUDIO_SEQUENCE.Random)
             {
-                audios[i].clipIndex = (audios[i].clipIndex + Random.Range(0, audiosActions[key_].clips.Count(audios[i].track) - 1));
+                audios[i].clipIndex = (Random.Range(0, audiosActions[key_].clips.Count(audios[i].track) - 1));
             }
             else
             {
                 audios[i].clipIndex++;
+            }
+
+            if (audiosActions[key_].clips.Count(audios[i].track) == 0)
+            {
+                Debug.LogWarning(GetComponentInParent<Gaze_InteractiveObject>() + " has no audio clip to play !");
+                return;
             }
 
             audios[i].clipIndex %= audiosActions[key_].clips.Count(audios[i].track);
@@ -439,8 +444,14 @@ namespace Gaze
                 audios[i].loop = audiosActions[key_].loopAudio[audios[i].track] == Gaze_Actions.LOOP_MODES.Single;
                 audios[i].loopPlaylist = audiosActions[key_].loopAudio[audios[i].track] == Gaze_Actions.LOOP_MODES.Playlist;
                 audios[i].loopPlaylistOnce = audiosActions[key_].loopAudio[audios[i].track] == Gaze_Actions.LOOP_MODES.PlaylistOnce;
+
+                if (audios[i].clipIndex == audiosActions[key_].clips.Count(audios[i].track) - 1 && audiosActions[key_].loopOnLast[audios[i].track])
+                {
+                    audios[i].loop = true;
+                    audios[i].audioSource.loop = true;
+                }
+
                 audios[i].audioSource.Play();
-                audios[i].setTimer(audios[i].audioSource.clip.length);
             }
         }
 
@@ -493,13 +504,14 @@ namespace Gaze
             {
                 Gaze_AudioSource available_AS = null;
 
-                if (nonAvailable(out available_AS))
+                if (!getAvailable(out available_AS))
                 {
                     AudioSource newAudioSource = gameObject.AddComponent<AudioSource>();
                     newAudioSource.hideFlags = HideFlags.HideInInspector;
-                    audios.Add(new Gaze_AudioSource(newAudioSource));
-                    audios[audios.Count - 1].clipIndex = audiosActions[key].lastClipIndex[index];
-                    audios[audios.Count - 1].key = key;
+                    Gaze_AudioSource toAdd = new Gaze_AudioSource(newAudioSource);
+                    toAdd.clipIndex = audiosActions[key].lastClipIndex[index];
+                    toAdd.key = key;
+                    audios.Add(toAdd);
                 }
                 else
                 {
@@ -536,7 +548,6 @@ namespace Gaze
 
         public void stopAudio()
         {
-            Debug.Log("stopping");
             foreach (var a in audios)
             {
                 if (fadeOutDeactEnabled)
@@ -580,24 +591,24 @@ namespace Gaze
         {
             foreach (var a in audios)
             {
-                if (a.key == key && (a.audioState != AudioState.STOPPED || a.nextAudioState != AudioState.STOPPED)) return true;
+                if (a.key == key && (a.audioState != AudioState.STOPPED && a.nextAudioState != AudioState.STOPPED)) return true;
             }
             return false;
         }
 
-        private bool nonAvailable(out Gaze_AudioSource gas)
+        private bool getAvailable(out Gaze_AudioSource gas)
         {
             gas = null;
-            if (audios.Count < 1) return true;
+            if (audios.Count < 1) return false;
             foreach (var a in audios)
             {
-                if (a.nextAudioState == AudioState.STOPPED && a.audioState == AudioState.STOPPED)
+                if (a.nextAudioState == AudioState.STOPPED && a.audioState == AudioState.STOPPED && !a.isPlaying)
                 {
                     gas = a;
-                    return false;
+                    return true;
                 }
             }
-            return true;
+            return false;
         }
 
         private void fadeIn(int i)

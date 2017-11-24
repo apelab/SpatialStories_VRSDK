@@ -2,13 +2,11 @@
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
-using UnityEngine;
 
 namespace Gaze
 {
     public class Gaze_ProximityCondition : Gaze_AbstractCondition
     {
-        private Collider gazeCollider;
         private int entryInGroupIndex;
 
         /// <summary>
@@ -55,9 +53,10 @@ namespace Gaze
 
             foreach (Gaze_ProximityEntry pe in gazeConditionsScript.proximityMap.proximityEntryList)
             {
-                foreach (Gaze_InteractiveObject go in pe.CollidingObjects)
+                //TODO @apelab modify this method because it displays multiple times the same object
+                for (int i = 0; i < pe.CollidingObjects.Count; i++)
                 {
-                    objectsInProximity = string.Concat(objectsInProximity, ", ", go.name);
+                    objectsInProximity = string.Concat(objectsInProximity, ", ", pe.CollidingObjects[i].name);
                 }
             }
             if (objectsInProximity.Length > 0)
@@ -90,6 +89,7 @@ namespace Gaze
         }
 
         private int collisionsOccuringCount = 0;
+
         /// <summary>
         /// Checks the proximities conditions validity.
         /// </summary>
@@ -98,10 +98,10 @@ namespace Gaze
         private bool HandleProximity(Gaze_ProximityEventArgs e)
         {
             // get colliding objects
-            Gaze_InteractiveObject sender = ((Gaze_InteractiveObject)e.Sender).GetComponentInChildren<Gaze_Proximity>().IOScript;
-            Gaze_InteractiveObject other = ((Gaze_InteractiveObject)e.Other).GetComponentInChildren<Gaze_Proximity>().IOScript;
-            // make sure the collision concerns two objects in the list of proximities (-1 if NOT)
+            Gaze_InteractiveObject sender = ((Gaze_InteractiveObject)e.Sender).Proximity.IOScript;
+            Gaze_InteractiveObject other = ((Gaze_InteractiveObject)e.Other).Proximity.IOScript;
 
+            // make sure the collision concerns two objects in the list of proximities (-1 if NOT)
             int otherIndex = IsCollidingObjectsInList(other, sender);
             //				Debug.Log ("otherIndex = " + otherIndex);
             if (otherIndex != -1)
@@ -115,14 +115,13 @@ namespace Gaze
                     // if the sender is normal entry, add colliding object to it
                     if (otherIndex > -1)
                     {
-                        gazeConditionsScript.proximityMap.AddCollidingObjectToEntry(gazeConditionsScript.proximityMap.proximityEntryList[otherIndex], sender.GetComponentInChildren<Gaze_Proximity>().IOScript);
+                        gazeConditionsScript.proximityMap.AddCollidingObjectToEntry(gazeConditionsScript.proximityMap.proximityEntryList[otherIndex], sender.Proximity.IOScript);
                     }
                     // if the sender is an entryGroup (then otherIndex starts at -2 and goes down instead of going up), add colliding object to the entry of the group that triggered the event
                     else
                     {
-                        gazeConditionsScript.proximityMap.AddCollidingObjectToEntry(gazeConditionsScript.proximityMap.proximityEntryGroupList[-otherIndex - 2].proximityEntries[entryInGroupIndex], sender.GetComponentInChildren<Gaze_Proximity>().IOScript);
+                        gazeConditionsScript.proximityMap.AddCollidingObjectToEntry(gazeConditionsScript.proximityMap.proximityEntryGroupList[-otherIndex - 2].proximityEntries[entryInGroupIndex], sender.Proximity.IOScript);
                     }
-
 
                     if (gazeConditionsScript.proximityMap.proximityStateIndex.Equals((int)Gaze_ProximityStates.ENTER))
                     {
@@ -151,12 +150,12 @@ namespace Gaze
                     if (otherIndex > -1)
                     {
                         // // if the sender is normal entry, remove colliding object to it
-                        gazeConditionsScript.proximityMap.RemoveCollidingObjectToEntry(gazeConditionsScript.proximityMap.proximityEntryList[otherIndex], sender.GetComponentInChildren<Gaze_Proximity>().IOScript);
+                        gazeConditionsScript.proximityMap.RemoveCollidingObjectToEntry(gazeConditionsScript.proximityMap.proximityEntryList[otherIndex], sender.Proximity.IOScript);
                     }
                     else
                     {
                         // if the sender is an entryGroup (then otherIndex starts at -2 and goes down instead of going up), remove colliding object to the entry of the group that triggered the event
-                        gazeConditionsScript.proximityMap.RemoveCollidingObjectToEntry(gazeConditionsScript.proximityMap.proximityEntryGroupList[-otherIndex - 2].proximityEntries[entryInGroupIndex], sender.GetComponentInChildren<Gaze_Proximity>().IOScript);
+                        gazeConditionsScript.proximityMap.RemoveCollidingObjectToEntry(gazeConditionsScript.proximityMap.proximityEntryGroupList[-otherIndex - 2].proximityEntries[entryInGroupIndex], sender.Proximity.IOScript);
                     }
 
                     // if proximity condition is EXIT
@@ -204,7 +203,6 @@ namespace Gaze
             }
             return IsValid;
         }
-
 
         /// <summary>
         /// Check if both colliding objects are in the list.
@@ -275,7 +273,6 @@ namespace Gaze
             }
             return otherIndex;
         }
-
 
         /*
         /// <summary>

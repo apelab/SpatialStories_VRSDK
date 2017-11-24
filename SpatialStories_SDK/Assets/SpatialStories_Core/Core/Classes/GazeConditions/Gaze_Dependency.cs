@@ -13,6 +13,28 @@ namespace Gaze
         /// </summary>
         public GameObject dependentGameObject;
 
+        private Gaze_Conditions dependentConditions;
+        public Gaze_Conditions DependentConditions
+        {
+            get
+            {
+                if (dependentConditions == null)
+                {
+                    if (dependentGameObject == null)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        dependentConditions = dependentGameObject.GetComponent<Gaze_Conditions>();
+                    }
+                    if (dependentConditions == null)
+                        return null;
+                }
+                return dependentConditions;
+            }
+        }
+
         /// <summary>
         /// The index of the trigger state.
         /// </summary>

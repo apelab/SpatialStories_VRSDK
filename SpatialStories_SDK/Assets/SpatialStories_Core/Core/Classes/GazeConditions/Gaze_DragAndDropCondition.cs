@@ -38,7 +38,7 @@ namespace Gaze
         protected override void CustomSetup()
         {
             Gaze_EventManager.OnDragAndDropEvent += OnDragAndDropEvent;
-            Gaze_EventManager.OnTriggerStateEvent += Gaze_EventManager_OnTriggerStateEvent;
+            gazeConditionsScript.OnTriggerStateEvent += Gaze_EventManager_OnTriggerStateEvent;
             Gaze_EventManager.OnDependenciesValidated += Gaze_EventManager_OnDependenciesValidated;
             dragAndDropManager = Gaze_Utils.GetIOFromObject(gazeConditionsScript.gameObject).GetComponent<Gaze_DragAndDropManager>();
         }
@@ -46,7 +46,7 @@ namespace Gaze
         protected override void CustomDispose()
         {
             Gaze_EventManager.OnDragAndDropEvent -= OnDragAndDropEvent;
-            Gaze_EventManager.OnTriggerStateEvent -= Gaze_EventManager_OnTriggerStateEvent;
+            gazeConditionsScript.OnTriggerStateEvent -= Gaze_EventManager_OnTriggerStateEvent;
             Gaze_EventManager.OnDependenciesValidated -= Gaze_EventManager_OnDependenciesValidated;
         }
 
@@ -149,6 +149,9 @@ namespace Gaze
 
         private void HandleDnDCondition(Gaze_DragAndDropEventArgs e)
         {
+            if (gazeConditionsScript.triggerStateIndex == (int)Gaze_TriggerState.BEFORE)
+                return;
+
             // get the drop object and drop target 
             dropTarget = (GameObject)e.DropTarget;
             dropObject = (GameObject)e.DropObject;

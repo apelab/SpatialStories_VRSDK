@@ -33,6 +33,7 @@ namespace Gaze
         private Gaze_Conditions targetConditions;
         private string[] reloadModes;
         private string[] autoTriggerModes;
+        private string[] focusLossModes;
 
         // hierarchy lists
         private List<Gaze_InteractiveObject> hierarchyIOsScripts;
@@ -52,6 +53,7 @@ namespace Gaze
         private string[] dndEventValidatorEnum;
         private string[] dndTargetsModes;
         private List<string> dndTargetsNames;
+        private Gaze_SceneInventory sceneInventory;
         #endregion
 
         void OnEnable()
@@ -63,6 +65,7 @@ namespace Gaze
         {
             targetConditions = (Gaze_Conditions)target;
 
+            focusLossModes = Enum.GetNames(typeof(Gaze_FocusLossMode));
             hierarchyIOsScripts = new List<Gaze_InteractiveObject>();
             hierarchyIOsNames = new List<string>();
             hierarchyIOs = new List<GameObject>();
@@ -80,6 +83,7 @@ namespace Gaze
             dndTargetsModes = Enum.GetNames(typeof(apelab_DnDTargetsModes));
             FetchDnDTargets();
             FetchInputsList();
+            sceneInventory = UnityEngine.Object.FindObjectOfType<Gaze_SceneInventory>(); 
         }
 
         private void FetchDnDTargets()
@@ -114,21 +118,13 @@ namespace Gaze
             {
                 if (!Application.isPlaying)
                 {
+                    EditorGUILayout.Space();
                     // update InteractiveObjects list
                     UpdateInteractiveObjectsList();
 
-                    #region Conditions
-                    DisplayConditionsBlock();
-                    DisplayHandHoverBlock();
-                    DisplayProximityList();
-                    DisplayTouchCondition();
-                    DisplayGrabCondition();
-                    DisplayInputsCondition();
-                    DisplayTeleportCondition();
-                    DisplayDragAndDropCondition();
-                    EditorGUILayout.Space();
-                    #endregion
-
+                    Gaze_EditorUtils.DrawSectionTitle("DEPENDENCIES");
+                    
+                    Gaze_EditorUtils.DrawEditorHint("Use this to create chain reactions with any other interactions in the scene.");
                     #region Dependency
                     // set boolean value accordingly in Trigger settings
                     targetConditions.dependent = EditorGUILayout.ToggleLeft("Dependent", targetConditions.dependent);
@@ -139,7 +135,28 @@ namespace Gaze
                     EditorGUILayout.Space();
                     #endregion
 
+                    #region Conditions
+                    EditorGUILayout.Space();
+
+
+                    Gaze_EditorUtils.DrawSectionTitle("CONDITIONS");
+                    DisplayConditionsBlock();
+                    DisplayProximityList();
+                  
+
+                    DisplayHandHoverBlock();
+                    DisplayTouchCondition();
+                    DisplayGrabCondition();
+                    DisplayInputsCondition();
+                    DisplayTeleportCondition();
+                    DisplayDragAndDropCondition();
+                    EditorGUILayout.Space();
+                    #endregion
+
                     #region Custom Conditions
+                    Gaze_EditorUtils.DrawSectionTitle("CUSTOM CONDITIONS");
+                    Gaze_EditorUtils.DrawEditorHint("Use this to write your custom script and use it as a condition.", false);
+                    Gaze_EditorUtils.DrawEditorHint("See user manual for detailed structure.");
                     targetConditions.customConditionsEnabled = EditorGUILayout.ToggleLeft("Custom Conditions", targetConditions.customConditionsEnabled);
                     if (targetConditions.customConditionsEnabled)
                     {
@@ -152,14 +169,15 @@ namespace Gaze
                     //DisplayWarning();
                     #endregion
 
+                    DisplayDuration();
+
                     #region Delayed ActiveWindow
-                    // toggle button
-                    EditorGUILayout.LabelField("Timeframe", EditorStyles.boldLabel);
+                    Gaze_EditorUtils.DrawSectionTitle("TIMEFRAME");
 
                     // extra block that can be toggled on and off
                     GUILayout.BeginHorizontal();
                     // set boolean value accordingly in Trigger settings
-                    targetConditions.delayed = EditorGUILayout.ToggleLeft("Delayed", targetConditions.delayed);
+                    targetConditions.delayed = EditorGUILayout.ToggleLeft(new GUIContent("Delayed", "Amount of time (seconds) this interaction will have to wait before allowing the user to validate the conditions."), targetConditions.delayed);
                     if (targetConditions.delayed)
                     {
                         DisplayDelayBlock();
@@ -168,7 +186,7 @@ namespace Gaze
 
                     GUILayout.BeginHorizontal();
                     // set boolean value accordingly in Trigger settings
-                    targetConditions.expires = EditorGUILayout.ToggleLeft("Expires", targetConditions.expires);
+                    targetConditions.expires = EditorGUILayout.ToggleLeft(new GUIContent("Expires", "Conditions can be met only during this amount of time. The interaction will then be deactivated."), targetConditions.expires);
                     if (targetConditions.expires)
                     {
                         DisplayExpiresBlock();
@@ -176,7 +194,7 @@ namespace Gaze
                     GUILayout.EndHorizontal();
 
                     // set boolean value accordingly in Trigger settings
-                    targetConditions.autoTriggerModeIndex = EditorGUILayout.Popup("Auto Trigger Mode", targetConditions.autoTriggerModeIndex, autoTriggerModes);
+                    targetConditions.autoTriggerModeIndex = Gaze_EditorUtils.Gaze_HintPopup("Auto Trigger Mode", targetConditions.autoTriggerModeIndex, autoTriggerModes, "START: This option will be removed as actions automatically fire on start\nEND: The action will automatically fire after its expiring window.", 130);
 
                     if (((Gaze_AutoTriggerMode)targetConditions.autoTriggerModeIndex).Equals(Gaze_AutoTriggerMode.END) && !targetConditions.expires)
                     {
@@ -198,10 +216,10 @@ namespace Gaze
 
                     #region Reload
                     // toggle button
-                    EditorGUILayout.LabelField("Reload", EditorStyles.boldLabel);
-
+                    Gaze_EditorUtils.DrawSectionTitle("RELOAD");
+                    
                     // set boolean value accordingly in Trigger settings
-                    targetConditions.reload = EditorGUILayout.ToggleLeft("Reload", targetConditions.reload);
+                    targetConditions.reload = EditorGUILayout.ToggleLeft(new GUIContent("Reload", "Allows you to reload the conditions of an interaction (does not reload dependencies)." ), targetConditions.reload);
 
                     if (targetConditions.reload)
                     {
@@ -216,6 +234,28 @@ namespace Gaze
             // save changes
             base.EndChangeComparision();
             EditorUtility.SetDirty(targetConditions);
+        }
+
+        private void DisplayDuration()
+        {
+            // DURATION
+            Gaze_EditorUtils.DrawSectionTitle("Duration");
+            Gaze_EditorUtils.DrawEditorHint("How much time conditions needs to remain validated.");
+            Gaze_EditorUtils.DrawEditorHint("(Usefull for conditions not instantaneous like gaze, proximity or hand hover.)");
+            EditorGUI.indentLevel++;
+            GUILayout.BeginHorizontal();
+            targetConditions.focusDuration = EditorGUILayout.FloatField("Duration [s]", targetConditions.focusDuration);
+            GUILayout.EndHorizontal();
+            GUILayout.BeginHorizontal();
+            targetConditions.focusLossModeIndex = EditorGUILayout.Popup("Loss Mode", targetConditions.focusLossModeIndex, focusLossModes);
+            if (targetConditions.focusLossModeIndex.Equals((int)Gaze_FocusLossMode.FADE))
+            {
+                targetConditions.FocusLossSpeed = EditorGUILayout.FloatField("Speed Factor", targetConditions.FocusLossSpeed);
+            }
+            GUILayout.EndHorizontal();
+            EditorGUILayout.Space();
+            EditorGUI.indentLevel--;
+            // END OF DURATION
         }
 
         /// <summary>
@@ -282,8 +322,12 @@ namespace Gaze
 
         private void UpdateProximitiesList(GameObject g)
         {
-            Gaze_InteractiveObject proximity = g.GetComponentInChildrenBFS<Gaze_Proximity>().GetComponentInParent<Gaze_InteractiveObject>();
-            hierarchyProximities.Add(proximity);
+            Gaze_Proximity prox = g.GetComponentInChildrenBFS<Gaze_Proximity>();
+            if(prox != null)
+            {
+                Gaze_InteractiveObject proximity = Gaze_Utils.GetIOFromGameObject(prox.gameObject);
+                hierarchyProximities.Add(proximity);
+            }
         }
 
         private void UpdateCustomConditionsList()
@@ -325,7 +369,7 @@ namespace Gaze
         private void DisplayProximityList()
         {
             EditorGUILayout.BeginHorizontal();
-            targetConditions.proximityEnabled = EditorGUILayout.ToggleLeft("Proximity", targetConditions.proximityEnabled);
+            targetConditions.proximityEnabled = EditorGUILayout.ToggleLeft(new GUIContent("Proximity", "Define which IO is in collision with another. Uses the Proximity Collider Zone. Add Rig Group: Add this if you want to use the head or the hands of the user as the proximity zone."), targetConditions.proximityEnabled);
             EditorGUILayout.EndHorizontal();
 
             if (targetConditions.proximityEnabled)
@@ -464,7 +508,7 @@ namespace Gaze
         private void DisplayTouchCondition()
         {
             EditorGUILayout.BeginHorizontal();
-            targetConditions.touchEnabled = EditorGUILayout.ToggleLeft("Touch", targetConditions.touchEnabled);
+            targetConditions.touchEnabled = EditorGUILayout.ToggleLeft(new GUIContent("Touch", "Point and trigger at the selected IO to fire an action. Uses the Hand Hover Collider."), targetConditions.touchEnabled);
             EditorGUILayout.EndHorizontal();
 
             if (targetConditions.touchEnabled)
@@ -488,15 +532,15 @@ namespace Gaze
 
                 if (targetConditions.touchMap.touchHandsIndex.Equals((int)Gaze_HandsEnum.LEFT))
                 {
-                    targetConditions.touchMap.TouchEnitry.hand = VRNode.LeftHand;
+                    targetConditions.touchMap.TouchEnitry.hand = UnityEngine.XR.XRNode.LeftHand;
                 }
                 else if (targetConditions.touchMap.touchHandsIndex.Equals((int)Gaze_HandsEnum.RIGHT))
                 {
-                    targetConditions.touchMap.TouchEnitry.hand = VRNode.RightHand;
+                    targetConditions.touchMap.TouchEnitry.hand = UnityEngine.XR.XRNode.RightHand;
                 }
                 else // We store both in left
                 {
-                    targetConditions.touchMap.TouchEnitry.hand = VRNode.LeftHand;
+                    targetConditions.touchMap.TouchEnitry.hand = UnityEngine.XR.XRNode.LeftHand;
                 }
                 targetConditions.touchMap.touchActionIndex = EditorGUILayout.Popup(targetConditions.touchMap.touchActionIndex, Enum.GetNames(typeof(Gaze_TouchAction)));
 
@@ -521,7 +565,7 @@ namespace Gaze
         private void DisplayGrabCondition()
         {
             EditorGUILayout.BeginHorizontal();
-            targetConditions.grabEnabled = EditorGUILayout.ToggleLeft("Grab", targetConditions.grabEnabled);
+            targetConditions.grabEnabled = EditorGUILayout.ToggleLeft(new GUIContent("Grab", "Checks if an IO is grabbed or released. Uses the Manipulation Collider zone."), targetConditions.grabEnabled);
             EditorGUILayout.EndHorizontal();
 
             if (targetConditions.grabEnabled)
@@ -559,18 +603,18 @@ namespace Gaze
                 {
                     targetConditions.grabMap.grabStateLeftIndex = EditorGUILayout.Popup(targetConditions.grabMap.grabStateLeftIndex, Enum.GetNames(typeof(Gaze_GrabStates)));
                     //Debug.Log("targetConditions.grabMap.grabStateLeftIndex =" + targetConditions.grabMap.grabStateLeftIndex);
-                    targetConditions.grabMap.grabEntryList[0].hand = VRNode.LeftHand;
+                    targetConditions.grabMap.grabEntryList[0].hand = UnityEngine.XR.XRNode.LeftHand;
                 }
                 else if (targetConditions.grabMap.grabHandsIndex.Equals((int)Gaze_HandsEnum.RIGHT))
                 {
                     targetConditions.grabMap.grabStateRightIndex = EditorGUILayout.Popup(targetConditions.grabMap.grabStateRightIndex, Enum.GetNames(typeof(Gaze_GrabStates)));
-                    targetConditions.grabMap.grabEntryList[0].hand = VRNode.RightHand;
+                    targetConditions.grabMap.grabEntryList[0].hand = UnityEngine.XR.XRNode.RightHand;
                 }
                 else
                 {
                     targetConditions.grabMap.grabStateLeftIndex = EditorGUILayout.Popup(targetConditions.grabMap.grabStateLeftIndex, Enum.GetNames(typeof(Gaze_GrabStates)));
                     //Debug.Log("targetConditions.grabMap.grabStateLeftIndex =" + targetConditions.grabMap.grabStateLeftIndex);
-                    targetConditions.grabMap.grabEntryList[0].hand = VRNode.LeftHand;
+                    targetConditions.grabMap.grabEntryList[0].hand = UnityEngine.XR.XRNode.LeftHand;
                 }
 
                 var grabObject = EditorGUILayout.ObjectField(targetConditions.grabMap.grabEntryList[0].interactiveObject, typeof(Gaze_InteractiveObject), true);
@@ -591,7 +635,7 @@ namespace Gaze
         private void DisplayInputsCondition()
         {
             EditorGUILayout.BeginHorizontal();
-            targetConditions.inputsEnabled = EditorGUILayout.ToggleLeft("Inputs", targetConditions.inputsEnabled);
+            targetConditions.inputsEnabled = EditorGUILayout.ToggleLeft(new GUIContent("Inputs", "Choose any controller input available to trigger an action. See unity doc for button mapping."), targetConditions.inputsEnabled);
 
             if (targetConditions.inputsEnabled)
             {
@@ -658,7 +702,7 @@ namespace Gaze
         private void DisplayTeleportCondition()
         {
             EditorGUILayout.BeginHorizontal();
-            targetConditions.teleportEnabled = EditorGUILayout.ToggleLeft("Teleport", targetConditions.teleportEnabled);
+            targetConditions.teleportEnabled = EditorGUILayout.ToggleLeft(new GUIContent("Teleport", "Fire an action when Teleport is Good, Bad, activated or deactivated."), targetConditions.teleportEnabled);
 
             // chose teleport's action mode as a condition
             if (targetConditions.teleportEnabled)
@@ -908,7 +952,7 @@ namespace Gaze
 
         private void DisplayReloadBlock()
         {
-            targetConditions.reloadModeIndex = EditorGUILayout.Popup("Mode", targetConditions.reloadModeIndex, reloadModes);
+            targetConditions.reloadModeIndex = Gaze_EditorUtils.Gaze_HintPopup("Mode", targetConditions.reloadModeIndex, reloadModes, "Reload the trigger Infinitely, for a specific number of times or after a specific script.", 130);
             if (targetConditions.reloadModeIndex.Equals((int)Gaze_ReloadMode.FINITE))
             {
                 targetConditions.reloadMaxRepetitions = EditorGUILayout.IntField("Repetitions", targetConditions.reloadMaxRepetitions);
@@ -974,7 +1018,7 @@ namespace Gaze
 
         private void DisplayConditionsBlock()
         {
-            targetConditions.gazeEnabled = EditorGUILayout.ToggleLeft("Gaze", targetConditions.gazeEnabled);
+            targetConditions.gazeEnabled = EditorGUILayout.ToggleLeft(new GUIContent("Gaze", "Defines which IO to look at to fire an action. Uses the Gaze Collider zone"), targetConditions.gazeEnabled);
 
             if (targetConditions.gazeEnabled)
             {
@@ -1003,6 +1047,7 @@ namespace Gaze
                     }
 
                     EditorGUILayout.EndHorizontal();
+
                 }
             }
             EditorGUILayout.Space();
@@ -1010,7 +1055,7 @@ namespace Gaze
 
         private void DisplayHandHoverBlock()
         {
-            targetConditions.handHoverEnabled = EditorGUILayout.ToggleLeft("Hand Hover", targetConditions.handHoverEnabled);
+            targetConditions.handHoverEnabled = EditorGUILayout.ToggleLeft(new GUIContent("Hand Hover", " Define which IO is hovered with the hand to fire an action. Uses the Hand Hover Collider zone."), targetConditions.handHoverEnabled);
 
             if (targetConditions.handHoverEnabled)
             {
@@ -1021,9 +1066,9 @@ namespace Gaze
                     // Set the chosen hand
                     targetConditions.hoverHandIndex = EditorGUILayout.Popup(targetConditions.hoverHandIndex, Enum.GetNames(typeof(Gaze_HandsEnum)));
                     if (targetConditions.hoverHandIndex == ((int)Gaze_HandsEnum.LEFT))
-                        targetConditions.hoverHand = VRNode.LeftHand;
+                        targetConditions.hoverHand = UnityEngine.XR.XRNode.LeftHand;
                     if (targetConditions.hoverHandIndex == ((int)Gaze_HandsEnum.RIGHT))
-                        targetConditions.hoverHand = VRNode.RightHand;
+                        targetConditions.hoverHand = UnityEngine.XR.XRNode.RightHand;
 
 
                     // Set the state of the hover (In or Out)
@@ -1053,7 +1098,7 @@ namespace Gaze
         private void DisplayDragAndDropCondition()
         {
             EditorGUILayout.BeginHorizontal();
-            targetConditions.dragAndDropEnabled = EditorGUILayout.ToggleLeft("Drag And Drop", targetConditions.dragAndDropEnabled);
+            targetConditions.dragAndDropEnabled = EditorGUILayout.ToggleLeft(new GUIContent("Drag And Drop", "Fire an action when the IO is using Drag and Drop (condition can be set either on the source object or the target)."), targetConditions.dragAndDropEnabled);
             EditorGUILayout.EndHorizontal();
             FetchDnDTargets();
             if (targetConditions.dragAndDropEnabled)
@@ -1112,13 +1157,13 @@ namespace Gaze
             if (GUILayout.Button("+"))
             {
                 // by default, add the first IO in hierarchy
-                targetConditions.dndTargets.Add(Gaze_SceneInventory.Instance.InteractiveObjects[0]);
+                targetConditions.dndTargets.Add(sceneInventory.InteractiveObjects[0]);
 
                 EditorGUILayout.BeginHorizontal();
 
                 if (GUILayout.Button("-"))
                 {
-                    targetConditions.dndTargets.Remove(Gaze_SceneInventory.Instance.InteractiveObjects[0]);
+                    targetConditions.dndTargets.Remove(sceneInventory.InteractiveObjects[0]);
                 }
                 EditorGUILayout.EndHorizontal();
             }
