@@ -131,7 +131,7 @@ Material:
     m_Colors:
     - _Color: {r: 0, g: 0.5448277, b: 1, a: 1}
     - _DslEC: {r: 0.7794118, g: 0.16619812, b: 0.16619812, a: 1}
-    - _EmisColor: {r: 0, g: 0.83448315, b: 1, a: 1}
+    - _EmisColor: {r: 0, g: 0.83448315, b: 1, a: 0.472}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Pan1: {r: 0, g: 0, b: 0, a: 0}
     - _Pan2: {r: 0, g: 0, b: 0, a: 0}
