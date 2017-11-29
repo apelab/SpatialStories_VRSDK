@@ -1,28 +1,21 @@
 fileFormatVersion: 2
-guid: 5ddb8fa4b9c7a7f4cb6d04b4932fe0c5
-timeCreated: 1495189610
-licenseType: Free
+guid: 3484a9e8ec8502242a8b42ba6576e472
+timeCreated: 1511973110
+licenseType: Pro
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
-    100000: murs
-    100002: plafond
-    100004: //RootNode
-    400000: murs
-    400002: plafond
-    400004: //RootNode
-    2300000: murs
-    2300002: plafond
-    3300000: murs
-    3300002: plafond
-    4300000: murs
-    4300002: plafond
+    100000: //RootNode
+    400000: //RootNode
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: uv_rideaux_froufrou
   externalObjects:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: lambert1
-    second: {fileID: 2100000, guid: ce7f76111528cf84a8b9f111bb4a1354, type: 2}
+      name: Material.004
+    second: {fileID: 2100000, guid: 581745333a60434408ece727e2aedef6, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -52,13 +45,13 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 100
+    globalScale: 10
     meshCompression: 0
     addColliders: 0
-    importVisibility: 0
+    importVisibility: 1
     importBlendShapes: 1
-    importCameras: 0
-    importLights: 0
+    importCameras: 1
+    importLights: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
@@ -74,7 +67,7 @@ ModelImporter:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 3
-    normalCalculationMode: 0
+    normalCalculationMode: 4
   importAnimation: 1
   copyAvatar: 0
   humanDescription:
