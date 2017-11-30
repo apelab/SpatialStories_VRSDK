@@ -551,6 +551,64 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!1001 &62517747
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 400000, guid: e437dff024608a240ab71613e157816b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.359
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: e437dff024608a240ab71613e157816b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.048
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: e437dff024608a240ab71613e157816b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.781
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: e437dff024608a240ab71613e157816b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.000000081460335
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: e437dff024608a240ab71613e157816b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: e437dff024608a240ab71613e157816b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: e437dff024608a240ab71613e157816b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: e437dff024608a240ab71613e157816b, type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: e437dff024608a240ab71613e157816b, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: e437dff024608a240ab71613e157816b, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: e437dff024608a240ab71613e157816b, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: e437dff024608a240ab71613e157816b, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d88bb660b7c9b574c9fcd7043e7bb79d, type: 2}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: e437dff024608a240ab71613e157816b, type: 3}
+  m_IsPrefabParent: 0
 --- !u!1 &67523173
 GameObject:
   m_ObjectHideFlags: 0
@@ -1469,7 +1527,7 @@ MonoBehaviour:
     touchActionIndex: 0
   gazeEnabled: 1
   gazeStateIndex: 0
-  gazeIn: 0
+  gazeIn: 1
   touchEnabled: 0
   ActivateOnDependencyMap:
     dependencies: []
@@ -1968,7 +2026,7 @@ MonoBehaviour:
     touchActionIndex: 0
   gazeEnabled: 1
   gazeStateIndex: 0
-  gazeIn: 0
+  gazeIn: 1
   touchEnabled: 0
   ActivateOnDependencyMap:
     dependencies: []
@@ -2777,8 +2835,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 241770139}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.00000022101, y: 0.00000022242, z: 0.00000025361}
-  m_LocalScale: {x: 0.088645615, y: 0.0648937, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.08108335, y: 0.064884864, z: 1}
   m_Children: []
   m_Father: {fileID: 2144270176}
   m_RootOrder: 0
@@ -2922,7 +2980,7 @@ Transform:
   m_GameObject: {fileID: 258204556}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 1135935050}
   m_RootOrder: 0
@@ -2961,8 +3019,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: c316eb0a51a6a664894f5e722368ab15, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 64eb12e6c0c525849b64e5bb0f348a68, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -3717,7 +3775,7 @@ MonoBehaviour:
     touchActionIndex: 0
   gazeEnabled: 1
   gazeStateIndex: 0
-  gazeIn: 0
+  gazeIn: 1
   touchEnabled: 0
   ActivateOnDependencyMap:
     dependencies: []
@@ -4179,7 +4237,7 @@ Transform:
   m_GameObject: {fileID: 454436237}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.00000022101, y: -0.02, z: -0.00000025361}
-  m_LocalScale: {x: 0.020211471, y: 0.022423504, z: 1.01}
+  m_LocalScale: {x: 0.025, y: 0.022423504, z: 1.01}
   m_Children: []
   m_Father: {fileID: 1430401434}
   m_RootOrder: 0
@@ -4323,7 +4381,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a11d97df356699943aab990d9fcca9f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dependent: 0
+  dependent: 1
   requireAllActivators: 0
   requireAllDeactivators: 0
   proximityMap:
@@ -4387,13 +4445,17 @@ MonoBehaviour:
       interactiveObject: {fileID: 0}
     touchHandsIndex: 0
     touchActionIndex: 0
-  gazeEnabled: 1
+  gazeEnabled: 0
   gazeStateIndex: 0
-  gazeIn: 0
+  gazeIn: 1
   touchEnabled: 0
   ActivateOnDependencyMap:
-    dependencies: []
-    AreDependenciesSatisfied: 1
+    dependencies:
+    - IsValid: 0
+      dependentGameObject: {fileID: 429148697}
+      triggerStateIndex: 3
+      onTrigger: 1
+    AreDependenciesSatisfied: 0
   DeactivateOnDependencyMap:
     dependencies: []
     AreDependenciesSatisfied: 0
@@ -4824,7 +4886,7 @@ Transform:
   m_GameObject: {fileID: 489378190}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.023, y: 0.021, z: 1}
+  m_LocalScale: {x: 0.025, y: 0.021, z: 1}
   m_Children: []
   m_Father: {fileID: 1689654489}
   m_RootOrder: 0
@@ -7457,7 +7519,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 02477943ac1eccb4e83b4d63c5cbdb69, type: 2}
+  - {fileID: 2100000, guid: 515b76809fbfd8e41be2a9135e2afbea, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7829,7 +7891,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a11d97df356699943aab990d9fcca9f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dependent: 0
+  dependent: 1
   requireAllActivators: 0
   requireAllDeactivators: 0
   proximityMap:
@@ -7893,13 +7955,17 @@ MonoBehaviour:
       interactiveObject: {fileID: 0}
     touchHandsIndex: 0
     touchActionIndex: 0
-  gazeEnabled: 1
+  gazeEnabled: 0
   gazeStateIndex: 0
-  gazeIn: 0
+  gazeIn: 1
   touchEnabled: 0
   ActivateOnDependencyMap:
-    dependencies: []
-    AreDependenciesSatisfied: 1
+    dependencies:
+    - IsValid: 0
+      dependentGameObject: {fileID: 102280222}
+      triggerStateIndex: 3
+      onTrigger: 1
+    AreDependenciesSatisfied: 0
   DeactivateOnDependencyMap:
     dependencies: []
     AreDependenciesSatisfied: 0
@@ -9618,7 +9684,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a11d97df356699943aab990d9fcca9f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dependent: 0
+  dependent: 1
   requireAllActivators: 0
   requireAllDeactivators: 0
   proximityMap:
@@ -9682,13 +9748,17 @@ MonoBehaviour:
       interactiveObject: {fileID: 0}
     touchHandsIndex: 0
     touchActionIndex: 0
-  gazeEnabled: 1
+  gazeEnabled: 0
   gazeStateIndex: 0
-  gazeIn: 0
+  gazeIn: 1
   touchEnabled: 0
   ActivateOnDependencyMap:
-    dependencies: []
-    AreDependenciesSatisfied: 1
+    dependencies:
+    - IsValid: 0
+      dependentGameObject: {fileID: 1792952080}
+      triggerStateIndex: 3
+      onTrigger: 1
+    AreDependenciesSatisfied: 0
   DeactivateOnDependencyMap:
     dependencies: []
     AreDependenciesSatisfied: 0
@@ -10064,7 +10134,7 @@ Transform:
   m_GameObject: {fileID: 977050300}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 1873829130}
   m_RootOrder: 0
@@ -10103,8 +10173,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: c316eb0a51a6a664894f5e722368ab15, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 64eb12e6c0c525849b64e5bb0f348a68, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -10221,7 +10291,7 @@ MonoBehaviour:
     touchActionIndex: 0
   gazeEnabled: 1
   gazeStateIndex: 0
-  gazeIn: 0
+  gazeIn: 1
   touchEnabled: 0
   ActivateOnDependencyMap:
     dependencies: []
@@ -10897,6 +10967,71 @@ MonoBehaviour:
   ActualHand: 0
   Rotation: {x: 0, y: 0, z: 0, w: 0}
   Position: {x: 0, y: 0, z: 0}
+--- !u!1 &1103214842
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1103214843}
+  - component: {fileID: 1103214844}
+  m_Layer: 0
+  m_Name: Point light
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1103214843
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1103214842}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.387, y: 2.858, z: -10.643}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1244271427}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!108 &1103214844
+Light:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1103214842}
+  m_Enabled: 1
+  serializedVersion: 8
+  m_Type: 2
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 1
+  m_Range: 10
+  m_SpotAngle: 30
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 0
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_Lightmapping: 4
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 1
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
 --- !u!1 &1107565955
 GameObject:
   m_ObjectHideFlags: 0
@@ -12127,6 +12262,7 @@ Transform:
   - {fileID: 773372997}
   - {fileID: 1282441784}
   - {fileID: 690206720}
+  - {fileID: 1103214843}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -12183,7 +12319,7 @@ Transform:
   m_GameObject: {fileID: 1263810944}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 664780323}
   m_RootOrder: 0
@@ -12222,8 +12358,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: c316eb0a51a6a664894f5e722368ab15, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 64eb12e6c0c525849b64e5bb0f348a68, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -13062,7 +13198,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a11d97df356699943aab990d9fcca9f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dependent: 0
+  dependent: 1
   requireAllActivators: 0
   requireAllDeactivators: 0
   proximityMap:
@@ -13126,13 +13262,17 @@ MonoBehaviour:
       interactiveObject: {fileID: 0}
     touchHandsIndex: 0
     touchActionIndex: 0
-  gazeEnabled: 1
+  gazeEnabled: 0
   gazeStateIndex: 0
-  gazeIn: 0
+  gazeIn: 1
   touchEnabled: 0
   ActivateOnDependencyMap:
-    dependencies: []
-    AreDependenciesSatisfied: 1
+    dependencies:
+    - IsValid: 0
+      dependentGameObject: {fileID: 1749880448}
+      triggerStateIndex: 3
+      onTrigger: 1
+    AreDependenciesSatisfied: 0
   DeactivateOnDependencyMap:
     dependencies: []
     AreDependenciesSatisfied: 0
@@ -13857,7 +13997,7 @@ Transform:
   m_GameObject: {fileID: 1448445417}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.09246669, y: 0.064884864, z: 1}
+  m_LocalScale: {x: 0.08108335, y: 0.064884864, z: 1}
   m_Children: []
   m_Father: {fileID: 2122188350}
   m_RootOrder: 1
@@ -14692,7 +14832,7 @@ Transform:
   m_GameObject: {fileID: 1480770399}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 776403461}
   m_RootOrder: 0
@@ -14731,8 +14871,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: c316eb0a51a6a664894f5e722368ab15, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 64eb12e6c0c525849b64e5bb0f348a68, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -14937,7 +15077,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rayLength: 100
-  debugMode: 0
+  debugMode: 1
   gazeCamera: {fileID: 0}
   zoom: 0
   zoomFOV: 10
@@ -15485,7 +15625,7 @@ Transform:
   m_GameObject: {fileID: 1563567075}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 1098332627}
   m_RootOrder: 0
@@ -15524,8 +15664,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: c316eb0a51a6a664894f5e722368ab15, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 64eb12e6c0c525849b64e5bb0f348a68, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -15850,7 +15990,7 @@ Transform:
   m_GameObject: {fileID: 1603951338}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 1117740683}
   m_RootOrder: 0
@@ -15889,8 +16029,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: c316eb0a51a6a664894f5e722368ab15, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 64eb12e6c0c525849b64e5bb0f348a68, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -16838,7 +16978,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a11d97df356699943aab990d9fcca9f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dependent: 0
+  dependent: 1
   requireAllActivators: 0
   requireAllDeactivators: 0
   proximityMap:
@@ -16902,13 +17042,17 @@ MonoBehaviour:
       interactiveObject: {fileID: 0}
     touchHandsIndex: 0
     touchActionIndex: 0
-  gazeEnabled: 1
+  gazeEnabled: 0
   gazeStateIndex: 0
-  gazeIn: 0
+  gazeIn: 1
   touchEnabled: 0
   ActivateOnDependencyMap:
-    dependencies: []
-    AreDependenciesSatisfied: 1
+    dependencies:
+    - IsValid: 0
+      dependentGameObject: {fileID: 150588910}
+      triggerStateIndex: 3
+      onTrigger: 1
+    AreDependenciesSatisfied: 0
   DeactivateOnDependencyMap:
     dependencies: []
     AreDependenciesSatisfied: 0
@@ -17781,7 +17925,7 @@ MonoBehaviour:
     touchActionIndex: 0
   gazeEnabled: 1
   gazeStateIndex: 0
-  gazeIn: 0
+  gazeIn: 1
   touchEnabled: 0
   ActivateOnDependencyMap:
     dependencies: []
@@ -18746,7 +18890,7 @@ MonoBehaviour:
     touchActionIndex: 0
   gazeEnabled: 1
   gazeStateIndex: 0
-  gazeIn: 0
+  gazeIn: 1
   touchEnabled: 0
   ActivateOnDependencyMap:
     dependencies: []
@@ -19467,7 +19611,7 @@ MonoBehaviour:
     touchActionIndex: 0
   gazeEnabled: 1
   gazeStateIndex: 0
-  gazeIn: 0
+  gazeIn: 1
   touchEnabled: 0
   ActivateOnDependencyMap:
     dependencies: []
@@ -19708,7 +19852,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a11d97df356699943aab990d9fcca9f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dependent: 0
+  dependent: 1
   requireAllActivators: 0
   requireAllDeactivators: 0
   proximityMap:
@@ -19772,13 +19916,17 @@ MonoBehaviour:
       interactiveObject: {fileID: 0}
     touchHandsIndex: 0
     touchActionIndex: 0
-  gazeEnabled: 1
+  gazeEnabled: 0
   gazeStateIndex: 0
   gazeIn: 1
   touchEnabled: 0
   ActivateOnDependencyMap:
-    dependencies: []
-    AreDependenciesSatisfied: 1
+    dependencies:
+    - IsValid: 0
+      dependentGameObject: {fileID: 1906141655}
+      triggerStateIndex: 3
+      onTrigger: 1
+    AreDependenciesSatisfied: 0
   DeactivateOnDependencyMap:
     dependencies: []
     AreDependenciesSatisfied: 0
@@ -20565,7 +20713,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1847431878}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1.7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4526772}
@@ -22381,7 +22529,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a11d97df356699943aab990d9fcca9f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dependent: 0
+  dependent: 1
   requireAllActivators: 0
   requireAllDeactivators: 0
   proximityMap:
@@ -22445,13 +22593,17 @@ MonoBehaviour:
       interactiveObject: {fileID: 0}
     touchHandsIndex: 0
     touchActionIndex: 0
-  gazeEnabled: 1
+  gazeEnabled: 0
   gazeStateIndex: 0
-  gazeIn: 0
+  gazeIn: 1
   touchEnabled: 0
   ActivateOnDependencyMap:
-    dependencies: []
-    AreDependenciesSatisfied: 1
+    dependencies:
+    - IsValid: 0
+      dependentGameObject: {fileID: 1702030354}
+      triggerStateIndex: 3
+      onTrigger: 1
+    AreDependenciesSatisfied: 0
   DeactivateOnDependencyMap:
     dependencies: []
     AreDependenciesSatisfied: 0
@@ -23718,7 +23870,7 @@ Transform:
   m_GameObject: {fileID: 1981119952}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 554381332}
   m_RootOrder: 0
@@ -23757,8 +23909,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: c316eb0a51a6a664894f5e722368ab15, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 64eb12e6c0c525849b64e5bb0f348a68, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -24227,7 +24379,7 @@ Transform:
   m_GameObject: {fileID: 2039449403}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 874376588}
   m_RootOrder: 0
@@ -24266,8 +24418,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: c316eb0a51a6a664894f5e722368ab15, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 64eb12e6c0c525849b64e5bb0f348a68, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -24597,7 +24749,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a11d97df356699943aab990d9fcca9f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dependent: 0
+  dependent: 1
   requireAllActivators: 0
   requireAllDeactivators: 0
   proximityMap:
@@ -24661,13 +24813,17 @@ MonoBehaviour:
       interactiveObject: {fileID: 0}
     touchHandsIndex: 0
     touchActionIndex: 0
-  gazeEnabled: 1
+  gazeEnabled: 0
   gazeStateIndex: 0
-  gazeIn: 0
+  gazeIn: 1
   touchEnabled: 0
   ActivateOnDependencyMap:
-    dependencies: []
-    AreDependenciesSatisfied: 1
+    dependencies:
+    - IsValid: 0
+      dependentGameObject: {fileID: 979694710}
+      triggerStateIndex: 3
+      onTrigger: 1
+    AreDependenciesSatisfied: 0
   DeactivateOnDependencyMap:
     dependencies: []
     AreDependenciesSatisfied: 0
