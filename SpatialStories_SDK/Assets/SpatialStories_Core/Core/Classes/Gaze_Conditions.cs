@@ -598,6 +598,7 @@ namespace Gaze
             // if focus is not complete
             if (!runningFocusComplete || focusDuration <= 0f)
             {
+                //Debug.Log("focus adding :" + Time.deltaTime + " to focusTotalTime = " + focusTotalTime);
                 // set the flag
                 focusInProgress = true;
 
@@ -657,6 +658,14 @@ namespace Gaze
 
         private void UpdateTimeFrameStatus()
         {
+            if (DeactivateOnDependencyMap.AreDependenciesSatisfied)
+            {
+                // notify manager
+                SetTriggerState(Gaze_TriggerState.AFTER);
+                canBeTriggered = false;
+                return;
+            }
+
             // while we were not in the time frame
             if (triggerStateIndex == (int)Gaze_TriggerState.BEFORE)
             {
@@ -676,13 +685,13 @@ namespace Gaze
         /// <returns><c>true</c>, if current time is within absolute defined time, <c>false</c> otherwise.</returns>
         private bool IsWithinTimeFrame()
         {
-            if (DeactivateOnDependencyMap.AreDependenciesSatisfied)
-            {
-                // notify manager
-                SetTriggerState(Gaze_TriggerState.AFTER);
-                canBeTriggered = false;
-                return true;
-            }
+            //if (DeactivateOnDependencyMap.AreDependenciesSatisfied)
+            //{
+            //    // notify manager
+            //    SetTriggerState(Gaze_TriggerState.AFTER);
+            //    canBeTriggered = false;
+            //    return true;
+            //}
 
             if (ActivateOnDependencyMap.AreDependenciesSatisfied)
             {

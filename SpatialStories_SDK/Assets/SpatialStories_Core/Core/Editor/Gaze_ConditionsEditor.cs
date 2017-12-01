@@ -20,7 +20,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.VR;
 
 namespace Gaze
 {
@@ -83,7 +82,7 @@ namespace Gaze
             dndTargetsModes = Enum.GetNames(typeof(apelab_DnDTargetsModes));
             FetchDnDTargets();
             FetchInputsList();
-            sceneInventory = UnityEngine.Object.FindObjectOfType<Gaze_SceneInventory>(); 
+            sceneInventory = UnityEngine.Object.FindObjectOfType<Gaze_SceneInventory>();
         }
 
         private void FetchDnDTargets()
@@ -123,7 +122,7 @@ namespace Gaze
                     UpdateInteractiveObjectsList();
 
                     Gaze_EditorUtils.DrawSectionTitle("DEPENDENCIES");
-                    
+
                     Gaze_EditorUtils.DrawEditorHint("Use this to create chain reactions with any other interactions in the scene.");
                     #region Dependency
                     // set boolean value accordingly in Trigger settings
@@ -142,7 +141,7 @@ namespace Gaze
                     Gaze_EditorUtils.DrawSectionTitle("CONDITIONS");
                     DisplayConditionsBlock();
                     DisplayProximityList();
-                  
+
 
                     DisplayHandHoverBlock();
                     DisplayTouchCondition();
@@ -217,9 +216,9 @@ namespace Gaze
                     #region Reload
                     // toggle button
                     Gaze_EditorUtils.DrawSectionTitle("RELOAD");
-                    
+
                     // set boolean value accordingly in Trigger settings
-                    targetConditions.reload = EditorGUILayout.ToggleLeft(new GUIContent("Reload", "Allows you to reload the conditions of an interaction (does not reload dependencies)." ), targetConditions.reload);
+                    targetConditions.reload = EditorGUILayout.ToggleLeft(new GUIContent("Reload", "Allows you to reload the conditions of an interaction (does not reload dependencies)."), targetConditions.reload);
 
                     if (targetConditions.reload)
                     {
@@ -323,7 +322,7 @@ namespace Gaze
         private void UpdateProximitiesList(GameObject g)
         {
             Gaze_Proximity prox = g.GetComponentInChildrenBFS<Gaze_Proximity>();
-            if(prox != null)
+            if (prox != null)
             {
                 Gaze_InteractiveObject proximity = Gaze_Utils.GetIOFromGameObject(prox.gameObject);
                 hierarchyProximities.Add(proximity);
@@ -585,24 +584,9 @@ namespace Gaze
                 EditorGUILayout.BeginHorizontal();
                 targetConditions.grabMap.grabHandsIndex = EditorGUILayout.Popup(targetConditions.grabMap.grabHandsIndex, Enum.GetNames(typeof(Gaze_HandsEnum)));
 
-                //// Set the default collider for the gaze
-                //if (targetConditions.proximityMap.proximityEntryList[i].dependentGameObject == null)
-                //{
-                //    targetConditions.proximityMap.proximityEntryList[i].dependentGameObject = targetConditions.GetComponentInParent<Gaze_InteractiveObject>();
-                //}
-
-                //var proximityObject = EditorGUILayout.ObjectField(targetConditions.proximityMap.proximityEntryList[i].dependentGameObject, typeof(Gaze_InteractiveObject), true);
-
-                //if (proximityObject != null)
-                //    targetConditions.proximityMap.proximityEntryList[i].dependentGameObject = (Gaze_InteractiveObject)proximityObject;
-
-                // if both hands are used
-
-
                 if (targetConditions.grabMap.grabHandsIndex.Equals((int)Gaze_HandsEnum.LEFT))
                 {
                     targetConditions.grabMap.grabStateLeftIndex = EditorGUILayout.Popup(targetConditions.grabMap.grabStateLeftIndex, Enum.GetNames(typeof(Gaze_GrabStates)));
-                    //Debug.Log("targetConditions.grabMap.grabStateLeftIndex =" + targetConditions.grabMap.grabStateLeftIndex);
                     targetConditions.grabMap.grabEntryList[0].hand = UnityEngine.XR.XRNode.LeftHand;
                 }
                 else if (targetConditions.grabMap.grabHandsIndex.Equals((int)Gaze_HandsEnum.RIGHT))
@@ -613,7 +597,7 @@ namespace Gaze
                 else
                 {
                     targetConditions.grabMap.grabStateLeftIndex = EditorGUILayout.Popup(targetConditions.grabMap.grabStateLeftIndex, Enum.GetNames(typeof(Gaze_GrabStates)));
-                    //Debug.Log("targetConditions.grabMap.grabStateLeftIndex =" + targetConditions.grabMap.grabStateLeftIndex);
+                    targetConditions.grabMap.grabStateRightIndex = targetConditions.grabMap.grabStateLeftIndex;
                     targetConditions.grabMap.grabEntryList[0].hand = UnityEngine.XR.XRNode.LeftHand;
                 }
 
