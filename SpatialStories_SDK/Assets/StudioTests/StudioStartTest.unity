@@ -3453,7 +3453,7 @@ MonoBehaviour:
       interactiveObject: {fileID: 325185525}
     grabHandsIndex: 2
     grabStateLeftIndex: 1
-    grabStateRightIndex: 0
+    grabStateRightIndex: 1
   customConditions: []
   triggerStateIndex: 0
   delayDuration: 0
@@ -3483,8 +3483,8 @@ MonoBehaviour:
   focusDuration: 0
   focusLossModeIndex: 0
   FocusLossSpeed: 1
-  proximityEnabled: 1
-  grabEnabled: 0
+  proximityEnabled: 0
+  grabEnabled: 1
   teleportIndex: 0
   teleportEnabled: 0
   inputsEnabled: 0
