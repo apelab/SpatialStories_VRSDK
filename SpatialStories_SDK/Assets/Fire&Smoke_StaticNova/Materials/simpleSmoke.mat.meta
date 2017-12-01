@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 54f5eb5232c6d454098b541afae10fe8
+labels:
+- ParticleSystem
+- Fire
+- Smoke
+- Particles
+- Legacy
+- Animated
+timeCreated: 18446744011573954816
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

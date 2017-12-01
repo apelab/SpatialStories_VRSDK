@@ -800,313 +800,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.1, y: 0.1, z: 0.1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!1 &56848407
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 56848408}
-  - component: {fileID: 56848411}
-  - component: {fileID: 56848410}
-  - component: {fileID: 56848409}
-  m_Layer: 0
-  m_Name: Btn_HoverOn (7)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &56848408
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 56848407}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.39299998, y: -0.34000003, z: 0.025999997}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1775503154}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &56848409
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 56848407}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9fe86aa1e2e51304b81a3f6820a3abdb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isDelayed: 0
-  delayTime: 0
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  multipleActionsInTime: 0
-  rootIO: {fileID: 0}
-  isActive: 1
-  ActionReset: 0
-  ActionVisuals: 0
-  ActionGrab: 0
-  ActionTouch: 0
-  ActionGravity: 0
-  ActionAudio: 0
-  ActionColliders: 0
-  ActionDragAndDrop: 0
-  ActionAnimation: 1
-  DestroyOnTrigger: 0
-  ModifyGrabDistance: 0
-  ModifyTouchDistance: 0
-  ModifyGrabMode: 0
-  grabDistance: 0
-  touchDistance: 0
-  grabModeIndex: 0
-  ModifyDragAndDrop: 0
-  ModifyDragAndDropTargets: 0
-  ModifyDnDMinDistance: 0
-  ModifyDnDSnapBeforeDrop: 0
-  ModifyDnDAttached: 0
-  ModifyDnDRespectAxis: 0
-  dnDMinDistance: 0
-  dnDSnapBeforeDrop: 0
-  dnDRespectXAxis: 0
-  dnDRespectYAxis: 0
-  dnDRespectZAxis: 0
-  dnDRespectXAxisMirror: 0
-  dnDRespectYAxisMirror: 0
-  dnDRespectZAxisMirror: 0
-  ModifyDnDAngleThreshold: 0
-  dnDAngleThreshold: 0
-  DnD_Targets: []
-  visualsScript: {fileID: 247691307}
-  AlterAllVisuals: 1
-  selectedRenderers: 
-  triggerAnimation: 0
-  targetAnimator: {fileID: 36513020}
-  activeTriggerStatesAnim: 0100000000
-  animatorTriggers:
-  - HoverOn
-  - 
-  - 
-  - 
-  - 
-  loopOnLast: 0000000000
-  animationClip:
-    ClipEntries00: []
-    ClipEntries01: []
-    ClipEntries02: []
-    ClipEntries03: []
-    ClipEntries04: []
-  loopAnim: 0000000000000000000000000000000000000000
-  loopAnimType: 0000000000000000000000000000000000000000
-  animationSequence: 0000000000000000000000000000000000000000
-  targetAudioSource: {fileID: 0}
-  activeTriggerStatesAudio: 0100000000
-  audioClips:
-    ClipEntries00: []
-    ClipEntries01: []
-    ClipEntries02: []
-    ClipEntries03: []
-    ClipEntries04: []
-  loopAudio: 0000000000000000000000000000000000000000
-  audio_sequence: 0000000000000000000000000000000000000000
-  fadeInBetween: 0000000000
-  audioClipsNew:
-    ClipEntries00: []
-    ClipEntries01: []
-    ClipEntries02: []
-    ClipEntries03: []
-    ClipEntries04: []
-  loopAudioNew: 0000000000000000000000000000000000000000
-  audioLoopOnLast: 0000000000
-  duckingEnabled: 1
-  fadeInTime: 1
-  fadeOutTime: 1
-  fadeOutDeactTime: 1
-  fadeInCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 1
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 1
-      inSlope: 1
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  fadeOutDeactCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: -1
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 0
-      inSlope: -1
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  fadeOutCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: -1
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 0
-      inSlope: -1
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  fadeInEnabled: 0
-  fadeOutEnabled: 0
-  fadeOutDeactEnabled: 0
-  audioVolumeMin: 0.2
-  audioVolumeMax: 1
-  fadeSpeed: 0.005
-  audio_ForceStop: 0
-  audio_AllowMultiple: 0
-  audio_randomizePitch: 0
-  audio_minPitch: 0
-  audio_maxPitch: 2
-  audio_MaxConcurrentSound: 8
-  audio_stopOthers: 0
-  IO: {fileID: 325185527}
-  triggerNotification: 0
---- !u!114 &56848410
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 56848407}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a11d97df356699943aab990d9fcca9f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dependent: 0
-  requireAllActivators: 0
-  requireAllDeactivators: 0
-  proximityMap:
-    proximityEntryList: []
-    proximityEntryGroupList: []
-    proximityStateIndex: 0
-  grabMap:
-    grabEntryList: []
-    grabHandsIndex: 0
-    grabStateLeftIndex: 0
-    grabStateRightIndex: 0
-  customConditions: []
-  triggerStateIndex: 0
-  delayDuration: 0
-  delayed: 0
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  activeDuration: 0
-  expires: 0
-  isExpireRandom: 0
-  expireRange:
-  - 0
-  - 0
-  autoTriggerModeIndex: 0
-  reload: 1
-  canBeTriggered: 1
-  TriggerCount: 0
-  reloadModeIndex: 1
-  reloadMaxRepetitions: 0
-  reloadCount: 0
-  reloadDelay: 0.1
-  isReloadRandom: 0
-  reloadRange:
-  - 0
-  - 0
-  focusDuration: 0
-  focusLossModeIndex: 0
-  FocusLossSpeed: 1
-  proximityEnabled: 0
-  grabEnabled: 0
-  teleportIndex: 0
-  teleportEnabled: 0
-  inputsEnabled: 0
-  InputsMap:
-    InputsEntries: []
-    AreDependenciesSatisfied: 1
-  requireAllInputs: 0
-  customConditionsEnabled: 0
-  dragAndDropEnabled: 0
-  dndEventValidator: 0
-  dndAnyTarget: 1
-  dndTargetModesIndex: 0
-  dndAttached: 0
-  dndTargets: []
-  requireAllProximities: 0
-  touchMap:
-    TouchEnitry:
-      hand: 4
-      interactiveObject: {fileID: 1551184538}
-    touchHandsIndex: 2
-    touchActionIndex: 0
-  gazeEnabled: 0
-  gazeStateIndex: 0
-  gazeIn: 0
-  touchEnabled: 0
-  ActivateOnDependencyMap:
-    dependencies: []
-    AreDependenciesSatisfied: 1
-  DeactivateOnDependencyMap:
-    dependencies: []
-    AreDependenciesSatisfied: 0
-  gazeColliderIO: {fileID: 0}
-  handHoverEnabled: 1
-  handHoverIO: {fileID: 1551184542}
-  hoverHandIndex: 2
-  hoverHand: 4
-  hoverStateIndex: 0
-  hoverIn: 1
-  ReloadDependencies: 0
-  isActive: 1
-  proximityGroupIndex: 0
-  rigCombinations: []
---- !u!114 &56848411
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 56848407}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c5e5d36d57be5841bfb50b6dbe7c062, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HasActions: 1
-  HasConditions: 1
 --- !u!1 &67127041
 GameObject:
   m_ObjectHideFlags: 0
@@ -1262,313 +955,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 73414815}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &84843961
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 84843962}
-  - component: {fileID: 84843965}
-  - component: {fileID: 84843964}
-  - component: {fileID: 84843963}
-  m_Layer: 0
-  m_Name: Btn_HoverOn (8)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &84843962
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 84843961}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.38899997, y: -0.19100001, z: 0.025999997}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1452077696}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &84843963
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 84843961}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9fe86aa1e2e51304b81a3f6820a3abdb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isDelayed: 0
-  delayTime: 0
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  multipleActionsInTime: 0
-  rootIO: {fileID: 0}
-  isActive: 1
-  ActionReset: 0
-  ActionVisuals: 0
-  ActionGrab: 0
-  ActionTouch: 0
-  ActionGravity: 0
-  ActionAudio: 0
-  ActionColliders: 0
-  ActionDragAndDrop: 0
-  ActionAnimation: 1
-  DestroyOnTrigger: 0
-  ModifyGrabDistance: 0
-  ModifyTouchDistance: 0
-  ModifyGrabMode: 0
-  grabDistance: 0
-  touchDistance: 0
-  grabModeIndex: 0
-  ModifyDragAndDrop: 0
-  ModifyDragAndDropTargets: 0
-  ModifyDnDMinDistance: 0
-  ModifyDnDSnapBeforeDrop: 0
-  ModifyDnDAttached: 0
-  ModifyDnDRespectAxis: 0
-  dnDMinDistance: 0
-  dnDSnapBeforeDrop: 0
-  dnDRespectXAxis: 0
-  dnDRespectYAxis: 0
-  dnDRespectZAxis: 0
-  dnDRespectXAxisMirror: 0
-  dnDRespectYAxisMirror: 0
-  dnDRespectZAxisMirror: 0
-  ModifyDnDAngleThreshold: 0
-  dnDAngleThreshold: 0
-  DnD_Targets: []
-  visualsScript: {fileID: 972000980}
-  AlterAllVisuals: 1
-  selectedRenderers: 
-  triggerAnimation: 0
-  targetAnimator: {fileID: 36513020}
-  activeTriggerStatesAnim: 0100000000
-  animatorTriggers:
-  - HoverOn
-  - 
-  - 
-  - 
-  - 
-  loopOnLast: 0000000000
-  animationClip:
-    ClipEntries00: []
-    ClipEntries01: []
-    ClipEntries02: []
-    ClipEntries03: []
-    ClipEntries04: []
-  loopAnim: 0000000000000000000000000000000000000000
-  loopAnimType: 0000000000000000000000000000000000000000
-  animationSequence: 0000000000000000000000000000000000000000
-  targetAudioSource: {fileID: 0}
-  activeTriggerStatesAudio: 0100000000
-  audioClips:
-    ClipEntries00: []
-    ClipEntries01: []
-    ClipEntries02: []
-    ClipEntries03: []
-    ClipEntries04: []
-  loopAudio: 0000000000000000000000000000000000000000
-  audio_sequence: 0000000000000000000000000000000000000000
-  fadeInBetween: 0000000000
-  audioClipsNew:
-    ClipEntries00: []
-    ClipEntries01: []
-    ClipEntries02: []
-    ClipEntries03: []
-    ClipEntries04: []
-  loopAudioNew: 0000000000000000000000000000000000000000
-  audioLoopOnLast: 0000000000
-  duckingEnabled: 1
-  fadeInTime: 1
-  fadeOutTime: 1
-  fadeOutDeactTime: 1
-  fadeInCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 1
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 1
-      inSlope: 1
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  fadeOutDeactCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: -1
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 0
-      inSlope: -1
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  fadeOutCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: -1
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 0
-      inSlope: -1
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  fadeInEnabled: 0
-  fadeOutEnabled: 0
-  fadeOutDeactEnabled: 0
-  audioVolumeMin: 0.2
-  audioVolumeMax: 1
-  fadeSpeed: 0.005
-  audio_ForceStop: 0
-  audio_AllowMultiple: 0
-  audio_randomizePitch: 0
-  audio_minPitch: 0
-  audio_maxPitch: 2
-  audio_MaxConcurrentSound: 8
-  audio_stopOthers: 0
-  IO: {fileID: 604350924}
-  triggerNotification: 0
---- !u!114 &84843964
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 84843961}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a11d97df356699943aab990d9fcca9f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dependent: 0
-  requireAllActivators: 0
-  requireAllDeactivators: 0
-  proximityMap:
-    proximityEntryList: []
-    proximityEntryGroupList: []
-    proximityStateIndex: 0
-  grabMap:
-    grabEntryList: []
-    grabHandsIndex: 0
-    grabStateLeftIndex: 0
-    grabStateRightIndex: 0
-  customConditions: []
-  triggerStateIndex: 0
-  delayDuration: 0
-  delayed: 0
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  activeDuration: 0
-  expires: 0
-  isExpireRandom: 0
-  expireRange:
-  - 0
-  - 0
-  autoTriggerModeIndex: 0
-  reload: 1
-  canBeTriggered: 1
-  TriggerCount: 0
-  reloadModeIndex: 1
-  reloadMaxRepetitions: 0
-  reloadCount: 0
-  reloadDelay: 0.1
-  isReloadRandom: 0
-  reloadRange:
-  - 0
-  - 0
-  focusDuration: 0
-  focusLossModeIndex: 0
-  FocusLossSpeed: 1
-  proximityEnabled: 0
-  grabEnabled: 0
-  teleportIndex: 0
-  teleportEnabled: 0
-  inputsEnabled: 0
-  InputsMap:
-    InputsEntries: []
-    AreDependenciesSatisfied: 1
-  requireAllInputs: 0
-  customConditionsEnabled: 0
-  dragAndDropEnabled: 0
-  dndEventValidator: 0
-  dndAnyTarget: 1
-  dndTargetModesIndex: 0
-  dndAttached: 0
-  dndTargets: []
-  requireAllProximities: 0
-  touchMap:
-    TouchEnitry:
-      hand: 4
-      interactiveObject: {fileID: 1551184538}
-    touchHandsIndex: 2
-    touchActionIndex: 0
-  gazeEnabled: 0
-  gazeStateIndex: 0
-  gazeIn: 0
-  touchEnabled: 0
-  ActivateOnDependencyMap:
-    dependencies: []
-    AreDependenciesSatisfied: 1
-  DeactivateOnDependencyMap:
-    dependencies: []
-    AreDependenciesSatisfied: 0
-  gazeColliderIO: {fileID: 0}
-  handHoverEnabled: 1
-  handHoverIO: {fileID: 1551184542}
-  hoverHandIndex: 2
-  hoverHand: 4
-  hoverStateIndex: 0
-  hoverIn: 1
-  ReloadDependencies: 0
-  isActive: 1
-  proximityGroupIndex: 0
-  rigCombinations: []
---- !u!114 &84843965
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 84843961}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c5e5d36d57be5841bfb50b6dbe7c062, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HasActions: 1
-  HasConditions: 1
 --- !u!1 &100229173
 GameObject:
   m_ObjectHideFlags: 0
@@ -2243,7 +1629,7 @@ MonoBehaviour:
   AlterAllVisuals: 1
   selectedRenderers: 
   triggerAnimation: 0
-  targetAnimator: {fileID: 1622205723}
+  targetAnimator: {fileID: 652715272}
   activeTriggerStatesAnim: 0100000000
   animatorTriggers:
   - HoverOff
@@ -2440,7 +1826,7 @@ MonoBehaviour:
     AreDependenciesSatisfied: 0
   gazeColliderIO: {fileID: 0}
   handHoverEnabled: 1
-  handHoverIO: {fileID: 1551184542}
+  handHoverIO: {fileID: 1622205724}
   hoverHandIndex: 2
   hoverHand: 4
   hoverStateIndex: 1
@@ -2621,7 +2007,7 @@ MonoBehaviour:
   AlterAllVisuals: 1
   selectedRenderers: 
   triggerAnimation: 0
-  targetAnimator: {fileID: 1099307729}
+  targetAnimator: {fileID: 1920836946}
   activeTriggerStatesAnim: 0100000000
   animatorTriggers:
   - HoverOff
@@ -2818,7 +2204,7 @@ MonoBehaviour:
     AreDependenciesSatisfied: 0
   gazeColliderIO: {fileID: 0}
   handHoverEnabled: 1
-  handHoverIO: {fileID: 1551184542}
+  handHoverIO: {fileID: 1099307730}
   hoverHandIndex: 2
   hoverHand: 4
   hoverStateIndex: 1
@@ -3108,13 +2494,15 @@ MonoBehaviour:
   requireAllActivators: 0
   requireAllDeactivators: 0
   proximityMap:
-    proximityEntryList: []
+    proximityEntryList:
+    - dependentGameObject: {fileID: 604350924}
+    - dependentGameObject: {fileID: 332464716}
     proximityEntryGroupList: []
-    proximityStateIndex: 0
+    proximityStateIndex: 1
   grabMap:
     grabEntryList:
     - hand: 4
-      interactiveObject: {fileID: 604350922}
+      interactiveObject: {fileID: 325185525}
     grabHandsIndex: 2
     grabStateLeftIndex: 1
     grabStateRightIndex: 0
@@ -3133,10 +2521,10 @@ MonoBehaviour:
   - 0
   - 0
   autoTriggerModeIndex: 0
-  reload: 0
+  reload: 1
   canBeTriggered: 1
   TriggerCount: 0
-  reloadModeIndex: 0
+  reloadModeIndex: 1
   reloadMaxRepetitions: 0
   reloadCount: 0
   reloadDelay: 0
@@ -3147,8 +2535,8 @@ MonoBehaviour:
   focusDuration: 0
   focusLossModeIndex: 0
   FocusLossSpeed: 1
-  proximityEnabled: 0
-  grabEnabled: 1
+  proximityEnabled: 1
+  grabEnabled: 0
   teleportIndex: 0
   teleportEnabled: 0
   inputsEnabled: 0
@@ -3190,7 +2578,11 @@ MonoBehaviour:
   ReloadDependencies: 0
   isActive: 1
   proximityGroupIndex: 0
-  rigCombinations: []
+  rigCombinations:
+  - '  ||  Head (IO)  ||  Left Hand (IO)  ||  '
+  - '  ||  Head (IO)  ||  Right Hand (IO)  ||  '
+  - '  ||  Left Hand (IO)  ||  Right Hand (IO)  ||  '
+  - '  ||  Head (IO)  ||  Left Hand (IO)  ||  Right Hand (IO)  ||  '
 --- !u!114 &175253039
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3385,7 +2777,7 @@ MonoBehaviour:
   AlterAllVisuals: 1
   selectedRenderers: 
   triggerAnimation: 0
-  targetAnimator: {fileID: 314776044}
+  targetAnimator: {fileID: 1473120374}
   activeTriggerStatesAnim: 0100000000
   animatorTriggers:
   - HoverOff
@@ -3582,7 +2974,7 @@ MonoBehaviour:
     AreDependenciesSatisfied: 0
   gazeColliderIO: {fileID: 0}
   handHoverEnabled: 1
-  handHoverIO: {fileID: 1551184542}
+  handHoverIO: {fileID: 314776045}
   hoverHandIndex: 2
   hoverHand: 4
   hoverStateIndex: 1
@@ -3866,7 +3258,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1775503154}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &199368112
 MonoBehaviour:
@@ -4050,9 +3442,11 @@ MonoBehaviour:
   requireAllActivators: 0
   requireAllDeactivators: 0
   proximityMap:
-    proximityEntryList: []
+    proximityEntryList:
+    - dependentGameObject: {fileID: 325185527}
+    - dependentGameObject: {fileID: 332464716}
     proximityEntryGroupList: []
-    proximityStateIndex: 0
+    proximityStateIndex: 1
   grabMap:
     grabEntryList:
     - hand: 4
@@ -4075,10 +3469,10 @@ MonoBehaviour:
   - 0
   - 0
   autoTriggerModeIndex: 0
-  reload: 0
+  reload: 1
   canBeTriggered: 1
   TriggerCount: 0
-  reloadModeIndex: 0
+  reloadModeIndex: 1
   reloadMaxRepetitions: 0
   reloadCount: 0
   reloadDelay: 0
@@ -4089,8 +3483,8 @@ MonoBehaviour:
   focusDuration: 0
   focusLossModeIndex: 0
   FocusLossSpeed: 1
-  proximityEnabled: 0
-  grabEnabled: 1
+  proximityEnabled: 1
+  grabEnabled: 0
   teleportIndex: 0
   teleportEnabled: 0
   inputsEnabled: 0
@@ -4132,7 +3526,11 @@ MonoBehaviour:
   ReloadDependencies: 0
   isActive: 1
   proximityGroupIndex: 0
-  rigCombinations: []
+  rigCombinations:
+  - '  ||  Head (IO)  ||  Left Hand (IO)  ||  '
+  - '  ||  Head (IO)  ||  Right Hand (IO)  ||  '
+  - '  ||  Left Hand (IO)  ||  Right Hand (IO)  ||  '
+  - '  ||  Head (IO)  ||  Left Hand (IO)  ||  Right Hand (IO)  ||  '
 --- !u!114 &199368114
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4165,8 +3563,8 @@ MonoBehaviour:
   - 0
   multipleActionsInTime: 0
   TargetTransform: {fileID: 1975349559}
-  AnimationTime: 2
-  numberOfFlips: 1
+  AnimationTime: 0.5
+  numberOfFlips: 0
   ParabolicHeight: 0
 --- !u!1 &215722471
 GameObject:
@@ -5892,7 +5290,7 @@ Animator:
   m_GameObject: {fileID: 314776041}
   m_Enabled: 0
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f063f7bbb69ddc5499d7d13f84a4db78, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -6123,7 +5521,7 @@ Animator:
   m_GameObject: {fileID: 325185525}
   m_Enabled: 0
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f063f7bbb69ddc5499d7d13f84a4db78, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -6535,313 +5933,12 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: cd76563355d09e84da1d396d1108824f, type: 3}
   m_PrefabInternal: {fileID: 331559143}
---- !u!1 &337765806
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 337765807}
-  - component: {fileID: 337765810}
-  - component: {fileID: 337765809}
-  - component: {fileID: 337765808}
-  m_Layer: 0
-  m_Name: Btn_HoverOff (10)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &337765807
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 337765806}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.51600003, y: -0.34300002, z: 0.025999997}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 507154150}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &337765808
+--- !u!114 &332464716 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 337765806}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9fe86aa1e2e51304b81a3f6820a3abdb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isDelayed: 0
-  delayTime: 0
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  multipleActionsInTime: 0
-  rootIO: {fileID: 0}
-  isActive: 1
-  ActionReset: 0
-  ActionVisuals: 0
-  ActionGrab: 0
-  ActionTouch: 0
-  ActionGravity: 0
-  ActionAudio: 0
-  ActionColliders: 0
-  ActionDragAndDrop: 0
-  ActionAnimation: 1
-  DestroyOnTrigger: 0
-  ModifyGrabDistance: 0
-  ModifyTouchDistance: 0
-  ModifyGrabMode: 0
-  grabDistance: 0
-  touchDistance: 0
-  grabModeIndex: 0
-  ModifyDragAndDrop: 0
-  ModifyDragAndDropTargets: 0
-  ModifyDnDMinDistance: 0
-  ModifyDnDSnapBeforeDrop: 0
-  ModifyDnDAttached: 0
-  ModifyDnDRespectAxis: 0
-  dnDMinDistance: 0
-  dnDSnapBeforeDrop: 0
-  dnDRespectXAxis: 0
-  dnDRespectYAxis: 0
-  dnDRespectZAxis: 0
-  dnDRespectXAxisMirror: 0
-  dnDRespectYAxisMirror: 0
-  dnDRespectZAxisMirror: 0
-  ModifyDnDAngleThreshold: 0
-  dnDAngleThreshold: 0
-  DnD_Targets: []
-  visualsScript: {fileID: 847593151}
-  AlterAllVisuals: 1
-  selectedRenderers: 
-  triggerAnimation: 0
-  targetAnimator: {fileID: 1562334268}
-  activeTriggerStatesAnim: 0100000000
-  animatorTriggers:
-  - HoverOff
-  - 
-  - 
-  - 
-  - 
-  loopOnLast: 0000000000
-  animationClip:
-    ClipEntries00: []
-    ClipEntries01: []
-    ClipEntries02: []
-    ClipEntries03: []
-    ClipEntries04: []
-  loopAnim: 0000000000000000000000000000000000000000
-  loopAnimType: 0000000000000000000000000000000000000000
-  animationSequence: 0000000000000000000000000000000000000000
-  targetAudioSource: {fileID: 0}
-  activeTriggerStatesAudio: 0100000000
-  audioClips:
-    ClipEntries00: []
-    ClipEntries01: []
-    ClipEntries02: []
-    ClipEntries03: []
-    ClipEntries04: []
-  loopAudio: 0000000000000000000000000000000000000000
-  audio_sequence: 0000000000000000000000000000000000000000
-  fadeInBetween: 0000000000
-  audioClipsNew:
-    ClipEntries00: []
-    ClipEntries01: []
-    ClipEntries02: []
-    ClipEntries03: []
-    ClipEntries04: []
-  loopAudioNew: 0000000000000000000000000000000000000000
-  audioLoopOnLast: 0000000000
-  duckingEnabled: 1
-  fadeInTime: 1
-  fadeOutTime: 1
-  fadeOutDeactTime: 1
-  fadeInCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 1
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 1
-      inSlope: 1
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  fadeOutDeactCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: -1
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 0
-      inSlope: -1
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  fadeOutCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: -1
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 0
-      inSlope: -1
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  fadeInEnabled: 0
-  fadeOutEnabled: 0
-  fadeOutDeactEnabled: 0
-  audioVolumeMin: 0.2
-  audioVolumeMax: 1
-  fadeSpeed: 0.005
-  audio_ForceStop: 0
-  audio_AllowMultiple: 0
-  audio_randomizePitch: 0
-  audio_minPitch: 0
-  audio_maxPitch: 2
-  audio_MaxConcurrentSound: 8
-  audio_stopOthers: 0
-  IO: {fileID: 1562334266}
-  triggerNotification: 0
---- !u!114 &337765809
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 337765806}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a11d97df356699943aab990d9fcca9f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dependent: 0
-  requireAllActivators: 0
-  requireAllDeactivators: 0
-  proximityMap:
-    proximityEntryList: []
-    proximityEntryGroupList: []
-    proximityStateIndex: 0
-  grabMap:
-    grabEntryList: []
-    grabHandsIndex: 0
-    grabStateLeftIndex: 0
-    grabStateRightIndex: 0
-  customConditions: []
-  triggerStateIndex: 0
-  delayDuration: 0
-  delayed: 0
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  activeDuration: 0
-  expires: 0
-  isExpireRandom: 0
-  expireRange:
-  - 0
-  - 0
-  autoTriggerModeIndex: 0
-  reload: 1
-  canBeTriggered: 1
-  TriggerCount: 0
-  reloadModeIndex: 1
-  reloadMaxRepetitions: 0
-  reloadCount: 0
-  reloadDelay: 0.1
-  isReloadRandom: 0
-  reloadRange:
-  - 0
-  - 0
-  focusDuration: 0
-  focusLossModeIndex: 0
-  FocusLossSpeed: 1
-  proximityEnabled: 0
-  grabEnabled: 0
-  teleportIndex: 0
-  teleportEnabled: 0
-  inputsEnabled: 0
-  InputsMap:
-    InputsEntries: []
-    AreDependenciesSatisfied: 1
-  requireAllInputs: 0
-  customConditionsEnabled: 0
-  dragAndDropEnabled: 0
-  dndEventValidator: 0
-  dndAnyTarget: 1
-  dndTargetModesIndex: 0
-  dndAttached: 0
-  dndTargets: []
-  requireAllProximities: 0
-  touchMap:
-    TouchEnitry:
-      hand: 4
-      interactiveObject: {fileID: 1551184538}
-    touchHandsIndex: 2
-    touchActionIndex: 0
-  gazeEnabled: 0
-  gazeStateIndex: 0
-  gazeIn: 0
-  touchEnabled: 0
-  ActivateOnDependencyMap:
-    dependencies: []
-    AreDependenciesSatisfied: 1
-  DeactivateOnDependencyMap:
-    dependencies: []
-    AreDependenciesSatisfied: 0
-  gazeColliderIO: {fileID: 0}
-  handHoverEnabled: 1
-  handHoverIO: {fileID: 1551184542}
-  hoverHandIndex: 2
-  hoverHand: 4
-  hoverStateIndex: 1
-  hoverIn: 0
-  ReloadDependencies: 0
-  isActive: 1
-  proximityGroupIndex: 0
-  rigCombinations: []
---- !u!114 &337765810
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 337765806}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c5e5d36d57be5841bfb50b6dbe7c062, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HasActions: 1
-  HasConditions: 1
+  m_PrefabParentObject: {fileID: 114950922817326080, guid: 5b6fb31d0455cc54985292f544a3b02f,
+    type: 2}
+  m_PrefabInternal: {fileID: 1240295465}
+  m_Script: {fileID: 11500000, guid: 7ac765816c049ac42908efc08e7f359c, type: 3}
 --- !u!1 &341385069
 GameObject:
   m_ObjectHideFlags: 0
@@ -7140,13 +6237,15 @@ MonoBehaviour:
   requireAllActivators: 0
   requireAllDeactivators: 0
   proximityMap:
-    proximityEntryList: []
+    proximityEntryList:
+    - dependentGameObject: {fileID: 1596771066}
+    - dependentGameObject: {fileID: 332464716}
     proximityEntryGroupList: []
-    proximityStateIndex: 0
+    proximityStateIndex: 1
   grabMap:
     grabEntryList:
     - hand: 4
-      interactiveObject: {fileID: 1596771064}
+      interactiveObject: {fileID: 325185525}
     grabHandsIndex: 2
     grabStateLeftIndex: 1
     grabStateRightIndex: 0
@@ -7165,10 +6264,743 @@ MonoBehaviour:
   - 0
   - 0
   autoTriggerModeIndex: 0
-  reload: 0
+  reload: 1
   canBeTriggered: 1
   TriggerCount: 0
-  reloadModeIndex: 0
+  reloadModeIndex: 1
+  reloadMaxRepetitions: 0
+  reloadCount: 0
+  reloadDelay: 0
+  isReloadRandom: 0
+  reloadRange:
+  - 0
+  - 0
+  focusDuration: 0
+  focusLossModeIndex: 0
+  FocusLossSpeed: 1
+  proximityEnabled: 1
+  grabEnabled: 0
+  teleportIndex: 0
+  teleportEnabled: 0
+  inputsEnabled: 0
+  InputsMap:
+    InputsEntries: []
+    AreDependenciesSatisfied: 1
+  requireAllInputs: 0
+  customConditionsEnabled: 0
+  dragAndDropEnabled: 0
+  dndEventValidator: 0
+  dndAnyTarget: 1
+  dndTargetModesIndex: 0
+  dndAttached: 0
+  dndTargets: []
+  requireAllProximities: 0
+  touchMap:
+    TouchEnitry:
+      hand: 0
+      interactiveObject: {fileID: 0}
+    touchHandsIndex: 0
+    touchActionIndex: 0
+  gazeEnabled: 0
+  gazeStateIndex: 0
+  gazeIn: 0
+  touchEnabled: 0
+  ActivateOnDependencyMap:
+    dependencies: []
+    AreDependenciesSatisfied: 1
+  DeactivateOnDependencyMap:
+    dependencies: []
+    AreDependenciesSatisfied: 0
+  gazeColliderIO: {fileID: 0}
+  handHoverEnabled: 0
+  handHoverIO: {fileID: 0}
+  hoverHandIndex: 0
+  hoverHand: 0
+  hoverStateIndex: 0
+  hoverIn: 0
+  ReloadDependencies: 0
+  isActive: 1
+  proximityGroupIndex: 0
+  rigCombinations:
+  - '  ||  Head (IO)  ||  Left Hand (IO)  ||  '
+  - '  ||  Head (IO)  ||  Right Hand (IO)  ||  '
+  - '  ||  Left Hand (IO)  ||  Right Hand (IO)  ||  '
+  - '  ||  Head (IO)  ||  Left Hand (IO)  ||  Right Hand (IO)  ||  '
+--- !u!114 &345718666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 345718662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c5e5d36d57be5841bfb50b6dbe7c062, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HasActions: 1
+  HasConditions: 1
+--- !u!114 &345718667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 345718662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84ae47d39caccb042a43a3f921ed8340, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDelayed: 0
+  delayTime: 0
+  isDelayRandom: 0
+  delayRange:
+  - 0
+  - 0
+  multipleActionsInTime: 0
+  TargetTransform: {fileID: 1177458455}
+  AnimationTime: 2
+  numberOfFlips: 1
+  ParabolicHeight: 0
+--- !u!1 &353000219
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 353000220}
+  - component: {fileID: 353000224}
+  - component: {fileID: 353000223}
+  - component: {fileID: 353000222}
+  - component: {fileID: 353000221}
+  m_Layer: 0
+  m_Name: GazeReparent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &353000220
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 353000219}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.000000014901161, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1775503154}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &353000221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 353000219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b469a6add43f8e4d994b4dc814a3ac3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDelayed: 1
+  delayTime: 1
+  isDelayRandom: 0
+  delayRange:
+  - 0
+  - 0
+  multipleActionsInTime: 0
+  Parent: {fileID: 2021573603}
+  Child: {fileID: 325185526}
+  MoveToParentPosition: 0
+--- !u!114 &353000222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 353000219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fe86aa1e2e51304b81a3f6820a3abdb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDelayed: 1
+  delayTime: 1
+  isDelayRandom: 0
+  delayRange:
+  - 0
+  - 0
+  multipleActionsInTime: 0
+  rootIO: {fileID: 0}
+  isActive: 1
+  ActionReset: 0
+  ActionVisuals: 0
+  ActionGrab: 0
+  ActionTouch: 0
+  ActionGravity: 0
+  ActionAudio: 0
+  ActionColliders: 0
+  ActionDragAndDrop: 0
+  ActionAnimation: 0
+  DestroyOnTrigger: 0
+  ModifyGrabDistance: 0
+  ModifyTouchDistance: 0
+  ModifyGrabMode: 0
+  grabDistance: 0
+  touchDistance: 0
+  grabModeIndex: 0
+  ModifyDragAndDrop: 0
+  ModifyDragAndDropTargets: 0
+  ModifyDnDMinDistance: 0
+  ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDAttached: 0
+  ModifyDnDRespectAxis: 0
+  dnDMinDistance: 0
+  dnDSnapBeforeDrop: 0
+  dnDRespectXAxis: 0
+  dnDRespectYAxis: 0
+  dnDRespectZAxis: 0
+  dnDRespectXAxisMirror: 0
+  dnDRespectYAxisMirror: 0
+  dnDRespectZAxisMirror: 0
+  ModifyDnDAngleThreshold: 0
+  dnDAngleThreshold: 0
+  DnD_Targets: []
+  visualsScript: {fileID: 247691307}
+  AlterAllVisuals: 1
+  selectedRenderers: 
+  triggerAnimation: 0
+  targetAnimator: {fileID: 0}
+  activeTriggerStatesAnim: 0000000000
+  animatorTriggers:
+  - 
+  - 
+  - 
+  - 
+  - 
+  loopOnLast: 0000000000
+  animationClip:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAnim: 0000000000000000000000000000000000000000
+  loopAnimType: 0000000000000000000000000000000000000000
+  animationSequence: 0000000000000000000000000000000000000000
+  targetAudioSource: {fileID: 0}
+  activeTriggerStatesAudio: 0100000000
+  audioClips:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudio: 0000000000000000000000000000000000000000
+  audio_sequence: 0000000000000000000000000000000000000000
+  fadeInBetween: 0000000000
+  audioClipsNew:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudioNew: 0000000000000000000000000000000000000000
+  audioLoopOnLast: 0000000000
+  duckingEnabled: 1
+  fadeInTime: 1
+  fadeOutTime: 1
+  fadeOutDeactTime: 1
+  fadeInCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutDeactCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeInEnabled: 0
+  fadeOutEnabled: 0
+  fadeOutDeactEnabled: 0
+  audioVolumeMin: 0.2
+  audioVolumeMax: 1
+  fadeSpeed: 0.005
+  audio_ForceStop: 0
+  audio_AllowMultiple: 0
+  audio_randomizePitch: 0
+  audio_minPitch: 0
+  audio_maxPitch: 2
+  audio_MaxConcurrentSound: 8
+  audio_stopOthers: 0
+  IO: {fileID: 325185527}
+  triggerNotification: 0
+--- !u!114 &353000223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 353000219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a11d97df356699943aab990d9fcca9f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dependent: 1
+  requireAllActivators: 0
+  requireAllDeactivators: 0
+  proximityMap:
+    proximityEntryList: []
+    proximityEntryGroupList: []
+    proximityStateIndex: 0
+  grabMap:
+    grabEntryList:
+    - hand: 4
+      interactiveObject: {fileID: 325185525}
+    grabHandsIndex: 2
+    grabStateLeftIndex: 1
+    grabStateRightIndex: 0
+  customConditions: []
+  triggerStateIndex: 0
+  delayDuration: 0
+  delayed: 0
+  isDelayRandom: 0
+  delayRange:
+  - 0
+  - 0
+  activeDuration: 0
+  expires: 0
+  isExpireRandom: 0
+  expireRange:
+  - 0
+  - 0
+  autoTriggerModeIndex: 0
+  reload: 1
+  canBeTriggered: 1
+  TriggerCount: 0
+  reloadModeIndex: 1
+  reloadMaxRepetitions: 0
+  reloadCount: 0
+  reloadDelay: 0
+  isReloadRandom: 0
+  reloadRange:
+  - 0
+  - 0
+  focusDuration: 0
+  focusLossModeIndex: 0
+  FocusLossSpeed: 1
+  proximityEnabled: 0
+  grabEnabled: 0
+  teleportIndex: 0
+  teleportEnabled: 0
+  inputsEnabled: 0
+  InputsMap:
+    InputsEntries: []
+    AreDependenciesSatisfied: 1
+  requireAllInputs: 0
+  customConditionsEnabled: 0
+  dragAndDropEnabled: 0
+  dndEventValidator: 0
+  dndAnyTarget: 1
+  dndTargetModesIndex: 0
+  dndAttached: 0
+  dndTargets: []
+  requireAllProximities: 0
+  touchMap:
+    TouchEnitry:
+      hand: 0
+      interactiveObject: {fileID: 0}
+    touchHandsIndex: 0
+    touchActionIndex: 0
+  gazeEnabled: 0
+  gazeStateIndex: 0
+  gazeIn: 0
+  touchEnabled: 0
+  ActivateOnDependencyMap:
+    dependencies:
+    - IsValid: 0
+      dependentGameObject: {fileID: 199368110}
+      triggerStateIndex: 3
+      onTrigger: 1
+    AreDependenciesSatisfied: 0
+  DeactivateOnDependencyMap:
+    dependencies: []
+    AreDependenciesSatisfied: 0
+  gazeColliderIO: {fileID: 0}
+  handHoverEnabled: 0
+  handHoverIO: {fileID: 0}
+  hoverHandIndex: 0
+  hoverHand: 0
+  hoverStateIndex: 0
+  hoverIn: 0
+  ReloadDependencies: 1
+  isActive: 1
+  proximityGroupIndex: 0
+  rigCombinations: []
+--- !u!114 &353000224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 353000219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c5e5d36d57be5841bfb50b6dbe7c062, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HasActions: 1
+  HasConditions: 1
+--- !u!1 &363774596
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 363774597}
+  - component: {fileID: 363774598}
+  m_Layer: 0
+  m_Name: Snap Left
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &363774597
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 363774596}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1022197196}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &363774598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 363774596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9005be4611680e74b85e73e1f84f41b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ActualHand: 0
+  Rotation: {x: 0, y: 0, z: 0, w: 0}
+  Position: {x: 0, y: 0, z: 0}
+--- !u!1 &373503660
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 373503661}
+  - component: {fileID: 373503665}
+  - component: {fileID: 373503664}
+  - component: {fileID: 373503663}
+  - component: {fileID: 373503662}
+  m_Layer: 0
+  m_Name: GazeTaken
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &373503661
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 373503660}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.000000014901161, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1775503154}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &373503662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 373503660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c86a836962c36047bcbd635bf6d67af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDelayed: 0
+  delayTime: 0
+  isDelayRandom: 0
+  delayRange:
+  - 0
+  - 0
+  multipleActionsInTime: 0
+  ObjectToUnparent: {fileID: 325185527}
+--- !u!114 &373503663
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 373503660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fe86aa1e2e51304b81a3f6820a3abdb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDelayed: 0
+  delayTime: 0
+  isDelayRandom: 0
+  delayRange:
+  - 0
+  - 0
+  multipleActionsInTime: 0
+  rootIO: {fileID: 0}
+  isActive: 1
+  ActionReset: 0
+  ActionVisuals: 0
+  ActionGrab: 0
+  ActionTouch: 0
+  ActionGravity: 0
+  ActionAudio: 0
+  ActionColliders: 0
+  ActionDragAndDrop: 0
+  ActionAnimation: 0
+  DestroyOnTrigger: 0
+  ModifyGrabDistance: 0
+  ModifyTouchDistance: 0
+  ModifyGrabMode: 0
+  grabDistance: 0
+  touchDistance: 0
+  grabModeIndex: 0
+  ModifyDragAndDrop: 0
+  ModifyDragAndDropTargets: 0
+  ModifyDnDMinDistance: 0
+  ModifyDnDSnapBeforeDrop: 0
+  ModifyDnDAttached: 0
+  ModifyDnDRespectAxis: 0
+  dnDMinDistance: 0
+  dnDSnapBeforeDrop: 0
+  dnDRespectXAxis: 0
+  dnDRespectYAxis: 0
+  dnDRespectZAxis: 0
+  dnDRespectXAxisMirror: 0
+  dnDRespectYAxisMirror: 0
+  dnDRespectZAxisMirror: 0
+  ModifyDnDAngleThreshold: 0
+  dnDAngleThreshold: 0
+  DnD_Targets: []
+  visualsScript: {fileID: 247691307}
+  AlterAllVisuals: 1
+  selectedRenderers: 
+  triggerAnimation: 0
+  targetAnimator: {fileID: 0}
+  activeTriggerStatesAnim: 0000000000
+  animatorTriggers:
+  - 
+  - 
+  - 
+  - 
+  - 
+  loopOnLast: 0000000000
+  animationClip:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAnim: 0000000000000000000000000000000000000000
+  loopAnimType: 0000000000000000000000000000000000000000
+  animationSequence: 0000000000000000000000000000000000000000
+  targetAudioSource: {fileID: 0}
+  activeTriggerStatesAudio: 0100000000
+  audioClips:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudio: 0000000000000000000000000000000000000000
+  audio_sequence: 0000000000000000000000000000000000000000
+  fadeInBetween: 0000000000
+  audioClipsNew:
+    ClipEntries00: []
+    ClipEntries01: []
+    ClipEntries02: []
+    ClipEntries03: []
+    ClipEntries04: []
+  loopAudioNew: 0000000000000000000000000000000000000000
+  audioLoopOnLast: 0000000000
+  duckingEnabled: 1
+  fadeInTime: 1
+  fadeOutTime: 1
+  fadeOutDeactTime: 1
+  fadeInCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutDeactCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeOutCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fadeInEnabled: 0
+  fadeOutEnabled: 0
+  fadeOutDeactEnabled: 0
+  audioVolumeMin: 0.2
+  audioVolumeMax: 1
+  fadeSpeed: 0.005
+  audio_ForceStop: 0
+  audio_AllowMultiple: 0
+  audio_randomizePitch: 0
+  audio_minPitch: 0
+  audio_maxPitch: 2
+  audio_MaxConcurrentSound: 8
+  audio_stopOthers: 0
+  IO: {fileID: 325185527}
+  triggerNotification: 0
+--- !u!114 &373503664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 373503660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a11d97df356699943aab990d9fcca9f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dependent: 0
+  requireAllActivators: 0
+  requireAllDeactivators: 0
+  proximityMap:
+    proximityEntryList: []
+    proximityEntryGroupList: []
+    proximityStateIndex: 0
+  grabMap:
+    grabEntryList:
+    - hand: 4
+      interactiveObject: {fileID: 325185525}
+    grabHandsIndex: 2
+    grabStateLeftIndex: 0
+    grabStateRightIndex: 0
+  customConditions: []
+  triggerStateIndex: 0
+  delayDuration: 0
+  delayed: 0
+  isDelayRandom: 0
+  delayRange:
+  - 0
+  - 0
+  activeDuration: 0
+  expires: 0
+  isExpireRandom: 0
+  expireRange:
+  - 0
+  - 0
+  autoTriggerModeIndex: 0
+  reload: 1
+  canBeTriggered: 1
+  TriggerCount: 0
+  reloadModeIndex: 1
   reloadMaxRepetitions: 0
   reloadCount: 0
   reloadDelay: 0
@@ -7223,12 +7055,12 @@ MonoBehaviour:
   isActive: 1
   proximityGroupIndex: 0
   rigCombinations: []
---- !u!114 &345718666
+--- !u!114 &373503665
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 345718662}
+  m_GameObject: {fileID: 373503660}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2c5e5d36d57be5841bfb50b6dbe7c062, type: 3}
@@ -7236,71 +7068,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HasActions: 1
   HasConditions: 1
---- !u!114 &345718667
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 345718662}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84ae47d39caccb042a43a3f921ed8340, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isDelayed: 0
-  delayTime: 0
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  multipleActionsInTime: 0
-  TargetTransform: {fileID: 1177458455}
-  AnimationTime: 2
-  numberOfFlips: 1
-  ParabolicHeight: 0
---- !u!1 &363774596
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 363774597}
-  - component: {fileID: 363774598}
-  m_Layer: 0
-  m_Name: Snap Left
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &363774597
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 363774596}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1022197196}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &363774598
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 363774596}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9005be4611680e74b85e73e1f84f41b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ActualHand: 0
-  Rotation: {x: 0, y: 0, z: 0, w: 0}
-  Position: {x: 0, y: 0, z: 0}
 --- !u!1 &375718186
 GameObject:
   m_ObjectHideFlags: 0
@@ -7790,7 +7557,7 @@ Animator:
   m_GameObject: {fileID: 418551833}
   m_Enabled: 0
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f063f7bbb69ddc5499d7d13f84a4db78, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -8197,9 +7964,9 @@ Animator:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 423209293}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f063f7bbb69ddc5499d7d13f84a4db78, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -8551,313 +8318,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3978acaf2eedc8f4889c42ba095690a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &502490547
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 502490548}
-  - component: {fileID: 502490551}
-  - component: {fileID: 502490550}
-  - component: {fileID: 502490549}
-  m_Layer: 0
-  m_Name: Btn_HoverOn (13)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &502490548
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 502490547}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.21400006, y: -0.22800002, z: 0.025999997}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 813114333}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &502490549
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 502490547}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9fe86aa1e2e51304b81a3f6820a3abdb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isDelayed: 0
-  delayTime: 0
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  multipleActionsInTime: 0
-  rootIO: {fileID: 0}
-  isActive: 1
-  ActionReset: 0
-  ActionVisuals: 0
-  ActionGrab: 0
-  ActionTouch: 0
-  ActionGravity: 0
-  ActionAudio: 0
-  ActionColliders: 0
-  ActionDragAndDrop: 0
-  ActionAnimation: 1
-  DestroyOnTrigger: 0
-  ModifyGrabDistance: 0
-  ModifyTouchDistance: 0
-  ModifyGrabMode: 0
-  grabDistance: 0
-  touchDistance: 0
-  grabModeIndex: 0
-  ModifyDragAndDrop: 0
-  ModifyDragAndDropTargets: 0
-  ModifyDnDMinDistance: 0
-  ModifyDnDSnapBeforeDrop: 0
-  ModifyDnDAttached: 0
-  ModifyDnDRespectAxis: 0
-  dnDMinDistance: 0
-  dnDSnapBeforeDrop: 0
-  dnDRespectXAxis: 0
-  dnDRespectYAxis: 0
-  dnDRespectZAxis: 0
-  dnDRespectXAxisMirror: 0
-  dnDRespectYAxisMirror: 0
-  dnDRespectZAxisMirror: 0
-  ModifyDnDAngleThreshold: 0
-  dnDAngleThreshold: 0
-  DnD_Targets: []
-  visualsScript: {fileID: 1792219559}
-  AlterAllVisuals: 1
-  selectedRenderers: 
-  triggerAnimation: 0
-  targetAnimator: {fileID: 36513020}
-  activeTriggerStatesAnim: 0100000000
-  animatorTriggers:
-  - HoverOn
-  - 
-  - 
-  - 
-  - 
-  loopOnLast: 0000000000
-  animationClip:
-    ClipEntries00: []
-    ClipEntries01: []
-    ClipEntries02: []
-    ClipEntries03: []
-    ClipEntries04: []
-  loopAnim: 0000000000000000000000000000000000000000
-  loopAnimType: 0000000000000000000000000000000000000000
-  animationSequence: 0000000000000000000000000000000000000000
-  targetAudioSource: {fileID: 0}
-  activeTriggerStatesAudio: 0100000000
-  audioClips:
-    ClipEntries00: []
-    ClipEntries01: []
-    ClipEntries02: []
-    ClipEntries03: []
-    ClipEntries04: []
-  loopAudio: 0000000000000000000000000000000000000000
-  audio_sequence: 0000000000000000000000000000000000000000
-  fadeInBetween: 0000000000
-  audioClipsNew:
-    ClipEntries00: []
-    ClipEntries01: []
-    ClipEntries02: []
-    ClipEntries03: []
-    ClipEntries04: []
-  loopAudioNew: 0000000000000000000000000000000000000000
-  audioLoopOnLast: 0000000000
-  duckingEnabled: 1
-  fadeInTime: 1
-  fadeOutTime: 1
-  fadeOutDeactTime: 1
-  fadeInCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 1
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 1
-      inSlope: 1
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  fadeOutDeactCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: -1
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 0
-      inSlope: -1
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  fadeOutCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: -1
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 0
-      inSlope: -1
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  fadeInEnabled: 0
-  fadeOutEnabled: 0
-  fadeOutDeactEnabled: 0
-  audioVolumeMin: 0.2
-  audioVolumeMax: 1
-  fadeSpeed: 0.005
-  audio_ForceStop: 0
-  audio_AllowMultiple: 0
-  audio_randomizePitch: 0
-  audio_minPitch: 0
-  audio_maxPitch: 2
-  audio_MaxConcurrentSound: 8
-  audio_stopOthers: 0
-  IO: {fileID: 2144354207}
-  triggerNotification: 0
---- !u!114 &502490550
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 502490547}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a11d97df356699943aab990d9fcca9f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dependent: 0
-  requireAllActivators: 0
-  requireAllDeactivators: 0
-  proximityMap:
-    proximityEntryList: []
-    proximityEntryGroupList: []
-    proximityStateIndex: 0
-  grabMap:
-    grabEntryList: []
-    grabHandsIndex: 0
-    grabStateLeftIndex: 0
-    grabStateRightIndex: 0
-  customConditions: []
-  triggerStateIndex: 0
-  delayDuration: 0
-  delayed: 0
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  activeDuration: 0
-  expires: 0
-  isExpireRandom: 0
-  expireRange:
-  - 0
-  - 0
-  autoTriggerModeIndex: 0
-  reload: 1
-  canBeTriggered: 1
-  TriggerCount: 0
-  reloadModeIndex: 1
-  reloadMaxRepetitions: 0
-  reloadCount: 0
-  reloadDelay: 0.1
-  isReloadRandom: 0
-  reloadRange:
-  - 0
-  - 0
-  focusDuration: 0
-  focusLossModeIndex: 0
-  FocusLossSpeed: 1
-  proximityEnabled: 0
-  grabEnabled: 0
-  teleportIndex: 0
-  teleportEnabled: 0
-  inputsEnabled: 0
-  InputsMap:
-    InputsEntries: []
-    AreDependenciesSatisfied: 1
-  requireAllInputs: 0
-  customConditionsEnabled: 0
-  dragAndDropEnabled: 0
-  dndEventValidator: 0
-  dndAnyTarget: 1
-  dndTargetModesIndex: 0
-  dndAttached: 0
-  dndTargets: []
-  requireAllProximities: 0
-  touchMap:
-    TouchEnitry:
-      hand: 4
-      interactiveObject: {fileID: 1551184538}
-    touchHandsIndex: 2
-    touchActionIndex: 0
-  gazeEnabled: 0
-  gazeStateIndex: 0
-  gazeIn: 0
-  touchEnabled: 0
-  ActivateOnDependencyMap:
-    dependencies: []
-    AreDependenciesSatisfied: 1
-  DeactivateOnDependencyMap:
-    dependencies: []
-    AreDependenciesSatisfied: 0
-  gazeColliderIO: {fileID: 0}
-  handHoverEnabled: 1
-  handHoverIO: {fileID: 1551184542}
-  hoverHandIndex: 2
-  hoverHand: 4
-  hoverStateIndex: 0
-  hoverIn: 1
-  ReloadDependencies: 0
-  isActive: 1
-  proximityGroupIndex: 0
-  rigCombinations: []
---- !u!114 &502490551
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 502490547}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c5e5d36d57be5841bfb50b6dbe7c062, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HasActions: 1
-  HasConditions: 1
 --- !u!1 &503581445
 GameObject:
   m_ObjectHideFlags: 0
@@ -8927,8 +8387,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 611786877}
-  - {fileID: 989627216}
-  - {fileID: 337765807}
   m_Father: {fileID: 1562334265}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -9620,7 +9078,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 0.5, y: 0.4, z: 0.02}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &573221268
 GameObject:
@@ -10124,7 +9582,7 @@ Animator:
   m_GameObject: {fileID: 604350922}
   m_Enabled: 0
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f063f7bbb69ddc5499d7d13f84a4db78, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -10389,13 +9847,15 @@ MonoBehaviour:
   requireAllActivators: 0
   requireAllDeactivators: 0
   proximityMap:
-    proximityEntryList: []
+    proximityEntryList:
+    - dependentGameObject: {fileID: 1562334266}
+    - dependentGameObject: {fileID: 332464716}
     proximityEntryGroupList: []
-    proximityStateIndex: 0
+    proximityStateIndex: 1
   grabMap:
     grabEntryList:
     - hand: 4
-      interactiveObject: {fileID: 1562334264}
+      interactiveObject: {fileID: 325185525}
     grabHandsIndex: 2
     grabStateLeftIndex: 1
     grabStateRightIndex: 0
@@ -10414,10 +9874,10 @@ MonoBehaviour:
   - 0
   - 0
   autoTriggerModeIndex: 0
-  reload: 0
+  reload: 1
   canBeTriggered: 1
   TriggerCount: 0
-  reloadModeIndex: 0
+  reloadModeIndex: 1
   reloadMaxRepetitions: 0
   reloadCount: 0
   reloadDelay: 0
@@ -10428,8 +9888,8 @@ MonoBehaviour:
   focusDuration: 0
   focusLossModeIndex: 0
   FocusLossSpeed: 1
-  proximityEnabled: 0
-  grabEnabled: 1
+  proximityEnabled: 1
+  grabEnabled: 0
   teleportIndex: 0
   teleportEnabled: 0
   inputsEnabled: 0
@@ -10471,7 +9931,11 @@ MonoBehaviour:
   ReloadDependencies: 0
   isActive: 1
   proximityGroupIndex: 0
-  rigCombinations: []
+  rigCombinations:
+  - '  ||  Head (IO)  ||  Left Hand (IO)  ||  '
+  - '  ||  Head (IO)  ||  Right Hand (IO)  ||  '
+  - '  ||  Left Hand (IO)  ||  Right Hand (IO)  ||  '
+  - '  ||  Head (IO)  ||  Left Hand (IO)  ||  Right Hand (IO)  ||  '
 --- !u!114 &611786880
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10739,9 +10203,9 @@ Animator:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 652715267}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f063f7bbb69ddc5499d7d13f84a4db78, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -11589,8 +11053,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 345718663}
-  - {fileID: 1075911253}
-  - {fileID: 1156668736}
   m_Father: {fileID: 1596771065}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -12090,8 +11552,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2102147297}
-  - {fileID: 502490548}
-  - {fileID: 1826737860}
   m_Father: {fileID: 2144354206}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -12136,313 +11596,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3978acaf2eedc8f4889c42ba095690a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &831588375
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 831588376}
-  - component: {fileID: 831588379}
-  - component: {fileID: 831588378}
-  - component: {fileID: 831588377}
-  m_Layer: 0
-  m_Name: Btn_HoverOn (14)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &831588376
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 831588375}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.21400006, y: -0.107000016, z: 0.025999997}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 864183502}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &831588377
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 831588375}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9fe86aa1e2e51304b81a3f6820a3abdb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isDelayed: 0
-  delayTime: 0
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  multipleActionsInTime: 0
-  rootIO: {fileID: 0}
-  isActive: 1
-  ActionReset: 0
-  ActionVisuals: 0
-  ActionGrab: 0
-  ActionTouch: 0
-  ActionGravity: 0
-  ActionAudio: 0
-  ActionColliders: 0
-  ActionDragAndDrop: 0
-  ActionAnimation: 1
-  DestroyOnTrigger: 0
-  ModifyGrabDistance: 0
-  ModifyTouchDistance: 0
-  ModifyGrabMode: 0
-  grabDistance: 0
-  touchDistance: 0
-  grabModeIndex: 0
-  ModifyDragAndDrop: 0
-  ModifyDragAndDropTargets: 0
-  ModifyDnDMinDistance: 0
-  ModifyDnDSnapBeforeDrop: 0
-  ModifyDnDAttached: 0
-  ModifyDnDRespectAxis: 0
-  dnDMinDistance: 0
-  dnDSnapBeforeDrop: 0
-  dnDRespectXAxis: 0
-  dnDRespectYAxis: 0
-  dnDRespectZAxis: 0
-  dnDRespectXAxisMirror: 0
-  dnDRespectYAxisMirror: 0
-  dnDRespectZAxisMirror: 0
-  ModifyDnDAngleThreshold: 0
-  dnDAngleThreshold: 0
-  DnD_Targets: []
-  visualsScript: {fileID: 806011270}
-  AlterAllVisuals: 1
-  selectedRenderers: 
-  triggerAnimation: 0
-  targetAnimator: {fileID: 418551837}
-  activeTriggerStatesAnim: 0100000000
-  animatorTriggers:
-  - HoverOn
-  - 
-  - 
-  - 
-  - 
-  loopOnLast: 0000000000
-  animationClip:
-    ClipEntries00: []
-    ClipEntries01: []
-    ClipEntries02: []
-    ClipEntries03: []
-    ClipEntries04: []
-  loopAnim: 0000000000000000000000000000000000000000
-  loopAnimType: 0000000000000000000000000000000000000000
-  animationSequence: 0000000000000000000000000000000000000000
-  targetAudioSource: {fileID: 0}
-  activeTriggerStatesAudio: 0100000000
-  audioClips:
-    ClipEntries00: []
-    ClipEntries01: []
-    ClipEntries02: []
-    ClipEntries03: []
-    ClipEntries04: []
-  loopAudio: 0000000000000000000000000000000000000000
-  audio_sequence: 0000000000000000000000000000000000000000
-  fadeInBetween: 0000000000
-  audioClipsNew:
-    ClipEntries00: []
-    ClipEntries01: []
-    ClipEntries02: []
-    ClipEntries03: []
-    ClipEntries04: []
-  loopAudioNew: 0000000000000000000000000000000000000000
-  audioLoopOnLast: 0000000000
-  duckingEnabled: 1
-  fadeInTime: 1
-  fadeOutTime: 1
-  fadeOutDeactTime: 1
-  fadeInCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 1
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 1
-      inSlope: 1
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  fadeOutDeactCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: -1
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 0
-      inSlope: -1
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  fadeOutCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: -1
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 0
-      inSlope: -1
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  fadeInEnabled: 0
-  fadeOutEnabled: 0
-  fadeOutDeactEnabled: 0
-  audioVolumeMin: 0.2
-  audioVolumeMax: 1
-  fadeSpeed: 0.005
-  audio_ForceStop: 0
-  audio_AllowMultiple: 0
-  audio_randomizePitch: 0
-  audio_minPitch: 0
-  audio_maxPitch: 2
-  audio_MaxConcurrentSound: 8
-  audio_stopOthers: 0
-  IO: {fileID: 418551835}
-  triggerNotification: 0
---- !u!114 &831588378
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 831588375}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a11d97df356699943aab990d9fcca9f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dependent: 0
-  requireAllActivators: 0
-  requireAllDeactivators: 0
-  proximityMap:
-    proximityEntryList: []
-    proximityEntryGroupList: []
-    proximityStateIndex: 0
-  grabMap:
-    grabEntryList: []
-    grabHandsIndex: 0
-    grabStateLeftIndex: 0
-    grabStateRightIndex: 0
-  customConditions: []
-  triggerStateIndex: 0
-  delayDuration: 0
-  delayed: 0
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  activeDuration: 0
-  expires: 0
-  isExpireRandom: 0
-  expireRange:
-  - 0
-  - 0
-  autoTriggerModeIndex: 0
-  reload: 1
-  canBeTriggered: 1
-  TriggerCount: 0
-  reloadModeIndex: 1
-  reloadMaxRepetitions: 0
-  reloadCount: 0
-  reloadDelay: 0.1
-  isReloadRandom: 0
-  reloadRange:
-  - 0
-  - 0
-  focusDuration: 0
-  focusLossModeIndex: 0
-  FocusLossSpeed: 1
-  proximityEnabled: 0
-  grabEnabled: 0
-  teleportIndex: 0
-  teleportEnabled: 0
-  inputsEnabled: 0
-  InputsMap:
-    InputsEntries: []
-    AreDependenciesSatisfied: 1
-  requireAllInputs: 0
-  customConditionsEnabled: 0
-  dragAndDropEnabled: 0
-  dndEventValidator: 0
-  dndAnyTarget: 1
-  dndTargetModesIndex: 0
-  dndAttached: 0
-  dndTargets: []
-  requireAllProximities: 0
-  touchMap:
-    TouchEnitry:
-      hand: 4
-      interactiveObject: {fileID: 1551184538}
-    touchHandsIndex: 2
-    touchActionIndex: 0
-  gazeEnabled: 0
-  gazeStateIndex: 0
-  gazeIn: 0
-  touchEnabled: 0
-  ActivateOnDependencyMap:
-    dependencies: []
-    AreDependenciesSatisfied: 1
-  DeactivateOnDependencyMap:
-    dependencies: []
-    AreDependenciesSatisfied: 0
-  gazeColliderIO: {fileID: 0}
-  handHoverEnabled: 1
-  handHoverIO: {fileID: 1551184542}
-  hoverHandIndex: 2
-  hoverHand: 4
-  hoverStateIndex: 0
-  hoverIn: 1
-  ReloadDependencies: 0
-  isActive: 1
-  proximityGroupIndex: 0
-  rigCombinations: []
---- !u!114 &831588379
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 831588375}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c5e5d36d57be5841bfb50b6dbe7c062, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HasActions: 1
-  HasConditions: 1
 --- !u!1 &838322572
 GameObject:
   m_ObjectHideFlags: 0
@@ -12859,8 +12012,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1657241060}
-  - {fileID: 831588376}
-  - {fileID: 1421542278}
   m_Father: {fileID: 418551834}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -13052,8 +12203,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1144636140}
-  - {fileID: 2073029487}
-  - {fileID: 1114079878}
   m_Father: {fileID: 2076853706}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -13176,7 +12325,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ac765816c049ac42908efc08e7f359c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ManipulationModeIndex: 3
+  ManipulationModeIndex: 1
   LeftHandSnapPoint: {fileID: 0}
   RightHandSnapPoint: {fileID: 0}
   TouchModeIndex: 0
@@ -13186,7 +12335,7 @@ MonoBehaviour:
   GrabPositioner: {fileID: 0}
   VibratesOnGrab: 0
   GrabDistance: 30
-  TouchDistance: 0
+  TouchDistance: 1
   AttractionSpeed: 50
   IsManipulable: 1
   SnapOnGrab: 0
@@ -13911,13 +13060,15 @@ MonoBehaviour:
   requireAllActivators: 0
   requireAllDeactivators: 0
   proximityMap:
-    proximityEntryList: []
+    proximityEntryList:
+    - dependentGameObject: {fileID: 1779618281}
+    - dependentGameObject: {fileID: 332464716}
     proximityEntryGroupList: []
-    proximityStateIndex: 0
+    proximityStateIndex: 1
   grabMap:
     grabEntryList:
     - hand: 4
-      interactiveObject: {fileID: 1779618279}
+      interactiveObject: {fileID: 325185525}
     grabHandsIndex: 2
     grabStateLeftIndex: 1
     grabStateRightIndex: 0
@@ -13936,10 +13087,10 @@ MonoBehaviour:
   - 0
   - 0
   autoTriggerModeIndex: 0
-  reload: 0
+  reload: 1
   canBeTriggered: 1
   TriggerCount: 0
-  reloadModeIndex: 0
+  reloadModeIndex: 1
   reloadMaxRepetitions: 0
   reloadCount: 0
   reloadDelay: 0
@@ -13950,8 +13101,8 @@ MonoBehaviour:
   focusDuration: 0
   focusLossModeIndex: 0
   FocusLossSpeed: 1
-  proximityEnabled: 0
-  grabEnabled: 1
+  proximityEnabled: 1
+  grabEnabled: 0
   teleportIndex: 0
   teleportEnabled: 0
   inputsEnabled: 0
@@ -13993,7 +13144,11 @@ MonoBehaviour:
   ReloadDependencies: 0
   isActive: 1
   proximityGroupIndex: 0
-  rigCombinations: []
+  rigCombinations:
+  - '  ||  Head (IO)  ||  Left Hand (IO)  ||  '
+  - '  ||  Head (IO)  ||  Right Hand (IO)  ||  '
+  - '  ||  Left Hand (IO)  ||  Right Hand (IO)  ||  '
+  - '  ||  Head (IO)  ||  Left Hand (IO)  ||  Right Hand (IO)  ||  '
 --- !u!114 &981676439
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14102,313 +13257,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 984174090}
   m_Mesh: {fileID: 4300000, guid: dfc90b2df2ca7b94aacb780362477ca0, type: 3}
---- !u!1 &989627215
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 989627216}
-  - component: {fileID: 989627219}
-  - component: {fileID: 989627218}
-  - component: {fileID: 989627217}
-  m_Layer: 0
-  m_Name: Btn_HoverOn (10)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &989627216
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 989627215}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.51600003, y: -0.34300002, z: 0.025999997}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 507154150}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &989627217
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 989627215}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9fe86aa1e2e51304b81a3f6820a3abdb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isDelayed: 0
-  delayTime: 0
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  multipleActionsInTime: 0
-  rootIO: {fileID: 0}
-  isActive: 1
-  ActionReset: 0
-  ActionVisuals: 0
-  ActionGrab: 0
-  ActionTouch: 0
-  ActionGravity: 0
-  ActionAudio: 0
-  ActionColliders: 0
-  ActionDragAndDrop: 0
-  ActionAnimation: 1
-  DestroyOnTrigger: 0
-  ModifyGrabDistance: 0
-  ModifyTouchDistance: 0
-  ModifyGrabMode: 0
-  grabDistance: 0
-  touchDistance: 0
-  grabModeIndex: 0
-  ModifyDragAndDrop: 0
-  ModifyDragAndDropTargets: 0
-  ModifyDnDMinDistance: 0
-  ModifyDnDSnapBeforeDrop: 0
-  ModifyDnDAttached: 0
-  ModifyDnDRespectAxis: 0
-  dnDMinDistance: 0
-  dnDSnapBeforeDrop: 0
-  dnDRespectXAxis: 0
-  dnDRespectYAxis: 0
-  dnDRespectZAxis: 0
-  dnDRespectXAxisMirror: 0
-  dnDRespectYAxisMirror: 0
-  dnDRespectZAxisMirror: 0
-  ModifyDnDAngleThreshold: 0
-  dnDAngleThreshold: 0
-  DnD_Targets: []
-  visualsScript: {fileID: 847593151}
-  AlterAllVisuals: 1
-  selectedRenderers: 
-  triggerAnimation: 0
-  targetAnimator: {fileID: 36513020}
-  activeTriggerStatesAnim: 0100000000
-  animatorTriggers:
-  - HoverOn
-  - 
-  - 
-  - 
-  - 
-  loopOnLast: 0000000000
-  animationClip:
-    ClipEntries00: []
-    ClipEntries01: []
-    ClipEntries02: []
-    ClipEntries03: []
-    ClipEntries04: []
-  loopAnim: 0000000000000000000000000000000000000000
-  loopAnimType: 0000000000000000000000000000000000000000
-  animationSequence: 0000000000000000000000000000000000000000
-  targetAudioSource: {fileID: 0}
-  activeTriggerStatesAudio: 0100000000
-  audioClips:
-    ClipEntries00: []
-    ClipEntries01: []
-    ClipEntries02: []
-    ClipEntries03: []
-    ClipEntries04: []
-  loopAudio: 0000000000000000000000000000000000000000
-  audio_sequence: 0000000000000000000000000000000000000000
-  fadeInBetween: 0000000000
-  audioClipsNew:
-    ClipEntries00: []
-    ClipEntries01: []
-    ClipEntries02: []
-    ClipEntries03: []
-    ClipEntries04: []
-  loopAudioNew: 0000000000000000000000000000000000000000
-  audioLoopOnLast: 0000000000
-  duckingEnabled: 1
-  fadeInTime: 1
-  fadeOutTime: 1
-  fadeOutDeactTime: 1
-  fadeInCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 1
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 1
-      inSlope: 1
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  fadeOutDeactCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: -1
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 0
-      inSlope: -1
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  fadeOutCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: -1
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 0
-      inSlope: -1
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  fadeInEnabled: 0
-  fadeOutEnabled: 0
-  fadeOutDeactEnabled: 0
-  audioVolumeMin: 0.2
-  audioVolumeMax: 1
-  fadeSpeed: 0.005
-  audio_ForceStop: 0
-  audio_AllowMultiple: 0
-  audio_randomizePitch: 0
-  audio_minPitch: 0
-  audio_maxPitch: 2
-  audio_MaxConcurrentSound: 8
-  audio_stopOthers: 0
-  IO: {fileID: 1562334266}
-  triggerNotification: 0
---- !u!114 &989627218
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 989627215}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a11d97df356699943aab990d9fcca9f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dependent: 0
-  requireAllActivators: 0
-  requireAllDeactivators: 0
-  proximityMap:
-    proximityEntryList: []
-    proximityEntryGroupList: []
-    proximityStateIndex: 0
-  grabMap:
-    grabEntryList: []
-    grabHandsIndex: 0
-    grabStateLeftIndex: 0
-    grabStateRightIndex: 0
-  customConditions: []
-  triggerStateIndex: 0
-  delayDuration: 0
-  delayed: 0
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  activeDuration: 0
-  expires: 0
-  isExpireRandom: 0
-  expireRange:
-  - 0
-  - 0
-  autoTriggerModeIndex: 0
-  reload: 1
-  canBeTriggered: 1
-  TriggerCount: 0
-  reloadModeIndex: 1
-  reloadMaxRepetitions: 0
-  reloadCount: 0
-  reloadDelay: 0.1
-  isReloadRandom: 0
-  reloadRange:
-  - 0
-  - 0
-  focusDuration: 0
-  focusLossModeIndex: 0
-  FocusLossSpeed: 1
-  proximityEnabled: 0
-  grabEnabled: 0
-  teleportIndex: 0
-  teleportEnabled: 0
-  inputsEnabled: 0
-  InputsMap:
-    InputsEntries: []
-    AreDependenciesSatisfied: 1
-  requireAllInputs: 0
-  customConditionsEnabled: 0
-  dragAndDropEnabled: 0
-  dndEventValidator: 0
-  dndAnyTarget: 1
-  dndTargetModesIndex: 0
-  dndAttached: 0
-  dndTargets: []
-  requireAllProximities: 0
-  touchMap:
-    TouchEnitry:
-      hand: 4
-      interactiveObject: {fileID: 1551184538}
-    touchHandsIndex: 2
-    touchActionIndex: 0
-  gazeEnabled: 0
-  gazeStateIndex: 0
-  gazeIn: 0
-  touchEnabled: 0
-  ActivateOnDependencyMap:
-    dependencies: []
-    AreDependenciesSatisfied: 1
-  DeactivateOnDependencyMap:
-    dependencies: []
-    AreDependenciesSatisfied: 0
-  gazeColliderIO: {fileID: 0}
-  handHoverEnabled: 1
-  handHoverIO: {fileID: 1551184542}
-  hoverHandIndex: 2
-  hoverHand: 4
-  hoverStateIndex: 0
-  hoverIn: 1
-  ReloadDependencies: 0
-  isActive: 1
-  proximityGroupIndex: 0
-  rigCombinations: []
---- !u!114 &989627219
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 989627215}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c5e5d36d57be5841bfb50b6dbe7c062, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HasActions: 1
-  HasConditions: 1
 --- !u!1 &991765618
 GameObject:
   m_ObjectHideFlags: 0
@@ -15803,313 +14651,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
---- !u!1 &1075911252
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1075911253}
-  - component: {fileID: 1075911256}
-  - component: {fileID: 1075911255}
-  - component: {fileID: 1075911254}
-  m_Layer: 0
-  m_Name: Btn_HoverOn (9)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1075911253
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1075911252}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.515, y: -0.19000003, z: 0.025999997}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 797251613}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1075911254
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1075911252}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9fe86aa1e2e51304b81a3f6820a3abdb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isDelayed: 0
-  delayTime: 0
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  multipleActionsInTime: 0
-  rootIO: {fileID: 0}
-  isActive: 1
-  ActionReset: 0
-  ActionVisuals: 0
-  ActionGrab: 0
-  ActionTouch: 0
-  ActionGravity: 0
-  ActionAudio: 0
-  ActionColliders: 0
-  ActionDragAndDrop: 0
-  ActionAnimation: 1
-  DestroyOnTrigger: 0
-  ModifyGrabDistance: 0
-  ModifyTouchDistance: 0
-  ModifyGrabMode: 0
-  grabDistance: 0
-  touchDistance: 0
-  grabModeIndex: 0
-  ModifyDragAndDrop: 0
-  ModifyDragAndDropTargets: 0
-  ModifyDnDMinDistance: 0
-  ModifyDnDSnapBeforeDrop: 0
-  ModifyDnDAttached: 0
-  ModifyDnDRespectAxis: 0
-  dnDMinDistance: 0
-  dnDSnapBeforeDrop: 0
-  dnDRespectXAxis: 0
-  dnDRespectYAxis: 0
-  dnDRespectZAxis: 0
-  dnDRespectXAxisMirror: 0
-  dnDRespectYAxisMirror: 0
-  dnDRespectZAxisMirror: 0
-  ModifyDnDAngleThreshold: 0
-  dnDAngleThreshold: 0
-  DnD_Targets: []
-  visualsScript: {fileID: 1303914180}
-  AlterAllVisuals: 1
-  selectedRenderers: 
-  triggerAnimation: 0
-  targetAnimator: {fileID: 36513020}
-  activeTriggerStatesAnim: 0100000000
-  animatorTriggers:
-  - HoverOn
-  - 
-  - 
-  - 
-  - 
-  loopOnLast: 0000000000
-  animationClip:
-    ClipEntries00: []
-    ClipEntries01: []
-    ClipEntries02: []
-    ClipEntries03: []
-    ClipEntries04: []
-  loopAnim: 0000000000000000000000000000000000000000
-  loopAnimType: 0000000000000000000000000000000000000000
-  animationSequence: 0000000000000000000000000000000000000000
-  targetAudioSource: {fileID: 0}
-  activeTriggerStatesAudio: 0100000000
-  audioClips:
-    ClipEntries00: []
-    ClipEntries01: []
-    ClipEntries02: []
-    ClipEntries03: []
-    ClipEntries04: []
-  loopAudio: 0000000000000000000000000000000000000000
-  audio_sequence: 0000000000000000000000000000000000000000
-  fadeInBetween: 0000000000
-  audioClipsNew:
-    ClipEntries00: []
-    ClipEntries01: []
-    ClipEntries02: []
-    ClipEntries03: []
-    ClipEntries04: []
-  loopAudioNew: 0000000000000000000000000000000000000000
-  audioLoopOnLast: 0000000000
-  duckingEnabled: 1
-  fadeInTime: 1
-  fadeOutTime: 1
-  fadeOutDeactTime: 1
-  fadeInCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 1
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 1
-      inSlope: 1
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  fadeOutDeactCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: -1
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 0
-      inSlope: -1
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  fadeOutCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: -1
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 0
-      inSlope: -1
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  fadeInEnabled: 0
-  fadeOutEnabled: 0
-  fadeOutDeactEnabled: 0
-  audioVolumeMin: 0.2
-  audioVolumeMax: 1
-  fadeSpeed: 0.005
-  audio_ForceStop: 0
-  audio_AllowMultiple: 0
-  audio_randomizePitch: 0
-  audio_minPitch: 0
-  audio_maxPitch: 2
-  audio_MaxConcurrentSound: 8
-  audio_stopOthers: 0
-  IO: {fileID: 1596771066}
-  triggerNotification: 0
---- !u!114 &1075911255
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1075911252}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a11d97df356699943aab990d9fcca9f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dependent: 0
-  requireAllActivators: 0
-  requireAllDeactivators: 0
-  proximityMap:
-    proximityEntryList: []
-    proximityEntryGroupList: []
-    proximityStateIndex: 0
-  grabMap:
-    grabEntryList: []
-    grabHandsIndex: 0
-    grabStateLeftIndex: 0
-    grabStateRightIndex: 0
-  customConditions: []
-  triggerStateIndex: 0
-  delayDuration: 0
-  delayed: 0
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  activeDuration: 0
-  expires: 0
-  isExpireRandom: 0
-  expireRange:
-  - 0
-  - 0
-  autoTriggerModeIndex: 0
-  reload: 1
-  canBeTriggered: 1
-  TriggerCount: 0
-  reloadModeIndex: 1
-  reloadMaxRepetitions: 0
-  reloadCount: 0
-  reloadDelay: 0.1
-  isReloadRandom: 0
-  reloadRange:
-  - 0
-  - 0
-  focusDuration: 0
-  focusLossModeIndex: 0
-  FocusLossSpeed: 1
-  proximityEnabled: 0
-  grabEnabled: 0
-  teleportIndex: 0
-  teleportEnabled: 0
-  inputsEnabled: 0
-  InputsMap:
-    InputsEntries: []
-    AreDependenciesSatisfied: 1
-  requireAllInputs: 0
-  customConditionsEnabled: 0
-  dragAndDropEnabled: 0
-  dndEventValidator: 0
-  dndAnyTarget: 1
-  dndTargetModesIndex: 0
-  dndAttached: 0
-  dndTargets: []
-  requireAllProximities: 0
-  touchMap:
-    TouchEnitry:
-      hand: 4
-      interactiveObject: {fileID: 1551184538}
-    touchHandsIndex: 2
-    touchActionIndex: 0
-  gazeEnabled: 0
-  gazeStateIndex: 0
-  gazeIn: 0
-  touchEnabled: 0
-  ActivateOnDependencyMap:
-    dependencies: []
-    AreDependenciesSatisfied: 1
-  DeactivateOnDependencyMap:
-    dependencies: []
-    AreDependenciesSatisfied: 0
-  gazeColliderIO: {fileID: 0}
-  handHoverEnabled: 1
-  handHoverIO: {fileID: 1551184542}
-  hoverHandIndex: 2
-  hoverHand: 4
-  hoverStateIndex: 0
-  hoverIn: 1
-  ReloadDependencies: 0
-  isActive: 1
-  proximityGroupIndex: 0
-  rigCombinations: []
---- !u!114 &1075911256
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1075911252}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c5e5d36d57be5841bfb50b6dbe7c062, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HasActions: 1
-  HasConditions: 1
 --- !u!1 &1081596578
 GameObject:
   m_ObjectHideFlags: 0
@@ -16270,7 +14811,7 @@ Animator:
   m_GameObject: {fileID: 1099307726}
   m_Enabled: 0
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f063f7bbb69ddc5499d7d13f84a4db78, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -16710,313 +15251,6 @@ Transform:
   m_Father: {fileID: 501398926}
   m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1114079877
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1114079878}
-  - component: {fileID: 1114079881}
-  - component: {fileID: 1114079880}
-  - component: {fileID: 1114079879}
-  m_Layer: 0
-  m_Name: Btn_HoverOff (11)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1114079878
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1114079877}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.55200005, y: -0.056500018, z: 0.025999997}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 905347112}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1114079879
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1114079877}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9fe86aa1e2e51304b81a3f6820a3abdb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isDelayed: 0
-  delayTime: 0
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  multipleActionsInTime: 0
-  rootIO: {fileID: 0}
-  isActive: 1
-  ActionReset: 0
-  ActionVisuals: 0
-  ActionGrab: 0
-  ActionTouch: 0
-  ActionGravity: 0
-  ActionAudio: 0
-  ActionColliders: 0
-  ActionDragAndDrop: 0
-  ActionAnimation: 1
-  DestroyOnTrigger: 0
-  ModifyGrabDistance: 0
-  ModifyTouchDistance: 0
-  ModifyGrabMode: 0
-  grabDistance: 0
-  touchDistance: 0
-  grabModeIndex: 0
-  ModifyDragAndDrop: 0
-  ModifyDragAndDropTargets: 0
-  ModifyDnDMinDistance: 0
-  ModifyDnDSnapBeforeDrop: 0
-  ModifyDnDAttached: 0
-  ModifyDnDRespectAxis: 0
-  dnDMinDistance: 0
-  dnDSnapBeforeDrop: 0
-  dnDRespectXAxis: 0
-  dnDRespectYAxis: 0
-  dnDRespectZAxis: 0
-  dnDRespectXAxisMirror: 0
-  dnDRespectYAxisMirror: 0
-  dnDRespectZAxisMirror: 0
-  ModifyDnDAngleThreshold: 0
-  dnDAngleThreshold: 0
-  DnD_Targets: []
-  visualsScript: {fileID: 759596869}
-  AlterAllVisuals: 1
-  selectedRenderers: 
-  triggerAnimation: 0
-  targetAnimator: {fileID: 2076853708}
-  activeTriggerStatesAnim: 0100000000
-  animatorTriggers:
-  - HoverOff
-  - 
-  - 
-  - 
-  - 
-  loopOnLast: 0000000000
-  animationClip:
-    ClipEntries00: []
-    ClipEntries01: []
-    ClipEntries02: []
-    ClipEntries03: []
-    ClipEntries04: []
-  loopAnim: 0000000000000000000000000000000000000000
-  loopAnimType: 0000000000000000000000000000000000000000
-  animationSequence: 0000000000000000000000000000000000000000
-  targetAudioSource: {fileID: 0}
-  activeTriggerStatesAudio: 0100000000
-  audioClips:
-    ClipEntries00: []
-    ClipEntries01: []
-    ClipEntries02: []
-    ClipEntries03: []
-    ClipEntries04: []
-  loopAudio: 0000000000000000000000000000000000000000
-  audio_sequence: 0000000000000000000000000000000000000000
-  fadeInBetween: 0000000000
-  audioClipsNew:
-    ClipEntries00: []
-    ClipEntries01: []
-    ClipEntries02: []
-    ClipEntries03: []
-    ClipEntries04: []
-  loopAudioNew: 0000000000000000000000000000000000000000
-  audioLoopOnLast: 0000000000
-  duckingEnabled: 1
-  fadeInTime: 1
-  fadeOutTime: 1
-  fadeOutDeactTime: 1
-  fadeInCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 1
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 1
-      inSlope: 1
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  fadeOutDeactCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: -1
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 0
-      inSlope: -1
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  fadeOutCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: -1
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 0
-      inSlope: -1
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  fadeInEnabled: 0
-  fadeOutEnabled: 0
-  fadeOutDeactEnabled: 0
-  audioVolumeMin: 0.2
-  audioVolumeMax: 1
-  fadeSpeed: 0.005
-  audio_ForceStop: 0
-  audio_AllowMultiple: 0
-  audio_randomizePitch: 0
-  audio_minPitch: 0
-  audio_maxPitch: 2
-  audio_MaxConcurrentSound: 8
-  audio_stopOthers: 0
-  IO: {fileID: 2076853709}
-  triggerNotification: 0
---- !u!114 &1114079880
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1114079877}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a11d97df356699943aab990d9fcca9f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dependent: 0
-  requireAllActivators: 0
-  requireAllDeactivators: 0
-  proximityMap:
-    proximityEntryList: []
-    proximityEntryGroupList: []
-    proximityStateIndex: 0
-  grabMap:
-    grabEntryList: []
-    grabHandsIndex: 0
-    grabStateLeftIndex: 0
-    grabStateRightIndex: 0
-  customConditions: []
-  triggerStateIndex: 0
-  delayDuration: 0
-  delayed: 0
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  activeDuration: 0
-  expires: 0
-  isExpireRandom: 0
-  expireRange:
-  - 0
-  - 0
-  autoTriggerModeIndex: 0
-  reload: 1
-  canBeTriggered: 1
-  TriggerCount: 0
-  reloadModeIndex: 1
-  reloadMaxRepetitions: 0
-  reloadCount: 0
-  reloadDelay: 0.1
-  isReloadRandom: 0
-  reloadRange:
-  - 0
-  - 0
-  focusDuration: 0
-  focusLossModeIndex: 0
-  FocusLossSpeed: 1
-  proximityEnabled: 0
-  grabEnabled: 0
-  teleportIndex: 0
-  teleportEnabled: 0
-  inputsEnabled: 0
-  InputsMap:
-    InputsEntries: []
-    AreDependenciesSatisfied: 1
-  requireAllInputs: 0
-  customConditionsEnabled: 0
-  dragAndDropEnabled: 0
-  dndEventValidator: 0
-  dndAnyTarget: 1
-  dndTargetModesIndex: 0
-  dndAttached: 0
-  dndTargets: []
-  requireAllProximities: 0
-  touchMap:
-    TouchEnitry:
-      hand: 4
-      interactiveObject: {fileID: 1551184538}
-    touchHandsIndex: 2
-    touchActionIndex: 0
-  gazeEnabled: 0
-  gazeStateIndex: 0
-  gazeIn: 0
-  touchEnabled: 0
-  ActivateOnDependencyMap:
-    dependencies: []
-    AreDependenciesSatisfied: 1
-  DeactivateOnDependencyMap:
-    dependencies: []
-    AreDependenciesSatisfied: 0
-  gazeColliderIO: {fileID: 0}
-  handHoverEnabled: 1
-  handHoverIO: {fileID: 1551184542}
-  hoverHandIndex: 2
-  hoverHand: 4
-  hoverStateIndex: 1
-  hoverIn: 0
-  ReloadDependencies: 0
-  isActive: 1
-  proximityGroupIndex: 0
-  rigCombinations: []
---- !u!114 &1114079881
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1114079877}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c5e5d36d57be5841bfb50b6dbe7c062, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HasActions: 1
-  HasConditions: 1
 --- !u!1 &1114483355
 GameObject:
   m_ObjectHideFlags: 0
@@ -17589,13 +15823,15 @@ MonoBehaviour:
   requireAllActivators: 0
   requireAllDeactivators: 0
   proximityMap:
-    proximityEntryList: []
+    proximityEntryList:
+    - dependentGameObject: {fileID: 2076853709}
+    - dependentGameObject: {fileID: 332464716}
     proximityEntryGroupList: []
-    proximityStateIndex: 0
+    proximityStateIndex: 1
   grabMap:
     grabEntryList:
     - hand: 4
-      interactiveObject: {fileID: 2076853705}
+      interactiveObject: {fileID: 325185525}
     grabHandsIndex: 2
     grabStateLeftIndex: 1
     grabStateRightIndex: 0
@@ -17614,10 +15850,10 @@ MonoBehaviour:
   - 0
   - 0
   autoTriggerModeIndex: 0
-  reload: 0
+  reload: 1
   canBeTriggered: 1
   TriggerCount: 0
-  reloadModeIndex: 0
+  reloadModeIndex: 1
   reloadMaxRepetitions: 0
   reloadCount: 0
   reloadDelay: 0
@@ -17628,8 +15864,8 @@ MonoBehaviour:
   focusDuration: 0
   focusLossModeIndex: 0
   FocusLossSpeed: 1
-  proximityEnabled: 0
-  grabEnabled: 1
+  proximityEnabled: 1
+  grabEnabled: 0
   teleportIndex: 0
   teleportEnabled: 0
   inputsEnabled: 0
@@ -17671,7 +15907,11 @@ MonoBehaviour:
   ReloadDependencies: 0
   isActive: 1
   proximityGroupIndex: 0
-  rigCombinations: []
+  rigCombinations:
+  - '  ||  Head (IO)  ||  Left Hand (IO)  ||  '
+  - '  ||  Head (IO)  ||  Right Hand (IO)  ||  '
+  - '  ||  Left Hand (IO)  ||  Right Hand (IO)  ||  '
+  - '  ||  Head (IO)  ||  Left Hand (IO)  ||  Right Hand (IO)  ||  '
 --- !u!114 &1144636143
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17737,313 +15977,6 @@ Transform:
   m_Father: {fileID: 1099307727}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1156668735
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1156668736}
-  - component: {fileID: 1156668739}
-  - component: {fileID: 1156668738}
-  - component: {fileID: 1156668737}
-  m_Layer: 0
-  m_Name: Btn_HoverOff (9)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1156668736
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1156668735}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.515, y: -0.19000003, z: 0.025999997}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 797251613}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1156668737
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1156668735}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9fe86aa1e2e51304b81a3f6820a3abdb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isDelayed: 0
-  delayTime: 0
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  multipleActionsInTime: 0
-  rootIO: {fileID: 0}
-  isActive: 1
-  ActionReset: 0
-  ActionVisuals: 0
-  ActionGrab: 0
-  ActionTouch: 0
-  ActionGravity: 0
-  ActionAudio: 0
-  ActionColliders: 0
-  ActionDragAndDrop: 0
-  ActionAnimation: 1
-  DestroyOnTrigger: 0
-  ModifyGrabDistance: 0
-  ModifyTouchDistance: 0
-  ModifyGrabMode: 0
-  grabDistance: 0
-  touchDistance: 0
-  grabModeIndex: 0
-  ModifyDragAndDrop: 0
-  ModifyDragAndDropTargets: 0
-  ModifyDnDMinDistance: 0
-  ModifyDnDSnapBeforeDrop: 0
-  ModifyDnDAttached: 0
-  ModifyDnDRespectAxis: 0
-  dnDMinDistance: 0
-  dnDSnapBeforeDrop: 0
-  dnDRespectXAxis: 0
-  dnDRespectYAxis: 0
-  dnDRespectZAxis: 0
-  dnDRespectXAxisMirror: 0
-  dnDRespectYAxisMirror: 0
-  dnDRespectZAxisMirror: 0
-  ModifyDnDAngleThreshold: 0
-  dnDAngleThreshold: 0
-  DnD_Targets: []
-  visualsScript: {fileID: 1303914180}
-  AlterAllVisuals: 1
-  selectedRenderers: 
-  triggerAnimation: 0
-  targetAnimator: {fileID: 1596771068}
-  activeTriggerStatesAnim: 0100000000
-  animatorTriggers:
-  - HoverOff
-  - 
-  - 
-  - 
-  - 
-  loopOnLast: 0000000000
-  animationClip:
-    ClipEntries00: []
-    ClipEntries01: []
-    ClipEntries02: []
-    ClipEntries03: []
-    ClipEntries04: []
-  loopAnim: 0000000000000000000000000000000000000000
-  loopAnimType: 0000000000000000000000000000000000000000
-  animationSequence: 0000000000000000000000000000000000000000
-  targetAudioSource: {fileID: 0}
-  activeTriggerStatesAudio: 0100000000
-  audioClips:
-    ClipEntries00: []
-    ClipEntries01: []
-    ClipEntries02: []
-    ClipEntries03: []
-    ClipEntries04: []
-  loopAudio: 0000000000000000000000000000000000000000
-  audio_sequence: 0000000000000000000000000000000000000000
-  fadeInBetween: 0000000000
-  audioClipsNew:
-    ClipEntries00: []
-    ClipEntries01: []
-    ClipEntries02: []
-    ClipEntries03: []
-    ClipEntries04: []
-  loopAudioNew: 0000000000000000000000000000000000000000
-  audioLoopOnLast: 0000000000
-  duckingEnabled: 1
-  fadeInTime: 1
-  fadeOutTime: 1
-  fadeOutDeactTime: 1
-  fadeInCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 1
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 1
-      inSlope: 1
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  fadeOutDeactCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: -1
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 0
-      inSlope: -1
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  fadeOutCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: -1
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 0
-      inSlope: -1
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  fadeInEnabled: 0
-  fadeOutEnabled: 0
-  fadeOutDeactEnabled: 0
-  audioVolumeMin: 0.2
-  audioVolumeMax: 1
-  fadeSpeed: 0.005
-  audio_ForceStop: 0
-  audio_AllowMultiple: 0
-  audio_randomizePitch: 0
-  audio_minPitch: 0
-  audio_maxPitch: 2
-  audio_MaxConcurrentSound: 8
-  audio_stopOthers: 0
-  IO: {fileID: 1596771066}
-  triggerNotification: 0
---- !u!114 &1156668738
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1156668735}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a11d97df356699943aab990d9fcca9f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dependent: 0
-  requireAllActivators: 0
-  requireAllDeactivators: 0
-  proximityMap:
-    proximityEntryList: []
-    proximityEntryGroupList: []
-    proximityStateIndex: 0
-  grabMap:
-    grabEntryList: []
-    grabHandsIndex: 0
-    grabStateLeftIndex: 0
-    grabStateRightIndex: 0
-  customConditions: []
-  triggerStateIndex: 0
-  delayDuration: 0
-  delayed: 0
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  activeDuration: 0
-  expires: 0
-  isExpireRandom: 0
-  expireRange:
-  - 0
-  - 0
-  autoTriggerModeIndex: 0
-  reload: 1
-  canBeTriggered: 1
-  TriggerCount: 0
-  reloadModeIndex: 1
-  reloadMaxRepetitions: 0
-  reloadCount: 0
-  reloadDelay: 0.1
-  isReloadRandom: 0
-  reloadRange:
-  - 0
-  - 0
-  focusDuration: 0
-  focusLossModeIndex: 0
-  FocusLossSpeed: 1
-  proximityEnabled: 0
-  grabEnabled: 0
-  teleportIndex: 0
-  teleportEnabled: 0
-  inputsEnabled: 0
-  InputsMap:
-    InputsEntries: []
-    AreDependenciesSatisfied: 1
-  requireAllInputs: 0
-  customConditionsEnabled: 0
-  dragAndDropEnabled: 0
-  dndEventValidator: 0
-  dndAnyTarget: 1
-  dndTargetModesIndex: 0
-  dndAttached: 0
-  dndTargets: []
-  requireAllProximities: 0
-  touchMap:
-    TouchEnitry:
-      hand: 4
-      interactiveObject: {fileID: 1551184538}
-    touchHandsIndex: 2
-    touchActionIndex: 0
-  gazeEnabled: 0
-  gazeStateIndex: 0
-  gazeIn: 0
-  touchEnabled: 0
-  ActivateOnDependencyMap:
-    dependencies: []
-    AreDependenciesSatisfied: 1
-  DeactivateOnDependencyMap:
-    dependencies: []
-    AreDependenciesSatisfied: 0
-  gazeColliderIO: {fileID: 0}
-  handHoverEnabled: 1
-  handHoverIO: {fileID: 1551184542}
-  hoverHandIndex: 2
-  hoverHand: 4
-  hoverStateIndex: 1
-  hoverIn: 0
-  ReloadDependencies: 0
-  isActive: 1
-  proximityGroupIndex: 0
-  rigCombinations: []
---- !u!114 &1156668739
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1156668735}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c5e5d36d57be5841bfb50b6dbe7c062, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HasActions: 1
-  HasConditions: 1
 --- !u!1 &1162890515
 GameObject:
   m_ObjectHideFlags: 0
@@ -18609,7 +16542,7 @@ MonoBehaviour:
   AlterAllVisuals: 1
   selectedRenderers: 
   triggerAnimation: 0
-  targetAnimator: {fileID: 1622205723}
+  targetAnimator: {fileID: 652715272}
   activeTriggerStatesAnim: 0100000000
   animatorTriggers:
   - HoverOn
@@ -18806,7 +16739,7 @@ MonoBehaviour:
     AreDependenciesSatisfied: 0
   gazeColliderIO: {fileID: 0}
   handHoverEnabled: 1
-  handHoverIO: {fileID: 1551184542}
+  handHoverIO: {fileID: 1622205724}
   hoverHandIndex: 2
   hoverHand: 4
   hoverStateIndex: 0
@@ -18879,7 +16812,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 0.5, y: 0.4, z: 0.02}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1212452789
 GameObject:
@@ -18953,6 +16886,48 @@ MonoBehaviour:
   ActualHand: 1
   Rotation: {x: 0, y: 0, z: 0, w: 0}
   Position: {x: 0, y: 0, z: 0}
+--- !u!1001 &1240295465
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4642047441547672, guid: 5b6fb31d0455cc54985292f544a3b02f, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4642047441547672, guid: 5b6fb31d0455cc54985292f544a3b02f, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 1.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4642047441547672, guid: 5b6fb31d0455cc54985292f544a3b02f, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4642047441547672, guid: 5b6fb31d0455cc54985292f544a3b02f, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4642047441547672, guid: 5b6fb31d0455cc54985292f544a3b02f, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4642047441547672, guid: 5b6fb31d0455cc54985292f544a3b02f, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4642047441547672, guid: 5b6fb31d0455cc54985292f544a3b02f, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4642047441547672, guid: 5b6fb31d0455cc54985292f544a3b02f, type: 2}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 5b6fb31d0455cc54985292f544a3b02f, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1240711805
 GameObject:
   m_ObjectHideFlags: 0
@@ -19184,313 +17159,6 @@ MonoBehaviour:
   ActualHand: 0
   Rotation: {x: 0, y: 0, z: 0, w: 0}
   Position: {x: 0, y: 0, z: 0}
---- !u!1 &1272459394
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1272459395}
-  - component: {fileID: 1272459398}
-  - component: {fileID: 1272459397}
-  - component: {fileID: 1272459396}
-  m_Layer: 0
-  m_Name: Btn_HoverOff (7)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1272459395
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1272459394}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.39299998, y: -0.34000003, z: 0.025999997}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1775503154}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1272459396
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1272459394}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9fe86aa1e2e51304b81a3f6820a3abdb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isDelayed: 0
-  delayTime: 0
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  multipleActionsInTime: 0
-  rootIO: {fileID: 0}
-  isActive: 1
-  ActionReset: 0
-  ActionVisuals: 0
-  ActionGrab: 0
-  ActionTouch: 0
-  ActionGravity: 0
-  ActionAudio: 0
-  ActionColliders: 0
-  ActionDragAndDrop: 0
-  ActionAnimation: 1
-  DestroyOnTrigger: 0
-  ModifyGrabDistance: 0
-  ModifyTouchDistance: 0
-  ModifyGrabMode: 0
-  grabDistance: 0
-  touchDistance: 0
-  grabModeIndex: 0
-  ModifyDragAndDrop: 0
-  ModifyDragAndDropTargets: 0
-  ModifyDnDMinDistance: 0
-  ModifyDnDSnapBeforeDrop: 0
-  ModifyDnDAttached: 0
-  ModifyDnDRespectAxis: 0
-  dnDMinDistance: 0
-  dnDSnapBeforeDrop: 0
-  dnDRespectXAxis: 0
-  dnDRespectYAxis: 0
-  dnDRespectZAxis: 0
-  dnDRespectXAxisMirror: 0
-  dnDRespectYAxisMirror: 0
-  dnDRespectZAxisMirror: 0
-  ModifyDnDAngleThreshold: 0
-  dnDAngleThreshold: 0
-  DnD_Targets: []
-  visualsScript: {fileID: 247691307}
-  AlterAllVisuals: 1
-  selectedRenderers: 
-  triggerAnimation: 0
-  targetAnimator: {fileID: 325185529}
-  activeTriggerStatesAnim: 0100000000
-  animatorTriggers:
-  - HoverOff
-  - 
-  - 
-  - 
-  - 
-  loopOnLast: 0000000000
-  animationClip:
-    ClipEntries00: []
-    ClipEntries01: []
-    ClipEntries02: []
-    ClipEntries03: []
-    ClipEntries04: []
-  loopAnim: 0000000000000000000000000000000000000000
-  loopAnimType: 0000000000000000000000000000000000000000
-  animationSequence: 0000000000000000000000000000000000000000
-  targetAudioSource: {fileID: 0}
-  activeTriggerStatesAudio: 0100000000
-  audioClips:
-    ClipEntries00: []
-    ClipEntries01: []
-    ClipEntries02: []
-    ClipEntries03: []
-    ClipEntries04: []
-  loopAudio: 0000000000000000000000000000000000000000
-  audio_sequence: 0000000000000000000000000000000000000000
-  fadeInBetween: 0000000000
-  audioClipsNew:
-    ClipEntries00: []
-    ClipEntries01: []
-    ClipEntries02: []
-    ClipEntries03: []
-    ClipEntries04: []
-  loopAudioNew: 0000000000000000000000000000000000000000
-  audioLoopOnLast: 0000000000
-  duckingEnabled: 1
-  fadeInTime: 1
-  fadeOutTime: 1
-  fadeOutDeactTime: 1
-  fadeInCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 1
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 1
-      inSlope: 1
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  fadeOutDeactCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: -1
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 0
-      inSlope: -1
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  fadeOutCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: -1
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 0
-      inSlope: -1
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  fadeInEnabled: 0
-  fadeOutEnabled: 0
-  fadeOutDeactEnabled: 0
-  audioVolumeMin: 0.2
-  audioVolumeMax: 1
-  fadeSpeed: 0.005
-  audio_ForceStop: 0
-  audio_AllowMultiple: 0
-  audio_randomizePitch: 0
-  audio_minPitch: 0
-  audio_maxPitch: 2
-  audio_MaxConcurrentSound: 8
-  audio_stopOthers: 0
-  IO: {fileID: 325185527}
-  triggerNotification: 0
---- !u!114 &1272459397
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1272459394}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a11d97df356699943aab990d9fcca9f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dependent: 0
-  requireAllActivators: 0
-  requireAllDeactivators: 0
-  proximityMap:
-    proximityEntryList: []
-    proximityEntryGroupList: []
-    proximityStateIndex: 0
-  grabMap:
-    grabEntryList: []
-    grabHandsIndex: 0
-    grabStateLeftIndex: 0
-    grabStateRightIndex: 0
-  customConditions: []
-  triggerStateIndex: 0
-  delayDuration: 0
-  delayed: 0
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  activeDuration: 0
-  expires: 0
-  isExpireRandom: 0
-  expireRange:
-  - 0
-  - 0
-  autoTriggerModeIndex: 0
-  reload: 1
-  canBeTriggered: 1
-  TriggerCount: 0
-  reloadModeIndex: 1
-  reloadMaxRepetitions: 0
-  reloadCount: 0
-  reloadDelay: 0.1
-  isReloadRandom: 0
-  reloadRange:
-  - 0
-  - 0
-  focusDuration: 0
-  focusLossModeIndex: 0
-  FocusLossSpeed: 1
-  proximityEnabled: 0
-  grabEnabled: 0
-  teleportIndex: 0
-  teleportEnabled: 0
-  inputsEnabled: 0
-  InputsMap:
-    InputsEntries: []
-    AreDependenciesSatisfied: 1
-  requireAllInputs: 0
-  customConditionsEnabled: 0
-  dragAndDropEnabled: 0
-  dndEventValidator: 0
-  dndAnyTarget: 1
-  dndTargetModesIndex: 0
-  dndAttached: 0
-  dndTargets: []
-  requireAllProximities: 0
-  touchMap:
-    TouchEnitry:
-      hand: 4
-      interactiveObject: {fileID: 1551184538}
-    touchHandsIndex: 2
-    touchActionIndex: 0
-  gazeEnabled: 0
-  gazeStateIndex: 0
-  gazeIn: 0
-  touchEnabled: 0
-  ActivateOnDependencyMap:
-    dependencies: []
-    AreDependenciesSatisfied: 1
-  DeactivateOnDependencyMap:
-    dependencies: []
-    AreDependenciesSatisfied: 0
-  gazeColliderIO: {fileID: 0}
-  handHoverEnabled: 1
-  handHoverIO: {fileID: 1551184542}
-  hoverHandIndex: 2
-  hoverHand: 4
-  hoverStateIndex: 1
-  hoverIn: 0
-  ReloadDependencies: 0
-  isActive: 1
-  proximityGroupIndex: 0
-  rigCombinations: []
---- !u!114 &1272459398
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1272459394}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c5e5d36d57be5841bfb50b6dbe7c062, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HasActions: 1
-  HasConditions: 1
 --- !u!1001 &1274715912
 Prefab:
   m_ObjectHideFlags: 0
@@ -19641,7 +17309,7 @@ MonoBehaviour:
   AlterAllVisuals: 1
   selectedRenderers: 
   triggerAnimation: 0
-  targetAnimator: {fileID: 1611338466}
+  targetAnimator: {fileID: 1473120374}
   activeTriggerStatesAnim: 0100000000
   animatorTriggers:
   - HoverOn
@@ -19838,7 +17506,7 @@ MonoBehaviour:
     AreDependenciesSatisfied: 0
   gazeColliderIO: {fileID: 0}
   handHoverEnabled: 1
-  handHoverIO: {fileID: 1551184542}
+  handHoverIO: {fileID: 314776045}
   hoverHandIndex: 2
   hoverHand: 4
   hoverStateIndex: 0
@@ -20023,9 +17691,9 @@ Animator:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1282700691}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f063f7bbb69ddc5499d7d13f84a4db78, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -20428,313 +18096,6 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1307762791}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c5e5d36d57be5841bfb50b6dbe7c062, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HasActions: 1
-  HasConditions: 1
---- !u!1 &1321994226
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1321994227}
-  - component: {fileID: 1321994230}
-  - component: {fileID: 1321994229}
-  - component: {fileID: 1321994228}
-  m_Layer: 0
-  m_Name: Btn_HoverOn (12)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1321994227
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1321994226}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.21400006, y: -0.34900004, z: 0.025999997}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1851911472}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1321994228
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1321994226}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9fe86aa1e2e51304b81a3f6820a3abdb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isDelayed: 0
-  delayTime: 0
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  multipleActionsInTime: 0
-  rootIO: {fileID: 0}
-  isActive: 1
-  ActionReset: 0
-  ActionVisuals: 0
-  ActionGrab: 0
-  ActionTouch: 0
-  ActionGravity: 0
-  ActionAudio: 0
-  ActionColliders: 0
-  ActionDragAndDrop: 0
-  ActionAnimation: 1
-  DestroyOnTrigger: 0
-  ModifyGrabDistance: 0
-  ModifyTouchDistance: 0
-  ModifyGrabMode: 0
-  grabDistance: 0
-  touchDistance: 0
-  grabModeIndex: 0
-  ModifyDragAndDrop: 0
-  ModifyDragAndDropTargets: 0
-  ModifyDnDMinDistance: 0
-  ModifyDnDSnapBeforeDrop: 0
-  ModifyDnDAttached: 0
-  ModifyDnDRespectAxis: 0
-  dnDMinDistance: 0
-  dnDSnapBeforeDrop: 0
-  dnDRespectXAxis: 0
-  dnDRespectYAxis: 0
-  dnDRespectZAxis: 0
-  dnDRespectXAxisMirror: 0
-  dnDRespectYAxisMirror: 0
-  dnDRespectZAxisMirror: 0
-  ModifyDnDAngleThreshold: 0
-  dnDAngleThreshold: 0
-  DnD_Targets: []
-  visualsScript: {fileID: 409889775}
-  AlterAllVisuals: 1
-  selectedRenderers: 
-  triggerAnimation: 0
-  targetAnimator: {fileID: 36513020}
-  activeTriggerStatesAnim: 0100000000
-  animatorTriggers:
-  - HoverOn
-  - 
-  - 
-  - 
-  - 
-  loopOnLast: 0000000000
-  animationClip:
-    ClipEntries00: []
-    ClipEntries01: []
-    ClipEntries02: []
-    ClipEntries03: []
-    ClipEntries04: []
-  loopAnim: 0000000000000000000000000000000000000000
-  loopAnimType: 0000000000000000000000000000000000000000
-  animationSequence: 0000000000000000000000000000000000000000
-  targetAudioSource: {fileID: 0}
-  activeTriggerStatesAudio: 0100000000
-  audioClips:
-    ClipEntries00: []
-    ClipEntries01: []
-    ClipEntries02: []
-    ClipEntries03: []
-    ClipEntries04: []
-  loopAudio: 0000000000000000000000000000000000000000
-  audio_sequence: 0000000000000000000000000000000000000000
-  fadeInBetween: 0000000000
-  audioClipsNew:
-    ClipEntries00: []
-    ClipEntries01: []
-    ClipEntries02: []
-    ClipEntries03: []
-    ClipEntries04: []
-  loopAudioNew: 0000000000000000000000000000000000000000
-  audioLoopOnLast: 0000000000
-  duckingEnabled: 1
-  fadeInTime: 1
-  fadeOutTime: 1
-  fadeOutDeactTime: 1
-  fadeInCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 1
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 1
-      inSlope: 1
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  fadeOutDeactCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: -1
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 0
-      inSlope: -1
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  fadeOutCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: -1
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 0
-      inSlope: -1
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  fadeInEnabled: 0
-  fadeOutEnabled: 0
-  fadeOutDeactEnabled: 0
-  audioVolumeMin: 0.2
-  audioVolumeMax: 1
-  fadeSpeed: 0.005
-  audio_ForceStop: 0
-  audio_AllowMultiple: 0
-  audio_randomizePitch: 0
-  audio_minPitch: 0
-  audio_maxPitch: 2
-  audio_MaxConcurrentSound: 8
-  audio_stopOthers: 0
-  IO: {fileID: 1779618281}
-  triggerNotification: 0
---- !u!114 &1321994229
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1321994226}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a11d97df356699943aab990d9fcca9f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dependent: 0
-  requireAllActivators: 0
-  requireAllDeactivators: 0
-  proximityMap:
-    proximityEntryList: []
-    proximityEntryGroupList: []
-    proximityStateIndex: 0
-  grabMap:
-    grabEntryList: []
-    grabHandsIndex: 0
-    grabStateLeftIndex: 0
-    grabStateRightIndex: 0
-  customConditions: []
-  triggerStateIndex: 0
-  delayDuration: 0
-  delayed: 0
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  activeDuration: 0
-  expires: 0
-  isExpireRandom: 0
-  expireRange:
-  - 0
-  - 0
-  autoTriggerModeIndex: 0
-  reload: 1
-  canBeTriggered: 1
-  TriggerCount: 0
-  reloadModeIndex: 1
-  reloadMaxRepetitions: 0
-  reloadCount: 0
-  reloadDelay: 0.1
-  isReloadRandom: 0
-  reloadRange:
-  - 0
-  - 0
-  focusDuration: 0
-  focusLossModeIndex: 0
-  FocusLossSpeed: 1
-  proximityEnabled: 0
-  grabEnabled: 0
-  teleportIndex: 0
-  teleportEnabled: 0
-  inputsEnabled: 0
-  InputsMap:
-    InputsEntries: []
-    AreDependenciesSatisfied: 1
-  requireAllInputs: 0
-  customConditionsEnabled: 0
-  dragAndDropEnabled: 0
-  dndEventValidator: 0
-  dndAnyTarget: 1
-  dndTargetModesIndex: 0
-  dndAttached: 0
-  dndTargets: []
-  requireAllProximities: 0
-  touchMap:
-    TouchEnitry:
-      hand: 4
-      interactiveObject: {fileID: 1551184538}
-    touchHandsIndex: 2
-    touchActionIndex: 0
-  gazeEnabled: 0
-  gazeStateIndex: 0
-  gazeIn: 0
-  touchEnabled: 0
-  ActivateOnDependencyMap:
-    dependencies: []
-    AreDependenciesSatisfied: 1
-  DeactivateOnDependencyMap:
-    dependencies: []
-    AreDependenciesSatisfied: 0
-  gazeColliderIO: {fileID: 0}
-  handHoverEnabled: 1
-  handHoverIO: {fileID: 1551184542}
-  hoverHandIndex: 2
-  hoverHand: 4
-  hoverStateIndex: 0
-  hoverIn: 1
-  ReloadDependencies: 0
-  isActive: 1
-  proximityGroupIndex: 0
-  rigCombinations: []
---- !u!114 &1321994230
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1321994226}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2c5e5d36d57be5841bfb50b6dbe7c062, type: 3}
@@ -21779,313 +19140,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.1, y: 0.1, z: 0.1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!1 &1421542277
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1421542278}
-  - component: {fileID: 1421542281}
-  - component: {fileID: 1421542280}
-  - component: {fileID: 1421542279}
-  m_Layer: 0
-  m_Name: Btn_HoverOff (14)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1421542278
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1421542277}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.21400006, y: -0.107000016, z: 0.025999997}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 864183502}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1421542279
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1421542277}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9fe86aa1e2e51304b81a3f6820a3abdb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isDelayed: 0
-  delayTime: 0
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  multipleActionsInTime: 0
-  rootIO: {fileID: 0}
-  isActive: 1
-  ActionReset: 0
-  ActionVisuals: 0
-  ActionGrab: 0
-  ActionTouch: 0
-  ActionGravity: 0
-  ActionAudio: 0
-  ActionColliders: 0
-  ActionDragAndDrop: 0
-  ActionAnimation: 1
-  DestroyOnTrigger: 0
-  ModifyGrabDistance: 0
-  ModifyTouchDistance: 0
-  ModifyGrabMode: 0
-  grabDistance: 0
-  touchDistance: 0
-  grabModeIndex: 0
-  ModifyDragAndDrop: 0
-  ModifyDragAndDropTargets: 0
-  ModifyDnDMinDistance: 0
-  ModifyDnDSnapBeforeDrop: 0
-  ModifyDnDAttached: 0
-  ModifyDnDRespectAxis: 0
-  dnDMinDistance: 0
-  dnDSnapBeforeDrop: 0
-  dnDRespectXAxis: 0
-  dnDRespectYAxis: 0
-  dnDRespectZAxis: 0
-  dnDRespectXAxisMirror: 0
-  dnDRespectYAxisMirror: 0
-  dnDRespectZAxisMirror: 0
-  ModifyDnDAngleThreshold: 0
-  dnDAngleThreshold: 0
-  DnD_Targets: []
-  visualsScript: {fileID: 806011270}
-  AlterAllVisuals: 1
-  selectedRenderers: 
-  triggerAnimation: 0
-  targetAnimator: {fileID: 418551837}
-  activeTriggerStatesAnim: 0100000000
-  animatorTriggers:
-  - HoverOff
-  - 
-  - 
-  - 
-  - 
-  loopOnLast: 0000000000
-  animationClip:
-    ClipEntries00: []
-    ClipEntries01: []
-    ClipEntries02: []
-    ClipEntries03: []
-    ClipEntries04: []
-  loopAnim: 0000000000000000000000000000000000000000
-  loopAnimType: 0000000000000000000000000000000000000000
-  animationSequence: 0000000000000000000000000000000000000000
-  targetAudioSource: {fileID: 0}
-  activeTriggerStatesAudio: 0100000000
-  audioClips:
-    ClipEntries00: []
-    ClipEntries01: []
-    ClipEntries02: []
-    ClipEntries03: []
-    ClipEntries04: []
-  loopAudio: 0000000000000000000000000000000000000000
-  audio_sequence: 0000000000000000000000000000000000000000
-  fadeInBetween: 0000000000
-  audioClipsNew:
-    ClipEntries00: []
-    ClipEntries01: []
-    ClipEntries02: []
-    ClipEntries03: []
-    ClipEntries04: []
-  loopAudioNew: 0000000000000000000000000000000000000000
-  audioLoopOnLast: 0000000000
-  duckingEnabled: 1
-  fadeInTime: 1
-  fadeOutTime: 1
-  fadeOutDeactTime: 1
-  fadeInCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 1
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 1
-      inSlope: 1
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  fadeOutDeactCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: -1
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 0
-      inSlope: -1
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  fadeOutCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: -1
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 0
-      inSlope: -1
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  fadeInEnabled: 0
-  fadeOutEnabled: 0
-  fadeOutDeactEnabled: 0
-  audioVolumeMin: 0.2
-  audioVolumeMax: 1
-  fadeSpeed: 0.005
-  audio_ForceStop: 0
-  audio_AllowMultiple: 0
-  audio_randomizePitch: 0
-  audio_minPitch: 0
-  audio_maxPitch: 2
-  audio_MaxConcurrentSound: 8
-  audio_stopOthers: 0
-  IO: {fileID: 418551835}
-  triggerNotification: 0
---- !u!114 &1421542280
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1421542277}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a11d97df356699943aab990d9fcca9f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dependent: 0
-  requireAllActivators: 0
-  requireAllDeactivators: 0
-  proximityMap:
-    proximityEntryList: []
-    proximityEntryGroupList: []
-    proximityStateIndex: 0
-  grabMap:
-    grabEntryList: []
-    grabHandsIndex: 0
-    grabStateLeftIndex: 0
-    grabStateRightIndex: 0
-  customConditions: []
-  triggerStateIndex: 0
-  delayDuration: 0
-  delayed: 0
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  activeDuration: 0
-  expires: 0
-  isExpireRandom: 0
-  expireRange:
-  - 0
-  - 0
-  autoTriggerModeIndex: 0
-  reload: 1
-  canBeTriggered: 1
-  TriggerCount: 0
-  reloadModeIndex: 1
-  reloadMaxRepetitions: 0
-  reloadCount: 0
-  reloadDelay: 0.1
-  isReloadRandom: 0
-  reloadRange:
-  - 0
-  - 0
-  focusDuration: 0
-  focusLossModeIndex: 0
-  FocusLossSpeed: 1
-  proximityEnabled: 0
-  grabEnabled: 0
-  teleportIndex: 0
-  teleportEnabled: 0
-  inputsEnabled: 0
-  InputsMap:
-    InputsEntries: []
-    AreDependenciesSatisfied: 1
-  requireAllInputs: 0
-  customConditionsEnabled: 0
-  dragAndDropEnabled: 0
-  dndEventValidator: 0
-  dndAnyTarget: 1
-  dndTargetModesIndex: 0
-  dndAttached: 0
-  dndTargets: []
-  requireAllProximities: 0
-  touchMap:
-    TouchEnitry:
-      hand: 4
-      interactiveObject: {fileID: 1551184538}
-    touchHandsIndex: 2
-    touchActionIndex: 0
-  gazeEnabled: 0
-  gazeStateIndex: 0
-  gazeIn: 0
-  touchEnabled: 0
-  ActivateOnDependencyMap:
-    dependencies: []
-    AreDependenciesSatisfied: 1
-  DeactivateOnDependencyMap:
-    dependencies: []
-    AreDependenciesSatisfied: 0
-  gazeColliderIO: {fileID: 0}
-  handHoverEnabled: 1
-  handHoverIO: {fileID: 1551184542}
-  hoverHandIndex: 2
-  hoverHand: 4
-  hoverStateIndex: 1
-  hoverIn: 0
-  ReloadDependencies: 0
-  isActive: 1
-  proximityGroupIndex: 0
-  rigCombinations: []
---- !u!114 &1421542281
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1421542277}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c5e5d36d57be5841bfb50b6dbe7c062, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HasActions: 1
-  HasConditions: 1
 --- !u!1 &1434680381
 GameObject:
   m_ObjectHideFlags: 0
@@ -22174,7 +19228,7 @@ MonoBehaviour:
   AlterAllVisuals: 1
   selectedRenderers: 
   triggerAnimation: 0
-  targetAnimator: {fileID: 1697241645}
+  targetAnimator: {fileID: 1282700696}
   activeTriggerStatesAnim: 0100000000
   animatorTriggers:
   - HoverOn
@@ -22371,7 +19425,7 @@ MonoBehaviour:
     AreDependenciesSatisfied: 0
   gazeColliderIO: {fileID: 0}
   handHoverEnabled: 1
-  handHoverIO: {fileID: 1551184542}
+  handHoverIO: {fileID: 1697241646}
   hoverHandIndex: 2
   hoverHand: 4
   hoverStateIndex: 0
@@ -22534,7 +19588,7 @@ MonoBehaviour:
   AlterAllVisuals: 1
   selectedRenderers: 
   triggerAnimation: 0
-  targetAnimator: {fileID: 1099307729}
+  targetAnimator: {fileID: 1920836946}
   activeTriggerStatesAnim: 0100000000
   animatorTriggers:
   - HoverOn
@@ -22731,7 +19785,7 @@ MonoBehaviour:
     AreDependenciesSatisfied: 0
   gazeColliderIO: {fileID: 0}
   handHoverEnabled: 1
-  handHoverIO: {fileID: 1551184542}
+  handHoverIO: {fileID: 1099307730}
   hoverHandIndex: 2
   hoverHand: 4
   hoverStateIndex: 0
@@ -22779,8 +19833,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 175253036}
-  - {fileID: 84843962}
-  - {fileID: 1530301292}
   m_Father: {fileID: 604350923}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -22896,7 +19948,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 0.5, y: 0.4, z: 0.02}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1465473380
 GameObject:
@@ -22978,7 +20030,7 @@ Transform:
   m_GameObject: {fileID: 1473120369}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.099999994, y: 0.099999964, z: 0.02}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.02}
   m_Children: []
   m_Father: {fileID: 189643111}
   m_RootOrder: 0
@@ -23043,9 +20095,9 @@ Animator:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1473120369}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f063f7bbb69ddc5499d7d13f84a4db78, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -23361,313 +20413,6 @@ MonoBehaviour:
   ActualHand: 1
   Rotation: {x: 0, y: 0, z: 0, w: 0}
   Position: {x: 0, y: 0, z: 0}
---- !u!1 &1530301291
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1530301292}
-  - component: {fileID: 1530301295}
-  - component: {fileID: 1530301294}
-  - component: {fileID: 1530301293}
-  m_Layer: 0
-  m_Name: Btn_HoverOff (8)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1530301292
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1530301291}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.38899997, y: -0.19100001, z: 0.025999997}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1452077696}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1530301293
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1530301291}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9fe86aa1e2e51304b81a3f6820a3abdb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isDelayed: 0
-  delayTime: 0
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  multipleActionsInTime: 0
-  rootIO: {fileID: 0}
-  isActive: 1
-  ActionReset: 0
-  ActionVisuals: 0
-  ActionGrab: 0
-  ActionTouch: 0
-  ActionGravity: 0
-  ActionAudio: 0
-  ActionColliders: 0
-  ActionDragAndDrop: 0
-  ActionAnimation: 1
-  DestroyOnTrigger: 0
-  ModifyGrabDistance: 0
-  ModifyTouchDistance: 0
-  ModifyGrabMode: 0
-  grabDistance: 0
-  touchDistance: 0
-  grabModeIndex: 0
-  ModifyDragAndDrop: 0
-  ModifyDragAndDropTargets: 0
-  ModifyDnDMinDistance: 0
-  ModifyDnDSnapBeforeDrop: 0
-  ModifyDnDAttached: 0
-  ModifyDnDRespectAxis: 0
-  dnDMinDistance: 0
-  dnDSnapBeforeDrop: 0
-  dnDRespectXAxis: 0
-  dnDRespectYAxis: 0
-  dnDRespectZAxis: 0
-  dnDRespectXAxisMirror: 0
-  dnDRespectYAxisMirror: 0
-  dnDRespectZAxisMirror: 0
-  ModifyDnDAngleThreshold: 0
-  dnDAngleThreshold: 0
-  DnD_Targets: []
-  visualsScript: {fileID: 972000980}
-  AlterAllVisuals: 1
-  selectedRenderers: 
-  triggerAnimation: 0
-  targetAnimator: {fileID: 604350926}
-  activeTriggerStatesAnim: 0100000000
-  animatorTriggers:
-  - HoverOff
-  - 
-  - 
-  - 
-  - 
-  loopOnLast: 0000000000
-  animationClip:
-    ClipEntries00: []
-    ClipEntries01: []
-    ClipEntries02: []
-    ClipEntries03: []
-    ClipEntries04: []
-  loopAnim: 0000000000000000000000000000000000000000
-  loopAnimType: 0000000000000000000000000000000000000000
-  animationSequence: 0000000000000000000000000000000000000000
-  targetAudioSource: {fileID: 0}
-  activeTriggerStatesAudio: 0100000000
-  audioClips:
-    ClipEntries00: []
-    ClipEntries01: []
-    ClipEntries02: []
-    ClipEntries03: []
-    ClipEntries04: []
-  loopAudio: 0000000000000000000000000000000000000000
-  audio_sequence: 0000000000000000000000000000000000000000
-  fadeInBetween: 0000000000
-  audioClipsNew:
-    ClipEntries00: []
-    ClipEntries01: []
-    ClipEntries02: []
-    ClipEntries03: []
-    ClipEntries04: []
-  loopAudioNew: 0000000000000000000000000000000000000000
-  audioLoopOnLast: 0000000000
-  duckingEnabled: 1
-  fadeInTime: 1
-  fadeOutTime: 1
-  fadeOutDeactTime: 1
-  fadeInCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 1
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 1
-      inSlope: 1
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  fadeOutDeactCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: -1
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 0
-      inSlope: -1
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  fadeOutCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: -1
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 0
-      inSlope: -1
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  fadeInEnabled: 0
-  fadeOutEnabled: 0
-  fadeOutDeactEnabled: 0
-  audioVolumeMin: 0.2
-  audioVolumeMax: 1
-  fadeSpeed: 0.005
-  audio_ForceStop: 0
-  audio_AllowMultiple: 0
-  audio_randomizePitch: 0
-  audio_minPitch: 0
-  audio_maxPitch: 2
-  audio_MaxConcurrentSound: 8
-  audio_stopOthers: 0
-  IO: {fileID: 604350924}
-  triggerNotification: 0
---- !u!114 &1530301294
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1530301291}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a11d97df356699943aab990d9fcca9f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dependent: 0
-  requireAllActivators: 0
-  requireAllDeactivators: 0
-  proximityMap:
-    proximityEntryList: []
-    proximityEntryGroupList: []
-    proximityStateIndex: 0
-  grabMap:
-    grabEntryList: []
-    grabHandsIndex: 0
-    grabStateLeftIndex: 0
-    grabStateRightIndex: 0
-  customConditions: []
-  triggerStateIndex: 0
-  delayDuration: 0
-  delayed: 0
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  activeDuration: 0
-  expires: 0
-  isExpireRandom: 0
-  expireRange:
-  - 0
-  - 0
-  autoTriggerModeIndex: 0
-  reload: 1
-  canBeTriggered: 1
-  TriggerCount: 0
-  reloadModeIndex: 1
-  reloadMaxRepetitions: 0
-  reloadCount: 0
-  reloadDelay: 0.1
-  isReloadRandom: 0
-  reloadRange:
-  - 0
-  - 0
-  focusDuration: 0
-  focusLossModeIndex: 0
-  FocusLossSpeed: 1
-  proximityEnabled: 0
-  grabEnabled: 0
-  teleportIndex: 0
-  teleportEnabled: 0
-  inputsEnabled: 0
-  InputsMap:
-    InputsEntries: []
-    AreDependenciesSatisfied: 1
-  requireAllInputs: 0
-  customConditionsEnabled: 0
-  dragAndDropEnabled: 0
-  dndEventValidator: 0
-  dndAnyTarget: 1
-  dndTargetModesIndex: 0
-  dndAttached: 0
-  dndTargets: []
-  requireAllProximities: 0
-  touchMap:
-    TouchEnitry:
-      hand: 4
-      interactiveObject: {fileID: 1551184538}
-    touchHandsIndex: 2
-    touchActionIndex: 0
-  gazeEnabled: 0
-  gazeStateIndex: 0
-  gazeIn: 0
-  touchEnabled: 0
-  ActivateOnDependencyMap:
-    dependencies: []
-    AreDependenciesSatisfied: 1
-  DeactivateOnDependencyMap:
-    dependencies: []
-    AreDependenciesSatisfied: 0
-  gazeColliderIO: {fileID: 0}
-  handHoverEnabled: 1
-  handHoverIO: {fileID: 1551184542}
-  hoverHandIndex: 2
-  hoverHand: 4
-  hoverStateIndex: 1
-  hoverIn: 0
-  ReloadDependencies: 0
-  isActive: 1
-  proximityGroupIndex: 0
-  rigCombinations: []
---- !u!114 &1530301295
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1530301291}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c5e5d36d57be5841bfb50b6dbe7c062, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HasActions: 1
-  HasConditions: 1
 --- !u!1 &1535170209
 GameObject:
   m_ObjectHideFlags: 0
@@ -23819,7 +20564,7 @@ Transform:
   m_GameObject: {fileID: 1551184538}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.15400001, y: 0.014999985, z: -0.012999997}
-  m_LocalScale: {x: 1, y: 0.99999994, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1984200234}
   - {fileID: 243329006}
@@ -24017,7 +20762,7 @@ Animator:
   m_GameObject: {fileID: 1562334264}
   m_Enabled: 0
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f063f7bbb69ddc5499d7d13f84a4db78, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -24191,7 +20936,7 @@ Animator:
   m_GameObject: {fileID: 1596771064}
   m_Enabled: 0
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f063f7bbb69ddc5499d7d13f84a4db78, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -24226,7 +20971,7 @@ Transform:
   m_GameObject: {fileID: 1611338461}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.09999999, z: 0.02}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.02}
   m_Children: []
   m_Father: {fileID: 243329006}
   m_RootOrder: 0
@@ -24365,7 +21110,7 @@ Animator:
   m_GameObject: {fileID: 1622205720}
   m_Enabled: 0
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f063f7bbb69ddc5499d7d13f84a4db78, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -24653,14 +21398,13 @@ Prefab:
       propertyPath: dragAndDropManager
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 1991706874646814, guid: 0f53dde3af42faa4f9e6397a5e14eb5b, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0f53dde3af42faa4f9e6397a5e14eb5b, type: 2}
   m_IsPrefabParent: 0
---- !u!4 &1655092575 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 4923349320720722, guid: 0f53dde3af42faa4f9e6397a5e14eb5b,
-    type: 2}
-  m_PrefabInternal: {fileID: 1655092574}
 --- !u!1 &1657241059
 GameObject:
   m_ObjectHideFlags: 0
@@ -24875,13 +21619,15 @@ MonoBehaviour:
   requireAllActivators: 0
   requireAllDeactivators: 0
   proximityMap:
-    proximityEntryList: []
+    proximityEntryList:
+    - dependentGameObject: {fileID: 418551835}
+    - dependentGameObject: {fileID: 332464716}
     proximityEntryGroupList: []
-    proximityStateIndex: 0
+    proximityStateIndex: 1
   grabMap:
     grabEntryList:
     - hand: 4
-      interactiveObject: {fileID: 418551833}
+      interactiveObject: {fileID: 325185525}
     grabHandsIndex: 2
     grabStateLeftIndex: 1
     grabStateRightIndex: 0
@@ -24900,10 +21646,10 @@ MonoBehaviour:
   - 0
   - 0
   autoTriggerModeIndex: 0
-  reload: 0
+  reload: 1
   canBeTriggered: 1
   TriggerCount: 0
-  reloadModeIndex: 0
+  reloadModeIndex: 1
   reloadMaxRepetitions: 0
   reloadCount: 0
   reloadDelay: 0
@@ -24914,8 +21660,8 @@ MonoBehaviour:
   focusDuration: 0
   focusLossModeIndex: 0
   FocusLossSpeed: 1
-  proximityEnabled: 0
-  grabEnabled: 1
+  proximityEnabled: 1
+  grabEnabled: 0
   teleportIndex: 0
   teleportEnabled: 0
   inputsEnabled: 0
@@ -24957,7 +21703,11 @@ MonoBehaviour:
   ReloadDependencies: 0
   isActive: 1
   proximityGroupIndex: 0
-  rigCombinations: []
+  rigCombinations:
+  - '  ||  Head (IO)  ||  Left Hand (IO)  ||  '
+  - '  ||  Head (IO)  ||  Right Hand (IO)  ||  '
+  - '  ||  Left Hand (IO)  ||  Right Hand (IO)  ||  '
+  - '  ||  Head (IO)  ||  Left Hand (IO)  ||  Right Hand (IO)  ||  '
 --- !u!114 &1657241063
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25090,7 +21840,7 @@ Transform:
   m_GameObject: {fileID: 1685930841}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.014999985, z: 0.0119}
-  m_LocalScale: {x: 1, y: 0.99999994, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 328971075}
   - {fileID: 838322573}
@@ -25353,7 +22103,7 @@ Animator:
   m_GameObject: {fileID: 1697241642}
   m_Enabled: 0
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f063f7bbb69ddc5499d7d13f84a4db78, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -26013,7 +22763,7 @@ MonoBehaviour:
   AlterAllVisuals: 1
   selectedRenderers: 
   triggerAnimation: 0
-  targetAnimator: {fileID: 1697241645}
+  targetAnimator: {fileID: 1282700696}
   activeTriggerStatesAnim: 0100000000
   animatorTriggers:
   - HoverOff
@@ -26210,7 +22960,7 @@ MonoBehaviour:
     AreDependenciesSatisfied: 0
   gazeColliderIO: {fileID: 0}
   handHoverEnabled: 1
-  handHoverIO: {fileID: 1551184542}
+  handHoverIO: {fileID: 1697241646}
   hoverHandIndex: 2
   hoverHand: 4
   hoverStateIndex: 1
@@ -26311,9 +23061,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 373503661}
   - {fileID: 199368111}
-  - {fileID: 56848408}
-  - {fileID: 1272459395}
+  - {fileID: 353000220}
   m_Father: {fileID: 325185526}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -26425,7 +23175,7 @@ Animator:
   m_GameObject: {fileID: 1779618279}
   m_Enabled: 0
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f063f7bbb69ddc5499d7d13f84a4db78, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -26744,7 +23494,7 @@ MonoBehaviour:
   - 0
   - 0
   multipleActionsInTime: 0
-  Parent: {fileID: 1655092575}
+  Parent: {fileID: 2138013106}
   Child: {fileID: 1976451429}
   MoveToParentPosition: 1
 --- !u!114 &1808665112
@@ -27025,313 +23775,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HasActions: 1
   HasConditions: 1
---- !u!1 &1826737859
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1826737860}
-  - component: {fileID: 1826737863}
-  - component: {fileID: 1826737862}
-  - component: {fileID: 1826737861}
-  m_Layer: 0
-  m_Name: Btn_HoverOff (13)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1826737860
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1826737859}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.21400006, y: -0.22800002, z: 0.025999997}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 813114333}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1826737861
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1826737859}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9fe86aa1e2e51304b81a3f6820a3abdb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isDelayed: 0
-  delayTime: 0
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  multipleActionsInTime: 0
-  rootIO: {fileID: 0}
-  isActive: 1
-  ActionReset: 0
-  ActionVisuals: 0
-  ActionGrab: 0
-  ActionTouch: 0
-  ActionGravity: 0
-  ActionAudio: 0
-  ActionColliders: 0
-  ActionDragAndDrop: 0
-  ActionAnimation: 1
-  DestroyOnTrigger: 0
-  ModifyGrabDistance: 0
-  ModifyTouchDistance: 0
-  ModifyGrabMode: 0
-  grabDistance: 0
-  touchDistance: 0
-  grabModeIndex: 0
-  ModifyDragAndDrop: 0
-  ModifyDragAndDropTargets: 0
-  ModifyDnDMinDistance: 0
-  ModifyDnDSnapBeforeDrop: 0
-  ModifyDnDAttached: 0
-  ModifyDnDRespectAxis: 0
-  dnDMinDistance: 0
-  dnDSnapBeforeDrop: 0
-  dnDRespectXAxis: 0
-  dnDRespectYAxis: 0
-  dnDRespectZAxis: 0
-  dnDRespectXAxisMirror: 0
-  dnDRespectYAxisMirror: 0
-  dnDRespectZAxisMirror: 0
-  ModifyDnDAngleThreshold: 0
-  dnDAngleThreshold: 0
-  DnD_Targets: []
-  visualsScript: {fileID: 1792219559}
-  AlterAllVisuals: 1
-  selectedRenderers: 
-  triggerAnimation: 0
-  targetAnimator: {fileID: 2144354209}
-  activeTriggerStatesAnim: 0100000000
-  animatorTriggers:
-  - HoverOff
-  - 
-  - 
-  - 
-  - 
-  loopOnLast: 0000000000
-  animationClip:
-    ClipEntries00: []
-    ClipEntries01: []
-    ClipEntries02: []
-    ClipEntries03: []
-    ClipEntries04: []
-  loopAnim: 0000000000000000000000000000000000000000
-  loopAnimType: 0000000000000000000000000000000000000000
-  animationSequence: 0000000000000000000000000000000000000000
-  targetAudioSource: {fileID: 0}
-  activeTriggerStatesAudio: 0100000000
-  audioClips:
-    ClipEntries00: []
-    ClipEntries01: []
-    ClipEntries02: []
-    ClipEntries03: []
-    ClipEntries04: []
-  loopAudio: 0000000000000000000000000000000000000000
-  audio_sequence: 0000000000000000000000000000000000000000
-  fadeInBetween: 0000000000
-  audioClipsNew:
-    ClipEntries00: []
-    ClipEntries01: []
-    ClipEntries02: []
-    ClipEntries03: []
-    ClipEntries04: []
-  loopAudioNew: 0000000000000000000000000000000000000000
-  audioLoopOnLast: 0000000000
-  duckingEnabled: 1
-  fadeInTime: 1
-  fadeOutTime: 1
-  fadeOutDeactTime: 1
-  fadeInCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 1
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 1
-      inSlope: 1
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  fadeOutDeactCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: -1
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 0
-      inSlope: -1
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  fadeOutCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: -1
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 0
-      inSlope: -1
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  fadeInEnabled: 0
-  fadeOutEnabled: 0
-  fadeOutDeactEnabled: 0
-  audioVolumeMin: 0.2
-  audioVolumeMax: 1
-  fadeSpeed: 0.005
-  audio_ForceStop: 0
-  audio_AllowMultiple: 0
-  audio_randomizePitch: 0
-  audio_minPitch: 0
-  audio_maxPitch: 2
-  audio_MaxConcurrentSound: 8
-  audio_stopOthers: 0
-  IO: {fileID: 2144354207}
-  triggerNotification: 0
---- !u!114 &1826737862
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1826737859}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a11d97df356699943aab990d9fcca9f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dependent: 0
-  requireAllActivators: 0
-  requireAllDeactivators: 0
-  proximityMap:
-    proximityEntryList: []
-    proximityEntryGroupList: []
-    proximityStateIndex: 0
-  grabMap:
-    grabEntryList: []
-    grabHandsIndex: 0
-    grabStateLeftIndex: 0
-    grabStateRightIndex: 0
-  customConditions: []
-  triggerStateIndex: 0
-  delayDuration: 0
-  delayed: 0
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  activeDuration: 0
-  expires: 0
-  isExpireRandom: 0
-  expireRange:
-  - 0
-  - 0
-  autoTriggerModeIndex: 0
-  reload: 1
-  canBeTriggered: 1
-  TriggerCount: 0
-  reloadModeIndex: 1
-  reloadMaxRepetitions: 0
-  reloadCount: 0
-  reloadDelay: 0.1
-  isReloadRandom: 0
-  reloadRange:
-  - 0
-  - 0
-  focusDuration: 0
-  focusLossModeIndex: 0
-  FocusLossSpeed: 1
-  proximityEnabled: 0
-  grabEnabled: 0
-  teleportIndex: 0
-  teleportEnabled: 0
-  inputsEnabled: 0
-  InputsMap:
-    InputsEntries: []
-    AreDependenciesSatisfied: 1
-  requireAllInputs: 0
-  customConditionsEnabled: 0
-  dragAndDropEnabled: 0
-  dndEventValidator: 0
-  dndAnyTarget: 1
-  dndTargetModesIndex: 0
-  dndAttached: 0
-  dndTargets: []
-  requireAllProximities: 0
-  touchMap:
-    TouchEnitry:
-      hand: 4
-      interactiveObject: {fileID: 1551184538}
-    touchHandsIndex: 2
-    touchActionIndex: 0
-  gazeEnabled: 0
-  gazeStateIndex: 0
-  gazeIn: 0
-  touchEnabled: 0
-  ActivateOnDependencyMap:
-    dependencies: []
-    AreDependenciesSatisfied: 1
-  DeactivateOnDependencyMap:
-    dependencies: []
-    AreDependenciesSatisfied: 0
-  gazeColliderIO: {fileID: 0}
-  handHoverEnabled: 1
-  handHoverIO: {fileID: 1551184542}
-  hoverHandIndex: 2
-  hoverHand: 4
-  hoverStateIndex: 1
-  hoverIn: 0
-  ReloadDependencies: 0
-  isActive: 1
-  proximityGroupIndex: 0
-  rigCombinations: []
---- !u!114 &1826737863
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1826737859}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c5e5d36d57be5841bfb50b6dbe7c062, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HasActions: 1
-  HasConditions: 1
 --- !u!1 &1837059496
 GameObject:
   m_ObjectHideFlags: 0
@@ -27464,8 +23907,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 981676436}
-  - {fileID: 1321994227}
-  - {fileID: 2105690226}
   m_Father: {fileID: 1779618280}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -27940,9 +24381,9 @@ Animator:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1920836941}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f063f7bbb69ddc5499d7d13f84a4db78, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -28967,7 +25408,7 @@ MonoBehaviour:
   targetAnimator: {fileID: 1976451427}
   activeTriggerStatesAnim: 0100000000
   animatorTriggers:
-  - MainMenu
+  - BackToMenu
   - 
   - 
   - 
@@ -29409,313 +25850,6 @@ MonoBehaviour:
   ActualHand: 1
   Rotation: {x: 0, y: 0, z: 0, w: 0}
   Position: {x: 0, y: 0, z: 0}
---- !u!1 &2073029486
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 2073029487}
-  - component: {fileID: 2073029490}
-  - component: {fileID: 2073029489}
-  - component: {fileID: 2073029488}
-  m_Layer: 0
-  m_Name: Btn_HoverOn (11)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2073029487
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2073029486}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.55200005, y: -0.056500018, z: 0.025999997}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 905347112}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2073029488
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2073029486}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9fe86aa1e2e51304b81a3f6820a3abdb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isDelayed: 0
-  delayTime: 0
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  multipleActionsInTime: 0
-  rootIO: {fileID: 0}
-  isActive: 1
-  ActionReset: 0
-  ActionVisuals: 0
-  ActionGrab: 0
-  ActionTouch: 0
-  ActionGravity: 0
-  ActionAudio: 0
-  ActionColliders: 0
-  ActionDragAndDrop: 0
-  ActionAnimation: 1
-  DestroyOnTrigger: 0
-  ModifyGrabDistance: 0
-  ModifyTouchDistance: 0
-  ModifyGrabMode: 0
-  grabDistance: 0
-  touchDistance: 0
-  grabModeIndex: 0
-  ModifyDragAndDrop: 0
-  ModifyDragAndDropTargets: 0
-  ModifyDnDMinDistance: 0
-  ModifyDnDSnapBeforeDrop: 0
-  ModifyDnDAttached: 0
-  ModifyDnDRespectAxis: 0
-  dnDMinDistance: 0
-  dnDSnapBeforeDrop: 0
-  dnDRespectXAxis: 0
-  dnDRespectYAxis: 0
-  dnDRespectZAxis: 0
-  dnDRespectXAxisMirror: 0
-  dnDRespectYAxisMirror: 0
-  dnDRespectZAxisMirror: 0
-  ModifyDnDAngleThreshold: 0
-  dnDAngleThreshold: 0
-  DnD_Targets: []
-  visualsScript: {fileID: 759596869}
-  AlterAllVisuals: 1
-  selectedRenderers: 
-  triggerAnimation: 0
-  targetAnimator: {fileID: 36513020}
-  activeTriggerStatesAnim: 0100000000
-  animatorTriggers:
-  - HoverOn
-  - 
-  - 
-  - 
-  - 
-  loopOnLast: 0000000000
-  animationClip:
-    ClipEntries00: []
-    ClipEntries01: []
-    ClipEntries02: []
-    ClipEntries03: []
-    ClipEntries04: []
-  loopAnim: 0000000000000000000000000000000000000000
-  loopAnimType: 0000000000000000000000000000000000000000
-  animationSequence: 0000000000000000000000000000000000000000
-  targetAudioSource: {fileID: 0}
-  activeTriggerStatesAudio: 0100000000
-  audioClips:
-    ClipEntries00: []
-    ClipEntries01: []
-    ClipEntries02: []
-    ClipEntries03: []
-    ClipEntries04: []
-  loopAudio: 0000000000000000000000000000000000000000
-  audio_sequence: 0000000000000000000000000000000000000000
-  fadeInBetween: 0000000000
-  audioClipsNew:
-    ClipEntries00: []
-    ClipEntries01: []
-    ClipEntries02: []
-    ClipEntries03: []
-    ClipEntries04: []
-  loopAudioNew: 0000000000000000000000000000000000000000
-  audioLoopOnLast: 0000000000
-  duckingEnabled: 1
-  fadeInTime: 1
-  fadeOutTime: 1
-  fadeOutDeactTime: 1
-  fadeInCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 1
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 1
-      inSlope: 1
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  fadeOutDeactCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: -1
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 0
-      inSlope: -1
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  fadeOutCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: -1
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 0
-      inSlope: -1
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  fadeInEnabled: 0
-  fadeOutEnabled: 0
-  fadeOutDeactEnabled: 0
-  audioVolumeMin: 0.2
-  audioVolumeMax: 1
-  fadeSpeed: 0.005
-  audio_ForceStop: 0
-  audio_AllowMultiple: 0
-  audio_randomizePitch: 0
-  audio_minPitch: 0
-  audio_maxPitch: 2
-  audio_MaxConcurrentSound: 8
-  audio_stopOthers: 0
-  IO: {fileID: 2076853709}
-  triggerNotification: 0
---- !u!114 &2073029489
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2073029486}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a11d97df356699943aab990d9fcca9f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dependent: 0
-  requireAllActivators: 0
-  requireAllDeactivators: 0
-  proximityMap:
-    proximityEntryList: []
-    proximityEntryGroupList: []
-    proximityStateIndex: 0
-  grabMap:
-    grabEntryList: []
-    grabHandsIndex: 0
-    grabStateLeftIndex: 0
-    grabStateRightIndex: 0
-  customConditions: []
-  triggerStateIndex: 0
-  delayDuration: 0
-  delayed: 0
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  activeDuration: 0
-  expires: 0
-  isExpireRandom: 0
-  expireRange:
-  - 0
-  - 0
-  autoTriggerModeIndex: 0
-  reload: 1
-  canBeTriggered: 1
-  TriggerCount: 0
-  reloadModeIndex: 1
-  reloadMaxRepetitions: 0
-  reloadCount: 0
-  reloadDelay: 0.1
-  isReloadRandom: 0
-  reloadRange:
-  - 0
-  - 0
-  focusDuration: 0
-  focusLossModeIndex: 0
-  FocusLossSpeed: 1
-  proximityEnabled: 0
-  grabEnabled: 0
-  teleportIndex: 0
-  teleportEnabled: 0
-  inputsEnabled: 0
-  InputsMap:
-    InputsEntries: []
-    AreDependenciesSatisfied: 1
-  requireAllInputs: 0
-  customConditionsEnabled: 0
-  dragAndDropEnabled: 0
-  dndEventValidator: 0
-  dndAnyTarget: 1
-  dndTargetModesIndex: 0
-  dndAttached: 0
-  dndTargets: []
-  requireAllProximities: 0
-  touchMap:
-    TouchEnitry:
-      hand: 4
-      interactiveObject: {fileID: 1551184538}
-    touchHandsIndex: 2
-    touchActionIndex: 0
-  gazeEnabled: 0
-  gazeStateIndex: 0
-  gazeIn: 0
-  touchEnabled: 0
-  ActivateOnDependencyMap:
-    dependencies: []
-    AreDependenciesSatisfied: 1
-  DeactivateOnDependencyMap:
-    dependencies: []
-    AreDependenciesSatisfied: 0
-  gazeColliderIO: {fileID: 0}
-  handHoverEnabled: 1
-  handHoverIO: {fileID: 1551184542}
-  hoverHandIndex: 2
-  hoverHand: 4
-  hoverStateIndex: 0
-  hoverIn: 1
-  ReloadDependencies: 0
-  isActive: 1
-  proximityGroupIndex: 0
-  rigCombinations: []
---- !u!114 &2073029490
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2073029486}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c5e5d36d57be5841bfb50b6dbe7c062, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HasActions: 1
-  HasConditions: 1
 --- !u!1 &2076853705
 GameObject:
   m_ObjectHideFlags: 0
@@ -29780,7 +25914,7 @@ Animator:
   m_GameObject: {fileID: 2076853705}
   m_Enabled: 0
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f063f7bbb69ddc5499d7d13f84a4db78, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -30046,13 +26180,15 @@ MonoBehaviour:
   requireAllActivators: 0
   requireAllDeactivators: 0
   proximityMap:
-    proximityEntryList: []
+    proximityEntryList:
+    - dependentGameObject: {fileID: 2144354207}
+    - dependentGameObject: {fileID: 332464716}
     proximityEntryGroupList: []
-    proximityStateIndex: 0
+    proximityStateIndex: 1
   grabMap:
     grabEntryList:
     - hand: 4
-      interactiveObject: {fileID: 2144354205}
+      interactiveObject: {fileID: 325185525}
     grabHandsIndex: 2
     grabStateLeftIndex: 1
     grabStateRightIndex: 0
@@ -30071,10 +26207,10 @@ MonoBehaviour:
   - 0
   - 0
   autoTriggerModeIndex: 0
-  reload: 0
+  reload: 1
   canBeTriggered: 1
   TriggerCount: 0
-  reloadModeIndex: 0
+  reloadModeIndex: 1
   reloadMaxRepetitions: 0
   reloadCount: 0
   reloadDelay: 0
@@ -30085,8 +26221,8 @@ MonoBehaviour:
   focusDuration: 0
   focusLossModeIndex: 0
   FocusLossSpeed: 1
-  proximityEnabled: 0
-  grabEnabled: 1
+  proximityEnabled: 1
+  grabEnabled: 0
   teleportIndex: 0
   teleportEnabled: 0
   inputsEnabled: 0
@@ -30128,7 +26264,11 @@ MonoBehaviour:
   ReloadDependencies: 0
   isActive: 1
   proximityGroupIndex: 0
-  rigCombinations: []
+  rigCombinations:
+  - '  ||  Head (IO)  ||  Left Hand (IO)  ||  '
+  - '  ||  Head (IO)  ||  Right Hand (IO)  ||  '
+  - '  ||  Left Hand (IO)  ||  Right Hand (IO)  ||  '
+  - '  ||  Head (IO)  ||  Left Hand (IO)  ||  Right Hand (IO)  ||  '
 --- !u!114 &2102147300
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30164,313 +26304,6 @@ MonoBehaviour:
   AnimationTime: 2
   numberOfFlips: 1
   ParabolicHeight: 0
---- !u!1 &2105690225
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 2105690226}
-  - component: {fileID: 2105690229}
-  - component: {fileID: 2105690228}
-  - component: {fileID: 2105690227}
-  m_Layer: 0
-  m_Name: Btn_HoverOff (12)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2105690226
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2105690225}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.21400006, y: -0.34900004, z: 0.025999997}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1851911472}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2105690227
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2105690225}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9fe86aa1e2e51304b81a3f6820a3abdb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isDelayed: 0
-  delayTime: 0
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  multipleActionsInTime: 0
-  rootIO: {fileID: 0}
-  isActive: 1
-  ActionReset: 0
-  ActionVisuals: 0
-  ActionGrab: 0
-  ActionTouch: 0
-  ActionGravity: 0
-  ActionAudio: 0
-  ActionColliders: 0
-  ActionDragAndDrop: 0
-  ActionAnimation: 1
-  DestroyOnTrigger: 0
-  ModifyGrabDistance: 0
-  ModifyTouchDistance: 0
-  ModifyGrabMode: 0
-  grabDistance: 0
-  touchDistance: 0
-  grabModeIndex: 0
-  ModifyDragAndDrop: 0
-  ModifyDragAndDropTargets: 0
-  ModifyDnDMinDistance: 0
-  ModifyDnDSnapBeforeDrop: 0
-  ModifyDnDAttached: 0
-  ModifyDnDRespectAxis: 0
-  dnDMinDistance: 0
-  dnDSnapBeforeDrop: 0
-  dnDRespectXAxis: 0
-  dnDRespectYAxis: 0
-  dnDRespectZAxis: 0
-  dnDRespectXAxisMirror: 0
-  dnDRespectYAxisMirror: 0
-  dnDRespectZAxisMirror: 0
-  ModifyDnDAngleThreshold: 0
-  dnDAngleThreshold: 0
-  DnD_Targets: []
-  visualsScript: {fileID: 409889775}
-  AlterAllVisuals: 1
-  selectedRenderers: 
-  triggerAnimation: 0
-  targetAnimator: {fileID: 1779618283}
-  activeTriggerStatesAnim: 0100000000
-  animatorTriggers:
-  - HoverOff
-  - 
-  - 
-  - 
-  - 
-  loopOnLast: 0000000000
-  animationClip:
-    ClipEntries00: []
-    ClipEntries01: []
-    ClipEntries02: []
-    ClipEntries03: []
-    ClipEntries04: []
-  loopAnim: 0000000000000000000000000000000000000000
-  loopAnimType: 0000000000000000000000000000000000000000
-  animationSequence: 0000000000000000000000000000000000000000
-  targetAudioSource: {fileID: 0}
-  activeTriggerStatesAudio: 0100000000
-  audioClips:
-    ClipEntries00: []
-    ClipEntries01: []
-    ClipEntries02: []
-    ClipEntries03: []
-    ClipEntries04: []
-  loopAudio: 0000000000000000000000000000000000000000
-  audio_sequence: 0000000000000000000000000000000000000000
-  fadeInBetween: 0000000000
-  audioClipsNew:
-    ClipEntries00: []
-    ClipEntries01: []
-    ClipEntries02: []
-    ClipEntries03: []
-    ClipEntries04: []
-  loopAudioNew: 0000000000000000000000000000000000000000
-  audioLoopOnLast: 0000000000
-  duckingEnabled: 1
-  fadeInTime: 1
-  fadeOutTime: 1
-  fadeOutDeactTime: 1
-  fadeInCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 1
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 1
-      inSlope: 1
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  fadeOutDeactCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: -1
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 0
-      inSlope: -1
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  fadeOutCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: -1
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 0
-      inSlope: -1
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  fadeInEnabled: 0
-  fadeOutEnabled: 0
-  fadeOutDeactEnabled: 0
-  audioVolumeMin: 0.2
-  audioVolumeMax: 1
-  fadeSpeed: 0.005
-  audio_ForceStop: 0
-  audio_AllowMultiple: 0
-  audio_randomizePitch: 0
-  audio_minPitch: 0
-  audio_maxPitch: 2
-  audio_MaxConcurrentSound: 8
-  audio_stopOthers: 0
-  IO: {fileID: 1779618281}
-  triggerNotification: 0
---- !u!114 &2105690228
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2105690225}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a11d97df356699943aab990d9fcca9f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dependent: 0
-  requireAllActivators: 0
-  requireAllDeactivators: 0
-  proximityMap:
-    proximityEntryList: []
-    proximityEntryGroupList: []
-    proximityStateIndex: 0
-  grabMap:
-    grabEntryList: []
-    grabHandsIndex: 0
-    grabStateLeftIndex: 0
-    grabStateRightIndex: 0
-  customConditions: []
-  triggerStateIndex: 0
-  delayDuration: 0
-  delayed: 0
-  isDelayRandom: 0
-  delayRange:
-  - 0
-  - 0
-  activeDuration: 0
-  expires: 0
-  isExpireRandom: 0
-  expireRange:
-  - 0
-  - 0
-  autoTriggerModeIndex: 0
-  reload: 1
-  canBeTriggered: 1
-  TriggerCount: 0
-  reloadModeIndex: 1
-  reloadMaxRepetitions: 0
-  reloadCount: 0
-  reloadDelay: 0.1
-  isReloadRandom: 0
-  reloadRange:
-  - 0
-  - 0
-  focusDuration: 0
-  focusLossModeIndex: 0
-  FocusLossSpeed: 1
-  proximityEnabled: 0
-  grabEnabled: 0
-  teleportIndex: 0
-  teleportEnabled: 0
-  inputsEnabled: 0
-  InputsMap:
-    InputsEntries: []
-    AreDependenciesSatisfied: 1
-  requireAllInputs: 0
-  customConditionsEnabled: 0
-  dragAndDropEnabled: 0
-  dndEventValidator: 0
-  dndAnyTarget: 1
-  dndTargetModesIndex: 0
-  dndAttached: 0
-  dndTargets: []
-  requireAllProximities: 0
-  touchMap:
-    TouchEnitry:
-      hand: 4
-      interactiveObject: {fileID: 1551184538}
-    touchHandsIndex: 2
-    touchActionIndex: 0
-  gazeEnabled: 0
-  gazeStateIndex: 0
-  gazeIn: 0
-  touchEnabled: 0
-  ActivateOnDependencyMap:
-    dependencies: []
-    AreDependenciesSatisfied: 1
-  DeactivateOnDependencyMap:
-    dependencies: []
-    AreDependenciesSatisfied: 0
-  gazeColliderIO: {fileID: 0}
-  handHoverEnabled: 1
-  handHoverIO: {fileID: 1551184542}
-  hoverHandIndex: 2
-  hoverHand: 4
-  hoverStateIndex: 1
-  hoverIn: 0
-  ReloadDependencies: 0
-  isActive: 1
-  proximityGroupIndex: 0
-  rigCombinations: []
---- !u!114 &2105690229
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2105690225}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c5e5d36d57be5841bfb50b6dbe7c062, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HasActions: 1
-  HasConditions: 1
 --- !u!1 &2106763672
 GameObject:
   m_ObjectHideFlags: 0
@@ -31060,6 +26893,11 @@ MonoBehaviour:
   ActualHand: 0
   Rotation: {x: 0, y: 0, z: 0, w: 0}
   Position: {x: 0, y: 0, z: 0}
+--- !u!4 &2138013106 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4280081319961988, guid: 5b6fb31d0455cc54985292f544a3b02f,
+    type: 2}
+  m_PrefabInternal: {fileID: 1240295465}
 --- !u!1 &2144354205
 GameObject:
   m_ObjectHideFlags: 0
@@ -31168,7 +27006,7 @@ Animator:
   m_GameObject: {fileID: 2144354205}
   m_Enabled: 0
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f063f7bbb69ddc5499d7d13f84a4db78, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
