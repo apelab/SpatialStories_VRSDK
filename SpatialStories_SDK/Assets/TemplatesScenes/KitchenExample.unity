@@ -18034,6 +18034,26 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114762883065776206, guid: 4a70e87a0bd9bce47ac1e190b0b10162,
+        type: 2}
+      propertyPath: closestDistance
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114678689918388106, guid: 4a70e87a0bd9bce47ac1e190b0b10162,
+        type: 2}
+      propertyPath: closestDistance
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114344136702934336, guid: 4a70e87a0bd9bce47ac1e190b0b10162,
+        type: 2}
+      propertyPath: dragAndDropManager
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114897808430480468, guid: 4a70e87a0bd9bce47ac1e190b0b10162,
+        type: 2}
+      propertyPath: GyroUI
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4a70e87a0bd9bce47ac1e190b0b10162, type: 2}
   m_IsPrefabParent: 0
