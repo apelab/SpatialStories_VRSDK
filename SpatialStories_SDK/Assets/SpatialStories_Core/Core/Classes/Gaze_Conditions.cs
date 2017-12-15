@@ -366,6 +366,11 @@ namespace Gaze
         static long assignedTurns = 0;
         long turnIndex = 0;
 
+        /// <summary>
+        /// Last time that the interaction updated
+        /// </summary>
+        private float lastCheckTime = 0.0f;
+
         private void Awake()
         {
             triggerStateIndex = (int)Gaze_TriggerState.BEFORE;
@@ -534,6 +539,8 @@ namespace Gaze
                 // check if a trigger occurs
                 HandleTrigger();
             }
+
+            lastCheckTime = Time.time;
         }
 
 
@@ -598,12 +605,11 @@ namespace Gaze
             // if focus is not complete
             if (!runningFocusComplete || focusDuration <= 0f)
             {
-                //Debug.Log("focus adding :" + Time.deltaTime + " to focusTotalTime = " + focusTotalTime);
                 // set the flag
                 focusInProgress = true;
 
                 // update focus time
-                focusTotalTime += Time.deltaTime;
+                focusTotalTime += (Time.time - lastCheckTime);
 
                 // set focused flag if focus time overpassed
                 if (focusTotalTime >= focusDuration)
@@ -652,7 +658,7 @@ namespace Gaze
             else if (focusLossModeIndex == (int)Gaze_FocusLossMode.FADE)
             {
                 // decrease if FADE loss mode
-                focusTotalTime = Mathf.Max(0, focusTotalTime - Time.deltaTime * FocusLossSpeed);
+                focusTotalTime = Mathf.Max(0, focusTotalTime - (Time.time - lastCheckTime) * FocusLossSpeed);
             }
         }
 
