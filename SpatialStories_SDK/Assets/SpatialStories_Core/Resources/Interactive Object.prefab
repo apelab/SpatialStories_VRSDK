@@ -69,6 +69,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4620078243772294}
   - component: {fileID: 82195572876997990}
+  - component: {fileID: 114416197561282712}
   m_Layer: 0
   m_Name: AudioSource
   m_TagString: Untagged
@@ -105,7 +106,7 @@ GameObject:
   - component: {fileID: 65951399339019554}
   - component: {fileID: 54942743705170130}
   - component: {fileID: 114334997517604920}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Proximity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -561,8 +562,10 @@ MonoBehaviour:
   DnD_respectZAxisMirrored: 0
   DnD_snapBeforeDrop: 1
   DnD_TimeToSnap: 0.5
+  DnD_DropOnAlreadyOccupiedTargets: 0
   DnD_attached: 0
   DnD_Targets: []
+  dragAndDropManager: {fileID: 0}
   IsPointedWithLeftHand: 0
   IsPointedWithRightHand: 0
 --- !u!114 &114334997517604920
@@ -592,6 +595,18 @@ MonoBehaviour:
   ActualHand: 0
   Rotation: {x: 0, y: 0, z: 0, w: 0}
   Position: {x: 0, y: 0, z: 0}
+--- !u!114 &114416197561282712
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1150835305271888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8170862739ecdb04392511ce00051beb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NeedsToUpdate: 0
 --- !u!114 &114419752343020054
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -679,10 +694,11 @@ MonoBehaviour:
   loopAnim: 0000000000000000000000000000000000000000
   loopAnimType: 0000000000000000000000000000000000000000
   animationSequence: 0000000000000000000000000000000000000000
-  targetAudioSource: {fileID: 0}
+  targetAudioSource: {fileID: 82195572876997990}
   activeTriggerStatesAudio: 0000000000
   audioClips:
-    ClipEntries00: []
+    ClipEntries00:
+    - {fileID: 0}
     ClipEntries01: []
     ClipEntries02: []
     ClipEntries03: []
@@ -698,7 +714,7 @@ MonoBehaviour:
     ClipEntries04: []
   loopAudioNew: 0000000000000000000000000000000000000000
   audioLoopOnLast: 0000000000
-  duckingEnabled: 1
+  duckingEnabled: 0
   fadeInTime: 1
   fadeOutTime: 1
   fadeOutDeactTime: 1
@@ -763,7 +779,7 @@ MonoBehaviour:
   audioVolumeMax: 1
   fadeSpeed: 0.005
   audio_ForceStop: 0
-  audio_AllowMultiple: 0
+  audio_AllowMultiple: 1
   audio_randomizePitch: 0
   audio_minPitch: 0
   audio_maxPitch: 2
@@ -844,7 +860,7 @@ MonoBehaviour:
     grabStateLeftIndex: 0
     grabStateRightIndex: 0
   customConditions: []
-  triggerStateIndex: 1
+  triggerStateIndex: 0
   delayDuration: 0
   delayed: 0
   isDelayRandom: 0
