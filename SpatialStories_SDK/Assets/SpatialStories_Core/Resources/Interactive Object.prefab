@@ -545,7 +545,7 @@ MonoBehaviour:
   GrabPositioner: {fileID: 0}
   VibratesOnGrab: 0
   GrabDistance: 30
-  TouchDistance: 0
+  TouchDistance: 5
   AttractionSpeed: 50
   IsManipulable: 1
   SnapOnGrab: 0
@@ -695,7 +695,7 @@ MonoBehaviour:
   loopAnimType: 0000000000000000000000000000000000000000
   animationSequence: 0000000000000000000000000000000000000000
   targetAudioSource: {fileID: 82195572876997990}
-  activeTriggerStatesAudio: 0000000000
+  activeTriggerStatesAudio: 0100000000
   audioClips:
     ClipEntries00:
     - {fileID: 0}

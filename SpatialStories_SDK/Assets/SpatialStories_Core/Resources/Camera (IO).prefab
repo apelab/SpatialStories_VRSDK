@@ -956,6 +956,7 @@ GameObject:
   - component: {fileID: 114349680535224100}
   - component: {fileID: 114010110958322394}
   - component: {fileID: 114219190042395278}
+  - component: {fileID: 114694605704491764}
   m_Layer: 0
   m_Name: Camera (IO)
   m_TagString: MainCamera
@@ -4368,14 +4369,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InteractiveObjectScripts:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 114746924379506148}
-  - {fileID: 114344136702934336}
   - {fileID: 114485687126287418}
+  - {fileID: 114344136702934336}
   InteractiveObjects:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 1683829259733712}
-  - {fileID: 1494125986354430}
   - {fileID: 1101354194073666}
-  InteractiveObjectsCount: 3
+  - {fileID: 1494125986354430}
+  InteractiveObjectsCount: 9
 --- !u!114 &114243278959470296
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4609,7 +4622,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ac765816c049ac42908efc08e7f359c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ManipulationModeIndex: 0
+  ManipulationModeIndex: 3
   LeftHandSnapPoint: {fileID: 0}
   RightHandSnapPoint: {fileID: 0}
   TouchModeIndex: 0
@@ -5105,6 +5118,18 @@ MonoBehaviour:
   debug: 0
   OriginParticlesPrefab: {fileID: 0}
   EndPointPrefab: {fileID: 0}
+--- !u!114 &114694605704491764
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1518787635232588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58d4e2d162e9e4047a2a5939860c8413, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  viveHeigth: 0
 --- !u!114 &114712462370856414
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5140,7 +5165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ac765816c049ac42908efc08e7f359c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ManipulationModeIndex: 0
+  ManipulationModeIndex: 3
   LeftHandSnapPoint: {fileID: 0}
   RightHandSnapPoint: {fileID: 0}
   TouchModeIndex: 0
@@ -5265,7 +5290,7 @@ MonoBehaviour:
   InptuThreshold: 0.5
   AllowedLayers:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 256
   MaxTeleportDistance: 5
   MaxSlope: 10
   Cooldown: 1
@@ -5295,7 +5320,7 @@ MonoBehaviour:
   InptuThreshold: 0.5
   AllowedLayers:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 256
   MaxTeleportDistance: 5
   MaxSlope: 10
   Cooldown: 1
