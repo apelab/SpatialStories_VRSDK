@@ -730,6 +730,14 @@ namespace Gaze
                 EditorGUILayout.EndHorizontal();
             }
 
+            // check if there are there are deactivate without activate because it wont work
+            if (targetConditions.ActivateOnDependencyMap.dependencies.Count < 1 && targetConditions.DeactivateOnDependencyMap.dependencies.Count > 0)
+            {
+                EditorGUILayout.BeginHorizontal();
+                EditorGUILayout.HelpBox("Add at least one dependency to activate in order to make the deactivate dependencies work.", MessageType.Warning);
+                EditorGUILayout.EndHorizontal();
+            }
+
             // On Activation button
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.LabelField("Activate on");
