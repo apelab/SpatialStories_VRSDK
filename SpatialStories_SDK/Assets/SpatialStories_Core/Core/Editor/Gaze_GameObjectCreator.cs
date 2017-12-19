@@ -142,9 +142,9 @@ namespace Gaze
         /// </summary>
         /// <returns>The Gazable Root.</returns>
         /// <param name="go">The reference GameObject</param>
-        public static GameObject ConvertOculusInteractiveCamera(GameObject go)
+        public static GameObject ConvertToInteractiveCamera(GameObject go)
         {
-            return CovertCameraUsingPrefab(go, "Camera Oculus (IO)");
+            return CovertCameraUsingPrefab(go, "Camera (IO)");
         }
 
         /// <summary>
@@ -205,14 +205,13 @@ namespace Gaze
                 ConvertInteractiveObject(Selection.activeGameObject);
         }
 
-        [MenuItem("GameObject/SpatialStories/Convert into Oculus Rift camera", false, 10)]
+        [MenuItem("GameObject/SpatialStories/Convert into Interactive Camera", false, 10)]
         public static void GameObjectConvertIntoCamera(MenuCommand menuCommand)
         {
             if (Selection.activeGameObject != null && Selection.activeGameObject.GetComponent<Camera>() != null)
-                ConvertOculusInteractiveCamera(Selection.activeGameObject);
+                ConvertToInteractiveCamera(Selection.activeGameObject);
         }
 
-        [MenuItem("GameObject/SpatialStories/Convert into HTC Vive camera", false, 10)]
         public static void GameObjectConvertIntoHTCVive(MenuCommand menuCommand)
         {
             EditorUtility.DisplayDialog("HTC Vive tip", "Remember to place the camera at the same height than your scene's floor", "Understood");
@@ -220,7 +219,6 @@ namespace Gaze
                 ConvertHTCInteractiveCamera(Selection.activeGameObject);
         }
 
-        [MenuItem("GameObject/SpatialStories/Convert into GearVr interactive camera", false, 10)]
         public static void GameObjectToGearVrCamera(MenuCommand menuCommand)
         {
             if (Selection.activeGameObject != null && Selection.activeGameObject.GetComponent<Camera>() != null)
