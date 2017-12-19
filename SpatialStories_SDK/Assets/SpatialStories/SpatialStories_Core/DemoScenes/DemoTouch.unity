@@ -510,7 +510,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &11713477
 Transform:
   m_ObjectHideFlags: 0
@@ -1240,7 +1240,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &39049137
 Transform:
   m_ObjectHideFlags: 0
@@ -3201,7 +3201,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &209289155
 Transform:
   m_ObjectHideFlags: 0
@@ -4209,7 +4209,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &265403903
 Transform:
   m_ObjectHideFlags: 0
@@ -7130,7 +7130,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &432596385
 Transform:
   m_ObjectHideFlags: 0
@@ -12336,7 +12336,7 @@ MonoBehaviour:
   GrabPositioner: {fileID: 0}
   VibratesOnGrab: 0
   GrabDistance: 30
-  TouchDistance: 0.25
+  TouchDistance: 1
   AttractionSpeed: 50
   IsManipulable: 1
   SnapOnGrab: 0
@@ -14588,7 +14588,7 @@ MonoBehaviour:
   GrabPositioner: {fileID: 0}
   VibratesOnGrab: 0
   GrabDistance: 30
-  TouchDistance: 0.25
+  TouchDistance: 1
   AttractionSpeed: 50
   IsManipulable: 1
   SnapOnGrab: 0
@@ -17739,7 +17739,7 @@ MonoBehaviour:
   GrabPositioner: {fileID: 0}
   VibratesOnGrab: 0
   GrabDistance: 30
-  TouchDistance: 0.25
+  TouchDistance: 1
   AttractionSpeed: 50
   IsManipulable: 1
   SnapOnGrab: 0
@@ -19030,7 +19030,7 @@ MonoBehaviour:
   GrabPositioner: {fileID: 0}
   VibratesOnGrab: 0
   GrabDistance: 30
-  TouchDistance: 0.25
+  TouchDistance: 1
   AttractionSpeed: 50
   IsManipulable: 1
   SnapOnGrab: 0
@@ -19333,7 +19333,7 @@ MonoBehaviour:
   GrabPositioner: {fileID: 0}
   VibratesOnGrab: 0
   GrabDistance: 30
-  TouchDistance: 0.25
+  TouchDistance: 0.1
   AttractionSpeed: 50
   IsManipulable: 1
   SnapOnGrab: 0
@@ -21776,7 +21776,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1365200422
 Transform:
   m_ObjectHideFlags: 0
@@ -24849,7 +24849,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1529593772
 Transform:
   m_ObjectHideFlags: 0
@@ -25296,7 +25296,7 @@ MonoBehaviour:
   GrabPositioner: {fileID: 0}
   VibratesOnGrab: 0
   GrabDistance: 30
-  TouchDistance: 0.25
+  TouchDistance: 1
   AttractionSpeed: 50
   IsManipulable: 1
   SnapOnGrab: 0
@@ -28512,7 +28512,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1756961239
 Transform:
   m_ObjectHideFlags: 0
@@ -29039,7 +29039,7 @@ MonoBehaviour:
   GrabPositioner: {fileID: 0}
   VibratesOnGrab: 0
   GrabDistance: 30
-  TouchDistance: 0.25
+  TouchDistance: 1
   AttractionSpeed: 50
   IsManipulable: 1
   SnapOnGrab: 0
@@ -31230,7 +31230,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1977887645}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.4, y: 0, z: 0}
+  m_LocalPosition: {x: -9.52, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1529593772}
@@ -31781,7 +31781,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2022748949
 Transform:
   m_ObjectHideFlags: 0

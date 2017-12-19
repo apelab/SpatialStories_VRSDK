@@ -1558,6 +1558,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &225063453 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114344136702934336, guid: 4a70e87a0bd9bce47ac1e190b0b10162,
+    type: 2}
+  m_PrefabInternal: {fileID: 1975814853}
+  m_Script: {fileID: 11500000, guid: 7ac765816c049ac42908efc08e7f359c, type: 3}
 --- !u!1 &226223105
 GameObject:
   m_ObjectHideFlags: 0
@@ -1814,7 +1820,7 @@ MonoBehaviour:
     grabStateRightIndex: 0
   customConditions: []
   triggerStateIndex: 0
-  delayDuration: 2.415657
+  delayDuration: 2.2853508
   delayed: 1
   isDelayRandom: 1
   delayRange:
@@ -5925,7 +5931,7 @@ MonoBehaviour:
     grabStateRightIndex: 0
   customConditions: []
   triggerStateIndex: 0
-  delayDuration: 2.6018522
+  delayDuration: 2.590126
   delayed: 1
   isDelayRandom: 1
   delayRange:
@@ -6884,6 +6890,12 @@ Transform:
   m_Father: {fileID: 1324555176}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1206762623 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114485687126287418, guid: 4a70e87a0bd9bce47ac1e190b0b10162,
+    type: 2}
+  m_PrefabInternal: {fileID: 1975814853}
+  m_Script: {fileID: 11500000, guid: 7ac765816c049ac42908efc08e7f359c, type: 3}
 --- !u!1 &1217306410
 GameObject:
   m_ObjectHideFlags: 0
@@ -7425,9 +7437,9 @@ MonoBehaviour:
     - dependentGameObject: {fileID: 1110849586}
     proximityEntryGroupList:
     - proximityEntries:
-      - dependentGameObject: {fileID: 0}
-      - dependentGameObject: {fileID: 0}
-      - dependentGameObject: {fileID: 0}
+      - dependentGameObject: {fileID: 1206762623}
+      - dependentGameObject: {fileID: 225063453}
+      - dependentGameObject: {fileID: 1618940075}
     proximityStateIndex: 0
   grabMap:
     grabEntryList: []
@@ -9678,6 +9690,12 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 50d86818e8764374eba6c80cf64e5e76, type: 3}
   m_IsPrefabParent: 0
+--- !u!114 &1618940075 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114746924379506148, guid: 4a70e87a0bd9bce47ac1e190b0b10162,
+    type: 2}
+  m_PrefabInternal: {fileID: 1975814853}
+  m_Script: {fileID: 11500000, guid: 7ac765816c049ac42908efc08e7f359c, type: 3}
 --- !u!1 &1626211785
 GameObject:
   m_ObjectHideFlags: 0

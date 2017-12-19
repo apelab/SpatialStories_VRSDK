@@ -43,7 +43,7 @@ namespace Gaze
 			}
 		}
 
-		[MenuItem("Gaze/Filter Hierarchy/Filter Gaze Objects")]
+		//[MenuItem("Gaze/Filter Hierarchy/Filter Gaze Objects")]
 		public static void filterGazeObjects ()
 		{
 			filter = true;
@@ -57,7 +57,7 @@ namespace Gaze
 			}
 		}
 
-		[MenuItem("Gaze/Filter Hierarchy/Clear Filter")]
+	//	[MenuItem("Gaze/Filter Hierarchy/Clear Filter")]
 		public 	static void clearFilter ()
 		{
 			filter = false;
@@ -69,13 +69,13 @@ namespace Gaze
 			}
 		}
 		
-		[MenuItem("Gaze/Filter Hierarchy/Filter Gaze Objects", true)]
+	//	[MenuItem("Gaze/Filter Hierarchy/Filter Gaze Objects", true)]
 		public static bool CanFilterGazeObjects ()
 		{
 			return filter == false;
 		}
 		
-		[MenuItem("Gaze/Filter Hierarchy/Clear Filter", true)]
+		//[MenuItem("Gaze/Filter Hierarchy/Clear Filter", true)]
 		public static bool CanClearFilter ()
 		{
 			return filter == true;

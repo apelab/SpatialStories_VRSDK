@@ -23,7 +23,7 @@ namespace Gaze
 			return targetCamera;
 		}
 	
-		[MenuItem("Gaze/Billboard Alignment/Look at Camera")]
+	//	[MenuItem("Gaze/Billboard Alignment/Look at Camera")]
 		public static void lookAtCamera ()
 		{
 			foreach (Transform t in Selection.transforms) {
@@ -32,7 +32,7 @@ namespace Gaze
 			}
 		}
 		
-		[MenuItem("Gaze/Billboard Alignment/Look away from Camera")]
+		//[MenuItem("Gaze/Billboard Alignment/Look away from Camera")]
 		public static void lookAwayFromCamera ()
 		{
 			foreach (Transform t in Selection.transforms) {
@@ -41,8 +41,8 @@ namespace Gaze
 			}
 		}
 		
-		[MenuItem("Gaze/Billboard Alignment/Look at Camera", true)]
-		[MenuItem("Gaze/Billboard Alignment/Look away from Camera", true)]
+		//[MenuItem("Gaze/Billboard Alignment/Look at Camera", true)]
+	//	[MenuItem("Gaze/Billboard Alignment/Look away from Camera", true)]
 		public static bool CanAlign ()
 		{
 			return Selection.transforms.Length > 0 && TargetCamera () != null;

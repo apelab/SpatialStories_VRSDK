@@ -171,7 +171,7 @@ namespace Gaze
             return root;
         }
 
-        #region Main Menu
+        #region Contextual Menu
 
         public static void AdjustColliders(GameObject _selectedGameObject)
         {
@@ -198,7 +198,7 @@ namespace Gaze
                 AdjustColliders(Selection.activeGameObject);
         }
 
-        [MenuItem("GameObject/SpatialStories/Convert into interactive object", false, 10)]
+        [MenuItem("GameObject/SpatialStories/Convert into Interactive Object", false, 10)]
         public static void GameObjectConvertIntoObject(MenuCommand menuCommand)
         {
             if (Selection.activeGameObject != null)
@@ -207,7 +207,7 @@ namespace Gaze
 
         [MenuItem("GameObject/SpatialStories/Convert into Interactive Camera", false, 10)]
         public static void GameObjectConvertIntoCamera(MenuCommand menuCommand)
-        {
+		{ EditorUtility.DisplayDialog("HTC Vive tip", "If you are using HTC Vive place the camera at the same height than your scene's floor", "Understood");
             if (Selection.activeGameObject != null && Selection.activeGameObject.GetComponent<Camera>() != null)
                 ConvertToInteractiveCamera(Selection.activeGameObject);
         }
@@ -227,7 +227,7 @@ namespace Gaze
 
         #endregion
 
-        #region Contextual Menu
+        #region Main Menu
 
         [MenuItem("SpatialStories/Create/Interactive Object")]
         public static void MenuCreateInteractiveObject()
@@ -265,11 +265,11 @@ namespace Gaze
             return Selection.activeGameObject != null && Selection.activeGameObject.GetComponent<Camera>() != null;
         }
 
-        [MenuItem("SpatialStories/Create/GearVr Interactive Camera")]
-        public static void GearVrCameraCreation()
-        {
-            ParentAndUndo(CreateGearVrInteractiveCamera());
-        }
+//        [MenuItem("SpatialStories/Create/GearVr Interactive Camera")]
+//        public static void GearVrCameraCreation()
+//        {
+//            ParentAndUndo(CreateGearVrInteractiveCamera());
+//        }
         #endregion
     }
 }
