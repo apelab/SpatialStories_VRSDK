@@ -877,14 +877,17 @@ public class Gaze_InputManager : MonoBehaviour
 
     }
 
+    const float AXIS_TOLERANCE = 0f;
+
     /// <summary>
     /// Notification for Right touchpad direction (i.e. Gear VR pad)
     /// </summary>
     /// <param name="e"></param>
     private void StickRightAxisEvent(Gaze_InputEventArgs e)
     {
+        Debug.Log(e.AxisValue.ToString());
         // implement gesture for touchpad direction on Gear VR pad
-        if (e.AxisValue.x > 0.1f)
+        if (e.AxisValue.x > AXIS_TOLERANCE)
         {
             if (debug)
                 Debug.Log("Right Touchpad touched Right");
@@ -895,7 +898,7 @@ public class Gaze_InputManager : MonoBehaviour
             if (OnRightTouchpadEvent != null)
                 OnRightTouchpadEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.PAD_RIGHT_TOUCH_RIGHT, e.AxisValue));
         }
-        else if (e.AxisValue.x < .1f)
+        else if (e.AxisValue.x < AXIS_TOLERANCE)
         {
             if (debug)
                 Debug.Log("Right Touchpad touched Left");
@@ -907,7 +910,7 @@ public class Gaze_InputManager : MonoBehaviour
                 OnRightTouchpadEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.PAD_RIGHT_TOUCH_LEFT, e.AxisValue));
         }
 
-        if (e.AxisValue.y > 0.1f)
+        if (e.AxisValue.y > AXIS_TOLERANCE)
         {
             if (debug)
                 Debug.Log("Right Touchpad touched Down");
@@ -919,7 +922,7 @@ public class Gaze_InputManager : MonoBehaviour
                 OnRightTouchpadEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.PAD_RIGHT_TOUCH_DOWN, e.AxisValue));
 
         }
-        else if (e.AxisValue.y < .1f)
+        else if (e.AxisValue.y < AXIS_TOLERANCE)
         {
             if (debug)
                 Debug.Log("Right Touchpad touched Up");
@@ -938,7 +941,7 @@ public class Gaze_InputManager : MonoBehaviour
     /// <param name="e"></param>
     private void StickLeftAxisEvent(Gaze_InputEventArgs e)
     {
-        if (e.AxisValue.x > 0.1f)
+        if (e.AxisValue.x > AXIS_TOLERANCE)
         {
             if (debug)
                 Debug.Log("Left Touchpad touched Right");
@@ -949,7 +952,7 @@ public class Gaze_InputManager : MonoBehaviour
             if (OnLeftTouchpadEvent != null)
                 OnLeftTouchpadEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.PAD_LEFT_TOUCH_RIGHT, e.AxisValue));
         }
-        else if (e.AxisValue.x < .1f)
+        else if (e.AxisValue.x < -AXIS_TOLERANCE)
         {
             if (debug)
                 Debug.Log("Left Touchpad touched Left");
@@ -961,7 +964,7 @@ public class Gaze_InputManager : MonoBehaviour
                 OnLeftTouchpadEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.PAD_LEFT_TOUCH_LEFT, e.AxisValue));
         }
 
-        if (e.AxisValue.y > 0.1f)
+        if (e.AxisValue.y > AXIS_TOLERANCE)
         {
             if (debug)
                 Debug.Log("Left Touchpad touched Down");
@@ -973,7 +976,7 @@ public class Gaze_InputManager : MonoBehaviour
                 OnLeftTouchpadEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.PAD_LEFT_TOUCH_DOWN, e.AxisValue));
 
         }
-        else if (e.AxisValue.y < .1f)
+        else if (e.AxisValue.y < -AXIS_TOLERANCE)
         {
             if (debug)
                 Debug.Log("Left Touchpad touched Up");

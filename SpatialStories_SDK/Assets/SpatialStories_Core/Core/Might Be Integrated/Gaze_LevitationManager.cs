@@ -20,7 +20,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.VR;
 
 namespace Gaze
 {
@@ -84,19 +83,6 @@ namespace Gaze
         private Vector3 beamEndPosition;
         private float chargeProgress;
         private Vector3[] beamControlPoints, beamSplinePoints;
-        private Renderer[] originalLevitateRenderers;
-        private Gaze_Conditions gazable;
-        private GameObject visuals;
-        private Renderer[] visualsRenderers;
-        private float startCameraHandsDistance;
-        private float levitatingObjectDistance;
-        private float pushPullDelta;
-        private float distanceHeadHands;
-        /// <summary>
-        /// The distance between the hands' midpoint and the torso (attached below the camera)
-        /// </summary>
-        private float torsoDistance;
-        private bool controllersFound;
         private Vector3 beamStartPosition;
         private Gaze_LevitationStates levitationState;
         private Vector3 hitPosition;
@@ -104,7 +90,6 @@ namespace Gaze
         public GameObject AttachPoint { get { return attachPoint; } }
         private GameObject attachPoint;
 
-        private Color attachPointColor;
         private Transform handLocation;
         private bool dropReady;
         private IEnumerator updateBeamColorRoutine;
@@ -127,6 +112,8 @@ namespace Gaze
         public GameObject OriginParticlesPrefab;
         public GameObject EndPointPrefab;
 
+        bool alreadySubscribedToPadEvents = false;
+
         #endregion
 
         void OnEnable()
@@ -138,20 +125,7 @@ namespace Gaze
 
             // TODO: Discriminate the hand that we are using
             Gaze_InputManager.OnControllerGrabEvent += OnControllerGrabEvent;
-
-            if (actualHand == Gaze_HandsEnum.LEFT)
-            {
-                Gaze_InputManager.OnPadLeftTouchDownEvent += OnPadRightTouchDownEvent;
-                Gaze_InputManager.OnPadLeftTouchUpEvent += OnPadRightTouchUpEvent;
-                Gaze_InputManager.OnLeftTouchpadEvent += OnRightTouchpadEvent;
-            }
-            else
-            {
-                Gaze_InputManager.OnPadRightTouchDownEvent += OnPadRightTouchDownEvent;
-                Gaze_InputManager.OnPadRightTouchUpEvent += OnPadRightTouchUpEvent;
-                Gaze_InputManager.OnRightTouchpadEvent += OnRightTouchpadEvent;
-            }
-
+            
             Gaze_HandsReplacer.OnHandsReplaced += Gaze_HandsReplacer_OnHandsReplaced;
 
             transform.gameObject.AddComponent<AudioSource>();
@@ -161,6 +135,47 @@ namespace Gaze
             GetComponent<AudioSource>().volume = audioFXVolume;
             LevitationManagers.Add(this);
         }
+
+        private void SubscribeToPadEvents()
+        {
+            if (alreadySubscribedToPadEvents)
+                return;
+
+            if (actualHand == Gaze_HandsEnum.LEFT)
+            {
+                Gaze_InputManager.OnPadLeftTouchDownEvent += OnPadTouchDownEvent;
+                Gaze_InputManager.OnPadLeftTouchUpEvent += OnPadTouchUpEvent;
+                Gaze_InputManager.OnLeftTouchpadEvent += OnTouchpadEvent;
+            }
+            else
+            {
+                Gaze_InputManager.OnPadRightTouchDownEvent += OnPadTouchDownEvent;
+                Gaze_InputManager.OnPadRightTouchUpEvent += OnPadTouchUpEvent;
+                Gaze_InputManager.OnRightTouchpadEvent += OnTouchpadEvent;
+            }
+            alreadySubscribedToPadEvents = true;
+        }
+
+        private void UnsubscribeToPadEvents()
+        {
+            if (!alreadySubscribedToPadEvents)
+                return;
+
+            if (actualHand == Gaze_HandsEnum.LEFT)
+            {
+                Gaze_InputManager.OnPadLeftTouchDownEvent -= OnPadTouchDownEvent;
+                Gaze_InputManager.OnPadLeftTouchUpEvent -= OnPadTouchUpEvent;
+                Gaze_InputManager.OnLeftTouchpadEvent -= OnTouchpadEvent;
+            }
+            else
+            {
+                Gaze_InputManager.OnPadRightTouchDownEvent -= OnPadTouchDownEvent;
+                Gaze_InputManager.OnPadRightTouchUpEvent -= OnPadTouchUpEvent;
+                Gaze_InputManager.OnRightTouchpadEvent -= OnTouchpadEvent;
+            }
+            alreadySubscribedToPadEvents = false;
+        }
+
 
         private void Gaze_HandsReplacer_OnHandsReplaced(Gaze_GrabManager grabManager, Transform GrabTarget, GameObject DistantGrabObject)
         {
@@ -177,18 +192,8 @@ namespace Gaze
 
             Gaze_InputManager.OnControllerGrabEvent -= OnControllerGrabEvent;
 
-            if (actualHand == Gaze_HandsEnum.LEFT)
-            {
-                Gaze_InputManager.OnPadLeftTouchDownEvent -= OnPadRightTouchDownEvent;
-                Gaze_InputManager.OnPadLeftTouchUpEvent -= OnPadRightTouchUpEvent;
-                Gaze_InputManager.OnLeftTouchpadEvent -= OnRightTouchpadEvent;
-            }
-            else
-            {
-                Gaze_InputManager.OnPadRightTouchDownEvent -= OnPadRightTouchDownEvent;
-                Gaze_InputManager.OnPadRightTouchUpEvent -= OnPadRightTouchUpEvent;
-                Gaze_InputManager.OnRightTouchpadEvent -= OnRightTouchpadEvent;
-            }
+            UnsubscribeToPadEvents();
+
             Gaze_HandsReplacer.OnHandsReplaced -= Gaze_HandsReplacer_OnHandsReplaced;
             LevitationManagers.Remove(this);
         }
@@ -666,6 +671,7 @@ namespace Gaze
                 Gaze_GrabManager.EnableAllGrabManagers();
                 ClearAttachPoint();
                 Gaze_Teleporter.IsTeleportAllowed = true;
+                UnsubscribeToPadEvents();
             }
         }
 
@@ -682,6 +688,7 @@ namespace Gaze
                     hitPosition = e.HitPosition;
 
                     // Ensure 1 dynamic levitation point on the manager.
+                    SubscribeToPadEvents();
                     Destroy(DynamicLevitationPoint);
                     DynamicLevitationPoint = new GameObject();
                     DynamicLevitationPoint.transform.localScale = Vector3.zero;
@@ -765,17 +772,17 @@ namespace Gaze
         }
 
         #region GearVR Controller
-        private void OnPadRightTouchDownEvent(Gaze_InputEventArgs e)
+        private void OnPadTouchDownEvent(Gaze_InputEventArgs e)
         {
             levitationState = Gaze_InputManager.instance.CurrentController == Gaze_Controllers.GEARVR_CONTROLLER ? Gaze_LevitationStates.PULL : Gaze_LevitationStates.PUSH;
         }
 
-        private void OnPadRightTouchUpEvent(Gaze_InputEventArgs e)
+        private void OnPadTouchUpEvent(Gaze_InputEventArgs e)
         {
             levitationState = Gaze_InputManager.instance.CurrentController == Gaze_Controllers.GEARVR_CONTROLLER ? Gaze_LevitationStates.PUSH : Gaze_LevitationStates.PULL;
         }
 
-        private void OnRightTouchpadEvent(Gaze_InputEventArgs e)
+        private void OnTouchpadEvent(Gaze_InputEventArgs e)
         {
             if (Vector2.Distance(e.AxisValue, Vector2.zero) < 0.1f && levitationState != Gaze_LevitationStates.NEUTRAL)
             {

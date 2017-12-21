@@ -134,6 +134,7 @@ namespace Gaze
 
         private void ValidateInputs(Gaze_InputEventArgs e)
         {
+
             // for all input conditions specified (in the map)
             for (int i = 0; i < entriesCount; i++)
             {
@@ -162,6 +163,9 @@ namespace Gaze
 
         private void CheckReceivedInputValidity(Gaze_InputEventArgs e)
         {
+            if (gazeConditionsScript.triggerStateIndex == (int)Gaze_TriggerState.BEFORE)
+                return;
+
             // for all input conditions specified (in the map)
             for (int i = 0; i < entriesCount; i++)
             {

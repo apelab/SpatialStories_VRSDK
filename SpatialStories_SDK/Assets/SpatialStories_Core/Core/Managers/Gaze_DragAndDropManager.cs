@@ -122,7 +122,6 @@ namespace Gaze
 
         private void ResetVariables()
         {
-
             // Unlock the gravity in case it has been locked for another game object
             Gaze_GravityManager.ChangeGravityState(IO, Gaze_GravityRequestType.UNLOCK);
 
@@ -223,7 +222,6 @@ namespace Gaze
                 m_Snapped = true;
             }
 
-            //Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(gameObject, targetTransform.gameObject, Gaze_DragAndDropStates.PICKUP));
             Gaze_EventManager.FireDragAndDropEvent(new Gaze_DragAndDropEventArgs(this, gameObject, targetTransform.gameObject, Gaze_DragAndDropStates.PICKUP));
         }
 

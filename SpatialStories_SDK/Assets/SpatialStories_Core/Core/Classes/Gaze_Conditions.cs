@@ -432,15 +432,8 @@ namespace Gaze
                 {
                     foreach (Gaze_Dependency dep in ActivateOnDependencyMap.dependencies)
                     {
-                        //try
-                        //{
                         dep.DependentConditions.OnTriggerStateEvent += OnTriggerStateEventMethod;
                         dep.DependentConditions.OnTriggerEvent += OnTriggerEventMethod;
-                        //}
-                        //catch (NullReferenceException ex)
-                        //{
-                        //    Debug.Log("sss");
-                        //}
                     }
 
                     foreach (Gaze_Dependency dep in DeactivateOnDependencyMap.dependencies)
@@ -691,14 +684,6 @@ namespace Gaze
         /// <returns><c>true</c>, if current time is within absolute defined time, <c>false</c> otherwise.</returns>
         private bool IsWithinTimeFrame()
         {
-            //if (DeactivateOnDependencyMap.AreDependenciesSatisfied)
-            //{
-            //    // notify manager
-            //    SetTriggerState(Gaze_TriggerState.AFTER);
-            //    canBeTriggered = false;
-            //    return true;
-            //}
-
             if (ActivateOnDependencyMap.AreDependenciesSatisfied)
             {
                 // if time is beyond the specified wait time
