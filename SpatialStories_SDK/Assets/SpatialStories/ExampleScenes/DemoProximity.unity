@@ -1820,7 +1820,7 @@ MonoBehaviour:
     grabStateRightIndex: 0
   customConditions: []
   triggerStateIndex: 0
-  delayDuration: 2.2853508
+  delayDuration: 2.2426019
   delayed: 1
   isDelayRandom: 1
   delayRange:
@@ -3347,6 +3347,14 @@ Prefab:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 2300028, guid: fb28ea01e2a91014d83d77a258ef82dd, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5bb9788fa04320a4b8ce6e80dc9d9407, type: 2}
+    - target: {fileID: 2300030, guid: fb28ea01e2a91014d83d77a258ef82dd, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5bb9788fa04320a4b8ce6e80dc9d9407, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fb28ea01e2a91014d83d77a258ef82dd, type: 3}
   m_IsPrefabParent: 0
@@ -5174,7 +5182,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 5bb9788fa04320a4b8ce6e80dc9d9407, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5931,7 +5939,7 @@ MonoBehaviour:
     grabStateRightIndex: 0
   customConditions: []
   triggerStateIndex: 0
-  delayDuration: 2.590126
+  delayDuration: 2.9615927
   delayed: 1
   isDelayRandom: 1
   delayRange:

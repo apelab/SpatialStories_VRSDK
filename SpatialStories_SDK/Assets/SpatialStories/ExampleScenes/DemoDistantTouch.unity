@@ -20249,9 +20249,11 @@ MonoBehaviour:
   grabEnabled: 0
   teleportIndex: 0
   teleportEnabled: 0
-  inputsEnabled: 0
+  inputsEnabled: 1
   InputsMap:
-    InputsEntries: []
+    InputsEntries:
+    - inputType: 1
+      valid: 0
     AreDependenciesSatisfied: 1
   requireAllInputs: 0
   customConditionsEnabled: 0
