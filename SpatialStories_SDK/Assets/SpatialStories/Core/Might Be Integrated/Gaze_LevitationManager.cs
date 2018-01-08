@@ -143,14 +143,14 @@ namespace Gaze
 
             if (actualHand == Gaze_HandsEnum.LEFT)
             {
-                Gaze_InputManager.OnPadLeftTouchDownEvent += OnPadTouchDownEvent;
-                Gaze_InputManager.OnPadLeftTouchUpEvent += OnPadTouchUpEvent;
+                Gaze_InputManager.OnPadLeftTouchSouthEvent += OnPadTouchDownEvent;
+                Gaze_InputManager.OnPadLeftTouchNorthEvent += OnPadTouchUpEvent;
                 Gaze_InputManager.OnLeftTouchpadEvent += OnTouchpadEvent;
             }
             else
             {
-                Gaze_InputManager.OnPadRightTouchDownEvent += OnPadTouchDownEvent;
-                Gaze_InputManager.OnPadRightTouchUpEvent += OnPadTouchUpEvent;
+                Gaze_InputManager.OnPadRightTouchSouthEvent += OnPadTouchDownEvent;
+                Gaze_InputManager.OnPadRightTouchNorthEvent += OnPadTouchUpEvent;
                 Gaze_InputManager.OnRightTouchpadEvent += OnTouchpadEvent;
             }
             alreadySubscribedToPadEvents = true;
@@ -163,14 +163,14 @@ namespace Gaze
 
             if (actualHand == Gaze_HandsEnum.LEFT)
             {
-                Gaze_InputManager.OnPadLeftTouchDownEvent -= OnPadTouchDownEvent;
-                Gaze_InputManager.OnPadLeftTouchUpEvent -= OnPadTouchUpEvent;
+                Gaze_InputManager.OnPadLeftTouchSouthEvent -= OnPadTouchDownEvent;
+                Gaze_InputManager.OnPadLeftTouchNorthEvent -= OnPadTouchUpEvent;
                 Gaze_InputManager.OnLeftTouchpadEvent -= OnTouchpadEvent;
             }
             else
             {
-                Gaze_InputManager.OnPadRightTouchDownEvent -= OnPadTouchDownEvent;
-                Gaze_InputManager.OnPadRightTouchUpEvent -= OnPadTouchUpEvent;
+                Gaze_InputManager.OnPadRightTouchSouthEvent -= OnPadTouchDownEvent;
+                Gaze_InputManager.OnPadRightTouchNorthEvent -= OnPadTouchUpEvent;
                 Gaze_InputManager.OnRightTouchpadEvent -= OnTouchpadEvent;
             }
             alreadySubscribedToPadEvents = false;

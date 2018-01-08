@@ -40,7 +40,12 @@ namespace Gaze
         public List<GameObject> hierarchyIOs;
         private List<GameObject> hierarchyInteractions;
         private List<string> hierarchyInteractionsNames;
+
+        // Input Condition
+        private string[] platformsNames;
+        private string[] viveInputNames;
         private string[] inputsNames;
+
         private List<Gaze_InteractiveObject> hierarchyProximities;
 
         // Reflection members
@@ -81,7 +86,7 @@ namespace Gaze
             dndEventValidatorEnum = Enum.GetNames(typeof(Gaze_DragAndDropStates));
             dndTargetsModes = Enum.GetNames(typeof(apelab_DnDTargetsModes));
             FetchDnDTargets();
-            FetchInputsList();
+            FetchInputsLists();
             sceneInventory = UnityEngine.Object.FindObjectOfType<Gaze_SceneInventory>();
         }
 
@@ -103,9 +108,14 @@ namespace Gaze
             }
         }
 
-        private void FetchInputsList()
+        /// <summary>
+        /// Get all the input related lists
+        /// </summary>
+        private void FetchInputsLists()
         {
             inputsNames = Enum.GetNames(typeof(Gaze_InputTypes));
+            platformsNames = Enum.GetNames(typeof(Gaze_Controllers));
+            viveInputNames = Enum.GetNames(typeof(Gaze_HTCViveInputTypes));
         }
 
         public override void Gaze_OnInspectorGUI()
@@ -640,18 +650,7 @@ namespace Gaze
                     // update inputs list in Gaze_Interactions (Gaze_Interactions may have been removed in the hierarchy)
                     for (int i = 0; i < targetConditions.InputsMap.InputsEntries.Count; i++)
                     {
-                        // display the entry
-                        EditorGUILayout.BeginHorizontal();
-                        targetConditions.InputsMap.InputsEntries[i].inputType = (Gaze_InputTypes)EditorGUILayout.Popup((int)targetConditions.InputsMap.InputsEntries[i].inputType, inputsNames);
-
-
-                        // TODO @apelab add/remove event subscription with the new popup value
-
-                        // and a '-' button to remove it if needed
-                        if (GUILayout.Button("-"))
-                            targetConditions.InputsMap.Delete(targetConditions.InputsMap.InputsEntries[i]);
-
-                        EditorGUILayout.EndHorizontal();
+                        DisplayInputEntry(targetConditions.InputsMap.InputsEntries[i]);
                     }
                 }
 
@@ -681,6 +680,49 @@ namespace Gaze
 
 
             EditorGUILayout.Space();
+        }
+
+        private void DisplayInputEntry(Gaze_InputsMapEntry _inputEntry)
+        {
+            Gaze_Controllers lastSelectedPlatform = _inputEntry.UISelectedPlatform;
+            int lastSelectedSpecificInput = _inputEntry.UIControllerSpecificInput;
+            bool somethingHasChanged = false;
+
+            // display the entry
+            EditorGUILayout.BeginHorizontal();
+
+            // Display the platform
+            _inputEntry.UISelectedPlatform = (Gaze_Controllers)EditorGUILayout.Popup((int)_inputEntry.UISelectedPlatform, platformsNames);
+
+            // If the user changes the platform restart the input index to avoid index out of bound exeptions
+            if(lastSelectedPlatform != _inputEntry.UISelectedPlatform)
+            {
+                _inputEntry.UIControllerSpecificInput = 0;
+                somethingHasChanged = true;
+            }
+
+            // Display the correct input list for the selected platform
+            switch (_inputEntry.UISelectedPlatform)
+            {
+                case Gaze_Controllers.HTC_VIVE:
+                    _inputEntry.UIControllerSpecificInput = EditorGUILayout.Popup(_inputEntry.UIControllerSpecificInput, viveInputNames);
+                    break;
+            }
+            
+           
+            somethingHasChanged = lastSelectedSpecificInput != _inputEntry.UIControllerSpecificInput || somethingHasChanged;
+        
+            if (somethingHasChanged)
+            {
+                _inputEntry.InputType = Gaze_PlatformSpecificToGenericInputMapper.ToGenericInput(_inputEntry.UISelectedPlatform, _inputEntry.UIControllerSpecificInput);
+
+            }
+
+            if (GUILayout.Button("-"))
+                targetConditions.InputsMap.Delete(_inputEntry);
+
+            EditorGUILayout.EndHorizontal();
+            EditorGUILayout.LabelField(_inputEntry.InputType.ToString());
         }
 
         private void DisplayTeleportCondition()

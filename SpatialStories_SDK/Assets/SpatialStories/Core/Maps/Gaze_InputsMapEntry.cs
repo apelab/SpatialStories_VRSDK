@@ -16,11 +16,19 @@
 // <web>http://www.apelab.ch</web>
 // <date>2014-06-01</date>
 
+using Gaze;
+
 [System.Serializable]
 public class Gaze_InputsMapEntry
 {
+    /// <summary>
+    /// UI vars used to make the InputCondition Editor more friendly
+    /// </summary>
+    public Gaze_Controllers UISelectedPlatform;
+    public int UIControllerSpecificInput;
+
     // input name
-    public Gaze_InputTypes inputType;
+    public Gaze_InputTypes InputType;
 
     // has the input been used by the user
     public bool valid;
@@ -28,18 +36,18 @@ public class Gaze_InputsMapEntry
     public Gaze_InputsMapEntry()
     {
         // assign a default value for the input if none specified at construction
-        inputType = Gaze_InputTypes.A_BUTTON;
+        InputType = Gaze_InputTypes.A_BUTTON;
         valid = false;
     }
 
     public Gaze_InputsMapEntry(Gaze_InputTypes _type)
     {
-        inputType = _type;
+        InputType = _type;
     }
 
     public Gaze_InputsMapEntry(Gaze_InputTypes _type, bool _valid)
     {
-        inputType = _type;
+        InputType = _type;
         valid = _valid;
     }
 }

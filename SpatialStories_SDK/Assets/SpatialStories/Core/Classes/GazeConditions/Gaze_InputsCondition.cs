@@ -33,37 +33,52 @@ namespace Gaze
         protected override void CustomSetup()
         {
             #region inputs subscription
-            Gaze_InputManager.OnStartEvent += OnStartEvent;
-            Gaze_InputManager.OnButtonADownEvent += OnButtonADownEvent;
-            Gaze_InputManager.OnButtonAUpEvent += OnButtonAUpEvent;
-            Gaze_InputManager.OnButtonBDownEvent += OnButtonBDownEvent;
-            Gaze_InputManager.OnButtonBUpEvent += OnButtonBUpEvent;
-            Gaze_InputManager.OnButtonXDownEvent += OnButtonXDownEvent;
-            Gaze_InputManager.OnButtonXUpEvent += OnButtonXUpEvent;
-            Gaze_InputManager.OnButtonYDownEvent += OnButtonYDownEvent;
-            Gaze_InputManager.OnButtonYUpEvent += OnButtonYUpEvent;
-            Gaze_InputManager.OnIndexLeftDownEvent += OnIndexLeftDownEvent;
-            Gaze_InputManager.OnIndexLeftUpEvent += OnIndexLeftUpEvent;
-            Gaze_InputManager.OnIndexRightDownEvent += OnIndexRightDownEvent;
-            Gaze_InputManager.OnIndexRightUpEvent += OnIndexRightUpEvent;
-            Gaze_InputManager.OnHandLeftDownEvent += OnHandLeftDownEvent;
-            Gaze_InputManager.OnHandLeftUpEvent += OnHandLeftUpEvent;
-            Gaze_InputManager.OnHandRightDownEvent += OnHandRightDownEvent;
-            Gaze_InputManager.OnHandRightUpEvent += OnHandRightUpEvent;
-            Gaze_InputManager.OnStickLeftDownEvent += OnStickLeftDownEvent;
-            Gaze_InputManager.OnStickLeftUpEvent += OnStickLeftUpEvent;
-            Gaze_InputManager.OnStickRightDownEvent += OnStickRightDownEvent;
-            Gaze_InputManager.OnStickRightUpEvent += OnStickRightUpEvent;
-            Gaze_InputManager.OnLeftTouchpadEvent += OnLeftTouchpadEvent;
-            Gaze_InputManager.OnPadLeftTouchLeftEvent += OnPadLeftTouchLeftEvent;
-            Gaze_InputManager.OnPadLeftTouchRightEvent += OnPadLeftTouchRightEvent;
-            Gaze_InputManager.OnPadLeftTouchUpEvent += OnPadLeftTouchUpEvent;
-            Gaze_InputManager.OnPadLeftTouchDownEvent += OnPadLeftTouchDownEvent;
-            Gaze_InputManager.OnRightTouchpadEvent += OnRightTouchpadEvent;
-            Gaze_InputManager.OnPadRightTouchLeftEvent += OnPadRightTouchLeftEvent;
-            Gaze_InputManager.OnPadRightTouchRightEvent += OnPadRightTouchRightEvent;
-            Gaze_InputManager.OnPadRightTouchUpEvent += OnPadRightTouchUpEvent;
-            Gaze_InputManager.OnPadRightTouchDownEvent += OnPadRightTouchDownEvent;
+            Gaze_InputManager.OnStartEvent += OnInputEvent;
+            Gaze_InputManager.OnButtonADownEvent += OnInputEvent;
+            Gaze_InputManager.OnButtonAUpEvent += OnInputEvent;
+            Gaze_InputManager.OnButtonBDownEvent += OnInputEvent;
+            Gaze_InputManager.OnButtonBUpEvent += OnInputEvent;
+            Gaze_InputManager.OnButtonXDownEvent += OnInputEvent;
+            Gaze_InputManager.OnButtonXUpEvent += OnInputEvent;
+            Gaze_InputManager.OnButtonYDownEvent += OnInputEvent;
+            Gaze_InputManager.OnButtonYUpEvent += OnInputEvent;
+            Gaze_InputManager.OnIndexLeftDownEvent += OnInputEvent;
+            Gaze_InputManager.OnIndexLeftUpEvent += OnInputEvent;
+            Gaze_InputManager.OnIndexRightDownEvent += OnInputEvent;
+            Gaze_InputManager.OnIndexRightUpEvent += OnInputEvent;
+            Gaze_InputManager.OnHandLeftDownEvent += OnInputEvent;
+            Gaze_InputManager.OnHandLeftUpEvent += OnInputEvent;
+            Gaze_InputManager.OnHandRightDownEvent += OnInputEvent;
+            Gaze_InputManager.OnHandRightUpEvent += OnInputEvent;
+            Gaze_InputManager.OnStickLeftDownEvent += OnInputEvent;
+            Gaze_InputManager.OnStickLeftUpEvent += OnInputEvent;
+            Gaze_InputManager.OnStickRightDownEvent += OnInputEvent;
+            Gaze_InputManager.OnStickRightUpEvent += OnInputEvent;
+
+            Gaze_InputManager.OnLeftTouchpadEvent += OnInputEvent;
+
+            Gaze_InputManager.OnPadLeftTouchWestEvent += OnInputEvent;
+            Gaze_InputManager.OnPadLeftTouchEastEvent += OnInputEvent;
+            Gaze_InputManager.OnPadLeftTouchNorthEvent += OnInputEvent;
+            Gaze_InputManager.OnPadLeftTouchSouthEvent += OnInputEvent;
+
+            Gaze_InputManager.OnPadLeftPressWestEvent += OnInputEvent;
+            Gaze_InputManager.OnPadLeftPressEastEvent += OnInputEvent;
+            Gaze_InputManager.OnPadLeftPressNorthEvent += OnInputEvent;
+            Gaze_InputManager.OnPadLeftPressDownEvent += OnInputEvent;
+
+            Gaze_InputManager.OnRightTouchpadEvent += OnInputEvent;
+
+            Gaze_InputManager.OnPadRightTouchWestEvent += OnInputEvent;
+            Gaze_InputManager.OnPadRightTouchEastEvent += OnInputEvent;
+            Gaze_InputManager.OnPadRightTouchNorthEvent += OnInputEvent;
+            Gaze_InputManager.OnPadRightTouchSouthEvent += OnInputEvent;
+
+            Gaze_InputManager.OnPadRightPressWestEvent += OnInputEvent;
+            Gaze_InputManager.OnPadRightPressEastEvent += OnInputEvent;
+            Gaze_InputManager.OnPadRightPressNorthEvent += OnInputEvent;
+            Gaze_InputManager.OnPadRightPressSouthEvent += OnInputEvent;
+
             #endregion inputs subscription
 
             entriesCount = gazeConditionsScript.InputsMap.InputsEntries.Count;
@@ -77,37 +92,51 @@ namespace Gaze
         protected override void CustomDispose()
         {
             #region inputs subscription
-            Gaze_InputManager.OnStartEvent -= OnStartEvent;
-            Gaze_InputManager.OnButtonADownEvent -= OnButtonADownEvent;
-            Gaze_InputManager.OnButtonAUpEvent -= OnButtonAUpEvent;
-            Gaze_InputManager.OnButtonBDownEvent -= OnButtonBDownEvent;
-            Gaze_InputManager.OnButtonBUpEvent -= OnButtonBUpEvent;
-            Gaze_InputManager.OnButtonXDownEvent -= OnButtonXDownEvent;
-            Gaze_InputManager.OnButtonXUpEvent -= OnButtonXUpEvent;
-            Gaze_InputManager.OnButtonYDownEvent -= OnButtonYDownEvent;
-            Gaze_InputManager.OnButtonYUpEvent -= OnButtonYUpEvent;
-            Gaze_InputManager.OnIndexLeftDownEvent -= OnIndexLeftDownEvent;
-            Gaze_InputManager.OnIndexLeftUpEvent -= OnIndexLeftUpEvent;
-            Gaze_InputManager.OnIndexRightDownEvent -= OnIndexRightDownEvent;
-            Gaze_InputManager.OnIndexRightUpEvent -= OnIndexRightUpEvent;
-            Gaze_InputManager.OnHandLeftDownEvent -= OnHandLeftDownEvent;
-            Gaze_InputManager.OnHandLeftUpEvent -= OnHandLeftUpEvent;
-            Gaze_InputManager.OnHandRightDownEvent -= OnHandRightDownEvent;
-            Gaze_InputManager.OnHandRightUpEvent -= OnHandRightUpEvent;
-            Gaze_InputManager.OnStickLeftDownEvent -= OnStickLeftDownEvent;
-            Gaze_InputManager.OnStickLeftUpEvent -= OnStickLeftUpEvent;
-            Gaze_InputManager.OnStickRightDownEvent -= OnStickRightDownEvent;
-            Gaze_InputManager.OnStickRightUpEvent -= OnStickRightUpEvent;
-            Gaze_InputManager.OnLeftTouchpadEvent -= OnLeftTouchpadEvent;
-            Gaze_InputManager.OnPadLeftTouchLeftEvent -= OnPadLeftTouchLeftEvent;
-            Gaze_InputManager.OnPadLeftTouchRightEvent -= OnPadLeftTouchRightEvent;
-            Gaze_InputManager.OnPadLeftTouchUpEvent -= OnPadLeftTouchUpEvent;
-            Gaze_InputManager.OnPadLeftTouchDownEvent -= OnPadLeftTouchDownEvent;
-            Gaze_InputManager.OnRightTouchpadEvent -= OnRightTouchpadEvent;
-            Gaze_InputManager.OnPadRightTouchLeftEvent -= OnPadRightTouchLeftEvent;
-            Gaze_InputManager.OnPadRightTouchRightEvent -= OnPadRightTouchRightEvent;
-            Gaze_InputManager.OnPadRightTouchUpEvent -= OnPadRightTouchUpEvent;
-            Gaze_InputManager.OnPadRightTouchDownEvent -= OnPadRightTouchDownEvent;
+            Gaze_InputManager.OnStartEvent -= OnInputEvent;
+            Gaze_InputManager.OnButtonADownEvent -= OnInputEvent;
+            Gaze_InputManager.OnButtonAUpEvent -= OnInputEvent;
+            Gaze_InputManager.OnButtonBDownEvent -= OnInputEvent;
+            Gaze_InputManager.OnButtonBUpEvent -= OnInputEvent;
+            Gaze_InputManager.OnButtonXDownEvent -= OnInputEvent;
+            Gaze_InputManager.OnButtonXUpEvent -= OnInputEvent;
+            Gaze_InputManager.OnButtonYDownEvent -= OnInputEvent;
+            Gaze_InputManager.OnButtonYUpEvent -= OnInputEvent;
+            Gaze_InputManager.OnIndexLeftDownEvent -= OnInputEvent;
+            Gaze_InputManager.OnIndexLeftUpEvent -= OnInputEvent;
+            Gaze_InputManager.OnIndexRightDownEvent -= OnInputEvent;
+            Gaze_InputManager.OnIndexRightUpEvent -= OnInputEvent;
+            Gaze_InputManager.OnHandLeftDownEvent -= OnInputEvent;
+            Gaze_InputManager.OnHandLeftUpEvent -= OnInputEvent;
+            Gaze_InputManager.OnHandRightDownEvent -= OnInputEvent;
+            Gaze_InputManager.OnHandRightUpEvent -= OnInputEvent;
+            Gaze_InputManager.OnStickLeftDownEvent -= OnInputEvent;
+            Gaze_InputManager.OnStickLeftUpEvent -= OnInputEvent;
+            Gaze_InputManager.OnStickRightDownEvent -= OnInputEvent;
+            Gaze_InputManager.OnStickRightUpEvent -= OnInputEvent;
+
+            Gaze_InputManager.OnLeftTouchpadEvent -= OnInputEvent;
+
+            Gaze_InputManager.OnPadLeftTouchWestEvent -= OnInputEvent;
+            Gaze_InputManager.OnPadLeftTouchEastEvent -= OnInputEvent;
+            Gaze_InputManager.OnPadLeftTouchNorthEvent -= OnInputEvent;
+            Gaze_InputManager.OnPadLeftTouchSouthEvent -= OnInputEvent;
+
+            Gaze_InputManager.OnPadLeftPressWestEvent -= OnInputEvent;
+            Gaze_InputManager.OnPadLeftPressEastEvent -= OnInputEvent;
+            Gaze_InputManager.OnPadLeftPressNorthEvent -= OnInputEvent;
+            Gaze_InputManager.OnPadLeftPressDownEvent -= OnInputEvent;
+
+            Gaze_InputManager.OnRightTouchpadEvent -= OnInputEvent;
+
+            Gaze_InputManager.OnPadRightTouchWestEvent -= OnInputEvent;
+            Gaze_InputManager.OnPadRightTouchEastEvent -= OnInputEvent;
+            Gaze_InputManager.OnPadRightTouchNorthEvent -= OnInputEvent;
+            Gaze_InputManager.OnPadRightTouchSouthEvent -= OnInputEvent;
+
+            Gaze_InputManager.OnPadRightPressWestEvent -= OnInputEvent;
+            Gaze_InputManager.OnPadRightPressEastEvent -= OnInputEvent;
+            Gaze_InputManager.OnPadRightPressNorthEvent -= OnInputEvent;
+            Gaze_InputManager.OnPadRightPressSouthEvent -= OnInputEvent;
             #endregion inputs subscription
         }
 
@@ -119,12 +148,12 @@ namespace Gaze
                 EditorGUILayout.BeginHorizontal();
                 if (gazeConditionsScript.InputsMap.InputsEntries[i].valid)
                 {
-                    RenderSatisfiedLabel(gazeConditionsScript.InputsMap.InputsEntries[i].inputType.ToString());
+                    RenderSatisfiedLabel(gazeConditionsScript.InputsMap.InputsEntries[i].InputType.ToString());
                     RenderSatisfiedLabel("True");
                 }
                 else
                 {
-                    RenderNonSatisfiedLabel(gazeConditionsScript.InputsMap.InputsEntries[i].inputType.ToString());
+                    RenderNonSatisfiedLabel(gazeConditionsScript.InputsMap.InputsEntries[i].InputType.ToString());
                     RenderNonSatisfiedLabel("False");
                 }
                 EditorGUILayout.EndHorizontal();
@@ -170,7 +199,7 @@ namespace Gaze
             for (int i = 0; i < entriesCount; i++)
             {
                 // if the pressed input is in the map
-                if (e.InputType.Equals(gazeConditionsScript.InputsMap.InputsEntries[i].inputType))
+                if (e.InputType.Equals(gazeConditionsScript.InputsMap.InputsEntries[i].InputType))
                 {
                     // update its valid flag
                     gazeConditionsScript.InputsMap.InputsEntries[i].valid = true;
@@ -182,157 +211,7 @@ namespace Gaze
             }
         }
 
-        private void OnButtonADownEvent(Gaze_InputEventArgs e)
-        {
-            CheckReceivedInputValidity(e);
-        }
-
-        private void OnButtonBDownEvent(Gaze_InputEventArgs e)
-        {
-            CheckReceivedInputValidity(e);
-        }
-
-        private void OnStartEvent(Gaze_InputEventArgs e)
-        {
-            CheckReceivedInputValidity(e);
-        }
-
-        private void OnButtonAUpEvent(Gaze_InputEventArgs e)
-        {
-            CheckReceivedInputValidity(e);
-        }
-
-        private void OnButtonBUpEvent(Gaze_InputEventArgs e)
-        {
-            CheckReceivedInputValidity(e);
-        }
-
-        private void OnButtonXDownEvent(Gaze_InputEventArgs e)
-        {
-            CheckReceivedInputValidity(e);
-        }
-
-        private void OnButtonXUpEvent(Gaze_InputEventArgs e)
-        {
-            CheckReceivedInputValidity(e);
-        }
-
-        private void OnButtonYDownEvent(Gaze_InputEventArgs e)
-        {
-            CheckReceivedInputValidity(e);
-        }
-
-        private void OnButtonYUpEvent(Gaze_InputEventArgs e)
-        {
-            CheckReceivedInputValidity(e);
-        }
-
-        private void OnIndexLeftDownEvent(Gaze_InputEventArgs e)
-        {
-            CheckReceivedInputValidity(e);
-        }
-
-        private void OnIndexLeftUpEvent(Gaze_InputEventArgs e)
-        {
-            CheckReceivedInputValidity(e);
-        }
-
-        private void OnIndexRightDownEvent(Gaze_InputEventArgs e)
-        {
-            CheckReceivedInputValidity(e);
-        }
-
-        private void OnIndexRightUpEvent(Gaze_InputEventArgs e)
-        {
-            CheckReceivedInputValidity(e);
-        }
-
-        private void OnHandLeftDownEvent(Gaze_InputEventArgs e)
-        {
-            CheckReceivedInputValidity(e);
-        }
-
-        private void OnHandLeftUpEvent(Gaze_InputEventArgs e)
-        {
-            CheckReceivedInputValidity(e);
-        }
-
-        private void OnHandRightDownEvent(Gaze_InputEventArgs e)
-        {
-            CheckReceivedInputValidity(e);
-        }
-
-        private void OnHandRightUpEvent(Gaze_InputEventArgs e)
-        {
-            CheckReceivedInputValidity(e);
-        }
-
-        private void OnStickLeftDownEvent(Gaze_InputEventArgs e)
-        {
-            CheckReceivedInputValidity(e);
-        }
-
-        private void OnStickLeftUpEvent(Gaze_InputEventArgs e)
-        {
-            CheckReceivedInputValidity(e);
-        }
-
-        private void OnStickRightDownEvent(Gaze_InputEventArgs e)
-        {
-            CheckReceivedInputValidity(e);
-        }
-
-        private void OnStickRightUpEvent(Gaze_InputEventArgs e)
-        {
-            CheckReceivedInputValidity(e);
-        }
-
-        private void OnLeftTouchpadEvent(Gaze_InputEventArgs e)
-        {
-            CheckReceivedInputValidity(e);
-        }
-
-        private void OnPadLeftTouchLeftEvent(Gaze_InputEventArgs e)
-        {
-            CheckReceivedInputValidity(e);
-        }
-
-        private void OnPadLeftTouchRightEvent(Gaze_InputEventArgs e)
-        {
-            CheckReceivedInputValidity(e);
-        }
-
-        private void OnPadLeftTouchDownEvent(Gaze_InputEventArgs e)
-        {
-            CheckReceivedInputValidity(e);
-        }
-
-        private void OnPadLeftTouchUpEvent(Gaze_InputEventArgs e)
-        {
-            CheckReceivedInputValidity(e);
-        }
-
-        private void OnRightTouchpadEvent(Gaze_InputEventArgs e)
-        {
-            CheckReceivedInputValidity(e);
-        }
-
-        private void OnPadRightTouchLeftEvent(Gaze_InputEventArgs e)
-        {
-            CheckReceivedInputValidity(e);
-        }
-
-        private void OnPadRightTouchRightEvent(Gaze_InputEventArgs e)
-        {
-            CheckReceivedInputValidity(e);
-        }
-
-        private void OnPadRightTouchUpEvent(Gaze_InputEventArgs e)
-        {
-            CheckReceivedInputValidity(e);
-        }
-
-        private void OnPadRightTouchDownEvent(Gaze_InputEventArgs e)
+        private void OnInputEvent(Gaze_InputEventArgs e)
         {
             CheckReceivedInputValidity(e);
         }

@@ -166,10 +166,18 @@ public class Gaze_InputManager : MonoBehaviour
     public static event InputEvent OnStickRightUpEvent;
 
     public static event InputEvent OnLeftTouchpadEvent;
-    public static event InputEvent OnPadLeftTouchLeftEvent;
-    public static event InputEvent OnPadLeftTouchRightEvent;
-    public static event InputEvent OnPadLeftTouchUpEvent;
-    public static event InputEvent OnPadLeftTouchDownEvent;
+
+    // Touch
+    public static event InputEvent OnPadLeftTouchWestEvent;
+    public static event InputEvent OnPadLeftTouchEastEvent;
+    public static event InputEvent OnPadLeftTouchNorthEvent;
+    public static event InputEvent OnPadLeftTouchSouthEvent;
+
+    // Press
+    public static event InputEvent OnPadLeftPressWestEvent;
+    public static event InputEvent OnPadLeftPressEastEvent;
+    public static event InputEvent OnPadLeftPressNorthEvent;
+    public static event InputEvent OnPadLeftPressDownEvent;
 
     public static event InputEvent OnRightTouchpadEvent;
     public static void FireRightTouchpadEvent(Gaze_InputEventArgs args)
@@ -177,10 +185,19 @@ public class Gaze_InputManager : MonoBehaviour
         if (OnRightTouchpadEvent != null)
             OnRightTouchpadEvent(args);
     }
-    public static event InputEvent OnPadRightTouchLeftEvent;
-    public static event InputEvent OnPadRightTouchRightEvent;
-    public static event InputEvent OnPadRightTouchUpEvent;
-    public static event InputEvent OnPadRightTouchDownEvent;
+
+    // Touch
+    public static event InputEvent OnPadRightTouchWestEvent;
+    public static event InputEvent OnPadRightTouchEastEvent;
+    public static event InputEvent OnPadRightTouchNorthEvent;
+    public static event InputEvent OnPadRightTouchSouthEvent;
+
+    // Press
+    public static event InputEvent OnPadRightPressWestEvent;
+    public static event InputEvent OnPadRightPressEastEvent;
+    public static event InputEvent OnPadRightPressNorthEvent;
+    public static event InputEvent OnPadRightPressSouthEvent;
+
 
     public GameObject LeftController { get { return leftHandIO; } }
 
@@ -221,6 +238,19 @@ public class Gaze_InputManager : MonoBehaviour
 
     float localHandsHeigth;
 
+
+    /// <summary>
+    /// Used to know what is the dominant direction when the user is using a pad or a joystick
+    /// </summary>
+    public static Gaze_InputTypes DominantDirectionLeftPad;
+    public static Gaze_InputTypes DominantDirectionRightPad;
+    
+    /// <summary>
+    /// Used to distinguish between a Touch or a Press
+    /// </summary>
+    bool isLeftStickDown = false;
+    bool isRightStickDown = false;
+    
     public static event OnSetupController OnControlerSetup
     {
         add
@@ -690,6 +720,8 @@ public class Gaze_InputManager : MonoBehaviour
 
             if (OnStickLeftDownEvent != null)
                 OnStickLeftDownEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.LeftHand, Gaze_InputTypes.STICK_LEFT_DOWN));
+
+            isLeftStickDown = true;
         }
         if (Input.GetButtonUp(Gaze_InputConstants.APELAB_INPUT_STICK_LEFT))
         {
@@ -698,6 +730,9 @@ public class Gaze_InputManager : MonoBehaviour
 
             if (OnStickLeftUpEvent != null)
                 OnStickLeftUpEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.LeftHand, Gaze_InputTypes.STICK_LEFT_DOWN));
+
+            isLeftStickDown = false;
+            
         }
 
         if (Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_STICK_LEFT_VERTICAL) != 0 || Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_STICK_LEFT_HORIZONTAL) != 0)
@@ -732,6 +767,8 @@ public class Gaze_InputManager : MonoBehaviour
 
             if (OnStickRightDownEvent != null)
                 OnStickRightDownEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.STICK_RIGHT_DOWN));
+
+            isRightStickDown = true;
         }
         if (Input.GetButtonUp(Gaze_InputConstants.APELAB_INPUT_STICK_RIGHT))
         {
@@ -740,6 +777,8 @@ public class Gaze_InputManager : MonoBehaviour
 
             if (OnStickRightUpEvent != null)
                 OnStickRightUpEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.STICK_RIGHT_UP));
+
+            isRightStickDown = false;
         }
         if (Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_STICK_RIGHT_HORIZONTAL) != 0 || Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_STICK_RIGHT_VERTICAL) != 0)
         {
@@ -879,114 +918,216 @@ public class Gaze_InputManager : MonoBehaviour
 
     const float AXIS_TOLERANCE = 0.1f;
 
+    /// Notification for Left touchpad direction (i.e. Gear VR pad)
+    /// </summary>
+    /// <param name="e"></param>
+    private void StickLeftAxisEvent(Gaze_InputEventArgs e)
+    {
+        CalcDominantDirectionForPad(e, true);
+
+        if (e.AxisValue.x > AXIS_TOLERANCE)
+        {
+            if (debug)
+                Debug.Log("Left Touchpad touched Left");
+
+            // Only notify if the direction is the dominant one
+            if(DominantDirectionLeftPad == Gaze_InputTypes.PAD_LEFT_TOUCH_EAST)
+            {
+                if (OnPadLeftTouchEastEvent != null)
+                    OnPadLeftTouchEastEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.LeftHand, Gaze_InputTypes.PAD_LEFT_TOUCH_EAST));
+
+                // If the user is pressing fire the press event
+                if(isLeftStickDown && OnPadLeftPressEastEvent != null)
+                    OnPadLeftPressEastEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.LeftHand, Gaze_InputTypes.PAD_LEFT_PRESS_EAST));
+            }
+
+            if (OnLeftTouchpadEvent != null)
+                OnLeftTouchpadEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.LeftHand, Gaze_InputTypes.PAD_LEFT_TOUCH_EAST, e.AxisValue));
+        }
+        else if (e.AxisValue.x < AXIS_TOLERANCE)
+        {
+            if (debug)
+                Debug.Log("Left Touchpad touched West");
+
+            if(DominantDirectionLeftPad == Gaze_InputTypes.PAD_LEFT_TOUCH_WEST)
+            {
+                if (OnPadLeftTouchWestEvent != null)
+                    OnPadLeftTouchWestEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.LeftHand, Gaze_InputTypes.PAD_LEFT_TOUCH_WEST));
+
+                // If the user is pressing fire the press event
+                if (isLeftStickDown && OnPadLeftTouchWestEvent != null)
+                    OnPadLeftPressWestEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.LeftHand, Gaze_InputTypes.PAD_LEFT_PRESS_WEST));
+            }
+
+            if (OnLeftTouchpadEvent != null)
+                OnLeftTouchpadEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.LeftHand, Gaze_InputTypes.PAD_LEFT_TOUCH_WEST, e.AxisValue));
+        }
+
+        if (e.AxisValue.y > AXIS_TOLERANCE)
+        {
+            if (debug)
+                Debug.Log("Left Touchpad touched South");
+
+            if(DominantDirectionLeftPad == Gaze_InputTypes.PAD_LEFT_TOUCH_SOUTH)
+            {
+                if (OnPadLeftTouchSouthEvent != null)
+                    OnPadLeftTouchSouthEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.LeftHand, Gaze_InputTypes.PAD_LEFT_TOUCH_SOUTH));
+
+                // If the user is pressing fire the press event
+                if (isLeftStickDown && OnPadRightPressSouthEvent != null)
+                    OnPadRightPressSouthEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.LeftHand, Gaze_InputTypes.PAD_LEFT_PRESS_SOUTH));
+            }
+
+            if (OnLeftTouchpadEvent != null)
+                OnLeftTouchpadEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.LeftHand, Gaze_InputTypes.PAD_LEFT_TOUCH_SOUTH, e.AxisValue));
+
+        }
+        else if (e.AxisValue.y < AXIS_TOLERANCE)
+        {
+            if (debug)
+                Debug.Log("Left Touchpad touched North");
+
+            if(DominantDirectionLeftPad == Gaze_InputTypes.PAD_LEFT_TOUCH_NORTH)
+            {
+                if (OnPadLeftTouchNorthEvent != null)
+                    OnPadLeftTouchNorthEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.LeftHand, Gaze_InputTypes.PAD_LEFT_TOUCH_NORTH));
+
+                // If the user is pressing fire the press event
+                if (isLeftStickDown && OnPadLeftPressNorthEvent != null)
+                    OnPadLeftTouchNorthEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.LeftHand, Gaze_InputTypes.PAD_LEFT_PRESS_NORTH));
+            }
+
+            if (OnLeftTouchpadEvent != null)
+                OnLeftTouchpadEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.LeftHand, Gaze_InputTypes.PAD_LEFT_TOUCH_NORTH, e.AxisValue));
+        }
+
+    }
+
+
     /// <summary>
     /// Notification for Right touchpad direction (i.e. Gear VR pad)
     /// </summary>
     /// <param name="e"></param>
     private void StickRightAxisEvent(Gaze_InputEventArgs e)
     {
+        CalcDominantDirectionForPad(e, false);
+
         // implement gesture for touchpad direction on Gear VR pad
         if (e.AxisValue.x > AXIS_TOLERANCE)
         {
             if (debug)
-                Debug.Log("Right Touchpad touched Right");
+                Debug.Log("Right Touchpad touched East");
+            
+            if(DominantDirectionRightPad == Gaze_InputTypes.PAD_RIGHT_TOUCH_EAST)
+            {
+                if (OnPadRightTouchEastEvent != null)
+                    OnPadRightTouchEastEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.PAD_RIGHT_TOUCH_EAST));
 
-            if (OnPadRightTouchRightEvent != null)
-                OnPadRightTouchRightEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.PAD_RIGHT_TOUCH_RIGHT));
+                // If the user is pressing fire the press event
+                if (isRightStickDown && OnPadRightPressEastEvent != null)
+                    OnPadRightPressEastEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.PAD_RIGHT_PRESS_EAST));
+            }
 
             if (OnRightTouchpadEvent != null)
-                OnRightTouchpadEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.PAD_RIGHT_TOUCH_RIGHT, e.AxisValue));
+                OnRightTouchpadEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.PAD_RIGHT_TOUCH_EAST, e.AxisValue));
         }
         else if (e.AxisValue.x < AXIS_TOLERANCE)
         {
             if (debug)
-                Debug.Log("Right Touchpad touched Left");
+                Debug.Log("Right Touchpad touched West");
 
-            if (OnPadRightTouchLeftEvent != null)
-                OnPadRightTouchLeftEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.PAD_RIGHT_TOUCH_LEFT));
+            if(DominantDirectionRightPad == Gaze_InputTypes.PAD_RIGHT_TOUCH_WEST)
+            {
+                if (OnPadRightTouchWestEvent != null)
+                    OnPadRightTouchWestEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.PAD_RIGHT_TOUCH_WEST));
 
+                if(isRightStickDown && OnPadRightPressWestEvent != null)
+                    OnPadRightTouchWestEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.PAD_RIGHT_PRESS_WEST));
+            }
             if (OnRightTouchpadEvent != null)
-                OnRightTouchpadEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.PAD_RIGHT_TOUCH_LEFT, e.AxisValue));
+                OnRightTouchpadEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.PAD_RIGHT_TOUCH_WEST, e.AxisValue));
         }
 
         if (e.AxisValue.y > AXIS_TOLERANCE)
         {
             if (debug)
-                Debug.Log("Right Touchpad touched Down");
+                Debug.Log("Right Touchpad touched South");
 
-            if (OnPadRightTouchDownEvent != null)
-                OnPadRightTouchDownEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.PAD_RIGHT_TOUCH_DOWN));
+            if(DominantDirectionRightPad == Gaze_InputTypes.PAD_RIGHT_TOUCH_SOUTH)
+            {
+                if (OnPadRightTouchSouthEvent != null)
+                    OnPadRightTouchSouthEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.PAD_RIGHT_TOUCH_SOUTH));
+
+                if(isRightStickDown && OnPadRightPressSouthEvent != null)
+                    OnPadRightPressSouthEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.PAD_RIGHT_PRESS_SOUTH));
+            }
 
             if (OnRightTouchpadEvent != null)
-                OnRightTouchpadEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.PAD_RIGHT_TOUCH_DOWN, e.AxisValue));
-
+                OnRightTouchpadEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.PAD_RIGHT_TOUCH_SOUTH, e.AxisValue));
         }
         else if (e.AxisValue.y < AXIS_TOLERANCE)
         {
             if (debug)
-                Debug.Log("Right Touchpad touched Up");
+                Debug.Log("Right Touchpad touched North");
 
-            if (OnPadRightTouchUpEvent != null)
-                OnPadRightTouchUpEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.PAD_RIGHT_TOUCH_UP));
+            if(DominantDirectionRightPad == Gaze_InputTypes.PAD_RIGHT_TOUCH_NORTH)
+            {
+                if (OnPadRightTouchNorthEvent != null)
+                    OnPadRightTouchNorthEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.PAD_RIGHT_TOUCH_NORTH));
+
+                if(isRightStickDown && OnPadRightPressNorthEvent != null)
+                    OnPadRightPressNorthEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.PAD_RIGHT_PRESS_NORTH));
+            }
 
             if (OnRightTouchpadEvent != null)
-                OnRightTouchpadEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.PAD_RIGHT_TOUCH_UP, e.AxisValue));
+                OnRightTouchpadEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.PAD_RIGHT_TOUCH_NORTH, e.AxisValue));
         }
     }
 
-    /// <summary>
-    /// Notification for Left touchpad direction (i.e. Gear VR pad)
-    /// </summary>
-    /// <param name="e"></param>
-    private void StickLeftAxisEvent(Gaze_InputEventArgs e)
+
+    private void CalcDominantDirectionForPad(Gaze_InputEventArgs e, bool _isLeft)
     {
-        if (e.AxisValue.x > AXIS_TOLERANCE)
+        float upMagnitude = Mathf.Abs(-1 - e.AxisValue.y);
+        float downMagnitude = Mathf.Abs(1 - e.AxisValue.y);
+        float leftMagnitude = Mathf.Abs(-1 - e.AxisValue.x);
+        float rightMagnitude = Mathf.Abs(1 - e.AxisValue.x);
+
+        // Up Wins
+        if (upMagnitude < downMagnitude && upMagnitude < leftMagnitude && upMagnitude < rightMagnitude)
         {
-            if (debug)
-                Debug.Log("Left Touchpad touched Right");
-
-            if (OnPadLeftTouchRightEvent != null)
-                OnPadLeftTouchRightEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.LeftHand, Gaze_InputTypes.PAD_LEFT_TOUCH_RIGHT));
-
-            if (OnLeftTouchpadEvent != null)
-                OnLeftTouchpadEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.PAD_LEFT_TOUCH_RIGHT, e.AxisValue));
+            if (_isLeft)
+                DominantDirectionLeftPad = Gaze_InputTypes.PAD_LEFT_TOUCH_NORTH;
+            else
+                DominantDirectionRightPad = Gaze_InputTypes.PAD_RIGHT_TOUCH_NORTH;
         }
-        else if (e.AxisValue.x < -AXIS_TOLERANCE)
+        // Down Wins
+        else if (downMagnitude < upMagnitude && downMagnitude < leftMagnitude && downMagnitude < rightMagnitude)
         {
-            if (debug)
-                Debug.Log("Left Touchpad touched Left");
-
-            if (OnPadLeftTouchLeftEvent != null)
-                OnPadLeftTouchLeftEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.LeftHand, Gaze_InputTypes.PAD_LEFT_TOUCH_LEFT));
-
-            if (OnLeftTouchpadEvent != null)
-                OnLeftTouchpadEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.PAD_LEFT_TOUCH_LEFT, e.AxisValue));
+            if (_isLeft)
+                DominantDirectionLeftPad = Gaze_InputTypes.PAD_LEFT_TOUCH_SOUTH;
+            else
+                DominantDirectionRightPad = Gaze_InputTypes.PAD_RIGHT_TOUCH_SOUTH;
         }
-
-        if (e.AxisValue.y > AXIS_TOLERANCE)
+        // Left Wins
+        else if (leftMagnitude < upMagnitude && leftMagnitude < downMagnitude && leftMagnitude < rightMagnitude)
         {
-            if (debug)
-                Debug.Log("Left Touchpad touched Down");
-
-            if (OnPadLeftTouchDownEvent != null)
-                OnPadLeftTouchDownEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.LeftHand, Gaze_InputTypes.PAD_LEFT_TOUCH_DOWN));
-
-            if (OnLeftTouchpadEvent != null)
-                OnLeftTouchpadEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.PAD_LEFT_TOUCH_DOWN, e.AxisValue));
-
+            if (_isLeft)
+                DominantDirectionLeftPad = Gaze_InputTypes.PAD_LEFT_TOUCH_WEST;
+            else
+                DominantDirectionRightPad = Gaze_InputTypes.PAD_RIGHT_TOUCH_WEST;
         }
-        else if (e.AxisValue.y < -AXIS_TOLERANCE)
+        // Right Magnitude
+        else if (rightMagnitude < upMagnitude && rightMagnitude < downMagnitude && rightMagnitude < leftMagnitude)
         {
-            if (debug)
-                Debug.Log("Left Touchpad touched Up");
-
-            if (OnPadLeftTouchUpEvent != null)
-                OnPadLeftTouchUpEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.LeftHand, Gaze_InputTypes.PAD_LEFT_TOUCH_UP));
-
-            if (OnLeftTouchpadEvent != null)
-                OnLeftTouchpadEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.PAD_LEFT_TOUCH_UP, e.AxisValue));
+            if (_isLeft)
+                DominantDirectionLeftPad = Gaze_InputTypes.PAD_LEFT_TOUCH_EAST;
+            else
+                DominantDirectionRightPad = Gaze_InputTypes.PAD_RIGHT_TOUCH_EAST;
         }
     }
+
+
+
 
     /// <summary>
     /// Checks if the user has the InputManger.asset installed correctly with all our custom inputs
