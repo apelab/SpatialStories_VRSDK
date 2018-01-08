@@ -1,11 +1,11 @@
 ﻿public enum Gaze_HTCViveInputTypes
 {
     LeftTrackpadCenterPress,
-
     LeftTrackpadNorthPress,
     LeftTrackpadSouthPress,
     LeftTrackpadWestPress,
     LeftTrackpadEastPress,
+
     LeftTrackpadCenterRelease,
     LeftTrackpadNorthRelease,
     LeftTrackpadSouthRelease,
