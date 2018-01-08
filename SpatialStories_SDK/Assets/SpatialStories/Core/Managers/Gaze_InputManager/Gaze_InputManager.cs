@@ -885,7 +885,6 @@ public class Gaze_InputManager : MonoBehaviour
     /// <param name="e"></param>
     private void StickRightAxisEvent(Gaze_InputEventArgs e)
     {
-        Debug.Log(e.AxisValue.ToString());
         // implement gesture for touchpad direction on Gear VR pad
         if (e.AxisValue.x > AXIS_TOLERANCE)
         {
