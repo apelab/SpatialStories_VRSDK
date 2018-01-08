@@ -729,7 +729,7 @@ public class Gaze_InputManager : MonoBehaviour
                 Debug.Log(Gaze_InputConstants.APELAB_INPUT_STICK_LEFT + " Up");
 
             if (OnStickLeftUpEvent != null)
-                OnStickLeftUpEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.LeftHand, Gaze_InputTypes.STICK_LEFT_DOWN));
+                OnStickLeftUpEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.LeftHand, Gaze_InputTypes.STICK_LEFT_UP));
 
             isLeftStickDown = false;
             
@@ -1125,10 +1125,7 @@ public class Gaze_InputManager : MonoBehaviour
                 DominantDirectionRightPad = Gaze_InputTypes.PAD_RIGHT_TOUCH_EAST;
         }
     }
-
-
-
-
+    
     /// <summary>
     /// Checks if the user has the InputManger.asset installed correctly with all our custom inputs
     /// </summary>
