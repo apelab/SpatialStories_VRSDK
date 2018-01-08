@@ -877,7 +877,7 @@ public class Gaze_InputManager : MonoBehaviour
 
     }
 
-    const float AXIS_TOLERANCE = 0f;
+    const float AXIS_TOLERANCE = 0.1f;
 
     /// <summary>
     /// Notification for Right touchpad direction (i.e. Gear VR pad)
