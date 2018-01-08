@@ -22,10 +22,10 @@ namespace SpatialStories
         /// </summary>
         static S_CollisionMatrix()
         {
+            CreateLayerIfNeeded(Gaze_HashIDs.LAYER_TELEPORT);
             CreateLayerIfNeeded(Gaze_HashIDs.LAYER_HANDHOVER);
             CreateLayerIfNeeded(Gaze_HashIDs.LAYER_PROXIMTY);
             CreateLayerIfNeeded(Gaze_HashIDs.LAYER_GAZE);
-            CreateLayerIfNeeded(Gaze_HashIDs.LAYER_TELEPORT);
             CreateLayerIfNeeded(Gaze_HashIDs.LAYER_SOLID);
 
             if (layersHaveBeenCreated)
