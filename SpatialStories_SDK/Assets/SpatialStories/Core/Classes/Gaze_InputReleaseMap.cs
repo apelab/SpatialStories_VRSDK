@@ -218,6 +218,45 @@ namespace Gaze
             { Gaze_InputTypes.PAD_RIGHT_TOUCH, new List<Gaze_InputTypes>() { Gaze_InputTypes.PAD_RIGHT_UNTOUCH } },
         };
 
+        private static Dictionary<Gaze_InputTypes, Gaze_InputTypes> PressToRelease = new Dictionary<Gaze_InputTypes, Gaze_InputTypes>()
+        {
+            { Gaze_InputTypes.PAD_LEFT_TOUCH, Gaze_InputTypes.PAD_LEFT_UNTOUCH },
+            { Gaze_InputTypes.PAD_RIGHT_TOUCH, Gaze_InputTypes.PAD_RIGHT_UNTOUCH },
+
+            { Gaze_InputTypes.PAD_LEFT_TOUCH_WEST, Gaze_InputTypes.PAD_LEFT_RELEASE_WEST },
+            { Gaze_InputTypes.PAD_LEFT_TOUCH_EAST, Gaze_InputTypes.PAD_LEFT_RELEASE_EAST },
+            { Gaze_InputTypes.PAD_LEFT_TOUCH_NORTH, Gaze_InputTypes.PAD_LEFT_RELEASE_NORTH },
+            { Gaze_InputTypes.PAD_LEFT_TOUCH_SOUTH, Gaze_InputTypes.PAD_LEFT_RELEASE_SOUTH },
+
+            { Gaze_InputTypes.PAD_RIGHT_TOUCH_WEST, Gaze_InputTypes.PAD_RIGHT_RELEASE_WEST },
+            { Gaze_InputTypes.PAD_RIGHT_TOUCH_EAST, Gaze_InputTypes.PAD_RIGHT_RELEASE_EAST },
+            { Gaze_InputTypes.PAD_RIGHT_TOUCH_NORTH, Gaze_InputTypes.PAD_RIGHT_RELEASE_NORTH },
+            { Gaze_InputTypes.PAD_RIGHT_TOUCH_SOUTH, Gaze_InputTypes.PAD_RIGHT_RELEASE_SOUTH },
+
+            { Gaze_InputTypes.PAD_LEFT_PRESS_WEST, Gaze_InputTypes.PAD_LEFT_RELEASE_WEST },
+            { Gaze_InputTypes.PAD_LEFT_PRESS_EAST, Gaze_InputTypes.PAD_LEFT_RELEASE_EAST },
+            { Gaze_InputTypes.PAD_LEFT_PRESS_NORTH, Gaze_InputTypes.PAD_LEFT_RELEASE_NORTH },
+            { Gaze_InputTypes.PAD_LEFT_PRESS_SOUTH, Gaze_InputTypes.PAD_LEFT_RELEASE_SOUTH },
+
+            { Gaze_InputTypes.PAD_RIGHT_PRESS_WEST, Gaze_InputTypes.PAD_RIGHT_RELEASE_WEST },
+            { Gaze_InputTypes.PAD_RIGHT_PRESS_EAST, Gaze_InputTypes.PAD_RIGHT_RELEASE_EAST },
+            { Gaze_InputTypes.PAD_RIGHT_PRESS_NORTH, Gaze_InputTypes.PAD_RIGHT_RELEASE_NORTH },
+            { Gaze_InputTypes.PAD_RIGHT_PRESS_SOUTH, Gaze_InputTypes.PAD_RIGHT_RELEASE_SOUTH },
+        };
+
+        /// <summary>
+        /// Get the release input for an input type
+        /// </summary>
+        /// <param name="_input"> The checking type </param>
+        /// <returns> The "Release Input" if any or NONE </returns>
+        public static Gaze_InputTypes GetReleaseInputFor(Gaze_InputTypes _input)
+        {
+            if (!PressToRelease.ContainsKey(_input))
+                return Gaze_InputTypes.NONE;
+
+            return PressToRelease[_input];
+        }
+
         /// <summary>
         /// Checks if the testing input is a "Release" of the base input
         /// </summary>

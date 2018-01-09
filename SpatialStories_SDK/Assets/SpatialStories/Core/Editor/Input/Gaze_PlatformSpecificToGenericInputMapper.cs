@@ -37,7 +37,7 @@ namespace Gaze
                     break;
                 default:
                     Debug.LogError("Translation not implemented for this platform: " + _platform);
-                    return Gaze_InputTypes.A_BUTTON;
+                    return Gaze_InputTypes.NONE;
                     break;
             }
         }
@@ -51,7 +51,7 @@ namespace Gaze
             else
             {
                 Debug.LogError("Translation not implemented for this inputType: " + _inputType);
-                return Gaze_InputTypes.A_BUTTON;
+                return Gaze_InputTypes.NONE;
             }
         }
     }
