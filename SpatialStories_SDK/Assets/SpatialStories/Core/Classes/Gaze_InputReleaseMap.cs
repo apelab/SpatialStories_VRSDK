@@ -223,15 +223,15 @@ namespace Gaze
             { Gaze_InputTypes.PAD_LEFT_TOUCH, Gaze_InputTypes.PAD_LEFT_UNTOUCH },
             { Gaze_InputTypes.PAD_RIGHT_TOUCH, Gaze_InputTypes.PAD_RIGHT_UNTOUCH },
 
-            { Gaze_InputTypes.PAD_LEFT_TOUCH_WEST, Gaze_InputTypes.PAD_LEFT_RELEASE_WEST },
-            { Gaze_InputTypes.PAD_LEFT_TOUCH_EAST, Gaze_InputTypes.PAD_LEFT_RELEASE_EAST },
-            { Gaze_InputTypes.PAD_LEFT_TOUCH_NORTH, Gaze_InputTypes.PAD_LEFT_RELEASE_NORTH },
-            { Gaze_InputTypes.PAD_LEFT_TOUCH_SOUTH, Gaze_InputTypes.PAD_LEFT_RELEASE_SOUTH },
+            { Gaze_InputTypes.PAD_LEFT_TOUCH_WEST, Gaze_InputTypes.PAD_LEFT_UNTOUCH_WEST },
+            { Gaze_InputTypes.PAD_LEFT_TOUCH_EAST, Gaze_InputTypes.PAD_LEFT_UNTOUCH_EAST },
+            { Gaze_InputTypes.PAD_LEFT_TOUCH_NORTH, Gaze_InputTypes.PAD_LEFT_UNTOUCH_NORTH },
+            { Gaze_InputTypes.PAD_LEFT_TOUCH_SOUTH, Gaze_InputTypes.PAD_LEFT_UNTOUCH_SOUTH },
 
-            { Gaze_InputTypes.PAD_RIGHT_TOUCH_WEST, Gaze_InputTypes.PAD_RIGHT_RELEASE_WEST },
-            { Gaze_InputTypes.PAD_RIGHT_TOUCH_EAST, Gaze_InputTypes.PAD_RIGHT_RELEASE_EAST },
-            { Gaze_InputTypes.PAD_RIGHT_TOUCH_NORTH, Gaze_InputTypes.PAD_RIGHT_RELEASE_NORTH },
-            { Gaze_InputTypes.PAD_RIGHT_TOUCH_SOUTH, Gaze_InputTypes.PAD_RIGHT_RELEASE_SOUTH },
+            { Gaze_InputTypes.PAD_RIGHT_TOUCH_WEST, Gaze_InputTypes.PAD_RIGHT_UNTOUCH_WEST },
+            { Gaze_InputTypes.PAD_RIGHT_TOUCH_EAST, Gaze_InputTypes.PAD_RIGHT_UNTOUCH_EAST },
+            { Gaze_InputTypes.PAD_RIGHT_TOUCH_NORTH, Gaze_InputTypes.PAD_RIGHT_UNTOUCH_NORTH },
+            { Gaze_InputTypes.PAD_RIGHT_TOUCH_SOUTH, Gaze_InputTypes.PAD_RIGHT_UNTOUCH_SOUTH },
 
             { Gaze_InputTypes.PAD_LEFT_PRESS_WEST, Gaze_InputTypes.PAD_LEFT_RELEASE_WEST },
             { Gaze_InputTypes.PAD_LEFT_PRESS_EAST, Gaze_InputTypes.PAD_LEFT_RELEASE_EAST },
