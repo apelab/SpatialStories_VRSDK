@@ -12,7 +12,7 @@ namespace Gaze
             // Regular buttons
             // BUTON                                                   RELEASE BUTTONS
             { Gaze_InputTypes.A_BUTTON, new List<Gaze_InputTypes>() { Gaze_InputTypes.A_BUTTON_UP }},
-            { Gaze_InputTypes.A_BUTTON, new List<Gaze_InputTypes>() { Gaze_InputTypes.A_BUTTON_UP }},
+            { Gaze_InputTypes.A_BUTTON_DOWN, new List<Gaze_InputTypes>() { Gaze_InputTypes.A_BUTTON_UP }},
 
             { Gaze_InputTypes.B_BUTTON, new List<Gaze_InputTypes>() { Gaze_InputTypes.B_BUTTON_UP }},
             { Gaze_InputTypes.B_BUTTON_DOWN, new List<Gaze_InputTypes>() { Gaze_InputTypes.B_BUTTON_UP }},

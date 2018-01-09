@@ -413,6 +413,9 @@ public class Gaze_InputManager : MonoBehaviour
 
         // Add the actual pressed inputs to the last
         lastpressedInputs.AddRange(actualPressedInputs);
+
+        // 
+        actualPressedInputs.Clear();
     }
 
     void FixedUpdate()

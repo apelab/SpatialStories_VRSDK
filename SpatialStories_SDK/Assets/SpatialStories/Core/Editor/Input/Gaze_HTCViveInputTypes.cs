@@ -5,12 +5,12 @@
     LeftTrackpadSouthPress,
     LeftTrackpadWestPress,
     LeftTrackpadEastPress,
-
     LeftTrackpadCenterRelease,
     LeftTrackpadNorthRelease,
     LeftTrackpadSouthRelease,
     LeftTrackpadWestRelease,
     LeftTrackpadEastRelease,
+
     LeftTrackpadNorthTouch,
     LeftTrackpadSouthTouch,
     LeftTrackpadEastTouch,
@@ -30,6 +30,7 @@
     RightTrackpadSouthRelease,
     RightTrackpadWestRelease,
     RightTrackpadEastRelease,
+
     RightTrackpadNorthTouch,
     RightTrackpadSouthTouch,
     RightTrackpadEastTouch,

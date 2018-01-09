@@ -18,6 +18,11 @@ namespace Gaze
 
             { Gaze_HTCViveInputTypes.LeftTrackpadCenterRelease, Gaze_InputTypes.STICK_LEFT_UP },
 
+            { Gaze_HTCViveInputTypes.LeftTrackpadNorthRelease, Gaze_InputTypes.PAD_LEFT_RELEASE_NORTH },
+            { Gaze_HTCViveInputTypes.LeftTrackpadSouthRelease, Gaze_InputTypes.PAD_LEFT_RELEASE_SOUTH },
+            { Gaze_HTCViveInputTypes.LeftTrackpadWestRelease, Gaze_InputTypes.PAD_LEFT_RELEASE_WEST },
+            { Gaze_HTCViveInputTypes.LeftTrackpadEastRelease, Gaze_InputTypes.PAD_LEFT_RELEASE_EAST },
+
             // Right Controller
             { Gaze_HTCViveInputTypes.RightTrackpadCenterPress, Gaze_InputTypes.STICK_RIGHT_DOWN },
             { Gaze_HTCViveInputTypes.RightTrackpadNorthPress, Gaze_InputTypes.PAD_RIGHT_PRESS_NORTH },
@@ -26,6 +31,12 @@ namespace Gaze
             { Gaze_HTCViveInputTypes.RightTrackpadWestPress, Gaze_InputTypes.PAD_RIGHT_PRESS_WEST },
 
             { Gaze_HTCViveInputTypes.RightTrackpadCenterRelease, Gaze_InputTypes.STICK_RIGHT_UP },
+
+            { Gaze_HTCViveInputTypes.RightTrackpadNorthRelease, Gaze_InputTypes.PAD_RIGHT_RELEASE_NORTH },
+            { Gaze_HTCViveInputTypes.RightTrackpadSouthRelease, Gaze_InputTypes.PAD_RIGHT_RELEASE_SOUTH },
+            { Gaze_HTCViveInputTypes.RightTrackpadWestRelease, Gaze_InputTypes.PAD_RIGHT_RELEASE_WEST },
+            { Gaze_HTCViveInputTypes.RightTrackpadEastRelease, Gaze_InputTypes.PAD_RIGHT_RELEASE_EAST },
+
         };
 
         public static Gaze_InputTypes ToGenericInput(Gaze_Controllers _platform, int _inputType)

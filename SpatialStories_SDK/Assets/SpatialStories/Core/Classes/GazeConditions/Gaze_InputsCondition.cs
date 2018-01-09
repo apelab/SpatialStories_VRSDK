@@ -19,7 +19,9 @@
 //-----------------------------------------------------------------------
 
 #if UNITY_EDITOR
+using System;
 using UnityEditor;
+using UnityEngine;
 #endif
 
 namespace Gaze
@@ -79,10 +81,13 @@ namespace Gaze
             Gaze_InputManager.OnPadRightPressNorthEvent += OnInputEvent;
             Gaze_InputManager.OnPadRightPressSouthEvent += OnInputEvent;
 
+            Gaze_InputManager.OnReleaseEvent += OnReleaseEvent;
+
             #endregion inputs subscription
 
             entriesCount = gazeConditionsScript.InputsMap.InputsEntries.Count;
         }
+
 
         public override bool IsValidated()
         {
@@ -137,6 +142,8 @@ namespace Gaze
             Gaze_InputManager.OnPadRightPressEastEvent -= OnInputEvent;
             Gaze_InputManager.OnPadRightPressNorthEvent -= OnInputEvent;
             Gaze_InputManager.OnPadRightPressSouthEvent -= OnInputEvent;
+
+            Gaze_InputManager.OnReleaseEvent -= OnReleaseEvent;
             #endregion inputs subscription
         }
 
@@ -163,7 +170,6 @@ namespace Gaze
 
         private void ValidateInputs(Gaze_InputEventArgs e)
         {
-
             // for all input conditions specified (in the map)
             for (int i = 0; i < entriesCount; i++)
             {
@@ -211,9 +217,16 @@ namespace Gaze
             }
         }
 
-        private void OnInputEvent(Gaze_InputEventArgs e)
+        private void OnReleaseEvent(Gaze_InputEventArgs _e)
         {
-            CheckReceivedInputValidity(e);
+            Debug.Log(_e.InputType);
+            CheckReceivedInputValidity(_e);
+        }
+
+        private void OnInputEvent(Gaze_InputEventArgs _e)
+        {
+            Debug.Log(_e.InputType);
+            CheckReceivedInputValidity(_e);
         }
     }
 }
