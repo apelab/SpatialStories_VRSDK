@@ -217,5 +217,21 @@ namespace Gaze
             { Gaze_InputTypes.PAD_LEFT_TOUCH, new List<Gaze_InputTypes>() { Gaze_InputTypes.PAD_LEFT_UNTOUCH } },
             { Gaze_InputTypes.PAD_RIGHT_TOUCH, new List<Gaze_InputTypes>() { Gaze_InputTypes.PAD_RIGHT_UNTOUCH } },
         };
+
+        /// <summary>
+        /// Checks if the testing input is a "Release" of the base input
+        /// </summary>
+        /// <param name="_testingInput">The input type that can potentially be a release input of _baseInput</param>
+        /// <param name="_baseInput"> The input the can be a potential press event of the _testingInput </param>
+        /// <returns></returns>
+        public static bool IsReleaseInputtOf(Gaze_InputTypes _testingInput, Gaze_InputTypes _baseInput)
+        {
+            // If the input doesn't have any release input (probably because is a release input) return false
+            if (!pressToReleaseMap.ContainsKey(_baseInput))
+                return false;
+
+            // If the base input has any release input test if the event is one of them
+            return pressToReleaseMap[_baseInput].Contains(_testingInput);
+        }
     }
 }
