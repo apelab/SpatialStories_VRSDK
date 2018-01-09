@@ -87,8 +87,7 @@ namespace Gaze
 
             entriesCount = gazeConditionsScript.InputsMap.InputsEntries.Count;
         }
-
-
+        
         public override bool IsValidated()
         {
             return IsValid;
@@ -170,33 +169,36 @@ namespace Gaze
 
         private void ValidateInputs(Gaze_InputEventArgs e)
         {
-            // for all input conditions specified (in the map)
+            int validInputs = 0;
+
+            // Count the number of valid inputs
             for (int i = 0; i < entriesCount; i++)
             {
-                // if the current input is valid
                 if (gazeConditionsScript.InputsMap.InputsEntries[i].valid)
                 {
-                    // if NOT require all
-                    if (!gazeConditionsScript.requireAllInputs)
-                    {
-                        IsValid = true;
-                        break;
-                    }
+                    ++validInputs;
                 }
-                else
-                {
-                    // if require all
-                    if (gazeConditionsScript.requireAllInputs)
-                    {
-                        IsValid = false;
-                        break;
-                    }
-                }
-                IsValid = true;
             }
+
+            // If we need all the inputs and we don't have them return false
+            if (gazeConditionsScript.requireAllInputs && validInputs < gazeConditionsScript.InputsMap.InputsEntries.Count)
+            {
+                IsValid = false;
+                return;
+            }
+
+            // If we don't have any valid input return false
+            if (validInputs == 0)
+            {
+                IsValid = false;
+                return;
+            }
+
+            //Is valid
+            IsValid = true;
         }
 
-        private void CheckReceivedInputValidity(Gaze_InputEventArgs e)
+        private void CheckReceivedInputValidity(Gaze_InputEventArgs _e)
         {
             if (gazeConditionsScript.triggerStateIndex == (int)Gaze_TriggerState.BEFORE)
                 return;
@@ -205,14 +207,28 @@ namespace Gaze
             for (int i = 0; i < entriesCount; i++)
             {
                 // if the pressed input is in the map
-                if (e.InputType.Equals(gazeConditionsScript.InputsMap.InputsEntries[i].InputType))
+                if (_e.InputType.Equals(gazeConditionsScript.InputsMap.InputsEntries[i].InputType))
                 {
                     // update its valid flag
                     gazeConditionsScript.InputsMap.InputsEntries[i].valid = true;
 
                     // check if all conditions are now met
-                    ValidateInputs(e);
+                    ValidateInputs(_e);
                     break;
+                }
+            }
+
+            CheckIfInputReleased(_e);
+        }
+        
+        private void CheckIfInputReleased(Gaze_InputEventArgs _e)
+        {
+            for (int i = 0; i < entriesCount; i++)
+            {
+                if (Gaze_InputReleaseMap.IsReleaseInputtOf(_e.InputType, gazeConditionsScript.InputsMap.InputsEntries[i].InputType))
+                {
+                    gazeConditionsScript.InputsMap.InputsEntries[i].valid = false;
+                    ValidateInputs(_e);
                 }
             }
         }

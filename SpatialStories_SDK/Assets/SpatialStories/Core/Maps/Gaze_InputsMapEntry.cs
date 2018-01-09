@@ -28,7 +28,22 @@ public class Gaze_InputsMapEntry
     public int UIControllerSpecificInput;
 
     // input name
-    public Gaze_InputTypes InputType;
+    private Gaze_InputTypes inputType;
+    public Gaze_InputTypes InputType
+    {
+        set
+        {
+            inputType = value;
+            IsRelease = inputType.ToString().ToLower().Contains("up") || inputType.ToString().ToLower().Contains("release");
+            
+        }
+        get
+        {
+            return inputType;
+        }
+    }
+
+    public bool IsRelease = false;
 
     // has the input been used by the user
     public bool valid;
