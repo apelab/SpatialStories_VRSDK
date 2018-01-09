@@ -47,7 +47,7 @@ namespace Gaze
             Transform goParent = go.transform.parent;
 
             Undo.SetTransformParent(go.transform, root.transform.Find("Visuals"), "Convert");
-
+            
             // re-attach to the original parent
             root.transform.parent = goParent;
 

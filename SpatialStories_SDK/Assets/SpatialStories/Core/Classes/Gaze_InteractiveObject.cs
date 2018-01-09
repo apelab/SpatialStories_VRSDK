@@ -15,6 +15,7 @@
 // <web>https://twitter.com/apelab_ch</web>
 // <web>http://www.apelab.ch</web>
 // <date>2014-06-01</date>
+using SpatialStories;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -191,6 +192,8 @@ namespace Gaze
 
         private void Awake()
         {
+            CreateSchedulerIfNeeded();
+            
             grabLogic = new Gaze_GrabLogic(this);
             SetActualGravityStateAsDefault();
 
@@ -533,6 +536,15 @@ namespace Gaze
 
             Gaze_Actions[] actions = GetComponentsInChildren<Gaze_Actions>();
             return actions.Any(_action => _action.ActionGrab == Gaze_Actions.ACTIVABLE_OPTION.ACTIVATE);
+        }
+
+        private static void CreateSchedulerIfNeeded()
+        {
+            S_Scheduler scheduler = FindObjectOfType<S_Scheduler>();
+            if (scheduler == null)
+            {
+                new GameObject("Scheduler").AddComponent<S_Scheduler>().gameObject.hideFlags = HideFlags.HideInHierarchy;
+            }
         }
     }
 }

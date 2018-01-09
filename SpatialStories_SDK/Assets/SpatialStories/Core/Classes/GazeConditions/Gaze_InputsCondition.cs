@@ -19,6 +19,7 @@
 //-----------------------------------------------------------------------
 
 #if UNITY_EDITOR
+using SpatialStories;
 using System;
 using UnityEditor;
 using UnityEngine;
@@ -86,6 +87,8 @@ namespace Gaze
             #endregion inputs subscription
 
             entriesCount = gazeConditionsScript.InputsMap.InputsEntries.Count;
+            for(int i = 0; i < entriesCount; i++)
+                gazeConditionsScript.InputsMap.InputsEntries[i].CheckIfIsRelease();
         }
         
         public override bool IsValidated()
@@ -152,7 +155,7 @@ namespace Gaze
             for (int i = 0; i < entriesCount; i++)
             {
                 EditorGUILayout.BeginHorizontal();
-                if (gazeConditionsScript.InputsMap.InputsEntries[i].valid)
+                if (gazeConditionsScript.InputsMap.InputsEntries[i].Valid)
                 {
                     RenderSatisfiedLabel(gazeConditionsScript.InputsMap.InputsEntries[i].InputType.ToString());
                     RenderSatisfiedLabel("True");
@@ -174,7 +177,7 @@ namespace Gaze
             // Count the number of valid inputs
             for (int i = 0; i < entriesCount; i++)
             {
-                if (gazeConditionsScript.InputsMap.InputsEntries[i].valid)
+                if (gazeConditionsScript.InputsMap.InputsEntries[i].Valid)
                 {
                     ++validInputs;
                 }
@@ -210,8 +213,11 @@ namespace Gaze
                 if (_e.InputType.Equals(gazeConditionsScript.InputsMap.InputsEntries[i].InputType))
                 {
                     // update its valid flag
-                    gazeConditionsScript.InputsMap.InputsEntries[i].valid = true;
-
+                    Gaze_InputsMapEntry mapEntry = gazeConditionsScript.InputsMap.InputsEntries[i];
+                    mapEntry.Valid = true;
+                    if (mapEntry.IsRelease)
+                        S_Scheduler.AddTaskAtNextFrame(() => { InvalidateReleaseConditionAtNextFrame(mapEntry); });
+                    
                     // check if all conditions are now met
                     ValidateInputs(_e);
                     break;
@@ -221,27 +227,36 @@ namespace Gaze
             CheckIfInputReleased(_e);
         }
         
+
+        private void InvalidateReleaseConditionAtNextFrame(Gaze_InputsMapEntry _entry)
+        {
+            _entry.Valid = false;
+            ValidateInputs(null);
+        }
+
         private void CheckIfInputReleased(Gaze_InputEventArgs _e)
         {
             for (int i = 0; i < entriesCount; i++)
             {
                 if (Gaze_InputReleaseMap.IsReleaseInputtOf(_e.InputType, gazeConditionsScript.InputsMap.InputsEntries[i].InputType))
                 {
-                    gazeConditionsScript.InputsMap.InputsEntries[i].valid = false;
+                    Debug.Log(true);
+                    gazeConditionsScript.InputsMap.InputsEntries[i].Valid = false;
                     ValidateInputs(_e);
                 }
+                Debug.Log(false);
             }
         }
 
         private void OnReleaseEvent(Gaze_InputEventArgs _e)
         {
-            Debug.Log(_e.InputType);
+            Debug.Log("Release: " + _e.InputType);
             CheckReceivedInputValidity(_e);
         }
 
         private void OnInputEvent(Gaze_InputEventArgs _e)
         {
-            Debug.Log(_e.InputType);
+            Debug.Log("Release: " + _e.InputType);
             CheckReceivedInputValidity(_e);
         }
     }

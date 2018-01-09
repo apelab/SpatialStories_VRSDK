@@ -28,31 +28,19 @@ public class Gaze_InputsMapEntry
     public int UIControllerSpecificInput;
 
     // input name
-    private Gaze_InputTypes inputType;
-    public Gaze_InputTypes InputType
-    {
-        set
-        {
-            inputType = value;
-            IsRelease = inputType.ToString().ToLower().Contains("up") || inputType.ToString().ToLower().Contains("release");
-            
-        }
-        get
-        {
-            return inputType;
-        }
-    }
+
+    public Gaze_InputTypes InputType;
 
     public bool IsRelease = false;
 
     // has the input been used by the user
-    public bool valid;
+    public bool Valid;
 
     public Gaze_InputsMapEntry()
     {
         // assign a default value for the input if none specified at construction
         InputType = Gaze_InputTypes.A_BUTTON;
-        valid = false;
+        Valid = false;
     }
 
     public Gaze_InputsMapEntry(Gaze_InputTypes _type)
@@ -63,6 +51,12 @@ public class Gaze_InputsMapEntry
     public Gaze_InputsMapEntry(Gaze_InputTypes _type, bool _valid)
     {
         InputType = _type;
-        valid = _valid;
+        Valid = _valid;
+    }
+
+    public void CheckIfIsRelease()
+    {
+        string s = InputType.ToString().ToLower();
+        IsRelease = s.Contains("up") || s.Contains("release") || s.Contains("untouch"); 
     }
 }

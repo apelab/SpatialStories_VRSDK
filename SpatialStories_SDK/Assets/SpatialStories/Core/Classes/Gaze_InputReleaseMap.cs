@@ -50,7 +50,8 @@ namespace Gaze
                                                         Gaze_InputTypes.PAD_LEFT_PRESS_EAST,
                                                         Gaze_InputTypes.PAD_LEFT_PRESS_NORTH,
                                                         Gaze_InputTypes.PAD_LEFT_PRESS_SOUTH,
-                                                        Gaze_InputTypes.PAD_LEFT_RELEASE_WEST
+                                                        Gaze_InputTypes.PAD_LEFT_RELEASE_WEST,
+                                                        Gaze_InputTypes.PAD_LEFT_UNTOUCH_WEST,
                                                     }
             },
 
@@ -72,7 +73,8 @@ namespace Gaze
                                                         Gaze_InputTypes.PAD_RIGHT_PRESS_EAST,
                                                         Gaze_InputTypes.PAD_RIGHT_PRESS_NORTH,
                                                         Gaze_InputTypes.PAD_RIGHT_PRESS_SOUTH,
-                                                        Gaze_InputTypes.PAD_RIGHT_RELEASE_WEST
+                                                        Gaze_InputTypes.PAD_RIGHT_RELEASE_WEST,
+                                                        Gaze_InputTypes.PAD_RIGHT_UNTOUCH_WEST,
                                                     }
             },
 
@@ -95,7 +97,8 @@ namespace Gaze
                                                         Gaze_InputTypes.PAD_LEFT_PRESS_WEST,
                                                         Gaze_InputTypes.PAD_LEFT_PRESS_NORTH,
                                                         Gaze_InputTypes.PAD_LEFT_PRESS_SOUTH,
-                                                        Gaze_InputTypes.PAD_LEFT_RELEASE_EAST
+                                                        Gaze_InputTypes.PAD_LEFT_RELEASE_EAST,
+                                                        Gaze_InputTypes.PAD_LEFT_UNTOUCH_EAST,
                                                     }
             },
             { Gaze_InputTypes.PAD_LEFT_PRESS_EAST, new List<Gaze_InputTypes>() {
@@ -115,7 +118,8 @@ namespace Gaze
                                                         Gaze_InputTypes.PAD_RIGHT_PRESS_WEST,
                                                         Gaze_InputTypes.PAD_RIGHT_PRESS_NORTH,
                                                         Gaze_InputTypes.PAD_RIGHT_PRESS_SOUTH,
-                                                        Gaze_InputTypes.PAD_RIGHT_RELEASE_EAST
+                                                        Gaze_InputTypes.PAD_RIGHT_RELEASE_EAST,
+                                                        Gaze_InputTypes.PAD_RIGHT_UNTOUCH_EAST,
                                                     }
             },
             { Gaze_InputTypes.PAD_RIGHT_PRESS_EAST, new List<Gaze_InputTypes>() {
@@ -137,7 +141,8 @@ namespace Gaze
                                                         Gaze_InputTypes.PAD_LEFT_PRESS_WEST,
                                                         Gaze_InputTypes.PAD_LEFT_PRESS_EAST,
                                                         Gaze_InputTypes.PAD_LEFT_PRESS_SOUTH,
-                                                        Gaze_InputTypes.PAD_LEFT_RELEASE_NORTH
+                                                        Gaze_InputTypes.PAD_LEFT_RELEASE_NORTH,
+                                                        Gaze_InputTypes.PAD_LEFT_UNTOUCH_NORTH,
                                                     }
             },
             { Gaze_InputTypes.PAD_LEFT_PRESS_NORTH, new List<Gaze_InputTypes>() {
@@ -147,7 +152,7 @@ namespace Gaze
                                                         Gaze_InputTypes.PAD_LEFT_PRESS_WEST,
                                                         Gaze_InputTypes.PAD_LEFT_PRESS_EAST,
                                                         Gaze_InputTypes.PAD_LEFT_PRESS_SOUTH,
-                                                        Gaze_InputTypes.PAD_LEFT_RELEASE_NORTH
+                                                        Gaze_InputTypes.PAD_LEFT_RELEASE_NORTH,
                                                     }
             },
             { Gaze_InputTypes.PAD_RIGHT_TOUCH_NORTH, new List<Gaze_InputTypes>() {
@@ -157,7 +162,8 @@ namespace Gaze
                                                         Gaze_InputTypes.PAD_RIGHT_PRESS_WEST,
                                                         Gaze_InputTypes.PAD_RIGHT_PRESS_EAST,
                                                         Gaze_InputTypes.PAD_RIGHT_PRESS_SOUTH,
-                                                        Gaze_InputTypes.PAD_RIGHT_RELEASE_NORTH
+                                                        Gaze_InputTypes.PAD_RIGHT_RELEASE_NORTH,
+                                                        Gaze_InputTypes.PAD_RIGHT_UNTOUCH_NORTH,
                                                     }
             },
             { Gaze_InputTypes.PAD_RIGHT_PRESS_NORTH, new List<Gaze_InputTypes>() {
@@ -179,7 +185,8 @@ namespace Gaze
                                                         Gaze_InputTypes.PAD_LEFT_PRESS_WEST,
                                                         Gaze_InputTypes.PAD_LEFT_PRESS_EAST,
                                                         Gaze_InputTypes.PAD_LEFT_PRESS_NORTH,
-                                                        Gaze_InputTypes.PAD_LEFT_RELEASE_SOUTH
+                                                        Gaze_InputTypes.PAD_LEFT_RELEASE_SOUTH,
+                                                        Gaze_InputTypes.PAD_LEFT_UNTOUCH_SOUTH,
                                                     }
             },
             { Gaze_InputTypes.PAD_LEFT_PRESS_SOUTH, new List<Gaze_InputTypes>() {
@@ -199,7 +206,8 @@ namespace Gaze
                                                         Gaze_InputTypes.PAD_RIGHT_PRESS_WEST,
                                                         Gaze_InputTypes.PAD_RIGHT_PRESS_EAST,
                                                         Gaze_InputTypes.PAD_RIGHT_PRESS_NORTH,
-                                                        Gaze_InputTypes.PAD_RIGHT_RELEASE_SOUTH
+                                                        Gaze_InputTypes.PAD_RIGHT_RELEASE_SOUTH,
+                                                        Gaze_InputTypes.PAD_RIGHT_UNTOUCH_SOUTH,
                                                     }
             },
             { Gaze_InputTypes.PAD_RIGHT_PRESS_SOUTH, new List<Gaze_InputTypes>() {

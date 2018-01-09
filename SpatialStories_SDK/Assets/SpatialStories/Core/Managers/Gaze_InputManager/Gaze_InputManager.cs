@@ -402,7 +402,7 @@ public class Gaze_InputManager : MonoBehaviour
                 {
                     OnReleaseEvent(new Gaze_InputEventArgs(this, t));
                     Gaze_InputTypes releaseInput = Gaze_InputReleaseMap.GetReleaseInputFor(t);
-                    if(releaseInput == Gaze_InputTypes.PAD_LEFT_UNTOUCH)
+                    if(releaseInput == Gaze_InputTypes.PAD_LEFT_UNTOUCH_NORTH)
                     {
                         Debug.Log("BREAKK");
                     }
