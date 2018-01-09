@@ -42,14 +42,180 @@ namespace Gaze
             { Gaze_InputTypes.STICK_RIGHT_DOWN, new List<Gaze_InputTypes>() { Gaze_InputTypes.STICK_RIGHT_UP }},
             
             // Axis buttons treated as button
+            // WEST
             { Gaze_InputTypes.PAD_LEFT_TOUCH_WEST, new List<Gaze_InputTypes>() {
                                                         Gaze_InputTypes.PAD_LEFT_TOUCH_EAST,
                                                         Gaze_InputTypes.PAD_LEFT_TOUCH_NORTH,
                                                         Gaze_InputTypes.PAD_LEFT_TOUCH_SOUTH,
+                                                        Gaze_InputTypes.PAD_LEFT_PRESS_EAST,
+                                                        Gaze_InputTypes.PAD_LEFT_PRESS_NORTH,
+                                                        Gaze_InputTypes.PAD_LEFT_PRESS_SOUTH,
                                                         Gaze_InputTypes.PAD_LEFT_RELEASE_WEST
                                                     }
             },
 
+            { Gaze_InputTypes.PAD_LEFT_PRESS_WEST, new List<Gaze_InputTypes>() {
+                                                        Gaze_InputTypes.PAD_LEFT_TOUCH_EAST,
+                                                        Gaze_InputTypes.PAD_LEFT_TOUCH_NORTH,
+                                                        Gaze_InputTypes.PAD_LEFT_TOUCH_SOUTH,
+                                                        Gaze_InputTypes.PAD_LEFT_PRESS_EAST,
+                                                        Gaze_InputTypes.PAD_LEFT_PRESS_NORTH,
+                                                        Gaze_InputTypes.PAD_LEFT_PRESS_SOUTH,
+                                                        Gaze_InputTypes.PAD_LEFT_RELEASE_WEST
+                                                    }
+            },
+
+            { Gaze_InputTypes.PAD_RIGHT_TOUCH_WEST, new List<Gaze_InputTypes>() {
+                                                        Gaze_InputTypes.PAD_RIGHT_TOUCH_EAST,
+                                                        Gaze_InputTypes.PAD_RIGHT_TOUCH_NORTH,
+                                                        Gaze_InputTypes.PAD_RIGHT_TOUCH_SOUTH,
+                                                        Gaze_InputTypes.PAD_RIGHT_PRESS_EAST,
+                                                        Gaze_InputTypes.PAD_RIGHT_PRESS_NORTH,
+                                                        Gaze_InputTypes.PAD_RIGHT_PRESS_SOUTH,
+                                                        Gaze_InputTypes.PAD_RIGHT_RELEASE_WEST
+                                                    }
+            },
+
+            { Gaze_InputTypes.PAD_RIGHT_PRESS_WEST, new List<Gaze_InputTypes>() {
+                                                        Gaze_InputTypes.PAD_RIGHT_TOUCH_EAST,
+                                                        Gaze_InputTypes.PAD_RIGHT_TOUCH_NORTH,
+                                                        Gaze_InputTypes.PAD_RIGHT_TOUCH_SOUTH,
+                                                        Gaze_InputTypes.PAD_RIGHT_PRESS_EAST,
+                                                        Gaze_InputTypes.PAD_RIGHT_PRESS_NORTH,
+                                                        Gaze_InputTypes.PAD_RIGHT_PRESS_SOUTH,
+                                                        Gaze_InputTypes.PAD_RIGHT_RELEASE_WEST
+                                                    }
+            },
+
+            // EAST
+            { Gaze_InputTypes.PAD_LEFT_TOUCH_EAST, new List<Gaze_InputTypes>() {
+                                                        Gaze_InputTypes.PAD_LEFT_TOUCH_WEST,
+                                                        Gaze_InputTypes.PAD_LEFT_TOUCH_NORTH,
+                                                        Gaze_InputTypes.PAD_LEFT_TOUCH_SOUTH,
+                                                        Gaze_InputTypes.PAD_LEFT_PRESS_WEST,
+                                                        Gaze_InputTypes.PAD_LEFT_PRESS_NORTH,
+                                                        Gaze_InputTypes.PAD_LEFT_PRESS_SOUTH,
+                                                        Gaze_InputTypes.PAD_LEFT_RELEASE_EAST
+                                                    }
+            },
+            { Gaze_InputTypes.PAD_LEFT_PRESS_EAST, new List<Gaze_InputTypes>() {
+                                                        Gaze_InputTypes.PAD_LEFT_TOUCH_WEST,
+                                                        Gaze_InputTypes.PAD_LEFT_TOUCH_NORTH,
+                                                        Gaze_InputTypes.PAD_LEFT_TOUCH_SOUTH,
+                                                        Gaze_InputTypes.PAD_LEFT_PRESS_WEST,
+                                                        Gaze_InputTypes.PAD_LEFT_PRESS_NORTH,
+                                                        Gaze_InputTypes.PAD_LEFT_PRESS_SOUTH,
+                                                        Gaze_InputTypes.PAD_LEFT_RELEASE_EAST
+                                                    }
+            },
+            { Gaze_InputTypes.PAD_RIGHT_TOUCH_EAST, new List<Gaze_InputTypes>() {
+                                                        Gaze_InputTypes.PAD_RIGHT_TOUCH_WEST,
+                                                        Gaze_InputTypes.PAD_RIGHT_TOUCH_NORTH,
+                                                        Gaze_InputTypes.PAD_RIGHT_TOUCH_SOUTH,
+                                                        Gaze_InputTypes.PAD_RIGHT_PRESS_WEST,
+                                                        Gaze_InputTypes.PAD_RIGHT_PRESS_NORTH,
+                                                        Gaze_InputTypes.PAD_RIGHT_PRESS_SOUTH,
+                                                        Gaze_InputTypes.PAD_RIGHT_RELEASE_EAST
+                                                    }
+            },
+            { Gaze_InputTypes.PAD_RIGHT_PRESS_EAST, new List<Gaze_InputTypes>() {
+                                                        Gaze_InputTypes.PAD_RIGHT_TOUCH_WEST,
+                                                        Gaze_InputTypes.PAD_RIGHT_TOUCH_NORTH,
+                                                        Gaze_InputTypes.PAD_RIGHT_TOUCH_SOUTH,
+                                                        Gaze_InputTypes.PAD_RIGHT_PRESS_WEST,
+                                                        Gaze_InputTypes.PAD_RIGHT_PRESS_NORTH,
+                                                        Gaze_InputTypes.PAD_RIGHT_PRESS_SOUTH,
+                                                        Gaze_InputTypes.PAD_RIGHT_RELEASE_EAST
+                                                    }
+            },
+
+            // NORTH
+            { Gaze_InputTypes.PAD_LEFT_TOUCH_NORTH, new List<Gaze_InputTypes>() {
+                                                        Gaze_InputTypes.PAD_LEFT_TOUCH_WEST,
+                                                        Gaze_InputTypes.PAD_LEFT_TOUCH_EAST,
+                                                        Gaze_InputTypes.PAD_LEFT_TOUCH_SOUTH,
+                                                        Gaze_InputTypes.PAD_LEFT_PRESS_WEST,
+                                                        Gaze_InputTypes.PAD_LEFT_PRESS_EAST,
+                                                        Gaze_InputTypes.PAD_LEFT_PRESS_SOUTH,
+                                                        Gaze_InputTypes.PAD_LEFT_RELEASE_NORTH
+                                                    }
+            },
+            { Gaze_InputTypes.PAD_LEFT_PRESS_NORTH, new List<Gaze_InputTypes>() {
+                                                        Gaze_InputTypes.PAD_LEFT_TOUCH_WEST,
+                                                        Gaze_InputTypes.PAD_LEFT_TOUCH_EAST,
+                                                        Gaze_InputTypes.PAD_LEFT_TOUCH_SOUTH,
+                                                        Gaze_InputTypes.PAD_LEFT_PRESS_WEST,
+                                                        Gaze_InputTypes.PAD_LEFT_PRESS_EAST,
+                                                        Gaze_InputTypes.PAD_LEFT_PRESS_SOUTH,
+                                                        Gaze_InputTypes.PAD_LEFT_RELEASE_NORTH
+                                                    }
+            },
+            { Gaze_InputTypes.PAD_RIGHT_TOUCH_NORTH, new List<Gaze_InputTypes>() {
+                                                        Gaze_InputTypes.PAD_RIGHT_TOUCH_WEST,
+                                                        Gaze_InputTypes.PAD_RIGHT_TOUCH_EAST,
+                                                        Gaze_InputTypes.PAD_RIGHT_TOUCH_SOUTH,
+                                                        Gaze_InputTypes.PAD_RIGHT_PRESS_WEST,
+                                                        Gaze_InputTypes.PAD_RIGHT_PRESS_EAST,
+                                                        Gaze_InputTypes.PAD_RIGHT_PRESS_SOUTH,
+                                                        Gaze_InputTypes.PAD_RIGHT_RELEASE_NORTH
+                                                    }
+            },
+            { Gaze_InputTypes.PAD_RIGHT_PRESS_NORTH, new List<Gaze_InputTypes>() {
+                                                        Gaze_InputTypes.PAD_RIGHT_TOUCH_WEST,
+                                                        Gaze_InputTypes.PAD_RIGHT_TOUCH_EAST,
+                                                        Gaze_InputTypes.PAD_RIGHT_TOUCH_SOUTH,
+                                                        Gaze_InputTypes.PAD_RIGHT_PRESS_WEST,
+                                                        Gaze_InputTypes.PAD_RIGHT_PRESS_EAST,
+                                                        Gaze_InputTypes.PAD_RIGHT_PRESS_SOUTH,
+                                                        Gaze_InputTypes.PAD_RIGHT_RELEASE_NORTH
+                                                    }
+            },
+
+            //SOUTH
+            { Gaze_InputTypes.PAD_LEFT_TOUCH_SOUTH, new List<Gaze_InputTypes>() {
+                                                        Gaze_InputTypes.PAD_LEFT_TOUCH_WEST,
+                                                        Gaze_InputTypes.PAD_LEFT_TOUCH_EAST,
+                                                        Gaze_InputTypes.PAD_LEFT_TOUCH_NORTH,
+                                                        Gaze_InputTypes.PAD_LEFT_PRESS_WEST,
+                                                        Gaze_InputTypes.PAD_LEFT_PRESS_EAST,
+                                                        Gaze_InputTypes.PAD_LEFT_PRESS_NORTH,
+                                                        Gaze_InputTypes.PAD_LEFT_RELEASE_SOUTH
+                                                    }
+            },
+            { Gaze_InputTypes.PAD_LEFT_PRESS_SOUTH, new List<Gaze_InputTypes>() {
+                                                        Gaze_InputTypes.PAD_LEFT_TOUCH_WEST,
+                                                        Gaze_InputTypes.PAD_LEFT_TOUCH_EAST,
+                                                        Gaze_InputTypes.PAD_LEFT_TOUCH_NORTH,
+                                                        Gaze_InputTypes.PAD_LEFT_PRESS_WEST,
+                                                        Gaze_InputTypes.PAD_LEFT_PRESS_EAST,
+                                                        Gaze_InputTypes.PAD_LEFT_PRESS_NORTH,
+                                                        Gaze_InputTypes.PAD_LEFT_RELEASE_SOUTH
+                                                    }
+            },
+            { Gaze_InputTypes.PAD_RIGHT_TOUCH_SOUTH, new List<Gaze_InputTypes>() {
+                                                        Gaze_InputTypes.PAD_RIGHT_TOUCH_WEST,
+                                                        Gaze_InputTypes.PAD_RIGHT_TOUCH_EAST,
+                                                        Gaze_InputTypes.PAD_RIGHT_TOUCH_NORTH,
+                                                        Gaze_InputTypes.PAD_RIGHT_PRESS_WEST,
+                                                        Gaze_InputTypes.PAD_RIGHT_PRESS_EAST,
+                                                        Gaze_InputTypes.PAD_RIGHT_PRESS_NORTH,
+                                                        Gaze_InputTypes.PAD_RIGHT_RELEASE_SOUTH
+                                                    }
+            },
+            { Gaze_InputTypes.PAD_RIGHT_PRESS_SOUTH, new List<Gaze_InputTypes>() {
+                                                        Gaze_InputTypes.PAD_RIGHT_TOUCH_WEST,
+                                                        Gaze_InputTypes.PAD_RIGHT_TOUCH_EAST,
+                                                        Gaze_InputTypes.PAD_RIGHT_TOUCH_NORTH,
+                                                        Gaze_InputTypes.PAD_RIGHT_PRESS_WEST,
+                                                        Gaze_InputTypes.PAD_RIGHT_PRESS_EAST,
+                                                        Gaze_InputTypes.PAD_RIGHT_PRESS_NORTH,
+                                                        Gaze_InputTypes.PAD_RIGHT_RELEASE_SOUTH
+                                                    }
+            },
+
+            // Touch
+            { Gaze_InputTypes.PAD_LEFT_TOUCH, new List<Gaze_InputTypes>() { Gaze_InputTypes.PAD_LEFT_UNTOUCH } },
+            { Gaze_InputTypes.PAD_RIGHT_TOUCH, new List<Gaze_InputTypes>() { Gaze_InputTypes.PAD_RIGHT_UNTOUCH } },
         };
     }
 }
