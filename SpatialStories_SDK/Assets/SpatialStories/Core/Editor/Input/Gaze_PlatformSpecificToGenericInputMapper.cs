@@ -85,6 +85,11 @@ namespace Gaze
             { Gaze_HTCViveInputTypes.RightGripRelease, Gaze_InputTypes.HAND_RIGHT_UP },
         };
 
+        private static Dictionary<Gaze_HTCViveInputTypes, Gaze_InputTypes> vieToOculusMap = new Dictionary<Gaze_HTCViveInputTypes, Gaze_InputTypes>()
+        {
+
+        }
+
         public static Gaze_InputTypes ToGenericInput(Gaze_Controllers _platform, int _inputType)
         {
             switch (_platform)
