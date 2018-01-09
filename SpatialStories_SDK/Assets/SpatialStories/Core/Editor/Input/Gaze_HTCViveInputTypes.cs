@@ -15,11 +15,11 @@
     LeftTrackpadEastTouch,
     LeftTrackpadWestTouch,
     LeftTrackpadCenterTouch,
-
     LeftTrackpadNorthUntouch,
     LeftTrackpadSouthUntouch,
     LeftTrackpadEastUntouch,
     LeftTrackpadWestUntouch,
+
     LeftTrackpadCenterUntouch,
     LeftMenuButton,
     LeftTrigger,
@@ -40,11 +40,11 @@
     RightTrackpadEastTouch,
     RightTrackpadWestTouch,
     RightTrackpadCenterTouch,
-
     RightTrackpadNorthUntouch,
     RightTrackpadSouthUntouch,
     RightTrackpadEastUntouch,
     RightTrackpadWestUntouch,
+
     RightTrackpadCenterUntouch,
     RightMenuButton,
     RightTrigger,

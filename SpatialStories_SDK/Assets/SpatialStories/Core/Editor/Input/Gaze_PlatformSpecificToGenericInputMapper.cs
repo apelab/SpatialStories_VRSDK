@@ -30,7 +30,14 @@ namespace Gaze
             { Gaze_HTCViveInputTypes.LeftTrackpadEastTouch, Gaze_InputTypes.PAD_LEFT_TOUCH_EAST },
             { Gaze_HTCViveInputTypes.LeftTrackpadWestTouch, Gaze_InputTypes.PAD_LEFT_TOUCH_WEST },
             { Gaze_HTCViveInputTypes.LeftTrackpadCenterTouch, Gaze_InputTypes.PAD_LEFT_TOUCH },
-            
+
+            // Untouch
+            { Gaze_HTCViveInputTypes.LeftTrackpadNorthUntouch, Gaze_InputTypes.PAD_LEFT_UNTOUCH_NORTH },
+            { Gaze_HTCViveInputTypes.LeftTrackpadSouthUntouch, Gaze_InputTypes.PAD_LEFT_UNTOUCH_SOUTH },
+            { Gaze_HTCViveInputTypes.LeftTrackpadEastUntouch, Gaze_InputTypes.PAD_LEFT_UNTOUCH_EAST },
+            { Gaze_HTCViveInputTypes.LeftTrackpadWestUntouch, Gaze_InputTypes.PAD_LEFT_UNTOUCH_WEST },
+            { Gaze_HTCViveInputTypes.LeftTrackpadCenterUntouch, Gaze_InputTypes.PAD_LEFT_UNTOUCH },
+
             // Right Controller
 
             // Press
@@ -53,6 +60,13 @@ namespace Gaze
             { Gaze_HTCViveInputTypes.RightTrackpadEastTouch, Gaze_InputTypes.PAD_RIGHT_TOUCH_EAST },
             { Gaze_HTCViveInputTypes.RightTrackpadWestTouch, Gaze_InputTypes.PAD_RIGHT_TOUCH_WEST },
             { Gaze_HTCViveInputTypes.RightTrackpadCenterTouch, Gaze_InputTypes.PAD_RIGHT_TOUCH },
+
+            // Untouch
+            { Gaze_HTCViveInputTypes.RightTrackpadNorthUntouch, Gaze_InputTypes.PAD_RIGHT_UNTOUCH_NORTH },
+            { Gaze_HTCViveInputTypes.RightTrackpadSouthUntouch, Gaze_InputTypes.PAD_RIGHT_UNTOUCH_SOUTH },
+            { Gaze_HTCViveInputTypes.RightTrackpadEastUntouch, Gaze_InputTypes.PAD_RIGHT_UNTOUCH_EAST },
+            { Gaze_HTCViveInputTypes.RightTrackpadWestUntouch, Gaze_InputTypes.PAD_RIGHT_UNTOUCH_WEST },
+            { Gaze_HTCViveInputTypes.RightTrackpadCenterUntouch, Gaze_InputTypes.PAD_RIGHT_UNTOUCH },
 
         };
 
