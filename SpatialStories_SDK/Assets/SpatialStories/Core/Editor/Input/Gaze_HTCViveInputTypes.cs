@@ -19,12 +19,13 @@
     LeftTrackpadSouthUntouch,
     LeftTrackpadEastUntouch,
     LeftTrackpadWestUntouch,
-
     LeftTrackpadCenterUntouch,
-    LeftMenuButton,
-    LeftTrigger,
-    LeftGrip,
-    
+    LeftTriggerPress,
+    LeftTriggerRelease,
+
+    LeftGripPress,
+    LeftGripRelease,
+
     RightTrackpadCenterPress,
     RightTrackpadNorthPress,
     RightTrackpadSouthPress,
@@ -44,9 +45,10 @@
     RightTrackpadSouthUntouch,
     RightTrackpadEastUntouch,
     RightTrackpadWestUntouch,
-
     RightTrackpadCenterUntouch,
-    RightMenuButton,
-    RightTrigger,
-    RightGrip,
+    RightTriggerPress,
+    RightTriggerRelease,
+
+    RightGripPress,
+    RightGripRelease,
 }

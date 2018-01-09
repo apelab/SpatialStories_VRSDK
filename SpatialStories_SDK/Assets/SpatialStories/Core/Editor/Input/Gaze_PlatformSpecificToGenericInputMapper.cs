@@ -38,6 +38,14 @@ namespace Gaze
             { Gaze_HTCViveInputTypes.LeftTrackpadWestUntouch, Gaze_InputTypes.PAD_LEFT_UNTOUCH_WEST },
             { Gaze_HTCViveInputTypes.LeftTrackpadCenterUntouch, Gaze_InputTypes.PAD_LEFT_UNTOUCH },
 
+            // Index
+            { Gaze_HTCViveInputTypes.LeftTriggerPress, Gaze_InputTypes.INDEX_LEFT_DOWN },
+            { Gaze_HTCViveInputTypes.LeftTriggerRelease, Gaze_InputTypes.INDEX_LEFT_UP },
+
+            // Hand
+            { Gaze_HTCViveInputTypes.LeftGripPress, Gaze_InputTypes.HAND_LEFT_DOWN },
+            { Gaze_HTCViveInputTypes.LeftGripRelease, Gaze_InputTypes.HAND_LEFT_UP },
+            
             // Right Controller
 
             // Press
@@ -68,6 +76,13 @@ namespace Gaze
             { Gaze_HTCViveInputTypes.RightTrackpadWestUntouch, Gaze_InputTypes.PAD_RIGHT_UNTOUCH_WEST },
             { Gaze_HTCViveInputTypes.RightTrackpadCenterUntouch, Gaze_InputTypes.PAD_RIGHT_UNTOUCH },
 
+            // Index
+            { Gaze_HTCViveInputTypes.RightTriggerPress, Gaze_InputTypes.INDEX_RIGHT_DOWN },
+            { Gaze_HTCViveInputTypes.RightTriggerRelease, Gaze_InputTypes.INDEX_RIGHT_UP },
+
+            // Hand
+            { Gaze_HTCViveInputTypes.RightGripPress, Gaze_InputTypes.HAND_RIGHT_DOWN },
+            { Gaze_HTCViveInputTypes.RightGripRelease, Gaze_InputTypes.HAND_RIGHT_UP },
         };
 
         public static Gaze_InputTypes ToGenericInput(Gaze_Controllers _platform, int _inputType)
