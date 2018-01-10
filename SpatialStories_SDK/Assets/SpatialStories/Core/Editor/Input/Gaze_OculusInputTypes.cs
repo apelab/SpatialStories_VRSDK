@@ -54,7 +54,5 @@ public enum Gaze_OculusInputTypes
     RightIndexTouch,
     RightThumbrestTouch,
 
-    Test,
-
     StartButtonPress
 }

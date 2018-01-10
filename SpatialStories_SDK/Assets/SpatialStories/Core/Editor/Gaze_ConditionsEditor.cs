@@ -18,9 +18,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using UnityEditor;
 using UnityEngine;
-
 namespace Gaze
 {
     [CanEditMultipleObjects]
@@ -120,6 +120,19 @@ namespace Gaze
             viveInputNames = Enum.GetNames(typeof(Gaze_HTCViveInputTypes));
             oculusInputNames = Enum.GetNames(typeof(Gaze_OculusInputTypes));
             gearVrInputNames = Enum.GetNames(typeof(Gaze_GearVRInputTypes));
+
+            SplitWord(oculusInputNames);
+            SplitWord(viveInputNames);
+            SplitWord(gearVrInputNames);
+        }
+
+        // Split the word at every capital letter to make it more readable
+        private void SplitWord(string[] _string)
+        {
+            for (int i = 0; i < _string.Count(); i++)
+            {
+                _string[i] = Regex.Replace(_string[i], "(\\B[A-Z])", " $1");
+            }
 
         }
 
@@ -733,7 +746,7 @@ namespace Gaze
                 targetConditions.InputsMap.Delete(_inputEntry);
 
             EditorGUILayout.EndHorizontal();
-            EditorGUILayout.LabelField(_inputEntry.InputType.ToString());
+            //EditorGUILayout.LabelField(_inputEntry.InputType.ToString());
         }
 
         private void DisplayTeleportCondition()
