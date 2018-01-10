@@ -131,16 +131,69 @@ public class Gaze_InputManager : MonoBehaviour
 
     //Testing Touch functionalities on Buttons on Oculus Rift
     public static event InputEvent OnButtonBTouch;
+    public static void FireOnButtonBTouchEvent(Gaze_InputEventArgs args)
+    {
+        if (OnButtonBTouch != null)
+            OnButtonBTouch(args);
+    }
     public static event InputEvent OnButtonATouch;
+    public static void FireOnButtonATouchEvent(Gaze_InputEventArgs args)
+    {
+        if (OnButtonATouch != null)
+            OnButtonATouch(args);
+    }
+
     public static event InputEvent OnButtonXTouch;
+    public static void FireOnButtonXTouchEvent(Gaze_InputEventArgs args)
+    {
+        if (OnButtonXTouch != null)
+            OnButtonXTouch(args);
+    }
     public static event InputEvent OnButtonYTouch;
+    public static void FireOnButtonYTouchEvent(Gaze_InputEventArgs args)
+    {
+        if (OnButtonYTouch != null)
+            OnButtonYTouch(args);
+    }
+
+
 
     public static event InputEvent OnButtonLeftIndexTouch;
+    public static void FireOnButtonLeftIndexTouch(Gaze_InputEventArgs args)
+    {
+        if (OnButtonLeftIndexTouch != null)
+            OnButtonLeftIndexTouch(args);
+    }
     public static event InputEvent OnButtonLeftThumbrestTouch;
+    public static void FireOnButtonLeftThumbrestTouch(Gaze_InputEventArgs args)
+    {
+        if (OnButtonLeftThumbrestTouch != null)
+            OnButtonLeftThumbrestTouch(args);
+    }
     public static event InputEvent OnButtonLeftThumbstickTouch;
+    public static void FireOnButtonLeftThumbstickTouch(Gaze_InputEventArgs args)
+    {
+        if (OnButtonLeftThumbstickTouch != null)
+            OnButtonLeftThumbstickTouch(args);
+    }
     public static event InputEvent OnButtonRightIndexTouch;
+    public static void FireOnButtonRightIndexTouch(Gaze_InputEventArgs args)
+    {
+        if (OnButtonRightIndexTouch != null)
+            OnButtonRightIndexTouch(args);
+    }
     public static event InputEvent OnButtonRightThumbrestTouch;
+    public static void FireOnButtonRightThumbrestTouch(Gaze_InputEventArgs args)
+    {
+        if (OnButtonRightThumbrestTouch != null)
+            OnButtonRightThumbrestTouch(args);
+    }
     public static event InputEvent OnButtonRightThumbstickTouch;
+    public static void FireOnButtonRightThumbstickTouch(Gaze_InputEventArgs args)
+    {
+        if (OnButtonRightThumbstickTouch != null)
+            OnButtonRightThumbstickTouch(args);
+    }
 
 
     public static event InputEvent OnHandRightEvent;
@@ -215,7 +268,7 @@ public class Gaze_InputManager : MonoBehaviour
 
     // Release Button Event
     public static event InputEvent OnReleaseEvent;
-    
+
     public GameObject LeftController { get { return leftHandIO; } }
 
     public GameObject RightController { get { return rightHandIO; } }
@@ -254,7 +307,7 @@ public class Gaze_InputManager : MonoBehaviour
     public GameObject UnpluggedControllerMessage;
 
     float localHandsHeigth;
-    
+
     /// <summary>
     /// Used to know what is the dominant direction when the user is using a pad or a joystick
     /// </summary>
@@ -343,7 +396,7 @@ public class Gaze_InputManager : MonoBehaviour
 
         nextUpdate = Time.time + rate;
 
-        // Check if GearVR_Controller is conected if dont just add the generic controller
+        // Check if GearVR_Controller is connected if not just add the generic controller
         if (OVRInput.IsControllerConnected(OVRInput.Controller.RTrackedRemote) || OVRInput.IsControllerConnected(OVRInput.Controller.LTrackedRemote))
         {
             SpecialInputLogic = new Gaze_GearVR_InputLogic(this);
@@ -356,7 +409,8 @@ public class Gaze_InputManager : MonoBehaviour
             if (Input.GetJoystickNames().Where(name => name.Contains("Oculus")).Count() > 0)
             {
                 PluggedControllerType = Gaze_Controllers.OCULUS_RIFT;
-                // TODO add new class SpecialInputLogic
+                SpecialInputLogic = new Gaze_OculusRift_InputLogic(this);
+
             }
             else if (Input.GetJoystickNames().Where(name => name.Contains("OpenVR")).Count() > 0)
             {
@@ -386,12 +440,22 @@ public class Gaze_InputManager : MonoBehaviour
         // In the new update of the gear vr controller we should remove this if the problem is solved.
         IdentifyInputType();
 
-        if (SpecialInputLogic != null)
-            SpecialInputLogic.Update();
-        else
+        // HACK: 
+        if (SpecialInputLogic is Gaze_OculusRift_InputLogic)
         {
+            SpecialInputLogic.Update();
             UpdateGenericInputs();
         }
+        else
+        {
+            if (SpecialInputLogic != null)
+                SpecialInputLogic.Update();
+            else
+            {
+                UpdateGenericInputs();
+            }
+        }
+
 
         if (trackPosition)
             SetPosition();
@@ -489,7 +553,7 @@ public class Gaze_InputManager : MonoBehaviour
 
     private void SetPosition()
     {
-        if (SpecialInputLogic == null)
+        if (SpecialInputLogic == null || SpecialInputLogic is Gaze_OculusRift_InputLogic)
         {
             leftHandIO.transform.localPosition = UnityEngine.XR.InputTracking.GetLocalPosition(UnityEngine.XR.XRNode.LeftHand);
             rightHandIO.transform.localPosition = UnityEngine.XR.InputTracking.GetLocalPosition(UnityEngine.XR.XRNode.RightHand);
@@ -500,7 +564,7 @@ public class Gaze_InputManager : MonoBehaviour
 
     private void SetOrientation()
     {
-        if (SpecialInputLogic == null)
+        if (SpecialInputLogic == null || SpecialInputLogic is Gaze_OculusRift_InputLogic)
         {
             leftHandIO.transform.localRotation = UnityEngine.XR.InputTracking.GetLocalRotation(UnityEngine.XR.XRNode.LeftHand);
             rightHandIO.transform.localRotation = UnityEngine.XR.InputTracking.GetLocalRotation(UnityEngine.XR.XRNode.RightHand);
@@ -638,7 +702,7 @@ public class Gaze_InputManager : MonoBehaviour
             }
         }
 
-        if (SpecialInputLogic != null)
+        if (SpecialInputLogic != null && !(SpecialInputLogic is Gaze_OculusRift_InputLogic))
             controllersConnected = SpecialInputLogic.CheckIfControllerConnected();
 
         if (!controllersConnected)
@@ -716,74 +780,6 @@ public class Gaze_InputManager : MonoBehaviour
             if (OnButtonBUpEvent != null)
                 OnButtonBUpEvent(new Gaze_InputEventArgs(this.gameObject, Gaze_InputTypes.B_BUTTON_UP));
         }
-
-        //==================== Testing Touch=================================//
-        // R
-        if (OVRInput.Get(OVRInput.Touch.One, OVRInput.Controller.RTouch))
-        {
-            //Debug.Log("Touching A");
-            if (OnButtonATouch != null)
-                OnButtonATouch(new Gaze_InputEventArgs(this.gameObject, Gaze_InputTypes.A_BUTTON_TOUCH));
-        }
-        if (OVRInput.Get(OVRInput.Touch.Two, OVRInput.Controller.RTouch))
-        {
-            //Debug.Log("Touching B");
-            if (OnButtonBTouch != null)
-                OnButtonBTouch(new Gaze_InputEventArgs(this.gameObject, Gaze_InputTypes.B_BUTTON_TOUCH));
-        }
-        if (OVRInput.Get(OVRInput.Touch.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
-        {
-            //Debug.Log("Primary Index trigger");
-            if (OnButtonRightIndexTouch != null)
-                OnButtonRightIndexTouch(new Gaze_InputEventArgs(this.gameObject, Gaze_InputTypes.INDEX_RIGHT_TOUCH));
-        }
-        if (OVRInput.Get(OVRInput.Touch.PrimaryThumbRest, OVRInput.Controller.RTouch))
-        {
-            //Debug.Log("Primary Thumb Rest");
-            if (OnButtonRightThumbrestTouch != null)
-                OnButtonRightThumbrestTouch(new Gaze_InputEventArgs(this.gameObject, Gaze_InputTypes.THUMBREST_RIGHT_TOUCH));
-        }
-        if (OVRInput.Get(OVRInput.Touch.PrimaryThumbstick, OVRInput.Controller.RTouch))
-        {
-            //Debug.Log("Primary Thumbstick");
-            if (OnButtonRightThumbstickTouch != null)
-                OnButtonRightThumbstickTouch(new Gaze_InputEventArgs(this.gameObject, Gaze_InputTypes.STICK_RIGHT_TOUCH));
-
-        }
-        // L
-        if (OVRInput.Get(OVRInput.Touch.One, OVRInput.Controller.LTouch))
-        {
-            //Debug.Log("Touching X");
-            if (OnButtonXTouch != null)
-                OnButtonXTouch(new Gaze_InputEventArgs(this.gameObject, Gaze_InputTypes.X_BUTTON_TOUCH));
-        }
-        if (OVRInput.Get(OVRInput.Touch.Two, OVRInput.Controller.LTouch))
-        {
-            //Debug.Log("Touching Y");
-            if (OnButtonYTouch != null)
-                OnButtonYTouch(new Gaze_InputEventArgs(this.gameObject, Gaze_InputTypes.Y_BUTTON_TOUCH));
-        }
-
-        if (OVRInput.Get(OVRInput.Touch.PrimaryIndexTrigger, OVRInput.Controller.LTouch))
-        {
-            //Debug.Log("Primary Index trigger");
-            if (OnButtonLeftIndexTouch != null)
-                OnButtonLeftIndexTouch(new Gaze_InputEventArgs(this.gameObject, Gaze_InputTypes.INDEX_LEFT_TOUCH));
-        }
-        if (OVRInput.Get(OVRInput.Touch.PrimaryThumbRest, OVRInput.Controller.LTouch))
-        {
-            //Debug.Log("Primary Thumb Rest");
-            if (OnButtonLeftThumbrestTouch != null)
-                OnButtonLeftThumbrestTouch(new Gaze_InputEventArgs(this.gameObject, Gaze_InputTypes.THUMBREST_LEFT_TOUCH));
-        }
-        if (OVRInput.Get(OVRInput.Touch.PrimaryThumbstick, OVRInput.Controller.LTouch))
-        {
-            //Debug.Log("Primary Thumbstick");
-            if (OnButtonLeftThumbstickTouch != null)
-                OnButtonLeftThumbstickTouch(new Gaze_InputEventArgs(this.gameObject, Gaze_InputTypes.STICK_LEFT_TOUCH));
-        }
-
-        //===================================================================//
 
         if (Input.GetButton(Gaze_InputConstants.APELAB_INPUT_X))
         {
@@ -1170,7 +1166,7 @@ public class Gaze_InputManager : MonoBehaviour
     public void StickRightAxisEvent(Gaze_InputEventArgs e)
     {
         CalcDominantDirectionForPad(e, false);
-    
+
         // implement gesture for touchpad direction on Gear VR pad
         if (e.AxisValue.x > AXIS_TOLERANCE)
         {
@@ -1212,7 +1208,7 @@ public class Gaze_InputManager : MonoBehaviour
                     actualPressedInputs.Add(Gaze_InputTypes.PAD_RIGHT_TOUCH_WEST);
                 }
 
-                if(IsRightStickDown && OnPadRightPressWestEvent != null)
+                if (IsRightStickDown && OnPadRightPressWestEvent != null)
                 {
                     OnPadRightTouchWestEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.PAD_RIGHT_PRESS_WEST));
                     actualPressedInputs.Add(Gaze_InputTypes.PAD_RIGHT_PRESS_WEST);
@@ -1238,7 +1234,7 @@ public class Gaze_InputManager : MonoBehaviour
                     actualPressedInputs.Add(Gaze_InputTypes.PAD_RIGHT_TOUCH_SOUTH);
                 }
 
-                if(IsRightStickDown && OnPadRightPressSouthEvent != null)
+                if (IsRightStickDown && OnPadRightPressSouthEvent != null)
                 {
                     OnPadRightPressSouthEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.PAD_RIGHT_PRESS_SOUTH));
                     actualPressedInputs.Add(Gaze_InputTypes.PAD_RIGHT_PRESS_SOUTH);
@@ -1264,7 +1260,7 @@ public class Gaze_InputManager : MonoBehaviour
                     actualPressedInputs.Add(Gaze_InputTypes.PAD_RIGHT_TOUCH_NORTH);
                 }
 
-                if(IsRightStickDown && OnPadRightPressNorthEvent != null)
+                if (IsRightStickDown && OnPadRightPressNorthEvent != null)
                 {
                     OnPadRightPressNorthEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.PAD_RIGHT_PRESS_NORTH));
                     actualPressedInputs.Add(Gaze_InputTypes.PAD_RIGHT_PRESS_NORTH);

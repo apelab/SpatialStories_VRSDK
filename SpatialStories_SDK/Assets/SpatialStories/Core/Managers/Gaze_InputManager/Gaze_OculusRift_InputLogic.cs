@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 
-
 namespace Gaze
 {
     public class Gaze_OculusRift_InputLogic : Gaze_InputLogic
@@ -10,154 +9,88 @@ namespace Gaze
         private OVRInput.Controller handedRemote;
 
 
-        private float touchpadX = 0f, touchpadY = 0f;
-        private Vector2 touchpadValue = Vector2.zero;
-        private float lastTouchpadInputTime;
+        private float lStickX = 0f, lStickY = 0f;
+        private float rStickX = 0f, rStickY = 0f;
+        private Vector2 leftStick = Vector2.zero;
+        private Vector2 rightStick = Vector2.zero;
+
+        private float lastLeftStickInputTime;
+        private float lastRightStickInputTime;
+
 
         public Gaze_OculusRift_InputLogic(Gaze_InputManager _inputManager) : base(_inputManager)
         {
             CheckIfControllerConnected();
         }
 
-        public static Vector2 SamsungGearVR_TouchpadPos
+        public static Vector2 leftStickPosition
         {
-            get { return OVRInput.Get(OVRInput.Axis2D.PrimaryTouchpad); }
+            get { return OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick, OVRInput.Controller.LTouch); }
+        }
+
+        public static Vector2 rightStickPosition
+        {
+            get { return OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick, OVRInput.Controller.RTouch); }
         }
 
         public override void Update()
         {
 
-            CheckTouchpadState();
 
-            // Returns true if the Index trigger was pressed
-            bool rightIndexTriggerPressedThisFrame = OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch);
-            bool leftIndexTriggerPressedThisFrame = OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.LTouch);
+            bool buttonAWasTouched = OVRInput.Get(OVRInput.Touch.One, OVRInput.Controller.RTouch);
+            bool buttonBWasTouched = OVRInput.Get(OVRInput.Touch.Two, OVRInput.Controller.RTouch);
+            bool buttonXWasTouched = OVRInput.Get(OVRInput.Touch.One, OVRInput.Controller.LTouch);
+            bool buttonYWasTouched = OVRInput.Get(OVRInput.Touch.Two, OVRInput.Controller.LTouch);
 
-            // Returns true if the hand trigger was pressed
-            bool rightHandTriggerPressedThisFrame = OVRInput.GetDown(OVRInput.Button.PrimaryHandTrigger, OVRInput.Controller.RTouch);
-            bool leftHandTriggerPressedThisFrame = OVRInput.GetDown(OVRInput.Button.PrimaryHandTrigger, OVRInput.Controller.LTouch);
+            bool rightPrimaryIndexWasTouched = OVRInput.Get(OVRInput.Touch.PrimaryIndexTrigger, OVRInput.Controller.RTouch);
+            bool rightPrimaryThumbrestWasTouched = OVRInput.Get(OVRInput.Touch.PrimaryThumbRest, OVRInput.Controller.RTouch);
+            bool rightPrimaryThumbstickWasTouched = OVRInput.Get(OVRInput.Touch.PrimaryThumbstick, OVRInput.Controller.RTouch);
 
-
-            // Return true if the correspective button was pressed
-            bool buttonAPressedThisFrame = OVRInput.GetDown(OVRInput.Button.One, OVRInput.Controller.RTouch);
-            bool buttonBPressedThisFrame = OVRInput.GetDown(OVRInput.Button.Two, OVRInput.Controller.RTouch);
-            bool buttonXPressedThisFrame = OVRInput.GetDown(OVRInput.Button.One, OVRInput.Controller.LTouch);
-            bool buttonYPressedThisFrame = OVRInput.GetDown(OVRInput.Button.Two, OVRInput.Controller.LTouch);
-
-
-
+            bool leftPrimaryIndexWasTouched = OVRInput.Get(OVRInput.Touch.PrimaryIndexTrigger, OVRInput.Controller.LTouch);
+            bool leftPrimaryThumbrestWasTouched = OVRInput.Get(OVRInput.Touch.PrimaryThumbRest, OVRInput.Controller.LTouch);
+            bool lefttPrimaryThumbstickWasTouched = OVRInput.Get(OVRInput.Touch.PrimaryThumbstick, OVRInput.Controller.LTouch);
 
             //===========================================================================================//
 
-            // Returns true if the trigger was pressed down this frame
-            bool triggerPressedThisFrame = OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, handedRemote);
-
-            // Returns true if the trigger was released this frame
-            bool triggerReleasedThisFrame = OVRInput.GetUp(OVRInput.Button.PrimaryIndexTrigger, handedRemote);
-
-            // Returns true if the touchpad is currently pressed down
-            bool touchpadPressed = OVRInput.Get(OVRInput.Button.PrimaryTouchpad, handedRemote);
-
-            // Returns true if the touchpad was released this frame
-            bool touchpadReleasedThisFrame = OVRInput.GetUp(OVRInput.Button.PrimaryTouchpad, handedRemote);
-
             // Queries the touchpad position of the GearVR Controller explicitly
-            if (triggerPressedThisFrame)
-                Gaze_InputManager.FireOnHandRightDownEvent(new Gaze_InputEventArgs(this, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.HAND_RIGHT_DOWN, Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_HAND_RIGHT)));
+            if (buttonBWasTouched)
+                Gaze_InputManager.FireOnButtonBTouchEvent(new Gaze_InputEventArgs(this, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.B_BUTTON_TOUCH));
+            if (buttonAWasTouched)
+                Gaze_InputManager.FireOnButtonATouchEvent(new Gaze_InputEventArgs(this, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.A_BUTTON_TOUCH));
+            if (buttonXWasTouched)
+                Gaze_InputManager.FireOnButtonXTouchEvent(new Gaze_InputEventArgs(this, UnityEngine.XR.XRNode.LeftHand, Gaze_InputTypes.X_BUTTON_TOUCH));
+            if (buttonYWasTouched)
+                Gaze_InputManager.FireOnButtonYTouchEvent(new Gaze_InputEventArgs(this, UnityEngine.XR.XRNode.LeftHand, Gaze_InputTypes.Y_BUTTON_TOUCH));
 
-            if (triggerReleasedThisFrame)
-                Gaze_InputManager.FireOnHandRightUpEvent(new Gaze_InputEventArgs(this, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.HAND_RIGHT_UP));
 
-            if (touchpadPressed)
-            {
-                if (Gaze_InputManager.instance.debug)
-                    Debug.Log("A Button");
-                Gaze_InputManager.FireOnButtonAEvent(new Gaze_InputEventArgs(this, Gaze_InputTypes.A_BUTTON));
-            }
-            if (triggerPressedThisFrame)
-            {
-                if (Gaze_InputManager.instance.debug)
-                    Debug.Log("A Button Down");
-                Gaze_InputManager.FireOnButtonADownEvent(new Gaze_InputEventArgs(this, Gaze_InputTypes.A_BUTTON_DOWN));
-            }
-            if (touchpadReleasedThisFrame)
-            {
-                if (Gaze_InputManager.instance.debug)
-                    Debug.Log("A Button Up");
-                Gaze_InputManager.FireOnOnButtonAUpEvent(new Gaze_InputEventArgs(this, Gaze_InputTypes.A_BUTTON_UP));
-            }
-        }
-
-        private void CheckTouchpadState()
-        {
-            // track touchpad position to fire event if any change
-            touchpadValue = SamsungGearVR_TouchpadPos;
-            if (touchpadValue.x != touchpadX || touchpadValue.y != touchpadY)
-            {
-                // notify touch event as a Generic Axis event
-                Gaze_InputManager.FireStickRightAxisEvent(new Gaze_InputEventArgs(this, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.PAD_RIGHT_TOUCH, touchpadValue));
-
-                // update values
-                touchpadX = touchpadValue.x;
-                touchpadY = touchpadValue.y;
-
-                lastTouchpadInputTime = Time.time;
-            }
-
-            //detect when pad NEUTRAL and fire event with FireRightTouchpadEvent
-            if (Time.time - lastTouchpadInputTime > touchpadNeutralTimeout)
-            {
-                Gaze_InputManager.FireRightTouchpadEvent(new Gaze_InputEventArgs(this, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.PAD_RIGHT_TOUCH, Vector2.zero));
-            }
+            if (rightPrimaryIndexWasTouched)
+                Gaze_InputManager.FireOnButtonRightIndexTouch(new Gaze_InputEventArgs(this, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.INDEX_RIGHT_TOUCH));
+            if (rightPrimaryThumbrestWasTouched)
+                Gaze_InputManager.FireOnButtonRightThumbrestTouch(new Gaze_InputEventArgs(this, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.THUMBREST_RIGHT_TOUCH));
+            if (rightPrimaryThumbstickWasTouched)
+                Gaze_InputManager.FireOnButtonRightThumbstickTouch(new Gaze_InputEventArgs(this, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.STICK_RIGHT_TOUCH));
+            if (leftPrimaryIndexWasTouched)
+                Gaze_InputManager.FireOnButtonLeftIndexTouch(new Gaze_InputEventArgs(this, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.INDEX_LEFT_TOUCH));
+            if (leftPrimaryThumbrestWasTouched)
+                Gaze_InputManager.FireOnButtonLeftThumbrestTouch(new Gaze_InputEventArgs(this, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.THUMBREST_LEFT_TOUCH));
+            if (lefttPrimaryThumbstickWasTouched)
+                Gaze_InputManager.FireOnButtonLeftThumbstickTouch(new Gaze_InputEventArgs(this, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.STICK_LEFT_TOUCH));
         }
 
         public override bool CheckIfControllerConnected()
         {
-            var actualHandedRemote = OVRInput.GetConnectedControllers() & OVRInput.Controller.RTrackedRemote;
+            // TODO (Giuseppe)
+            return true;
+        }
 
-            // if not, check if we have a left handed remote
-            if (actualHandedRemote == 0)
-            {
-                actualHandedRemote = OVRInput.GetConnectedControllers() & OVRInput.Controller.LTrackedRemote;
-            }
-
-
-            //#if UNITY_EDITOR
-
-            //            // Use Touch controller in editor
-            //            actualHandedRemote = OVRInput.GetConnectedControllers() & OVRInput.Controller.RTouch & OVRInput.Controller.LTouch;
-            //#endif
-
-            if (actualHandedRemote == handedRemote)
-                return isControllerConnected;
-
-            if (actualHandedRemote == OVRInput.Controller.None)
-            {
-                isControllerConnected = false;
-            }
-            else
-            {
-                isControllerConnected = true;
-            }
-
-            handedRemote = actualHandedRemote;
-
-            return isControllerConnected;
+        public override void SetOrientation(GameObject _rightHand, GameObject _leftHand)
+        {
+            // TODO (Giuseppe)
         }
 
         public override void SetPosition(GameObject _rightHand, GameObject _leftHand)
         {
-            _rightHand.transform.localPosition = UnityEngine.XR.InputTracking.GetLocalPosition(UnityEngine.XR.XRNode.RightHand);
-            _leftHand.transform.localPosition = UnityEngine.XR.InputTracking.GetLocalPosition(UnityEngine.XR.XRNode.LeftHand);
-        }
-
-
-        public override void SetOrientation(GameObject _rightHand, GameObject _leftHand)
-        {
-            inputManager.FixedRightPosition.localPosition = inputManager.OriginalRightHandFixedPosition;
-            inputManager.FixedLeftPosition.localPosition = inputManager.FixedLeftPosition.localPosition;
-            _rightHand.transform.localRotation = OVRInput.GetLocalControllerRotation(OVRInput.Controller.RTrackedRemote);
-            _leftHand.transform.localRotation = OVRInput.GetLocalControllerRotation(OVRInput.Controller.LTrackedRemote);
+            // TODO (Giuseppe)
         }
     }
 }
