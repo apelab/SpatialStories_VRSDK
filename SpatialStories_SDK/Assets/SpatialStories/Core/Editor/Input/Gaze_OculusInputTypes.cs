@@ -55,6 +55,8 @@
         RightIndexTouch,
         RightThumbrestTouch,
 
+        Test,
+
         StartButtonPress
     }
 }

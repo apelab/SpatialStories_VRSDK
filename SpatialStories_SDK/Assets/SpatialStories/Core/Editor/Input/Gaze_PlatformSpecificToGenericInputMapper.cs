@@ -139,7 +139,7 @@ namespace Gaze
 
 
             {Gaze_OculusInputTypes.RightThumbrestTouch, Gaze_InputTypes.THUMBREST_RIGHT_TOUCH },
-            {Gaze_OculusInputTypes.RightIndexTouch, Gaze_InputTypes.INDEX_RIGHT_TOUCH },
+            {Gaze_OculusInputTypes.RightIndexTouch, Gaze_InputTypes.INDEX_RIGHT_TOUCH }
 
         };
 

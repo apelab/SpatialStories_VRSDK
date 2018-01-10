@@ -8,6 +8,8 @@ namespace Gaze
         private bool isControllerConnected = false;
         private float touchpadNeutralTimeout = .3f;
         private OVRInput.Controller handedRemote;
+
+
         private float touchpadX = 0f, touchpadY = 0f;
         private Vector2 touchpadValue = Vector2.zero;
         private float lastTouchpadInputTime;
@@ -26,6 +28,26 @@ namespace Gaze
         {
 
             CheckTouchpadState();
+
+            // Returns true if the Index trigger was pressed
+            bool rightIndexTriggerPressedThisFrame = OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch);
+            bool leftIndexTriggerPressedThisFrame = OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.LTouch);
+
+            // Returns true if the hand trigger was pressed
+            bool rightHandTriggerPressedThisFrame = OVRInput.GetDown(OVRInput.Button.PrimaryHandTrigger, OVRInput.Controller.RTouch);
+            bool leftHandTriggerPressedThisFrame = OVRInput.GetDown(OVRInput.Button.PrimaryHandTrigger, OVRInput.Controller.LTouch);
+
+
+            // Return true if the correspective button was pressed
+            bool buttonAPressedThisFrame = OVRInput.GetDown(OVRInput.Button.One, OVRInput.Controller.RTouch);
+            bool buttonBPressedThisFrame = OVRInput.GetDown(OVRInput.Button.Two, OVRInput.Controller.RTouch);
+            bool buttonXPressedThisFrame = OVRInput.GetDown(OVRInput.Button.One, OVRInput.Controller.LTouch);
+            bool buttonYPressedThisFrame = OVRInput.GetDown(OVRInput.Button.Two, OVRInput.Controller.LTouch);
+
+
+
+
+            //===========================================================================================//
 
             // Returns true if the trigger was pressed down this frame
             bool triggerPressedThisFrame = OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, handedRemote);
@@ -100,11 +122,11 @@ namespace Gaze
             }
 
 
-#if UNITY_EDITOR
+            //#if UNITY_EDITOR
 
-            // Use Touch controller in editor
-            actualHandedRemote = OVRInput.GetConnectedControllers() & OVRInput.Controller.RTouch;
-#endif
+            //            // Use Touch controller in editor
+            //            actualHandedRemote = OVRInput.GetConnectedControllers() & OVRInput.Controller.RTouch & OVRInput.Controller.LTouch;
+            //#endif
 
             if (actualHandedRemote == handedRemote)
                 return isControllerConnected;
