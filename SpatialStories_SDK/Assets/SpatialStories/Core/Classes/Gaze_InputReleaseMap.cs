@@ -224,6 +224,7 @@ namespace Gaze
             // Touch
             { Gaze_InputTypes.PAD_LEFT_TOUCH, new List<Gaze_InputTypes>() { Gaze_InputTypes.PAD_LEFT_UNTOUCH } },
             { Gaze_InputTypes.PAD_RIGHT_TOUCH, new List<Gaze_InputTypes>() { Gaze_InputTypes.PAD_RIGHT_UNTOUCH } },
+            
         };
 
         private static Dictionary<Gaze_InputTypes, Gaze_InputTypes> PressToRelease = new Dictionary<Gaze_InputTypes, Gaze_InputTypes>()

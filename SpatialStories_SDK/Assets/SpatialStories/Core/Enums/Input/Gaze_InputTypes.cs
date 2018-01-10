@@ -97,6 +97,5 @@
 
     PAD_LEFT_UNTOUCH,
     PAD_RIGHT_UNTOUCH,
-
     NONE,
 }

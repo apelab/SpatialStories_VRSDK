@@ -19,10 +19,10 @@
 //-----------------------------------------------------------------------
 
 #if UNITY_EDITOR
-using SpatialStories;
 using UnityEditor;
-using UnityEngine;
 #endif
+using SpatialStories;
+using UnityEngine;
 
 namespace Gaze
 {
@@ -37,6 +37,7 @@ namespace Gaze
             #region inputs subscription
             Gaze_InputManager.OnStartEvent += OnInputEvent;
             Gaze_InputManager.OnButtonADownEvent += OnInputEvent;
+            Gaze_InputManager.OnButtonAEvent += OnInputEvent;
             Gaze_InputManager.OnButtonAUpEvent += OnInputEvent;
             Gaze_InputManager.OnButtonBDownEvent += OnInputEvent;
             Gaze_InputManager.OnButtonBUpEvent += OnInputEvent;
@@ -83,7 +84,6 @@ namespace Gaze
 
             Gaze_InputManager.OnReleaseEvent += OnReleaseEvent;
 
-
             // Testing touch events for oculus rift
             Gaze_InputManager.OnButtonATouch += OnInputEvent;
             Gaze_InputManager.OnButtonBTouch += OnInputEvent;
@@ -98,6 +98,10 @@ namespace Gaze
             Gaze_InputManager.OnButtonRightThumbstickTouch += OnInputEvent;
 
 
+#if UNITY_ANDROID
+            Gaze_GearVR_InputLogic.OnHomeButtonUp += OnInputEvent;
+            Gaze_GearVR_InputLogic.OnHomeButtonDown += OnInputEvent;
+#endif
             #endregion inputs subscription
 
             entriesCount = gazeConditionsScript.InputsMap.InputsEntries.Count;
@@ -174,6 +178,10 @@ namespace Gaze
             Gaze_InputManager.OnButtonRightThumbrestTouch -= OnInputEvent;
             Gaze_InputManager.OnButtonRightThumbstickTouch -= OnInputEvent;
 
+#if UNITY_ANDROID
+            Gaze_GearVR_InputLogic.OnHomeButtonUp -= OnInputEvent;
+            Gaze_GearVR_InputLogic.OnHomeButtonDown -= OnInputEvent;
+#endif
             #endregion inputs subscription
         }
 
@@ -244,7 +252,7 @@ namespace Gaze
                     Gaze_InputsMapEntry mapEntry = gazeConditionsScript.InputsMap.InputsEntries[i];
                     mapEntry.Valid = true;
                     if (mapEntry.IsRelease)
-                        S_Scheduler.AddTaskAtNextFrame(() => { InvalidateReleaseConditionAtNextFrame(mapEntry); });
+                        S_Scheduler.AddTask(0.1f, () => { InvalidateReleaseConditionAtNextFrame(mapEntry); });
 
                     // check if all conditions are now met
                     ValidateInputs(_e);
@@ -268,23 +276,19 @@ namespace Gaze
             {
                 if (Gaze_InputReleaseMap.IsReleaseInputtOf(_e.InputType, gazeConditionsScript.InputsMap.InputsEntries[i].InputType))
                 {
-                    Debug.Log(true);
                     gazeConditionsScript.InputsMap.InputsEntries[i].Valid = false;
                     ValidateInputs(_e);
                 }
-                Debug.Log(false);
             }
         }
-
+        
         private void OnReleaseEvent(Gaze_InputEventArgs _e)
         {
-            Debug.Log("Release: " + _e.InputType);
             CheckReceivedInputValidity(_e);
         }
 
         private void OnInputEvent(Gaze_InputEventArgs _e)
         {
-            Debug.Log("Release: " + _e.InputType);
             CheckReceivedInputValidity(_e);
         }
     }

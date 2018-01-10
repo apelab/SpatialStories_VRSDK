@@ -1,11 +1,6 @@
 fileFormatVersion: 2
-<<<<<<< HEAD
-guid: 406a17332f9353e4aa24cf1a222e78cc
-timeCreated: 1515514928
-=======
-guid: c9e9264936a747d4fa62b2000b898b61
-timeCreated: 1515516018
->>>>>>> develop_inputCondition_gearVR
+guid: 5a770bdd6bc31b748bf44270df743646
+timeCreated: 1515573351
 licenseType: Free
 MonoImporter:
   externalObjects: {}

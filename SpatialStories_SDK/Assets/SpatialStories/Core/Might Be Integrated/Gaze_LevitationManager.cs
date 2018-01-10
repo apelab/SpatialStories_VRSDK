@@ -143,14 +143,14 @@ namespace Gaze
 
             if (actualHand == Gaze_HandsEnum.LEFT)
             {
-                Gaze_InputManager.OnPadLeftTouchSouthEvent += OnPadTouchDownEvent;
-                Gaze_InputManager.OnPadLeftTouchNorthEvent += OnPadTouchUpEvent;
+                Gaze_InputManager.OnPadLeftTouchSouthEvent += OnPadTouchSouthEvent;
+                Gaze_InputManager.OnPadLeftTouchNorthEvent += OnPadTouchNorthEvent;
                 Gaze_InputManager.OnLeftTouchpadEvent += OnTouchpadEvent;
             }
             else
             {
-                Gaze_InputManager.OnPadRightTouchSouthEvent += OnPadTouchDownEvent;
-                Gaze_InputManager.OnPadRightTouchNorthEvent += OnPadTouchUpEvent;
+                Gaze_InputManager.OnPadRightTouchSouthEvent += OnPadTouchSouthEvent;
+                Gaze_InputManager.OnPadRightTouchNorthEvent += OnPadTouchNorthEvent;
                 Gaze_InputManager.OnRightTouchpadEvent += OnTouchpadEvent;
             }
             alreadySubscribedToPadEvents = true;
@@ -163,14 +163,14 @@ namespace Gaze
 
             if (actualHand == Gaze_HandsEnum.LEFT)
             {
-                Gaze_InputManager.OnPadLeftTouchSouthEvent -= OnPadTouchDownEvent;
-                Gaze_InputManager.OnPadLeftTouchNorthEvent -= OnPadTouchUpEvent;
+                Gaze_InputManager.OnPadLeftTouchSouthEvent -= OnPadTouchSouthEvent;
+                Gaze_InputManager.OnPadLeftTouchNorthEvent -= OnPadTouchNorthEvent;
                 Gaze_InputManager.OnLeftTouchpadEvent -= OnTouchpadEvent;
             }
             else
             {
-                Gaze_InputManager.OnPadRightTouchSouthEvent -= OnPadTouchDownEvent;
-                Gaze_InputManager.OnPadRightTouchNorthEvent -= OnPadTouchUpEvent;
+                Gaze_InputManager.OnPadRightTouchSouthEvent -= OnPadTouchSouthEvent;
+                Gaze_InputManager.OnPadRightTouchNorthEvent -= OnPadTouchNorthEvent;
                 Gaze_InputManager.OnRightTouchpadEvent -= OnTouchpadEvent;
             }
             alreadySubscribedToPadEvents = false;
@@ -772,12 +772,13 @@ namespace Gaze
         }
 
         #region GearVR Controller
-        private void OnPadTouchDownEvent(Gaze_InputEventArgs e)
+        private void OnPadTouchSouthEvent(Gaze_InputEventArgs e)
         {
+            Debug.Log("GearVR Controller south");
             levitationState = Gaze_InputManager.instance.CurrentController == Gaze_Controllers.GEARVR_CONTROLLER ? Gaze_LevitationStates.PULL : Gaze_LevitationStates.PUSH;
         }
 
-        private void OnPadTouchUpEvent(Gaze_InputEventArgs e)
+        private void OnPadTouchNorthEvent(Gaze_InputEventArgs e)
         {
             levitationState = Gaze_InputManager.instance.CurrentController == Gaze_Controllers.GEARVR_CONTROLLER ? Gaze_LevitationStates.PUSH : Gaze_LevitationStates.PULL;
         }
