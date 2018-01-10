@@ -1,4 +1,4 @@
-﻿namespace Gaze
+﻿public enum Gaze_OculusInputTypes
 {
 
 }

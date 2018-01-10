@@ -24,7 +24,6 @@ namespace Gaze
 
         public override void Update()
         {
-
             CheckTouchpadState();
 
             // Returns true if the trigger was pressed down this frame
@@ -34,10 +33,29 @@ namespace Gaze
             bool triggerReleasedThisFrame = OVRInput.GetUp(OVRInput.Button.PrimaryIndexTrigger, handedRemote);
 
             // Returns true if the touchpad is currently pressed down
+            bool touchpadPressedThisFrame = OVRInput.GetDown(OVRInput.Button.PrimaryTouchpad, handedRemote);
+
+            // Returns true if the touchpad is currently pressed down
             bool touchpadPressed = OVRInput.Get(OVRInput.Button.PrimaryTouchpad, handedRemote);
 
             // Returns true if the touchpad was released this frame
             bool touchpadReleasedThisFrame = OVRInput.GetUp(OVRInput.Button.PrimaryTouchpad, handedRemote);
+
+            // Touchpad touch
+            bool touchPadTouchThisFrame = OVRInput.GetDown(OVRInput.Touch.PrimaryTouchpad, handedRemote);
+
+            // Touchpad Released
+            bool touchPadUpThisFrame = false;
+
+            if (touchPadTouchThisFrame)
+            {
+                Gaze_InputManager.FireStickRightAxisEvent(new Gaze_InputEventArgs(this, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.PAD_RIGHT_TOUCH, touchpadValue));
+            }
+
+            if (touchPadUpThisFrame)
+            {
+                Gaze_InputManager.FireStickRightAxisEvent(new Gaze_InputEventArgs(this, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.PAD_RIGHT_UNTOUCH, Vector2.zero));
+            }
 
             // Queries the touchpad position of the GearVR Controller explicitly
             if (triggerPressedThisFrame)
@@ -48,44 +66,15 @@ namespace Gaze
 
             if (touchpadPressed)
             {
-                if (Gaze_InputManager.instance.debug)
-                    Debug.Log("A Button");
-                Gaze_InputManager.FireOnButtonAEvent(new Gaze_InputEventArgs(this, Gaze_InputTypes.A_BUTTON));
+                Gaze_InputManager.FireOnButtonAEvent(new Gaze_InputEventArgs(this, Gaze_InputTypes.STICK_RIGHT_DOWN));
             }
-            if (triggerPressedThisFrame)
+            if (touchpadPressed)
             {
-                if (Gaze_InputManager.instance.debug)
-                    Debug.Log("A Button Down");
-                Gaze_InputManager.FireOnButtonADownEvent(new Gaze_InputEventArgs(this, Gaze_InputTypes.A_BUTTON_DOWN));
+                Gaze_InputManager.FireOnButtonAEvent(new Gaze_InputEventArgs(this, Gaze_InputTypes.STICK_RIGHT));
             }
             if (touchpadReleasedThisFrame)
             {
-                if (Gaze_InputManager.instance.debug)
-                    Debug.Log("A Button Up");
-                Gaze_InputManager.FireOnOnButtonAUpEvent(new Gaze_InputEventArgs(this, Gaze_InputTypes.A_BUTTON_UP));
-            }
-        }
-
-        private void CheckTouchpadState()
-        {
-            // track touchpad position to fire event if any change
-            touchpadValue = SamsungGearVR_TouchpadPos;
-            if (touchpadValue.x != touchpadX || touchpadValue.y != touchpadY)
-            {
-                // notify touch event as a Generic Axis event
-                Gaze_InputManager.FireStickRightAxisEvent(new Gaze_InputEventArgs(this, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.PAD_RIGHT_TOUCH, touchpadValue));
-
-                // update values
-                touchpadX = touchpadValue.x;
-                touchpadY = touchpadValue.y;
-
-                lastTouchpadInputTime = Time.time;
-            }
-
-            //detect when pad NEUTRAL and fire event with FireRightTouchpadEvent
-            if (Time.time - lastTouchpadInputTime > touchpadNeutralTimeout)
-            {
-                Gaze_InputManager.FireRightTouchpadEvent(new Gaze_InputEventArgs(this, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.PAD_RIGHT_TOUCH, Vector2.zero));
+                Gaze_InputManager.FireOnOnButtonAUpEvent(new Gaze_InputEventArgs(this, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.STICK_RIGHT_UP, Vector2.zero));
             }
         }
 
@@ -121,6 +110,29 @@ namespace Gaze
             handedRemote = actualHandedRemote;
 
             return isControllerConnected;
+        }
+
+        private void CheckTouchpadState()
+        {
+            // track touchpad position to fire event if any change
+            touchpadValue = SamsungGearVR_TouchpadPos;
+            if (touchpadValue.x != touchpadX || touchpadValue.y != touchpadY)
+            {
+                // notify touch event as a Generic Axis event
+                Gaze_InputManager.FireStickRightAxisEvent(new Gaze_InputEventArgs(this, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.PAD_RIGHT_TOUCH, touchpadValue));
+
+                // update values
+                touchpadX = touchpadValue.x;
+                touchpadY = touchpadValue.y;
+
+                lastTouchpadInputTime = Time.time;
+            }
+
+            //detect when pad NEUTRAL and fire event with FireRightTouchpadEvent
+            if (Time.time - lastTouchpadInputTime > touchpadNeutralTimeout)
+            {
+                Gaze_InputManager.FireRightTouchpadEvent(new Gaze_InputEventArgs(this, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.PAD_RIGHT_TOUCH, Vector2.zero));
+            }
         }
 
         public override void SetPosition(GameObject _rightHand, GameObject _leftHand)

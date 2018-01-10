@@ -658,6 +658,10 @@ public class Gaze_InputManager : MonoBehaviour
             }
         }
 
+        // Collision with gear vr
+        // TODO (4nc3str4l): Move this to oculus and vive specific scripts
+#if UNITY_ANDROID
+#else
         if (Input.GetButton(Gaze_InputConstants.APELAB_INPUT_A))
         {
             if (debug)
@@ -676,7 +680,7 @@ public class Gaze_InputManager : MonoBehaviour
                 Debug.Log(Gaze_InputConstants.APELAB_INPUT_A + " Up");
             FireOnOnButtonAUpEvent(new Gaze_InputEventArgs(this.gameObject, Gaze_InputTypes.A_BUTTON_UP));
         }
-
+#endif
         if (Input.GetButton(Gaze_InputConstants.APELAB_INPUT_B))
         {
             if (debug)
@@ -1208,33 +1212,49 @@ public class Gaze_InputManager : MonoBehaviour
         if (upMagnitude < downMagnitude && upMagnitude < leftMagnitude && upMagnitude < rightMagnitude)
         {
             if (_isLeft)
+            {
                 DominantDirectionLeftPad = Gaze_InputTypes.PAD_LEFT_TOUCH_NORTH;
+            }
             else
+            {
                 DominantDirectionRightPad = Gaze_InputTypes.PAD_RIGHT_TOUCH_NORTH;
+            }
         }
         // Down Wins
         else if (downMagnitude < upMagnitude && downMagnitude < leftMagnitude && downMagnitude < rightMagnitude)
         {
             if (_isLeft)
+            {
                 DominantDirectionLeftPad = Gaze_InputTypes.PAD_LEFT_TOUCH_SOUTH;
+            }
             else
+            {
                 DominantDirectionRightPad = Gaze_InputTypes.PAD_RIGHT_TOUCH_SOUTH;
+            }
         }
         // Left Wins
         else if (leftMagnitude < upMagnitude && leftMagnitude < downMagnitude && leftMagnitude < rightMagnitude)
         {
             if (_isLeft)
+            {
                 DominantDirectionLeftPad = Gaze_InputTypes.PAD_LEFT_TOUCH_WEST;
+            }
             else
+            {
                 DominantDirectionRightPad = Gaze_InputTypes.PAD_RIGHT_TOUCH_WEST;
+            }
         }
         // Right Magnitude
         else if (rightMagnitude < upMagnitude && rightMagnitude < downMagnitude && rightMagnitude < leftMagnitude)
         {
             if (_isLeft)
+            {
                 DominantDirectionLeftPad = Gaze_InputTypes.PAD_LEFT_TOUCH_EAST;
+            }
             else
+            {
                 DominantDirectionRightPad = Gaze_InputTypes.PAD_RIGHT_TOUCH_EAST;
+            }
         }
     }
     

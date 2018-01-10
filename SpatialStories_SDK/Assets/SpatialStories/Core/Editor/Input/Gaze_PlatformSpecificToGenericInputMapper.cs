@@ -85,10 +85,10 @@ namespace Gaze
             { Gaze_HTCViveInputTypes.RightGripRelease, Gaze_InputTypes.HAND_RIGHT_UP },
         };
 
-        private static Dictionary<Gaze_HTCViveInputTypes, Gaze_InputTypes> vieToOculusMap = new Dictionary<Gaze_HTCViveInputTypes, Gaze_InputTypes>()
+        private static Dictionary<Gaze_GearVRInputTypes, Gaze_InputTypes> gearVrToGenericMap = new Dictionary<Gaze_GearVRInputTypes, Gaze_InputTypes>()
         {
-
-        }
+            { Gaze_GearVRInputTypes.TrackpadPress, Gaze_InputTypes.STICK_LEFT_DOWN },
+        };
 
         public static Gaze_InputTypes ToGenericInput(Gaze_Controllers _platform, int _inputType)
         {
@@ -97,10 +97,26 @@ namespace Gaze
                 case Gaze_Controllers.HTC_VIVE:
                     return ViveToGenericInput((Gaze_HTCViveInputTypes)_inputType);
                     break;
+                case Gaze_Controllers.GEARVR_CONTROLLER:
+                    return GearVRToGenericInput((Gaze_GearVRInputTypes)_inputType);
+                    break;
                 default:
                     Debug.LogError("Translation not implemented for this platform: " + _platform);
                     return Gaze_InputTypes.NONE;
                     break;
+            }
+        }
+
+        private static Gaze_InputTypes GearVRToGenericInput(Gaze_GearVRInputTypes _inputType)
+        {
+            if (gearVrToGenericMap.ContainsKey(_inputType))
+            {
+                return gearVrToGenericMap[_inputType];
+            }
+            else
+            {
+                Debug.LogError("Translation not implemented for this inputType: " + _inputType);
+                return Gaze_InputTypes.NONE;
             }
         }
 

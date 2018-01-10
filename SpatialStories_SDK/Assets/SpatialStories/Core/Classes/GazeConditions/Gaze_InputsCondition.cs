@@ -19,11 +19,10 @@
 //-----------------------------------------------------------------------
 
 #if UNITY_EDITOR
-using SpatialStories;
-using System;
 using UnityEditor;
-using UnityEngine;
 #endif
+using SpatialStories;
+using UnityEngine;
 
 namespace Gaze
 {
@@ -240,23 +239,31 @@ namespace Gaze
             {
                 if (Gaze_InputReleaseMap.IsReleaseInputtOf(_e.InputType, gazeConditionsScript.InputsMap.InputsEntries[i].InputType))
                 {
-                    Debug.Log(true);
                     gazeConditionsScript.InputsMap.InputsEntries[i].Valid = false;
                     ValidateInputs(_e);
                 }
-                Debug.Log(false);
             }
         }
 
+        Gaze_InputTypes t1;
+        Gaze_InputTypes t2;
         private void OnReleaseEvent(Gaze_InputEventArgs _e)
         {
-            Debug.Log("Release: " + _e.InputType);
+            if(((int)_e.InputType) != ((int)t1))
+            {
+                Debug.Log("Release: " + _e.InputType);
+                t1 = _e.InputType;
+            }
             CheckReceivedInputValidity(_e);
         }
 
         private void OnInputEvent(Gaze_InputEventArgs _e)
         {
-            Debug.Log("Release: " + _e.InputType);
+            if (((int)_e.InputType) != ((int)t2))
+            {
+                Debug.Log("Press: " + _e.InputType);
+                t2 = _e.InputType;
+            }
             CheckReceivedInputValidity(_e);
         }
     }
