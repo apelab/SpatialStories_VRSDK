@@ -87,7 +87,28 @@ namespace Gaze
 
         private static Dictionary<Gaze_GearVRInputTypes, Gaze_InputTypes> gearVrToGenericMap = new Dictionary<Gaze_GearVRInputTypes, Gaze_InputTypes>()
         {
-            { Gaze_GearVRInputTypes.TrackpadPress, Gaze_InputTypes.STICK_LEFT_DOWN },
+            { Gaze_GearVRInputTypes.TrackpadPress, Gaze_InputTypes.STICK_RIGHT_DOWN },
+            { Gaze_GearVRInputTypes.TrackpadNorthPress, Gaze_InputTypes.PAD_RIGHT_PRESS_SOUTH },
+            { Gaze_GearVRInputTypes.TrackpadSouthPress, Gaze_InputTypes.PAD_RIGHT_PRESS_NORTH },
+            { Gaze_GearVRInputTypes.TrackpadWestPress, Gaze_InputTypes.PAD_RIGHT_PRESS_EAST },
+            { Gaze_GearVRInputTypes.TrackpadEastPress, Gaze_InputTypes.PAD_RIGHT_PRESS_WEST },
+            { Gaze_GearVRInputTypes.TrackpadRelease, Gaze_InputTypes.STICK_RIGHT_UP },
+            { Gaze_GearVRInputTypes.TrackpadNorthRelease, Gaze_InputTypes.PAD_RIGHT_RELEASE_SOUTH },
+            { Gaze_GearVRInputTypes.TrackpadSouthRelease, Gaze_InputTypes.PAD_RIGHT_RELEASE_NORTH },
+            { Gaze_GearVRInputTypes.TrackpadWestRelease, Gaze_InputTypes.PAD_RIGHT_RELEASE_EAST },
+            { Gaze_GearVRInputTypes.TrackpadEastRelease, Gaze_InputTypes.PAD_RIGHT_RELEASE_WEST },
+            { Gaze_GearVRInputTypes.TrackpadNorthTouch, Gaze_InputTypes.PAD_RIGHT_TOUCH_SOUTH },
+            { Gaze_GearVRInputTypes.TrackpadSouthTouch, Gaze_InputTypes.PAD_RIGHT_TOUCH_NORTH },
+            { Gaze_GearVRInputTypes.TrackpadEastTouch, Gaze_InputTypes.PAD_RIGHT_TOUCH_EAST },
+            { Gaze_GearVRInputTypes.TrackpadWestTouch, Gaze_InputTypes.PAD_RIGHT_TOUCH_WEST },
+            { Gaze_GearVRInputTypes.TrackpadCenterTouch, Gaze_InputTypes.PAD_RIGHT_TOUCH },
+            { Gaze_GearVRInputTypes.TrackpadNorthUnTouch, Gaze_InputTypes.PAD_RIGHT_UNTOUCH_SOUTH },
+            { Gaze_GearVRInputTypes.TrackpadSouthUnTouch, Gaze_InputTypes.PAD_RIGHT_UNTOUCH_NORTH },
+            { Gaze_GearVRInputTypes.TrackpadEastUnTouch, Gaze_InputTypes.PAD_RIGHT_UNTOUCH_EAST },
+            { Gaze_GearVRInputTypes.TrackpadWestUnTouch, Gaze_InputTypes.PAD_RIGHT_UNTOUCH_WEST },
+            { Gaze_GearVRInputTypes.TrackpadCenterUnTouch, Gaze_InputTypes.PAD_RIGHT_UNTOUCH },
+            { Gaze_GearVRInputTypes.TriggerDown, Gaze_InputTypes.HAND_RIGHT_DOWN },
+            { Gaze_GearVRInputTypes.TriggerUp, Gaze_InputTypes.HAND_RIGHT_UP },
         };
 
         public static Gaze_InputTypes ToGenericInput(Gaze_Controllers _platform, int _inputType)

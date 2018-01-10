@@ -201,8 +201,7 @@ public class Gaze_InputManager : MonoBehaviour
 
     // Release Button Event
     public static event InputEvent OnReleaseEvent;
-
-
+    
     public GameObject LeftController { get { return leftHandIO; } }
 
     public GameObject RightController { get { return rightHandIO; } }
@@ -241,8 +240,7 @@ public class Gaze_InputManager : MonoBehaviour
     public GameObject UnpluggedControllerMessage;
 
     float localHandsHeigth;
-
-
+    
     /// <summary>
     /// Used to know what is the dominant direction when the user is using a pad or a joystick
     /// </summary>
@@ -253,7 +251,9 @@ public class Gaze_InputManager : MonoBehaviour
     /// Used to distinguish between a Touch or a Press
     /// </summary>
     bool isLeftStickDown = false;
-    bool isRightStickDown = false;
+
+    [HideInInspector]
+    public bool IsRightStickDown = false;
 
     // Used for handling press and release
     List<Gaze_InputTypes> actualPressedInputs = new List<Gaze_InputTypes>();
@@ -402,10 +402,6 @@ public class Gaze_InputManager : MonoBehaviour
                 {
                     OnReleaseEvent(new Gaze_InputEventArgs(this, t));
                     Gaze_InputTypes releaseInput = Gaze_InputReleaseMap.GetReleaseInputFor(t);
-                    if(releaseInput == Gaze_InputTypes.PAD_LEFT_UNTOUCH_NORTH)
-                    {
-                        Debug.Log("BREAKK");
-                    }
                     if (releaseInput != Gaze_InputTypes.NONE)
                         OnReleaseEvent(new Gaze_InputEventArgs(this, releaseInput));
                 }
@@ -813,7 +809,7 @@ public class Gaze_InputManager : MonoBehaviour
             if (OnStickRightDownEvent != null)
                 OnStickRightDownEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.STICK_RIGHT_DOWN));
 
-            isRightStickDown = true;
+            IsRightStickDown = true;
         }
         if (Input.GetButtonUp(Gaze_InputConstants.APELAB_INPUT_STICK_RIGHT))
         {
@@ -823,7 +819,7 @@ public class Gaze_InputManager : MonoBehaviour
             if (OnStickRightUpEvent != null)
                 OnStickRightUpEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.STICK_RIGHT_UP));
 
-            isRightStickDown = false;
+            IsRightStickDown = false;
         }
         if (Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_STICK_RIGHT_HORIZONTAL) != 0 || Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_STICK_RIGHT_VERTICAL) != 0)
         {
@@ -1088,10 +1084,10 @@ public class Gaze_InputManager : MonoBehaviour
     /// Notification for Right touchpad direction (i.e. Gear VR pad)
     /// </summary>
     /// <param name="e"></param>
-    private void StickRightAxisEvent(Gaze_InputEventArgs e)
+    public void StickRightAxisEvent(Gaze_InputEventArgs e)
     {
         CalcDominantDirectionForPad(e, false);
-
+    
         // implement gesture for touchpad direction on Gear VR pad
         if (e.AxisValue.x > AXIS_TOLERANCE)
         {
@@ -1107,7 +1103,7 @@ public class Gaze_InputManager : MonoBehaviour
                 }
 
                 // If the user is pressing fire the press event
-                if (isRightStickDown && OnPadRightPressEastEvent != null)
+                if (IsRightStickDown && OnPadRightPressEastEvent != null)
                 {
                     OnPadRightPressEastEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.PAD_RIGHT_PRESS_EAST));
                     actualPressedInputs.Add(Gaze_InputTypes.PAD_RIGHT_PRESS_EAST);
@@ -1133,7 +1129,7 @@ public class Gaze_InputManager : MonoBehaviour
                     actualPressedInputs.Add(Gaze_InputTypes.PAD_RIGHT_TOUCH_WEST);
                 }
 
-                if(isRightStickDown && OnPadRightPressWestEvent != null)
+                if(IsRightStickDown && OnPadRightPressWestEvent != null)
                 {
                     OnPadRightTouchWestEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.PAD_RIGHT_PRESS_WEST));
                     actualPressedInputs.Add(Gaze_InputTypes.PAD_RIGHT_PRESS_WEST);
@@ -1159,7 +1155,7 @@ public class Gaze_InputManager : MonoBehaviour
                     actualPressedInputs.Add(Gaze_InputTypes.PAD_RIGHT_TOUCH_SOUTH);
                 }
 
-                if(isRightStickDown && OnPadRightPressSouthEvent != null)
+                if(IsRightStickDown && OnPadRightPressSouthEvent != null)
                 {
                     OnPadRightPressSouthEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.PAD_RIGHT_PRESS_SOUTH));
                     actualPressedInputs.Add(Gaze_InputTypes.PAD_RIGHT_PRESS_SOUTH);
@@ -1185,7 +1181,7 @@ public class Gaze_InputManager : MonoBehaviour
                     actualPressedInputs.Add(Gaze_InputTypes.PAD_RIGHT_TOUCH_NORTH);
                 }
 
-                if(isRightStickDown && OnPadRightPressNorthEvent != null)
+                if(IsRightStickDown && OnPadRightPressNorthEvent != null)
                 {
                     OnPadRightPressNorthEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.PAD_RIGHT_PRESS_NORTH));
                     actualPressedInputs.Add(Gaze_InputTypes.PAD_RIGHT_PRESS_NORTH);

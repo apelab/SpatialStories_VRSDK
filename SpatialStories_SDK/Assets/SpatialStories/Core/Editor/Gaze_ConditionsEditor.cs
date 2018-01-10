@@ -45,6 +45,7 @@ namespace Gaze
         private string[] platformsNames;
         private string[] viveInputNames;
         private string[] inputsNames;
+        private string[] gearVrInputNames;
 
         private List<Gaze_InteractiveObject> hierarchyProximities;
 
@@ -116,6 +117,7 @@ namespace Gaze
             inputsNames = Enum.GetNames(typeof(Gaze_InputTypes));
             platformsNames = Enum.GetNames(typeof(Gaze_Controllers));
             viveInputNames = Enum.GetNames(typeof(Gaze_HTCViveInputTypes));
+            gearVrInputNames = Enum.GetNames(typeof(Gaze_GearVRInputTypes));
         }
 
         public override void Gaze_OnInspectorGUI()
@@ -706,6 +708,10 @@ namespace Gaze
             {
                 case Gaze_Controllers.HTC_VIVE:
                     _inputEntry.UIControllerSpecificInput = EditorGUILayout.Popup(_inputEntry.UIControllerSpecificInput, viveInputNames);
+                    break;
+
+                case Gaze_Controllers.GEARVR_CONTROLLER:
+                    _inputEntry.UIControllerSpecificInput = EditorGUILayout.Popup(_inputEntry.UIControllerSpecificInput, gearVrInputNames);
                     break;
             }
             

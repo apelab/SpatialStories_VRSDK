@@ -15,6 +15,11 @@
     TrackpadEastTouch,
     TrackpadWestTouch,
     TrackpadCenterTouch,
-    HomeButton,
-    Trigger
+    TrackpadNorthUnTouch,
+    TrackpadSouthUnTouch,
+    TrackpadEastUnTouch,
+    TrackpadWestUnTouch,
+    TrackpadCenterUnTouch,
+    TriggerDown,
+    TriggerUp,
 }

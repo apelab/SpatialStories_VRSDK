@@ -37,6 +37,7 @@ namespace Gaze
             #region inputs subscription
             Gaze_InputManager.OnStartEvent += OnInputEvent;
             Gaze_InputManager.OnButtonADownEvent += OnInputEvent;
+            Gaze_InputManager.OnButtonAEvent += OnInputEvent;
             Gaze_InputManager.OnButtonAUpEvent += OnInputEvent;
             Gaze_InputManager.OnButtonBDownEvent += OnInputEvent;
             Gaze_InputManager.OnButtonBUpEvent += OnInputEvent;
@@ -83,13 +84,18 @@ namespace Gaze
 
             Gaze_InputManager.OnReleaseEvent += OnReleaseEvent;
 
+#if UNITY_ANDROID
+            Gaze_GearVR_InputLogic.OnHomeButtonUp += OnInputEvent;
+            Gaze_GearVR_InputLogic.OnHomeButtonDown += OnInputEvent;
+#endif
+
             #endregion inputs subscription
 
             entriesCount = gazeConditionsScript.InputsMap.InputsEntries.Count;
-            for(int i = 0; i < entriesCount; i++)
+            for (int i = 0; i < entriesCount; i++)
                 gazeConditionsScript.InputsMap.InputsEntries[i].CheckIfIsRelease();
         }
-        
+
         public override bool IsValidated()
         {
             return IsValid;
@@ -145,6 +151,11 @@ namespace Gaze
             Gaze_InputManager.OnPadRightPressSouthEvent -= OnInputEvent;
 
             Gaze_InputManager.OnReleaseEvent -= OnReleaseEvent;
+
+#if UNITY_ANDROID
+            Gaze_GearVR_InputLogic.OnHomeButtonUp -= OnInputEvent;
+            Gaze_GearVR_InputLogic.OnHomeButtonDown -= OnInputEvent;
+#endif
             #endregion inputs subscription
         }
 
@@ -215,8 +226,8 @@ namespace Gaze
                     Gaze_InputsMapEntry mapEntry = gazeConditionsScript.InputsMap.InputsEntries[i];
                     mapEntry.Valid = true;
                     if (mapEntry.IsRelease)
-                        S_Scheduler.AddTaskAtNextFrame(() => { InvalidateReleaseConditionAtNextFrame(mapEntry); });
-                    
+                        S_Scheduler.AddTask(0.1f, () => { InvalidateReleaseConditionAtNextFrame(mapEntry); });
+
                     // check if all conditions are now met
                     ValidateInputs(_e);
                     break;
@@ -225,7 +236,7 @@ namespace Gaze
 
             CheckIfInputReleased(_e);
         }
-        
+
 
         private void InvalidateReleaseConditionAtNextFrame(Gaze_InputsMapEntry _entry)
         {
@@ -249,7 +260,7 @@ namespace Gaze
         Gaze_InputTypes t2;
         private void OnReleaseEvent(Gaze_InputEventArgs _e)
         {
-            if(((int)_e.InputType) != ((int)t1))
+            if (((int)_e.InputType) != ((int)t1))
             {
                 Debug.Log("Release: " + _e.InputType);
                 t1 = _e.InputType;

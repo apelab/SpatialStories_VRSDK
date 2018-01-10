@@ -342,7 +342,7 @@ MonoBehaviour:
   ActionColliders: 0
   ActionDragAndDrop: 0
   ActionAnimation: 0
-  DestroyOnTrigger: 0
+  DestroyOnTrigger: 1
   ModifyGrabDistance: 0
   ModifyTouchDistance: 0
   ModifyGrabMode: 0
@@ -540,14 +540,9 @@ MonoBehaviour:
   inputsEnabled: 1
   InputsMap:
     InputsEntries:
-    - UISelectedPlatform: 2
-      UIControllerSpecificInput: 0
-      InputType: 26
-      IsRelease: 0
-      Valid: 0
-    - UISelectedPlatform: 2
-      UIControllerSpecificInput: 20
-      InputType: 14
+    - UISelectedPlatform: 3
+      UIControllerSpecificInput: 17
+      InputType: 62
       IsRelease: 0
       Valid: 0
     AreDependenciesSatisfied: 0
