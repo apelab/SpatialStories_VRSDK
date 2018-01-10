@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace Gaze
@@ -85,10 +84,64 @@ namespace Gaze
             { Gaze_HTCViveInputTypes.RightGripRelease, Gaze_InputTypes.HAND_RIGHT_UP },
         };
 
-        private static Dictionary<Gaze_HTCViveInputTypes, Gaze_InputTypes> vieToOculusMap = new Dictionary<Gaze_HTCViveInputTypes, Gaze_InputTypes>()
+        private static Dictionary<Gaze_OculusInputTypes, Gaze_InputTypes> oculusToGeneric = new Dictionary<Gaze_OculusInputTypes, Gaze_InputTypes>()
         {
+            {Gaze_OculusInputTypes.LeftJoystickPress, Gaze_InputTypes.STICK_LEFT_DOWN },
+            {Gaze_OculusInputTypes.LeftJoystickRelease, Gaze_InputTypes.STICK_LEFT_UP },
+            {Gaze_OculusInputTypes.LeftJoystickEast, Gaze_InputTypes.PAD_LEFT_TOUCH_EAST },
+            {Gaze_OculusInputTypes.LeftJoystickEastRelease, Gaze_InputTypes.PAD_LEFT_UNTOUCH_EAST },
+            {Gaze_OculusInputTypes.LeftJoystickSouth, Gaze_InputTypes.PAD_LEFT_TOUCH_SOUTH },
+            {Gaze_OculusInputTypes.LeftJoystickSouthRelease, Gaze_InputTypes.PAD_LEFT_UNTOUCH_SOUTH },
+            {Gaze_OculusInputTypes.LeftJoystickNorth, Gaze_InputTypes.PAD_LEFT_TOUCH_NORTH },
+            {Gaze_OculusInputTypes.LeftJoystickNorthRelease, Gaze_InputTypes.PAD_LEFT_UNTOUCH_NORTH },
+            {Gaze_OculusInputTypes.LeftJoystickWest, Gaze_InputTypes.PAD_LEFT_TOUCH_WEST },
+            {Gaze_OculusInputTypes.LeftJoystickWestRelease, Gaze_InputTypes.PAD_LEFT_UNTOUCH_WEST },
+            {Gaze_OculusInputTypes.LeftJoystickTouch, Gaze_InputTypes.STICK_LEFT_TOUCH },
+            {Gaze_OculusInputTypes.LeftJoystickHandTriggerPress, Gaze_InputTypes.HAND_LEFT_DOWN },
+            {Gaze_OculusInputTypes.LeftJoystickHandTriggerRelease, Gaze_InputTypes.HAND_LEFT_UP },
+            {Gaze_OculusInputTypes.LeftJoystickIndexTriggerPress, Gaze_InputTypes.INDEX_LEFT_DOWN },
+            {Gaze_OculusInputTypes.LeftJoystickIndexTriggerRelease, Gaze_InputTypes.INDEX_LEFT_UP },
 
-        }
+            {Gaze_OculusInputTypes.RightJoystickPress, Gaze_InputTypes.STICK_RIGHT_DOWN },
+            {Gaze_OculusInputTypes.RightJoystickRelease, Gaze_InputTypes.STICK_RIGHT_UP },
+            {Gaze_OculusInputTypes.RightJoystickEast, Gaze_InputTypes.PAD_RIGHT_TOUCH_EAST },
+            {Gaze_OculusInputTypes.RightJoystickEastRelease, Gaze_InputTypes.PAD_RIGHT_UNTOUCH_EAST },
+            {Gaze_OculusInputTypes.RightJoystickSouth, Gaze_InputTypes.PAD_RIGHT_TOUCH_SOUTH },
+            {Gaze_OculusInputTypes.RightJoystickSouthRelease, Gaze_InputTypes.PAD_RIGHT_UNTOUCH_SOUTH },
+            {Gaze_OculusInputTypes.RightJoystickNorth, Gaze_InputTypes.PAD_RIGHT_TOUCH_NORTH },
+            {Gaze_OculusInputTypes.RightJoystickNorthRelease, Gaze_InputTypes.PAD_RIGHT_UNTOUCH_NORTH },
+            {Gaze_OculusInputTypes.RightJoystickWest, Gaze_InputTypes.PAD_RIGHT_TOUCH_WEST },
+            {Gaze_OculusInputTypes.RightJoystickWestRelease, Gaze_InputTypes.PAD_RIGHT_UNTOUCH_WEST },
+            {Gaze_OculusInputTypes.RightJoystickTouch, Gaze_InputTypes.STICK_RIGHT_TOUCH },
+            {Gaze_OculusInputTypes.RightJoystickHandTriggerPress, Gaze_InputTypes.HAND_RIGHT_DOWN },
+            {Gaze_OculusInputTypes.RightJoystickHandTriggerRelease, Gaze_InputTypes.HAND_RIGHT_UP },
+            {Gaze_OculusInputTypes.RightJoystickIndexTriggerPress, Gaze_InputTypes.INDEX_RIGHT_DOWN },
+            {Gaze_OculusInputTypes.RightJoystickIndexTriggerRelease, Gaze_InputTypes.INDEX_RIGHT_UP },
+
+            {Gaze_OculusInputTypes.AButtonPress, Gaze_InputTypes.A_BUTTON_DOWN },
+            {Gaze_OculusInputTypes.AButtonRelease, Gaze_InputTypes.A_BUTTON_UP },
+            {Gaze_OculusInputTypes.BButtonPress, Gaze_InputTypes.B_BUTTON_DOWN },
+            {Gaze_OculusInputTypes.BButtonRelease, Gaze_InputTypes.B_BUTTON_UP },
+            {Gaze_OculusInputTypes.XButtonPress, Gaze_InputTypes.X_BUTTON_DOWN },
+            {Gaze_OculusInputTypes.XButtonRelease, Gaze_InputTypes.X_BUTTON_UP },
+            {Gaze_OculusInputTypes.YButtonPress, Gaze_InputTypes.Y_BUTTON_DOWN },
+            {Gaze_OculusInputTypes.YButtonRelease, Gaze_InputTypes.Y_BUTTON_UP },
+
+            {Gaze_OculusInputTypes.StartButtonPress, Gaze_InputTypes.START_BUTTON },
+
+            {Gaze_OculusInputTypes.AButtonTouch, Gaze_InputTypes.A_BUTTON_TOUCH },
+            {Gaze_OculusInputTypes.BButtonTouch, Gaze_InputTypes.B_BUTTON_TOUCH },
+            {Gaze_OculusInputTypes.XButtonTouch, Gaze_InputTypes.X_BUTTON_TOUCH },
+            {Gaze_OculusInputTypes.YButtonTouch, Gaze_InputTypes.Y_BUTTON_TOUCH },
+
+            {Gaze_OculusInputTypes.LeftThumbrestTouch, Gaze_InputTypes.THUMBREST_LEFT_TOUCH },
+            {Gaze_OculusInputTypes.LeftIndexTouch, Gaze_InputTypes.INDEX_LEFT_TOUCH },
+
+
+            {Gaze_OculusInputTypes.RightThumbrestTouch, Gaze_InputTypes.THUMBREST_RIGHT_TOUCH },
+            {Gaze_OculusInputTypes.RightIndexTouch, Gaze_InputTypes.INDEX_RIGHT_TOUCH },
+
+        };
 
         public static Gaze_InputTypes ToGenericInput(Gaze_Controllers _platform, int _inputType)
         {
@@ -96,6 +149,9 @@ namespace Gaze
             {
                 case Gaze_Controllers.HTC_VIVE:
                     return ViveToGenericInput((Gaze_HTCViveInputTypes)_inputType);
+                    break;
+                case Gaze_Controllers.OCULUS_RIFT:
+                    return OculusToGenericInput((Gaze_OculusInputTypes)_inputType);
                     break;
                 default:
                     Debug.LogError("Translation not implemented for this platform: " + _platform);
@@ -109,6 +165,19 @@ namespace Gaze
             if (viveToGenericMap.ContainsKey(_inputType))
             {
                 return viveToGenericMap[_inputType];
+            }
+            else
+            {
+                Debug.LogError("Translation not implemented for this inputType: " + _inputType);
+                return Gaze_InputTypes.NONE;
+            }
+        }
+
+        private static Gaze_InputTypes OculusToGenericInput(Gaze_OculusInputTypes _inputType)
+        {
+            if (oculusToGeneric.ContainsKey(_inputType))
+            {
+                return oculusToGeneric[_inputType];
             }
             else
             {

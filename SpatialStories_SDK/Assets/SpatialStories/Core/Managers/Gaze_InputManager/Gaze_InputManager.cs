@@ -129,6 +129,20 @@ public class Gaze_InputManager : MonoBehaviour
     public static event InputEvent OnHandLeftDownEvent;
     public static event InputEvent OnHandLeftUpEvent;
 
+    //Testing Touch functionalities on Buttons on Oculus Rift
+    public static event InputEvent OnButtonBTouch;
+    public static event InputEvent OnButtonATouch;
+    public static event InputEvent OnButtonXTouch;
+    public static event InputEvent OnButtonYTouch;
+
+    public static event InputEvent OnButtonLeftIndexTouch;
+    public static event InputEvent OnButtonLeftThumbrestTouch;
+    public static event InputEvent OnButtonLeftThumbstickTouch;
+    public static event InputEvent OnButtonRightIndexTouch;
+    public static event InputEvent OnButtonRightThumbrestTouch;
+    public static event InputEvent OnButtonRightThumbstickTouch;
+
+
     public static event InputEvent OnHandRightEvent;
     public static void FireOnHandRightEvent(Gaze_InputEventArgs args)
     {
@@ -248,7 +262,7 @@ public class Gaze_InputManager : MonoBehaviour
     /// </summary>
     public static Gaze_InputTypes DominantDirectionLeftPad;
     public static Gaze_InputTypes DominantDirectionRightPad;
-    
+
     /// <summary>
     /// Used to distinguish between a Touch or a Press
     /// </summary>
@@ -258,7 +272,7 @@ public class Gaze_InputManager : MonoBehaviour
     // Used for handling press and release
     List<Gaze_InputTypes> actualPressedInputs = new List<Gaze_InputTypes>();
     List<Gaze_InputTypes> lastpressedInputs = new List<Gaze_InputTypes>();
-    
+
     public static event OnSetupController OnControlerSetup
     {
         add
@@ -342,6 +356,7 @@ public class Gaze_InputManager : MonoBehaviour
             if (Input.GetJoystickNames().Where(name => name.Contains("Oculus")).Count() > 0)
             {
                 PluggedControllerType = Gaze_Controllers.OCULUS_RIFT;
+                // TODO add new class SpecialInputLogic
             }
             else if (Input.GetJoystickNames().Where(name => name.Contains("OpenVR")).Count() > 0)
             {
@@ -386,14 +401,14 @@ public class Gaze_InputManager : MonoBehaviour
 
         CheckReleasedInputs();
     }
-    
+
     /// <summary>
     /// Send all the appropiate release events
     /// </summary>
     private void CheckReleasedInputs()
     {
         int counter = lastpressedInputs.Count;
-        for(int i = 0; i < counter; i++)
+        for (int i = 0; i < counter; i++)
         {
             Gaze_InputTypes t = lastpressedInputs[i];
             if (!actualPressedInputs.Contains(t))
@@ -402,7 +417,7 @@ public class Gaze_InputManager : MonoBehaviour
                 {
                     OnReleaseEvent(new Gaze_InputEventArgs(this, t));
                     Gaze_InputTypes releaseInput = Gaze_InputReleaseMap.GetReleaseInputFor(t);
-                    if(releaseInput == Gaze_InputTypes.PAD_LEFT_UNTOUCH_NORTH)
+                    if (releaseInput == Gaze_InputTypes.PAD_LEFT_UNTOUCH_NORTH)
                     {
                         Debug.Log("BREAKK");
                     }
@@ -645,7 +660,7 @@ public class Gaze_InputManager : MonoBehaviour
     private void UpdateGenericInputs()
     {
 
-#region buttons input
+        #region buttons input
         if (Input.GetButton(Gaze_InputConstants.APELAB_INPUT_START))
         {
             if (debug)
@@ -702,6 +717,74 @@ public class Gaze_InputManager : MonoBehaviour
                 OnButtonBUpEvent(new Gaze_InputEventArgs(this.gameObject, Gaze_InputTypes.B_BUTTON_UP));
         }
 
+        //==================== Testing Touch=================================//
+        // R
+        if (OVRInput.Get(OVRInput.Touch.One, OVRInput.Controller.RTouch))
+        {
+            //Debug.Log("Touching A");
+            if (OnButtonATouch != null)
+                OnButtonATouch(new Gaze_InputEventArgs(this.gameObject, Gaze_InputTypes.A_BUTTON_TOUCH));
+        }
+        if (OVRInput.Get(OVRInput.Touch.Two, OVRInput.Controller.RTouch))
+        {
+            //Debug.Log("Touching B");
+            if (OnButtonBTouch != null)
+                OnButtonBTouch(new Gaze_InputEventArgs(this.gameObject, Gaze_InputTypes.B_BUTTON_TOUCH));
+        }
+        if (OVRInput.Get(OVRInput.Touch.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
+        {
+            //Debug.Log("Primary Index trigger");
+            if (OnButtonRightIndexTouch != null)
+                OnButtonRightIndexTouch(new Gaze_InputEventArgs(this.gameObject, Gaze_InputTypes.INDEX_RIGHT_TOUCH));
+        }
+        if (OVRInput.Get(OVRInput.Touch.PrimaryThumbRest, OVRInput.Controller.RTouch))
+        {
+            //Debug.Log("Primary Thumb Rest");
+            if (OnButtonRightThumbrestTouch != null)
+                OnButtonRightThumbrestTouch(new Gaze_InputEventArgs(this.gameObject, Gaze_InputTypes.THUMBREST_RIGHT_TOUCH));
+        }
+        if (OVRInput.Get(OVRInput.Touch.PrimaryThumbstick, OVRInput.Controller.RTouch))
+        {
+            //Debug.Log("Primary Thumbstick");
+            if (OnButtonRightThumbstickTouch != null)
+                OnButtonRightThumbstickTouch(new Gaze_InputEventArgs(this.gameObject, Gaze_InputTypes.STICK_RIGHT_TOUCH));
+
+        }
+        // L
+        if (OVRInput.Get(OVRInput.Touch.One, OVRInput.Controller.LTouch))
+        {
+            //Debug.Log("Touching X");
+            if (OnButtonXTouch != null)
+                OnButtonXTouch(new Gaze_InputEventArgs(this.gameObject, Gaze_InputTypes.X_BUTTON_TOUCH));
+        }
+        if (OVRInput.Get(OVRInput.Touch.Two, OVRInput.Controller.LTouch))
+        {
+            //Debug.Log("Touching Y");
+            if (OnButtonYTouch != null)
+                OnButtonYTouch(new Gaze_InputEventArgs(this.gameObject, Gaze_InputTypes.Y_BUTTON_TOUCH));
+        }
+
+        if (OVRInput.Get(OVRInput.Touch.PrimaryIndexTrigger, OVRInput.Controller.LTouch))
+        {
+            //Debug.Log("Primary Index trigger");
+            if (OnButtonLeftIndexTouch != null)
+                OnButtonLeftIndexTouch(new Gaze_InputEventArgs(this.gameObject, Gaze_InputTypes.INDEX_LEFT_TOUCH));
+        }
+        if (OVRInput.Get(OVRInput.Touch.PrimaryThumbRest, OVRInput.Controller.LTouch))
+        {
+            //Debug.Log("Primary Thumb Rest");
+            if (OnButtonLeftThumbrestTouch != null)
+                OnButtonLeftThumbrestTouch(new Gaze_InputEventArgs(this.gameObject, Gaze_InputTypes.THUMBREST_LEFT_TOUCH));
+        }
+        if (OVRInput.Get(OVRInput.Touch.PrimaryThumbstick, OVRInput.Controller.LTouch))
+        {
+            //Debug.Log("Primary Thumbstick");
+            if (OnButtonLeftThumbstickTouch != null)
+                OnButtonLeftThumbstickTouch(new Gaze_InputEventArgs(this.gameObject, Gaze_InputTypes.STICK_LEFT_TOUCH));
+        }
+
+        //===================================================================//
+
         if (Input.GetButton(Gaze_InputConstants.APELAB_INPUT_X))
         {
             if (debug)
@@ -751,9 +834,9 @@ public class Gaze_InputManager : MonoBehaviour
             if (OnButtonYUpEvent != null)
                 OnButtonYUpEvent(new Gaze_InputEventArgs(this.gameObject, Gaze_InputTypes.Y_BUTTON_UP));
         }
-#endregion
+        #endregion
 
-#region sticks/pads input
+        #region sticks/pads input
         if (Input.GetButtonDown(Gaze_InputConstants.APELAB_INPUT_STICK_LEFT))
         {
             if (debug)
@@ -773,7 +856,7 @@ public class Gaze_InputManager : MonoBehaviour
                 OnStickLeftUpEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.LeftHand, Gaze_InputTypes.STICK_LEFT_UP));
 
             isLeftStickDown = false;
-            
+
         }
 
         if (Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_STICK_LEFT_VERTICAL) != 0 || Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_STICK_LEFT_HORIZONTAL) != 0)
@@ -845,9 +928,9 @@ public class Gaze_InputManager : MonoBehaviour
             if (OnStickRightAxisEvent != null)
                 OnStickRightAxisEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.STICK_RIGHT, Vector2.zero));
         }
-#endregion
+        #endregion
 
-#region indexes/trigger input
+        #region indexes/trigger input
         if (Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_INDEX_RIGHT) != 0)
         {
             if (debug)
@@ -906,9 +989,9 @@ public class Gaze_InputManager : MonoBehaviour
             if (OnIndexLeftUpEvent != null)
                 OnIndexLeftUpEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.LeftHand, Gaze_InputTypes.INDEX_LEFT_UP, Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_INDEX_LEFT)));
         }
-#endregion
+        #endregion
 
-#region hands/grip input
+        #region hands/grip input
         if (Input.GetAxis(Gaze_InputConstants.APELAB_INPUT_HAND_RIGHT) != 0)
         {
             if (debug)
@@ -953,7 +1036,7 @@ public class Gaze_InputManager : MonoBehaviour
             if (OnHandLeftUpEvent != null)
                 OnHandLeftUpEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.LeftHand, Gaze_InputTypes.HAND_LEFT_UP));
         }
-#endregion
+        #endregion
 
     }
 
@@ -972,7 +1055,7 @@ public class Gaze_InputManager : MonoBehaviour
                 Debug.Log("Left Touchpad touched Left");
 
             // Only notify if the direction is the dominant one
-            if(DominantDirectionLeftPad == Gaze_InputTypes.PAD_LEFT_TOUCH_EAST)
+            if (DominantDirectionLeftPad == Gaze_InputTypes.PAD_LEFT_TOUCH_EAST)
             {
                 if (OnPadLeftTouchEastEvent != null)
                 {
@@ -981,7 +1064,7 @@ public class Gaze_InputManager : MonoBehaviour
                 }
 
                 // If the user is pressing fire the press event
-                if(isLeftStickDown && OnPadLeftPressEastEvent != null)
+                if (isLeftStickDown && OnPadLeftPressEastEvent != null)
                 {
                     OnPadLeftPressEastEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.LeftHand, Gaze_InputTypes.PAD_LEFT_PRESS_EAST));
                     actualPressedInputs.Add(Gaze_InputTypes.PAD_LEFT_PRESS_EAST);
@@ -999,7 +1082,7 @@ public class Gaze_InputManager : MonoBehaviour
             if (debug)
                 Debug.Log("Left Touchpad touched West");
 
-            if(DominantDirectionLeftPad == Gaze_InputTypes.PAD_LEFT_TOUCH_WEST)
+            if (DominantDirectionLeftPad == Gaze_InputTypes.PAD_LEFT_TOUCH_WEST)
             {
                 if (OnPadLeftTouchWestEvent != null)
                 {
@@ -1027,7 +1110,7 @@ public class Gaze_InputManager : MonoBehaviour
             if (debug)
                 Debug.Log("Left Touchpad touched South");
 
-            if(DominantDirectionLeftPad == Gaze_InputTypes.PAD_LEFT_TOUCH_SOUTH)
+            if (DominantDirectionLeftPad == Gaze_InputTypes.PAD_LEFT_TOUCH_SOUTH)
             {
                 if (OnPadLeftTouchSouthEvent != null)
                 {
@@ -1055,7 +1138,7 @@ public class Gaze_InputManager : MonoBehaviour
             if (debug)
                 Debug.Log("Left Touchpad touched North");
 
-            if(DominantDirectionLeftPad == Gaze_InputTypes.PAD_LEFT_TOUCH_NORTH)
+            if (DominantDirectionLeftPad == Gaze_InputTypes.PAD_LEFT_TOUCH_NORTH)
             {
                 if (OnPadLeftTouchNorthEvent != null)
                 {
@@ -1093,8 +1176,8 @@ public class Gaze_InputManager : MonoBehaviour
         {
             if (debug)
                 Debug.Log("Right Touchpad touched East");
-            
-            if(DominantDirectionRightPad == Gaze_InputTypes.PAD_RIGHT_TOUCH_EAST)
+
+            if (DominantDirectionRightPad == Gaze_InputTypes.PAD_RIGHT_TOUCH_EAST)
             {
                 if (OnPadRightTouchEastEvent != null)
                 {
@@ -1121,7 +1204,7 @@ public class Gaze_InputManager : MonoBehaviour
             if (debug)
                 Debug.Log("Right Touchpad touched West");
 
-            if(DominantDirectionRightPad == Gaze_InputTypes.PAD_RIGHT_TOUCH_WEST)
+            if (DominantDirectionRightPad == Gaze_InputTypes.PAD_RIGHT_TOUCH_WEST)
             {
                 if (OnPadRightTouchWestEvent != null)
                 {
@@ -1129,7 +1212,7 @@ public class Gaze_InputManager : MonoBehaviour
                     actualPressedInputs.Add(Gaze_InputTypes.PAD_RIGHT_TOUCH_WEST);
                 }
 
-                if(isRightStickDown && OnPadRightPressWestEvent != null)
+                if (isRightStickDown && OnPadRightPressWestEvent != null)
                 {
                     OnPadRightTouchWestEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.PAD_RIGHT_PRESS_WEST));
                     actualPressedInputs.Add(Gaze_InputTypes.PAD_RIGHT_PRESS_WEST);
@@ -1147,7 +1230,7 @@ public class Gaze_InputManager : MonoBehaviour
             if (debug)
                 Debug.Log("Right Touchpad touched South");
 
-            if(DominantDirectionRightPad == Gaze_InputTypes.PAD_RIGHT_TOUCH_SOUTH)
+            if (DominantDirectionRightPad == Gaze_InputTypes.PAD_RIGHT_TOUCH_SOUTH)
             {
                 if (OnPadRightTouchSouthEvent != null)
                 {
@@ -1155,7 +1238,7 @@ public class Gaze_InputManager : MonoBehaviour
                     actualPressedInputs.Add(Gaze_InputTypes.PAD_RIGHT_TOUCH_SOUTH);
                 }
 
-                if(isRightStickDown && OnPadRightPressSouthEvent != null)
+                if (isRightStickDown && OnPadRightPressSouthEvent != null)
                 {
                     OnPadRightPressSouthEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.PAD_RIGHT_PRESS_SOUTH));
                     actualPressedInputs.Add(Gaze_InputTypes.PAD_RIGHT_PRESS_SOUTH);
@@ -1173,7 +1256,7 @@ public class Gaze_InputManager : MonoBehaviour
             if (debug)
                 Debug.Log("Right Touchpad touched North");
 
-            if(DominantDirectionRightPad == Gaze_InputTypes.PAD_RIGHT_TOUCH_NORTH)
+            if (DominantDirectionRightPad == Gaze_InputTypes.PAD_RIGHT_TOUCH_NORTH)
             {
                 if (OnPadRightTouchNorthEvent != null)
                 {
@@ -1181,7 +1264,7 @@ public class Gaze_InputManager : MonoBehaviour
                     actualPressedInputs.Add(Gaze_InputTypes.PAD_RIGHT_TOUCH_NORTH);
                 }
 
-                if(isRightStickDown && OnPadRightPressNorthEvent != null)
+                if (isRightStickDown && OnPadRightPressNorthEvent != null)
                 {
                     OnPadRightPressNorthEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.PAD_RIGHT_PRESS_NORTH));
                     actualPressedInputs.Add(Gaze_InputTypes.PAD_RIGHT_PRESS_NORTH);
@@ -1237,7 +1320,7 @@ public class Gaze_InputManager : MonoBehaviour
                 DominantDirectionRightPad = Gaze_InputTypes.PAD_RIGHT_TOUCH_EAST;
         }
     }
-    
+
     /// <summary>
     /// Checks if the user has the InputManger.asset installed correctly with all our custom inputs
     /// </summary>

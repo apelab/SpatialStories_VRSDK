@@ -20,7 +20,6 @@
 
 #if UNITY_EDITOR
 using SpatialStories;
-using System;
 using UnityEditor;
 using UnityEngine;
 #endif
@@ -84,13 +83,28 @@ namespace Gaze
 
             Gaze_InputManager.OnReleaseEvent += OnReleaseEvent;
 
+
+            // Testing touch events for oculus rift
+            Gaze_InputManager.OnButtonATouch += OnInputEvent;
+            Gaze_InputManager.OnButtonBTouch += OnInputEvent;
+            Gaze_InputManager.OnButtonXTouch += OnInputEvent;
+            Gaze_InputManager.OnButtonYTouch += OnInputEvent;
+
+            Gaze_InputManager.OnButtonLeftIndexTouch += OnInputEvent;
+            Gaze_InputManager.OnButtonLeftThumbrestTouch += OnInputEvent;
+            Gaze_InputManager.OnButtonLeftThumbstickTouch += OnInputEvent;
+            Gaze_InputManager.OnButtonRightIndexTouch += OnInputEvent;
+            Gaze_InputManager.OnButtonRightThumbrestTouch += OnInputEvent;
+            Gaze_InputManager.OnButtonRightThumbstickTouch += OnInputEvent;
+
+
             #endregion inputs subscription
 
             entriesCount = gazeConditionsScript.InputsMap.InputsEntries.Count;
-            for(int i = 0; i < entriesCount; i++)
+            for (int i = 0; i < entriesCount; i++)
                 gazeConditionsScript.InputsMap.InputsEntries[i].CheckIfIsRelease();
         }
-        
+
         public override bool IsValidated()
         {
             return IsValid;
@@ -146,6 +160,20 @@ namespace Gaze
             Gaze_InputManager.OnPadRightPressSouthEvent -= OnInputEvent;
 
             Gaze_InputManager.OnReleaseEvent -= OnReleaseEvent;
+
+            // Testing touch events for oculus rift
+            Gaze_InputManager.OnButtonATouch -= OnInputEvent;
+            Gaze_InputManager.OnButtonBTouch -= OnInputEvent;
+            Gaze_InputManager.OnButtonXTouch -= OnInputEvent;
+            Gaze_InputManager.OnButtonYTouch -= OnInputEvent;
+
+            Gaze_InputManager.OnButtonLeftIndexTouch -= OnInputEvent;
+            Gaze_InputManager.OnButtonLeftThumbrestTouch -= OnInputEvent;
+            Gaze_InputManager.OnButtonLeftThumbstickTouch -= OnInputEvent;
+            Gaze_InputManager.OnButtonRightIndexTouch -= OnInputEvent;
+            Gaze_InputManager.OnButtonRightThumbrestTouch -= OnInputEvent;
+            Gaze_InputManager.OnButtonRightThumbstickTouch -= OnInputEvent;
+
             #endregion inputs subscription
         }
 
@@ -217,7 +245,7 @@ namespace Gaze
                     mapEntry.Valid = true;
                     if (mapEntry.IsRelease)
                         S_Scheduler.AddTaskAtNextFrame(() => { InvalidateReleaseConditionAtNextFrame(mapEntry); });
-                    
+
                     // check if all conditions are now met
                     ValidateInputs(_e);
                     break;
@@ -226,7 +254,7 @@ namespace Gaze
 
             CheckIfInputReleased(_e);
         }
-        
+
 
         private void InvalidateReleaseConditionAtNextFrame(Gaze_InputsMapEntry _entry)
         {

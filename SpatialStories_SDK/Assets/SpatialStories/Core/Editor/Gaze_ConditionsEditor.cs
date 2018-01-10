@@ -44,6 +44,7 @@ namespace Gaze
         // Input Condition
         private string[] platformsNames;
         private string[] viveInputNames;
+        private string[] oculusInputNames;
         private string[] inputsNames;
 
         private List<Gaze_InteractiveObject> hierarchyProximities;
@@ -116,6 +117,7 @@ namespace Gaze
             inputsNames = Enum.GetNames(typeof(Gaze_InputTypes));
             platformsNames = Enum.GetNames(typeof(Gaze_Controllers));
             viveInputNames = Enum.GetNames(typeof(Gaze_HTCViveInputTypes));
+            oculusInputNames = Enum.GetNames(typeof(Gaze_OculusInputTypes));
         }
 
         public override void Gaze_OnInspectorGUI()
@@ -695,7 +697,7 @@ namespace Gaze
             _inputEntry.UISelectedPlatform = (Gaze_Controllers)EditorGUILayout.Popup((int)_inputEntry.UISelectedPlatform, platformsNames);
 
             // If the user changes the platform restart the input index to avoid index out of bound exeptions
-            if(lastSelectedPlatform != _inputEntry.UISelectedPlatform)
+            if (lastSelectedPlatform != _inputEntry.UISelectedPlatform)
             {
                 _inputEntry.UIControllerSpecificInput = 0;
                 somethingHasChanged = true;
@@ -707,11 +709,15 @@ namespace Gaze
                 case Gaze_Controllers.HTC_VIVE:
                     _inputEntry.UIControllerSpecificInput = EditorGUILayout.Popup(_inputEntry.UIControllerSpecificInput, viveInputNames);
                     break;
+                case Gaze_Controllers.OCULUS_RIFT:
+                    _inputEntry.UIControllerSpecificInput = EditorGUILayout.Popup(_inputEntry.UIControllerSpecificInput, oculusInputNames);
+                    break;
+
             }
-            
-           
+
+
             somethingHasChanged = lastSelectedSpecificInput != _inputEntry.UIControllerSpecificInput || somethingHasChanged;
-        
+
             if (somethingHasChanged)
             {
                 _inputEntry.InputType = Gaze_PlatformSpecificToGenericInputMapper.ToGenericInput(_inputEntry.UISelectedPlatform, _inputEntry.UIControllerSpecificInput);
