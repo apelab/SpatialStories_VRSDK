@@ -41,6 +41,8 @@ namespace Gaze
             bool buttonBWasTouched = OVRInput.Get(OVRInput.Touch.Two, OVRInput.Controller.RTouch);
             bool buttonXWasTouched = OVRInput.Get(OVRInput.Touch.One, OVRInput.Controller.LTouch);
             bool buttonYWasTouched = OVRInput.Get(OVRInput.Touch.Two, OVRInput.Controller.LTouch);
+            bool buttonBWasUntouched = OVRInput.GetUp(OVRInput.Touch.Two, OVRInput.Controller.RTouch);
+
 
             bool rightPrimaryIndexWasTouched = OVRInput.Get(OVRInput.Touch.PrimaryIndexTrigger, OVRInput.Controller.RTouch);
             bool rightPrimaryThumbrestWasTouched = OVRInput.Get(OVRInput.Touch.PrimaryThumbRest, OVRInput.Controller.RTouch);
@@ -55,6 +57,11 @@ namespace Gaze
             // Queries the touchpad position of the GearVR Controller explicitly
             if (buttonBWasTouched)
                 Gaze_InputManager.FireOnButtonBTouchEvent(new Gaze_InputEventArgs(this, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.B_BUTTON_TOUCH));
+            if (buttonBWasUntouched)
+            {
+                Debug.Log("hello");
+                Gaze_InputManager.FireOnButtonBUntouchEvent(new Gaze_InputEventArgs(this, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.B_BUTTON_UNTOUCH));
+            }
             if (buttonAWasTouched)
                 Gaze_InputManager.FireOnButtonATouchEvent(new Gaze_InputEventArgs(this, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.A_BUTTON_TOUCH));
             if (buttonXWasTouched)

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace Gaze
 {
@@ -19,7 +16,7 @@ namespace Gaze
 
             { Gaze_InputTypes.X_BUTTON, new List<Gaze_InputTypes>() { Gaze_InputTypes.X_BUTTON_UP }},
             { Gaze_InputTypes.X_BUTTON_DOWN, new List<Gaze_InputTypes>() { Gaze_InputTypes.X_BUTTON_UP }},
-            
+
             { Gaze_InputTypes.Y_BUTTON, new List<Gaze_InputTypes>() { Gaze_InputTypes.Y_BUTTON_UP }},
             { Gaze_InputTypes.Y_BUTTON_DOWN, new List<Gaze_InputTypes>() { Gaze_InputTypes.Y_BUTTON_UP }},
 
@@ -224,7 +221,18 @@ namespace Gaze
             // Touch
             { Gaze_InputTypes.PAD_LEFT_TOUCH, new List<Gaze_InputTypes>() { Gaze_InputTypes.PAD_LEFT_UNTOUCH } },
             { Gaze_InputTypes.PAD_RIGHT_TOUCH, new List<Gaze_InputTypes>() { Gaze_InputTypes.PAD_RIGHT_UNTOUCH } },
-            
+
+            { Gaze_InputTypes.A_BUTTON_TOUCH, new List<Gaze_InputTypes>() { Gaze_InputTypes.A_BUTTON_UNTOUCH} },
+            { Gaze_InputTypes.B_BUTTON_TOUCH, new List<Gaze_InputTypes>() { Gaze_InputTypes.B_BUTTON_UNTOUCH} },
+            { Gaze_InputTypes.X_BUTTON_TOUCH, new List<Gaze_InputTypes>() { Gaze_InputTypes.X_BUTTON_UNTOUCH} },
+            { Gaze_InputTypes.Y_BUTTON_TOUCH, new List<Gaze_InputTypes>() { Gaze_InputTypes.Y_BUTTON_UNTOUCH} },
+            { Gaze_InputTypes.THUMBREST_LEFT_TOUCH, new List<Gaze_InputTypes>() { Gaze_InputTypes.THUMBREST_LEFT_UNTOUCH} },
+            { Gaze_InputTypes.THUMBREST_RIGHT_TOUCH, new List<Gaze_InputTypes>() { Gaze_InputTypes.THUMBREST_RIGHT_UNTOUCH} },
+            { Gaze_InputTypes.STICK_LEFT_TOUCH, new List<Gaze_InputTypes>() { Gaze_InputTypes.STICK_LEFT_UNTOUCH} },
+            { Gaze_InputTypes.STICK_RIGHT_TOUCH, new List<Gaze_InputTypes>() { Gaze_InputTypes.STICK_RIGHT_UNTOUCH} },
+            { Gaze_InputTypes.INDEX_LEFT_TOUCH, new List<Gaze_InputTypes>() { Gaze_InputTypes.INDEX_LEFT_UNTOUCH} },
+            { Gaze_InputTypes.INDEX_RIGHT_TOUCH, new List<Gaze_InputTypes>() { Gaze_InputTypes.INDEX_RIGHT_UNTOUCH} },
+
         };
 
         private static Dictionary<Gaze_InputTypes, Gaze_InputTypes> PressToRelease = new Dictionary<Gaze_InputTypes, Gaze_InputTypes>()

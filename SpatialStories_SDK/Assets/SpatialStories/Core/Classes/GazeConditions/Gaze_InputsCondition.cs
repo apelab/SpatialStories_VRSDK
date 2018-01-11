@@ -22,7 +22,6 @@
 using UnityEditor;
 #endif
 using SpatialStories;
-using UnityEngine;
 
 namespace Gaze
 {
@@ -96,6 +95,8 @@ namespace Gaze
             Gaze_InputManager.OnButtonRightIndexTouch += OnInputEvent;
             Gaze_InputManager.OnButtonRightThumbrestTouch += OnInputEvent;
             Gaze_InputManager.OnButtonRightThumbstickTouch += OnInputEvent;
+
+            Gaze_InputManager.OnButtonBUntouch += OnInputEvent;
 
 
 #if UNITY_ANDROID
@@ -177,6 +178,9 @@ namespace Gaze
             Gaze_InputManager.OnButtonRightIndexTouch -= OnInputEvent;
             Gaze_InputManager.OnButtonRightThumbrestTouch -= OnInputEvent;
             Gaze_InputManager.OnButtonRightThumbstickTouch -= OnInputEvent;
+
+            Gaze_InputManager.OnButtonBUntouch -= OnInputEvent;
+
 
 #if UNITY_ANDROID
             Gaze_GearVR_InputLogic.OnHomeButtonUp -= OnInputEvent;
@@ -281,7 +285,7 @@ namespace Gaze
                 }
             }
         }
-        
+
         private void OnReleaseEvent(Gaze_InputEventArgs _e)
         {
             CheckReceivedInputValidity(_e);

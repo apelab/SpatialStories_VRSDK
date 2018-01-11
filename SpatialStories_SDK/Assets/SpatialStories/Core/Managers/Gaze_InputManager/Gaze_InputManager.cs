@@ -136,6 +136,12 @@ public class Gaze_InputManager : MonoBehaviour
         if (OnButtonBTouch != null)
             OnButtonBTouch(args);
     }
+    public static event InputEvent OnButtonBUntouch;
+    public static void FireOnButtonBUntouchEvent(Gaze_InputEventArgs args)
+    {
+        if (OnButtonBUntouch != null)
+            OnButtonBUntouch(args);
+    }
     public static event InputEvent OnButtonATouch;
     public static void FireOnButtonATouchEvent(Gaze_InputEventArgs args)
     {

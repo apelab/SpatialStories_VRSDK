@@ -139,7 +139,20 @@ namespace Gaze
 
 
             {Gaze_OculusInputTypes.RightThumbrestTouch, Gaze_InputTypes.THUMBREST_RIGHT_TOUCH },
-            {Gaze_OculusInputTypes.RightIndexTouch, Gaze_InputTypes.INDEX_RIGHT_TOUCH }
+            {Gaze_OculusInputTypes.RightIndexTouch, Gaze_InputTypes.INDEX_RIGHT_TOUCH },
+
+            {Gaze_OculusInputTypes.AButtonUntouch, Gaze_InputTypes.A_BUTTON_UNTOUCH },
+            {Gaze_OculusInputTypes.BButtonUntouch, Gaze_InputTypes.B_BUTTON_UNTOUCH },
+            {Gaze_OculusInputTypes.XButtonUntouch, Gaze_InputTypes.X_BUTTON_UNTOUCH },
+            {Gaze_OculusInputTypes.YButtonUntouch, Gaze_InputTypes.Y_BUTTON_UNTOUCH },
+
+            {Gaze_OculusInputTypes.LeftThumbrestUntouch, Gaze_InputTypes.THUMBREST_LEFT_UNTOUCH },
+            {Gaze_OculusInputTypes.LeftIndexUntouch, Gaze_InputTypes.INDEX_LEFT_UNTOUCH },
+
+
+            {Gaze_OculusInputTypes.RightThumbrestUntouch, Gaze_InputTypes.THUMBREST_RIGHT_UNTOUCH },
+            {Gaze_OculusInputTypes.RightIndexUntouch, Gaze_InputTypes.INDEX_RIGHT_UNTOUCH }
+
         };
 
         private static Dictionary<Gaze_GearVRInputTypes, Gaze_InputTypes> gearVrToGenericMap = new Dictionary<Gaze_GearVRInputTypes, Gaze_InputTypes>()
