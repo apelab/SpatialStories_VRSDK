@@ -148,8 +148,9 @@ namespace Gaze
 
             {Gaze_OculusInputTypes.LeftThumbrestUntouch, Gaze_InputTypes.THUMBREST_LEFT_UNTOUCH },
             {Gaze_OculusInputTypes.LeftIndexUntouch, Gaze_InputTypes.INDEX_LEFT_UNTOUCH },
+            {Gaze_OculusInputTypes.RightJoystickUntouch, Gaze_InputTypes.STICK_RIGHT_UNTOUCH },
 
-
+            {Gaze_OculusInputTypes.LeftJoystickUntouch, Gaze_InputTypes.STICK_LEFT_UNTOUCH },
             {Gaze_OculusInputTypes.RightThumbrestUntouch, Gaze_InputTypes.THUMBREST_RIGHT_UNTOUCH },
             {Gaze_OculusInputTypes.RightIndexUntouch, Gaze_InputTypes.INDEX_RIGHT_UNTOUCH }
 

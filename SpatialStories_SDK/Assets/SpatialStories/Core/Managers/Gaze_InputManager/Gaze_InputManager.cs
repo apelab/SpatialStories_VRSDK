@@ -148,7 +148,18 @@ public class Gaze_InputManager : MonoBehaviour
         if (OnButtonATouch != null)
             OnButtonATouch(args);
     }
-
+    public static event InputEvent OnButtonAUntouch;
+    public static void FireOnButtonAUntouchEvent(Gaze_InputEventArgs args)
+    {
+        if (OnButtonAUntouch != null)
+            OnButtonAUntouch(args);
+    }
+    public static event InputEvent OnButtonXUntouch;
+    public static void FireOnButtonXUntouchEvent(Gaze_InputEventArgs args)
+    {
+        if (OnButtonXUntouch != null)
+            OnButtonXUntouch(args);
+    }
     public static event InputEvent OnButtonXTouch;
     public static void FireOnButtonXTouchEvent(Gaze_InputEventArgs args)
     {
@@ -161,20 +172,35 @@ public class Gaze_InputManager : MonoBehaviour
         if (OnButtonYTouch != null)
             OnButtonYTouch(args);
     }
-
-
-
+    public static event InputEvent OnButtonYUntouch;
+    public static void FireOnButtonYUntouchEvent(Gaze_InputEventArgs args)
+    {
+        if (OnButtonYUntouch != null)
+            OnButtonYUntouch(args);
+    }
     public static event InputEvent OnButtonLeftIndexTouch;
     public static void FireOnButtonLeftIndexTouch(Gaze_InputEventArgs args)
     {
         if (OnButtonLeftIndexTouch != null)
             OnButtonLeftIndexTouch(args);
     }
+    public static event InputEvent OnButtonLeftIndexUntouch;
+    public static void FireOnButtonLeftIndexUntouch(Gaze_InputEventArgs args)
+    {
+        if (OnButtonLeftIndexUntouch != null)
+            OnButtonLeftIndexUntouch(args);
+    }
     public static event InputEvent OnButtonLeftThumbrestTouch;
     public static void FireOnButtonLeftThumbrestTouch(Gaze_InputEventArgs args)
     {
         if (OnButtonLeftThumbrestTouch != null)
             OnButtonLeftThumbrestTouch(args);
+    }
+    public static event InputEvent OnButtonLeftThumbrestUntouch;
+    public static void FireOnButtonLeftThumbrestUntouch(Gaze_InputEventArgs args)
+    {
+        if (OnButtonLeftThumbrestUntouch != null)
+            OnButtonLeftThumbrestUntouch(args);
     }
     public static event InputEvent OnButtonLeftThumbstickTouch;
     public static void FireOnButtonLeftThumbstickTouch(Gaze_InputEventArgs args)
@@ -200,7 +226,30 @@ public class Gaze_InputManager : MonoBehaviour
         if (OnButtonRightThumbstickTouch != null)
             OnButtonRightThumbstickTouch(args);
     }
-
+    public static event InputEvent OnButtonLeftThumbstickUntouch;
+    public static void FireOnButtonLeftThumbstickUntouch(Gaze_InputEventArgs args)
+    {
+        if (OnButtonLeftThumbstickUntouch != null)
+            OnButtonLeftThumbstickUntouch(args);
+    }
+    public static event InputEvent OnButtonRightIndexUntouch;
+    public static void FireOnButtonRightIndexUntouch(Gaze_InputEventArgs args)
+    {
+        if (OnButtonRightIndexUntouch != null)
+            OnButtonRightIndexUntouch(args);
+    }
+    public static event InputEvent OnButtonRightThumbrestUntouch;
+    public static void FireOnButtonRightThumbrestUntouch(Gaze_InputEventArgs args)
+    {
+        if (OnButtonRightThumbrestUntouch != null)
+            OnButtonRightThumbrestUntouch(args);
+    }
+    public static event InputEvent OnButtonRightThumbstickUntouch;
+    public static void FireOnButtonRightThumbstickUntouch(Gaze_InputEventArgs args)
+    {
+        if (OnButtonRightThumbstickUntouch != null)
+            OnButtonRightThumbstickUntouch(args);
+    }
 
     public static event InputEvent OnHandRightEvent;
     public static void FireOnHandRightEvent(Gaze_InputEventArgs args)

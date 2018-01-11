@@ -96,7 +96,16 @@ namespace Gaze
             Gaze_InputManager.OnButtonRightThumbrestTouch += OnInputEvent;
             Gaze_InputManager.OnButtonRightThumbstickTouch += OnInputEvent;
 
+            Gaze_InputManager.OnButtonAUntouch += OnInputEvent;
             Gaze_InputManager.OnButtonBUntouch += OnInputEvent;
+            Gaze_InputManager.OnButtonXUntouch += OnInputEvent;
+            Gaze_InputManager.OnButtonYUntouch += OnInputEvent;
+            Gaze_InputManager.OnButtonLeftIndexUntouch += OnInputEvent;
+            Gaze_InputManager.OnButtonLeftThumbrestUntouch += OnInputEvent;
+            Gaze_InputManager.OnButtonLeftThumbstickUntouch += OnInputEvent;
+            Gaze_InputManager.OnButtonRightIndexUntouch += OnInputEvent;
+            Gaze_InputManager.OnButtonRightThumbrestUntouch += OnInputEvent;
+            Gaze_InputManager.OnButtonRightThumbstickUntouch += OnInputEvent;
 
 
 #if UNITY_ANDROID
@@ -166,7 +175,7 @@ namespace Gaze
 
             Gaze_InputManager.OnReleaseEvent -= OnReleaseEvent;
 
-            // Testing touch events for oculus rift
+            // Touch events for oculus rift
             Gaze_InputManager.OnButtonATouch -= OnInputEvent;
             Gaze_InputManager.OnButtonBTouch -= OnInputEvent;
             Gaze_InputManager.OnButtonXTouch -= OnInputEvent;
@@ -179,7 +188,16 @@ namespace Gaze
             Gaze_InputManager.OnButtonRightThumbrestTouch -= OnInputEvent;
             Gaze_InputManager.OnButtonRightThumbstickTouch -= OnInputEvent;
 
+            Gaze_InputManager.OnButtonAUntouch -= OnInputEvent;
             Gaze_InputManager.OnButtonBUntouch -= OnInputEvent;
+            Gaze_InputManager.OnButtonXUntouch -= OnInputEvent;
+            Gaze_InputManager.OnButtonYUntouch -= OnInputEvent;
+            Gaze_InputManager.OnButtonLeftIndexUntouch -= OnInputEvent;
+            Gaze_InputManager.OnButtonLeftThumbrestUntouch -= OnInputEvent;
+            Gaze_InputManager.OnButtonLeftThumbstickUntouch -= OnInputEvent;
+            Gaze_InputManager.OnButtonRightIndexUntouch -= OnInputEvent;
+            Gaze_InputManager.OnButtonRightThumbrestUntouch -= OnInputEvent;
+            Gaze_InputManager.OnButtonRightThumbstickUntouch -= OnInputEvent;
 
 
 #if UNITY_ANDROID

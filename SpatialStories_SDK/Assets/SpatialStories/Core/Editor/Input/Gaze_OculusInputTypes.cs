@@ -59,6 +59,8 @@ public enum Gaze_OculusInputTypes
     YButtonUntouch,
     LeftIndexUntouch,
     LeftThumbrestUntouch,
+    LeftJoystickUntouch,
+    RightJoystickUntouch,
     RightIndexUntouch,
     RightThumbrestUntouch,
 
