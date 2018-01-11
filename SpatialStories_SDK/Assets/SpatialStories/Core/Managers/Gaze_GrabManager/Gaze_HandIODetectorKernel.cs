@@ -88,11 +88,9 @@ namespace Gaze
                         // get the pointed object
                         Gaze_InteractiveObject interactiveObject = Hits[i].collider.transform.GetComponentInParent<Gaze_InteractiveObject>();
 
-                        // If the other hand is levitating the object dont consider this as a valid target.
-                        if (Gaze_LevitationManager.IsIOBeingLevitatedByHand(interactiveObject, !grabManager.isLeftHand))
+                        if (Hits[i].transform.name == "Cube (IO)")
                         {
-                            // stop here for this occurence and process the next in the loop
-                            continue;
+                            Debug.Log("Trala");
                         }
 
                         // populate the list of IOs hit
@@ -124,7 +122,7 @@ namespace Gaze
                             grabManager.closerDistance = Hits[i].distance;
                             break;
                         }
-                        if (interactiveObject.IsGrabEnabled && interactiveObject.GrabModeIndex.Equals((int)Gaze_GrabMode.LEVITATE) && Hits[i].distance < interactiveObject.GrabDistance)
+                        if (interactiveObject.IsGrabEnabled && interactiveObject.GrabModeIndex.Equals((int)Gaze_GrabMode.LEVITATE) && Hits[i].distance < interactiveObject.GrabDistance && !interactiveObject.GrabLogic.IsBeingGrabbed)
                         {
                             // update the hit position until we grab something
                             if (grabManager.grabState != Gaze_GrabManagerState.GRABBED)

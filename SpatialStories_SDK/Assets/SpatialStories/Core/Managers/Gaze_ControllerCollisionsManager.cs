@@ -44,7 +44,6 @@ public class Gaze_ControllerCollisionsManager : MonoBehaviour
         // Find the hand model within the IO children to make the Proximity follow it
         if (GetComponentInParent<Gaze_InteractiveObject>() != null && GetComponentInParent<Gaze_InteractiveObject>().GetComponentInChildren<Gaze_HandController>() != null)
         {
-
             controllerTransform = GetComponentInParent<Gaze_InteractiveObject>().GetComponentInChildren<Gaze_HandController>().transform;
             if (controllerTransform != null)
             {

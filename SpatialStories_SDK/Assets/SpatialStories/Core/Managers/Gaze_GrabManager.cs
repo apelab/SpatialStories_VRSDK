@@ -891,17 +891,16 @@ public class Gaze_GrabManager : MonoBehaviour
     /// <param name="_e">E.</param>
     private void OnControllerCollisionEvent(Gaze_ControllerCollisionEventArgs _e)
     {
-
         // If the grab manager is not this one we dont care
         if (_e.GrabManger != this)
             return;
 
         GameObject colObject = Gaze_Utils.ConvertIntoGameObject(_e.Other);
 
-        if (colObject.GetComponent<Gaze_Manipulation>() == null)
-            return;
-
         Gaze_InteractiveObject IO = colObject.GetComponentInParent<Gaze_InteractiveObject>();
+
+        if (IO == null)
+            return;
 
         if (IO.ManipulationMode == Gaze_ManipulationModes.NONE)
             return;
