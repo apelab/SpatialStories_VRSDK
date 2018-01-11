@@ -491,6 +491,12 @@ public class Gaze_InputManager : MonoBehaviour
 
     private void Update()
     {
+#if UNITY_EDITOR
+        // Used to avoid an error message when inputs are not configured
+        if (!Gaze_InputManagerChecker.IsInputManagerAssetIsInstaled())
+            return;
+#endif
+
         // Hack: Right now we are not able to know what is the current input type until update method 
         // In the new update of the gear vr controller we should remove this if the problem is solved.
         IdentifyInputType();
