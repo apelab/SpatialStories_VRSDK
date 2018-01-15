@@ -1912,7 +1912,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 6ccf4b29e558b9644b1343ffb414e445, type: 2}
+  - {fileID: 2100000, guid: da8c68c28e7c1364e8b6ccabead205dd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1946,7 +1946,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 6ccf4b29e558b9644b1343ffb414e445, type: 2}
+  - {fileID: 2100000, guid: da8c68c28e7c1364e8b6ccabead205dd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2014,7 +2014,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 6ccf4b29e558b9644b1343ffb414e445, type: 2}
+  - {fileID: 2100000, guid: 30e4099cee412964c824502eea2c7c00, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2048,7 +2048,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 6ccf4b29e558b9644b1343ffb414e445, type: 2}
+  - {fileID: 2100000, guid: da8c68c28e7c1364e8b6ccabead205dd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2082,7 +2082,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 6ccf4b29e558b9644b1343ffb414e445, type: 2}
+  - {fileID: 2100000, guid: da8c68c28e7c1364e8b6ccabead205dd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2116,7 +2116,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 6ccf4b29e558b9644b1343ffb414e445, type: 2}
+  - {fileID: 2100000, guid: 30e4099cee412964c824502eea2c7c00, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2150,7 +2150,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 6ccf4b29e558b9644b1343ffb414e445, type: 2}
+  - {fileID: 2100000, guid: da8c68c28e7c1364e8b6ccabead205dd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2184,7 +2184,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 6ccf4b29e558b9644b1343ffb414e445, type: 2}
+  - {fileID: 2100000, guid: da8c68c28e7c1364e8b6ccabead205dd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2252,7 +2252,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 6ccf4b29e558b9644b1343ffb414e445, type: 2}
+  - {fileID: 2100000, guid: da8c68c28e7c1364e8b6ccabead205dd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2286,7 +2286,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 6ccf4b29e558b9644b1343ffb414e445, type: 2}
+  - {fileID: 2100000, guid: da8c68c28e7c1364e8b6ccabead205dd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2320,7 +2320,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 6ccf4b29e558b9644b1343ffb414e445, type: 2}
+  - {fileID: 2100000, guid: 30e4099cee412964c824502eea2c7c00, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2354,7 +2354,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 6ccf4b29e558b9644b1343ffb414e445, type: 2}
+  - {fileID: 2100000, guid: da8c68c28e7c1364e8b6ccabead205dd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2388,7 +2388,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 6ccf4b29e558b9644b1343ffb414e445, type: 2}
+  - {fileID: 2100000, guid: da8c68c28e7c1364e8b6ccabead205dd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3078,14 +3078,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InteractiveObjectScripts:
-  - {fileID: 114134813088610276}
-  - {fileID: 114366381998730324}
   - {fileID: 114788331516213372}
+  - {fileID: 114366381998730324}
+  - {fileID: 114134813088610276}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   InteractiveObjects:
-  - {fileID: 1227046925733434}
-  - {fileID: 1846034397402828}
   - {fileID: 1778678553011596}
-  InteractiveObjectsCount: 3
+  - {fileID: 1846034397402828}
+  - {fileID: 1227046925733434}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  InteractiveObjectsCount: 15
 --- !u!114 &114134813088610276
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4046,6 +4070,7 @@ MonoBehaviour:
   debug: 0
   updateInterval: 0.2
   UnpluggedControllerMessage: {fileID: 1260057045943876}
+  IsRightStickDown: 0
   FixedLeftPosition: {fileID: 0}
   FixedRightPosition: {fileID: 0}
   OriginalRightHandFixedPosition: {x: 0, y: 0, z: 0}
