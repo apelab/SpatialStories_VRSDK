@@ -236,7 +236,7 @@ namespace IBM.Watson.DeveloperCloud.Editor
 
         private void OnGUI()
         {
-            if (Event.current.type == EventType.repaint && !m_handleRepaintError)
+            if (Event.current.type == EventType.Repaint && !m_handleRepaintError)
             {
                 m_handleRepaintError = true;
                 return;
