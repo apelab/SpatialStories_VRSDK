@@ -7,12 +7,14 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Ghost
-  m_Shader: {fileID: 4800000, guid: 2490ff1b892c40646b2b0d6fa52c8339, type: 3}
+  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: _ALPHAPREMULTIPLY_ON _EMISSION
   m_LightmapFlags: 1
   m_EnableInstancingVariants: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: 3000
+  stringTagMap:
+    RenderType: Transparent
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
@@ -119,7 +121,7 @@ Material:
     - _Y_speed: 0
     - _ZWrite: 0
     m_Colors:
-    - _Color: {r: 0, g: 1, b: 0.9172411, a: 0.8039216}
+    - _Color: {r: 0.9034481, g: 0, b: 1, a: 0.8039216}
     - _EmisColor: {r: 0.66176474, g: 0.46712804, b: 0.46712804, a: 0}
     - _Emission: {r: 0.13667819, g: 0.21081014, b: 0.2352941, a: 0}
     - _EmissionColor: {r: 0.2647059, g: 0.21277146, b: 0.16154845, a: 1}
