@@ -9608,15 +9608,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400024, guid: ae6e51ad93fda934c868cf099c3ad0d3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.026
       objectReference: {fileID: 0}
     - target: {fileID: 400024, guid: ae6e51ad93fda934c868cf099c3ad0d3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.024
       objectReference: {fileID: 0}
     - target: {fileID: 400024, guid: ae6e51ad93fda934c868cf099c3ad0d3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.029
       objectReference: {fileID: 0}
     - target: {fileID: 400024, guid: ae6e51ad93fda934c868cf099c3ad0d3, type: 3}
       propertyPath: m_LocalRotation.x
@@ -16178,6 +16178,7 @@ GameObject:
   - component: {fileID: 1161907668}
   - component: {fileID: 1161907667}
   - component: {fileID: 1161907666}
+  - component: {fileID: 1161907670}
   m_Layer: 0
   m_Name: Camera (IO)
   m_TagString: MainCamera
@@ -16298,6 +16299,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1161907670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1161907665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58d4e2d162e9e4047a2a5939860c8413, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  viveHeigth: 0
 --- !u!1 &1165662286
 GameObject:
   m_ObjectHideFlags: 0
@@ -19683,15 +19696,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400010, guid: 84c37137326e7b943a87be7ae2a7ea19, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.250001
+      value: 1.666667
       objectReference: {fileID: 0}
     - target: {fileID: 400010, guid: 84c37137326e7b943a87be7ae2a7ea19, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.25
+      value: 1.666667
       objectReference: {fileID: 0}
     - target: {fileID: 400010, guid: 84c37137326e7b943a87be7ae2a7ea19, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.2500015
+      value: 1.666667
       objectReference: {fileID: 0}
     - target: {fileID: 400010, guid: 84c37137326e7b943a87be7ae2a7ea19, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
