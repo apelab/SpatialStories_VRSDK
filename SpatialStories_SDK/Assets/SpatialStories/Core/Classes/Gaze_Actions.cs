@@ -184,7 +184,7 @@ namespace Gaze
                 {
                     targetAnimator.gameObject.AddComponent<Gaze_AnimationPlayer>();
                 }
-                
+
                 gazeAnimationPlayer = targetAnimator.GetComponent<Gaze_AnimationPlayer>();
                 gazeAnimationPlayer.hideFlags = HideFlags.HideInInspector;
                 Animation_PlayList_Key = gazeAnimationPlayer.setParameters(targetAnimator, animationClip, activeTriggerStatesAnim, loopAnimType, loopAnim, animationSequence, loopOnLast);
@@ -305,15 +305,15 @@ namespace Gaze
             // is usefull for example when the user drops and object that its attachable it will lock causing
             // the problem of not being able to activate gravity again (By unlocking it this problem is solved).
             if (IO.ActualGravityState == Gaze_GravityState.LOCKED)
-                Gaze_GravityManager.ChangeGravityState(IO, Gaze_GravityRequestType.UNLOCK);
+                Gaze_GravityManager.ChangeGravityState(IO, Gaze_GravityRequestType.UNLOCK, false);
 
             if (ActionGravity == ACTIVABLE_OPTION.ACTIVATE)
-                Gaze_GravityManager.ChangeGravityState(IO, Gaze_GravityRequestType.ACTIVATE_AND_DETACH);
+                Gaze_GravityManager.ChangeGravityState(IO, Gaze_GravityRequestType.ACTIVATE_AND_DETACH, false);
             else
-                Gaze_GravityManager.ChangeGravityState(IO, Gaze_GravityRequestType.DEACTIVATE_AND_ATTACH);
+                Gaze_GravityManager.ChangeGravityState(IO, Gaze_GravityRequestType.DEACTIVATE_AND_ATTACH, false);
 
 
-            Gaze_GravityManager.ChangeGravityState(IO, Gaze_GravityRequestType.SET_AS_DEFAULT);
+            Gaze_GravityManager.ChangeGravityState(IO, Gaze_GravityRequestType.SET_AS_DEFAULT, true);
         }
 
         /// <summary>
@@ -494,7 +494,7 @@ namespace Gaze
 
                     targetAnimator.enabled = false;
                 }
-                                                
+
             }
             else if (activeTriggerStatesAnim.Length > 0 && activeTriggerStatesAnim[0])
             {
@@ -578,6 +578,7 @@ namespace Gaze
         {
             TimeFrameLogic(4);
         }
+
         #endregion
     }
 }

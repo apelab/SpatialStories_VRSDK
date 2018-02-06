@@ -13,7 +13,7 @@ namespace Gaze
         /// </summary>
         public static bool SHOW_GRAVITY_WARNINGS = false;
 
-        public static void ChangeGravityState(Gaze_InteractiveObject _IO, Gaze_GravityRequestType operation)
+        public static void ChangeGravityState(Gaze_InteractiveObject _IO, Gaze_GravityRequestType operation, bool _notifyGrabLogic = true)
         {
             switch (operation)
             {
@@ -42,6 +42,10 @@ namespace Gaze
                     SetActualGravityStateAsDefault(_IO);
                     break;
             }
+
+            // Usefull if the object is being grabbed
+            if (_notifyGrabLogic)
+                _IO.GrabLogic.GravityChanged();
         }
 
         /// <summary>

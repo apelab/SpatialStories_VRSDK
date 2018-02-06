@@ -97,8 +97,6 @@ public class Build
         string projectName = Path.GetFileNameWithoutExtension(Application.productName);
         if (target == BuildTarget.StandaloneWindows || target == BuildTarget.StandaloneWindows64)
             projectName += ".exe";
-        else if (target == BuildTarget.StandaloneOSXIntel || target == BuildTarget.StandaloneOSXIntel64 || target == BuildTarget.StandaloneOSX)
-            projectName += ".app";
         else if (target == BuildTarget.Android)
             projectName += ".apk";
         else if (target == BuildTarget.iOS)
@@ -220,12 +218,6 @@ public class Build
     public static void BuildOSX64()
     {
         StartBuild(BuildTarget.StandaloneOSXIntel64);
-    }
-
-    [MenuItem("Watson/Build/Player/OSX Universal", false, 200)]
-    public static void BuildOSXUniversal()
-    {
-        StartBuild(BuildTarget.StandaloneOSX);
     }
 
     [MenuItem("Watson/Build/Player/Android", false, 200)]

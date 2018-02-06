@@ -15,7 +15,6 @@
 // <web>https://twitter.com/apelab_ch</web>
 // <web>http://www.apelab.ch</web>
 // <date>2014-06-01</date>
-using SpatialStories;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -146,7 +145,7 @@ namespace Gaze
         public Gaze_GravityState ActualGravityState { get { return actualGravityState; } }
         private Gaze_GravityState actualGravityState;
 
-        private Gaze_GravityState initialGravityState;
+        public Gaze_GravityState InitialGravityState { get; private set; }
 
         public Gaze_Transform InitialTransform { get { return initialTransform; } }
 
@@ -192,8 +191,6 @@ namespace Gaze
 
         private void Awake()
         {
-            CreateSchedulerIfNeeded();
-            
             grabLogic = new Gaze_GrabLogic(this);
             SetActualGravityStateAsDefault();
 
@@ -297,14 +294,14 @@ namespace Gaze
             if (rigidBody.isKinematic)
             {
 
-                initialGravityState = rigidBody.useGravity ? Gaze_GravityState.ACTIVE_KINEMATIC : Gaze_GravityState.UNACTIVE_KINEMATIC;
+                InitialGravityState = rigidBody.useGravity ? Gaze_GravityState.ACTIVE_KINEMATIC : Gaze_GravityState.UNACTIVE_KINEMATIC;
             }
             else
             {
-                initialGravityState = rigidBody.useGravity ? Gaze_GravityState.ACTIVE_NOT_KINEMATIC : Gaze_GravityState.UNACTIVE_NOT_KINEMATIC;
+                InitialGravityState = rigidBody.useGravity ? Gaze_GravityState.ACTIVE_NOT_KINEMATIC : Gaze_GravityState.UNACTIVE_NOT_KINEMATIC;
             }
 
-            actualGravityState = initialGravityState;
+            actualGravityState = InitialGravityState;
         }
 
         /// <summary>
@@ -317,7 +314,7 @@ namespace Gaze
             if (rigidBody == null)
                 return;
 
-            switch (initialGravityState)
+            switch (InitialGravityState)
             {
                 case Gaze_GravityState.ACTIVE_KINEMATIC:
                     rigidBody.useGravity = true;
@@ -536,15 +533,6 @@ namespace Gaze
 
             Gaze_Actions[] actions = GetComponentsInChildren<Gaze_Actions>();
             return actions.Any(_action => _action.ActionGrab == Gaze_Actions.ACTIVABLE_OPTION.ACTIVATE);
-        }
-
-        private static void CreateSchedulerIfNeeded()
-        {
-            S_Scheduler scheduler = FindObjectOfType<S_Scheduler>();
-            if (scheduler == null)
-            {
-                new GameObject("Scheduler").AddComponent<S_Scheduler>().gameObject.hideFlags = HideFlags.HideInHierarchy;
-            }
         }
     }
 }

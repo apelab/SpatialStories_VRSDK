@@ -118,12 +118,6 @@ namespace Gaze
         /// </summary>
         private GameObject actualGrabPoint = null;
 
-        /// <summary>
-        /// Stores if the object was kinematic before tacking it in order to revert its state when the
-        /// object is dropped.
-        /// </summary>
-        private readonly bool isKinematicByDefault;
-
         private readonly Rigidbody rigidBody;
 
         /// <summary>
@@ -171,7 +165,7 @@ namespace Gaze
             if (rigidBody == null)
                 return;
             originalCenterOfMass = rigidBody.centerOfMass;
-            isKinematicByDefault = rigidBody.isKinematic;
+
             Time.fixedDeltaTime = EXPECTED_DELTA_TIME;
             rigidBody.drag = 0;
             rigidBody.angularDrag = 0.05f;
@@ -206,7 +200,7 @@ namespace Gaze
                 AddExternalVelocities();
             }
 
-            if(isBeingManipulated)
+            if (isBeingManipulated)
                 lastPosition = owner.transform.position;
         }
 
@@ -281,8 +275,8 @@ namespace Gaze
             // This is for manipulabe objects
             else if (owner.GrabPositionnerCollider != null)
             {
-				rotationDelta = CalcRotationDelta(_transformToFollow.transform.rotation, owner.GrabPositionnerCollider.transform.rotation);
-				desiredPosition = CalcDesiredPosition(_transformToFollow.transform.position, owner.GrabPositionnerCollider.transform.position);
+                rotationDelta = CalcRotationDelta(_transformToFollow.transform.rotation, owner.GrabPositionnerCollider.transform.rotation);
+                desiredPosition = CalcDesiredPosition(_transformToFollow.transform.position, owner.GrabPositionnerCollider.transform.position);
             }
             // This shouldn't be called
             else
@@ -711,6 +705,29 @@ namespace Gaze
                 ReleaseObject();
         }
 
+        /// <summary>
+        /// USed to know if the gravity has been changed during the manipulation of the object
+        /// </summary>
+        public void GravityChanged()
+        {
+            if (!IsBeingGrabbed)
+                return;
+
+            SetRigidBodyParametersToEnableManipulation();
+        }
+
+        private void SetRigidBodyParametersToEnableManipulation()
+        {
+            // This will serve the object as guide to know how to follow the controllers hand
+            controllerGrabLocation = GrabbingManager.GetComponentInChildren<Gaze_GrabPositionController>().transform;
+            Gaze_GravityManager.ChangeGravityState(owner, Gaze_GravityRequestType.UNLOCK, false);
+            Gaze_GravityManager.ChangeGravityState(owner, Gaze_GravityRequestType.ACTIVATE_AND_DETACH, false);
+
+            rigidBody.useGravity = false;
+            rigidBody.maxAngularVelocity = 100;
+            rigidBody.drag = 0;
+            rigidBody.angularDrag = 0.05f;
+        }
 
         /// <summary>
         /// Performs all the opearations needed to grab an object after
@@ -727,13 +744,7 @@ namespace Gaze
             else if (IsBeingManipulated)
                 owner.ContinueManipulation();
 
-            // This will serve the object as guide to know how to follow the controllers hand
-            controllerGrabLocation = GrabbingManager.GetComponentInChildren<Gaze_GrabPositionController>().transform;
-            Gaze_GravityManager.ChangeGravityState(owner, Gaze_GravityRequestType.UNLOCK);
-            Gaze_GravityManager.ChangeGravityState(owner, Gaze_GravityRequestType.ACTIVATE_AND_DETACH);
-
-            rigidBody.useGravity = false;
-            rigidBody.maxAngularVelocity = 100;
+            SetRigidBodyParametersToEnableManipulation();
 
             if (owner.ManipulationMode != Gaze_ManipulationModes.LEVITATE)
             {
@@ -742,10 +753,6 @@ namespace Gaze
             }
 
             remainingTimeUntilDetach = actualTimeUntilDetach;
-
-            rigidBody.drag = 0;
-            rigidBody.angularDrag = 0.05f;
-
 
             originalCenterOfMass = rigidBody.centerOfMass;
 
@@ -778,8 +785,11 @@ namespace Gaze
             if (owner.IsManipulable)
                 SetManipulationMode(false);
 
-            if (isKinematicByDefault)
-                Gaze_GravityManager.ChangeGravityState(owner, Gaze_GravityRequestType.DEACTIVATE_AND_ATTACH);
+            GrabbingManager = null;
+            controllerGrabLocation = null;
+
+            if (owner.InitialGravityState != Gaze_GravityState.ACTIVE_NOT_KINEMATIC)
+                Gaze_GravityManager.ChangeGravityState(owner, Gaze_GravityRequestType.DEACTIVATE_AND_ATTACH, false);
             else
             {
                 if (rigidBody != null)
@@ -792,9 +802,7 @@ namespace Gaze
                 rigidBody.centerOfMass = originalCenterOfMass;
             }
 
-            GrabbingManager = null;
-            controllerGrabLocation = null;
-            Gaze_GravityManager.ChangeGravityState(owner, Gaze_GravityRequestType.RETURN_TO_DEFAULT);
+            Gaze_GravityManager.ChangeGravityState(owner, Gaze_GravityRequestType.RETURN_TO_DEFAULT, false);
             CleanPositionsAndVelocityHistory();
         }
 
@@ -828,7 +836,7 @@ namespace Gaze
                     rigtSnapPoint = owner.transform;
                 }
             }
-            
+
             return _isLeftHand ? leftSnapPoint : rigtSnapPoint;
         }
 
