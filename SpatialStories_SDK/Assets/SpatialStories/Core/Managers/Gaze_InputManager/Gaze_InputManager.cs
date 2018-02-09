@@ -1117,13 +1117,16 @@ public class Gaze_InputManager : MonoBehaviour
                 if (OnPadLeftTouchEastEvent != null)
                 {
                     OnPadLeftTouchEastEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.LeftHand, Gaze_InputTypes.PAD_LEFT_TOUCH_EAST));
-                    actualPressedInputs.Add(Gaze_InputTypes.PAD_LEFT_TOUCH_EAST);
                 }
 
+                actualPressedInputs.Add(Gaze_InputTypes.PAD_LEFT_TOUCH_EAST);
+
                 // If the user is pressing fire the press event
-                if (isLeftStickDown && OnPadLeftPressEastEvent != null)
+                if (isLeftStickDown)
                 {
-                    OnPadLeftPressEastEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.LeftHand, Gaze_InputTypes.PAD_LEFT_PRESS_EAST));
+                    if (OnPadLeftPressEastEvent != null)
+                        OnPadLeftPressEastEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.LeftHand, Gaze_InputTypes.PAD_LEFT_PRESS_EAST));
+
                     actualPressedInputs.Add(Gaze_InputTypes.PAD_LEFT_PRESS_EAST);
                 }
             }
@@ -1131,8 +1134,8 @@ public class Gaze_InputManager : MonoBehaviour
             if (OnLeftTouchpadEvent != null)
             {
                 OnLeftTouchpadEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.LeftHand, Gaze_InputTypes.PAD_LEFT_TOUCH, e.AxisValue));
-                actualPressedInputs.Add(Gaze_InputTypes.PAD_LEFT_TOUCH);
             }
+            actualPressedInputs.Add(Gaze_InputTypes.PAD_LEFT_TOUCH);
         }
         else if (e.AxisValue.x < AXIS_TOLERANCE)
         {
@@ -1144,13 +1147,14 @@ public class Gaze_InputManager : MonoBehaviour
                 if (OnPadLeftTouchWestEvent != null)
                 {
                     OnPadLeftTouchWestEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.LeftHand, Gaze_InputTypes.PAD_LEFT_TOUCH_WEST));
-                    actualPressedInputs.Add(Gaze_InputTypes.PAD_LEFT_TOUCH_WEST);
                 }
+                actualPressedInputs.Add(Gaze_InputTypes.PAD_LEFT_TOUCH_WEST);
 
                 // If the user is pressing fire the press event
-                if (isLeftStickDown && OnPadLeftTouchWestEvent != null)
+                if (isLeftStickDown)
                 {
-                    OnPadLeftPressWestEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.LeftHand, Gaze_InputTypes.PAD_LEFT_PRESS_WEST));
+                    if (OnPadLeftTouchWestEvent != null)
+                        OnPadLeftPressWestEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.LeftHand, Gaze_InputTypes.PAD_LEFT_PRESS_WEST));
                     actualPressedInputs.Add(Gaze_InputTypes.PAD_LEFT_PRESS_WEST);
                 }
             }
@@ -1158,8 +1162,8 @@ public class Gaze_InputManager : MonoBehaviour
             if (OnLeftTouchpadEvent != null)
             {
                 OnLeftTouchpadEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.LeftHand, Gaze_InputTypes.PAD_LEFT_TOUCH, e.AxisValue));
-                actualPressedInputs.Add(Gaze_InputTypes.PAD_LEFT_TOUCH);
             }
+            actualPressedInputs.Add(Gaze_InputTypes.PAD_LEFT_TOUCH);
         }
 
         if (e.AxisValue.y > AXIS_TOLERANCE)
@@ -1172,13 +1176,14 @@ public class Gaze_InputManager : MonoBehaviour
                 if (OnPadLeftTouchSouthEvent != null)
                 {
                     OnPadLeftTouchSouthEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.LeftHand, Gaze_InputTypes.PAD_LEFT_TOUCH_SOUTH));
-                    actualPressedInputs.Add(Gaze_InputTypes.PAD_LEFT_TOUCH_SOUTH);
                 }
+                actualPressedInputs.Add(Gaze_InputTypes.PAD_LEFT_TOUCH_SOUTH);
 
                 // If the user is pressing fire the press event
-                if (isLeftStickDown && OnPadRightPressSouthEvent != null)
+                if (isLeftStickDown)
                 {
-                    OnPadRightPressSouthEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.LeftHand, Gaze_InputTypes.PAD_LEFT_PRESS_SOUTH));
+                    if (OnPadRightPressSouthEvent != null)
+                        OnPadRightPressSouthEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.LeftHand, Gaze_InputTypes.PAD_LEFT_PRESS_SOUTH));
                     actualPressedInputs.Add(Gaze_InputTypes.PAD_LEFT_PRESS_SOUTH);
                 }
             }
@@ -1186,8 +1191,8 @@ public class Gaze_InputManager : MonoBehaviour
             if (OnLeftTouchpadEvent != null)
             {
                 OnLeftTouchpadEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.LeftHand, Gaze_InputTypes.PAD_LEFT_TOUCH, e.AxisValue));
-                actualPressedInputs.Add(Gaze_InputTypes.PAD_LEFT_TOUCH);
             }
+            actualPressedInputs.Add(Gaze_InputTypes.PAD_LEFT_TOUCH);
 
         }
         else if (e.AxisValue.y < AXIS_TOLERANCE)
@@ -1200,13 +1205,14 @@ public class Gaze_InputManager : MonoBehaviour
                 if (OnPadLeftTouchNorthEvent != null)
                 {
                     OnPadLeftTouchNorthEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.LeftHand, Gaze_InputTypes.PAD_LEFT_TOUCH_NORTH));
-                    actualPressedInputs.Add(Gaze_InputTypes.PAD_LEFT_TOUCH_NORTH);
                 }
+                actualPressedInputs.Add(Gaze_InputTypes.PAD_LEFT_TOUCH_NORTH);
 
                 // If the user is pressing fire the press event
-                if (isLeftStickDown && OnPadLeftPressNorthEvent != null)
+                if (isLeftStickDown)
                 {
-                    OnPadLeftTouchNorthEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.LeftHand, Gaze_InputTypes.PAD_LEFT_PRESS_NORTH));
+                    if (OnPadLeftPressNorthEvent != null)
+                        OnPadLeftTouchNorthEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.LeftHand, Gaze_InputTypes.PAD_LEFT_PRESS_NORTH));
                     actualPressedInputs.Add(Gaze_InputTypes.PAD_LEFT_PRESS_NORTH);
                 }
             }
@@ -1214,8 +1220,8 @@ public class Gaze_InputManager : MonoBehaviour
             if (OnLeftTouchpadEvent != null)
             {
                 OnLeftTouchpadEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.LeftHand, Gaze_InputTypes.PAD_LEFT_TOUCH, e.AxisValue));
-                actualPressedInputs.Add(Gaze_InputTypes.PAD_LEFT_TOUCH);
             }
+            actualPressedInputs.Add(Gaze_InputTypes.PAD_LEFT_TOUCH);
         }
     }
 
@@ -1239,13 +1245,14 @@ public class Gaze_InputManager : MonoBehaviour
                 if (OnPadRightTouchEastEvent != null)
                 {
                     OnPadRightTouchEastEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.PAD_RIGHT_TOUCH_EAST));
-                    actualPressedInputs.Add(Gaze_InputTypes.PAD_RIGHT_TOUCH_EAST);
                 }
+                actualPressedInputs.Add(Gaze_InputTypes.PAD_RIGHT_TOUCH_EAST);
 
                 // If the user is pressing fire the press event
-                if (IsRightStickDown && OnPadRightPressEastEvent != null)
+                if (IsRightStickDown)
                 {
-                    OnPadRightPressEastEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.PAD_RIGHT_PRESS_EAST));
+                    if (OnPadRightPressEastEvent != null)
+                        OnPadRightPressEastEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.PAD_RIGHT_PRESS_EAST));
                     actualPressedInputs.Add(Gaze_InputTypes.PAD_RIGHT_PRESS_EAST);
                 }
             }
@@ -1253,8 +1260,8 @@ public class Gaze_InputManager : MonoBehaviour
             if (OnRightTouchpadEvent != null)
             {
                 OnRightTouchpadEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.PAD_RIGHT_TOUCH, e.AxisValue));
-                actualPressedInputs.Add(Gaze_InputTypes.PAD_RIGHT_TOUCH);
             }
+            actualPressedInputs.Add(Gaze_InputTypes.PAD_RIGHT_TOUCH);
         }
         else if (e.AxisValue.x < AXIS_TOLERANCE)
         {
@@ -1266,20 +1273,21 @@ public class Gaze_InputManager : MonoBehaviour
                 if (OnPadRightTouchWestEvent != null)
                 {
                     OnPadRightTouchWestEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.PAD_RIGHT_TOUCH_WEST));
-                    actualPressedInputs.Add(Gaze_InputTypes.PAD_RIGHT_TOUCH_WEST);
                 }
+                actualPressedInputs.Add(Gaze_InputTypes.PAD_RIGHT_TOUCH_WEST);
 
-                if (IsRightStickDown && OnPadRightPressWestEvent != null)
+                if (IsRightStickDown)
                 {
-                    OnPadRightTouchWestEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.PAD_RIGHT_PRESS_WEST));
+                    if (OnPadRightPressWestEvent != null)
+                        OnPadRightTouchWestEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.PAD_RIGHT_PRESS_WEST));
                     actualPressedInputs.Add(Gaze_InputTypes.PAD_RIGHT_PRESS_WEST);
                 }
             }
             if (OnRightTouchpadEvent != null)
             {
                 OnRightTouchpadEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.PAD_RIGHT_TOUCH, e.AxisValue));
-                actualPressedInputs.Add(Gaze_InputTypes.PAD_RIGHT_TOUCH);
             }
+            actualPressedInputs.Add(Gaze_InputTypes.PAD_RIGHT_TOUCH);
         }
 
         if (e.AxisValue.y > AXIS_TOLERANCE)
@@ -1292,12 +1300,13 @@ public class Gaze_InputManager : MonoBehaviour
                 if (OnPadRightTouchSouthEvent != null)
                 {
                     OnPadRightTouchSouthEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.PAD_RIGHT_TOUCH_SOUTH));
-                    actualPressedInputs.Add(Gaze_InputTypes.PAD_RIGHT_TOUCH_SOUTH);
                 }
+                actualPressedInputs.Add(Gaze_InputTypes.PAD_RIGHT_TOUCH_SOUTH);
 
-                if (IsRightStickDown && OnPadRightPressSouthEvent != null)
+                if (IsRightStickDown)
                 {
-                    OnPadRightPressSouthEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.PAD_RIGHT_PRESS_SOUTH));
+                    if (OnPadRightPressSouthEvent != null)
+                        OnPadRightPressSouthEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.PAD_RIGHT_PRESS_SOUTH));
                     actualPressedInputs.Add(Gaze_InputTypes.PAD_RIGHT_PRESS_SOUTH);
                 }
             }
@@ -1305,8 +1314,8 @@ public class Gaze_InputManager : MonoBehaviour
             if (OnRightTouchpadEvent != null)
             {
                 OnRightTouchpadEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.PAD_RIGHT_TOUCH, e.AxisValue));
-                actualPressedInputs.Add(Gaze_InputTypes.PAD_RIGHT_TOUCH);
             }
+            actualPressedInputs.Add(Gaze_InputTypes.PAD_RIGHT_TOUCH);
         }
         else if (e.AxisValue.y < AXIS_TOLERANCE)
         {
@@ -1318,12 +1327,13 @@ public class Gaze_InputManager : MonoBehaviour
                 if (OnPadRightTouchNorthEvent != null)
                 {
                     OnPadRightTouchNorthEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.PAD_RIGHT_TOUCH_NORTH));
-                    actualPressedInputs.Add(Gaze_InputTypes.PAD_RIGHT_TOUCH_NORTH);
                 }
+                actualPressedInputs.Add(Gaze_InputTypes.PAD_RIGHT_TOUCH_NORTH);
 
-                if (IsRightStickDown && OnPadRightPressNorthEvent != null)
+                if (IsRightStickDown)
                 {
-                    OnPadRightPressNorthEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.PAD_RIGHT_PRESS_NORTH));
+                    if (OnPadRightPressNorthEvent != null)
+                        OnPadRightPressNorthEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.PAD_RIGHT_PRESS_NORTH));
                     actualPressedInputs.Add(Gaze_InputTypes.PAD_RIGHT_PRESS_NORTH);
                 }
             }
@@ -1331,8 +1341,8 @@ public class Gaze_InputManager : MonoBehaviour
             if (OnRightTouchpadEvent != null)
             {
                 OnRightTouchpadEvent(new Gaze_InputEventArgs(this.gameObject, UnityEngine.XR.XRNode.RightHand, Gaze_InputTypes.PAD_RIGHT_TOUCH, e.AxisValue));
-                actualPressedInputs.Add(Gaze_InputTypes.PAD_RIGHT_TOUCH);
             }
+            actualPressedInputs.Add(Gaze_InputTypes.PAD_RIGHT_TOUCH);
         }
     }
 
