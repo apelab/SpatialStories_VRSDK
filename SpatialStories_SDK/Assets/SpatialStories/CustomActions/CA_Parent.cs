@@ -5,7 +5,7 @@ using UnityEngine;
 /// This action parents a transform to another transform.
 /// </summary>
 
-[AddComponentMenu("SpatialStories/Custom Actions/Parent")]
+[AddComponentMenu("SpatialStories/Custom Actions/CA_Parent")]
 public class CA_Parent : Gaze_AbstractBehaviour
 {
 
