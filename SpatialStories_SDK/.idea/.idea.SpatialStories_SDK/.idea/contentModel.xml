@@ -1,0 +1,431 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\cmuri\.Rider2018.1\system\resharper-host\Local\Transient\ReSharperHost\v12\SolutionCaches\_SpatialStories_SDK.-1653623338.00" t="ExcludeRecursive" />
+    <e p="C:\Users\cmuri\Desktop\apelab\SpatialStories_SDK\SpatialStories_SDK" t="IncludeRecursive">
+      <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
+      <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
+      <e p="Assets" t="Include">
+        <e p="DarkArts Studios" t="Include">
+          <e p="Screenshot Creator" t="Include">
+            <e p="changes.txt" t="Include" />
+            <e p="Examples" t="Include">
+              <e p="Pro Only" t="Include">
+                <e p="Key press screenshots" t="Include">
+                  <e p="Scripts" t="Include">
+                    <e p="ScreenshotOnKeyPress.cs" t="Include" />
+                  </e>
+                </e>
+              </e>
+            </e>
+          </e>
+        </e>
+        <e p="SpatialStories" t="Include">
+          <e p="_ExampleScenes" t="Include">
+            <e p="Assets" t="Include">
+              <e p="Scripts" t="Include">
+                <e p="Gaze_VivePositioning.cs" t="Include" />
+              </e>
+            </e>
+          </e>
+          <e p="Core" t="Include">
+            <e p="Abstracts" t="Include">
+              <e p="apelab_Factory.cs" t="Include" />
+              <e p="Gaze_AbstractBehaviour.cs" t="Include" />
+              <e p="Gaze_AbstractCollision.cs" t="Include" />
+              <e p="Gaze_AbstractConditions.cs" t="Include" />
+            </e>
+            <e p="Animation" t="Include">
+              <e p="Gaze_AnimationPlayer.cs" t="Include" />
+              <e p="Gaze_AnimationPlaylist.cs" t="Include" />
+            </e>
+            <e p="Audio" t="Include">
+              <e p="Gaze_AudioPlayer.cs" t="Include" />
+              <e p="Gaze_AudioPlayList.cs" t="Include" />
+            </e>
+            <e p="Camera" t="Include">
+              <e p="apelab_ParentCamera.cs" t="Include" />
+              <e p="Gaze_CameraCollider.cs" t="Include" />
+              <e p="Gaze_CameraRaycaster.cs" t="Include" />
+              <e p="Gaze_CameraSwitcher.cs" t="Include" />
+              <e p="Gaze_Collision.cs" t="Include" />
+              <e p="Gaze_GyroRotation.cs" t="Include" />
+              <e p="Gaze_MouseLookController.cs" t="Include" />
+            </e>
+            <e p="Classes" t="Include">
+              <e p="Gaze_Actions.cs" t="Include" />
+              <e p="Gaze_Camera.cs" t="Include" />
+              <e p="Gaze_Catchable.cs" t="Include" />
+              <e p="Gaze_Conditions.cs" t="Include" />
+              <e p="Gaze_ControllerDisconnectedMessage.cs" t="Include" />
+              <e p="Gaze_DistantGrabPointer.cs" t="Include" />
+              <e p="Gaze_Gaze.cs" t="Include" />
+              <e p="Gaze_GrabPositionController.cs" t="Include" />
+              <e p="Gaze_GyroTarget.cs" t="Include" />
+              <e p="Gaze_HandController.cs" t="Include" />
+              <e p="Gaze_HandHover.cs" t="Include" />
+              <e p="Gaze_HashIDs.cs" t="Include" />
+              <e p="Gaze_Head.cs" t="Include" />
+              <e p="Gaze_InputReleaseMap.cs" t="Include" />
+              <e p="Gaze_Interaction.cs" t="Include" />
+              <e p="Gaze_InteractiveObject" t="Include">
+                <e p="Gaze_GrabLogic.cs" t="Include" />
+              </e>
+              <e p="Gaze_InteractiveObject.cs" t="Include" />
+              <e p="Gaze_Manipulation.cs" t="Include" />
+              <e p="Gaze_PlayerTorso.cs" t="Include" />
+              <e p="Gaze_Proximity.cs" t="Include" />
+              <e p="Gaze_SceneLoader.cs" t="Include" />
+              <e p="Gaze_SnapPosition.cs" t="Include" />
+              <e p="Gaze_Teleporter" t="Include">
+                <e p="Gaze_GearVrTeleport.cs" t="Include" />
+                <e p="Gaze_GenericTeleport.cs" t="Include" />
+                <e p="Gaze_Teleporter.cs" t="Include" />
+                <e p="Gaze_TeleportLogic.cs" t="Include" />
+                <e p="Gaze_ViveTeleport.cs" t="Include" />
+              </e>
+              <e p="Gaze_Transform.cs" t="Include" />
+              <e p="Gaze_TriggerCustom.cs" t="Include" />
+              <e p="Gaze_Zoom.cs" t="Include" />
+              <e p="GazeConditions" t="Include">
+                <e p="Gaze_AbstractCondition.cs" t="Include" />
+                <e p="Gaze_Dependency.cs" t="Include" />
+                <e p="Gaze_DragAndDropCondition.cs" t="Include" />
+                <e p="Gaze_GazeCondition.cs" t="Include" />
+                <e p="Gaze_GrabCondition.cs" t="Include" />
+                <e p="Gaze_HandHoverCondition.cs" t="Include" />
+                <e p="Gaze_InputsCondition.cs" t="Include" />
+                <e p="Gaze_ProximityCondition.cs" t="Include" />
+                <e p="Gaze_TeleportCondition.cs" t="Include" />
+                <e p="Gaze_TouchCondition.cs" t="Include" />
+              </e>
+            </e>
+            <e p="Editor" t="Include">
+              <e p="Gaze_ActionsEditor.cs" t="Include" />
+              <e p="Gaze_BillboardAligment.cs" t="Include" />
+              <e p="Gaze_ConditionsEditor.cs" t="Include" />
+              <e p="Gaze_Conditons.cs" t="Include" />
+              <e p="Gaze_Editor.cs" t="Include" />
+              <e p="Gaze_EditorUtils.cs" t="Include" />
+              <e p="Gaze_GameObjectCreator.cs" t="Include" />
+              <e p="Gaze_HierarchyFilterEditor.cs" t="Include" />
+              <e p="Gaze_HierarchyIcons.cs" t="Include" />
+              <e p="Gaze_InteractionEditor.cs" t="Include" />
+              <e p="Gaze_InteractiveObjectEditor.cs" t="Include" />
+              <e p="Gaze_ProximityEditor.cs" t="Include" />
+              <e p="Gaze_RootMotionEditor.cs" t="Include" />
+              <e p="Gaze_SceneLoaderEditor.cs" t="Include" />
+              <e p="Gaze_TeleporterEditor.cs" t="Include" />
+              <e p="Gaze_TriggerCustomEditor.cs" t="Include" />
+              <e p="Input" t="Include">
+                <e p="Gaze_GearVRInputTypes.cs" t="Include" />
+                <e p="Gaze_HTCViveInputTypes.cs" t="Include" />
+                <e p="Gaze_OculusInputTypes.cs" t="Include" />
+                <e p="Gaze_PlatformSpecificToGenericInputMapper.cs" t="Include" />
+              </e>
+              <e p="ListAllConditionsMapsWindow.cs" t="Include" />
+              <e p="ListDependenciesWindow.cs" t="Include" />
+              <e p="ManualTriggerWindow.cs" t="Include" />
+              <e p="S_CollisionMatrix.cs" t="Include" />
+              <e p="ShowDependencyListWindow.cs" t="Include" />
+              <e p="ShowDependencyMapWindow.cs" t="Include" />
+            </e>
+            <e p="Enums" t="Include">
+              <e p="apelab_DragAndDropEditorEnum.cs" t="Include" />
+              <e p="Gaze_AutoTriggerMode.cs" t="Include" />
+              <e p="Gaze_CameraType.cs" t="Include" />
+              <e p="Gaze_CollisionTypes.cs" t="Include" />
+              <e p="Gaze_Controllers.cs" t="Include" />
+              <e p="Gaze_DependencyTriggerEventsAndStates.cs" t="Include" />
+              <e p="Gaze_DezoomMode.cs" t="Include" />
+              <e p="Gaze_DragAndDropStates.cs" t="Include" />
+              <e p="Gaze_FocusLossMode.cs" t="Include" />
+              <e p="Gaze_GrabManagerState.cs" t="Include" />
+              <e p="Gaze_GrabMode.cs" t="Include" />
+              <e p="Gaze_GrabStates.cs" t="Include" />
+              <e p="Gaze_GravityRequestType.cs" t="Include" />
+              <e p="Gaze_GravityState.cs" t="Include" />
+              <e p="Gaze_HandsEnum.cs" t="Include" />
+              <e p="Gaze_HoverStates.cs" t="Include" />
+              <e p="Gaze_LevitationStates.cs" t="Include" />
+              <e p="Gaze_ManipulationModes.cs" t="Include" />
+              <e p="Gaze_ProximityColliderShape.cs" t="Include" />
+              <e p="Gaze_ProximityEventsAndStates.cs" t="Include" />
+              <e p="Gaze_ProximityStates.cs" t="Include" />
+              <e p="Gaze_ReloadMode.cs" t="Include" />
+              <e p="Gaze_TeleportMode.cs" t="Include" />
+              <e p="Gaze_TouchAction.cs" t="Include" />
+              <e p="Gaze_TouchDistanceMode.cs" t="Include" />
+              <e p="Gaze_TriggerDependencyMode.cs" t="Include" />
+              <e p="Gaze_TriggerEventsAndStates.cs" t="Include" />
+              <e p="Gaze_TriggerState.cs" t="Include" />
+              <e p="Input" t="Include">
+                <e p="Gaze_InputTypes.cs" t="Include" />
+              </e>
+            </e>
+            <e p="Events" t="Include">
+              <e p="Gaze_AudioPlayerEventArgs.cs" t="Include" />
+              <e p="Gaze_CollisionEventArgs.cs" t="Include" />
+              <e p="Gaze_ControllerCollisionEventArgs.cs" t="Include" />
+              <e p="Gaze_ControllerGrabEventArgs.cs" t="Include" />
+              <e p="Gaze_ControllerPointingEventArgs.cs" t="Include" />
+              <e p="Gaze_ControllerTouchEventArgs.cs" t="Include" />
+              <e p="Gaze_CustomConditionEventArgs.cs" t="Include" />
+              <e p="Gaze_DependenciesValidatedEventArgs.cs" t="Include" />
+              <e p="Gaze_DragAndDropEventArgs.cs" t="Include" />
+              <e p="Gaze_GazeEventArgs.cs" t="Include" />
+              <e p="Gaze_GrabEventArgs.cs" t="Include" />
+              <e p="Gaze_HandleEventArgs.cs" t="Include" />
+              <e p="Gaze_InputEventArgs.cs" t="Include" />
+              <e p="Gaze_IODestroyEventArgs.cs" t="Include" />
+              <e p="Gaze_LaserEventArgs.cs" t="Include" />
+              <e p="Gaze_LevelCompleteEventArgs.cs" t="Include" />
+              <e p="Gaze_ProximityEventArgs.cs" t="Include" />
+              <e p="Gaze_TriggerEventArgs.cs" t="Include" />
+              <e p="Gaze_TriggerStateEventArgs.cs" t="Include" />
+              <e p="Gaze_ZoomEventArgs.cs" t="Include" />
+            </e>
+            <e p="Managers" t="Include">
+              <e p="Gaze_ControllerCollisionsManager.cs" t="Include" />
+              <e p="Gaze_DragAndDropManager.cs" t="Include" />
+              <e p="Gaze_EventManager.cs" t="Include" />
+              <e p="Gaze_GearVr_DragAndDropManager.cs" t="Include" />
+              <e p="Gaze_GrabManager" t="Include">
+                <e p="Gaze_HandIODetectorFeedback.cs" t="Include" />
+                <e p="Gaze_HandIODetectorKernel.cs" t="Include" />
+              </e>
+              <e p="Gaze_GrabManager.cs" t="Include" />
+              <e p="Gaze_GravityManager.cs" t="Include" />
+              <e p="Gaze_InputManager" t="Include">
+                <e p="Gaze_GearVR_InputLogic.cs" t="Include" />
+                <e p="Gaze_InputConstants.cs" t="Include" />
+                <e p="Gaze_InputLogic.cs" t="Include" />
+                <e p="Gaze_InputManager.cs" t="Include" />
+                <e p="Gaze_OculusRift_InputLogic.cs" t="Include" />
+                <e p="IGaze_OculusRift_InputLogic.cs" t="Include" />
+              </e>
+              <e p="Gaze_LevelManager.cs" t="Include" />
+              <e p="Gaze_SceneInventory.cs" t="Include" />
+            </e>
+            <e p="Maps" t="Include">
+              <e p="apelab_DnDTargetsMap.cs" t="Include" />
+              <e p="Gaze_ActivableMap.cs" t="Include" />
+              <e p="Gaze_DependencyMap.cs" t="Include" />
+              <e p="Gaze_GrabMap.cs" t="Include" />
+              <e p="Gaze_InputsMap.cs" t="Include" />
+              <e p="Gaze_InputsMapEntry.cs" t="Include" />
+              <e p="Gaze_InteractiveObjectVisuals.cs" t="Include" />
+              <e p="Gaze_ProximityMap.cs" t="Include" />
+            </e>
+            <e p="Might Be Integrated" t="Include">
+              <e p="apelab_DnDTargetsModes.cs" t="Include" />
+              <e p="CA_DropObject.cs" t="Include" />
+              <e p="Gaze_CustomConditionActionEnum.cs" t="Include" />
+              <e p="Gaze_GrabActionValues.cs" t="Include" />
+              <e p="Gaze_Levitable.cs" t="Include" />
+              <e p="Gaze_LevitationActivator.cs" t="Include" />
+              <e p="Gaze_LevitationEventArgs.cs" t="Include" />
+              <e p="Gaze_LevitationManager.cs" t="Include" />
+              <e p="Gaze_LevitationTypes.cs" t="Include" />
+              <e p="Gaze_ShowOnlyAttribute.cs" t="Include" />
+              <e p="Gaze_TeleportEventArgs.cs" t="Include" />
+              <e p="TeleportCustomCondition.cs" t="Include" />
+            </e>
+            <e p="OVR" t="Include">
+              <e p="Editor" t="Include">
+                <e p="AndroidManifest.OVRSubmission.xml" t="Include" />
+                <e p="OVRBuild.cs" t="Include" />
+                <e p="OVRManifestPreprocessor.cs" t="Include" />
+                <e p="OVRMoonlightLoader.cs" t="Include" />
+                <e p="OVRScreenshotWizard.cs" t="Include" />
+              </e>
+              <e p="Resources" t="Include">
+                <e p="Underlay Impostor.shader" t="Include" />
+                <e p="Underlay Transparent Occluder.shader" t="Include" />
+                <e p="Unlit Transparent Color.shader" t="Include" />
+              </e>
+              <e p="Scripts" t="Include">
+                <e p="OVRBoundary.cs" t="Include" />
+                <e p="OVRCameraRig.cs" t="Include" />
+                <e p="OVRCommon.cs" t="Include" />
+                <e p="OVRDebugHeadController.cs" t="Include" />
+                <e p="OVRDisplay.cs" t="Include" />
+                <e p="OVRHaptics.cs" t="Include" />
+                <e p="OVRHapticsClip.cs" t="Include" />
+                <e p="OVRInput.cs" t="Include" />
+                <e p="OVRLint.cs" t="Include" />
+                <e p="OVRManager.cs" t="Include" />
+                <e p="OVROnCompleteListener.cs" t="Include" />
+                <e p="OVROverlay.cs" t="Include" />
+                <e p="OVRPlatformMenu.cs" t="Include" />
+                <e p="OVRPlugin.cs" t="Include" />
+                <e p="OVRProfile.cs" t="Include" />
+                <e p="OVRTouchpad.cs" t="Include" />
+                <e p="OVRTracker.cs" t="Include" />
+                <e p="Util" t="Include">
+                  <e p="OVRChromaticAberration.cs" t="Include" />
+                  <e p="OVRCubemapCapture.cs" t="Include" />
+                  <e p="OVRDebugInfo.cs" t="Include" />
+                  <e p="OVRGearVrController.cs" t="Include" />
+                  <e p="OVRGearVrControllerTest.cs" t="Include" />
+                  <e p="OVRGrabbable.cs" t="Include" />
+                  <e p="OVRGrabber.cs" t="Include" />
+                  <e p="OVRGridCube.cs" t="Include" />
+                  <e p="OVRModeParms.cs" t="Include" />
+                  <e p="OVRMonoscopic.cs" t="Include" />
+                  <e p="OVRPlayerController.cs" t="Include" />
+                  <e p="OVRResetOrientation.cs" t="Include" />
+                  <e p="OVRRTOverlayConnector.cs" t="Include" />
+                  <e p="OVRSceneSampleController.cs" t="Include" />
+                  <e p="OVRScreenFade.cs" t="Include" />
+                  <e p="OVRWaitCursor.cs" t="Include" />
+                </e>
+              </e>
+              <e p="Shaders" t="Include">
+                <e p="OVRColorRampAlpha.shader" t="Include" />
+                <e p="Unlit Crosshair.shader" t="Include" />
+              </e>
+            </e>
+            <e p="Scheduler" t="Include">
+              <e p="S_Scheduler.cs" t="Include" />
+              <e p="S_SchedulerTask.cs" t="Include" />
+              <e p="S_SchedulerTaskType.cs" t="Include" />
+            </e>
+            <e p="SpatialStories_Version.cs" t="Include" />
+            <e p="Utils" t="Include">
+              <e p="apelab_BoundingBox.cs" t="Include" />
+              <e p="Billboard.cs" t="Include" />
+              <e p="Fader" t="Include">
+                <e p="Gaze_CameraFader.cs" t="Include" />
+                <e p="Scripts" t="Include">
+                  <e p="AbstractFadeSystem.cs" t="Include" />
+                  <e p="apelab_ScreenFadePostProcess.cs" t="Include" />
+                  <e p="CA_CameraFader.cs" t="Include" />
+                  <e p="FadeInSystem.cs" t="Include" />
+                  <e p="FadeOutSystem.cs" t="Include" />
+                </e>
+                <e p="Shaders" t="Include">
+                  <e p="apelab Sprites-Default.shader" t="Include" />
+                  <e p="Unlit Color ZWrite_OFF.shader" t="Include" />
+                  <e p="Unlit Transparent Color 1.shader" t="Include" />
+                </e>
+              </e>
+              <e p="Gaze_CatmullRomSpline.cs" t="Include" />
+              <e p="Gaze_dpdf.cs" t="Include" />
+              <e p="Gaze_Enums.cs" t="Include" />
+              <e p="Gaze_HandsReplacer.cs" t="Include" />
+              <e p="Gaze_HandsReplacerV2.cs" t="Include" />
+              <e p="Gaze_InputManagerReader.cs" t="Include" />
+              <e p="Gaze_RandomList.cs" t="Include" />
+              <e p="Gaze_RootMotion.cs" t="Include" />
+              <e p="Gaze_UIManager.cs" t="Include" />
+              <e p="Gaze_UnityExtensions.cs" t="Include" />
+              <e p="Gaze_Utils.cs" t="Include" />
+              <e p="InputChecker" t="Include">
+                <e p="Gaze_InputConfig.cs" t="Include" />
+                <e p="Gaze_InputConstants.cs" t="Include" />
+                <e p="Gaze_InputFileManager.cs" t="Include" />
+                <e p="Gaze_InputFileWritter.cs" t="Include" />
+                <e p="Gaze_InputManagerChecker.cs" t="Include" />
+                <e p="Gaze_InputParser.cs" t="Include" />
+                <e p="Gaze_PhysicsChecker.cs" t="Include" />
+                <e p="InputType.cs" t="Include" />
+              </e>
+            </e>
+          </e>
+          <e p="CustomActions" t="Include">
+            <e p="CA_ActivateGameObject.cs" t="Include" />
+            <e p="CA_AlterColliders.cs" t="Include" />
+            <e p="CA_ChangeColor.cs" t="Include" />
+            <e p="CA_ChangeLayer.cs" t="Include" />
+            <e p="CA_ChangeScale.cs" t="Include" />
+            <e p="CA_DeactivateTeleport.cs" t="Include" />
+            <e p="CA_IncrementCounter.cs" t="Include" />
+            <e p="CA_LoadSceneImmediate.cs" t="Include" />
+            <e p="CA_MoveToTransform.cs" t="Include" />
+            <e p="CA_Parent.cs" t="Include" />
+            <e p="CA_ReloadInteractions.cs" t="Include" />
+            <e p="CA_TimelinePlay.cs" t="Include" />
+            <e p="CA_TimelineStop.cs" t="Include" />
+            <e p="CA_UnparentObjectFromEverybody.cs" t="Include" />
+            <e p="CA_Vibrate.cs" t="Include" />
+            <e p="Editor" t="Include">
+              <e p="CA_ChangeLayerEditor.cs" t="Include" />
+            </e>
+          </e>
+          <e p="Input Manager" t="Include">
+            <e p="SS_InputManager.txt" t="Include" />
+          </e>
+          <e p="Resources" t="Include">
+            <e p="GhostShader.shader" t="Include" />
+          </e>
+          <e p="UserInterface" t="Include">
+            <e p="Models" t="Include">
+              <e p="Hands" t="Include">
+                <e p="Models" t="Include">
+                  <e p="Materials" t="Include">
+                    <e p="ToonShader" t="Include">
+                      <e p="Editor" t="Include">
+                        <e p="MKToonFreeEditor.cs" t="Include" />
+                      </e>
+                      <e p="Shader" t="Include">
+                        <e p="Inc" t="Include">
+                          <e p="Common" t="Include">
+                            <e p="MKToonDef.cginc" t="Include" />
+                            <e p="MKToonInc.cginc" t="Include" />
+                            <e p="MKToonLight.cginc" t="Include" />
+                            <e p="MKToonV.cginc" t="Include" />
+                          </e>
+                          <e p="Forward" t="Include">
+                            <e p="MKToonForward.cginc" t="Include" />
+                            <e p="MKToonForwardAddSetup.cginc" t="Include" />
+                            <e p="MKToonForwardBaseSetup.cginc" t="Include" />
+                            <e p="MKToonForwardIO.cginc" t="Include" />
+                          </e>
+                          <e p="Outline" t="Include">
+                            <e p="MKToonOutlineOnlyBase.cginc" t="Include" />
+                            <e p="MKToonOutlineOnlyIO.cginc" t="Include" />
+                            <e p="MKToonOutlineOnlySetup.cginc" t="Include" />
+                          </e>
+                          <e p="ShadowCaster" t="Include">
+                            <e p="MKToonShadowCaster.cginc" t="Include" />
+                            <e p="MKToonShadowCasterIO.cginc" t="Include" />
+                            <e p="MKToonShadowCasterSetup.cginc" t="Include" />
+                          </e>
+                          <e p="Surface" t="Include">
+                            <e p="MKToonSurface.cginc" t="Include" />
+                            <e p="MKToonSurfaceIO.cginc" t="Include" />
+                          </e>
+                        </e>
+                        <e p="ToonShader.shader" t="Include" />
+                      </e>
+                    </e>
+                  </e>
+                </e>
+              </e>
+            </e>
+            <e p="Prefabs" t="Include">
+              <e p="CC_attributions.txt" t="Include" />
+              <e p="Feedback" t="Include">
+                <e p="PointerShader.shader" t="Include" />
+              </e>
+            </e>
+            <e p="Shaders" t="Include">
+              <e p="apelab_Standard.shader" t="Include" />
+              <e p="apelab_StandardNoFog.shader" t="Include" />
+              <e p="apelab_TeleportShader.shader" t="Include" />
+              <e p="apelab_TextShader.shader" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
+      <e p="Library" t="ExcludeRecursive" />
+      <e p="obj" t="ExcludeRecursive" />
+      <e p="packages" t="ExcludeRecursive" />
+      <e p="SpatialStories_SDK.sln" t="IncludeFlat" />
+      <e p="Temp" t="ExcludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+      </e>
+    </e>
+  </component>
+</project>

@@ -28,7 +28,9 @@ public class Gaze_AudioPlayList : System.Object
 
     public AudioClip Add(int i)
     {
-        AudioClip a = new AudioClip();
+        //HACK: Done that in order to make Audioclips in Untiy 2018 (I susect this object creation is not necesary)
+        //TODO: Consider stop creating this audioclips (They are not directly used)
+        AudioClip a = AudioClip.Create("My Clip", 4, 4, 4, true);
         Add(i, a);
         return a;
     }

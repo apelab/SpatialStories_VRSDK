@@ -2,17 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7201fc06-ba8e-44ce-b260-af3bd36929bf" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/Screenshots.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SpatialStories/UserInterface/Models/Hands/Models/hand.fbx.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SpatialStories/UserInterface/Models/Hands/Models/hand.fbx.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SpatialStories/UserInterface/Models/Hands/Models/hand_left_anim.fbx.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SpatialStories/UserInterface/Models/Hands/Models/hand_left_anim.fbx.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SpatialStories/UserInterface/Models/Hands/Models/hand_right_anim.fbx.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SpatialStories/UserInterface/Models/Hands/Models/hand_right_anim.fbx.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SpatialStories_Modules/Watson/SandBox/Standard Assets/Effects/ImageEffects/Scripts/Bloom.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SpatialStories_Modules/Watson/SandBox/Standard Assets/Effects/ImageEffects/Scripts/Bloom.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SpatialStories_Modules/Watson/SandBox/Standard Assets/Effects/ImageEffects/Scripts/BloomAndFlares.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SpatialStories_Modules/Watson/SandBox/Standard Assets/Effects/ImageEffects/Scripts/BloomAndFlares.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SpatialStories_Modules/Watson/SandBox/Standard Assets/Effects/ImageEffects/Scripts/SunShafts.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SpatialStories_Modules/Watson/SandBox/Standard Assets/Effects/ImageEffects/Scripts/SunShafts.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/StudioTests/Animation/SettingsPanel.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/StudioTests/Sprites/Icons.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectVersion.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectVersion.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UnityPackageManager/manifest.json" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.idea.SpatialStories_SDK/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.SpatialStories_SDK/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SpatialStories_SDK/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SpatialStories/Core/Audio/Gaze_AudioPlayList.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SpatialStories/Core/Audio/Gaze_AudioPlayList.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SpatialStories/CustomActions/CA_Vibrate.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SpatialStories/CustomActions/CA_Vibrate.cs" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -22,10 +15,44 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="ExampleSpeechToText.cs" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Assets/SpatialStories_Modules/Watson/SDK/Examples/ServiceExamples/Scripts/ExampleSpeechToText.cs">
-          <provider selected="true" editor-type-id="text-editor" />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="Gaze_AudioPlayList.cs" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Assets/SpatialStories/Core/Audio/Gaze_AudioPlayList.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="521">
+              <caret line="44" column="46" lean-forward="true" selection-start-line="44" selection-start-column="46" selection-end-line="44" selection-end-column="46" />
+              <folding>
+                <marker date="1535495554297" expanded="false" signature="6:78" ph="..." />
+                <marker date="1535495554297" expanded="true" signature="149:1882" ph="{...}" />
+                <marker date="1535495554297" expanded="true" signature="632:667" ph="{...}" />
+                <marker date="1535495554297" expanded="true" signature="700:1015" ph="{...}" />
+                <marker date="1535495554297" expanded="true" signature="715:906" ph="/* HACK: Done that in order to make Audioclips in Untiy 2018 (I susect this object creation is not necesary) ... */" />
+                <marker date="1535495554297" expanded="true" signature="1055:1167" ph="{...}" />
+                <marker date="1535495554297" expanded="true" signature="1215:1250" ph="{...}" />
+                <marker date="1535495554297" expanded="true" signature="1294:1332" ph="{...}" />
+                <marker date="1535495554297" expanded="true" signature="1370:1410" ph="{...}" />
+                <marker date="1535495554297" expanded="true" signature="1439:1480" ph="{...}" />
+                <marker date="1535495554297" expanded="true" signature="1505:1535" ph="{...}" />
+                <marker date="1535495554297" expanded="true" signature="1575:1879" ph="{...}" />
+                <marker date="1535495554297" expanded="true" signature="1600:1873" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CA_Vibrate.cs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Assets/SpatialStories/CustomActions/CA_Vibrate.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="306">
+              <caret line="21" column="40" selection-start-line="21" selection-start-column="40" selection-end-line="21" selection-end-column="40" />
+              <folding>
+                <marker date="1535495162782" expanded="false" signature="6:70" ph="..." />
+                <marker date="1535495162782" expanded="true" signature="120:1096" ph="{...}" />
+                <marker date="1535495162782" expanded="true" signature="405:1094" ph="{...}" />
+                <marker date="1535495162782" expanded="true" signature="473:1088" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
         </entry>
       </file>
     </leaf>
@@ -34,7 +61,16 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Assets/SpatialStories_Modules/Watson/SDK/Examples/ServiceExamples/Scripts/ExampleSpeechToText.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SpatialStories/Core/Audio/Gaze_AudioPlayList.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SpatialStories/CustomActions/CA_Vibrate.cs" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/Assets/SpatialStories/CustomActions/CA_Vibrate.cs" />
+        <option value="$PROJECT_DIR$/Assets/SpatialStories/Core/Audio/Gaze_AudioPlayList.cs" />
+      </list>
+    </option>
   </component>
   <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
   <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
@@ -46,8 +82,8 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-480" />
-    <option name="y" value="268" />
+    <option name="x" value="-188" />
+    <option name="y" value="187" />
     <option name="width" value="1920" />
     <option name="height" value="1013" />
   </component>
@@ -109,37 +145,49 @@
       <option name="presentableId" value="Default" />
       <updated>1535494605120</updated>
       <workItem from="1535494606394" duration="36000" />
+      <workItem from="1535494771586" duration="123000" />
+      <workItem from="1535495081640" duration="476000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="36000" />
+    <option name="totallyTimeSpent" value="635000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-480" y="268" width="1920" height="1013" extended-state="0" />
+    <frame x="-188" y="187" width="1920" height="1013" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="right" id="Errors In Solution" />
-      <window_info anchor="bottom" id="Event Log" side_tool="true" />
-      <window_info anchor="bottom" id="Unit Tests" />
-      <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />
+      <window_info anchor="right" id="Errors In Solution" order="3" />
+      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
+      <window_info anchor="bottom" id="Unit Tests" order="7" />
+      <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Version Control" />
-      <window_info anchor="bottom" id="Terminal" />
-      <window_info anchor="bottom" id="NuGet" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
-      <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
-      <window_info anchor="right" id="Database" />
+      <window_info anchor="bottom" id="Terminal" order="7" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25537634" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="right" id="Database" order="3" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info id="Favorites" side_tool="true" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="bottom" id="NuGet" order="7" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -150,8 +198,77 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Assets/SpatialStories_Modules/Watson/SDK/Examples/ServiceExamples/Scripts/ExampleSpeechToText.cs">
-      <provider selected="true" editor-type-id="text-editor" />
+    <entry file="file://$PROJECT_DIR$/Assets/SpatialStories/Core/Audio/Gaze_AudioPlayList.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="30" selection-start-line="30" selection-end-line="30" />
+          <folding>
+            <marker date="1535495554297" expanded="false" signature="6:78" ph="..." />
+            <marker date="1535495554297" expanded="true" signature="149:1882" ph="{...}" />
+            <marker date="1535495554297" expanded="true" signature="632:667" ph="{...}" />
+            <marker date="1535495554297" expanded="true" signature="700:1015" ph="{...}" />
+            <marker date="1535495554297" expanded="true" signature="715:906" ph="/* HACK: Done that in order to make Audioclips in Untiy 2018 (I susect this object creation is not necesary) ... */" />
+            <marker date="1535495554297" expanded="true" signature="1055:1167" ph="{...}" />
+            <marker date="1535495554297" expanded="true" signature="1215:1250" ph="{...}" />
+            <marker date="1535495554297" expanded="true" signature="1294:1332" ph="{...}" />
+            <marker date="1535495554297" expanded="true" signature="1370:1410" ph="{...}" />
+            <marker date="1535495554297" expanded="true" signature="1439:1480" ph="{...}" />
+            <marker date="1535495554297" expanded="true" signature="1505:1535" ph="{...}" />
+            <marker date="1535495554297" expanded="true" signature="1575:1879" ph="{...}" />
+            <marker date="1535495554297" expanded="true" signature="1600:1873" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/SpatialStories/CustomActions/CA_Vibrate.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="14" column="30" lean-forward="true" selection-start-line="14" selection-start-column="30" selection-end-line="14" selection-end-column="31" />
+          <folding>
+            <marker date="1535495162782" expanded="false" signature="6:70" ph="..." />
+            <marker date="1535495162782" expanded="true" signature="120:1096" ph="{...}" />
+            <marker date="1535495162782" expanded="true" signature="405:1094" ph="{...}" />
+            <marker date="1535495162782" expanded="true" signature="473:1088" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/SpatialStories_Modules/Watson/SDK/Examples/ServiceExamples/Scripts/ExampleSpeechToText.cs" />
+    <entry file="file://$PROJECT_DIR$/Assets/SpatialStories_Modules/Watson/SDK/Examples/ServiceExamples/Scripts/ExampleSpeechToText.cs" />
+    <entry file="file://$PROJECT_DIR$/Assets/SpatialStories/CustomActions/CA_Vibrate.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="21" column="40" selection-start-line="21" selection-start-column="40" selection-end-line="21" selection-end-column="40" />
+          <folding>
+            <marker date="1535495162782" expanded="false" signature="6:70" ph="..." />
+            <marker date="1535495162782" expanded="true" signature="120:1096" ph="{...}" />
+            <marker date="1535495162782" expanded="true" signature="405:1094" ph="{...}" />
+            <marker date="1535495162782" expanded="true" signature="473:1088" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/SpatialStories/Core/Audio/Gaze_AudioPlayList.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="521">
+          <caret line="44" column="46" lean-forward="true" selection-start-line="44" selection-start-column="46" selection-end-line="44" selection-end-column="46" />
+          <folding>
+            <marker date="1535495554297" expanded="false" signature="6:78" ph="..." />
+            <marker date="1535495554297" expanded="true" signature="149:1882" ph="{...}" />
+            <marker date="1535495554297" expanded="true" signature="632:667" ph="{...}" />
+            <marker date="1535495554297" expanded="true" signature="700:1015" ph="{...}" />
+            <marker date="1535495554297" expanded="true" signature="715:906" ph="/* HACK: Done that in order to make Audioclips in Untiy 2018 (I susect this object creation is not necesary) ... */" />
+            <marker date="1535495554297" expanded="true" signature="1055:1167" ph="{...}" />
+            <marker date="1535495554297" expanded="true" signature="1215:1250" ph="{...}" />
+            <marker date="1535495554297" expanded="true" signature="1294:1332" ph="{...}" />
+            <marker date="1535495554297" expanded="true" signature="1370:1410" ph="{...}" />
+            <marker date="1535495554297" expanded="true" signature="1439:1480" ph="{...}" />
+            <marker date="1535495554297" expanded="true" signature="1505:1535" ph="{...}" />
+            <marker date="1535495554297" expanded="true" signature="1575:1879" ph="{...}" />
+            <marker date="1535495554297" expanded="true" signature="1600:1873" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
     </entry>
   </component>
 </project>
