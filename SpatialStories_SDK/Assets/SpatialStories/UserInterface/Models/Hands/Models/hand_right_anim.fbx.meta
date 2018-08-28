@@ -1,9 +1,7 @@
 fileFormatVersion: 2
 guid: cde54a68b95c7c64c8fdf8b42d0e4974
-timeCreated: 1485771840
-licenseType: Free
 ModelImporter:
-  serializedVersion: 22
+  serializedVersion: 23
   fileIDToRecycleName:
     100000: Hand.control.L
     100002: Hand.control.L_end
@@ -82,6 +80,7 @@ ModelImporter:
     7400002: hand1|right_rockitbitch
     9500000: //RootNode
     13700000: hand1
+    2186277476908879412: ImportLogs
   externalObjects:
   - first:
       type: UnityEngine:Material
@@ -106,6 +105,7 @@ ModelImporter:
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
+    importConstraints: 0
     animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
@@ -137,6 +137,8 @@ ModelImporter:
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
+    previousCalculatedGlobalScale: 0.01
+    hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 151
     normalImportMode: 1
