@@ -35,6 +35,7 @@ namespace SpatialStories
                     Gaze_CameraRaycaster.DetectedObjectThisFrame = true;
                     if (!previousGazedObjects.Contains(h.collider.gameObject))
                     {
+                        Debug.LogError("++IN++COLLIDED OBJECT =" + h.collider.gameObject.name);
                         FireGazeEvent(h.collider.gameObject, true, Gaze_GazeConstraints.OBJECT);
                     }
                 }
@@ -45,6 +46,7 @@ namespace SpatialStories
                     {
                         if (!currentGazedObjects.Contains(p))
                         {
+                            Debug.LogError("--OUT--COLLIDED OBJECT =" + p.name);
                             FireGazeEvent(p, false, Gaze_GazeConstraints.OBJECT);
                         }
                     }
@@ -63,7 +65,7 @@ namespace SpatialStories
             PerformUnityRaycast();
             PerformArCoreRaycast();
             
-            if (hits != null && hits.Count > 0 && !Gaze_CameraRaycaster.DetectedPlaneThisFrame)
+            if (hits != null && hits.Count > 0)
             {
                 HandleNewGazedObjects();
             }
@@ -81,14 +83,8 @@ namespace SpatialStories
 
             if (m_arCoreSession != null)
             {
-                if (m_arCoreSession.SessionConfig.AugmentedImageDatabase == null)
-                {
-                    PerformArCoreRaycastPlane();
-                }
-                else
-                {
-                    PerformArCoreImageRecognition();
-                }                
+                if (m_arCoreSession.SessionConfig.PlaneFindingMode != DetectedPlaneFindingMode.Disabled) PerformArCoreRaycastPlane();
+                if (m_arCoreSession.SessionConfig.AugmentedImageDatabase != null) PerformArCoreImageRecognition();
             }
         }
 

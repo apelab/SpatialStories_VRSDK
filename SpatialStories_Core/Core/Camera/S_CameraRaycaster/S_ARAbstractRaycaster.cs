@@ -65,6 +65,7 @@ namespace SpatialStories
                 // for each one of the previous gazed object
                 foreach (GameObject p in previousGazedObjects)
                 {
+                    Debug.LogError("--OUT--(2)COLLIDED OBJECT =" + p.name);
                     FireGazeEvent(p, false, Gaze_GazeConstraints.OBJECT);
                 }
 

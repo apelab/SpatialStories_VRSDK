@@ -23,13 +23,10 @@ public class S_ARCoreController : MonoBehaviour
     // PUBLIC MEMBERS
     // -------------------------------------------
     public bool EnablePlaneRecognition = true;
+    public bool EnableImageRecognition = true;
 
-    [Header("PLANE DETECTOR")]
-    public ARCoreSessionConfig PlaneSessionConfig;
+    public ARCoreSessionConfig ARCoreSessionConfig;
     public GameObject SearchingForPlaneUI;
-
-    [Header("IMAGE DETECTOR")]
-    public ARCoreSessionConfig ImageSessionConfig;
     public GameObject FitToScanOverlay;
 
     // -------------------------------------------
@@ -46,16 +43,9 @@ public class S_ARCoreController : MonoBehaviour
     private void Awake()
     {
         ARCoreSession arCoreSession = GameObject.FindObjectOfType<ARCoreSession>();
-        if (EnablePlaneRecognition)
-        {
-            arCoreSession.SessionConfig = PlaneSessionConfig;
-        }
-        else
-        {
-            arCoreSession.SessionConfig = ImageSessionConfig;
-        }
+        arCoreSession.SessionConfig = ARCoreSessionConfig;
         BasicSystemEventController.Instance.BasicSystemEvent += new BasicSystemEventHandler(OnBasicSystemEvent);
-        FitToScanOverlay.SetActive(true);
+        if (FitToScanOverlay != null) FitToScanOverlay.SetActive(true);
     }
 
     /// <summary>
@@ -73,7 +63,7 @@ public class S_ARCoreController : MonoBehaviour
         }
         if (_nameEvent == S_ARCoreCameraRaycaster.EVENT_ARCORECAMERA_RAYCAST_IMAGE_ANCHOR)
         {
-            FitToScanOverlay.SetActive(false);
+            if (FitToScanOverlay != null) FitToScanOverlay.SetActive(false);
         }
     }
 
@@ -96,7 +86,7 @@ public class S_ARCoreController : MonoBehaviour
         {
             UpdatePlaneRecognition();
         }
-        else
+        if (EnableImageRecognition)
         {
             UpdateImageRecognition();
         }
@@ -118,7 +108,7 @@ public class S_ARCoreController : MonoBehaviour
             }
         }
 
-        SearchingForPlaneUI.SetActive(showSearchingUI);
+        if (SearchingForPlaneUI!=null) SearchingForPlaneUI.SetActive(showSearchingUI);
     }
 
     /// <summary>
