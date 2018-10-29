@@ -3,6 +3,7 @@
 using UnityEditor;
 #endif
 using UnityEngine;
+using YourCommonTools;
 
 namespace Gaze
 {
@@ -65,23 +66,39 @@ namespace Gaze
             }
         }
 
+        private void CheckObjectInside()
+        {
+            
+        }
+
         private void PerformObjectLogic(Gaze_GazeEventArgs _e)
         {
             // if sender is the gazable collider GameObject specified in the InteractiveObject Gaze field
             if (_e.Sender != null && gazeCollider != null)
             {
-                if(constraints == Gaze_GazeConstraints.ANY_OBJECT || (GameObject)_e.Sender == gazeCollider.gameObject)
+                if (constraints == Gaze_GazeConstraints.ANY_OBJECT || Utilities.FindGameObjectInChilds(gazeCollider.gameObject.transform.parent.gameObject, ((GameObject)_e.Sender)))
                 {
+                    if (constraints == Gaze_GazeConstraints.ANY_OBJECT)
+                    {
+                        Debug.LogError("PerformObjectLogic::STEP 3::ANY OBJECT");
+                    }
+                    else
+                    {
+                        Debug.LogError("PerformObjectLogic::STEP 3::OBJECT["+ gazeCollider.gameObject.name + "]");
+                    }
+                    
                     // check if gaze is set to IN or OUT, and set IsValid accordingly
                     if (gazeConditionsScript.gazeIn)
                     {
                         IsValid = _e.IsGazed;
                         validToEditorGUI = IsValid;
+                        Debug.LogError("PerformObjectLogic::STEP 4::GAZE IN++");
                     }
                     else
                     {
                         IsValid = !_e.IsGazed;
                         validToEditorGUI = IsValid;
+                        Debug.LogError("PerformObjectLogic::STEP 4::GAZE OUT--");
                     }
                 }
             }
@@ -119,7 +136,7 @@ namespace Gaze
             {
                 PerformImageLogic(_e);
             }
-            else if(_e.TargetType != Gaze_GazeConstraints.PLANE)
+            else if(_e.TargetType == Gaze_GazeConstraints.OBJECT)
             {
                 PerformObjectLogic(_e);
             }            
