@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
+#if UNITY_IOS
 using UnityEngine.XR.iOS;
+#endif
 using GoogleARCore;
 using SpatialStories;
 

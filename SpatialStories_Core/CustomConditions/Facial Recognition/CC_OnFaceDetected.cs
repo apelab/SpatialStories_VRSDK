@@ -1,8 +1,11 @@
 ﻿using Gaze;
+#if UNITY_IOS
 using UnityEngine.XR.iOS;
+#endif
 
 public class CC_OnFaceDetected : Gaze_AbstractConditions
 {
+#if UNITY_IOS
     private void OnEnable()
     {
         UnityARSessionNativeInterface.ARFaceAnchorAddedEvent += FaceAdded;
@@ -17,4 +20,5 @@ public class CC_OnFaceDetected : Gaze_AbstractConditions
     {
         UnityARSessionNativeInterface.ARFaceAnchorAddedEvent -= FaceAdded;
     }
+#endif
 }

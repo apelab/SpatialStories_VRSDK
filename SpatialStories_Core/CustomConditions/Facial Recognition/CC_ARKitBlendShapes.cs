@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+#if UNITY_IOS
 using UnityEngine.XR.iOS;
+#endif
 
 namespace Gaze
 {
@@ -89,9 +91,11 @@ namespace Gaze
             for (int i = 0; i < blendShapesStates.Length; i++)
                 blendShapesStates[i] = false;
 
+#if UNITY_IOS
             UnityARSessionNativeInterface.ARFaceAnchorAddedEvent += FaceAdded;
             UnityARSessionNativeInterface.ARFaceAnchorUpdatedEvent += FaceUpdated;
             UnityARSessionNativeInterface.ARFaceAnchorRemovedEvent += FaceRemoved;
+#endif
         }
 
         private void OnDisable()
@@ -99,11 +103,14 @@ namespace Gaze
             if (!Application.isPlaying)
                 return;
 
+#if UNITY_IOS
             UnityARSessionNativeInterface.ARFaceAnchorAddedEvent -= FaceAdded;
             UnityARSessionNativeInterface.ARFaceAnchorUpdatedEvent -= FaceUpdated;
             UnityARSessionNativeInterface.ARFaceAnchorRemovedEvent -= FaceRemoved;
+#endif
         }
 
+#if UNITY_IOS
         private void FaceRemoved(ARFaceAnchor anchorData)
         {
             isActive = false;
@@ -168,7 +175,7 @@ namespace Gaze
         {
             isActive = true;
         }
-
+#endif
         public void Validate()
         {
             ValidateCustomCondition(true);

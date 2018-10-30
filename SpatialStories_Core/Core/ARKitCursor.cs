@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using Gaze;
+#if UNITY_IOS
 using UnityEngine.XR.iOS;
+#endif
 
 public class ARKitCursor : MonoBehaviour
 {

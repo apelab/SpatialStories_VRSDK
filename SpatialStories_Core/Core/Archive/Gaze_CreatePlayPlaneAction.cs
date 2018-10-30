@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+#if UNITY_IOS
 using UnityEngine.XR.iOS;
+#endif
 using System;
 
 public class Gaze_CreatePlayPlaneAction : MonoBehaviour {
@@ -40,6 +42,7 @@ public class Gaze_CreatePlayPlaneAction : MonoBehaviour {
 		vertices = new List<Vector3> (4);
 	}
 
+#if UNITY_IOS
 	bool HitTestWithResultType (ARPoint point, ARHitTestResultType resultTypes)
 	{
 		List<ARHitTestResult> hitResults = UnityARSessionNativeInterface.GetARSessionNativeInterface ().HitTest (point, resultTypes);
@@ -86,6 +89,7 @@ public class Gaze_CreatePlayPlaneAction : MonoBehaviour {
 		}
 		return false;
 	}
+#endif
 
 	// Update is called once per frame
 	void Update () {
@@ -95,6 +99,7 @@ public class Gaze_CreatePlayPlaneAction : MonoBehaviour {
 			if (/*touch.phase == TouchPhase.Began || touch.phase == TouchPhase.Moved ||*/ touch.phase == TouchPhase.Ended)
 			{
 				var screenPosition = Camera.main.ScreenToViewportPoint(touch.position);
+#if UNITY_IOS
 				ARPoint point = new ARPoint {
 					x = screenPosition.x,
 					y = screenPosition.y
@@ -116,7 +121,8 @@ public class Gaze_CreatePlayPlaneAction : MonoBehaviour {
 						return;
 					}
 				}
-			}
-		}
+#endif
+            }
+        }
 	}
 }

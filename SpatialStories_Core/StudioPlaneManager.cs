@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
+#if UNITY_IOS
 using UnityEngine.XR.iOS;
+#endif
 using System.Collections.Generic;
 using GoogleARCore;
 
@@ -17,24 +19,27 @@ public class StudioPlaneManager : MonoBehaviour
 
         //NOTE: Used to make sure that planes will not be visible if they shouldn't
 #if UNITY_ANDROID
-#else
+#elif UNITY_IOS
         UnityARGeneratePlane planeGenerator = FindObjectOfType<UnityARGeneratePlane>();
 		if (planeGenerator != null && planeGenerator.planePrefab != null){
 			StudioPlane plane = planeGenerator.planePrefab.GetComponent<StudioPlane>();
 			if(plane == null)
 				planeGenerator.planePrefab.AddComponent<StudioPlane>();
 		}
-            
+#else
+
 #endif
     }
 
     private void OnEnable()
     {
 #if UNITY_ANDROID
-#else
+#elif UNITY_IOS
         UnityARSessionNativeInterface.ARAnchorAddedEvent += PlanesUpdated;
 		UnityARSessionNativeInterface.ARAnchorUpdatedEvent += PlanesUpdated;
 		UnityARSessionNativeInterface.ARAnchorRemovedEvent += PlanesUpdated;
+#else
+
 #endif
 
     }
@@ -42,14 +47,16 @@ public class StudioPlaneManager : MonoBehaviour
     private void OnDisable()
     {
 #if UNITY_ANDROID
+#elif UNITY_IOS
+        UnityARSessionNativeInterface.ARAnchorAddedEvent -= PlanesUpdated;
+        UnityARSessionNativeInterface.ARAnchorUpdatedEvent -= PlanesUpdated;
+        UnityARSessionNativeInterface.ARAnchorRemovedEvent -= PlanesUpdated;
 #else
-		UnityARSessionNativeInterface.ARAnchorAddedEvent -= PlanesUpdated;
-		UnityARSessionNativeInterface.ARAnchorUpdatedEvent -= PlanesUpdated;
-		UnityARSessionNativeInterface.ARAnchorRemovedEvent -= PlanesUpdated;
+
 #endif
     }
 
-    private void PlanesUpdated(ARPlaneAnchor arPlaneAnchor)
+    private void PlanesUpdated()
     {
         UpdatePlanesVisibility();
     }
@@ -64,7 +71,7 @@ public class StudioPlaneManager : MonoBehaviour
             r.enabled = ArePlanesVisible;
             // t.enabled = ArePlanesVisible;
         }
-#else
+#elif UNITY_IOS
         int counter = registeredPlanes.Count;
         for (int i = 0; i < counter; ++i)
         {
@@ -74,8 +81,10 @@ public class StudioPlaneManager : MonoBehaviour
                renderers[j].enabled = ArePlanesVisible;   
             }
         }
+#else
+
 #endif
-        
+
     }
 
     public void SetPlanesVisibility(bool _active)
@@ -91,18 +100,21 @@ public class StudioPlaneManager : MonoBehaviour
         
 		registeredPlanes.Add(_plane);
 #if UNITY_ANDROID
+#elif UNITY_IOS
+        registeredPlanesRenderers.Add(_plane.GetInstanceID(), _plane.GetComponentsInChildren<Renderer>());
 #else
-		registeredPlanesRenderers.Add(_plane.GetInstanceID(), _plane.GetComponentsInChildren<Renderer>());
 #endif
-		
+
         UpdatePlanesVisibility();
     }
 
     public void UnRegisterPlane(GameObject _plane)
     {
 #if UNITY_ANDROID
-#else
+#elif UNITY_IOS
         registeredPlanes.Remove(_plane);
+#else
+
 #endif
         registeredPlanesRenderers.Remove(_plane.GetInstanceID());
     }
