@@ -5,7 +5,6 @@ using SpatialStories;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using YourCommonTools;
 
 #if UNITY_EDITOR
 // Set up touch input propagation while using Instant Preview in the editor.
@@ -44,14 +43,14 @@ public class S_ARCoreController : MonoBehaviour
     {
         ARCoreSession arCoreSession = GameObject.FindObjectOfType<ARCoreSession>();
         arCoreSession.SessionConfig = ARCoreSessionConfig;
-        BasicSystemEventController.Instance.BasicSystemEvent += new BasicSystemEventHandler(OnBasicSystemEvent);
+        SpatialStoriesEventController.Instance.SpatialStoriesEvent += new SpatialStoriesEventHandler(OnSpatialStoriesEvent);
         if (FitToScanOverlay != null) FitToScanOverlay.SetActive(true);
     }
 
     /// <summary>
     /// Basic System Event manager
     /// </summary>
-    private void OnBasicSystemEvent(string _nameEvent, object[] _list)
+    private void OnSpatialStoriesEvent(string _nameEvent, object[] _list)
     {
         if (_nameEvent == EVENT_ARCORE_CONTROLLER_DISABLE_DETECTION)
         {
@@ -72,7 +71,7 @@ public class S_ARCoreController : MonoBehaviour
     /// </summary>
     private void OnDestroy()
     {
-        BasicSystemEventController.Instance.BasicSystemEvent -= OnBasicSystemEvent;
+        SpatialStoriesEventController.Instance.SpatialStoriesEvent -= OnSpatialStoriesEvent;
     }
 
     /// <summary>

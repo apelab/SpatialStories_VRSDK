@@ -3,7 +3,6 @@
 using UnityEditor;
 #endif
 using UnityEngine;
-using YourCommonTools;
 
 namespace Gaze
 {

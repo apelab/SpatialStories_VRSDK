@@ -2,7 +2,6 @@
 using UnityEngine;
 using System.Collections.Generic;
 using GoogleARCore;
-using YourCommonTools;
 
 namespace SpatialStories
 {
@@ -140,7 +139,7 @@ namespace SpatialStories
 
                     m_goImageReferences.Clear();
                     m_goImageReferences.Add(image.DatabaseIndex, goReference);
-                    BasicSystemEventController.Instance.DispatchBasicSystemEvent(EVENT_ARCORECAMERA_RAYCAST_IMAGE_ANCHOR, anchor);
+                    SpatialStoriesEventController.Instance.DispatchBasicSystemEvent(EVENT_ARCORECAMERA_RAYCAST_IMAGE_ANCHOR, anchor);
 
                     FireGazeEvent(image.Name, true, Gaze_GazeConstraints.IMAGE);
                 }

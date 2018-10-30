@@ -3,7 +3,6 @@ using Gaze;
 using GoogleARCore;
 using SpatialStories;
 using UnityEngine;
-using YourCommonTools;
 
 public class CA_ARKitMove : Gaze_AbstractBehaviour {
 
@@ -20,15 +19,15 @@ public class CA_ARKitMove : Gaze_AbstractBehaviour {
         if (DeactivateAtStart)
             ObjectToMove.SetActive(false);
 
-        BasicSystemEventController.Instance.BasicSystemEvent += new BasicSystemEventHandler(OnBasicSystemEvent);
+        SpatialStoriesEventController.Instance.SpatialStoriesEvent += new SpatialStoriesEventHandler(OnSpatialStoriesEvent);
     }
 
     void OnDestroy()
     {
-        BasicSystemEventController.Instance.BasicSystemEvent -= OnBasicSystemEvent;
+        SpatialStoriesEventController.Instance.SpatialStoriesEvent -= OnSpatialStoriesEvent;
     }
 
-    private void OnBasicSystemEvent(string _nameEvent, object[] _list)
+    private void OnSpatialStoriesEvent(string _nameEvent, object[] _list)
     {
         if (_nameEvent == S_ARCoreCameraRaycaster.EVENT_ARCORECAMERA_RAYCAST_IMAGE_ANCHOR)
         {
@@ -83,7 +82,7 @@ public class CA_ARKitMove : Gaze_AbstractBehaviour {
             ObjectToMove.SetActive(true);
         }
 
-        BasicSystemEventController.Instance.DispatchBasicSystemEvent(S_ARCoreController.EVENT_ARCORE_CONTROLLER_DISABLE_DETECTION);
+        SpatialStoriesEventController.Instance.DispatchBasicSystemEvent(S_ARCoreController.EVENT_ARCORE_CONTROLLER_DISABLE_DETECTION);
     }
 
     private void SetLocalPosition(Anchor _anchor, Vector3 _pos)
