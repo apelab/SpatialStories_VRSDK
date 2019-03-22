@@ -382,11 +382,15 @@ namespace Gaze
             transform.position = targetTransform.position;
             transform.rotation = targetTransform.transform.rotation;
 
+            //Attempt n.1
             ///Previously this statement was if(wasTeleportAllowed) and it made the teleport inactive after dropping an object.
             ///Now this is always true so Teleport gets always reactivated.
             ///This fix apparently solves this bug but further investigations are suggested while maybe keeping on-hold the whole "Snap Before Drop" option.
-            if (!wasTeleportAllowed)
-                Gaze_Teleporter.IsTeleportAllowed = true;
+            //if (!wasTeleportAllowed) - It still doesn't work as expected...
+            //Attempt n.2
+            //Made the if statement dependent to previous Gaze_Teleporter.IsTeleportAllowe bool
+            if(!Gaze_Teleporter.IsTeleportAllowed)
+             Gaze_Teleporter.IsTeleportAllowed = true;
         }
 
         private float QuadEaseOut(float time, float startVal, float changeInVal, float duration)
