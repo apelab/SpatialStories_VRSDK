@@ -389,7 +389,8 @@ namespace Gaze
             //if (!wasTeleportAllowed) - It still doesn't work as expected...
             //Attempt n.2
             //Made the if statement dependent to previous Gaze_Teleporter.IsTeleportAllowe bool
-            if(!Gaze_Teleporter.IsTeleportAllowed)
+            //Attempt n.3 Teleport Always reactivated at the end of the coroutine! NOTE: If this doesn't work we can try force reactivation everytime Coroutine is Stopped in UnSnap()
+            //if(!Gaze_Teleporter.IsTeleportAllowed)
              Gaze_Teleporter.IsTeleportAllowed = true;
         }
 
