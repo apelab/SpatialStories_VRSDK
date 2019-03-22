@@ -386,16 +386,7 @@ namespace Gaze
             if (wasTeleportAllowed)
                 Gaze_Teleporter.IsTeleportAllowed = true;
 
-            //Attempt n.1
-            ///Previously this statement was if(wasTeleportAllowed) and it made the teleport inactive after dropping an object.
-            ///Now this is always true so Teleport gets always reactivated.
-            ///This fix apparently solves this bug but further investigations are suggested while maybe keeping on-hold the whole "Snap Before Drop" option.
-           
-            //Attempt n.2
-            //Made the if statement dependent to previous Gaze_Teleporter.IsTeleportAllowe bool
-            //Attempt n.3 Teleport Always reactivated at the end of the coroutine! NOTE: If this doesn't work we can try force reactivation everytime Coroutine is Stopped in UnSnap()
-            //if(!Gaze_Teleporter.IsTeleportAllowed)
-            // 
+
         }
 
         private float QuadEaseOut(float time, float startVal, float changeInVal, float duration)
@@ -413,7 +404,7 @@ namespace Gaze
                 m_SnapCoroutine = null;
 
             }
-
+            //in case it remained inactive from the SnapCoroutine
             Gaze_Teleporter.IsTeleportAllowed = true;
             transform.SetParent(null);
         }
@@ -435,6 +426,8 @@ namespace Gaze
             {
                 PickUp();
             }
+
+           
 
         }
 
