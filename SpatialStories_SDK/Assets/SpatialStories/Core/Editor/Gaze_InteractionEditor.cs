@@ -214,7 +214,7 @@ namespace Gaze
         private void InitMembers()
         {
             #region Logo
-            logo = (Texture)Resources.Load("SpatialStorires_Logo_256", typeof(Texture));
+            logo = (Texture)Resources.Load("SpatialStories_Logo", typeof(Texture));
             logoRect = new Rect();
             logoRect.width = logo.width;
             logoRect.height = logo.height;
