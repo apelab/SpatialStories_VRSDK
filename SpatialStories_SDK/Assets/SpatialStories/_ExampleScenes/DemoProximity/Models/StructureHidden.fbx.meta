@@ -1,9 +1,7 @@
 fileFormatVersion: 2
-guid: fb28ea01e2a91014d83d77a258ef82dd
-timeCreated: 1511972977
-licenseType: Pro
+guid: 950d93e6faca0af409f42662f9985b74
 ModelImporter:
-  serializedVersion: 22
+  serializedVersion: 23
   fileIDToRecycleName:
     100000: hiddenstage_colonne_milieu
     100002: hiddenstage_colonneEscalier
@@ -97,32 +95,32 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: brick
-    second: {fileID: 2100000, guid: 40f888d00041c0e4f82d86ab91568422, type: 2}
+    second: {fileID: 2100000, guid: 8c0f6109141ca8d4ea70a3c6379b455f, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: escalier
-    second: {fileID: 2100000, guid: 265f2f9415a6b8a49a09dec79e932d5a, type: 2}
+    second: {fileID: 2100000, guid: 0b682b53aec43454b9305ca2702f4225, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: poutres+rebord
-    second: {fileID: 2100000, guid: 64be24f0510581d47a69d80fbd9f2f0c, type: 2}
+    second: {fileID: 2100000, guid: 3702b8fede5aaa24d942e38358970972, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: sol
-    second: {fileID: 2100000, guid: 4f668f5b42c28ac458ef062aa9a489b2, type: 2}
+    second: {fileID: 2100000, guid: 47e9e222102dcd3449717f69bc9c5556, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: stagetstructure
-    second: {fileID: 2100000, guid: 6bbd106fc95f8764380752881df0ca57, type: 2}
+    second: {fileID: 2100000, guid: 2b4628a0f5aaa2241b69bb40f453088a, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: tiles_wood
-    second: {fileID: 2100000, guid: c3c19979def76a746947affb46b080e8, type: 2}
+    second: {fileID: 2100000, guid: b42c8f9e72f0faf4ea2d0e881e01329d, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -141,6 +139,7 @@ ModelImporter:
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
+    importConstraints: 0
     animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
@@ -155,6 +154,7 @@ ModelImporter:
     globalScale: 0.1
     meshCompression: 0
     addColliders: 0
+    useSRGBMaterialColor: 1
     importVisibility: 0
     importBlendShapes: 0
     importCameras: 0
@@ -165,16 +165,23 @@ ModelImporter:
     optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 0
+    preserveHierarchy: 0
+    indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 3
     normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 1
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
   importAnimation: 1
   copyAvatar: 0
   humanDescription:
@@ -189,7 +196,6 @@ ModelImporter:
     legStretch: 0.05
     feetSpacing: 0
     rootMotionBoneName: 
-    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
