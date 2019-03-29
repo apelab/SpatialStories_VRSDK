@@ -24,12 +24,12 @@ EditorBuildSettings:
     path: 
     guid: 00000000000000000000000000000000
   - enabled: 0
-    path: Assets/Old_Demos/DemoDragAndDrop/DemoDragAndDrop.unity
+    path: Assets/SpatialStories/_ExampleScenes/OLD_Demos/DemoDragAndDrop/DemoDragAndDrop.unity
     guid: 49a3fbe036142204baab033130a84521
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
   - enabled: 0
-    path: Assets/Old_Demos/DemoManipulation/DemoManipulation.unity
+    path: Assets/SpatialStories/_ExampleScenes/OLD_Demos/DemoManipulation/DemoManipulation.unity
     guid: 2b31157793d1bb5438c0919f00909d15
   m_configObjects: {}
