@@ -9182,7 +9182,7 @@ MonoBehaviour:
     grabStateRightIndex: 0
   customConditions: []
   triggerStateIndex: 0
-  delayDuration: 8
+  delayDuration: 5
   delayed: 0
   isDelayRandom: 0
   delayRange:
