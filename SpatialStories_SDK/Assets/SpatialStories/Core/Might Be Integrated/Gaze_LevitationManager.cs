@@ -645,10 +645,14 @@ namespace Gaze
 
             if (e.Type.Equals(Gaze_LevitationTypes.LEVITATE_START))
             {
+
+               
                 IOToLevitate = Gaze_Utils.GetIOFromGameObject(e.ObjectToLevitate);
                 Gaze_GravityManager.ChangeGravityState(IOToLevitate, Gaze_GravityRequestType.UNLOCK);
                 Gaze_GravityManager.ChangeGravityState(IOToLevitate, Gaze_GravityRequestType.ACTIVATE_AND_DETACH);
-                IOToLevitate.SetActualGravityStateAsDefault();
+                //This line was commented as it causes gravity not being reactivated properly.
+                //Unfortunately the Gravity State that gets read and written here is not correct.
+                //IOToLevitate.SetActualGravityStateAsDefault();
                 targetLocation.transform.position = IOToLevitate.transform.position;
                 UpdateBeamControlPoints();
                 Gaze_Teleporter.IsTeleportAllowed = false;
