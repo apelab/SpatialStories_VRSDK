@@ -64,7 +64,8 @@ namespace Gaze
                 EditorGUILayout.BeginVertical();
                 if (hierarchyAudioSources.Count > 0)
                 {
-                    Gaze_EditorUtils.DrawSectionTitle("Audio Setup");
+                    // Gaze_EditorUtils.DrawSectionTitle("Audio Setup");
+                   
                     EditorGUILayout.BeginHorizontal();
                     EditorGUILayout.LabelField(new GUIContent("Audio Source", "Select the audiosource you want to use to play your audio if you have many on your IO"));
 
@@ -98,9 +99,12 @@ namespace Gaze
                     if (actionsScript.activeTriggerStatesAudio[0])
                     {
                         DisplayAudioBlock(0);
+                        GUILayout.BeginHorizontal();
+                        GUILayout.EndHorizontal();
+                        
                     }
 
-                    EditorGUI.indentLevel++;
+                    //EditorGUI.indentLevel++;
                     ShowOtherAudioOptions = EditorGUILayout.Foldout(ShowOtherAudioOptions, "More Options:");
 
                     if (ShowOtherAudioOptions)
@@ -115,8 +119,9 @@ namespace Gaze
                         }
                     }
 
-                    EditorGUI.indentLevel--;
+                    //EditorGUI.indentLevel--;
                     EditorGUILayout.Space();
+
 
                     Gaze_EditorUtils.DrawSectionTitle("Audio Parameters");
                     
@@ -150,20 +155,20 @@ namespace Gaze
                     GUILayout.EndHorizontal();
                     if (actionsScript.DontHaveAudioLoop())
                     {
-                        GUILayout.BeginHorizontal();
-                        actionsScript.fadeOutEnabled = EditorGUILayout.ToggleLeft("Fade Out", actionsScript.fadeOutEnabled);
-                        if (actionsScript.fadeOutEnabled)
-                        {
-                            actionsScript.fadeOutTime = EditorGUILayout.FloatField("", actionsScript.fadeOutTime, GUILayout.Width(100));
-                            Gaze_Utils.EnsureFieldIsPositiveOrZero(ref actionsScript.fadeOutTime);
-                            EditorGUILayout.LabelField("[s]");
-                            GUILayout.EndHorizontal();
-                            GUILayout.BeginHorizontal();
+                       /* GUILayout.BeginHorizontal();
+                         actionsScript.fadeOutEnabled = EditorGUILayout.ToggleLeft("Fade Out", actionsScript.fadeOutEnabled);
+                         if (actionsScript.fadeOutEnabled)
+                         {
+                             actionsScript.fadeOutTime = EditorGUILayout.FloatField("", actionsScript.fadeOutTime, GUILayout.Width(100));
+                             Gaze_Utils.EnsureFieldIsPositiveOrZero(ref actionsScript.fadeOutTime);
+                             EditorGUILayout.LabelField("[s]");
+                             GUILayout.EndHorizontal();
+                             GUILayout.BeginHorizontal();
 
-                            actionsScript.fadeOutCurve = EditorGUILayout.CurveField(actionsScript.fadeOutCurve, Color.green, new Rect(0, 0, actionsScript.fadeOutTime, 1), GUILayout.Width(400));
+                             actionsScript.fadeOutCurve = EditorGUILayout.CurveField(actionsScript.fadeOutCurve, Color.green, new Rect(0, 0, actionsScript.fadeOutTime, 1), GUILayout.Width(400));
 
-                        }
-                        GUILayout.EndHorizontal();
+                         }
+                        GUILayout.EndHorizontal();*/
 
                         #endregion
 
@@ -188,7 +193,7 @@ namespace Gaze
                     Gaze_EditorUtils.DrawEditorHint("By default audios will wait until the last one is finished when reloaded");
                     EditorGUILayout.Space();
 
-                    actionsScript.audio_ForceStop = EditorGUILayout.ToggleLeft(new GUIContent("Immediate play", "Stops others audios launched with this interaction when reloaded."), actionsScript.audio_ForceStop);
+                    actionsScript.audio_ForceStop = EditorGUILayout.ToggleLeft(new GUIContent("Immediate play", "Stops other audios launched with this interaction when reloaded."), actionsScript.audio_ForceStop);
                     if (!actionsScript.audio_ForceStop)
                     {
                         actionsScript.audio_AllowMultiple = EditorGUILayout.ToggleLeft(new GUIContent("Cumulate audios", "Cumulates audios launched with this interaction when reloaded."), actionsScript.audio_AllowMultiple);
@@ -204,6 +209,7 @@ namespace Gaze
 
                 if (actionsScript.ActionAudio == Gaze_Actions.ACTIVABLE_OPTION.DEACTIVATE)
                 {
+                    Gaze_EditorUtils.DrawEditorHint("Deactivate will MUTE the audio source");
                     #region Fade Out
                     GUILayout.BeginHorizontal();
                     actionsScript.fadeOutDeactEnabled = EditorGUILayout.ToggleLeft("Fade Out", actionsScript.fadeOutDeactEnabled);

@@ -145,6 +145,7 @@ namespace Gaze
             {
                 if (!Application.isPlaying)
                 {
+                    Gaze_EditorUtils.DrawEditorHint("This script allows you to set when the interaction will happen");
                     EditorGUILayout.Space();
                     // update InteractiveObjects list
                     UpdateInteractiveObjectsList();
@@ -181,10 +182,11 @@ namespace Gaze
                     #endregion
 
                     #region Custom Conditions
-                    Gaze_EditorUtils.DrawSectionTitle("CUSTOM CONDITIONS");
-                    Gaze_EditorUtils.DrawEditorHint("Use this to write your custom script and use it as a condition.", false);
-                    Gaze_EditorUtils.DrawEditorHint("See user manual for detailed structure.");
+                    //Gaze_EditorUtils.DrawSectionTitle("CUSTOM CONDITIONS");
+                 
                     targetConditions.customConditionsEnabled = EditorGUILayout.ToggleLeft("Custom Conditions", targetConditions.customConditionsEnabled);
+                    Gaze_EditorUtils.DrawEditorHint("Check this option if you added a custom condition as a separate component.", false);
+                    Gaze_EditorUtils.DrawEditorHint("See user manual for detailed structure.");
                     if (targetConditions.customConditionsEnabled)
                     {
                         DisplayCustomConditionsList();
@@ -225,7 +227,7 @@ namespace Gaze
 
                     if (((Gaze_AutoTriggerMode)targetConditions.autoTriggerModeIndex).Equals(Gaze_AutoTriggerMode.END) && !targetConditions.expires)
                     {
-                        EditorGUILayout.HelpBox("This trigger does not expire, it will never auto-trigger.", MessageType.Warning);
+                        EditorGUILayout.HelpBox("This interaction does not expire, it will never auto-trigger.", MessageType.Warning);
 
                     }
                     else if (targetConditions.autoTriggerModeIndex.Equals((int)Gaze_AutoTriggerMode.NONE) && targetConditions.expires && targetConditions.activeDuration == 0)
@@ -267,8 +269,8 @@ namespace Gaze
         {
             // DURATION
             Gaze_EditorUtils.DrawSectionTitle("Duration");
-            Gaze_EditorUtils.DrawEditorHint("How much time conditions needs to remain validated.");
-            Gaze_EditorUtils.DrawEditorHint("(Usefull for conditions not instantaneous like gaze, proximity or hand hover.)");
+            Gaze_EditorUtils.DrawEditorHint("use this to specify a given amount of time while conditions need to remain valid.");
+
             EditorGUI.indentLevel++;
             GUILayout.BeginHorizontal();
             targetConditions.focusDuration = EditorGUILayout.FloatField("Duration [s]", targetConditions.focusDuration);
@@ -1189,7 +1191,7 @@ namespace Gaze
             if (targetsCount < 1)
             {
                 EditorGUILayout.BeginHorizontal();
-                EditorGUILayout.HelpBox("Add at least one target or deactivate this condition if not needed.", MessageType.Warning);
+                EditorGUILayout.HelpBox("Add and choose the desired target(s)", MessageType.Warning);
                 EditorGUILayout.EndHorizontal();
             }
             else

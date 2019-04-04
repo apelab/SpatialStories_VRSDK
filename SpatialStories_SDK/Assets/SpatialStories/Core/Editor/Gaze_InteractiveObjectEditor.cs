@@ -171,7 +171,11 @@ namespace Gaze
 
             if (gaze_InteractiveObjectScript.IsDragAndDropEnabled)
             {
+               
                 DisplayTargets();
+                DisplayTargetGenerator();
+
+               
 
                 gaze_InteractiveObjectScript.DnD_DropOnAlreadyOccupiedTargets = EditorGUILayout.ToggleLeft(new GUIContent("Drop On Ocupied Targets", "Can this object be dropped into a target that is already ocuppied ?"), gaze_InteractiveObjectScript.DnD_DropOnAlreadyOccupiedTargets);
 
@@ -207,15 +211,15 @@ namespace Gaze
                 gaze_InteractiveObjectScript.DnD_TimeToSnap = EditorGUILayout.FloatField(new GUIContent("Time To Snap", "The time it takes for the object to snap"), gaze_InteractiveObjectScript.DnD_TimeToSnap);
                 EditorGUILayout.EndHorizontal();
 
-                DisplayTargetGenerator();
+                
             }
         }
 
         private void DisplayTargetGenerator()
         {
             EditorGUILayout.BeginHorizontal();
-            dnd_targetsToGenerate = EditorGUILayout.IntField(new GUIContent("Generate Targets", "Generates a pre-configured target with a blue transparent visual."), dnd_targetsToGenerate);
-            if (GUILayout.Button("GO"))
+            dnd_targetsToGenerate = EditorGUILayout.IntField(new GUIContent("Automatic Targets", "Generates a pre-configured target with a blue transparent visual."), dnd_targetsToGenerate);
+            if (GUILayout.Button("GENERATE"))
             {
                 GenerateDnDTargets();
             }
@@ -260,6 +264,11 @@ namespace Gaze
 			EditorGUILayout.BeginHorizontal();
             EditorGUILayout.LabelField(new GUIContent("Drop Targets", " Use existing IO’s in the scene or create an automatic target below for your IO."));
 			EditorGUILayout.EndHorizontal();
+
+            EditorGUILayout.BeginHorizontal();
+            Gaze_EditorUtils.DrawEditorHint("Use this to create chain reactions with any other interactions in the scene.");
+            EditorGUILayout.EndHorizontal();
+
 
             // help message if no target is specified
             if (gaze_InteractiveObjectScript.DnD_Targets == null || gaze_InteractiveObjectScript.DnD_Targets.Count < 1)
