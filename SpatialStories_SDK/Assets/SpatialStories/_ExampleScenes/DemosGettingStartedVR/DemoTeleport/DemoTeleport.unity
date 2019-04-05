@@ -3735,9 +3735,9 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 660943182}
-  m_Text: 'Teleport to purple floor
+  m_Text: 'Teleport on purple floor
 
-    to hide cube'
+    to hide the Cube'
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
@@ -11477,9 +11477,9 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2037671325}
-  m_Text: 'Teleport to black floor
+  m_Text: 'Teleport on black floor
 
-    to hide sphere'
+    to hide the Sphere'
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1

@@ -3844,13 +3844,23 @@ MonoBehaviour:
   InputsMap:
     InputsEntries:
     - UISelectedPlatform: 1
-      UIControllerSpecificInput: 27
-      InputType: 28
+      UIControllerSpecificInput: 26
+      InputType: 27
       IsRelease: 0
       Valid: 0
     - UISelectedPlatform: 1
-      UIControllerSpecificInput: 12
-      InputType: 23
+      UIControllerSpecificInput: 11
+      InputType: 22
+      IsRelease: 0
+      Valid: 0
+    - UISelectedPlatform: 2
+      UIControllerSpecificInput: 20
+      InputType: 22
+      IsRelease: 0
+      Valid: 0
+    - UISelectedPlatform: 2
+      UIControllerSpecificInput: 44
+      InputType: 27
       IsRelease: 0
       Valid: 0
     AreDependenciesSatisfied: 0
@@ -6113,7 +6123,7 @@ GameObject:
   - component: {fileID: 1199904157}
   - component: {fileID: 1199904156}
   m_Layer: 0
-  m_Name: Press A
+  m_Name: Release Trigger Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6127,7 +6137,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1199904154}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1, y: 2.5, z: 0}
+  m_LocalPosition: {x: 1.5, y: 2.5, z: 0}
   m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
   m_Children: []
   m_Father: {fileID: 720800190}
@@ -6141,9 +6151,9 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1199904154}
-  m_Text: 'Press A to
+  m_Text: 'Release Trigger to
 
-    hide sphere'
+    hide the Sphere'
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
@@ -6744,7 +6754,7 @@ GameObject:
   - component: {fileID: 1345810454}
   - component: {fileID: 1345810453}
   m_Layer: 0
-  m_Name: Show when A released
+  m_Name: Show Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7012,8 +7022,23 @@ MonoBehaviour:
   InputsMap:
     InputsEntries:
     - UISelectedPlatform: 1
-      UIControllerSpecificInput: 34
-      InputType: 3
+      UIControllerSpecificInput: 12
+      InputType: 23
+      IsRelease: 0
+      Valid: 0
+    - UISelectedPlatform: 1
+      UIControllerSpecificInput: 27
+      InputType: 28
+      IsRelease: 0
+      Valid: 0
+    - UISelectedPlatform: 2
+      UIControllerSpecificInput: 21
+      InputType: 23
+      IsRelease: 0
+      Valid: 0
+    - UISelectedPlatform: 2
+      UIControllerSpecificInput: 45
+      InputType: 28
       IsRelease: 0
       Valid: 0
     AreDependenciesSatisfied: 0
@@ -7561,7 +7586,7 @@ GameObject:
   - component: {fileID: 1398915077}
   - component: {fileID: 1398915076}
   m_Layer: 0
-  m_Name: Pull trigger Text
+  m_Name: Press Trigger Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7575,7 +7600,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1398915074}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1, y: 2.5, z: 0}
+  m_LocalPosition: {x: -1.5, y: 2.5, z: 0}
   m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
   m_Children: []
   m_Father: {fileID: 720800190}
@@ -7589,9 +7614,9 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1398915074}
-  m_Text: 'Pull trigger to
+  m_Text: 'Press Trigger to
 
-    hide cube'
+    hide the Cube'
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
@@ -10034,13 +10059,23 @@ MonoBehaviour:
   InputsMap:
     InputsEntries:
     - UISelectedPlatform: 1
-      UIControllerSpecificInput: 26
-      InputType: 27
+      UIControllerSpecificInput: 12
+      InputType: 23
       IsRelease: 0
       Valid: 0
     - UISelectedPlatform: 1
-      UIControllerSpecificInput: 11
-      InputType: 22
+      UIControllerSpecificInput: 27
+      InputType: 28
+      IsRelease: 0
+      Valid: 0
+    - UISelectedPlatform: 2
+      UIControllerSpecificInput: 21
+      InputType: 23
+      IsRelease: 0
+      Valid: 0
+    - UISelectedPlatform: 2
+      UIControllerSpecificInput: 45
+      InputType: 28
       IsRelease: 0
       Valid: 0
     AreDependenciesSatisfied: 0
@@ -10906,7 +10941,7 @@ GameObject:
   - component: {fileID: 1919970080}
   - component: {fileID: 1919970079}
   m_Layer: 0
-  m_Name: Hide when A pressed
+  m_Name: Hide Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11174,8 +11209,23 @@ MonoBehaviour:
   InputsMap:
     InputsEntries:
     - UISelectedPlatform: 1
-      UIControllerSpecificInput: 30
-      InputType: 2
+      UIControllerSpecificInput: 11
+      InputType: 22
+      IsRelease: 0
+      Valid: 0
+    - UISelectedPlatform: 1
+      UIControllerSpecificInput: 26
+      InputType: 27
+      IsRelease: 0
+      Valid: 0
+    - UISelectedPlatform: 2
+      UIControllerSpecificInput: 20
+      InputType: 22
+      IsRelease: 0
+      Valid: 0
+    - UISelectedPlatform: 2
+      UIControllerSpecificInput: 44
+      InputType: 27
       IsRelease: 0
       Valid: 0
     AreDependenciesSatisfied: 0
@@ -12302,7 +12352,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2125262622}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1, y: 1, z: 0}
+  m_LocalPosition: {x: -1.5, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1491883130}
@@ -12315,7 +12365,7 @@ Transform:
   - {fileID: 308118054}
   - {fileID: 1867723399}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2142912360
 GameObject:
@@ -12424,7 +12474,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2142912360}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1, y: 1, z: 0}
+  m_LocalPosition: {x: 1.5, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 62917540}
@@ -12437,7 +12487,7 @@ Transform:
   - {fileID: 1523129049}
   - {fileID: 60247890}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2143301515
 GameObject:

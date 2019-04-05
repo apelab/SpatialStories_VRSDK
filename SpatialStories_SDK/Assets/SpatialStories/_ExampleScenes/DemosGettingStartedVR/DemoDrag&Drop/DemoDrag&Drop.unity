@@ -11258,7 +11258,7 @@ GameObject:
   - component: {fileID: 1930388983}
   - component: {fileID: 1930388982}
   m_Layer: 0
-  m_Name: Drop cube hee
+  m_Name: Drop cube here
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11286,7 +11286,9 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1930388980}
-  m_Text: "Hold cube then\n drop it here"
+  m_Text: 'Hold cube then
+
+    drop it here'
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1

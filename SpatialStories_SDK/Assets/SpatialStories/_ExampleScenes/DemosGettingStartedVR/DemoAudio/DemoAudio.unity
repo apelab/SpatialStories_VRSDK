@@ -892,7 +892,7 @@ GameObject:
   - component: {fileID: 203307740}
   - component: {fileID: 203307739}
   m_Layer: 0
-  m_Name: Play audio at gaze in
+  m_Name: Play audio at Gaze in
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5405,7 +5405,7 @@ GameObject:
   - component: {fileID: 1099280330}
   - component: {fileID: 1099280329}
   m_Layer: 0
-  m_Name: Look here
+  m_Name: Look at Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5433,9 +5433,9 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1099280327}
-  m_Text: 'Look at cube
+  m_Text: 'Look at Cube to play audio
 
-    to activate audio'
+    Look away to stop audio'
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
@@ -9657,7 +9657,7 @@ GameObject:
   - component: {fileID: 1981488783}
   - component: {fileID: 1981488782}
   m_Layer: 0
-  m_Name: Deactivate at gaze out
+  m_Name: Stop audio at Gaze out
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
