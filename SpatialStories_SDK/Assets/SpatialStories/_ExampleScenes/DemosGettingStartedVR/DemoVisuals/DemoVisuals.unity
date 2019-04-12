@@ -203,7 +203,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6454438}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.7, z: -10}
+  m_LocalPosition: {x: 0, y: 1.7, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 423752291}
@@ -5468,7 +5468,7 @@ GameObject:
   - component: {fileID: 1154996193}
   - component: {fileID: 1154996192}
   m_Layer: 0
-  m_Name: Deactivate red button when pressing A
+  m_Name: Deactivate cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5736,8 +5736,13 @@ MonoBehaviour:
   InputsMap:
     InputsEntries:
     - UISelectedPlatform: 1
-      UIControllerSpecificInput: 30
-      InputType: 2
+      UIControllerSpecificInput: 26
+      InputType: 27
+      IsRelease: 0
+      Valid: 0
+    - UISelectedPlatform: 1
+      UIControllerSpecificInput: 11
+      InputType: 22
       IsRelease: 0
       Valid: 0
     AreDependenciesSatisfied: 0
@@ -8106,7 +8111,7 @@ GameObject:
   - component: {fileID: 1592222057}
   - component: {fileID: 1592222056}
   m_Layer: 0
-  m_Name: Activate red button when releasing A
+  m_Name: Activate cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8374,8 +8379,13 @@ MonoBehaviour:
   InputsMap:
     InputsEntries:
     - UISelectedPlatform: 1
-      UIControllerSpecificInput: 34
-      InputType: 3
+      UIControllerSpecificInput: 12
+      InputType: 23
+      IsRelease: 0
+      Valid: 0
+    - UISelectedPlatform: 1
+      UIControllerSpecificInput: 27
+      InputType: 28
       IsRelease: 0
       Valid: 0
     AreDependenciesSatisfied: 0
