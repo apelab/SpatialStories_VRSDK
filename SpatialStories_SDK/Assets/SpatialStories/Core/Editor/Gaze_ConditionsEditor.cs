@@ -1168,6 +1168,13 @@ namespace Gaze
                     EditorGUILayout.BeginHorizontal();
                     targetConditions.dndEventValidator = EditorGUILayout.Popup("Valid When", targetConditions.dndEventValidator, dndEventValidatorEnum);
                     EditorGUILayout.EndHorizontal();
+                    if (!targetConditions.RootIO.IsDragAndDropEnabled)
+                        {
+                            EditorGUILayout.BeginHorizontal();
+                            EditorGUILayout.HelpBox("Enable Drag and Drop in the Root of your (IO) for this condition to work.", MessageType.Warning);
+                            EditorGUILayout.EndHorizontal();
+                        }
+
                 }
                 else
                 {
