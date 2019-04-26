@@ -196,7 +196,9 @@ namespace Gaze
                     actionsScript.audio_ForceStop = EditorGUILayout.ToggleLeft(new GUIContent("Immediate play", "Stops other audios launched with this interaction when reloaded."), actionsScript.audio_ForceStop);
                     if (!actionsScript.audio_ForceStop)
                     {
-                        actionsScript.audio_AllowMultiple = EditorGUILayout.ToggleLeft(new GUIContent("Cumulate audios", "Cumulates audios launched with this interaction when reloaded."), actionsScript.audio_AllowMultiple);
+                        //Previous Toggle is disabled... for now.
+                        // actionsScript.audio_AllowMultiple = EditorGUILayout.ToggleLeft(new GUIContent("Cumulate audios", "Cumulates audios launched with this interaction when reloaded."), actionsScript.audio_AllowMultiple);
+                        actionsScript.audio_AllowMultiple = true;
                         actionsScript.audio_stopOthers = !actionsScript.audio_AllowMultiple;
                         
                         if (actionsScript.audio_AllowMultiple)
