@@ -358,8 +358,8 @@ namespace Gaze
                         ShowGrabOption();
                         ShowGrabDistanceOption();
                         ShowGrabModeOption();
-                        ShowTouchAbilityOption();
-                        ShowTouchDistanceOption();
+                        //ShowTouchAbilityOption();
+                        //ShowTouchDistanceOption();
                         ShowDragAndDropOptions();
 
                         EditorGUILayout.Space();
@@ -402,10 +402,10 @@ namespace Gaze
             }
         }
 
-        private void ShowTouchAbilityOption()
-        {
-            actionsScript.ActionTouch = (Gaze_Actions.ACTIVABLE_OPTION)EditorGUILayout.EnumPopup(new GUIContent("Touch Ability", "Activate or deactivate the touch ability of this IO at runtime."), actionsScript.ActionTouch);
-        }
+        //private void ShowTouchAbilityOption()
+        //{
+        //    actionsScript.ActionTouch = (Gaze_Actions.ACTIVABLE_OPTION)EditorGUILayout.EnumPopup(new GUIContent("Touch Ability", "Activate or deactivate the touch ability of this IO at runtime."), actionsScript.ActionTouch);
+        //}
 
         private void ShowGrabModeOption()
         {
@@ -415,6 +415,13 @@ namespace Gaze
                 EditorGUILayout.BeginHorizontal();
                 actionsScript.grabModeIndex = EditorGUILayout.Popup("", actionsScript.grabModeIndex, grabModes);
                 EditorGUILayout.EndHorizontal();
+
+                if(actionsScript.IO.ManipulationMode == Gaze_ManipulationModes.TOUCH){
+                    EditorGUILayout.BeginHorizontal();
+                    actionsScript.touchDistance = EditorGUILayout.FloatField("", actionsScript.touchDistance);
+                    Gaze_Utils.EnsureFieldIsPositiveOrZero(ref actionsScript.touchDistance);
+                    EditorGUILayout.EndHorizontal();
+                }
 
             }
         }

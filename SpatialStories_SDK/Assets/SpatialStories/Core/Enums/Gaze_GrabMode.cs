@@ -25,7 +25,8 @@ namespace Gaze
     /// </summary>
     public enum Gaze_GrabMode
     {
-        ATTRACT,
-        LEVITATE
+        GRAB,
+        LEVITATE,
+        TOUCH
     }
 }

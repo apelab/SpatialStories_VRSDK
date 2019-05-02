@@ -1,0 +1,25 @@
+﻿<Properties StartupConfiguration="{E1266C9A-238A-536D-2DA8-915D580E0CC8}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/SpatialStories/Core/Editor/Gaze_InteractionEditor.cs">
+    <Files>
+      <File FileName="../../baseprojectspatialstoriesarsdk/Assets/SpatialStories/SpatialStoriesARSDK/SpatialStoriesSDK/SpatialStories_Core/Core/Maps/Gaze_InteractiveObjectVisuals.cs" Line="1" Column="1" />
+      <File FileName="Assets/SpatialStories/Core/Editor/Gaze_InteractiveObjectEditor.cs" Line="83" Column="13" />
+      <File FileName="Assets/SpatialStories/Core/Classes/Gaze_Actions.cs" Line="432" Column="25" />
+      <File FileName="Assets/SpatialStories/Core/Editor/Gaze_ConditionsEditor.cs" Line="1177" Column="21" />
+      <File FileName="Assets/SpatialStories/Core/Editor/Gaze_ActionsEditor.cs" Line="244" Column="118" />
+      <File FileName="Assets/SpatialStories/Core/Enums/Gaze_GrabMode.cs" Line="30" Column="14" />
+      <File FileName="Assets/SpatialStories/Core/Managers/Gaze_GrabManager.cs" Line="377" Column="66" />
+      <File FileName="Assets/SpatialStories/Core/Managers/Gaze_GrabManager/Gaze_HandIODetectorKernel.cs" Line="123" Column="32" />
+      <File FileName="Assets/SpatialStories/Core/Classes/Gaze_InteractiveObject.cs" Line="157" Column="22" />
+      <File FileName="Assets/SpatialStories/Core/Managers/Gaze_DragAndDropManager.cs" Line="243" Column="61" />
+      <File FileName="Assets/SpatialStories/Core/Editor/Gaze_EditorUtils.cs" Line="60" Column="58" />
+      <File FileName="Assets/SpatialStories/Core/Editor/Gaze_InteractionEditor.cs" Line="160" Column="69" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

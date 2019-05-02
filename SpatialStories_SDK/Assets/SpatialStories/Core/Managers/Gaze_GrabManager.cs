@@ -374,7 +374,7 @@ public class Gaze_GrabManager : MonoBehaviour
                         interactableIO.GrabLogic.SetManipulationMode(true);
                     }
 
-                    if (interactableIO.GrabModeIndex.Equals((int)Gaze_GrabMode.ATTRACT))
+                    if (interactableIO.GrabModeIndex.Equals((int)Gaze_GrabMode.GRAB))
                     {
                         grabState = Gaze_GrabManagerState.ATTRACTING;
                         interactableIO.GrabLogic.GrabbingManager = this;
@@ -437,7 +437,7 @@ public class Gaze_GrabManager : MonoBehaviour
                 }
                 else if (interactableIO.IsGrabEnabled)
                 {
-                    if (interactableIO.GrabModeIndex.Equals((int)Gaze_GrabMode.ATTRACT))
+                    if (interactableIO.GrabModeIndex.Equals((int)Gaze_GrabMode.GRAB))
                     {
                         grabState = Gaze_GrabManagerState.GRABBING;
                     }
@@ -649,7 +649,7 @@ public class Gaze_GrabManager : MonoBehaviour
                     AddNewObjectInProximity(collidingIO.gameObject);
                 }
 
-                if (isTriggerPressed && interactableIO && interactableIO.IsGrabEnabled && interactableIO.GrabModeIndex.Equals((int)Gaze_GrabMode.ATTRACT))
+                if (isTriggerPressed && interactableIO && interactableIO.IsGrabEnabled && interactableIO.GrabModeIndex.Equals((int)Gaze_GrabMode.GRAB))
                 {
                     interactableIO = objectsInProximity.ElementAt(0).GetComponent<Gaze_InteractiveObject>();
                     grabState = Gaze_GrabManagerState.GRABBING;

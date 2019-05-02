@@ -69,7 +69,7 @@ namespace Gaze
             get
             {
                 if (ManipulationMode == Gaze_ManipulationModes.GRAB)
-                    return (int)Gaze_GrabMode.ATTRACT;
+                    return (int)Gaze_GrabMode.GRAB;
                 else if (ManipulationMode == Gaze_ManipulationModes.LEVITATE)
                     return (int)Gaze_GrabMode.LEVITATE;
                 else
@@ -154,7 +154,7 @@ namespace Gaze
         private Gaze_Transform initialTransform;
 
         public bool IsDragAndDropEnabled = false;
-        public float DnD_minDistance = 1f;
+        public float DnD_minDistance = 0.25f;
         // in unity units
         public float DnD_angleThreshold = 1f;
         // 0 is perpendicular, 1 is same direction

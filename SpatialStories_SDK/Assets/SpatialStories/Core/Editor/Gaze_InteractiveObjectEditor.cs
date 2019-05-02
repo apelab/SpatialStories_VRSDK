@@ -185,8 +185,8 @@ namespace Gaze
 
                 GUILayout.BeginHorizontal();
                 gaze_InteractiveObjectScript.DnD_minDistance = EditorGUILayout.FloatField("Min Distance To Validate", gaze_InteractiveObjectScript.DnD_minDistance);
+                Debug.Log(gaze_InteractiveObjectScript.DnD_minDistance);
                 GUILayout.EndHorizontal();
-
 
                 EditorGUILayout.BeginHorizontal();
                 gaze_InteractiveObjectScript.DnD_attached = EditorGUILayout.ToggleLeft(new GUIContent("Attached", "The IO can not be taken off its target after being released"), gaze_InteractiveObjectScript.DnD_attached);

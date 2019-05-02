@@ -110,7 +110,7 @@ namespace Gaze
                             Gaze_EventManager.FireControllerPointingEvent(gaze_ControllerPointingEventArgs);
                         }
 
-                        if (!interactiveObject.GrabLogic.IsBeingGrabbed && interactiveObject.IsGrabEnabled && interactiveObject.GrabModeIndex.Equals((int)Gaze_GrabMode.ATTRACT) && Hits[i].distance < interactiveObject.GrabDistance)
+                        if (!interactiveObject.GrabLogic.IsBeingGrabbed && interactiveObject.IsGrabEnabled && interactiveObject.GrabModeIndex.Equals((int)Gaze_GrabMode.GRAB) && Hits[i].distance < interactiveObject.GrabDistance)
                         {
                             grabManager.closerIO = interactiveObject;
                             grabManager.closerDistance = Hits[i].distance;
@@ -134,7 +134,7 @@ namespace Gaze
                         }
 
                         // Get the visual ray length
-                        visualRayLength = interactiveObject.IsGrabEnabled && interactiveObject.GrabModeIndex.Equals((int)Gaze_GrabMode.ATTRACT) && visualRayLength > Hits[i].distance ? Hits[i].distance : visualRayLength;
+                        visualRayLength = interactiveObject.IsGrabEnabled && interactiveObject.GrabModeIndex.Equals((int)Gaze_GrabMode.GRAB) && visualRayLength > Hits[i].distance ? Hits[i].distance : visualRayLength;
                     }
                 }
 

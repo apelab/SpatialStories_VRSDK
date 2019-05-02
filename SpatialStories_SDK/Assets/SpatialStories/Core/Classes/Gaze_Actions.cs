@@ -253,6 +253,7 @@ namespace Gaze
             if (ModifyTouchDistance == ALTERABLE_OPTION.MODIFY)
                 GetIO().TouchDistance = touchDistance;
 
+            Gaze_InteractiveObject IO = GetIO();
 
             if (ActionTouch == ACTIVABLE_OPTION.ACTIVATE)
             {
@@ -261,7 +262,12 @@ namespace Gaze
             }
             else if (ActionTouch == ACTIVABLE_OPTION.DEACTIVATE)
             {
-                GetIO().DisableManipulationMode(Gaze_ManipulationModes.TOUCH);
+                if (IO.ManipulationMode == Gaze_ManipulationModes.GRAB)
+                    IO.DisableManipulationMode(Gaze_ManipulationModes.GRAB);
+                else if (IO.ManipulationMode == Gaze_ManipulationModes.LEVITATE)
+                    IO.DisableManipulationMode(Gaze_ManipulationModes.LEVITATE);
+                else if (IO.ManipulationMode == Gaze_ManipulationModes.TOUCH)
+                    IO.DisableManipulationMode(Gaze_ManipulationModes.TOUCH);
             }
         }
 
@@ -282,6 +288,8 @@ namespace Gaze
                     IO.DisableManipulationMode(Gaze_ManipulationModes.GRAB);
                 else if (IO.ManipulationMode == Gaze_ManipulationModes.LEVITATE)
                     IO.DisableManipulationMode(Gaze_ManipulationModes.LEVITATE);
+                else if (IO.ManipulationMode == Gaze_ManipulationModes.TOUCH)
+                    IO.DisableManipulationMode(Gaze_ManipulationModes.TOUCH);
             }
         }
 
@@ -385,13 +393,21 @@ namespace Gaze
             if (ModifyGrabMode == ALTERABLE_OPTION.NOTHING)
                 return;
 
-            if (grabModeIndex == (int)Gaze_GrabMode.ATTRACT)
+            if (grabModeIndex == (int)Gaze_GrabMode.GRAB)
             {
                 GetIO().ManipulationModeIndex = (int)Gaze_ManipulationModes.GRAB;
             }
             else if (grabModeIndex == (int)Gaze_GrabMode.LEVITATE)
             {
                 GetIO().ManipulationModeIndex = (int)Gaze_ManipulationModes.LEVITATE;
+            }
+            else if (grabModeIndex == (int)Gaze_GrabMode.TOUCH)
+            {
+                if(grabDistance != touchDistance)
+                 GetIO().TouchDistance = grabDistance;
+                
+                GetIO().ManipulationModeIndex = (int)Gaze_ManipulationModes.TOUCH;
+
             }
         }
 
