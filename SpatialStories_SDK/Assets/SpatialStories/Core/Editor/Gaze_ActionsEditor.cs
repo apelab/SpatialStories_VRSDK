@@ -244,7 +244,7 @@ namespace Gaze
             actionsScript.ActionAnimation = (Gaze_Actions.ANIMATION_OPTION)EditorGUILayout.EnumPopup(new GUIContent("Animation type", "Launch animations directly from your Visual or Unity animations."), actionsScript.ActionAnimation);
             #endregion Animations
 
-            #region MECANIM
+            #region ACTIVATE
             #region Animator
             if (actionsScript.ActionAnimation != Gaze_Actions.ANIMATION_OPTION.NOTHING)
             {
@@ -276,7 +276,7 @@ namespace Gaze
             #endregion Animator
 
             #region AnimationTriggers
-            if (actionsScript.ActionAnimation == Gaze_Actions.ANIMATION_OPTION.MECANIM)
+            if (actionsScript.ActionAnimation == Gaze_Actions.ANIMATION_OPTION.ACTIVATE)
             {
                 EditorGUILayout.BeginHorizontal();
                 actionsScript.activeTriggerStatesAnim[0] = EditorGUILayout.ToggleLeft(Gaze_HashIDs.TriggerEventsAndStates[0], actionsScript.activeTriggerStatesAnim[0]);
@@ -328,38 +328,9 @@ namespace Gaze
 
             }
             #endregion AnimationTriggers
-            #endregion MECANIM
+            #endregion ACTIVATE
 
-            //#region CLIP           
-            //#region AnimationTriggers
-            //if (actionsScript.ActionAnimation == Gaze_Actions.ANIMATION_OPTION.CLIP)
-            //{
 
-            //    actionsScript.activeTriggerStatesAnim[0] = EditorGUILayout.ToggleLeft(Gaze_HashIDs.TriggerEventsAndStates[0], actionsScript.activeTriggerStatesAnim[0]);
-
-            //    if (actionsScript.activeTriggerStatesAnim[0])
-            //    {
-            //        DisplayAnimBlock(0);
-            //    }
-
-            //    isOtherAnimationTriggerOptionsOpen = EditorGUILayout.Foldout(isOtherAnimationTriggerOptionsOpen, "Other Trigger Options");
-            //    if (isOtherAnimationTriggerOptionsOpen)
-            //    {
-            //        EditorGUI.indentLevel++;
-            //        for (int i = 1; i < Gaze_HashIDs.TriggerEventsAndStates.Length; i++)
-            //        {
-            //            actionsScript.activeTriggerStatesAnim[i] = EditorGUILayout.ToggleLeft(Gaze_HashIDs.TriggerEventsAndStates[i], actionsScript.activeTriggerStatesAnim[i]);
-
-            //            if (actionsScript.activeTriggerStatesAnim[i])
-            //            {
-            //                DisplayAnimBlock(i);
-            //            }
-            //        }
-            //    }
-            //    EditorGUILayout.Space();
-            //}
-            //#endregion AnimationTriggers
-            //#endregion CLIP
         }
 
         public override void Gaze_OnInspectorGUI()
@@ -718,7 +689,7 @@ namespace Gaze
 
         private void DisplayAnimBlock(int k)
         {
-            if (actionsScript.ActionAnimation == Gaze_Actions.ANIMATION_OPTION.MECANIM && FindAnimatorTriggers())
+            if (actionsScript.ActionAnimation == Gaze_Actions.ANIMATION_OPTION.ACTIVATE && FindAnimatorTriggers())
             {
 
 
@@ -731,99 +702,7 @@ namespace Gaze
                 actionsScript.animatorTriggers[k] = selectedAnimatorTriggers[EditorGUILayout.Popup(selectedAnimatorTriggers.IndexOf(actionsScript.animatorTriggers[k]), selectedAnimatorTriggers.ToArray())];
            
             }
-            //else if (actionsScript.ActionAnimation == Gaze_Actions.ANIMATION_OPTION.CLIP)
-            //{
-            //    // help message if no aniamtion are found
-            //    if (!FindAnimatorStates())
-            //    {
-            //        EditorGUILayout.BeginHorizontal();
-            //        EditorGUILayout.HelpBox("There are no animation in your animator", MessageType.Warning);
-            //        EditorGUILayout.EndHorizontal();
-            //    }
-            //    else
-            //    {
-            //        if (actionsScript.animationClip.Count(k) < 1)
-            //        {
-            //            AnimationClip d = actionsScript.animationClip.Add(k);
-            //            d = selectedAnimatorStates[0];
-            //        }
-            //        else
-            //        {
-            //            EditorGUILayout.BeginHorizontal();
-            //            int index = EditorGUILayout.Popup(selectedAnimatorStates.IndexOf(actionsScript.animationClip.Get(k, 0)), selectedAnimatorStatesNames.ToArray());
-            //            index = Mathf.Max(index, 0);
-            //            actionsScript.animationClip.Set(k, 0, selectedAnimatorStates[index]);
-            //            EditorGUILayout.EndHorizontal();
 
-            //            // update inputs list in Gaze_Interactions (Gaze_Interactions may have been removed in the hierarchy)
-            //            for (int i = 1; i < actionsScript.animationClip.Count(k); i++)
-            //            {
-            //                if (!selectedAnimatorStates.Contains(actionsScript.animationClip.Get(k, i)))
-            //                {
-            //                    actionsScript.animationClip.Set(k, i, selectedAnimatorStates[0]);
-            //                }
-
-            //                // display the entry
-            //                EditorGUILayout.BeginHorizontal();
-            //                AnimationClip clip = selectedAnimatorStates[EditorGUILayout.Popup(selectedAnimatorStates.IndexOf(actionsScript.animationClip.Get(k, i)), selectedAnimatorStatesNames.ToArray())];
-            //                actionsScript.animationClip.Set(k, i, clip);
-
-                          
-
-            //                // and a '-' button to remove it if needed
-            //                if (GUILayout.Button("-", GUILayout.Width(100)))
-            //                {
-            //                    actionsScript.animationClip.Remove(k, i);
-            //                }
-
-            //                EditorGUILayout.EndHorizontal();
-
-                          
-
-            //            }
-            //        }
-
-            //        // display 'add' button
-            //        if (GUILayout.Button("+", GUILayout.Width(400)))
-            //        {
-            //            AnimationClip d = actionsScript.animationClip.Add(k);
-
-            //            EditorGUILayout.BeginHorizontal();
-
-            //            if (GUILayout.Button("-"))
-            //            {
-            //                actionsScript.animationClip.Remove(k, d);
-
-            //            }
-            //            EditorGUILayout.EndHorizontal();
-            //        }
-
-            //        EditorGUILayout.BeginHorizontal();
-            //        actionsScript.loopAnim[k] = (Gaze_Actions.LOOP_MODES)EditorGUILayout.EnumPopup("Loop", actionsScript.loopAnim[k]);
-
-            //        if (actionsScript.loopAnim[k] == Gaze_Actions.LOOP_MODES.Single)
-            //        {
-            //            actionsScript.loopAnimType[k] = (Gaze_Actions.ANIMATION_LOOP)EditorGUILayout.EnumPopup("", actionsScript.loopAnimType[k]);
-            //        }
-            //        EditorGUILayout.EndHorizontal();
-
-            //        if (actionsScript.animationClip.Count(k) > 1 && actionsScript.loopAnim[k] != Gaze_Actions.LOOP_MODES.PlaylistOnce)
-            //        {
-            //            actionsScript.animationSequence[k] = (Gaze_Actions.AUDIO_SEQUENCE)EditorGUILayout.EnumPopup("Sequence", actionsScript.animationSequence[k]);
-            //        }
-
-            //        if (actionsScript.loopAnim[k] == Gaze_Actions.LOOP_MODES.PlaylistOnce)
-            //        {
-            //            EditorGUILayout.BeginHorizontal();
-            //            actionsScript.loopOnLast[k] = EditorGUILayout.ToggleLeft("Loop on last", actionsScript.loopOnLast[k]);
-            //            if (actionsScript.loopOnLast[k])
-            //            {
-            //                actionsScript.loopAnimType[k] = (Gaze_Actions.ANIMATION_LOOP)EditorGUILayout.EnumPopup("", actionsScript.loopAnimType[k]);
-            //            }
-            //            EditorGUILayout.EndHorizontal();
-            //        }
-            //    }
-            //}
         }
 
         private void DisplayAudioBlock(int k)

@@ -17,7 +17,7 @@ namespace Gaze
         public enum LOOP_MODES { None, Single, Playlist, PlaylistOnce }
         public enum ALTERABLE_OPTION { NOTHING, MODIFY }
         public enum AUDIO_SEQUENCE { InOrder, Random }
-        public enum ANIMATION_OPTION { NOTHING, MECANIM, CLIP, DEACTIVATE }
+        public enum ANIMATION_OPTION { NOTHING, ACTIVATE, DEACTIVATE }
         public enum ANIMATION_LOOP { Loop, PingPong }
 
         public bool ActionReset;
@@ -178,17 +178,7 @@ namespace Gaze
 
             }
 
-            if (ActionAnimation == ANIMATION_OPTION.CLIP)
-            {
-                if (targetAnimator.GetComponent<Gaze_AnimationPlayer>() == null)
-                {
-                    targetAnimator.gameObject.AddComponent<Gaze_AnimationPlayer>();
-                }
-
-                gazeAnimationPlayer = targetAnimator.GetComponent<Gaze_AnimationPlayer>();
-                gazeAnimationPlayer.hideFlags = HideFlags.HideInInspector;
-                Animation_PlayList_Key = gazeAnimationPlayer.setParameters(targetAnimator, animationClip, activeTriggerStatesAnim, loopAnimType, loopAnim, animationSequence, loopOnLast);
-            }
+           
 
             if (!gazeInteraction.HasConditions)
             {
@@ -222,15 +212,12 @@ namespace Gaze
 
         private void PlayAnim(int i)
         {
-            if (ActionAnimation == ANIMATION_OPTION.MECANIM)
+            if (ActionAnimation == ANIMATION_OPTION.ACTIVATE)
             {
                 targetAnimator.enabled = true;
                 targetAnimator.SetTrigger(animatorTriggers[i]);
             }
-            else if (ActionAnimation == ANIMATION_OPTION.CLIP)
-            {
-                gazeAnimationPlayer.PlayAnim(Animation_PlayList_Key, i);
-            }
+
         }
 
         private void HandleReset()
