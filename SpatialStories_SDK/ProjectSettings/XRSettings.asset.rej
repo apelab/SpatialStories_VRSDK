@@ -1,0 +1,13 @@
+diff a/SpatialStories_SDK/ProjectSettings/XRSettings.asset b/SpatialStories_SDK/ProjectSettings/XRSettings.asset	(rejected hunks)
+@@ -0,0 +1,10 @@
++{
++    "m_SettingKeys": [
++        "VR Device Disabled",
++        "VR Device User Alert"
++    ],
++    "m_SettingValues": [
++        "False",
++        "False"
++    ]
++}
+\ No newline at end of file
