@@ -6069,7 +6069,7 @@ GameObject:
   - component: {fileID: 1243594756}
   - component: {fileID: 1243594755}
   m_Layer: 0
-  m_Name: 'Press A '
+  m_Name: Press Index Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6097,7 +6097,7 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1243594753}
-  m_Text: 'Press A to hide
+  m_Text: 'Press Index Trigger to hide
 
     upper part of button'
   m_OffsetZ: 0

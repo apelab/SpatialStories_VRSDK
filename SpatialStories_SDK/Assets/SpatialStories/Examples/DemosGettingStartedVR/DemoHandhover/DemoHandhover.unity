@@ -7079,7 +7079,7 @@ GameObject:
   - component: {fileID: 1495250707}
   - component: {fileID: 1495250706}
   m_Layer: 0
-  m_Name: Show cube
+  m_Name: Show at HandHover OUT
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9538,7 +9538,7 @@ GameObject:
   - component: {fileID: 1898067028}
   - component: {fileID: 1898067027}
   m_Layer: 0
-  m_Name: Hide cube
+  m_Name: Hide at HandHover IN
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
