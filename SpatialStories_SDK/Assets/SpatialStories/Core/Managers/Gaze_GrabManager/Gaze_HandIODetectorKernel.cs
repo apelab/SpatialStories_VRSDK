@@ -90,7 +90,7 @@ namespace Gaze
 
                         if (Hits[i].transform.name == "Cube (IO)")
                         {
-                            Debug.Log("Trala");
+                           // Debug.Log("Trala");
                         }
 
                         // populate the list of IOs hit
