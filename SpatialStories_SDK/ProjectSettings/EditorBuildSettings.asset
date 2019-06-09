@@ -5,31 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/GearVR.unity
-    guid: 5a10dd6f62feb9d4fa5889f5bab769b6
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 0
-    path: Assets/SpatialStories/_ExampleScenes/OLD_Demos/DemoDragAndDrop/DemoDragAndDrop.unity
-    guid: 49a3fbe036142204baab033130a84521
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 0
-    path: Assets/SpatialStories/_ExampleScenes/OLD_Demos/DemoManipulation/DemoManipulation.unity
-    guid: 2b31157793d1bb5438c0919f00909d15
+  - enabled: 1
+    path: Assets/Demos/ThirdPersonDemo/ThirdPersonDemo.unity
+    guid: 0da3dc948a66aa2418f3ddeb568978fa
   m_configObjects: {}
